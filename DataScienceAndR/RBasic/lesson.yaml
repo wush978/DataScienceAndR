@@ -31,5 +31,9 @@
   Output: R 本身的功能是受限制的，但是它具備有非常強大的套件庫！
     首先，我們先學著怎麼安裝套件。今天第一個要麻煩大家安裝的，是
     名叫devtools的套件庫。請大家輸入：`install.packages("devtools")`
+  CorrectAnswer: install.packages("devtools")
   AnswerTests:  
-    - expr_identical_to(install.packages('devtools'))
+    - test_package_version("devtools", "1.9.1")
+
+- Class : text
+  Output: 
