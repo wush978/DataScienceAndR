@@ -1,0 +1,35 @@
+- Class: meta
+  Course: DataScienceAndR
+  Lesson: RBasic
+  Author: Wush Wu
+  Type: Standard
+  Organization: Taiwan R User Group
+  Version: 0.1
+
+- Class : text
+  Output: 這是一個讓大家快速入門R 語言的swirl課程
+    這份文件中的格式採用和Markdown相容的語法
+    為了讓大家快速上手，這裡先說明一些常見的Markdown語法
+
+- Class : text
+  Output : 所有的程式碼，都會用``來包覆。例如：`sessionInfo()`代表
+    你們要輸入：sessionInfo()
+
+- Class : text
+  Output : 所有的超連結，都會用<>來包覆。例如：<https://www.google.com>
+    代表要請大家打開 https://www.google.com
+
+- Class : text
+  Output: 那我們就開始吧！
+
+- Class : text
+  Output: 首先，我想要讓大家先體驗一個簡單的資料視覺化範例。透過我
+    在參加2015年臺北市政府黑客松的一個作品，我們可以迅速的抓取
+    臺北市政府的資料，並且利用R 既有強大的功能，迅速驗證我們對資料的概念
+
+- Class : cmd_question
+  Output: R 本身的功能是受限制的，但是它具備有非常強大的套件庫！
+    首先，我們先學著怎麼安裝套件。今天第一個要麻煩大家安裝的，是
+    名叫devtools的套件庫。請大家輸入：`install.packages("devtools")`
+  AnswerTests:  
+    - expr_identical_to(install.packages('devtools'))
