@@ -1,0 +1,34 @@
+language: c
+
+sudo: true
+
+addons:
+  apt_packages:
+    - pandoc
+
+script: 
+  - Rscript -e 'eval(expr = parse(text = RCurl::getURL("https://gist.githubusercontent.com/ChihChengLiang/516aae373c6a27e95d02/raw/95705dde3f298d0fc462cf4e40689eae50bf6da9/test_lesson.R")));test_course("DataScienceAndR/")'
+
+after_failure:
+  - ./travis-tool.sh dump_logs
+
+before_install:
+  - curl -OL http://raw.github.com/craigcitro/r-travis/master/scripts/travis-tool.sh
+  - chmod 755 ./travis-tool.sh
+  - ./travis-tool.sh bootstrap
+
+install:
+  - ./travis-tool.sh install swirl
+  # Install testthat after running install_deps, otherwise devtools itself might be installed from CRAN or c2d4u
+
+notifications:
+  email:
+    on_success: change
+    on_failure: change
+env:
+  - global:
+    - WARNINGS_ARE_ERRORS=1
+    - _R_CHECK_FORCE_SUGGESTS_=0
+    - BOOTSTRAP_LATEX=1
+    - R_BUILD_ARGS="--no-manual"
+    - R_CHECK_ARGS="--no-manual --as-cran"
