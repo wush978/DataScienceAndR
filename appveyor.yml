@@ -12,7 +12,7 @@ install:
 # Adapt as necessary starting from here
 
 build_script:
-  - Rscript -e "install.packages('swirl')"
+  - Rscript -e "install.packages('swirl', repos = 'http://cran.r-project.org')"
 
 test_script:
   - Rscript -e 'eval(expr = parse(text = RCurl::getURL("https://gist.githubusercontent.com/ChihChengLiang/516aae373c6a27e95d02/raw/95705dde3f298d0fc462cf4e40689eae50bf6da9/test_lesson.R")));test_course("DataScienceAndR/")'
