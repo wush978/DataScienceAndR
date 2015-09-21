@@ -18,7 +18,7 @@ before_install:
   - ./travis-tool.sh bootstrap
 
 install:
-  - ./travis-tool.sh install swirl
+  - Rscript -e "install.packages('swirl', repos = 'http://cran.r-project.org')"
   # Install testthat after running install_deps, otherwise devtools itself might be installed from CRAN or c2d4u
 
 notifications:
