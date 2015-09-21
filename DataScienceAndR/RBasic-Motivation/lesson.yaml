@@ -32,9 +32,8 @@
     首先，我們先學著怎麼安裝套件。今天第一個要麻煩大家安裝的，是
     名叫devtools的套件庫。請大家輸入：`install.packages("devtools")`
     ps. 如果同學已經安裝過了，可以輸入`skip()`
-  CorrectAnswer: if (!require("devtools")) if (packageVersion("devtools") < package_version("1.9.1")) utils::install.packages("devtools", repos = "http://cran.r-project.org")
-  AnswerTests:  
-    - test_package_version("devtools", "1.9.1")
+  CorrectAnswer: check_then_install("devtools", "1.9.1")
+  AnswerTests: test_package_version("devtools", "1.9.1")
 
 - Class : text
   Output: 過了上一關之後，大家應該都已經安裝了devtools套件。
@@ -53,9 +52,8 @@
     各位同學可以在這邊測試一下R的自動完成功能。如果我們輸入`install_`之後暫停一下（Rstudio的功能），
     或是連按tab兩下（傳統R gui的功能），就可以自動補完函數名稱，或是列出函數名稱符合`install_`開頭的函數。
     ps. 如果同學已經安裝過了，可以輸入`skip()`
-  CorrectAnswer: if (!require("DataTaipei")) if (packageVersion("DataTaipei") < package_version("0.1")) install_github("TaipeiRHacker/DataTaipei")
-  AnswerTests:
-    - test_package_version("DataTaipei", "0.1")
+  CorrectAnswer: check_then_install("DataTaipei", "0.1")
+  AnswerTests: test_package_version("DataTaipei", "0.1")
 
 - Class : Text
   Output: 
@@ -111,9 +109,8 @@
     由於使用網頁服務需要Google帳號密碼，所以我們這裡就不Demo了。
     有興趣的同學可以在入門R之後看看<http://andrei.lopatenko.com/rstat/fusion-tables.R>。
     我們這次要利用ggmap這個套件。所以先請同學輸入`install.packages("ggmap")`來安裝套件。
-  CorrectAnswer: if (!require("ggmap")) if (packageVersion("ggmap") < package_version("2.5.2")) install.packages("ggmap")
-  AnswerTests:
-    - test_package_version("ggmap", "2.5.2")
+  CorrectAnswer: check_then_install("ggmap", "2.5.2")
+  AnswerTests: test_package_version("ggmap", "2.5.2")
 
 - Class: cmd_question
   Output: 請同學再度輸入使用套件的起手式：`library(ggmap)`
@@ -173,9 +170,8 @@
 
 - Class: cmd_question
   Output: 首先請各位同學先安裝kriging套件。這裡就請同學嘗試用上面學到的指令，自己做一次看看。
-  CorrectAnswer: install.packages("kriging")
-  AnswerTests:
-    - omnitest("install.packages(\"kriging\")")
+  CorrectAnswer: check_then_install("kriging", "1.1")
+  AnswerTests: test_package_version("kriging", "1.1")
 
 - Class: cmd_question
   Output: 接著，請載入kriging套件
