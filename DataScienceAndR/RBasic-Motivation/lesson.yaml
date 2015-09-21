@@ -52,7 +52,7 @@
     各位同學可以在這邊測試一下R的自動完成功能。如果我們輸入`install_`之後暫停一下（Rstudio的功能），
     或是連按tab兩下（傳統R gui的功能），就可以自動補完函數名稱，或是列出函數名稱符合`install_`開頭的函數。
     ps. 如果同學已經安裝過了，可以輸入`skip()`
-  CorrectAnswer: check_then_install("DataTaipei", "0.1")
+  CorrectAnswer: check_then_install_github("DataTaipei", "0.1", "TaipeiRHacker/DataTaipei")
   AnswerTests: test_package_version("DataTaipei", "0.1")
 
 - Class : Text
