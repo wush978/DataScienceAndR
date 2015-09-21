@@ -6,8 +6,8 @@ addons:
   apt_packages:
     - pandoc
 
-script: 
-  - Rscript -e 'eval(expr = parse(text = RCurl::getURL("https://gist.githubusercontent.com/ChihChengLiang/516aae373c6a27e95d02/raw/95705dde3f298d0fc462cf4e40689eae50bf6da9/test_lesson.R")));test_course("DataScienceAndR/")'
+script:
+  - Rscript -e "source('test_lesson.R');test_lesson('DataScienceAndR')"
 
 after_failure:
   - ./travis-tool.sh dump_logs
