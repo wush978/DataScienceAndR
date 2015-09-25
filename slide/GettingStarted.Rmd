@@ -1,0 +1,39 @@
+---
+title: "R 語言上手篇"
+author: "Wush Wu"
+date: "2015年9月25日"
+output: slidy_presentation
+---
+
+## 目的
+
+- 設定與安裝R
+- 了解Rstudio
+- 了解套件
+- 安裝swirl
+
+## 安裝 R
+
+- <http://cran.csie.ntu.edu.tw>
+
+## 安裝 R 最好的IDE: Rstudio
+
+- <https://www.rstudio.com/products/rstudio/download/>
+
+## 了解開發環境
+
+- 了解各種區塊
+- 了解安裝環境
+- Tab: 自動完成
+
+## 安裝套件
+
+- 學習如何利用Rstudio 安裝套件
+- 學習設定套件來源
+
+## 安裝swirl
+
+```
+source("http://taiwanrusergroup.github.io/R/init.R")
+```
+
