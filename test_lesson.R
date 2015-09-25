@@ -3,8 +3,11 @@ library(swirl)
 
 test_lesson = function(lesson_dir){
   print(paste("####Begin testing", lesson_dir))
+  .e <- environment(swirl:::any_of_exprs)
+  attach(.e)
+  on.exit(detach(.e))
   e = new.env()
-  
+
   # Since the initLesson might change working directory, load lesson yaml first before that happens.
   lesson = yaml.load_file(paste0(lesson_dir,"/lesson.yaml"))
   
@@ -18,7 +21,8 @@ test_lesson = function(lesson_dir){
     if(!is.null(question$CorrectAnswer) && question$Class=="cmd_question"){
       print(paste(">", question$CorrectAnswer))
       eval(parse(text=question$CorrectAnswer), envir = e)
-      
+      e$expr <- parse(text = question$CorrectAnswer)[[1]]
+      stopifnot(eval(parse(text=question$AnswerTests), envir = e))
     } 
   }
   
