@@ -103,10 +103,12 @@
   Output: 我們差不多把電力資料整理的差不多了，只剩下最後一步：把`power.mat`
     轉換成一個data.frame，並且讓各個column擁有正確的形態。
     但是這最後一步卻有許多小步驟。
-    首先，我們把`power.mat`用`as.data.frame`轉換成`power.df`
-  CorrectAnswer: power.df <- as.data.frame(power.mat)
-  AnswerTests: any_of_exprs('power.df <- as.data.frame(power.mat)',
-    'power.df = as.data.frame(power.mat)')
+    首先，我們把`power.mat`用`data.frame`轉換成`power.df`
+    這裡要注意的是，`data.frame`在轉換的時候，必須要下參數：`stringsAsFactors = FALSE`，
+    否則後續轉換的時候，容易出bug。
+  CorrectAnswer: power.df <- data.frame(power.mat, stringsAsFactors = FALSE)
+  AnswerTests: any_of_exprs('power.df <- data.frame(power.mat, stringsAsFactors = FALSE)',
+    'power.df = data.frame(power.mat, stringsAsFactors = FALSE)')
 
 - Class : cmd_question
   Output: 然後，我們設定`power.df`的欄位名稱（colnames）依序為：

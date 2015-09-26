@@ -38,3 +38,5 @@ test_power_df_column <- function(name) {
 }
 
 test_power_df <- test_generator("power.df", "power.df.Rds")
+
+test_gdp_df <- test_generator("gdp.df", "gdp.df.Rds")
