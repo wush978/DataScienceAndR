@@ -17,6 +17,7 @@
 
 test_generator <- function(user_name, rds_path) {
   function() {
+    browser()
     user_object <- get(user_name, globalenv())
     rds <- readRDS(.get_path(rds_path))
     isTRUE(all.equal(user_object, rds))
