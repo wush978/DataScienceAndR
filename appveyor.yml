@@ -13,6 +13,7 @@ install:
 
 build_script:
   - Rscript -e "install.packages(c('swirl'), repos = 'http://cran.r-project.org')"
+  - git ls-remote https://github.com/wush978/DataScienceAndR.git | grep refs/heads/course | cut -f 1
   - Rscript -e "swirl::install_course_github('wush978', 'DataScienceAndR', 'course')"
 
 test_script:
