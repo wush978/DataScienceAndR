@@ -16,7 +16,7 @@
 
 ### Windows
 
-目前swirl沒辦法在windows上正常顯示中文（ https://github.com/swirldev/swirl/pull/300 已經提交，等待swirl的開發者處理中），
+目前swirl沒辦法在windows上正常顯示中文（ 修正問題的方式 https://github.com/swirldev/swirl/pull/300 已經提交給swirl的開發團隊，等待他們處理中），
 所以請暫時先安裝我修改過的版本：
 
 ```r
