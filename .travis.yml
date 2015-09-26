@@ -6,10 +6,8 @@ r_binary_packages:
   - swirl
 
 script:
-  - Rscript -e "source('https://raw.githubusercontent.com/wush978/DataScienceAndR/master/test_lesson.R')"
-
-install:
   - Rscript -e "setwd('..');swirl::install_course_directory('DataScienceAndR')"
+  - Rscript -e "source('https://raw.githubusercontent.com/wush978/DataScienceAndR/master/test_lesson.R')"
 
 notifications:
   email:
