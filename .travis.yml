@@ -1,6 +1,6 @@
 language: r
 
-sudo: false
+sudo: required
 
 r_binary_packages:
   - swirl
