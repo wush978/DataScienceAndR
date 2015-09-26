@@ -8,7 +8,7 @@
 第二堂課程的主軸，是要介紹R 在Data Mining相關的功能。課程內容希望是涉獵一些我做過的專案，並且介紹一些R 在clustering、frequency pattern mining、
 和recommendation上的一些套件。
 
-由於出自R 社群的緣故，所有的內容我都想公佈在這個repository，以創用CC釋出。 
+由於出自R 社群的緣故，所有的內容我都想公佈在這個repository，以創用CC釋出。如果有朋友想要看swirl course的原始碼，請到course這個branch觀看。因為`swirl::install_course_github`的API設計，讓我必須要把course的檔案切到另外一個branch之中。
 
 以下的內容是講給有興趣想利用這些資源做自學的朋友：
 
