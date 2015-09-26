@@ -9,7 +9,7 @@ script:
   - Rscript -e "source('https://raw.githubusercontent.com/wush978/DataScienceAndR/master/test_lesson.R')"
 
 install:
-  - Rscript -e "setwd('..');install_course_directory('DataScienceAndR')"
+  - Rscript -e "setwd('..');swirl::install_course_directory('DataScienceAndR')"
 
 notifications:
   email:
