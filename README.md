@@ -1,5 +1,7 @@
 # Data Science and R
 
+目前教材在Linux上的測試: ![](https://travis-ci.org/wush978/DataScienceAndR.svg?branch=master)
+
 這個Repository主要是為了準備我在臺大的資料科學課程，幫陳老師講的兩堂R 的課程。課程素材主要就是投影片和swirl。內容則是參考CRAN上介紹R 的官方文件：[An Introduction to R](https://cran.r-project.org/doc/manuals/R-intro.pdf)。
 另外也要感謝社群中所有有參與籌備資料科學愛好者年會2015的同伴。
 
