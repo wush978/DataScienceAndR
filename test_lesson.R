@@ -20,9 +20,11 @@ test_lesson = function(lesson_dir){
   for(question in lesson){
     if(!is.null(question$CorrectAnswer) && question$Class=="cmd_question"){
       print(paste(">", question$CorrectAnswer))
-      eval(parse(text=question$CorrectAnswer), envir = e)
-      e$expr <- parse(text = question$CorrectAnswer)[[1]]
-      stopifnot(eval(parse(text=question$AnswerTests), envir = e))
+      suppressWarnings({
+        eval(parse(text=question$CorrectAnswer), envir = e)
+        e$expr <- parse(text = question$CorrectAnswer)[[1]]
+        stopifnot(eval(parse(text=question$AnswerTests), envir = e))
+      })
     } 
   }
   
