@@ -3,7 +3,7 @@ language: c
 sudo: true
 
 script:
-  - Rscript -e "source('https://raw.githubusercontent.com/wush978/DataScienceAndR/master/test_lesson.R');setwd('..');test_course('DataScienceAndR')"
+  - Rscript -e "source('https://raw.githubusercontent.com/wush978/DataScienceAndR/master/test_lesson.R');test_course('DataScienceAndR')"
 
 after_failure:
   - ./travis-tool.sh dump_logs
@@ -15,6 +15,7 @@ before_install:
 
 install:
   - Rscript -e "install.packages('swirl', repos = 'http://cran.r-project.org')"
+  - rm -rf .git
   - Rscript -e "setwd('..');install_course_directory('DataScienceAndR')"
 
 notifications:
