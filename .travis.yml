@@ -19,6 +19,7 @@ before_install:
 
 install:
   - Rscript -e "install.packages('swirl', repos = 'http://cran.r-project.org')"
+  - git ls-remote https://github.com/wush978/DataScienceAndR.git | grep refs/heads/course | cut -f 1
   - Rscript -e "swirl::install_course_github('wush978', 'DataScienceAndR', 'course')"
   # Install testthat after running install_deps, otherwise devtools itself might be installed from CRAN or c2d4u
 
