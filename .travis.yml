@@ -1,20 +1,14 @@
-language: c
+language: r
 
-sudo: true
+sudo: required
+
+r_binary_packages:
+  - swirl
 
 script:
   - Rscript -e "source('https://raw.githubusercontent.com/wush978/DataScienceAndR/master/test_lesson.R')"
 
-after_failure:
-  - ./travis-tool.sh dump_logs
-
-before_install:
-  - curl -OL http://raw.github.com/craigcitro/r-travis/master/scripts/travis-tool.sh
-  - chmod 755 ./travis-tool.sh
-  - ./travis-tool.sh bootstrap
-
 install:
-  - Rscript -e "install.packages('swirl', repos = 'http://cran.r-project.org')"
   - Rscript -e "setwd('..');install_course_directory('DataScienceAndR')"
 
 notifications:
