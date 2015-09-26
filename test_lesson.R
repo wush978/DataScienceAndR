@@ -31,11 +31,10 @@ test_lesson = function(lesson_dir){
   print(paste("-----Testing", lesson_dir, "Done"))
 }
 
-test_course = function(course_dir){
-  paths = list.dirs(course_dir,recursive = F)
-  wd = getwd()
-  for(path in paths) {
-    setwd(wd)
-    test_lesson(path)
-  }
+
+course_list <- list.dirs(".", recursive = FALSE)
+course_list <- substring(course_list, 3, nchar(course_list))
+course_list <- grep("^[^\\.]", course_list, value = TRUE)
+for(course in course_list) {
+  test_lesson(course)
 }
