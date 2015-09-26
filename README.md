@@ -31,6 +31,14 @@ install.packages('swirl', repos = 'http://taiwanrusergroup.github.io/R')
 install.packages('swirl')
 ```
 
+## 安裝課程
+
+```r
+library(swirl)
+install_course_github("wush978", "DataScienceAndR", "course")
+```
+
+## 教學影片
 
 ## License
 
