@@ -31,6 +31,20 @@ install.packages('swirl', repos = 'http://taiwanrusergroup.github.io/R')
 install.packages('swirl')
 ```
 
+## 安裝課程
+
+```r
+library(swirl)
+install_course_github("wush978", "DataScienceAndR", "course")
+```
+
+## 教學影片
+
+## 測試結果
+
+平台  | 測試結果
+------------- | -------------
+Linux | ![](https://travis-ci.org/wush978/DataScienceAndR.svg?branch=master)
 
 ## License
 
