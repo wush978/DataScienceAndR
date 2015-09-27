@@ -2,7 +2,7 @@ language: r
 
 sudo: required
 
-r_binary_packages:
+r_packages:
   - swirl
 
 script:
