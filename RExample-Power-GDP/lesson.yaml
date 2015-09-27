@@ -74,19 +74,25 @@
 
 - Class : cmd_question
   Output: 接下來，從螢幕上我們可以看到，這個檔案的分隔符號會是應該是`";\t"`，
-    （還滿少見的）
+    （還滿少見的）。另外在中間有部分資料的分隔符號只有`"\t"`。
     可惜R 的能接受的分隔符號，通常只能是一個字元。
     資料不大，所以我們可以自己切資料吧！
     首先，請同學用readLines把所有資料讀出來，並且將資料都存到`power`這個變數。
   CorrectAnswer: power <- readLines(file(power_path, encoding = "BIG5"))
   AnswerTests: test_power()
 
+- Class : text
+  Output: 其實這樣混亂、不好整理的資料，是我們在處理實際資料時
+    常常遇到的狀況。而且我們也常常犯錯，導致要重頭開始重新整理。
+
 - Class : cmd_question
   Output: 在R 中，我們可以使用`strsplit`來切割字串。
     `strsplit`的參數x 是要被切割的字串，split是定位分割點的字串。
-    請同學呼叫`strsplit`來用`";\t"`切割`power`，並且將結果儲存到
+    請同學呼叫`strsplit`來用`";?\t"`切割`power`，並且將結果儲存到
     `power.split`中。
-  CorrectAnswer: power.split <- strsplit(power, ";\t")
+    `";?\t"`在這邊代表，這個分號`;`是可有可無的。這是為了讓R 能夠
+    同時處理分隔符號為`";\t"`或`"\t"`的狀況。
+  CorrectAnswer: power.split <- strsplit(power, ";?\t")
   AnswerTests: test_power_split()
 
 - Class: cmd_question
@@ -148,6 +154,32 @@
     data.frame物件。同時我們也會再檢驗一次power.df看看是否正確。
   CorrectAnswer: head(power.df)
   AnswerTests: test_power_df()
+
+- Class : cmd_question
+  Output: 由於我們在抓資料的分割點時，很有可能會抓錯。所以保險起見，
+    在這個時間點我們要檢查資料是否有清理乾淨。
+    在R 中，如果中間資料有任何錯誤的話，常常會有NA產生。
+    所以一個方法就是用`is.na`檢查`power.df`的四個欄位中間有沒有NA。
+    `all`這個函數，則可以檢查一個邏輯向量的所有的值是否為TRUE。
+    請同學組合`is.na`和`all`來檢查`power.df`的欄位是否包含NA。
+  CorrectAnswer: all(!is.na(power.df))
+  AnswerTests: omnitest("all(!is.na(power.df))", TRUE)
+
+- Class : cmd_question
+  Output: 在動手分析之前，我們先看一下整理出來的電力資料。
+    這裡的`id`欄位，是中華民國行業標準分類的代碼。這個代碼的最大類，
+    都是用英文字母標示的。所以我們就用regular expression來找出
+    所有英文開頭的`id`。
+    `grep("^[A-Z]", power.df$id)`會找出所有英文開頭的id的坐標，請
+    把這個結果存到`group.id.index`之中。
+  CorrectAnswer: group.id.index <- grep("^[A-Z]", power.df$id)
+  AnswerTests: any_of_exprs('group.id.index <- grep("^[A-Z]", power.df$id)',
+    'group.id.index = grep("^[A-Z]", power.df$id)')
+
+- Class : cmd_question
+  Output: 利用`group.id.index`，我們可以從`power.df`中選取出這些大類
+    的列。請把選出的結果存到`power.group`
+  CorrectAnswer: power.group <- power.df[group.id.index,]
 
 - Class : text
   Output: 接著，我們來整理GDP的資料...
