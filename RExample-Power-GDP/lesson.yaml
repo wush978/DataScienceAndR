@@ -5,183 +5,192 @@
   Type: Standard
   Organization: Taiwan R User Group
   Version: 0.1
-
-- Class : text
-  Output: 近年來，能源議題是個和大家息息相關的問題。
-    而透過政府的公開資料，我們是有能力從這些資料更深入的了解能源議題。
-    又由於能源議題往往和經濟議題息息相關，所以我們希望能夠好好的整理
-    台灣各行業的耗電量，以及各行業所貢獻的GDP 。
-    藉由整理出來的結果，來協助我們更深入的思考台灣的能源相關議題。
-
-- Class : text
-  Output: 這次練習中，用電的資料來源是取自：<http://data.gov.tw/node/6064>。
-    我目前將2015-09-26時下載後的檔案解壓縮，並且把要用到的「歷年行業別.txt」
+- Class: text
+  Output: 近年來，能源議題是個和大家息息相關的問題。 而透過政府的公開資料，我們是有能力從這些資料更深入的了解能源議題。 又由於能源議題往往和經濟議題息息相關，所以我們希望能夠好好的整理
+    台灣各行業的耗電量，以及各行業所貢獻的GDP 。 藉由整理出來的結果，來協助我們更深入的思考台灣的能源相關議題。
+- Class: text
+  Output: 這次練習中，用電的資料來源是取自：<http://data.gov.tw/node/6064>。 我目前將2015-09-26時下載後的檔案解壓縮，並且把要用到的「歷年行業別.txt」
     搬到課程目錄之下。由於中文檔名在跨平台上不方便，所以更改名稱為power.txt。
-
-- Class : cmd_question
-  Output: 由於網路在傳輸課程資料時，可能會出錯，所以我們可以先用R 的內建
-    功能檢查power.txt的內容是不是在安裝過程中毀損。請同學輸入：
-    `tools::md5sum(power_path)`
+- Class: cmd_question
+  Output: 由於網路在傳輸課程資料時，可能會出錯，所以我們可以先用R 的內建 功能檢查power.txt的內容是不是在安裝過程中毀損。請同學輸入： `tools::md5sum(power_path)`
   CorrectAnswer: tools::md5sum(power_path)
-  AnswerTests: omnitest('tools::md5sum(power_path)', 
-    '80c02601192e706d453a289a5e32c176')
-  Hint: 如果輸出結果不是`"80c02601192e706d453a289a5e32c176"`，代表檔案
-    已經毀損，請移除課程（`uninstall_all_courses`）後重新安裝課程。
-
-- Class : text
-  Output: 這裡的`::`代表說，`md5sum`這個函數是來自`tools`這個套件。
-    這是近代R 語言新增的一種類似namespace的功能，是個很大的進步。
-
-- Class : cmd_question
+  AnswerTests: omnitest('tools::md5sum(power_path)', '80c02601192e706d453a289a5e32c176')
+  Hint: 如果輸出結果不是`"80c02601192e706d453a289a5e32c176"`，代表檔案 已經毀損，請移除課程（`uninstall_all_courses`）後重新安裝課程。
+- Class: text
+  Output: 這裡的`::`代表說，`md5sum`這個函數是來自`tools`這個套件。 這是近代R 語言新增的一種類似namespace的功能，是個很大的進步。
+- Class: cmd_question
   Output: 各行業的GDP 資料則下載自<http://statdb.dgbas.gov.tw/pxweb/dialog/statfile9L.asp>。
-    檔案路徑已經放入`gdp_path`之中。請同學再次利用`tools::md5sum(gdp_path)`
-    來檢查檔案內容。
+    檔案路徑已經放入`gdp_path`之中。請同學再次利用`tools::md5sum(gdp_path)` 來檢查檔案內容。
   CorrectAnswer: tools::md5sum(gdp_path)
-  AnswerTests: omnitest('tools::md5sum(gdp_path)', 
-    '9eee2ac49d017dbb79c8a802b55eb3bc')
-
-- Class : cmd_question
-  Output: 最後，由於兩個資料所使用的行業別編碼不同，所以我們需要
-    一個行業別編碼的對照表。這部分請參考：<https://github.com/wush978/ISIC-ROC-Translater>，
-    我自己已經找一些同學幫忙建立了這個行業別的對照表。
-    路徑都存放到`translater_path`這個變數之下，請同學利用`tools::md5sum(translater_path)`
+  AnswerTests: omnitest('tools::md5sum(gdp_path)', '9eee2ac49d017dbb79c8a802b55eb3bc')
+  Hint: tools::md5sum(gdp_path)
+- Class: cmd_question
+  Output: 最後，由於兩個資料所使用的行業別編碼不同，所以我們需要 一個行業別編碼的對照表。這部分請參考：<https://github.com/wush978/ISIC-ROC-Translater>，
+    我自己已經找一些同學幫忙建立了這個行業別的對照表。 路徑都存放到`translater_path`這個變數之下，請同學利用`tools::md5sum(translater_path)`
     檢查檔案內容的正確性。
   CorrectAnswer: tools::md5sum(translater_path)
-  AnswerTests: omnitest('tools::md5sum(translater_path)', c(
-      "762c18280e28e5b519f446393b8597b6",
-      "d3d457b967b5ade3886456c321cf3793",
-      "21fffee696d78cbc22b45f59b515cfb9"
-    ))
-
-- Class : cmd_question
-  Output: 首先，就讓我們把資料載入到R 之中吧！
-    首先我們來一起處理電力資料。
-    一般來說，在讀中文資料之前，我們要先了解資料的編碼。
-    由於官方文件上並沒有編碼的資訊，所以在實務上只能一個個嘗試。
-    通常政府的官方資料如果沒有特別註明，建議就是從BIG-5開始嘗試。
-    請同學試試看：`readLines(file(power_path, encoding = "BIG-5"), n = 10)`
-    這裡的`file`是R 建立一個檔案連結的方式。file的第一個參數是檔案的路徑，
-    `encoding`則代表這個檔案內容的編碼。
-    `readLines`則是輸出一個字串向量，而這個向量是從檔案中一行一行的把內容讀出來的。
-    也就是說，檔案裡面的每一行會變成一個向量中的字串。
-    參數`n = 10`則代表我們只讀最前面的10行。
-    這是實務上的一個好習慣：先看一看檔案的一開始。
+  AnswerTests: omnitest('tools::md5sum(translater_path)', c( "762c18280e28e5b519f446393b8597b6",
+    "d3d457b967b5ade3886456c321cf3793", "21fffee696d78cbc22b45f59b515cfb9" ))
+  Hint: tools::md5sum(translater_path)
+- Class: cmd_question
+  Output: 首先，就讓我們把資料載入到R 之中吧！ 首先我們來一起處理電力資料。 一般來說，在讀中文資料之前，我們要先了解資料的編碼。 由於官方文件上並沒有編碼的資訊，所以在實務上只能一個個嘗試。
+    通常政府的官方資料如果沒有特別註明，建議就是從BIG-5開始嘗試。 請同學試試看：`readLines(file(power_path, encoding
+    = "BIG-5"), n = 10)` 這裡的`file`是R 建立一個檔案連結的方式。file的第一個參數是檔案的路徑， `encoding`則代表這個檔案內容的編碼。
+    `readLines`則是輸出一個字串向量，而這個向量是從檔案中一行一行的把內容讀出來的。 也就是說，檔案裡面的每一行會變成一個向量中的字串。 參數`n =
+    10`則代表我們只讀最前面的10行。 這是實務上的一個好習慣：先看一看檔案的一開始。
   CorrectAnswer: readLines(file(power_path, encoding = "BIG-5"), n = 10)
   AnswerTests: omnitest('readLines(file(power_path, encoding = "BIG-5"), n = 10)')
-
-- Class : text
+  Hint: readLines(file(power_path, encoding = "BIG-5"), n = 10)
+- Class: text
   Output: 如果成功看到中文字，就是猜對Encoding了。
-
-- Class : cmd_question
-  Output: 接下來，從螢幕上我們可以看到，這個檔案的分隔符號會是應該是`";\t"`，
-    （還滿少見的）。另外在中間有部分資料的分隔符號只有`"\t"`。
-    可惜R 的能接受的分隔符號，通常只能是一個字元。
-    資料不大，所以我們可以自己切資料吧！
-    首先，請同學用readLines把所有資料讀出來，並且將資料都存到`power`這個變數。
+- Class: cmd_question
+  Output: 接下來，從螢幕上我們可以看到，這個檔案的分隔符號會是應該是`";\t"`， （還滿少見的）。另外在中間有部分資料的分隔符號只有`"\t"`。 可惜R
+    的能接受的分隔符號，通常只能是一個字元。 資料不大，所以我們可以自己切資料吧！ 首先，請同學用readLines把所有資料讀出來，並且將資料都存到`power`這個變數。
   CorrectAnswer: power <- readLines(file(power_path, encoding = "BIG5"))
   AnswerTests: test_power()
-
-- Class : text
-  Output: 其實這樣混亂、不好整理的資料，是我們在處理實際資料時
-    常常遇到的狀況。而且我們也常常犯錯，導致要重頭開始重新整理。
-
-- Class : cmd_question
-  Output: 在R 中，我們可以使用`strsplit`來切割字串。
-    `strsplit`的參數x 是要被切割的字串，split是定位分割點的字串。
-    請同學呼叫`strsplit`來用`";?\t"`切割`power`，並且將結果儲存到
-    `power.split`中。
-    `";?\t"`在這邊代表，這個分號`;`是可有可無的。這是為了讓R 能夠
-    同時處理分隔符號為`";\t"`或`"\t"`的狀況。
+  Hint: power <- readLines(file(power_path, encoding = "BIG5"))
+- Class: text
+  Output: 其實這樣混亂、不好整理的資料，是我們在處理實際資料時 常常遇到的狀況。而且我們也常常犯錯，導致要重頭開始重新整理。
+- Class: cmd_question
+  Output: 在R 中，我們可以使用`strsplit`來切割字串。 `strsplit`的參數x 是要被切割的字串，split是定位分割點的字串。 請同學呼叫`strsplit`來用`";?\t"`切割`power`，並且將結果儲存到
+    `power.split`中。 `";?\t"`在這邊代表，這個分號`;`是可有可無的。這是為了讓R 能夠 同時處理分隔符號為`";\t"`或`"\t"`的狀況。
   CorrectAnswer: power.split <- strsplit(power, ";?\t")
   AnswerTests: test_power_split()
-
+  Hint: power.split <- strsplit(power, ";?\t")
 - Class: cmd_question
-  Output: 使用`do.call`可以讓我們把`power.split`組裝成一個character matrix。
-    請同學輸入：`power.mat <- do.call(rbind, power.split)`。
-    `power.split`是一個R 物件向量，而rbind是吃一個任意參數的函數，
-    並且把每個參數當成一個row，組裝出一個matrix。
-    `do.call`會把在這裡的功能，就等價於：`rbind(power.split[[1]], power.split[[2]], ...)`
-    把`power.split`拆解後，全部當成參數丟到rbind去做組裝。
+  Output: 使用`do.call`可以讓我們把`power.split`組裝成一個character matrix。 請同學輸入：`power.mat <-
+    do.call(rbind, power.split)`。 `power.split`是一個R 物件向量，而rbind是吃一個任意參數的函數， 並且把每個參數當成一個row，組裝出一個matrix。
+    `do.call`會把在這裡的功能，就等價於：`rbind(power.split[[1]], power.split[[2]], ...)` 把`power.split`拆解後，全部當成參數丟到rbind去做組裝。
   CorrectAnswer: power.mat <- do.call(rbind, power.split)
   AnswerTests: omnitest('power.mat <- do.call(rbind, power.split)')
-
-- Class : cmd_question
-  Output: 我們差不多把電力資料整理的差不多了，只剩下最後一步：把`power.mat`
-    轉換成一個data.frame，並且讓各個column擁有正確的形態。
-    但是這最後一步卻有許多小步驟。
-    首先，我們把`power.mat`用`data.frame`轉換成`power.df`
-    這裡要注意的是，`data.frame`在轉換的時候，必須要下參數：`stringsAsFactors = FALSE`，
-    否則後續轉換的時候，容易出bug。
+  Hint: power.mat <- do.call(rbind, power.split)
+- Class: cmd_question
+  Output: 我們差不多把電力資料整理的差不多了，只剩下最後一步：把`power.mat` 轉換成一個data.frame，並且讓各個column擁有正確的形態。
+    但是這最後一步卻有許多小步驟。 首先，我們把`power.mat`用`data.frame`轉換成`power.df` 這裡要注意的是，`data.frame`在轉換的時候，必須要下參數：`stringsAsFactors
+    = FALSE`， 否則後續轉換的時候，容易出bug。
   CorrectAnswer: power.df <- data.frame(power.mat, stringsAsFactors = FALSE)
-  AnswerTests: any_of_exprs('power.df <- data.frame(power.mat, stringsAsFactors = FALSE)',
-    'power.df = data.frame(power.mat, stringsAsFactors = FALSE)')
-
-- Class : cmd_question
-  Output: 然後，我們設定`power.df`的欄位名稱（colnames）依序為：
-    `c("id", "name", "year", "power")`
-    請同學使用：`colnames(power.df) <- ` 的語法來指定power.df的
-    colnames。
+  AnswerTests: any_of_exprs('power.df <- data.frame(power.mat, stringsAsFactors =
+    FALSE)', 'power.df = data.frame(power.mat, stringsAsFactors = FALSE)')
+  Hint: power.df <- data.frame(power.mat, stringsAsFactors = FALSE)
+- Class: cmd_question
+  Output: 然後，我們設定`power.df`的欄位名稱（colnames）依序為： `c("id", "name", "year", "power")`
+    請同學使用：`colnames(power.df) <- ` 的語法來指定power.df的 colnames。
   CorrectAnswer: colnames(power.df) <- c("id", "name", "year", "power")
   AnswerTests: any_of_exprs('colnames(power.df) <- c("id", "name", "year", "power")',
     'colnames(power.df) = c("id", "name", "year", "power")')
-
-- Class : cmd_question
-  Output: 接下來，我們設定讓power.df的id欄位是`character`。
-    請使用`as.character`這個函數。
+  Hint: colnames(power.df) <- c("id", "name", "year", "power")
+- Class: cmd_question
+  Output: 接下來，我們設定讓power.df的id欄位是`character`。 請使用`as.character`這個函數。
   CorrectAnswer: power.df$id <- as.character(power.df$id)
   AnswerTests: test_power_df_column("id")
-
-- Class : cmd_question
-  Output: 接下來，我們設定讓power.df的name欄位是`factor`。
-    請使用`factor`這個函數。
+  Hint: power.df$id <- as.character(power.df$id)
+- Class: cmd_question
+  Output: 接下來，我們設定讓power.df的name欄位是`factor`。 請使用`factor`這個函數。
   CorrectAnswer: power.df$name <- factor(power.df$name)
   AnswerTests: test_power_df_column("name")
-
-- Class : cmd_question
-  Output: 接下來，我們設定讓power.df的year欄位是`integer`。
-    請使用`as.integer`這個函數。
+  Hint: power.df$name <- factor(power.df$name)
+- Class: cmd_question
+  Output: 接下來，我們設定讓power.df的year欄位是`integer`。 請使用`as.integer`這個函數。
   CorrectAnswer: power.df$year <- as.integer(power.df$year)
   AnswerTests: test_power_df_column("year")
-
-- Class : cmd_question
-  Output: 接下來，我們設定讓power.df的power欄位是`numeric`。
-    請使用`as.numeric`這個函數。
+  Hint: power.df$year <- as.integer(power.df$year)
+- Class: cmd_question
+  Output: 接下來，我們設定讓power.df的power欄位是`numeric`。 請使用`as.numeric`這個函數。
   CorrectAnswer: power.df$power <- as.numeric(power.df$power)
   AnswerTests: test_power_df_column("power")
-
-- Class : cmd_question
-  Output: 大功造成了，請輸入`head(power.df)`來檢視一下我們整理好的
-    data.frame物件。同時我們也會再檢驗一次power.df看看是否正確。
+  Hint: power.df$power <- as.numeric(power.df$power)
+- Class: cmd_question
+  Output: 大功造成了，請輸入`head(power.df)`來檢視一下我們整理好的 data.frame物件。同時我們也會再檢驗一次power.df看看是否正確。
   CorrectAnswer: head(power.df)
   AnswerTests: test_power_df()
-
-- Class : cmd_question
-  Output: 由於我們在抓資料的分割點時，很有可能會抓錯。所以保險起見，
-    在這個時間點我們要檢查資料是否有清理乾淨。
-    在R 中，如果中間資料有任何錯誤的話，常常會有NA產生。
-    所以一個方法就是用`is.na`檢查`power.df`的四個欄位中間有沒有NA。
-    `all`這個函數，則可以檢查一個邏輯向量的所有的值是否為TRUE。
-    請同學組合`is.na`和`all`來檢查`power.df`的欄位是否包含NA。
+  Hint: head(power.df)
+- Class: cmd_question
+  Output: 由於我們在抓資料的分割點時，很有可能會抓錯。所以保險起見， 在這個時間點我們要檢查資料是否有清理乾淨。 在R 中，如果中間資料有任何錯誤的話，常常會有NA產生。
+    所以一個方法就是用`is.na`檢查`power.df`的四個欄位中間有沒有NA。 `all`這個函數，則可以檢查一個邏輯向量的所有的值是否為TRUE。 請同學組合`is.na`和`all`來檢查`power.df`的欄位是否包含NA。
   CorrectAnswer: all(!is.na(power.df))
   AnswerTests: omnitest("all(!is.na(power.df))", TRUE)
-
-- Class : cmd_question
-  Output: 在動手分析之前，我們先看一下整理出來的電力資料。
-    這裡的`id`欄位，是中華民國行業標準分類的代碼。這個代碼的最大類，
-    都是用英文字母標示的。所以我們就用regular expression來找出
-    所有英文開頭的`id`。
-    `grep("^[A-Z]", power.df$id)`會找出所有英文開頭的id的坐標，請
-    把這個結果存到`group.id.index`之中。
-  CorrectAnswer: group.id.index <- grep("^[A-Z]", power.df$id)
-  AnswerTests: any_of_exprs('group.id.index <- grep("^[A-Z]", power.df$id)',
-    'group.id.index = grep("^[A-Z]", power.df$id)')
-
-- Class : cmd_question
-  Output: 利用`group.id.index`，我們可以從`power.df`中選取出這些大類
-    的列。請把選出的結果存到`power.group`
-  CorrectAnswer: power.group <- power.df[group.id.index,]
-
-- Class : text
+  Hint: all(!is.na(power.df))
+- Class: cmd_question
+  Output: 接下來，我們來運用dplyr和ggplot2這兩個套件將power.df的資料繪製成圖表。 請先安裝dplyr套件。
+  CorrectAnswer: check_then_install("dplyr", "0.4.3")
+  AnswerTests: test_package_version("dplyr", "0.4.3")
+  Hint: 請安裝套件dplyr
+- Class: cmd_question
+  Output: 請再安裝ggplot2套件
+  CorrectAnswer: check_then_install("ggplot2", "1.0.1")
+  AnswerTests: test_package_version("ggplot2", "1.0.1")
+  Hint: 請安裝套件ggplot2
+- Class: cmd_question
+  Output: 使用套件的起手式：載入dplyr
+  CorrectAnswer: library(dplyr)
+  AnswerTests: test_search_path("dplyr")
+  Hint: library(dplyr)
+- Class: cmd_question
+  Output: 這裡的`id`欄位，是中華民國行業標準分類的代碼。 這個代碼的最大類， 都是用英文字母標示的。所以我們就用regular expression來找出
+    所有英文開頭的`id`。 `grepl("^[A-Z]", input)`會判斷input這個字串向量的值，是不是符合 字母開頭。如果是的話，就傳TRUE，否則就是FALSE。
+    和dplyr套件的`filter`搭配使用，我們就可以快速取得所有大類的資料。 請同學將這樣的資料存到`power.target`這個變數之中。
+  CorrectAnswer: power.target <- filter(power.df, grepl("^[A-Z]", id))
+  AnswerTests: any_of_exprs('power.target <- filter(power.df, grepl("^[A-Z]", id))',
+    'power.target = filter(power.df, grepl("^[A-Z]", id))')
+  Hint: power.target <- filter(power.df, grepl("^[A-Z]", id))
+- Class: cmd_question
+  Output: filter 不只可以幫我們挑出主要的行業類別，還可以挑選年度。 所以我們可以繪製每年度，主要行業別的用電比較。 首先，我們先整理出91年度的主要類別，並且存放到`power.target`之中。
+  CorrectAnswer: power.target <- filter(power.df, grepl("^[A-Z]", id), year == 91)
+  AnswerTests: test_var_value("power.target", filter(power.df, grepl("^[A-Z]", id),
+    year == 91))
+  Hint: power.target <- filter(power.df, grepl("^[A-Z]", id), year == 91)
+- Class: cmd_question
+  Output: 我們可以利用power.target來繪製一個barchart來呈現 各種行業別的用電量。首先，還是要先載入ggplot2。
+  CorrectAnswer: library(ggplot2)
+  AnswerTests: test_search_path("ggplot2")
+  Hint: library(ggplot2)
+- Class: cmd_question
+  Output: 我們先建立ggplot2的底圖物件。 這裡我們會用到`aes`這個函數，來辨識在`power.target`的欄位，哪一欄要放到x 軸， 哪一欄，要放到y
+    軸。x 軸的通常放的是分類，而y 放的是我們想要觀測的數據的值。 請同學修改以下的指令，將ggplot2的底圖物件寫入變數`g`。 指令是：`g <- ggplot(power.target,
+    aes(x = <欄位名稱1>, y = <欄位名稱2>))`
+  CorrectAnswer: g <- ggplot(power.target, aes(x = name, y = power))
+  AnswerTests: omnitest('g <- ggplot(power.target, aes(x = name, y = power))')
+  Hint: 我們可以用`colnames(power.target)`來看一下欄位的名稱，以及用 `head(power.target)`來簡單看一下`power.target`的內容。這裡其實id和
+    name都可以，那為了讓圖表更清楚，我們先採用name當x軸的說明。
+- Class: cmd_question
+  Output: 建立底圖之後，我們就要選用適當的圖形工具來適當的呈現我們要看的工具。 這裡我們來用`geom_bar`來呈現我們要資料。 大家可以試試看：`g
+    + geom_bar(stat = "identity")`
+  CorrectAnswer: g + geom_bar(stat = "identity")
+  AnswerTests: omnitest('g + geom_bar(stat = "identity")')
+  Hint: g + geom_bar(stat = "identity")
+- Class: text
+  Output: 有些使用者可能會無法在圖上顯示中文。這可能是字形的問題。 如果是蘋果牌的使用者，可以更改預設的字形來顯示中文： `theme_set(theme_gray(base_family
+    = "STKaiti"))`
+- Class: cmd_question
+  Output: 另外我們也會發現整個x 軸容納不下我們的說明文字。 這時候可以透過設定`xlab`的字體方向，來解決這個問題： `theme(axis.text.x
+    = element_text(angle = 90))` 請注意，ggplot2在設定類型時，是直接透過在程式碼的最後用`+`來加上 `theme(...)`來作處理的。
+    我建議各位同學先使用上下鍵盤，找出剛剛繪圖的指令，然後在最後加上： `+ theme(axis.text.x = element_text(angle =
+    90))`
+  CorrectAnswer: g + geom_bar(stat = "identity") + theme(axis.text.x = element_text(angle
+    = 90))
+  AnswerTests: omnitest('g + geom_bar(stat = "identity") + theme(axis.text.x = element_text(angle
+    = 90))')
+  Hint: g + geom_bar(stat = "identity") + theme(axis.text.x = element_text(angle =
+    90))
+- Class: text
+  Output: 從圖上顯示，我們可以注意到在民國91年的時候， 在各行業中，製造業還是消耗了最多的電力。
+- Class: cmd_question
+  Output: 在ggplot2，我們可以把bar chart更改成pie chart。 請同學試試看：`ggplot(power.target, aes(x
+    = "", y = power, fill = name)) + geom_bar(stat = "identity") + coord_polar(theta
+    = "y")` 如果同學覺得這個指令很冗長的話，可以輸入`skip()`來跳過。
+  CorrectAnswer: ggplot(power.target, aes(x = "", y = power, fill = name)) + geom_bar(stat
+    = "identity") + coord_polar(theta = "y")
+  AnswerTests: omnitest('ggplot(power.target, aes(x = "", y = power, fill = name))
+    + geom_bar(stat = "identity") + coord_polar(theta = "y")')
+  Hint: ggplot(power.target, aes(x = "", y = power, fill = name)) + geom_bar(stat
+    = "identity") + coord_polar(theta = "y")
+- Class: text
+  Output: 事實上ggplot2對pie chart的支援並不好，而這是有理由的。 有興趣的同學可以讀一讀<http://www.r-chart.com/2010/07/pie-charts-in-ggplot2.html>
+    裡面提到一些統計學家對pie chart的批評。
+- Class: text
+  Output: 而根據這個pie chart，我們至少可以了解 在民國91年製造業消耗了我們超過一半的電力。
+- Class: text
+  Output: 一個我們也許會感興趣的問題是： 我們的GDP是不是大部份也來自於製造業呢？
+- Class: text
   Output: 接著，我們來整理GDP的資料...
-
 
