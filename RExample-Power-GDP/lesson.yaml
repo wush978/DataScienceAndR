@@ -193,4 +193,11 @@
   Output: 一個我們也許會感興趣的問題是： 我們的GDP是不是大部份也來自於製造業呢？
 - Class: text
   Output: 接著，我們來整理GDP的資料...
+- Class: cmd_question
+  Output: 透過一樣的要領，我們應該先用`readLines`先看看`gdp_path` 的資料內容。請同學檢視`gdp_path`這個檔案的前20行。
+  CorrectAnswer: readLines(file(gdp_path, encoding = "BIG-5"), n = 20)
+  AnswerTests: omnitest('readLines(file(gdp_path, encoding = "BIG-5"), n = 20)')
+  Hint: readLines(file(gdp_path, encoding = "BIG-5"), n = 20)
+- Class: text
+  Output: 一些不熟悉R 的同學可能會被`\"`這個符號給搞混了。 由於`"`在R 中是代表字串的開始和結束，所以R 會在顯示字串時， 在`"`之前加註`\`，所以一個`\"`實際上就是一個`"`
 
