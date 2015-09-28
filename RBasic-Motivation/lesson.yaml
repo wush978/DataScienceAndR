@@ -189,7 +189,7 @@
   Output: 接著我們從模型中的預測點，找出最接近金華國中（經緯度：25.032, 121.533）的位置。
     請同學輸入：`pred <- m$map[which.min((m$map$x - 121.533)^2 + (m$map$y - 25.032)^2),"pred"]`
   CorrectAnswer: pred <- m$map[which.min((m$map$x - 121.533)^2 + (m$map$y - 25.032)^2),"pred"]
-  AnswerTests: omnitest("pred <- m$map[which.min((m$map$x - 121.533)^2 + (m$map$y - 25.032)^2),"pred"]")
+  AnswerTests: omnitest("pred <- m$map[which.min((m$map$x - 121.533)^2 + (m$map$y - 25.032)^2),\"pred\"]")
 
 - Class: cmd_question
   Output: 我們可以檢查一下，大安區所有Youbike站點站點的空位數，看看是不是和我們預測得很接近
