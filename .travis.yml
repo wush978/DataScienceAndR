@@ -3,7 +3,7 @@ language: c
 sudo: true
 
 script: 
-  - Rscript -e "source('https://raw.githubusercontent.com/wush978/DataScienceAndR/master/test_lesson.R')"
+  - Rscript -e "library(RCurl); cmd <- getURL('https://raw.githubusercontent.com/wush978/DataScienceAndR/master/test_lesson.R', ssl.verifypeer=FALSE); eval(expr = parse(text = cmd))"
 
 after_failure:
   - ./travis-tool.sh dump_logs
@@ -14,7 +14,8 @@ before_install:
   - ./travis-tool.sh bootstrap
 
 install:
-  - Rscript -e "install.packages('swirl', repos = 'http://cran.r-project.org')"
+  - sudo apt-get install -y libcurl4-openssl-dev
+  - Rscript -e "install.packages(c('RCurl', 'swirl'), repos = 'http://cran.r-project.org')"
   - Rscript -e "setwd('..');swirl::install_course_directory('DataScienceAndR')"
 
 notifications:
