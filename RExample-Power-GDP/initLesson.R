@@ -33,5 +33,7 @@ assign("translater_path", c(
   "8to9" = .get_path("8to9.txt")),
   envir = globalenv())
 
-
+assign("gdp_df_path",
+       .get_path("gdp_df_tutorial.R"),
+       envir = globalenv())
 

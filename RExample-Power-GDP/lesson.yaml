@@ -238,4 +238,16 @@
   Output: 在實務上，我們會在`%>%`後斷行，增加程式的可讀性。
 - Class: text
   Output: 回歸正傳，我們第一個要看的，是檔案中的分隔符號是什麼。 大家在看過檔案內容之後，應該會同意：分隔符號是`,` 另外大家也會注意到這個檔案中，字串的內容的前後會加上`"`。
+    另外每一列的欄位數目也不一致，所以不能簡單用`read.csv`解決。 因為資料量不大，我們還是全部用`readLines`讀進來後再用`strsplit`
+    自己切吧！
+- Class: cmd_question
+  Output: 和剛剛的電力資料一樣，請讓我們先用`readLines`把資料全部 載入並且存到`gdp`這個變數之中。
+  CorrectAnswer: gdp <- file(gdp_path, encoding = "BIG-5") %>% readLines()
+  AnswerTests: (test_generator("gdp", "gdp.Rds"))()
+  Hint: gdp <- file(gdp_path, encoding = "BIG-5") %>% readLines()
+- Class: cmd_question
+  Output: 接著，我們利用`strsplit`，用`","`當分隔符號， 將讀入的gdp資料切成list。請將結果存到`gdp.split`
+  CorrectAnswer: gdp.split <- strsplit(gdp, ",")
+  AnswerTests: (test_generator("gdp.split", "gdp.split.Rds"))()
+  Hint: gdp.split <- strsplit(gdp, ",")
 

@@ -333,4 +333,54 @@
   Output: 回歸正傳，我們第一個要看的，是檔案中的分隔符號是什麼。
     大家在看過檔案內容之後，應該會同意：分隔符號是`,`
     另外大家也會注意到這個檔案中，字串的內容的前後會加上`"`。
+    另外每一列的欄位數目也不一致，所以不能簡單用`read.csv`解決。
+    因為資料量不大，我們還是全部用`readLines`讀進來後再用`strsplit`
+    自己切吧！
+
+- Class : cmd_question
+  Output: 和剛剛的電力資料一樣，請讓我們先用`readLines`把資料全部
+    載入並且存到`gdp`這個變數之中。
+  CorrectAnswer: gdp <- file(gdp_path, encoding = "BIG-5") %>% readLines()
+  AnswerTests: (test_generator("gdp", "gdp.Rds"))()
+
+- Class : cmd_question
+  Output: 接著，我們利用`strsplit`，用`","`當分隔符號，
+    將讀入的gdp資料切成list。請將結果存到`gdp.split`
+  CorrectAnswer: gdp.split <- strsplit(gdp, ",")
+  AnswerTests: (test_generator("gdp.split", "gdp.split.Rds"))()
+
+- Class : cmd_question
+  Output: 仔細一點的話，我們能注意到，年份的資料在切割後，長度都是1 。
+    所以讓我們選取`gdp.split`這個list中，`length`為1 的值。這部分，可以
+    利用`sapply`這個函數來查詢。請同學試試看：
+    `(sapply(gdp.split, length) == 1) %>% which`
+    這裡的`sapply(gdp.split, lenght)`相當於建立一個向量，並且讓第一個值
+    為`length(gdp.split[[1]])`，第二個值為`length(gdp.split[[2]])`，以此類推。
+  CorrectAnswer: (sapply(gdp.split, length) == 1) %>% which
+  AnswerTests: omnitest('(sapply(gdp.split, length) == 1) %>% which')
+
+- Class : cmd_question
+  Output: 我們可以看一下，這些長度為一的行的內容：
+    請同學輸入：`gdp.split[(sapply(gdp.split, length) == 1) %>% which]`
+  CorrectAnswer: gdp.split[(sapply(gdp.split, length) == 1) %>% which]
+  AnswerTests: omnitest('gdp.split[(sapply(gdp.split, length) == 1) %>% which]')
+
+- Class : cmd_question
+  Output: 我們可以看到，只有前7 個index 是真的代表年份。
+    最後幾個index 其實只有指到這個檔案的一些說明。
+    所以我們利用`head`這個函數，拿出前7 個index，並存到：`year.index`之中。
+    請同學輸入：`year.index <- (sapply(gdp.split, length) == 1) %>% which %>% head(7)`
+  CorrectAnswer: year.index <- (sapply(gdp.split, length) == 1) %>% which %>% head(7)
+  AnswerTests: omnitest('year.index <- (sapply(gdp.split, length) == 1) %>% which %>% head(7)')
+
+- Class : script
+  Output: 接著我們可以利用for 迴圈來切出這份資料。這部分請同學
+    參考路徑在`gdp_df_path`的這個檔案，修改它，讓我們能得到`gdp_df`
+    這個整理乾淨過後的data.frame。
+    你可以利用`browseURL(gdp_df_path)`來打開參考檔案。把檔案
+    的內容複製到gdp_df.R之中，並且再完成之後，輸入：`submit()`
+  Script: gdp_df.R
+  Hint: 你可以利用`browseURL(gdp_df_path)`來打開參考檔案。把檔案
+    的內容複製到gdp_df.R之中，並且再完成之後，輸入：`submit()`
+  AnswerTests: test_gdp_df()
 
