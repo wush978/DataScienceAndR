@@ -8,3 +8,5 @@ blood_type <- c("B","A","A","O","AB","O",
                 "A","A","A","AB","A","AB",
                 "AB","A","AB","A","AB","B",
                 "A","O","A","A","AB","AB")
+
+grades <- c("A","C","B","B","A")
