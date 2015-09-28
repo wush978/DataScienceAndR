@@ -200,4 +200,42 @@
   Hint: readLines(file(gdp_path, encoding = "BIG-5"), n = 20)
 - Class: text
   Output: 一些不熟悉R 的同學可能會被`\"`這個符號給搞混了。 由於`"`在R 中是代表字串的開始和結束，所以R 會在顯示字串時， 在`"`之前加註`\`，所以一個`\"`實際上就是一個`"`
+- Class: cmd_question
+  Output: 另一個避免`\"`干擾的方式，是使用`cat`這函數。 請同學試試看：`cat(readLines(file(gdp_path, encoding
+    = "BIG-5"), n = 20), sep = "\n")`
+  CorrectAnswer: cat(readLines(file(gdp_path, encoding = "BIG-5"), n = 20), sep =
+    "\n")
+  AnswerTests: omnitest('cat(readLines(file(gdp_path, encoding = "BIG-5"), n = 20),
+    sep = "\n")')
+  Hint: cat(readLines(file(gdp_path, encoding = "BIG-5"), n = 20), sep = "\n")
+- Class: text
+  Output: 上一個問題的答案，其實牽涉到了三層函數：
+- Class: text
+  Output: 我們先呼叫`file(gdp_path, encoding = "BIG-5")`建立一個connection。 connection是R 處理檔案的專業術語，如果比較不熟悉程式設計的同學，就先把
+    connection當成檔案的代理就好。
+- Class: text
+  Output: 接著，我們使用`readLines`處理`file`回傳的物件。這是第二層。 這裡我們指定參數`n=20`，代表我們要從connection的最前面讀取前20行。
+- Class: text
+  Output: 最後，我們把`readLines`回傳的20個字串交給`cat`作處理。 `cat`會直接把字串內容印到R 的console上，而且我們指定每一個
+    字串之間要插入一個斷行。
+- Class: cmd_question
+  Output: 這樣一層一層疊上去的寫法，很容易讓程式變的很複雜。 Stefan Milton Bache推出了一個R 套件很好地解決了這個問題： `magrittr`。我們在安裝`dplyr`之後，應該已經安裝了這個套件了。
+    因此，請同學直接輸入：`library(magrittr)`
+  CorrectAnswer: library(magrittr)
+  AnswerTests: omnitest('library(magrittr)')
+  Hint: library(magrittr)
+- Class: cmd_question
+  Output: 回顧一下我們剛剛做的事情： 把`file(gdp_path, encodoing = "BIG-5")` 得到的物件給 `readLines(...,
+    n = 20)` 再把得到的物件給 `cat(..., sep = "\n")`。 這裡的`...`就代表從上一個函數得到的物件。使用`magrittr`後，
+    我們的寫法就變成：`file(gdp_path, encoding = "BIG-5") %>% readLines(n = 20) %>% cat(sep
+    = "\n")` 請同學試試看
+  CorrectAnswer: file(gdp_path, encoding = "BIG-5") %>% readLines(n = 20) %>% cat(sep
+    = "\n")
+  AnswerTests: omnitest('file(gdp_path, encoding = "BIG-5") %>% readLines(n = 20)
+    %>% cat(sep = "\n")')
+  Hint: file(gdp_path, encoding = "BIG-5") %>% readLines(n = 20) %>% cat(sep = "\n")
+- Class: text
+  Output: 在實務上，我們會在`%>%`後斷行，增加程式的可讀性。
+- Class: text
+  Output: 回歸正傳，我們第一個要看的，是檔案中的分隔符號是什麼。 大家在看過檔案內容之後，應該會同意：分隔符號是`,` 另外大家也會注意到這個檔案中，字串的內容的前後會加上`"`。
 
