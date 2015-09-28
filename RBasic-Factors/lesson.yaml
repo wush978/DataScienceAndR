@@ -1,0 +1,61 @@
+- Class: meta
+  Course: DataScienceAndR
+  Lesson: RBasic-Factors
+  Author: Chih-Cheng Liang
+  Type: Standard
+  Organization: Taiwan R User Group
+  Version: 0.1
+  
+
+- Class: text
+  Output: 這個課程帶大家快速了解R語言的Factor資料結構
+  
+- Class: text
+  Output: Factor是一個向量物件，用途是儲存「類別」的資料，
+    有這樣的資料格式，我們可以輕易把資料集依照類別分組。
+    屬於「類別」資料的例子如：
+    「男、女」，「台北市、台中市、台東市、台南市」
+
+- Class: cmd_question
+  Output: 我們觀察一個實際的例子。課程儲存了一個文字向量 blood_type，
+    記載著30個人的血型資料。請輸入 blood_type 。
+  CorrectAnswer: blood_type
+  AnswerTests: omnitest(correctExpr='blood_type')
+  Hint: 請輸入 blood_type
+  
+- Class: cmd_question
+  Output: 大家可以觀察到這個文字向量有A, B, O, AB四種血型。
+    我們要將他轉為Factor向量，請輸入 blood_type_factor <- factor(blood_type)
+  CorrectAnswer: blood_type_factor <- factor(blood_type)
+  AnswerTests: 
+    - any_of_exprs(
+        "blood_type_factor = factor(blood_type)",
+        "blood_type_factor <- factor(blood_type)"
+        )
+  Hint: 請輸入 blood_type_factor <- factor(blood_type)
+
+- Class: cmd_question
+  Output: 我們仔細觀察這個Factor向量。請輸入 blood_type_factor 。
+  CorrectAnswer: blood_type_factor
+  AnswerTests: omnitest(correctExpr='blood_type_factor')
+  Hint: 請輸入 blood_type_factor
+
+- Class: text
+  Output: 可以觀察到R印出Factor向量和文字向量時的方式不太一樣。Factor多出levels這個屬性。
+
+- Class: cmd_question
+  Output: levels這個屬性是Factor向量中所允許出現的類別。
+    要取出這些類別，可使用levels函數。
+    請輸入 levels(blood_type_factor) 來取出所有允許的血型。
+  CorrectAnswer: levels(blood_type_factor)
+  AnswerTests: omnitest(correctExpr='levels(blood_type_factor)')
+
+- Class: text
+  Output: Ordered list
+  
+  
+
+
+
+- Class: text
+  Output: put your text output here
