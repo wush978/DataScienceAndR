@@ -56,6 +56,20 @@ test_power_df_column <- function(name) {
   )
 }
 
-test_power_df <- test_generator("power.df", "power.df.Rds")
+test_power_df <- function() {
+  user_object <- get("power.df", globalenv())
+  rds <- readRDS(.get_path("power.df.Rds"))
+  if (isTRUE(all.equal(user_object, rds))) TRUE else {
+    tryCatch({
+      stopifnot(length(rds) == length(user_object))
+      for(i in seq_along(user_object)) {
+        stopifnot(all(class(user_object[[i]]) == class(length(rds[[i]]))))
+        if (class(user_object[[i]]) == "factor") {
+          stopifnot(all(as.character(user_object[[i]]) == as.character(rds[[i]])))
+        } else stopifnot(all(user_object[[i]] == rds[[i]]))
+      }
+    }, error = function(e) FALSE)
+  }
+}
 
 test_gdp_df <- test_generator("gdp.df", "gdp.df.Rds")
