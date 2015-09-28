@@ -35,6 +35,7 @@ test_lesson = function(lesson_dir){
 course_list <- list.dirs(".", recursive = FALSE)
 course_list <- substring(course_list, 3, nchar(course_list))
 course_list <- grep("^[^\\.]", course_list, value = TRUE)
+course_list <- setdiff(course_list, "RBasic-Motivation")
 for(course in course_list) {
   test_lesson(course)
 }
