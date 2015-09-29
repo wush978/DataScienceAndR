@@ -178,7 +178,7 @@
 - Class : text
   Output: 這裡的名字，就是g 這個list的名字。
 
-- Class : text
+- Class : cmd_question
   Output: 另一個`attributes(g)`的輸出，是一個名字是"class"的character向量。它的值是`"lm"`。請同學試試看：`attr(g, "class")`
   CorrectAnswer: attr(g, "class")
   AnswerTests: omnitest('attr(g, "class")')

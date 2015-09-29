@@ -146,11 +146,12 @@
   Hint: attr(g, "names")
 - Class: text
   Output: 這裡的名字，就是g 這個list的名字。
-- Class: text
+- Class: cmd_question
   Output: 另一個`attributes(g)`的輸出，是一個名字是"class"的character向量。它的值是`"lm"`。請同學試試看：`attr(g,
     "class")`
   CorrectAnswer: attr(g, "class")
   AnswerTests: omnitest('attr(g, "class")')
+  Hint: attr(g, "class")
 - Class: text
   Output: 了解像attributes這樣的功能，在探索一些複雜的R 模型物件時，是非常好用的。我們在之後深入探討`matrix`、`data.frame`
     等進階物件的時候，也會需要了解attributes的相關的知識。現在，同學只要知道所有的R 物件都有attributes就可以了。
