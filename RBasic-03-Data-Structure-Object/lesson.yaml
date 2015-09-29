@@ -76,25 +76,25 @@
     但是有些物件的型態會是call和list。這讓R 的開發者能更有彈性的建立一些複雜的模型。 同時同學在學會list之後，也更有能力來了解各種R 套件所建立的模型物件。
 - Class: cmd_question
   Output: 請同學檢查看看`g[[10]]`的型態
-  CorrectAnswer: g[[10]]
-  AnswerTests: omnitest('g[[10]]', 'call')
-  Hint: g[[10]]
+  CorrectAnswer: mode(g[[10]])
+  AnswerTests: omnitest('mode(g[[10]])', 'call')
+  Hint: mode(g[[10]])
 - Class: text
   Output: 這裡的`g[[10]]`其實是記載著產生g 的程式碼。在R 裡面，這樣的程式碼是存成call型態的物件。 我們現在只要知道這是一種call就可以了。至於call是什麼東西，要等到同學需要開始深入的學習R
     的原始碼、運作機制時， 才需要弄懂。我們現在只要知道，list可以裝所有R 的物件就可以了。
 - Class: cmd_question
-  Output: 另一個我們需要知道的事情，就是list可以有名字。舉例來說，我們除了用`g[[1]]`來取得第一個值之外，也可以用 `g[["coefficients"]]`來取得第一個值。因為`g`這個向量是有名字的，而第一個名字就是`"coefficients"`。請同學試試看。
+  Output: 另一個我們需要知道的事情，就是可以為list命名。舉例來說，我們除了用`g[[1]]`來取得第一個值之外，也可以用 `g[["coefficients"]]`來取得第一個值。因為`g`這個向量是被命名的，而第一個名字就是`"coefficients"`。請同學試試看。
   CorrectAnswer: g[["coefficients"]]
   AnswerTests: omnitest('g[["coefficients"]]')
   Hint: g[["coefficients"]]
 - Class: text
-  Output: 適當的使用名字，可以讓程式碼更有可讀性。舉例來說，如果我們知道`g`就是一個迴歸模型，我們也知道迴歸模型通常 就是一個參數向量，那我們就會預期：`g[["coefficients"]]`就是這個迴歸模型的參數。（在統計學課本中，迴歸模型的參數
+  Output: 適當的命名，可以讓程式碼更易讀。舉例來說，若我們知道`g`是一個迴歸模型，我們也知道迴歸模型通常 就是一個參數向量，那我們就會預期：`g[["coefficients"]]`就是這個迴歸模型的參數。（在統計學課本中，各種模型的參數
     通常稱作："coefficients"。
 - Class: cmd_question
   Output: 我們可以更改一個向量的長度。舉例來說，現在x 是一個長度是5 、型態是numeric的向量。我們可以利用：`length(x) <- 10` 把x
     的長度改成10。請同學試試看。
   CorrectAnswer: length(x) <- 10
-  AnswerTests: omnitest('length(x) <- 10', 'length(x) = 10')
+  AnswerTests: omnitest('length(x) <- 10')
   Hint: length(x) <- 10
 - Class: cmd_question
   Output: 現在我們可以來看看x 的值。，請同學輸入：`x`
@@ -122,17 +122,17 @@
   AnswerTests: omnitest('x', c(1,2,3,4,5,NA,7,NA,NA,NA, NA, NA, 13))
   Hint: x
 - Class: cmd_question
-  Output: 如果我們要縮短x 的長度，可以運用如：`x <- x[c(1,3,5,7,9,11,13)]` 請同學試試看。
-  CorrectAnswer: x <- x[c(1,3,5,7,9,11,13)]
-  AnswerTests: any_of_exprs('x <- x[c(1,3,5,7,9,11,13)]', 'x = x[c(1,3,5,7,9,11,13)]')
-  Hint: x <- x[c(1,3,5,7,9,11,13)]
+  Output: 如果我們要縮短x 的長度，可以運用如：`x2 <- x[c(1,3,5,7,9,11,13)]`，這樣x2就是縮短的x 。 請同學試試看。
+  CorrectAnswer: x2 <- x[c(1,3,5,7,9,11,13)]
+  AnswerTests: any_of_exprs('x2 <- x[c(1,3,5,7,9,11,13)]', 'x2 = x[c(1,3,5,7,9,11,13)]')
+  Hint: x2 <- x[c(1,3,5,7,9,11,13)]
 - Class: cmd_question
-  Output: 現在我們可以來看看x 的值。，請同學輸入：`x`
-  CorrectAnswer: x
-  AnswerTests: omnitest('x', c(1,3,5,7,NA,NA,13))
-  Hint: x
+  Output: 現在我們可以來看看x2的值。，請同學輸入：`x2`
+  CorrectAnswer: x2
+  AnswerTests: omnitest('x2', c(1,3,5,7,NA,NA,13))
+  Hint: x2
 - Class: text
-  Output: x 只剩下原本在奇數位置的值了。 在整理資料時，我們常常需要這樣的技巧，來從資料中選出我們真正要分析的部份，並且將資料調整成我們需要的長度。
+  Output: x2只剩下原本在x 奇數位置的值了。 在整理資料時，我們常常需要這樣的技巧，來從資料中選出我們真正要分析的部份，並且將資料調整成我們需要的長度。
 - Class: cmd_question
   Output: 所有的R 物件，都有「屬性」(attributes)。我們可以用`attributes`這個函數來印出一個R 物件的屬性。 請同學試試看：`attributes(g)`
   CorrectAnswer: attributes(g)
