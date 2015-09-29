@@ -52,8 +52,8 @@
 
 - Class: cmd_question
   Output: 在Factor向量中指派沒在levels裡面的類別，會出現NA。
-    請輸入blood_type_factor[5] = "C"
-  CorrectAnswer: blood_type_factor[5] = "C"
+    請輸入blood_type_factor[5] <- "C"
+  CorrectAnswer: blood_type_factor[5] <- "C"
   AnswerTests:
     - any_of_exprs(
         "blood_type_factor[5] <- \"C\" ",
