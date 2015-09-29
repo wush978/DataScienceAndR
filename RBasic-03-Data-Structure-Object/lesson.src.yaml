@@ -1,0 +1,210 @@
+- Class: meta
+  Course: DataScienceAndR
+  Lesson: RBasic-03-Data-Structure-Object
+  Author: Wush Wu
+  Type: Standard
+  Organization: Taiwan R User Group
+  Version: 0.1
+
+- Class : output
+  Output: 在R 中，我們操作的所有變數，都是一種R 物件(Object)。
+    這一堂課程中，就是要簡介R 的物件結構。
+
+- Class : text
+  Output: 在所有物件中，最基礎的「原子」物件，就是在上一堂課中介紹的各種向量。
+    其他的物件都是有這些原子物件組合而成。
+
+- Class : text
+  Output: 這些向量物件有兩個很重要的屬性：`mode`和`length`。
+    `mode`代表這個向量的值型態，總共有：`logical`、`integer`、`numeric`、`complex`、`character`和`raw`。
+    `length`代表這個向量的值的個數。
+
+- Class : cmd_question
+  Output: 同學可以用`mode`和`length`這個函數來查詢一個向量的型態和長度。
+    請同學試試看：`mode(x)`
+  CorrectAnswer: mode(x)
+  AnswerTests: omnitest('mode(x)', "numeric")
+
+- Class : mult_question
+  Output: 請問x 的型態是？
+  AnswerChoices: logical;integer;numeric;complex;character;raw
+  CorrectAnswer: numeric
+  AnswerTests: omnitest(correctVal = 'numeric')
+  Hint: 請參考`mode(x)`的輸出
+
+- Class: cmd_question
+  Output: 接著，請試試看`length(x)`
+  CorrectAnswer: length(x)
+  AnswerTests: omnitest('length(x)', 5L)
+
+- Class: mult_question
+  Output: 請問x 的長度是？
+  AnswerChoices: 1;2;3;4;5;6
+  CorrectAnswer: 5
+  AnswerTests: omnitest(correctVal = '5')
+  Hint: 請參考`length(x)`的輸出
+
+- Class: text
+  Output: R 也可以建立一種叫做`list`的向量，這是「R 物件」的向量。換句話說，每一個值
+    都是R 物件，都有自己的`mode`、`length`等屬性。我們會在一些複雜的統計模型中，見到這樣的
+    資料型態。舉例來說，在R 中如果要建立一個迴歸模型，會使用：`g <- lm(dist ~ speed, cars)`
+    這樣的程式碼會利用車速當解釋變數、煞車距離當應變數，建立一個迴歸模型。
+    這裡我們先不管`lm`怎麼用，而是要看看`g`這個物件，也就是一個回歸模型。
+
+- Class: cmd_question
+  Output: 請同學檢查`g`的型態
+  CorrectAnswer: mode(g)
+  AnswerTests: omnitest('mode(g)', mode(g))
+
+- Class: cmd_question
+  Output: 請同學檢查`g`的長度
+  CorrectAnswer: length(g)
+  AnswerTests: omnitest('length(g)', length(g))
+
+- Class: cmd_question
+  Output: 在上一個章節中，我們有介紹可以使用如`g[1:2]`的方式來拿出`g`的第一個到第二個值。
+    而這樣的輸出結果，還是會和`g`有同樣的`mode`。
+    先請同學看看`g[1:2]`的結果。
+  CorrectAnswer: g[1:2]
+  AnswerTests: omnitest('g[1:2]', g[1:2])
+
+- Class : cmd_question
+  Output: 但是如果我們想拿出，`g`的第一個值，並且是這個物件的本身，而非被包在一個list中，
+    我們需要用：`g[[1]]`。請同學試試看。
+  CorrectAnswer: g[[1]]
+  AnswerTests: omnitest('g[[1]]', g[[1]])
+
+- Class : cmd_question
+  Output: 請同學查詢`g[[1]]`的型態
+  CorrectAnswer: mode(g[[1]])
+  AnswerTests: omnitest('mode(g[[1]])', mode(g[[1]]))
+
+- Class : cmd_question
+  Output: 請同學查詢`g[[1]]`的長度
+  CorrectAnswer: length(g[[1]])
+  AnswerTests: omnitest('length(g[[1]])', length(g[[1]]))
+
+- Class : text
+  Output: 這裡我們再解釋一次`g[1]`和`g[[1]]`的差異。使用`g[1]`時，回傳的值會和`g`有相同的型態，
+    所以會是一個list。但是`g[[1]]`則會取出第一個值本身，所以型態可能會和`g`不同。這是兩者的差異。
+
+- Class : text
+  Output: 經過這些練習，相信同學也會理解list這個「R 物件的向量」是什麼意思。
+    list向量最有用的地方，在於它可以裝不同型態的值。以`g`為範例，雖然它大部分的值的型態都是numeric，
+    但是有些物件的型態會是call和list。這讓R 的開發者能更有彈性的建立一些複雜的模型。
+    同時同學在學會list之後，也更有能力來了解各種R 套件所建立的模型物件。
+
+- Class: cmd_question
+  Output: 請同學檢查看看`g[[10]]`的型態
+  CorrectAnswer: mode(g[[10]])
+  AnswerTests: omnitest('mode(g[[10]])', 'call')
+
+- Class : text
+  Output: 這裡的`g[[10]]`其實是記載著產生g 的程式碼。在R 裡面，這樣的程式碼是存成call型態的物件。
+    我們現在只要知道這是一種call就可以了。至於call是什麼東西，要等到同學需要開始深入的學習R 的原始碼、運作機制時，
+    才需要弄懂。我們現在只要知道，list可以裝所有R 的物件就可以了。
+
+- Class : cmd_question
+  Output: 另一個我們需要知道的事情，就是可以為list命名。舉例來說，我們除了用`g[[1]]`來取得第一個值之外，也可以用
+    `g[["coefficients"]]`來取得第一個值。因為`g`這個向量是被命名的，而第一個名字就是`"coefficients"`。請同學試試看。
+  CorrectAnswer: g[["coefficients"]]
+  AnswerTests: omnitest('g[["coefficients"]]')
+
+- Class : text
+  Output: 適當的命名，可以讓程式碼更易讀。舉例來說，若我們知道`g`是一個迴歸模型，我們也知道迴歸模型通常
+    就是一個參數向量，那我們就會預期：`g[["coefficients"]]`就是這個迴歸模型的參數。（在統計學課本中，各種模型的參數
+    通常稱作："coefficients"。
+
+- Class : cmd_question
+  Output: 我們可以更改一個向量的長度。舉例來說，現在x 是一個長度是5 、型態是numeric的向量。我們可以利用：`length(x) <- 10`
+    把x 的長度改成10。請同學試試看。
+  CorrectAnswer: length(x) <- 10
+  AnswerTests: omnitest('length(x) <- 10')
+
+- Class : cmd_question
+  Output: 現在我們可以來看看x 的值。，請同學輸入：`x`
+  CorrectAnswer: x
+  AnswerTests: omnitest('x', c(1,2,3,4,5,NA,NA,NA,NA,NA))
+
+- Class : cmd_question
+  Output: 我們也可以直接在x 的指定位置塞入新的值，並且藉此增加x 的長度。舉例來說：
+    `x[7] <- 7`可以讓x 的第7 個位置的值變成7 。請同學試試看。
+  CorrectAnswer: x[7] <- 7
+  AnswerTests: any_of_exprs('x[7] <- 7', 'x[7] = 7')
+
+- Class : cmd_question
+  Output: 現在我們可以來看看x 的值。，請同學輸入：`x`
+  CorrectAnswer: x
+  AnswerTests: omnitest('x', c(1,2,3,4,5,NA,7,NA,NA,NA))
+
+- Class : cmd_question
+  Output: 由於x 本來的長度就已經超過7 所以並沒有延長。現在我們改程式試試看：`x[13] <- 13`
+  CorrectAnswer: x[13] <- 13
+  AnswerTests: any_of_exprs('x[13] <- 13', 'x[13] = 13')
+
+- Class : cmd_question
+  Output: 現在我們可以來看看x 的值。，請同學輸入：`x`
+  CorrectAnswer: x
+  AnswerTests: omnitest('x', c(1,2,3,4,5,NA,7,NA,NA,NA, NA, NA, 13))
+
+- Class : cmd_question
+  Output: 如果我們要縮短x 的長度，可以運用如：`x2 <- x[c(1,3,5,7,9,11,13)]`，這樣x2就是縮短的x 。
+    請同學試試看。
+  CorrectAnswer: x2 <- x[c(1,3,5,7,9,11,13)]
+  AnswerTests: any_of_exprs('x2 <- x[c(1,3,5,7,9,11,13)]', 'x2 = x[c(1,3,5,7,9,11,13)]')
+
+- Class : cmd_question
+  Output: 現在我們可以來看看x2的值。，請同學輸入：`x2`
+  CorrectAnswer: x2
+  AnswerTests: omnitest('x2', c(1,3,5,7,NA,NA,13))
+
+- Class : text
+  Output: x2只剩下原本在x 奇數位置的值了。
+    在整理資料時，我們常常需要這樣的技巧，來從資料中選出我們真正要分析的部份，並且將資料調整成我們需要的長度。
+
+- Class : cmd_question
+  Output: 所有的R 物件，都有「屬性」(attributes)。我們可以用`attributes`這個函數來印出一個R 物件的屬性。
+    請同學試試看：`attributes(g)`
+  CorrectAnswer: attributes(g)
+  AnswerTests: omnitest('attributes(g)')
+
+- Class : cmd_question
+  Output: 在剛剛`attributes(g)`的輸出中，同學應該會看到一個帶有名字的list。所有物件的attributes都是帶有名字的list。
+    一個有趣的事情是，通常向量的名字，就是存放在"names"這個attributes的character向量。在R 中，我們可以用`attr(g, "names")`
+    來取得名字是"names"的屬性。請同學試試看。
+  CorrectAnswer: attr(g, "names")
+  AnswerTests: omnitest('attr(g, "names")', names(g))
+
+- Class : text
+  Output: 這裡的名字，就是g 這個list的名字。
+
+- Class : cmd_question
+  Output: 另一個`attributes(g)`的輸出，是一個名字是"class"的character向量。它的值是`"lm"`。請同學試試看：`attr(g, "class")`
+  CorrectAnswer: attr(g, "class")
+  AnswerTests: omnitest('attr(g, "class")')
+
+- Class : text
+  Output: 了解像attributes這樣的功能，在探索一些複雜的R 模型物件時，是非常好用的。我們在之後深入探討`matrix`、`data.frame`
+    等進階物件的時候，也會需要了解attributes的相關的知識。現在，同學只要知道所有的R 物件都有attributes就可以了。
+
+- Class : text
+  Output: 而名稱為"class"的屬性是非常重要的，因為它牽涉到R 的物件導向設計。這部份請讓我們到之後的章節再跟同學說明。
+
+- Class : cmd_question
+  Output: 由於"names"和"class"這兩個屬性是如此的重要，所以在R 中有設計了`class`和`names`這兩個函數，可以讓使用者很方便的
+    來修改一個R 物件的names和class。請同學試試看：`names(g)`
+  CorrectAnswer: names(g)
+  AnswerTests: omnitest('names(g)')
+
+- Class : cmd_question
+  Output: 再請同學試試看：`class(g)`
+  CorrectAnswer: class(g)
+  AnswerTests: omnitest('class(g)')
+
+- Class : text
+  Output: 這個課程簡介了R 的物件系統。希望未來同學在接觸到沒學過得套件時，可以有系統得來摸索R 套件的輸出。
+
+
+
+
+  
