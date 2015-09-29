@@ -13,10 +13,9 @@ install:
 
 build_script:
   - Rscript -e "install.packages(c('swirl'), repos = 'http://cran.r-project.org')"
-  - Rscript -e "setwd('..');swirl::install_course_directory('DataScienceAndR')"
 
 test_script:
-  - Rscript -e "source('https://raw.githubusercontent.com/wush978/DataScienceAndR/master/test_lesson.R')"
+  - Rscript -e "source('.test_course.R')"
 
 on_failure:
   - travis-tool.sh dump_logs
