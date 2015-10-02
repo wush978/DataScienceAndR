@@ -19,13 +19,21 @@ test_lesson = function(lesson_dir){
   }
   
   for(question in lesson){
-    if(!is.null(question$CorrectAnswer) && question$Class=="cmd_question"){
+    if(!is.null(question$CorrectAnswer) && question$Class %in% c("cmd_question", "mult_question")) {
       print(paste(">", question$CorrectAnswer))
-      suppressWarnings({
-        e$val <- eval(parse(text=question$CorrectAnswer), envir = e)
-        e$expr <- parse(text = question$CorrectAnswer)[[1]]
-        stopifnot(eval(parse(text=question$AnswerTests), envir = e))
-      })
+      switch(question$Class, 
+        "cmd_question" = {
+          suppressWarnings({
+            e$val <- eval(parse(text=question$CorrectAnswer), envir = e)
+            e$expr <- parse(text = question$CorrectAnswer)[[1]]
+            stopifnot(eval(parse(text=question$AnswerTests), envir = e))
+          })
+        },
+        "mult_question" = {
+          e$val <- as.character(question$CorrectAnswer)
+          stopifnot(eval(parse(text = question$AnswerTests), envir = e))
+        }
+      )
     } 
   }
   
