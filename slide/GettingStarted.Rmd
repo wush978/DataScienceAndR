@@ -2,38 +2,121 @@
 title: "R 語言上手篇"
 author: "Wush Wu"
 date: "2015年9月25日"
-output: slidy_presentation
+output: 
+  slidy_presentation: 
+    keep_md: yes
 ---
 
-## 目的
-
-- 設定與安裝R
-- 了解Rstudio
-- 了解套件
-- 安裝swirl
-
-## 安裝 R
-
-- <http://cran.csie.ntu.edu.tw>
-
-## 安裝 R 最好的IDE: Rstudio
-
-- <https://www.rstudio.com/products/rstudio/download/>
-
-## 了解開發環境
-
-- 了解各種區塊
-- 了解安裝環境
-- Tab: 自動完成
-
-## 安裝套件
-
-- 學習如何利用Rstudio 安裝套件
-- 學習設定套件來源
-
-## 安裝swirl
-
+# Why Use R?
+```{r setup, include=FALSE, cache=FALSE}
+library(knitr)
+library(magrittr)
+library(xtable)
+library(data.table)
+library(dplyr)
+library(broom)
+library(ggplot2)
+library(quantmod)
+library(pander)
+library(wordcloud)
+library(RColorBrewer)
+opts_chunk$set(echo = FALSE, cache=TRUE, comment="", cache.path = ".cache-EDA/")
+fig <- function(path, size = 100) {
+  sprintf("<img src='img/%s' style='max-width: %d%%;max-height: %d%%'></img>", 
+          path, size, size)
+}
+fig2 <- function(path, size = 100) {
+  sprintf("<img src='img/%s' style='width: %d%%'></img>", 
+          path, size)
+}
+sys_name <- Sys.info()["sysname"] %>% tolower
+sys_encode <- c("utf8", "utf8", "big5")[pmatch(sys_name, c("linux", "darwin", "windows"))]
+sessionInfo() %>% capture.output %>% cat(file = "sessionInfo.log", sep = "\n")
 ```
-source("http://taiwanrusergroup.github.io/R/init.R")
+
+# R 來自世界上最專業的統計學家 {.smaller}
+
+<center>`r fig('statician_10521919-655x280.jpg')`</center>
+
+取自 <http://myfootpath.com/careers/engineering-careers/statistician-careers/>
+
+
+# R 可以輸出高品質的視覺化 {.smaller}
+
+`r fig("flights_sml.jpg", 100)`
+
+取自 <http://www.r-bloggers.com/mapping-the-worlds-biggest-airlines/>
+
+
+# R 有驚人彈性和潛力 {.smaller}
+
+<center>`r fig("fig_10_cran1.png", 50)`</center>
+
+取自 <http://r4stats.com/2013/03/19/r-2012-growth-exceeds-sas-all-time-total/>
+
+
+# R 很容易和其他工具整合 {.smaller}
+
+<center>
+```{r r-integration, warning=FALSE}
+tools <- strsplit("Rcpp,rJava,rpy2,RHadoop,RMySQL,RPostgreSQL,RJDBC,RODBC,ROpenOffice,rredis,rmongodb,RSelenium", ",")[[1]]
+freq <- rep(1, length(tools))
+pal <- brewer.pal(length(tools),"BuGn")
+wordcloud(tools, freq, random.color = TRUE, colors = pal)
 ```
+</center>
+
+# R 很容易擴充和客製化 {.smaller}
+
+<center>`r fig("t134_3ca_lg.jpg", 100)`</center>
+取自 <http://img.diynetwork.com/DIY/2003/09/18/t134_3ca_med.jpg>
+
+# 更重要的是
+
+# R 有很多的進階數據分析工具
+
+# 範例一
+
+- 統計很多理論都需要常態分佈
+- 但是一組數據真的是常態分佈嗎？
+
+```{r ks.test1}
+x <- c(rnorm(50), rnorm(50, 4))
+plot(density(x))
+```
+
+# R 可以很快的告訴你
+
+```{r ks.test2, echo = TRUE, dependson="ks.test"}
+shapiro.test(x)
+```
+
+# 範例二
+
+- 有兩種方法要比較轉換率
+- 方法A 10000點擊 10 轉換
+- 方法B 5000點擊 3 轉換
+- 我怎麼知道這兩種方法的轉換率是不是明顯不同？
+
+# 假設轉換率是 2/5000，做10000次可能有多少種轉換？
+
+```{r conversion}
+p <- 3/5000
+plot(density(x <- rbinom(1000, 10000, p)))
+mean(x > 10)
+```
+
+# 範例三
+
+- 剛剛是用模擬，但是我想要算信賴區間，因為區間比較潮
+
+```{r ci, echo = TRUE}
+library(binom)
+binom.confint(c(10, 3), c(10000, 5000), methods = "exact")
+```
+
+# 範例四
+
+
+
 
