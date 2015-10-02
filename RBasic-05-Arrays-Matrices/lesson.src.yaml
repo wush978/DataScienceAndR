@@ -62,7 +62,7 @@
 - Class : cmd_question
   Output: 我們可以把x 印出來看看。
   CorrectAnswer: x
-  AnswerTests: omnitest(correctVal = matrix(1:18, 4, 6))
+  AnswerTests: omnitest(correctVal = matrix(1:18, 3, 6))
 
 - Class : cmd_question
   Output: R 的除了矩陣(matrix)之外，還有高維度的陣列。舉例來說，我們可以直接更改x 的維度到更高維：
@@ -182,7 +182,7 @@
   Output: 請問`c(1,2,3) + 2`的結果會是？
   AnswerChoices: c(3,4,5);c(3,2,3);c(3)
   CorrectAnswer: c(3,4,5)
-  AnswerTests: omnitest(correctVal = c(3,4,5))
+  AnswerTests: omnitest(correctVal = 'c(3,4,5)')
   Hint: 當長度不相等的向量做運算時，長度比較短的向量會重複
 
 - Class : cmd_question
@@ -276,7 +276,7 @@
 - Class : cmd_question
   Output: 另外當兩個向量使用`%*%`做運算，會得到他們的內積。舉例來說：`1:3 %*% 1:3`會得到什麼呢？請同學試試看。
   CorrectAnswer: 1:3 %*% 1:3
-  AnswerTests: omnitest('1:3 %*% 1:3', matrix(14, 1, 1))
+  AnswerTests: omnitest('1:3 %*% 1:3')
 
 - Class : text
   Output: R 上的線性代數運算的底層是透過BLAS等函式庫做運算的，所以效能遠勝過我們自己用C 寫的線性代數運算。
