@@ -1,0 +1,188 @@
+- Class: meta
+  Course: DataScienceAndR
+  Lesson: RBasic-06-List-DataFrame
+  Author: Wush Wu
+  Type: Standard
+  Organization: Taiwan R User Group
+  Version: 2.3.1
+
+- Class : text
+  Output: 這堂課程要跟各位同學介紹list和data.frame這兩個很重要的資料結構。
+
+- Class : text
+  Output: R 的list是非常汎用的物件，相信同學在前面的課程也已經有簡單操作R 裡面的迴歸模型，
+    而這些迴歸模型的底層架構，就是用list所建立的。
+
+- Class : text
+  Output: 但是list的本質，其實就是一個「R 物件的向量」，這裡我想要強調「向量」的概念，因為list
+    是有順序性的。
+
+- Class : cmd_question
+  Output: 舉例來說，請同學建立一個list：`x <- list(iris = iris, cars = cars, n = 2)`
+    這裡`iris = iris`的意思是說，第一個元素的名字是`"iris"`，而值會是變數`iris`的值。
+  CorrectAnswer: x <- list(iris = iris, cars = cars, n = 2)
+  AnswerTests: any_of_exprs("x <- list(iris = iris, cars = cars, n = 2)", "x = list(iris = iris, cars = cars, n = 2)")
+
+- Class : cmd_question
+  Output: 在建立的過程中，因為iris在前面，所以是第一個元素（component），而cars跟在iris後面，所以
+    是第二個component。我們可以利用兩個中括號：`[[]]`來取出component。請同學試試看：`x[[3]]`
+  CorrectAnswer: x[[3]]
+  AnswerTests: omnitest("x[[3]]", 2)
+
+- Class : cmd_question
+  Output: 請檢查一下`x[[3]]`的型態。
+  CorrectAnswer: mode(x[[3]])
+  AnswerTests: omnitest(correctVal = "numeric")
+  Hint: 還記得`class`或`mode`這兩個函數嗎？
+
+- Class : text
+  Output: 我們可以看到`x[[3]]`的型態不是list，所以它的型態和`x` 是不相同的。
+
+- Class : cmd_question
+  Output: 因為list是個向量，所以我們過去學過得`[]`還是可以使用的。但是子向量的型態要和原本的向量相同，
+    所以如果我們運用如：`x[3]`的指令，從x 中選出只有包含第二個元素的向量，得到的輸出就會和`x`一樣是一個list。
+    請同學試試看：`mode(x[3])`
+  CorrectAnswer: mode(x[3])
+  AnswerTests: omnitest("mode(x[3])", "list")
+
+- Class : text
+  Output: 輸出的型態是否仍是list，就是`[[]]`和`[]`主要的不同。
+
+- Class : text
+  Output: 也由於list是一種向量，所以諸如`length`之類我們學過得函數，都是可以在list上使用的。
+
+- Class : mult_question
+  Output: 請各位同學猜猜看，`length(x)`的結果會是多少呢？
+  AnswerChoices: 2;3;4
+  CorrectAnswer: 3
+  AnswerTests: omnitest(correctVal = "3")
+  Hint: 在R 中，`length`會計算向量的長度，而我們是運用`x <- list(iris = iris, cars = cars, n = 2)`來建立`x`的。
+
+- Class : cmd_question
+  Output: list的元素除了用位置做選取之外（如：`x[[3]]`），也可以用名字做選取。在我們建立list的時候，是使用
+    `x <- list(iris = iris, cars = cars, n = 2)`，這代表第一個元素的名字是`"iris"`，第二個是`"cars"`，第三個是`"n"`。
+    而和我們使用`x[[3]]`的方式類似，我們也可以使用`x[["n"]]`來選擇第三個，也就是名字是`"n"`的元素。請同學試試看。
+  CorrectAnswer: x[["n"]]
+  AnswerTests: omnitest('x[["n"]]', 2)
+
+- Class : cmd_question
+  Output: 除了`[[]]`之外，也可以使用`$`來透過名字取出list的值。例如`x$n`就會取出`x`中名字為`"n"`的值。
+    請同學試試看。
+  CorrectAnswer: x$n
+  AnswerTests: omnitest('x$n', x$n)
+
+- Class : text
+  Output: 在windows上，如果名字是中文時，使用`$`的語法可能會出錯。一個比較保險的方式是： x$`中文名稱` 。這裡的 ` 
+    符號的按鍵，在美式鍵盤中位於1的左方，這個符號唸作：Grave accent，是R 在console中的跳脫字元。以特殊符號
+    為名稱的變數，可以透過兩邊包覆Grave accent來在console中存取。
+
+- Class : text
+  Output: 接著，我們要介紹一個R 很有名的物件。這個物件的設計，完全滿足了近代對結構化資料分析的需求。
+
+- Class : text
+  Output: 包含最近火紅的Apache Spark，以及Python的pandas都有受到這個物件的影響。這就是R 的data.frame。
+    具體來說，data.frame就是一個表格。
+
+- Class : text
+  Output: 傳統的matrix和array 由於有同質性的限制（所有的元素都要同樣的型態），所以在資料分析上並不方便。
+    因為我們分析的資料，通常都不會全部都用相同的型態。在結構化的資料中，通常資料是以表格的形式，而各欄位
+    會有自己的型態，例如是：數值型態、類別型態等等。
+
+- Class : text
+  Output: R 的data.frame是一種list，而且滿足以下幾個條件。
+
+- Class : text
+  Output: 各個元素必須是以下幾種類型之一：數值(numeric)、字串(character)、布林(logical)、類別(factor)、
+    數值矩陣(numeric matrix)、list或data.frame。不能是其他的物件。
+
+- Class : text
+  Output: 每一個元素的長度都要一致（矩陣或data.frame的話，則是列(row)的個數）。
+
+- Class : mult_question
+  Output: 請問下列哪一個list物件，符合data.frame的要素？如果不確定的話，可以看Hint了解原因。
+  AnswerChoices: list(a = 1:3, b = 1:4);list(a = function() { }, b = 1:4);list(a = 1:3, b = matrix(1:6, nrow = 3, ncol = 2))
+  CorrectAnswer: list(a = 1:3, b = matrix(1:6, nrow = 3, ncol = 2))
+  AnswerTests: omnitest(correctVal = 'list(a = 1:3, b = matrix(1:6, nrow = 3, ncol = 2))')
+  Hint: 提醒同學，`list(a = 1:3, b = 1:4)`長度不一樣，`list(a = function() { }, b = 1:4)`的第一個值是函數，不符合型態的條件。
+
+- Class : text
+  Output: data.frame的操作也是非常重要的。
+
+- Class : cmd_question
+  Output: 在R 之中，我們可以使用`data.frame`函數來建立一個data.frame。
+    請同學現在試試看利用`data.frame(class = 1, id = 1:10)`建立一個data.frame，
+    並且把這個物件存到變數`a`
+  CorrectAnswer: a <- data.frame(class = 1, id = 1:10)
+  AnswerTests: any_of_exprs('a <- data.frame(class = 1, id = 1:10)', 'a = data.frame(class = 1, id = 1:10)')
+
+- Class : mult_question
+  Output: 所有list的操作，都可用在data.frame上。請問同學，下面哪一個語法「不能」選取`a` 的第一欄？
+  AnswerChoices: a[["class"]];a[[1]];a$class;a$`class`;a[["id"]]
+  CorrectAnswer: a[["id"]]
+  AnswerTests: omnitest(correctVal = 'a[["id"]]')
+  Hint: 提醒同學，`a` 是透過`data.frame(x = 1, y = 1:10)`建立的。
+
+- Class : cmd_question
+  Output: 除了list的語法之外，我們也可以使用類似matrix的語法。舉例來說，我們可以用`a[,1]`選取第一欄。
+    請同學試試看。
+  CorrectAnswer: a[,1]
+  AnswerTests: omnitest('a[,1]', rep(1, 10))
+
+- Class : mult_question
+  Output: 根據螢幕上的輸出，請問同學`a[,1]`的類別是什麼呢？
+  AnswerChoices: list;data.frame;numeric
+  CorrectAnswer: numeric
+  AnswerTests: omnitest(correctVal = 'numeric')
+  Hint: 這裡`a[,1]`的效果和`a[[1]]`是一樣的。
+
+- Class : cmd_question
+  Output: 同理，我們也可以用`a[1,2]`來取出第1 列、第2 欄的資料。請同學試試看。
+  CorrectAnswer: a[1,2]
+  AnswerTests: omnitest('a[1,2]', 1)
+
+- Class : cmd_question
+  Output: 欄位的方向，也可以用名字代替。舉例來說，`a[2,"id"]`會選出名稱為`"id"`，也就是第二欄的第二個元素。
+    以表格的觀點來看，就是第2 列第2 欄。請同學試試看。
+  CorrectAnswer: a[2,"id"]
+  AnswerTests: omnitest('a[2,"id"]', 2)
+
+- Class : mult_question
+  Output: 中括號`[]`也可以一次選取多列多欄。舉例來說，`a[1:2,"id"]`可以一次選取`a$id`底下的第一到第二的值。
+    請問同學，下面哪一種語法「不能」得到一樣的結果？
+  AnswerChoices: a$id[1:2];a[[2]][1:2];a[["id"]][1:2];a[1:2]["id"]
+  CorrectAnswer: a[1:2]["id"]
+  AnswerTests: omnitest(correctVal = 'a[1:2]["id"]')
+  Hint: 在data.frame上，通常會先對欄位做選擇，取得欄位中的向量以後，才能使用中括號。
+
+- Class : cmd_question
+  Output: 另一個用法是：`a[1:2,1:2]`，可以選出前兩列和前兩欄。請同學試試看。
+  CorrectAnswer: a[1:2,1:2]
+  AnswerTests: omnitest('a[1:2,1:2]', a[1:2,1:2])
+
+- Class : cmd_question
+  Output: 請問同學，能不能用`class`查看`a[1:2,1:2]`的型態呢？
+  CorrectAnswer: class(a[1:2,1:2])
+  AnswerTests: omnitest('class(a[1:2,1:2])', 'data.frame')
+  
+- Class : text
+  Output: 有沒有注意到，在輸入`a[1:2,"id"]`的時候R 會輸出一個向量，但是輸入`a[1:2,1:2]`的時候R 反而
+    會給一個data.frame呢？其實這樣不一致的行為，在未來同學如果寫一些複雜的資料整理時，會帶來困擾的。
+
+- Class : cmd_question
+  Output: 其實`[]`中括號這個函數，有一個參數叫做：`drop`，而且預設為`TRUE`。當我們使用`[]`取得結果的時候，
+    如果有一個方向可以縮減維度（例如只有一個欄位的表格），R 就會自動把表格的結構破壞，回傳一個向量。
+    請同學試試看：`a[1:2, "id", drop = FALSE]`
+  CorrectAnswer: a[1:2, "id", drop = FALSE]
+  AnswerTests: omnitest('a[1:2, "id", drop = FALSE]')
+
+- Class : text
+  Output: 從R 顯示在console的輸出結果，同學應該會同意這是一個data.frame。在R 中，console會根據不同的`class`
+    而用不同的方式呈現輸出結果。
+
+- Class : text
+  Output: 那我們對於list和data.frame的介紹就到這了。data.frame是處理資料和跑各種進階演算法時，非常常用到的結構。
+    所以請同學務必要熟悉各種data.frame的操作，才能順利的整理收集的資料，並且在資料上跑其他的演算法。
+
+    
+
+
