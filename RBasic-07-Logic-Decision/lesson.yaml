@@ -1,0 +1,93 @@
+- Class: meta
+  Course: R_Course
+  Lesson: lesson1 - if, else
+  Author: Noah
+  Type: Standard
+  Organization: TW R User Groupd
+  Version: 2.3.1
+
+- Class: text
+  Output: 範例1：if/else 用法：
+
+- Class: text
+  Output: 提醒一下：如果已經有太多變數、函式時候，實在覺得很亂，想一次全部清除R或R Studio的變數以及名稱，可以使用這個指令： rm(list=ls())
+
+- Class: text
+  Output: if/else 是R的一個邏輯判斷指令，若程式中有不同的條件來執行不同的選擇的時候，可以用 if 相關指令來完成。
+
+- Class: text
+  Output: 既然要先練習 if/else 首先，我們來練習一下剛剛教的邏輯符號。
+
+
+- Class: cmd_question
+  Output: 等於： == ，是輸入兩個等號。請問，1 是不是等於 1？
+  CorrectAnswer: 1 == 1
+  AnswerTests: omnitest(correctExpr='1==1')
+  Hint: 請輸入 1 == 1
+
+- Class: cmd_question
+  Output: 等於： == ，是輸入兩個等號。再請問，1 是不是等於 2 ？
+  CorrectAnswer: 1 == 2
+  AnswerTests: omnitest(correctExpr='1==2')
+  Hint: 請輸入 1 == 2
+
+- Class: text
+  Output: 還有[小於： <]、[小於等於： <=]、[大於：>]、[大於等於：>=] 和 [不等於： !=]，相信聰明的你一定知道怎麼使用了
+
+- Class: cmd_question
+  Output: 和(and)使用符號為：[ && ]，為兩個&，這代表符號左右兩邊都要一樣才是TRUE。例如：請問 (1 == 1)和(2 == 2)用&&來判斷這兩個條件，得到的是TRUE還是FALSE？
+  CorrectAnswer: (1 == 1) && (2 == 2)
+  AnswerTests: omnitest(correctExpr='(1==1)&&(2==2)')
+  Hint: 請輸入 (1 == 1) && (2 == 2)
+
+- Class: cmd_question
+  Output: 或(or)[ || ]，為兩個|，代表符號左右兩邊只要其中一邊為TRUE就是TRUE。請問 (1 == 2)和(2 == 2)用||來判斷這兩個條件，得到的是TRUE還是FALSE？
+  CorrectAnswer: (1 == 2) || (2 == 2)
+  AnswerTests: omnitest(correctExpr='(1==2)||(2==2)')
+  Hint: 請輸入 (1 == 2) || (2 == 2)
+
+
+- Class: text
+  Output: 另外，R語言中對於and/or邏輯判斷符號[&&]、[||] 可以使用一個字元，如[&]、[|]使用，差別在於資料是否為集合型態，範例如下：
+
+- Class: cmd_question
+  Output: 請輸入x=c(1,2,3,4,5)
+  CorrectAnswer: (1 == 2) || (2 == 3)
+  AnswerTests: omnitest(correctExpr='(1==2)||(2==3)')
+  Hint: 請輸入 (1 == 2) || (2 == 3)
+
+
+- Class: text
+  Output: 到這邊，相信大家都已經知道R語言中的邏輯判斷符號是怎麼使用了吧，
+
+- Class: text
+  Output: 再來，回到之前說的 if/else 的部分，在R語言中，if/else 的使用方法如下：
+
+- Class: text
+  Output: if (expr_1) expr_2 else expr_3
+
+- Class: text
+  Output: 
+
+
+- Class: cmd_question
+  Output: if (x == y) print("x = y") else print("x != y")
+  CorrectAnswer: (1 == 2) || (2 == 2)
+  AnswerTests: omnitest(correctExpr='(1==2)||(2==2)')
+  Hint: 請輸入 (1 == 2) || (2 == 2)
+
+
+- Class: text
+  Output: 課外教學：邏輯 — 到底誰在說謊？？？
+
+- Class: text
+  Output: A 說 B 在說謊，B 說 C 在說謊，C 說 A、B 都在說謊。那到底誰在說謊呢？
+
+- Class: text
+  Output: 可以如果有學過邏輯的人，不妨先拿紙筆試著解這個問題看看。
+
+- Class: text
+  Output: 但這個課程還是得進行，所以.....簡單來說，第一題的答案就在ABC三個條件同時成立時
+
+- Class: text
+  Output: 那這個課程就到這邊結束。謝謝
