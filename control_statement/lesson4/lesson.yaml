@@ -1,0 +1,248 @@
+- Class: meta
+  Course: DSC2015_RBasic_Part2
+  Lesson: lesson4 - try and tryCatch
+  Author: Noah
+  Type: Standard
+  Organization: DSC 2015 R Tutorial
+  Version: 2.3.1
+
+- Class: text
+  Output: 範例1：try() / tryCatch()用法：
+
+- Class: text
+  Output: 提醒一下：如果已經有太多變數、函式時候，實在覺得很亂，想一次全部清除R或R Studio的變數以及名稱，可以使用這個指令： rm(list=ls())
+
+- Class: text
+  Output: 這邊，我們要學習一下當錯誤發生的危機處理，
+
+- Class: text
+  Output: 愛因斯坦曾經說過一個偉大的方程式：E=MC^2（能量=質量*光速的平方），軟體工程領域中也有一個 E=MC^2：Error = More Code^2
+
+- Class: text
+  Output: try() 是R所提供在執行 function 的時候，可以暫時忽略錯誤（Error）或例外（Excerption）而讓程式繼續執行下去。
+
+- Class: text
+  Output: 一般來說，Ｒ function如果碰到error的時候就會停止。 但是如果輸入100萬筆資料，而第70萬筆資料有問題，這時候要放棄前面已經算好的69萬的資料，以及放棄還沒運算的第71萬到100萬嗎？實在很可惜。
+
+- Class: text
+  Output: 而 try 就是發生錯誤的時候，可以先跳過錯誤那個部份，讓後面的資料可以繼續執行下去的方法，
+
+- Class: text
+  Output:  try 的使用方法也很簡單。
+
+- Class: cmd_question
+  Output: 首先，請輸入一筆資料： data_in = list(1, 2, 4, -5, "oops", 0, 10)
+  CorrectAnswer: data_in = list(1, 2, 4, -5, "oops", 0, 10)
+  AnswerTests: any_of_exprs('data_in=list(1, 2, 4, -5, "oops", 0, 10)')
+  Hint: 請輸入 data_in = list(1, 2, 4, -5, "oops", 0, 10)
+
+- Class: text
+  Output: 很好，我們就有一組屬性為 list，名稱叫作 data_in 的資料了。
+
+- Class: text
+  Output: 如果我們想對 data_in 這個資料集中的每個元件取對數（log）的運算，例如：for(input in data_in){ print(log(input)) }，這時候會發生什麼事？
+
+- Class: mult_question
+  Output: 你會選擇哪一種呢？
+  AnswerChoices: 完全沒事，可以把data_in 的每個元件都計算出來;一開始就出錯，全部的資料都完全不能計算;前面的資料：log(1),log(2),log(4)都可以正常計算，但碰到log(-5)就有狀況，下一個log("oops")發生錯誤，之後的資料也無法計算;前面的資料：log(1),log(2),log(4)都可以正常計算，但碰到log(-5)就有狀況，而且之後的元件還可以計算，包含log("oops")，和log(0)，log(10)
+  CorrectAnswer: 前面的資料：log(1),log(2),log(4)都可以正常計算，但碰到log(-5)就有狀況，下一個log("oops")發生錯誤，之後的資料也無法計算
+  AnswerTests: omnitest(correctVal='前面的資料：log(1),log(2),log(4)都可以正常計算，但碰到log(-5)就有狀況，下一個log("oops")發生錯誤，之後的資料也無法計算')
+  Hint: 請選擇：前面的資料：log(1),log(2),log(4)都可以正常計算，但碰到log(-5)就有狀況，下一個log("oops")發生錯誤，之後的資料也無法計算
+
+
+- Class: text
+  Output: 沒錯，function在對data_in的各個元件取log的時候，因為log的規定，一旦碰到不是數值的資料就會現error。
+
+
+- Class: text
+  Output: 但是前面的幾個資料，如log(1), log(2), log(4)，和之後的log(0), log(10)，這些都可以取對數（log），如果為了其中一個error而放棄已經計算好的內容，和還沒計算，但沒問題的內容，是不是很可惜？
+
+- Class: mult_question
+  Output: 你會覺得可惜嗎？
+  AnswerChoices: 會;不會，反正重打就好
+  CorrectAnswer: 會
+  AnswerTests: omnitest(correctVal='會')
+  Hint: 請選擇：會，因為題目是我出的，
+
+- Class: text
+  Output:  當然，你也可以選擇不會，並且選擇請助理或自己重打這5筆資料，但一旦碰到資料有100萬筆，那時候可能助理對你翻桌子，或是自己跟老闆翻桌子，或是自己對電腦翻桌子，
+
+- Class: text
+  Output:  既然如此，而且科技始終來自人的惰性，那要怎麼避免這種狀況，或是即使發生錯誤還是可以得到沒有問題的資料的計算結果呢？
+
+- Class: text
+  Output:  沒錯，就是用 try。
+
+- Class: text
+  Output: 使用方法很簡單。只要在感覺有問題的地方，用 try()包起來就好了。
+
+
+- Class: mult_question
+  Output: 像是這次的範例： for(input in data_in){ print(log(input)) } ，哪個指令是最可能有問題的地方？
+  AnswerChoices: for();for(){print()};print(log(input))
+  CorrectAnswer: print(log(input))
+  AnswerTests: omnitest(correctVal='print(log(input))')
+  Hint: 請選擇：print(log(input))。其實：log(input) 也可以。
+
+- Class: text
+  Output: 沒錯，print(log(input))這個地方就是我們想列印 log 運算後的資料，但因為log計算的過程有error，導致無法顯示。
+
+- Class: text
+  Output: 其實不見得一定要放print(log(input))，把 try 放在log(input) 也是可以。這個有機會不妨試試看
+
+- Class: text
+  Output: 既然如此，那我們就把 try 放到 print(log(input))中。
+
+- Class: text
+  Output: 那麼，之前的funcion就會變成：for(input in data_in) { try(print(log(input))) } 了
+
+- Class: cmd_question
+  Output: 請輸入：for(input in data_in) { try(print(log(input))) }
+  CorrectAnswer: for(input in data_in) { try(print(log(input))) }
+  AnswerTests: omnitest(correctExpr='for(input in data_in) { try(print(log(input))) }')
+  Hint: 請輸入：for(input in data_in) { try(print(log(input))) }
+
+- Class: text
+  Output: 這樣，就可以得到繼續後面的運算結果了，之後碰到這種狀況也不用翻桌了，可喜可賀。
+
+
+- Class: text
+  Output: 不過，這樣就結束了嗎？
+
+- Class: text
+  Output: 有人發現了嗎？錯誤的訊息好像有不太一樣，有些是[NaN]，有些是[Error in.......]，這是什麼意思？
+
+- Class: text
+  Output: 發現到的人的觀察能力真的很厲害，佩服佩服
+
+- Class: text
+  Output: 還記得一開始的 tryCatch()嗎？
+
+- Class: text
+  Output: tryCatch()相對於 try() 來說，提供更詳細的錯誤處理方法，這有點難度喔！讓我們繼續看下去吧。
+
+- Class: text
+  Output: 要談 tryCatch()之前，我們要先簡單的了解一下warning和error的差別
+
+- Class: text
+  Output: warning的意思就是警告，簡單說就是程式一切合法，但電腦「好像覺得」程式「觀感不佳」，
+
+- Class: text
+  Output: 所以發現有warning的時候，通常電腦會繼續讓程式執行下去，並不會停止程式。
+
+- Class: text
+  Output: 但是warning畢竟不是正常的狀況（不然現在就不會花那麼多時間解釋了），所以還是要另外留意一下，只是沒那麼嚴重而已。
+
+- Class: text
+  Output: 而error，就不是warning那麼簡單了，error就是電腦覺得程式繼續執行下去的話，因為違反程式語言的規範，甚至可能會導致電腦系統發生異常，所以一定要停止這個程式
+
+- Class: text
+  Output: 簡單說電腦發現到error的時候，就會為了保護自己，就會暫時停止程式的執行。（當然，還有常見的電腦當機，這個就是連電腦自己都沒辦法保護自己的時候，不過這個暫時不討論）
+
+- Class: text
+  Output: 所以，當軟體工程師碰到error的時候，通常就會非常緊張。還記得前面說過的 E=MC^2 嗎？
+
+- Class: text
+  Output: Error = More Code^2：錯誤，等於更多的程式碼
+
+- Class: text
+  Output: 沒錯，更多的程式碼代表更多出錯的可能，所以大多主流常聽到的電腦程式語言，都有一些抓取錯誤訊息的能力，來防止error的影響。
+
+- Class: text
+  Output: 回歸正傳，既然我們知道已經有warning和error的差別，那麼我們相幫這兩個狀況個別都建立一個function，這是用來處理當function發現error以及warning時，可以找到相對應的處理方法。
+
+- Class: cmd_question
+  Output: 先建立發現error時所對應的函式。請輸入：func_error = function(e) { print("I found a ERROR") }
+  CorrectAnswer: func_error = function(e) { print("I found a ERROR") }
+  AnswerTests: omnitest(correctExpr='func_error = function(e) { print("I found a ERROR") }')
+  Hint: 請輸入：func_error = function(e) { print("I found a ERROR") }
+
+- Class: cmd_question
+  Output: 再建立發現warning時所對應的函式。請輸入：func_warning = function(w) { print("just a warning") }
+  CorrectAnswer: func_warning = function(w) { print("just a warning") }
+  AnswerTests: omnitest(correctExpr='func_warning = function(w) { print("just a warning") }')
+  Hint: 請輸入：func_warning = function(w) { print("just a warning") }
+
+- Class: text
+  Output: 好了，我們已經有處理 error 發生的函式： func_error(e)，以及處理 warning 發生時的函式： func_warning(w) 了，可以泡杯咖啡，順便跟旁邊的帥哥美女聊個天吧。
+
+- Class: text
+  Output: ...............這是喝咖啡聊天的時間。
+
+- Class: text
+  Output: 咦？是不是突然想到一件事情：光建立這兩個function就沒事了嗎？
+
+- Class: text
+  Output: 事情果然沒那麼簡單。因為有了這兩個function，對for(input in data_in) { try(print(log(input))) } 的結果還是不能解決error的狀況阿。
+
+
+- Class: text
+  Output: 終於可以談到 tryCatch()了，
+
+- Class: text
+  Output: tryCatch() 的使用方法：和 try() 類似，把感覺有可能出錯的指令用 tryCatch() 包起來，
+
+- Class: mult_question
+  Output: 把之前 for(input in data_in) { print(log(input)) } 有問題的地方用，前面用 try()，現在請換成 tryCatch()。
+  AnswerChoices: for(input in data_in) { tryCatch(print(log(input))) };for(input in data_in) { try(print(log(input))) }
+  CorrectAnswer: for(input in data_in) { tryCatch(print(log(input))) }
+  AnswerTests: omnitest(correctVal='for(input in data_in) { tryCatch(print(log(input))) }')
+  Hint: 請選擇：for(input in data_in) { tryCatch(print(log(input))) } ，說到底，還是因為R的規定這樣。
+
+
+- Class: text
+  Output:  看了結果之後，感覺 tryCatch()好像和 try() 差不多，但後面正常的數值沒有被執行到？ 這樣反而比 try() 更糟？
+
+- Class: text
+  Output:  不是這樣的， tryCatch()強大的地方，就是可以攔截程式執行中的warning和error，這點 try()是做不到的。
+
+- Class: text
+  Output:  前面不是已經寫好兩個function了嗎？func_warning(w)處理warning，func_error(e)處理error。
+
+- Class: text
+  Output:  那麼，我們就把這兩個條件function放到 tryCatch()中。
+
+
+- Class: mult_question
+  Output: 那麼，要怎麼放呢？
+  AnswerChoices: for(input in data_in) { tryCatch(print(log(input)), warning=func_warning, error=func_error) };for(input in data_in) { tryCatch(print(log(input)), func_warning, func_error) };for(input in data_in) { tryCatch(print(log(input))) warning=func_warning(), error=func_error() };for(input in data_in) { tryCatch(print(log(input)), func_warning(warning), func_error(error)) }
+  CorrectAnswer: for(input in data_in) { tryCatch(print(log(input)), warning=func_warning, error=func_error) } 
+  AnswerTests: omnitest(correctVal='for(input in data_in) { tryCatch(print(log(input)), warning=func_warning, error=func_error) }')
+  Hint: 請選擇：for(input in data_in) { tryCatch(print(log(input)), warning=func_warning, error=func_error) }，說到底，還是因為R的規定這樣。
+
+
+- Class: text
+  Output:  果然厲害，這樣都知道了，那 tryCatch()已經難不倒你了。
+
+- Class: text
+  Output:  到這邊，已經知道 tryCatch()抓到warning和error的處理方法，如果想要不同的處理，就可以直接修改相對應的function，
+
+- Class: text
+  Output:  例如長官下令說：不準看到error發生，這時候可以怎麼辦呢？
+
+- Class: cmd_question
+  Output: 記得處理error的函式：func_error()嗎，這時候我們把func_error()中，列印的字串指令中，把內容改成空白看看
+  CorrectAnswer: func_error = function(e) { print("") }
+  AnswerTests: omnitest(correctExpr='func_error = function(e) { print("") }')
+  Hint: 請輸入：func_error = function(e) { print("") } 
+
+- Class: cmd_question
+  Output: 然後，在執行一次 for(input in data_in) { tryCatch(print(log(input)), warning=func_warning, error=func_error) }
+  CorrectAnswer: for(input in data_in) { tryCatch(print(log(input)), warning=func_warning, error=func_error) }
+  AnswerTests: omnitest(correctExpr='for(input in data_in) { tryCatch(print(log(input)), warning=func_warning, error=func_error) }')
+  Hint: 請輸入：for(input in data_in) { tryCatch(print(log(input)), warning=func_warning, error=func_error) }
+
+- Class: text
+  Output:  噹噹，果然，錯誤就不見了，真的是值得放鞭炮，順便立刻訂個機票到日本韓國慶祝一下，
+
+- Class: text
+  Output: 注意：上面的方法是自欺欺人，也只是鴕鳥把頭埋在地下以為沒事，
+
+- Class: text
+  Output: 實際上問題還是沒有解決，錯誤還是發生，只是沒有看到。所以上面狀況僅供參考。
+
+- Class: text
+  Output: Taiwan R User Group的創辦人Wush大大有分享這種錯誤判斷的心得，請Google關鍵字：Wush筆記 R 錯誤處理
+
+- Class: text
+  Output: 謝謝各位，try() / tryCatch()的教學就到這邊。

@@ -1,0 +1,197 @@
+- Class: meta
+  Course: DSC2015_RBasic_Part2
+  Lesson: lesson1 - if, else
+  Author: Noah
+  Type: Standard
+  Organization: DSC 2015 R Tutorial
+  Version: 2.3.1
+
+- Class: text
+  Output: 範例1：if, else 用法：
+
+- Class: text
+  Output: if, else 是R的一個邏輯判斷指令，若程式中有不同的條件來執行不同的選擇的時候，可以用 if 相關指令來完成。
+
+- Class: text
+  Output: 既然要先練習 if, else 首先，我們來練習一下剛剛教的邏輯符號。
+
+
+- Class: cmd_question
+  Output: 等於： == ，是輸入兩個等號。請問，1 是不是等於 1？
+  CorrectAnswer: 1 == 1
+  AnswerTests: omnitest(correctExpr='1==1')
+  Hint: 請輸入 1 == 1
+
+- Class: cmd_question
+  Output: 等於： == ，是輸入兩個等號。再請問，1 是不是等於 2 ？
+  CorrectAnswer: 1 == 2
+  AnswerTests: omnitest(correctExpr='1==2')
+  Hint: 請輸入 1 == 2
+
+
+- Class: cmd_question
+  Output: 小於等於： <= ，是輸入一個小於和一個等號。請問，1 是不是小於等於 1？
+  CorrectAnswer: 1 <= 1
+  AnswerTests: omnitest(correctExpr='1<=1')
+  Hint: 請輸入 1 <= 1
+
+- Class: cmd_question
+  Output: 小於等於： <= ，是輸入一個小於和一個等號。再請問，1 是不是小於等於 2 ？
+  CorrectAnswer: 1 <= 2
+  AnswerTests: omnitest(correctExpr='1<=2')
+  Hint: 請輸入 1 <= 2
+
+
+- Class: cmd_question
+  Output: 小於： < ，是輸入小於符號。請問，1 是不是小於 2？
+  CorrectAnswer: 1 < 2
+  AnswerTests: omnitest(correctExpr='1<2')
+  Hint: 請輸入 1 < 2
+
+- Class: cmd_question
+  Output: 小於： < ，是輸入小於符號。再請問，1 是不是小於 1 ？
+  CorrectAnswer: 1  < 	1
+  AnswerTests: omnitest(correctExpr='1<1')
+  Hint: 請輸入 1 < 1
+
+
+- Class: cmd_question
+  Output: 不等於： != ，是輸入一個驚嘆號和一個等號。再請問，1 是不是不等於 1 ？
+  CorrectAnswer: 1 != 1
+  AnswerTests: omnitest(correctExpr='1!=1')
+  Hint: 請輸入 1 != 1
+
+
+- Class: cmd_question
+  Output: 不等於： != ，是輸入一個驚嘆號和一個等號。再請問，1 是不是不等於 2 ？
+  CorrectAnswer: 1 != 2
+  AnswerTests: omnitest(correctExpr='1!=2')
+  Hint: 請輸入 1 != 2
+
+- Class: text
+  Output: 還有[大於：>] 和 [大於等於：>=]，相信聰明的你一定知道怎麼使用了
+
+
+- Class: cmd_question
+  Output: 和[ && ]，為兩個&，代表符號左右兩邊都要一樣才是TRUE。請問 (1 == 1)和(2 == 2)用&&來判斷這兩個條件，得到的是TRUE還是FALSE？
+  CorrectAnswer: (1 == 1) && (2 == 2)
+  AnswerTests: omnitest(correctExpr='(1==1)&&(2==2)')
+  Hint: 請輸入 (1 == 1) && (2 == 2)
+
+- Class: cmd_question
+  Output: 和[ && ]，為兩個&，代表符號左右兩邊都要一樣才是TRUE。請問 (1 == 2)和(2 == 2)用&&來判斷這兩個條件，得到的是TRUE還是FALSE？
+  CorrectAnswer: (1 == 2) && (2 == 2)
+  AnswerTests: omnitest(correctExpr='(1==2)&&(2==2)')
+  Hint: 請輸入 (1 == 2) && (2 == 2)
+
+
+- Class: cmd_question
+  Output: 和[ || ]，為兩個|，代表符號左右兩邊只要其中一邊為TRUE就是TRUE。請問 (1 == 2)和(2 == 2)用||來判斷這兩個條件，得到的是TRUE還是FALSE？
+  CorrectAnswer: (1 == 2) || (2 == 2)
+  AnswerTests: omnitest(correctExpr='(1==2)||(2==2)')
+  Hint: 請輸入 (1 == 2) || (2 == 2)
+
+
+- Class: cmd_question
+  Output: 和[ || ]，為兩個|，代表符號左右兩邊只要其中一邊為TRUE就是TRUE。請問 (1 == 2)和(2 == 3)用||來判斷這兩個條件，得到的是TRUE還是FALSE？
+  CorrectAnswer: (1 == 2) || (2 == 3)
+  AnswerTests: omnitest(correctExpr='(1==2)||(2==3)')
+  Hint: 請輸入 (1 == 2) || (2 == 3)
+
+
+- Class: text
+  Output: 到這邊，相信大家都已經知道邏輯判斷是怎麼使用了吧，再來，我們來挑戰一個比較難的問題：小明的故事。
+
+
+- Class: text
+  Output: 媽媽給了小明[10]個candy，媽媽說小明可以吃一些，但至少要留[5]個candy給妹妹，不然妹妹會哭，媽媽聽到妹妹哭就會用愛來教訓小明
+
+- Class: cmd_question
+  Output: 請先輸入第一個條件如：candy=10
+  CorrectAnswer: candy = 10
+  AnswerTests: omnitest(correctExpr='candy=10')
+  Hint: candy = 10
+
+- Class: text
+  Output: 很好，現在看一下R Studio右邊上面的叫作 [ Global Environment ]的框框，是不是有看到一個candy的欄位，而且旁邊有個數字：10，有看到了嗎？
+
+
+- Class: text
+  Output: 可能的狀況1：如果小明吃了3個candy，剩下10-3=7個candy，那把7個candy給妹妹吃，妹妹會很高興，媽媽也會很高興
+
+- Class: text
+  Output: 可能的狀況2：如果小明吃了10個candy，剩下10-10=0個candy，那妹妹沒有糖果吃而大哭，媽媽正義的鐵拳就飛到小明的頭上
+
+- Class: text
+  Output: 那要怎麼寫成程式呢？
+
+- Class: cmd_question
+  Output: 狀況一： 小明吃了3個：表示candy - 3 ，但還要把[candy-3]的結果存回candy，請問該怎麼輸入？
+  CorrectAnswer: candy = candy - 3
+  AnswerTests: omnitest(correctExpr='candy=candy-3')
+  Hint: 請輸入： candy = candy - 3
+
+- Class: cmd_question
+  Output: 狀況一： 原本媽媽有要求至少留下5個： [candy>5] ，而現在有沒有達成這個條件呢？請輸入過程，看看結果出現[TRUE]或是[FALSE]
+  CorrectAnswer: candy > 5
+  AnswerTests: omnitest(correctExpr='candy>5')
+  Hint: 請輸入：candy > 5
+
+- Class: cmd_question
+  Output: 狀況一： 剛剛看到結果是TRUE了，對吧！那我們可以把問題用之前學到的if的方法來表示：如果 candy -3 ：
+  CorrectAnswer: if(candy > 5) {}
+  AnswerTests: omnitest(correctExpr='if(candy>5) {}')
+  Hint: 請輸入：if(candy > 5) {}
+
+- Class: cmd_question
+  Output: 狀況一：對了，題目有說，如果candy>5為真，媽媽會很高興，請用print列印出媽媽很高興： print("Mon is Happy")：
+  CorrectAnswer: if(candy > 5) print("Mon is Happy")
+  AnswerTests: omnitest(correctExpr='if(candy > 5) print("Mon is Happy")')
+  Hint: 請輸入：if(candy > 5) print("Mon is Happy")
+
+- Class: text
+  Output: 那麼，由之前的問題得知，candy>5 是正確的話= 媽媽很高興，相反的，如果candy >5不成立（這句話也表示candy <5 為真）的話，媽媽就會生氣
+
+
+- Class: mult_question
+  Output: 要在什麼情況下（candy >5 不成立），媽媽生氣呢（ print("Mon is angry") ）？前面有提到else，那麼該怎表示呢？
+  AnswerChoices: if(candy>5) { else print("angry") print("Happy")};if(candy>5) { print("Happy") else print("angry")};if(candy>5) { print("Happy") print("angry") else};
+  CorrectAnswer: if(candy>5) { print("Happy") else print("angry")}
+  AnswerTests: omnitest(correctVal='if(candy>5) { print("Happy") else print("angry")}')
+  Hint: 中文：如果candy>5，媽媽很高興....否則，媽媽會生氣....
+
+- Class: text
+  Output: 當然，代誌不像我這種憨人想的一樣，狀況可能不只一種，柯南也說：兇手不只一個。
+
+- Class: text
+  Output: 狀況n：小明吃了3個candy，剩下10-3=7個candy，那把其中5個candy給妹妹吃，妹妹很高興，小明再把剩下2個candy給媽媽，媽媽也很高興，然後又買10個candy給小明。
+
+- Class: text
+  Output: 狀況n+1：小明吃了10個candy，拿自己不要的玩具送給妹妹，妹妹沒有大哭大鬧，媽媽看到妹妹玩很高興的樣子也很高興。
+
+- Class: text
+  Output: 狀況n+n：小明拿出10個candy成立一家公司，並說服媽媽額外的投資10個candy，承諾會給媽媽和妹妹應有的股份，因為之前欠了大雄5個candy，先拿出1個candy還給大雄，並邀請大雄入股但不巧被技安知道，技安要小明把剩下的70%的股份給他，並且要宜靜嫁給他.....。剩下請參考三民的編劇
+
+- Class: text
+  Output: 是不是太簡單呢？那來挑戰一下更難的題目吧。
+
+- Class: text
+  Output: 到底誰在說謊？？？
+
+- Class: text
+  Output: A 說 B 在說謊，
+
+- Class: text
+  Output: B 說 C 在說謊，
+
+- Class: text
+  Output: C 說 A、B 都在說謊。
+
+- Class: text
+  Output: 那到底誰在說謊呢？
+
+- Class: text
+  Output: 這個，就留給各位去思考了。
+
+- Class: text
+  Output: 那這個課程就到這邊結束。謝謝
