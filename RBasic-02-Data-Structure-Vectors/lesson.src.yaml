@@ -72,7 +72,7 @@
 
 - Class : cmd_question
   Output: 不是所有的運算都是向量式的。如果給定一個向量x ,
-    `max(x)`會傳回x 中最小的值，而`min(x)`會傳回x 最大的值。
+    `max(x)`會傳回x 中最大的值，而`min(x)`會傳回x 最小的值。
     有時候在分析的時候，我們如果想要知道數值的範圍，這兩個函數
     就很有用。請同學寫一個expression來建立一個兩個值的向量，
     而且第一個值是x 的最小值，第二個是x 的最大值。
@@ -150,8 +150,8 @@
   AnswerTests: omnitest(correctExpr = '2 * 1:10')
 
 - Class: cmd_question
-  Output: 另外我們也跟各位介紹一個更范用產生向量的方式：`seq`。
-    `seq(1, 10)` 在R 中，其實就是`1:10`。請試試看輸入`seq(1:10)`
+  Output: 另外我們也跟各位介紹一個更泛用產生向量的方式：`seq`。
+    `seq(1, 10)` 在R 中，其實就是`1:10`。請試試看輸入`seq(1, 10)`
   CorrectAnswer: seq(1,10)
   AnswerTests: omnitest(correctExpr = 'seq(1,10)')
 

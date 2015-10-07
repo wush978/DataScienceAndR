@@ -1,0 +1,138 @@
+- Class: meta
+  Course: DataScienceAndR
+  Lesson: RBasic-Factors
+  Author: Chih-Cheng Liang
+  Type: Standard
+  Organization: Taiwan R User Group
+  Version: 0.1
+
+
+- Class: text
+  Output: 這個課程帶大家快速了解R語言的Factor資料結構
+
+- Class: text
+  Output: Factor是一個向量物件，用途是儲存「類別」的資料，
+    有這樣的資料格式，我們可以輕易把資料集依照類別分組。
+    屬於「類別」資料的例子如：
+    「男、女」，「台北市、台中市、台東市、台南市」
+
+- Class: cmd_question
+  Output: 我們觀察一個實際的例子。課程儲存了一個文字向量 blood_type，
+    記載著30個人的血型資料。請輸入 blood_type 。
+  CorrectAnswer: blood_type
+  AnswerTests: omnitest(correctExpr='blood_type')
+  Hint: 請輸入 blood_type
+
+- Class: cmd_question
+  Output: 大家可以觀察到這個文字向量有A, B, O, AB四種血型，在資料中重複出現。
+    我們要將他轉為Factor向量，請輸入 blood_type_factor <- factor(blood_type)
+  CorrectAnswer: blood_type_factor <- factor(blood_type)
+  AnswerTests:
+    - any_of_exprs(
+        "blood_type_factor = factor(blood_type)",
+        "blood_type_factor <- factor(blood_type)"
+        )
+  Hint: 請輸入 blood_type_factor <- factor(blood_type)
+
+- Class: cmd_question
+  Output: 我們仔細觀察這個Factor向量。請輸入 blood_type_factor 。
+  CorrectAnswer: blood_type_factor
+  AnswerTests: omnitest(correctExpr='blood_type_factor')
+  Hint: 請輸入 blood_type_factor
+
+- Class: text
+  Output: 可以觀察到R印出Factor向量和文字向量時的方式不太一樣。Factor多出levels這個屬性。
+
+- Class: cmd_question
+  Output: Factor向量中的levels屬性代表向量中允許出現的類別。
+    要取出這些類別，可使用levels函數。
+    請輸入 levels(blood_type_factor) 來取出所有允許的血型。
+  CorrectAnswer: levels(blood_type_factor)
+  AnswerTests: omnitest(correctExpr='levels(blood_type_factor)')
+
+- Class: cmd_question
+  Output: 在Factor向量中指派沒在levels裡面的類別，會出現NA。
+    請輸入blood_type_factor[5] <- "C"
+  CorrectAnswer: blood_type_factor[5] <- "C"
+  AnswerTests:
+    - any_of_exprs(
+        "blood_type_factor[5] <- \"C\" ",
+        "blood_type_factor[5] = \"C\" "
+        )
+
+- Class: cmd_question
+  Output: 輸入 blood_type_factor 確認第五個元素變成NA。
+  CorrectAnswer: blood_type_factor
+  AnswerTests: omnitest(correctExpr='blood_type_factor')
+
+- Class: text
+  Output: R預設是以字母順序排序levels
+
+- Class: cmd_question
+  Output: 進一步觀察factor向量的結構。請輸入 str(blood_type_factor)
+  CorrectAnswer: str(blood_type_factor)
+  AnswerTests: omnitest(correctExpr='str(blood_type_factor)')
+
+- Class: text
+  Output: str印出的敘述表示，這個Factor向量有四個levels，並列出levels對應的名稱。
+    在levels名稱之後接著一串整數，Factor實際上就是以這些整數代表對應的levels名稱。
+    例如：一開始的3代表第三個level「B」，接著的1代表第一個level「A」。
+    （你可以對照Rstudio右上角Environment中blood_type和 blood_type_factor）
+
+- Class: text
+  Output: 所以Factor向量本質上只是整數向量加上levels。
+    這樣設計的原因是儲存整數比儲存文字更省空間。
+
+- Class: text
+  Output: 其實「類別」的資料有兩種。分為「無順序」與「有順序」的，
+    血型的資料是無順序的例子。因為血型並無大小先後之分，你無法說O型比A型大或小。
+
+
+- Class: cmd_question
+  Output: 對於無順序的資料硬要去比大小，R會印出警告訊息。
+    以血型例子，第一個血型是「A」，第二個血型是「AB」。
+    請試著輸入 blood_type_factor[1]> blood_type_factor[2] 來比較大小。
+  CorrectAnswer: blood_type_factor[1]> blood_type_factor[2]
+  AnswerTests: omnitest(correctExpr='blood_type_factor[1]> blood_type_factor[2]')
+
+- Class: cmd_question
+  Output: 對於有順序的資料，我們提供另一個等第制資料集作為範例。
+    請輸入 grades 載入五個同學的等第資料。
+  CorrectAnswer: grades
+  AnswerTests: omnitest(correctExpr='grades')
+
+- Class: text
+  Output: 這個資料中有「A」、「B」、「C」三種等第，照一般學校的慣例，
+    A比B好、B比C好、A也比C好。我們可以把等第定出順序。
+
+- Class: cmd_question
+  Output: 接著把grades轉為有順序的factor向量。做法是在factor函數中，把ordered設為TRUE。
+    並且把levels順序以向量方式傳入，level要由小到大填入。
+    請輸入
+    grades_factor <- factor(grades, ordered = TRUE, levels = c("C","B","A"))
+  CorrectAnswer: grades_factor <- factor(grades, ordered = TRUE, levels = c("C","B","A"))
+  AnswerTests:
+    - any_of_exprs(
+        "grades_factor <- factor(grades, ordered = TRUE, levels = c(\"C\",\"B\",\"A\"))",
+        "grades_factor = factor(grades, ordered = TRUE, levels = c(\"C\",\"B\",\"A\"))"
+        )
+
+- Class: cmd_question
+  Output: 輸入 grades_factor 觀察
+  CorrectAnswer: grades_factor
+  AnswerTests: omnitest(correctExpr='grades_factor')
+
+- Class: text
+  Output: 可以觀察到levels有順序。
+
+- Class: cmd_question
+  Output: 這時比較等第大小有意義。我們可以比較前兩個同學的等第。
+    請輸入grades_factor[1]> grades_factor[2]
+  CorrectAnswer: grades_factor[1]> grades_factor[2]
+  AnswerTests: omnitest(correctExpr='grades_factor[1]> grades_factor[2]')
+
+- Class: text
+  Output: 我們在這裡做個總結。
+    Factor向量用來儲存類別的資料。level屬性限制能在向量中出現的類別種類。
+    Factor本質上是整數向量，只是帶有levels。
+    Factor可以是無順序或有順序的，可用在Factor函數中使用ordered=TRUE讓Factor變成有序。

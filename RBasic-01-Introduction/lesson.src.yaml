@@ -43,7 +43,7 @@
     舉例來說，剛剛我們輸入的：`help(chol2inv)`就是一個有效的expression。
 
 - Class : text
-  Output: 而`help(chol2inv`就是一個無效的expression，因為少了一個`)`
+  Output: 而`help(chol2inv`少了一個`)`是無效的expression，需要完整的輸入help(chol2inv)
 
 - Class : text
   Output: 通常每一個給R 的指令，不是一個expression，就是一個assignment
