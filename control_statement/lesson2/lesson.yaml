@@ -1,0 +1,57 @@
+- Class: meta
+  Course: DSC2015_RBasic_Part2
+  Lesson: lesson2 - for
+  Author: Noah
+  Type: Standard
+  Organization: DSC 2015 R Tutorial
+  Version: 2.3.1
+
+- Class: text
+  Output: 範例1：for() loop 用法：
+
+- Class: text
+  Output: 提醒一下：如果已經有太多變數、函式時候，實在覺得很亂，想一次全部清除R或R Studio的變數以及名稱，可以使用這個指令： rm(list=ls())
+
+- Class: text
+  Output: for() 是R的一個很常使用的迴圈指令，如果想重複執行某些指令的話，可以用 for 來完成
+
+- Class: text
+  Output: for() 的用法複習：for (x in start:end)，其中x代表累進的變數。in 表示x會根據後面的變數而變化。start表示開始的條件，end表示結束的條件
+
+- Class: cmd_question
+  Output: 如果我們很喜歡R這個語言，就會不自覺的列印出：I Love R，像是偶爾就會在程式中不小心加上：print("I Love R")
+  CorrectAnswer: print("I Love R")
+  AnswerTests: omnitest(correctExpr='print("I Love R")')
+  Hint: 請輸入：print("I Love R")
+
+- Class: text
+  Output: 那如果真的很愛很喜歡R，覺得只顯示一行不夠，想要列印10行來證明的話，那該怎麼表示？
+
+- Class: text
+  Output: 前面提到：for(x in start:end)，其中x現在只是變數。start代表開始的條件，這時候可用 [1]，而因為start是由1開始，所以end要輸入10，才能表示10次。
+
+
+- Class: cmd_question
+  Output: 這麼，該怎麼用for迴圈表示列印10次 "I Love R" 呢？
+  CorrectAnswer: for(x in 1:10) print("I Love R")
+  AnswerTests: omnitest(correctExpr='for(x in 1:10) print("I Love R")')
+  Hint: 請輸入：for(x in 1:10) print("I Love R")
+
+- Class: text
+  Output: 太簡單了嗎？那可以挑戰一下如何顯示一個99乘法表，這邊有幾種方法，但現在我介紹兩種方法：
+
+- Class: text
+  Output: 使用print，像是print ("1*1=1") print("1*2=2") ....直到print("10*9=90")  print("100*100=100")
+
+- Class: text
+  Output: 使用for來完成，像是for(x in 1:10) { for(y in 1:10) } 這樣就有兩個迴圈了
+
+- Class: mult_question
+  Output: 你會選擇哪一種呢？
+  AnswerChoices: print;for
+  CorrectAnswer: for
+  AnswerTests: omnitest(correctVal='for')
+  Hint: 一定要選for，不然你會打將近2000多個字
+
+- Class: text
+  Output: 感謝你的智慧的選擇，少打了許多字，也省了許多時間。那這個課程就到這邊結束。謝謝
