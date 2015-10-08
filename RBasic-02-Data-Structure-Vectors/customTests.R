@@ -10,3 +10,7 @@
 # variables when appropriate. The answer test, creates_new_var()
 # can be used for for the purpose, but it also re-evaluates the
 # expression which the user entered, so care must be taken.
+
+rbasic_02_hw_test <- function() {
+  TRUE
+}
