@@ -74,6 +74,11 @@
   AnswerTests: omnitest(correctExpr = 'var(x)')
   Hint: var(x)
 - Class: cmd_question
+  Output: 請利用`sd`計算x 的樣本標準差。
+  CorrectAnswer: sd(x)
+  AnswerTests: omnitest(correctExpr = 'sd(x)')
+  Hint: sd(x)
+- Class: cmd_question
   Output: 在R 中，`sort(x)`則會產生一個和x 長度一樣的向量，但是值是 由小到大排列。請同學試試看：`sort(x)`
   CorrectAnswer: sort(x)
   AnswerTests: omnitest(correctExpr = 'sort(x)')
@@ -302,4 +307,8 @@
   Hint: x[c("b", "d")]
 - Class: text
   Output: 關於R 資料結構的入門就到這裡了。接下來，只要再 學會對於矩陣和data.frame的操作，我們就可以開始解決實際 的問題了！
+- Class: script
+  Output: 最後我們想請同學試試看用今天所學的方法，整理台電的公開數據。
+  Script: RBasic-02-HW.R
+  AnswerTests: rbasic_02_hw_test()
 
