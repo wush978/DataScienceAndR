@@ -1,136 +1,178 @@
 - Class: meta
   Course: R_Course
   Lesson: lesson0 - function
-  Author: Noah
+  Author: Noah, Wush Wu
   Type: Standard
   Organization: TW R User Groupd
   Version: 2.3.1
+
 - Class: text
   Output: 範例1：function 用法：
+
 - Class: text
   Output: 提醒一下：如果已經有太多變數、函式時候，實在覺得很亂，想一次全部清除R或R Studio的變數以及名稱，可以使用這個指令： rm(list=ls())
+
 - Class: text
-  Output: function() 是R的一個很常使用的函式指令，如果想把為了相同目的指令組合起來，比較好整理，程式中也比較好看，可以用 function()
-    來完成
+  Output: function() 是R的一個很常使用的函式指令，如果想把為了相同目的指令組合起來，比較好整理，程式中也比較好看，可以用 function() 來完成
+
 - Class: text
   Output: function() 的用法複習：函式名稱 = function(參數1, 參數2,...) { 各種指令+資料 }
+
 - Class: text
   Output: 其中 [=] 這個符號可以用 [<-]的符號代替。而括號內的參數1,參數2也可依據狀況來增加或減少參數，或是不用填寫。大括號後面的內容就是我們要努力的目標了
+
 - Class: text
   Output: 另外，使用swirl練習的時候，由於swirl的設定，輸入 [=] 會被當成輸入錯誤，此時就必須使用[<-]的符號代替。
+
 - Class: text
   Output: 要使用function的話，只要在console中輸入函式名稱()，這樣就可以執行之前寫的函式了。如果有參數的話，那記得要在括號內填入參數，如：函式名稱(參數1)。
+
+
 - Class: text
   Output: 一般第一次寫程式的話，通常都是用Hello World來教學，這次也不例外
+
 - Class: text
   Output: 我們想寫一個程式來列印出一串字串：Hello World, R。
+
 - Class: cmd_question
   Output: 之前有學過print指令了，所以請先輸入print("Hello World, R")
   CorrectAnswer: print("Hello World, R")
   AnswerTests: omnitest(correctExpr='print("Hello World, R")')
   Hint: 請輸入：print("Hello World, R")
+
 - Class: text
   Output: 然後，我們想把這個動作用一個名稱代替，叫作 hello_world_r。愛護生命，請不要用中文當作變數或函式名稱。
+
+
 - Class: text
   Output: 請問這個hello_world_r的函式該怎麼表示呢？註：大括號的內容暫時不用寫
+
+
 - Class: mult_question
   Output: 你會選擇哪一種呢？
-  AnswerChoices: hello_world_r = function() { };function(hello_world_r)() { };function
-    hello_world_r() { }
+  AnswerChoices: hello_world_r = function() { };function(hello_world_r)() { };function hello_world_r() { }
   CorrectAnswer: hello_world_r = function() { }
   AnswerTests: omnitest(correctVal='hello_world_r = function() { }')
   Hint: 請選擇hello_world_r = function() { }，因為是R規定的
+
+
 - Class: cmd_question
   Output: 恭喜，你已經完成你的第一個R程式了，這個程式叫作hello_world_r，請輸入hello_world_r()來執行程式：
   CorrectAnswer: hello_world_r()
   AnswerTests: omnitest(correctExpr='hello_world_r()')
   Hint: 請輸入：hello_world_r()
+
 - Class: text
   Output: 奇怪，怎麼螢幕上什麼事情都沒發生？是電腦當機了嗎？還是講師在騙人？
+
 - Class: text
   Output: 阿對喔！那個程式是為了什麼目的而寫的？？？
+
 - Class: text
   Output: 我們不是要寫一個程式，而這個程式可以列印出Hello World, R這個字串嗎？怎麼現在都沒有看到？
+
 - Class: text
   Output: 沒錯，我們原本的目的確實是要顯示那串字串，但有沒有發現程式那行中，我們沒有輸入任何hello world相關的字阿。
+
 - Class: text
   Output: 還記得之前有說function()後面的大括號內，要填入各種指令+資料嗎？承認吧，在上面的教學內容中，明明是教學過程叫大家大括號內先不要寫的。
+
 - Class: text
   Output: 沒關係，電腦永遠會原諒自己的錯誤的，不用自責了。只要修正就好。
+
+
 - Class: mult_question
   Output: 你會把print放在哪一邊呢？
-  AnswerChoices: hello_world_r = function() { print ("Hello World, R") };hello_world_r
-    = function({ print ("Hello World, R") }) { }
+  AnswerChoices:  hello_world_r = function() { print ("Hello World, R") };hello_world_r = function({ print ("Hello World, R") }) { }
   CorrectAnswer: hello_world_r = function() { print ("Hello World, R") }
-  AnswerTests: omnitest(correctVal='hello_world_r = function() { print ("Hello World,
-    R") }')
+  AnswerTests: omnitest(correctVal='hello_world_r = function() { print ("Hello World, R") }')
   Hint: 請選擇hello_world_r = function() { print ("Hello World, R") }，因為......這也是R規定的
+
+
 - Class: cmd_question
   Output: 那我們在執行一下這個程式：hello_world_r()
   CorrectAnswer: hello_world_r()
   AnswerTests: omnitest(correctExpr='hello_world_r() ')
   Hint: 請輸入：hello_world_r()
+
 - Class: text
   Output: 這樣不是就看到[Hello World, R]這串字了。 這才算完成一個有作用的程式，恭喜。（雞排吃完的話先不要急著再去買雞排）
+
 - Class: text
   Output: 不過這樣就結束了嗎？事情沒那麼簡單，別忘了前面function的括號中有寫著：參數1, 參數2.....，雖然前面有說可以增加或減少，甚至可以不用寫。
+
 - Class: text
   Output: 但是，如果要寫參數的話，那該怎麼寫？
+
 - Class: text
   Output: 現在，我們想在Hello World後面寫上自己的名字，像是John, Mike, Maryjin，
+
 - Class: cmd_question
   Output: 那我們先設定一下自己的名字放到變數：my_name中，請輸入：my_name = "friends"
   CorrectAnswer: my_name = "friends"
   AnswerTests: omnitest(correctExpr='my_name="friends"')
   Hint: 請輸入：my_name = "friends"
+
 - Class: text
   Output: 然後，我們想看到Hello World,後面可以接自己的名字，
+
 - Class: cmd_question
   Output: 這時候，光用print是不夠的，建議可以用print和paste一起用：請輸入 print(paste("Hello World,", my_name))
   CorrectAnswer: print(paste("Hello World,", my_name))
   AnswerTests: omnitest(correctExpr='print(paste("Hello World,", my_name))')
   Hint: 請輸入：print(paste("Hello World,", my_name))
+
 - Class: text
   Output: 這樣，就可以看到 Hello World, friends 了吧！
+
+
 - Class: mult_question
   Output: 回到函式中，把my_name當作參數，放到hello_world_r中，你會把放在哪一邊呢？
-  AnswerChoices: hello_world_r(my_name);my_name=hello_world_r();hello_world_r() =
-    my_name
+  AnswerChoices: hello_world_r(my_name);my_name=hello_world_r();hello_world_r() = my_name
   CorrectAnswer: hello_world_r(my_name)
   AnswerTests: omnitest(correctVal='hello_world_r(my_name)')
   Hint: 請選擇hello_world_r(my_name)，因為......這還是R規定的
+
+
 - Class: text
   Output: 有狀況，對吧，沒有狀況的話那就是你的R或電腦奇怪了，可能放到過期的乖乖了
+
 - Class: text
   Output: Error in hello_world_r(my_name) ： unused argument (my_name)
+
 - Class: text
   Output: 有看到Error。這就不是隨便應付可以解決的，是要call 助教 help，還是到雅虎知識或八卦版問嗎？
+
 - Class: text
   Output: 別緊張，看到Error別緊張先，先看看後面怎麼說的。unused argument (my_name) 是什麼意思？
+
 - Class: text
   Output: 還記得之前的程式hello_world_r=function()的括號內沒有寫任何字嗎，對吧。（明明是教學內容叫我們不用輸入的）
+
 - Class: text
   Output: 對，就是因為程式括號內沒有輸入參數，所以在執行程式的時候，也必須不要加入參數，（註：這時候，my_name就是參數）
+
 - Class: text
   Output: 但是現在我們想把my_name當作參數放到函式裏面去執行。那該怎麼辦？
+
 - Class: text
   Output: 很簡單，只要重新修改程式就好了。電腦永遠會原諒自己的錯誤的。
+
 - Class: cmd_question
-  Output: 再次輸入hello_world_r的函式一遍，不過這次在括號內要放入 { print(paste("Hello World,", my_name))
-    }
-  CorrectAnswer: hello_world_r = function(my_name) { print(paste("Hello World,", my_name))
-    }
-  AnswerTests: omnitest(correctExpr='hello_world_r = function(my_name) { print(paste("Hello
-    World,", my_name)) }')
-  Hint: 請輸入：hello_world_r = function(my_name) { print(paste("Hello World,", my_name))
-    }
+  Output: 再次輸入hello_world_r的函式一遍，不過這次在括號內要放入 { print(paste("Hello World,", my_name)) }
+  CorrectAnswer: hello_world_r = function(my_name) { print(paste("Hello World,", my_name)) }
+  AnswerTests: omnitest(correctExpr='hello_world_r = function(my_name) { print(paste("Hello World,", my_name)) }')
+  Hint: 請輸入：hello_world_r = function(my_name) { print(paste("Hello World,", my_name)) }
+
 - Class: cmd_question
   Output: 然後，在執行hello_world_r(my_name)看看
   CorrectAnswer: hello_world_r(my_name)
   AnswerTests: omnitest(correctExpr='hello_world_r(my_name)')
   Hint: 請輸入：hello_world_r(my_name)
+
 - Class: text
   Output: 這樣不就看到Hello World, friends 吧，很簡單對吧，然後大家就可以回家，或是去泛舟了
+  
 - Class: text
   Output: 那這個課程就到這邊結束。謝謝
-
+  
