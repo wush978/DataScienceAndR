@@ -71,11 +71,12 @@ wordcloud(tools, freq, random.color = TRUE, colors = pal)
 <center>`r fig("t134_3ca_lg.jpg", 100)`</center>
 取自 <http://img.diynetwork.com/DIY/2003/09/18/t134_3ca_med.jpg>
 
-# 更重要的是
+# 和其他工具相比，R 的特色
 
-# R 有很多的進階數據分析工具
+- R 有非常先進的數據視覺化系統
+- R 有很多的進階數據分析工具
 
-# 範例一
+# 範例 - 探索數據的分佈
 
 - 統計很多理論都需要常態分佈
 - 但是一組數據真的是常態分佈嗎？
@@ -85,38 +86,104 @@ x <- c(rnorm(50), rnorm(50, 4))
 plot(density(x))
 ```
 
-# R 可以很快的告訴你
+# 範例 - 探索數據的分佈
+
+- R 可以很快的告訴你
 
 ```{r ks.test2, echo = TRUE, dependson="ks.test"}
 shapiro.test(x)
 ```
 
-# 範例二
+# 範例 - 探索數據的分佈
 
-- 有兩種方法要比較轉換率
-- 方法A 10000點擊 10 轉換
-- 方法B 5000點擊 3 轉換
-- 我怎麼知道這兩種方法的轉換率是不是明顯不同？
+- R 也可以比較兩個數據是不是來自相同的分佈
 
-# 假設轉換率是 2/5000，做10000次可能有多少種轉換？
+```{r ks.test3, echo = TRUE}
+x1 <- rnorm(50)
+x2 <- rt(50, df = 2)
+plot(density(x1), xlim = range(c(x1, x2)), main = "Sample PDF")
+lines(density(x2), col = 2)
+legend("topright", c("x1", "x2"), lty = 1, col = 1:2)
+```
 
-```{r conversion}
+# 範例 - 探索數據的分佈
+
+- 檢定？沒問題
+
+```{r ks.test4, echo = TRUE, dependson="ks.test3"}
+ks.test(x1, x2)
+```
+
+# 範例 - 數據間的比較
+
+- 我們使用有兩套方法做推薦，要比較推薦的成果
+- 方法A：在10000點擊有10個購買
+- 方法B：在5000 點擊有3 個購買
+- 我怎麼知道這兩種方法的轉換率（購買/點擊）是不是明顯不同？
+
+# 範例 - 數據間的比較
+
+- 我不懂檢定，但是簡單的跑模擬就可以告訴我們答案。
+
+```{r conversion, echo = TRUE}
+# 假設方法A 真正的轉換率和就是 3 / 5000
 p <- 3/5000
+# 我們可以模擬1000次在10000個點擊下，方法A 的轉換數
 plot(density(x <- rbinom(1000, 10000, p)))
+```
+
+# 範例 - 數據間的比較
+
+- 利用模擬結果做比較
+
+```{r conversion2, echo = TRUE, dependson="conversion"}
+# 估計超過我們觀測值的機率
 mean(x > 10)
 ```
 
-# 範例三
+# 範例 - 數據間的比較
 
-- 剛剛是用模擬，但是我想要算信賴區間，因為區間比較潮
+- 我大致上懂檢定，但是我不想自己寫程式算信賴區間。
 
 ```{r ci, echo = TRUE}
 library(binom)
 binom.confint(c(10, 3), c(10000, 5000), methods = "exact")
 ```
 
-# 範例四
+# 範例 - 數據間的比較
 
+- 太棒了，但是我想用某篇paper的方法。你可以找找看有沒有你要的方法：
 
+<center>`r fig("binom-methods.png", 100)`</center>
+
+# 範例 - 相關性
+
+- R 擁有許多你想像不到的方式來探索數據
+    - 他們都來自於世界各地的貢獻者
+
+```{r chart.correlation, results = 'hide', warning = FALSE}
+library(PerformanceAnalytics)
+chart.Correlation(iris[-5], bg=iris$Species, pch=21)
+```
+
+# 範例 - 相關性
+
+- 許多機器學習的方法，會假設數據彼此之間是獨立的
+    - R 可以迅速幫你檢驗數據是否是獨立的
+
+```{r chart.ACFplus}
+data(edhec)
+chart.ACFplus(edhec[,1,drop=FALSE])
+```
+
+# 範例 - 相關性
+
+- <small>出處：<https://learnr.wordpress.com/2010/01/26/ggplot2-quick-heatmap-plotting/#more-2380></small>
+
+```{r heat.nba, echo = TRUE, eval = FALSE}
+nba <- read.csv("http://datasets.flowingdata.com/ppg2008.csv")
+nba$Name <- with(nba, reorder(Name, PTS))
+nba.m <- melt(nba)
+```
 
 
