@@ -19,7 +19,7 @@ test_lesson = function(lesson_dir){
   }
   
   for(question in lesson){
-    if(!is.null(question$CorrectAnswer) && question$Class %in% c("cmd_question", "mult_question")) {
+    if(question$Class %in% c("cmd_question", "mult_question", "script")) {
       print(paste(">", question$CorrectAnswer))
       switch(question$Class, 
         "cmd_question" = {
@@ -31,6 +31,11 @@ test_lesson = function(lesson_dir){
         },
         "mult_question" = {
           e$val <- as.character(question$CorrectAnswer)
+          stopifnot(eval(parse(text = question$AnswerTests), envir = e))
+        },
+        "script" = {
+          question$correctScript <- paste(tools::file_path_sans_ext(question$Script), "-correct.R", sep = "")
+          source(file.path(lesson_dir, "scripts", question$correctScript))
           stopifnot(eval(parse(text = question$AnswerTests), envir = e))
         }
       )
