@@ -3,6 +3,7 @@ library(yaml)
 library(swirl)
 
 test_lesson = function(lesson_dir){
+  install_course_directory(".")
   print(paste("####Begin testing", lesson_dir))
   .e <- environment(swirl:::any_of_exprs)
   attach(.e)
