@@ -203,5 +203,11 @@
     可以使用rjsonlite 。只要資料格式是公開格式，我們很容易找到R 的套件來
     讀取該資料格式。這就是R 是Open Source 的威力！
 
+- Class : text
+  Output: 受限於課程內容，所以我們這裡只講讀取CSV 的方式。這應該是最泛用
+    的內容了。未來有時間，會再找社群的其他大大合作開寫其他和讀資料相關的
+    課程。同學如果很期待看到處理某些形態資料的課程，歡迎到
+    <https://github.com/wush978/DataScienceAndR/issues> 許願。
+
 
 
