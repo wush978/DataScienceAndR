@@ -1,0 +1,207 @@
+- Class: meta
+  Course: DataScienceAndR
+  Lesson: RBasic-07-Loading-Dataset
+  Author: Wush Wu
+  Type: Standard
+  Organization: Taiwan R User Group
+  Version: 0.1
+
+- Class : text
+  Output: 在做資料分析之前，我們要能載入資料
+
+- Class : text
+  Output: 這個課程的目的是介紹R 最常見的幾種載入資料的方式
+
+- Class : cmd_question
+  Output: R 內建有許多知名的資料集。這些內建的資料集，目前都在`datasets`這個套件之中。
+    所以同學可以用輸入：`library(help=datasets)`來檢視所有的資料集。
+    請同學試試看。
+  CorrectAnswer: library(help=datasets)
+  AnswerTests: omnitest('library(help=datasets)')
+
+- Class : cmd_question
+  Output: 在載入資料之前，為了等一下更清楚地說明R 的函數，
+    請同學先輸入：`iris <- 1`。
+  CorrectAnswer: iris <- 1
+  AnswerTests: any_of_exprs('iris <- 1', 'iris = 1')
+
+
+- Class : cmd_question
+  Output: 這些列出的資料中，我們可以運用`data`這個指令來載入。
+    請同學試試看：`data(iris, package = "datasets")`
+    這個指令的意思就是，從套件datasets中載入資料集iris。
+  CorrectAnswer: data(iris, package = "datasets")
+  AnswerTests: omnitest('data(iris, package = "datasets")')
+
+- Class : cmd_question
+  Output: 接著，我們請同學輸入：`head(iris)`
+  CorrectAnswer: head(iris)
+  AnswerTests: omnitest('head(iris)')
+
+- Class : text
+  Output: 同學應該會在螢幕上看到R 輸出一個data.frame，而不是
+    當初輸入的1
+
+- Class : text
+  Output: 這就是`data`這個函數的功能。它可以讓同學從套件載入一個
+    資料集，並且會指定到第一個參數的變數名稱。舉例來說，在輸入：
+    `data(iris, package = "datasets")`，R 會把一個名為iris的資料
+    集輸入到iris這個變數之中。
+
+- Class : cmd_question
+  Output: 接著，請同學查詢iris的欄位名稱。
+  CorrectAnswer: colnames(iris)
+  AnswerTests: omnitest(correctVal = colnames(iris))
+
+- Class : text
+  Output: 雖然我們看到了欄位名稱，可是並不清楚這些欄位的意義，
+    也不清楚每列資料所代表的意義。這些事情，必須在實際進行資料
+    分析之前就要理解的。
+
+- Class : cmd_question
+  Output: 如果是使用R 提供的資料集，通常都會有相關的說明。
+    甚至會包含該資料集出處的論文。請同學輸入：`help(iris)`
+  CorrectAnswer: help(iris)
+  AnswerTests: any_of_exprs('help(iris)', '?iris')
+
+- Class : text
+  Output: 以上練習，已經讓同學了解如何使用R 內建的資料集。
+
+- Class : text
+  Output: 接著，我們來展示如何讓同學讀取外部的資料集。
+
+- Class : text
+  Output: 外部資料集的格式有千百種，今天只跟大家介紹最常見的csv 檔。
+
+- Class : text
+  Output: csv 檔的格式是以列為單位。每一行檔案就是一列。而每一列中，
+    是以一個分隔符號來讓使用者或程式分辨欄位。常見的分隔符號有：
+    tab (\t)或逗號(,) 。
+  
+- Class : text
+  Output: 我們拿一個自<http://data.gov.tw/node/6213>下載的csv 檔
+    做範例。這個檔案的目錄已經存入了`lvr_land.path` 變數之中。
+    我們將利用這個檔案來示範如何載入中文資料到R 。
+
+- Class : text
+  Output: 載入中文資料，最重要的就是要抓對檔案所採用的中文的編碼。
+    可惜目前我還不清楚如何在R 裏面偵測編碼。另外同學如果不懂什麼是
+    編碼，可以參考這個youtube 影片：<https://www.youtube.com/watch?v=GG2UFrmdtH4>
+
+- Class : cmd_question
+  Output: 簡單起見，我們這裡帶著同學測試這個檔案的編碼。
+    第一招，是檢查檔案有沒有BOM 。BOM 是一種利用檔案最前面的2 個或
+    3 個位元組來標示檔案編碼的方式。在windows 底下建立的中文檔案，
+    有很高的機會會帶BOM 。請同學執行：`readBin(lvr_land.path, what = "raw", n = 3)`
+  CorrectAnswer: readBin(lvr_land.path, what = "raw", n = 3)
+  AnswerTests: omnitest(correctVal = charToRaw("\xb6m\xc2"))
+
+- Class : text
+  Output: R 中的`readBin` 是一個很可以直接讀取檔案包含的位元的指令
+    ，所以可以正確的處理BOM 。第一個參數是檔案的路徑。第二個名稱為
+    what的參數，是告訴R 要如何處理讀入的資料。`what = "raw"`代表讀
+    入的資料用位元處理，而不是文字。第三個名稱為n 的參數，代表要輸
+    入的長度。這裡選`n = 3` 是因為通常BOM 最多就是3 個位元。
+
+- Class : text
+  Output: 接著，我們可以到<https://zh.wikipedia.org/wiki/位元組順序記號>查詢
+    常用的BOM 。這裡我們直接告訴各位同學，這三個位元不屬於任何已知的編碼所使
+    用的BOM ，所以我們猜測這個檔案應該不帶BOM 。
+
+- Class : text
+  Output: 如果沒有BOM ，一種方法是使用`file`搭配`readLines` 兩個函數來
+    測試。如果讀出來的中文可以正常顯示，通常我們就猜中編碼了。如果讀出
+    亂碼，或是讀取發生錯誤，那可能就猜錯了，就換個編碼猜猜看。
+
+- Class : cmd_question
+  Output: 請同學試試看BIG5編碼：`readLines(file(lvr_land.path, encoding = "BIG5"), n = 1)`
+    這裡的file指令會打開一個檔案，第一個參數是檔案的路徑，第二個名稱為encoding的參數
+    代表檔案的編碼。如果是BIG5編碼，就輸入名稱：`"BIG5"`。UTF-8 的話，就輸入`"UTF-8"`。
+    `readLines` 函數會一行一行的讀取檔案的內容。第一個參數就是用`file`函數開啟的檔案。
+    第二個名稱為n 的參數，則代表讀取的行數。這裡`n=1` 代表讀取一行，所以只會回傳一個
+    元素的character 向量。
+  CorrectAnswer: readLines(file(lvr_land.path, encoding = "BIG5"), n = 1)
+  AnswerTests: omnitest(correctVal = readLines(file(lvr_land.path, encoding = "BIG5"), n = 1))
+
+- Class : text
+  Output: 一試就中，所以同學的R console 上應該顯示出正確的中文字串。
+
+- Class : cmd_question
+  Output: 一開始先用`readLines`看一下資料是個好習慣。除了第一行外，我們應該
+    多看幾行，好猜猜看檔案的格式。請同學再輸入一次`file` 和`readLines` 的組
+    合指令，並且讀取5 行。
+  CorrectAnswer: readLines(file(lvr_land.path, encoding = "BIG5"), n = 5)
+  AnswerTests: omnitest(correctVal = readLines(file(lvr_land.path, encoding = "BIG5"), n = 5))
+  Hint: 上一次我們使用的指令是：`readLines(file(lvr_land.path, encoding = "BIG5"), n = 1)`
+    如果不知道怎麼改`readLines` 讀取的行數，可以回想一下參數n 的意義。
+
+- Class : text
+  Output: 接著我們開始來講解`read.table`這個讀取CSV 格式檔案最泛用的指令。
+
+- Class : mult_question
+  Output: 在R 中，`read.table`的第一個參數和readLines 的第一個參數一樣，代表要開啟的檔案。
+    如果我們不在乎檔案的編碼，可以直接輸入檔案的路徑。以下哪一個是正確的路徑？
+  AnswerChoices: lvr_land.path;"lvr_land.path"
+  CorrectAnswer: "lvr_land.path"
+  AnswerTests: omnitest(correctVal = 'lvr_land.path')
+  Hint: 在R 中，`lvr_land.path`代表一個變數，但是`"lvr_land.path"`代表一個字串。
+
+- Class : mult_question
+  Output: 可惜我們需要設定編碼。（註：在中文版windows 上預設會使用BIG5編碼，所以可以
+    直接如上題輸入`lvr_land.path`。第二個重要的參數，是`header`。`header = TRUE`代表
+    檔案的第一行是欄位名稱，而不是資料。`header=FALSE`代表檔案的第一行就是資料。剛剛
+    我們看到檔案的前五行的內容是：`[1] "鄉鎮市區,交易標的,..." [2] "文山區,房地(土地+
+    建物)..."`。請問同學，`header`的參數應該要給哪一個呢？
+  AnswerChoices: TRUE;FALSE
+  CorrectAnswer: "TRUE"
+  AnswerTests: omnitest(correctVal = "TRUE")
+  Hint: 仔細想想，第一行是資料，還是欄位名稱呢？
+
+- Class : mult_question
+  Output: 第三個重要的參數是`sep` ，這代表各行欄位間的分隔符號。
+    根據之前我們看到的前五行的資料：`[1] "鄉鎮市區,交易標的,土地區段位置...,土地移轉總面積..."
+    [2] "文山區,房地(土地+建物),臺北市文山區...,43.44..." [3] "中正區,房地(土地+建物),臺北市中
+    正區...,40.19..."。請問同學，這份檔案個欄位的分隔符號是什麼呢？
+  AnswerChoices: -;\t;,
+  CorrectAnswer: ","
+  AnswerTests: omnitest(correctVal = ",")
+  Hint: 從第2 行，我們可以判斷，`"文山區"`應該代表`"鄉鎮市區"`，而`"房地(土地+建物)"`
+    應該代表`"交易標的"`，以此類推。`"鄉鎮市區"`和`"房地(土地+建物)"` 兩筆資料中間差一
+    個`","`。而如果我們把`","`當分隔符號去解釋剩下的資料，也解釋得通。
+
+- Class : cmd_question
+  Output: 依照以上問答題的答案，請同學利用`read.table`，用BIG5編碼讀取
+    `lvr_land.path` ，並且把輸出存到變數`lvr_land`
+  CorrectAnswer: lvr_land <- read.table(file(lvr_land.path, encoding = "BIG5"), header = TRUE, sep = ",")
+  AnswerTests: val_is(read.table(file(lvr_land.path, encoding = "BIG5"), header = TRUE, sep = ","), 
+    "lvr_land")
+
+- Class : text
+  Output: 以上就是一個實際上，處理中文資料的流程。
+
+- Class : text
+  Output: 事實上，如果同學自行下載原本的檔案來處理，上述的流程還是會出錯的。
+    那是因為在第21行，資料的最後一欄的內容包含：`,`這個符號，導致欄位判斷出錯。
+
+- Class : text
+  Output: 遇到這種狀況，最好的方式是自己用如notepad++或是其他的編輯器，自行編輯
+    原始的檔案資料（依照錯誤訊息，移除多餘的,），再用R 讀取。由於這樣的動作超過
+    這個課程系統的內容，所以我們就不帶著同學做操作了。
+
+- Class : text
+  Output: 另外一種方式，是透過`readLines` 來讀取資料，再用R 的其他函數自行把讀入
+    的字串轉換為data.frame。這部分很難歸納，會隨著資料的乾淨程度而有所不同。同學
+    可以再閱讀本課程中的，一些實際分析Open Data 的範例，就可以學到一些技巧。或是
+    繼續學習R 的字串處理函數與套件。
+
+- Class : text
+  Output: 我們在這門課程中簡單展示了如何從套件中載入資料，以及如何從檔案中讀取
+    CSV 的資料。
+    
+- Class : text
+  Output: 如果要使用R 讀取XML 的資料，可以使用套件XML 。如果要讀取JSON，
+    可以使用rjsonlite 。只要資料格式是公開格式，我們很容易找到R 的套件來
+    讀取該資料格式。這就是R 是Open Source 的威力！
+
+
+
