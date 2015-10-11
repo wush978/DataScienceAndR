@@ -169,7 +169,7 @@
   Output: 了解像attributes這樣的功能，在探索一些複雜的R 模型物件時，是非常好用的。我們在之後深入探討`matrix`、`data.frame`
     等進階物件的時候，也會需要了解attributes的相關的知識。現在，同學只要知道所有的R 物件都有attributes就可以了。
 - Class: text
-  Output: 而名稱為"class"的屬性是非常重要的，因為它牽涉到R 的物件導向設計。這部份請讓我們到之後的章節再跟同學說明。
+  Output: 而名稱為"class"的屬性是非常重要的，因為它牽涉到R 的物件導向設計。這部份請讓我們到更進階的章節再跟同學說明。
 - Class: cmd_question
   Output: 由於"names"和"class"這兩個屬性是如此的重要，所以在R 中有設計了`class`和`names`這兩個函數，可以讓使用者很方便的 來修改一個R
     物件的names和class。請同學試試看：`names(g)`
