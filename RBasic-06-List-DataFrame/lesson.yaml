@@ -8,7 +8,7 @@
 - Class: text
   Output: 這堂課程要跟各位同學介紹list和data.frame這兩個很重要的資料結構。
 - Class: text
-  Output: R 的list是非常汎用的物件，相信同學在前面的課程也已經有簡單操作R 裡面的迴歸模型， 而這些迴歸模型的底層架構，就是用list所建立的。
+  Output: R 的list是非常泛用的物件，相信同學在前面的課程也已經有簡單操作R 裡面的迴歸模型， 而這些迴歸模型的底層架構，就是用list所建立的。
 - Class: text
   Output: 但是list的本質，其實就是一個「R 物件的向量」，這裡我想要強調「向量」的概念，因為list 是有順序性的。
 - Class: cmd_question
