@@ -37,7 +37,7 @@
 - Class: text
   Output: R 也可以建立一種叫做`list`的向量，這是「R 物件」的向量。換句話說，每一個值 都是R 物件，都有自己的`mode`、`length`等屬性。我們會在一些複雜的統計模型中，見到這樣的
     資料型態。舉例來說，在R 中如果要建立一個迴歸模型，會使用：`g <- lm(dist ~ speed, cars)` 這樣的程式碼會利用車速當解釋變數、煞車距離當應變數，建立一個迴歸模型。
-    這裡我們先不管`lm`怎麼用，而是要看看`g`這個物件，也就是一個回歸模型。
+    這裡我們先不管`lm`怎麼用，而是要看看`g`這個物件的結構。同學只要掌握這個課程的內容， 未來就可以輕鬆的探索各種機器學習或統計分析演算法的輸出結果。
 - Class: cmd_question
   Output: 請同學檢查`g`的型態
   CorrectAnswer: mode(g)
@@ -49,21 +49,29 @@
   AnswerTests: omnitest('length(g)', length(g))
   Hint: length(g)
 - Class: cmd_question
-  Output: 在上一個章節中，我們有介紹可以使用如`g[1:2]`的方式來拿出`g`的第一個到第二個值。 而這樣的輸出結果，還是會和`g`有同樣的`mode`。
-    先請同學看看`g[1:2]`的結果。
+  Output: 在上一個章節中，我們有介紹可以使用如`g[1:2]`的方式來拿出`g`的第一個到第二個值。 而這樣的輸出結果，還是會和`g`有同樣的`mode`。這裡請同學看看`g[1:2]`的結果。
   CorrectAnswer: g[1:2]
   AnswerTests: omnitest('g[1:2]', g[1:2])
   Hint: g[1:2]
 - Class: text
-  Output: 這裡同學會在R console看到一些數字與其妙的文字。在最上面的`$coefficients`，表示 `g`這個向量的第一個值，是有名字的。他的名字是：`"coefficients"`。接著，由於`g`的第一
-    個值是一個有名字的numeric vector，所以R 就把這個vector連同各個值的名字一起顯示在console。 也就是說，這個numeric vector的第一個值是-17.579095，而名字是`"(Intercept)"`。第二個值
-    是3.932409，而名字是`"speed"`。
+  Output: 同學會在R console看到一些數字與其妙的文字。在最上面的`$coefficients`，表示 `g[1:2]`這個向量的第一個值（同時也是`g`的第一個值），是有名字的。他的名字是：`"coefficients"`。
+    接著，由於`g[1:2]`的第一個值是一個有名字的numeric 向量，所以R 就把這個向量所有的名字和值 一起顯示在console。也就是說，這個numeric
+    向量的第一個值是-17.579095，而名字是`"(Intercept)"`。 第二個值是3.932409，而名字是`"speed"`。
 - Class: text
-  Output: 接著，`$residuals`表示`g`的第二個值也是有名字的，而且它的名字是`"residuals"`。由於 這個值也是一個有名字的numeric
-    vector，所以R 就把值和名字同時顯示到console上。所以我們就 可以知道，這個numeric vector的第一個值的名字是`"1"`，值是3.849460。以此類推。
+  Output: 接著，`$residuals`表示`g[1:2]`的第二個值也是有名字的，而且它的名字是`"residuals"`。由於 這個值也是一個有名字的numeric
+    向量，所以R 就把值和名字同時顯示到console上。所以我們就 可以知道，這個numeric 向量的第一個值的名字是`"1"`，值是3.849460。以此類推。
 - Class: text
   Output: 然而整個R Console的顯示告訴我們`g[1:2]`仍然是一個list，因為R 只有在顯示list的內容 才會帶有`$coefficients`和`$residuals`這種標記。如果只是一個numeric
-    vector，就不會顯示出 `$coefficients`和`$residuals`。
+    向量，就不會顯示出 `$coefficients`和`$residuals`。
+- Class: cmd_question
+  Output: 請同學輸入`list(1, a = 2)`來看看R 是如何顯示list，以及比較當值有附帶名字，或是沒有 附帶名字時，輸出的不同。
+  CorrectAnswer: list(1, a = 2)
+  AnswerTests: omnitest('list(1, a = 2)')
+  Hint: list(1, a = 2)
+- Class: text
+  Output: 在一開始，R 顯示了`[[1]]`，然後才顯示一個值為1 的numeric 向量。開頭的`[[1]]`不只 說明了這個物件是一個list，也說明接下來顯示的是第一個值的內容。
+- Class: text
+  Output: 接著，R 顯示了`$a`，後才顯示了一個值為2 的numeric 向量。開頭的`$a`因為位置在第二， 所以代表這是這個list物件的第二個值。同時，這個值的名字是`"a"`。
 - Class: cmd_question
   Output: 但是如果我們想拿出，`g`的第一個值，並且是這個物件的本身，而非被包在一個list中， 我們需要用：`g[[1]]`。請同學試試看。
   CorrectAnswer: g[[1]]
@@ -151,21 +159,28 @@
   CorrectAnswer: attributes(g)
   AnswerTests: omnitest('attributes(g)')
   Hint: attributes(g)
+- Class: mult_question
+  Output: 請問同學，根據剛剛的輸出結果，`attributes(g)`的屬性應該是哪一種向量？
+  AnswerChoices: numeric;character;list
+  CorrectAnswer: list
+  AnswerTests: omnitest(correctVal = 'list')
 - Class: cmd_question
-  Output: 在下一個題目之前，我想請同學先輸入`names(g)`來查詢`g`的名字。並且和上一個題目的結果做比對。
+  Output: 在下一個題目之前，我想請同學先輸入`names(g)`來查詢`g`的名字。並且和`attributes(g)`的結果做比對。
   CorrectAnswer: names(g)
   AnswerTests: omnitest('names(g)')
   Hint: names(g)
+- Class: text
+  Output: 在剛剛`attributes(g)`的輸出中，同學應該會看到一個帶有名字的list。請同學記得，所有R 物件的attributes都是 帶有名字的list。
 - Class: cmd_question
-  Output: 在剛剛`attributes(g)`的輸出中，同學應該會看到一個帶有名字的list。所有物件的attributes都是帶有名字的list。 一個有趣的事情是，通常向量的名字，就是存放在"names"這個attributes的character向量。在R
-    中，我們可以用`attr(g, "names")` 來取得名字是"names"的屬性。請同學試試看。
+  Output: 通常這個物件的名字，就是`attributes(g)`這個list中，名字為`"names"`的值。而且值一定要是character向量。 在R
+    中，我們可以用`attr(g, "names")`來取得名字是"names"的屬性。請同學試試看。
   CorrectAnswer: attr(g, "names")
   AnswerTests: omnitest('attr(g, "names")', names(g))
   Hint: attr(g, "names")
 - Class: text
-  Output: 這裡的名字，就是g 這個list的名字，也就是`names(g)`的結果。
+  Output: 上一題的輸出結果，就是g 這個list的名字，也就是`names(g)`的結果。
 - Class: cmd_question
-  Output: 另一個`attributes(g)`的輸出，是一個名字是"class"的character向量。它的值是`"lm"`。請同學試試看：`attr(g,
+  Output: 讓我們回到`attributes(g)`的輸出。除了第一個值是名字為`"names"`的character向量之外，第二個值是一個名字 是`"class"`的character向量。character向量的值是`"lm"`。請同學試試看：`attr(g,
     "class")`
   CorrectAnswer: attr(g, "class")
   AnswerTests: omnitest('attr(g, "class")')
