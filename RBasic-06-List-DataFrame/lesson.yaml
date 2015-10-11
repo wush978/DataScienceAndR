@@ -12,8 +12,8 @@
 - Class: text
   Output: 但是list的本質，其實就是一個「R 物件的向量」，這裡我想要強調「向量」的概念，因為list 是有順序性的。
 - Class: cmd_question
-  Output: 舉例來說，請同學建立一個list：`x <- list(iris = iris, cars = cars, n = 2)` 這裡`iris =
-    iris`的意思是說，第一個元素的名字是`"iris"`，而值會是變數`iris`的值。
+  Output: 請同學建立一個list，`x <- list(iris = iris, cars = cars, n = 2)` 這裡`iris = iris`的意思是說，第一個元素的名字是`"iris"`，而值會是變數`iris`的值。
+    而`cars = cars`表示第二個元素的名字是`"cars"`，值則是變數`cars`的值。以此類推。
   CorrectAnswer: x <- list(iris = iris, cars = cars, n = 2)
   AnswerTests: any_of_exprs("x <- list(iris = iris, cars = cars, n = 2)", "x = list(iris
     = iris, cars = cars, n = 2)")
