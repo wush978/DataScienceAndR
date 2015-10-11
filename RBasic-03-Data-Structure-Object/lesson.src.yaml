@@ -68,6 +68,23 @@
   CorrectAnswer: g[1:2]
   AnswerTests: omnitest('g[1:2]', g[1:2])
 
+- Class : text
+  Output: 這裡同學會在R console看到一些數字與其妙的文字。在最上面的`$coefficients`，表示
+    `g`這個向量的第一個值，是有名字的。他的名字是：`"coefficients"`。接著，由於`g`的第一
+    個值是一個有名字的numeric vector，所以R 就把這個vector連同各個值的名字一起顯示在console。
+    也就是說，這個numeric vector的第一個值是-17.579095，而名字是`"(Intercept)"`。第二個值
+    是3.932409，而名字是`"speed"`。
+
+- Class : text
+  Output: 接著，`$residuals`表示`g`的第二個值也是有名字的，而且它的名字是`"residuals"`。由於
+    這個值也是一個有名字的numeric vector，所以R 就把值和名字同時顯示到console上。所以我們就
+    可以知道，這個numeric vector的第一個值的名字是`"1"`，值是3.849460。以此類推。
+
+- Class : text
+  Output: 然而整個R Console的顯示告訴我們`g[1:2]`仍然是一個list，因為R 只有在顯示list的內容
+    才會帶有`$coefficients`和`$residuals`這種標記。如果只是一個numeric vector，就不會顯示出
+    `$coefficients`和`$residuals`。
+
 - Class : cmd_question
   Output: 但是如果我們想拿出，`g`的第一個值，並且是這個物件的本身，而非被包在一個list中，
     我們需要用：`g[[1]]`。請同學試試看。
