@@ -152,13 +152,18 @@
   AnswerTests: omnitest('attributes(g)')
   Hint: attributes(g)
 - Class: cmd_question
+  Output: 在下一個題目之前，我想請同學先輸入`names(g)`來查詢`g`的名字。並且和上一個題目的結果做比對。
+  CorrectAnswer: names(g)
+  AnswerTests: omnitest('names(g)')
+  Hint: names(g)
+- Class: cmd_question
   Output: 在剛剛`attributes(g)`的輸出中，同學應該會看到一個帶有名字的list。所有物件的attributes都是帶有名字的list。 一個有趣的事情是，通常向量的名字，就是存放在"names"這個attributes的character向量。在R
     中，我們可以用`attr(g, "names")` 來取得名字是"names"的屬性。請同學試試看。
   CorrectAnswer: attr(g, "names")
   AnswerTests: omnitest('attr(g, "names")', names(g))
   Hint: attr(g, "names")
 - Class: text
-  Output: 這裡的名字，就是g 這個list的名字。
+  Output: 這裡的名字，就是g 這個list的名字，也就是`names(g)`的結果。
 - Class: cmd_question
   Output: 另一個`attributes(g)`的輸出，是一個名字是"class"的character向量。它的值是`"lm"`。請同學試試看：`attr(g,
     "class")`
