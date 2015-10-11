@@ -142,8 +142,8 @@
   AnswerTests: omnitest('a[1,2]', 1)
 
 - Class : cmd_question
-  Output: 欄位的方向，也可以用名字代替。舉例來說，`a[2,"id"]`會選出名稱為`"id"`，也就是第二欄的第二個元素。
-    以表格的觀點來看，就是第2 列第2 欄。請同學試試看。
+  Output: 欄位的方向，也可以用名字代替。舉例來說，`a[2,"id"]`可以選到第二列第二欄，因為`a[2,]`代表第二列，
+    `a[,"id"]` 會選到名稱為`"id"`的第二欄。而兩者的交集，就是第2 列第2 欄。請同學試試看。
   CorrectAnswer: a[2,"id"]
   AnswerTests: omnitest('a[2,"id"]', 2)
 
