@@ -43,10 +43,11 @@
     當初輸入的1
 
 - Class : text
-  Output: 這就是`data`這個函數的功能。它可以讓同學從套件載入一個
-    資料集，並且會指定到第一個參數的變數名稱。舉例來說，在輸入：
-    `data(iris, package = "datasets")`，R 會把一個名為iris的資料
-    集輸入到iris這個變數之中。
+  Output: 這就是`data`函數的功能。它可以讓同學從套件載入特定資料
+    集（Data Sets）。舉例來說，我們剛才已由library(help=datasets)
+    觀察到datasets套件中有包含許多資料集，例如:AirPassengers、BJsales、…、iris…等。
+    我們可用`data(iris, package = "datasets")`指令，其中第一個參數可指定特定資料集，
+    R 則會把iris的資料集輸入到iris這個變數之中。
 
 - Class : cmd_question
   Output: 接著，請同學查詢iris的欄位名稱。
@@ -74,9 +75,10 @@
   Output: 外部資料集的格式有千百種，今天只跟大家介紹最常見的csv 檔。
 
 - Class : text
-  Output: csv 檔的格式是以列為單位。每一行檔案就是一列。而每一列中，
-    是以一個分隔符號來讓使用者或程式分辨欄位。常見的分隔符號有：
-    tab (\t)或逗號(,) 。
+  Output: csv 檔的格式是以行(Line)為單位。每一行(Line)就是一筆紀錄(Record)。而每一筆紀錄中，
+    是以一個分隔符號來讓使用者或程式分辨欄位。常見的分隔符號有： tab (\t)或逗號(,) 。
+    若以逗號做為分隔符號，則學生姓名加上4次小考分數的一筆紀錄，可用CSV表達如下：
+    `柯小哲,77,82,87,92`
   
 - Class : text
   Output: 我們拿一個自<http://data.gov.tw/node/6213>下載的csv 檔
