@@ -48,6 +48,7 @@ test_lesson = function(lesson_dir){
 }
 
 
+setwd("..");install_course_directory("DataScienceAndR");setwd("DataScienceAndR")
 course_list <- list.dirs(".", recursive = FALSE)
 course_list <- substring(course_list, 3, nchar(course_list))
 course_list <- grep("^[^\\.]", course_list, value = TRUE)
