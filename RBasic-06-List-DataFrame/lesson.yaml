@@ -29,10 +29,12 @@
   AnswerTests: omnitest(correctVal = "numeric")
   Hint: 還記得`class`或`mode`這兩個函數嗎？
 - Class: text
-  Output: 我們可以看到`x[[3]]`的型態不是list，所以它的型態和`x` 是不相同的。
+  Output: 我們可以看到`x[[3]]`的型態是numeric，這是因為`x <- list(iris = iris, cars = cars, n = 2)`，
+    所以`mode(x[[3]])`的結果等同於`mode(2)`，也就是numeric。同理，`mode(x[[1]])`和`mode(x[[2]])` 的結果則是x
+    的第一個值和第二個值的型態。
 - Class: cmd_question
-  Output: 因為list是個向量，所以我們過去學過得`[]`還是可以使用的。但是子向量的型態要和原本的向量相同， 所以如果我們運用如：`x[3]`的指令，從x
-    中選出只有包含第二個元素的向量，得到的輸出就會和`x`一樣是一個list。 請同學試試看：`mode(x[3])`
+  Output: 因為list是個向量，所以我們過去學過得`[]`還能使用。如果我們運用如：`x[3]`的指令，從x 中選出只有包含 第三個元素的向量，得到的輸出會和`x`一樣是一個list向量。簡言之，`mode(x[1])`、`mode(x[2])`和`mode(x[3])`
+    的結果都會是list，和`mode(x[[3]])`是numeric是不同的。請同學試試看`mode(x[3])`
   CorrectAnswer: mode(x[3])
   AnswerTests: omnitest("mode(x[3])", "list")
   Hint: mode(x[3])
@@ -63,17 +65,19 @@
 - Class: text
   Output: 接著，我們要介紹一個R 很有名的物件。這個物件的設計，完全滿足了近代對結構化資料分析的需求。
 - Class: text
-  Output: 包含最近火紅的Apache Spark，以及Python的pandas都有受到這個物件的影響。這就是R 的data.frame。 具體來說，data.frame就是一個表格。
+  Output: 包含最近火紅的Apache Spark，以及Python的pandas都有受到這個物件的影響。這就是R 的data.frame。
 - Class: text
   Output: 傳統的matrix和array 由於有同質性的限制（所有的元素都要同樣的型態），所以在資料分析上並不方便。 因為我們分析的資料，通常都不會全部都用相同的型態。在結構化的資料中，通常資料是以表格的形式，而各欄位
     會有自己的型態，例如是：數值型態、類別型態等等。
 - Class: text
-  Output: R 的data.frame是一種list，而且滿足以下幾個條件。
+  Output: R 的data.frame就是要表現出二維表格特性的物件。以下我們要介紹data.frame這個物件。
 - Class: text
-  Output: 各個元素必須是以下幾種類型之一：數值(numeric)、字串(character)、布林(logical)、類別(factor)、 數值矩陣(numeric
-    matrix)、list或data.frame。不能是其他的物件。
+  Output: 首先，data.frame是一種list。因為表格的各欄是型態不一的向量，所以我們需要用list來裝不同型態的向量。
 - Class: text
-  Output: 每一個元素的長度都要一致（矩陣或data.frame的話，則是列(row)的個數）。
+  Output: 第二，因為表格的資料是結構化的，所以data.frame的值不能存放太奇怪的物件。具體來說，data.frame的各個 元素必須是以下幾種類型之一：數值(numeric)、字串(character)、布林(logical)、類別(factor)、數值矩陣(numeric
+    matrix)、 list或data.frame。
+- Class: text
+  Output: 最重要的，因為data.frame代表的是二維表格，所以每一個值的長度都要一致（矩陣或data.frame的話，則是列(row) 的個數）。這種特性讓我們在整理資料上是非常的方便。
 - Class: mult_question
   Output: 請問下列哪一個list物件，符合data.frame的要素？如果不確定的話，可以看Hint了解原因。
   AnswerChoices: list(a = 1:3, b = 1:4);list(a = function() { }, b = 1:4);list(a =
@@ -86,17 +90,21 @@
   Output: data.frame的操作也是非常重要的。
 - Class: cmd_question
   Output: 在R 之中，我們可以使用`data.frame`函數來建立一個data.frame。 請同學現在試試看利用`data.frame(class =
-    1, id = 1:10)`建立一個data.frame， 並且把這個物件存到變數`a`
-  CorrectAnswer: a <- data.frame(class = 1, id = 1:10)
-  AnswerTests: any_of_exprs('a <- data.frame(class = 1, id = 1:10)', 'a = data.frame(class
-    = 1, id = 1:10)')
-  Hint: a <- data.frame(class = 1, id = 1:10)
+    "NTU", id = 1:10,scores = matrix(c(80:99),nrow=10,ncol=2 ) )` 建立一個data.frame，並且把這個物件存到變數`a`
+  CorrectAnswer: a <- data.frame(class = "NTU", id = 1:10,scores = matrix(c(80:99),nrow=10,ncol=2
+    ) )
+  AnswerTests: any_of_exprs('a <- data.frame(class = "NTU", id = 1:10,scores = matrix(c(80:99),nrow=10,ncol=2
+    ) )', 'a = data.frame(class = "NTU", id = 1:10,scores = matrix(c(80:99),nrow=10,ncol=2
+    ) )')
+  Hint: a <- data.frame(class = "NTU", id = 1:10,scores = matrix(c(80:99),nrow=10,ncol=2
+    ) )
 - Class: mult_question
   Output: 所有list的操作，都可用在data.frame上。請問同學，下面哪一個語法「不能」選取`a` 的第一欄？
   AnswerChoices: a[["class"]];a[[1]];a$class;a$`class`;a[["id"]]
   CorrectAnswer: a[["id"]]
   AnswerTests: omnitest(correctVal = 'a[["id"]]')
-  Hint: 提醒同學，`a` 是透過`data.frame(x = 1, y = 1:10)`建立的。
+  Hint: 提醒同學，`a` 是透過`data.frame(class = "NTU", id = 1:10,scores = matrix(c(80:99),nrow=10,ncol=2
+    ) )`建立的。
 - Class: cmd_question
   Output: 除了list的語法之外，我們也可以使用類似matrix的語法。舉例來說，我們可以用`a[,1]`選取第一欄。 請同學試試看。
   CorrectAnswer: a[,1]
@@ -104,9 +112,9 @@
   Hint: a[,1]
 - Class: mult_question
   Output: 根據螢幕上的輸出，請問同學`a[,1]`的類別是什麼呢？
-  AnswerChoices: list;data.frame;numeric
-  CorrectAnswer: numeric
-  AnswerTests: omnitest(correctVal = 'numeric')
+  AnswerChoices: list;data.frame;factor
+  CorrectAnswer: factor
+  AnswerTests: omnitest(correctVal = 'factor')
   Hint: 這裡`a[,1]`的效果和`a[[1]]`是一樣的。
 - Class: cmd_question
   Output: 同理，我們也可以用`a[1,2]`來取出第1 列、第2 欄的資料。請同學試試看。
