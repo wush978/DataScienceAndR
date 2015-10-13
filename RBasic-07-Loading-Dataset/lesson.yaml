@@ -130,4 +130,22 @@
     TRUE, sep = ","), "lvr_land")
   Hint: lvr_land <- read.table(file(lvr_land.path, encoding = "BIG5"), header = TRUE,
     sep = ",")
+- Class: text
+  Output: 以上就是一個實際上，處理中文資料的流程。
+- Class: text
+  Output: 事實上，如果同學自行下載原本的檔案來處理，上述的流程還是會出錯的。 那是因為在第21行，資料的最後一欄的內容包含：`,`這個符號，導致欄位判斷出錯。
+- Class: text
+  Output: 遇到這種狀況，最好的方式是自己用如notepad++或是其他的編輯器，自行編輯 原始的檔案資料（依照錯誤訊息，移除多餘的,），再用R 讀取。由於這樣的動作超過
+    這個課程系統的內容，所以我們就不帶著同學做操作了。
+- Class: text
+  Output: 另外一種方式，是透過`readLines` 來讀取資料，再用R 的其他函數自行把讀入 的字串轉換為data.frame。這部分很難歸納，會隨著資料的乾淨程度而有所不同。同學
+    可以再閱讀本課程中的，一些實際分析Open Data 的範例，就可以學到一些技巧。或是 繼續學習R 的字串處理函數與套件。
+- Class: text
+  Output: 我們在這門課程中簡單展示了如何從套件中載入資料，以及如何從檔案中讀取 CSV 的資料。
+- Class: text
+  Output: 如果要使用R 讀取XML 的資料，可以使用套件XML 。如果要讀取JSON， 可以使用rjsonlite 。只要資料格式是公開格式，我們很容易找到R
+    的套件來 讀取該資料格式。這就是R 是Open Source 的威力！
+- Class: text
+  Output: 受限於課程內容，所以我們這裡只講讀取CSV 的方式。這應該是最泛用 的內容了。未來有時間，會再找社群的其他大大合作開寫其他和讀資料相關的 課程。同學如果很期待看到處理某些形態資料的課程，歡迎到
+    <https://github.com/wush978/DataScienceAndR/issues> 許願。
 
