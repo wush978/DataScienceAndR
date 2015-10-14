@@ -13,6 +13,8 @@
 
 rbasic_02_hw_test <- function() {
   e <- get("e", parent.frame())
+  source_result <- try(source(e$script_temp_path, local = new.env()), silent = TRUE)
+  if (class(source_result)[1] == "try-error") return(FALSE)
   name.list <- c("year1", "power1", "power2", "year1.answer1", "power1.mean","power1.sd", 
                  "power1.z", "power2.mean", "power2.sd", "power2.z", "year1.answer2")
   year1.ref <-
@@ -43,13 +45,14 @@ rbasic_02_hw_test <- function() {
     87:91
   tryCatch({
     for(name in name.list) {
-      stopifnot(isTRUE(all.equal(
+      if (!isTRUE(all.equal(
         get(name),
         get(sprintf("%s.ref", name))
-      )))
+      ))) stop(sprintf("%s is wrong! Try again.\n", name))
     }
     TRUE
   }, error = function(e) {
+    cat(conditionMessage(e))
     FALSE
   })
 }

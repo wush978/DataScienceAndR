@@ -155,7 +155,7 @@
   Output: 從R 顯示在console的輸出結果，同學應該會同意這是一個data.frame。在R 中，console會根據不同的`class` 而用不同的方式呈現輸出結果。
 - Class: text
   Output: 那我們對於list和data.frame的介紹就到這了。data.frame是處理資料和跑各種進階演算法時，非常常用到的結構。 所以請同學務必要熟悉各種data.frame的操作，才能順利的整理收集的資料，並且在資料上跑其他的演算法。
-- Class: Script
+- Class: script
   Output: 接著，請同學依照這個課程所學到的技巧，做一個簡單的練習。
   Script: RBasic-06-HW.R
   AnswerTests: rbasic_06_hw_test()

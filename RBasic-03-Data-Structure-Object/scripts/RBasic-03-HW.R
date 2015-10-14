@@ -12,7 +12,7 @@ answer1 <- <填寫你的程式碼>
 #' 請同學找出`pca`這個向量的長度
 answer2 <- <填寫你的程式碼>
 
-#' 請同學找出`pca`中值的名字
+#' 請同學找出`pca`的名字
 answer3 <- <填寫你的程式碼>
 
 #' `pca` 的元素中，有一個是各個principal components的standard deviations。
