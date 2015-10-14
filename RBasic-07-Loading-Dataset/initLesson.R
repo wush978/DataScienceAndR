@@ -11,3 +11,7 @@ assign("lvr_land.path",
        .get_path("A_LVR_LAND_A.CSV"), 
        envir = globalenv())
 
+
+assign("orglist.path", 
+       .get_path("orglist-100.CSV"), 
+       envir = globalenv())

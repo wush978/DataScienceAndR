@@ -211,5 +211,8 @@
     課程。同學如果很期待看到處理某些形態資料的課程，歡迎到
     <https://github.com/wush978/DataScienceAndR/issues> 許願。
 
-
+- Class : script
+  Output: 最後，還是要請同學利用這次所學的內容，做一個小練習。
+  Script: RBasic-07-HW.R
+  AnswerTests: rbasic_07_hw_test()
 
