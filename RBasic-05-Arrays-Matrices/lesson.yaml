@@ -290,4 +290,8 @@
   CorrectAnswer: A %*% eigen(A)$vectors[,1] / eigen(A)$vectors[,1]
   AnswerTests: omnitest('A %*% eigen(A)$vectors[,1] / eigen(A)$vectors[,1]')
   Hint: A %*% eigen(A)$vectors[,1] / eigen(A)$vectors[,1]
+- Class: script
+  Output: 最後，我們請同學用所學到的技巧，做一個簡短的練習。
+  Script: RBasic-05-HW.R
+  AnswerTests: rbasic_05_hw_test()
 

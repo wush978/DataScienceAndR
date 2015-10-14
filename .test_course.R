@@ -34,9 +34,11 @@ test_lesson = function(lesson_dir){
           stopifnot(eval(parse(text = question$AnswerTests), envir = e))
         },
         "script" = {
-          question$correctScript <- paste(tools::file_path_sans_ext(question$Script), "-correct.R", sep = "")
+          question$correctScript <- file.path(lesson_dir, "scripts", paste(tools::file_path_sans_ext(question$Script), "-correct.R", sep = ""))
           if (file.exists(question$correctScript)) {
-            source(file.path(lesson_dir, "scripts", question$correctScript))
+            cat("Testing script...\n")
+            file.copy(question$correctScript, e$script_temp_path <- file.path(tempdir(), question$Script), overwrite = TRUE)
+            source(question$correctScript, local = e)
             stopifnot(eval(parse(text = question$AnswerTests), envir = e))
           }
         }

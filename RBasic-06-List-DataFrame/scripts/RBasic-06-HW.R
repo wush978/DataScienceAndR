@@ -4,7 +4,7 @@ data(CO2)
 #' 請問CO2 有多少列？
 answer1 <- <你的程式碼>
 
-#' 請問CO2 有多少行？
+#' 請問CO2 有多少行(column)？
 answer2 <- <你的程式碼> 
 
 #' 請問CO2 的各行的名稱為何？
@@ -16,9 +16,11 @@ answer4 <- <你的程式碼>
 #' 請挑出所有uptake的值超過uptake的平均值的列
 #' 
 #'   你可以先取出uptake的向量、接著拿該向量和平均值做比較、把結果的logical vector丟到`[]`的第一個參數
+#'   ps. answer5 應該是一個data.frame
 answer5 <- <你的程式碼>
 
 #' 請問Type有多少種類別？
+#' ps. answer6 應該是一個整數
 answer6 <- <你的程式碼>
 
 #' 請問當類別為Quebec時，uptake的平均值為多少？

@@ -6,6 +6,8 @@ beta <- c(0.5, -1, 4.3)
 #' 我們稱`X[,1]`為x1, `X[,2]`為x2, `X[,3]`為x3
 #' 向量y 的值是 x1 * beta[1] + x2 * beta[2] + x3 * beta[3]
 #' 請用矩陣乘法`%*%`算出向量y
+#' ps. class(y) 應該要是 "matrix"
+#'     dim(y) 應該是 c(10, 1)
 y <- <填寫你的程式碼>
 
 #' epsilon 是一個隨機產生的雜訊向量
@@ -20,8 +22,10 @@ y <- y + epsilon
 #' 利用這章學到的矩陣乘法，與線性代數函式，算出beta的估計值
 #' 
 #' 你可以寫很多行的程式碼，但是請把結果存到beta.hat這個變數之中
+#' ps. class(beta.hat) 應該要是 matrix
+#'     dim(beta.hat) 應該是 c(3, 1)
+#'     rownames(beta.hat) 應該是 c("x1", "x2", "x3")
 
 beta.hat <- <你的程式碼>
 
 #' 同學可以比較一下beta.hat和beta，體驗看看迴歸分析的方法，是不是真的有道理。
-  
