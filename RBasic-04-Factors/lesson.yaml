@@ -53,8 +53,8 @@
   AnswerTests: omnitest(correctExpr='str(blood_type_factor)')
   Hint: str(blood_type_factor)
 - Class: text
-  Output: str印出的敘述表示，這個Factor向量有四個levels，並列出levels對應的名稱。 在levels名稱之後接著一串整數，Factor實際上就是以這些整數代表對應的levels名稱。
-    例如：一開始的3代表第三個level「B」，接著的1代表第一個level「A」。 （你可以對照Rstudio右上角Environment中blood_type和
+  Output: str印出的資訊顯示，Factor向量有四個levels，並列出levels對應的名稱。 在levels名稱後是一串整數，Factor實際上是以整數代表對應的levels名稱。
+    例如：一開始3 代表第三個level「B」，第二個1 代表第一個level「A」。 （你可以對照Rstudio右上角Environment中blood_type和
     blood_type_factor）
 - Class: text
   Output: 所以Factor向量本質上只是整數向量加上levels。 這樣設計的原因是儲存整數比儲存文字更省空間。
