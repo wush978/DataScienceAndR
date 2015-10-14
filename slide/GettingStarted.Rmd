@@ -162,7 +162,7 @@ binom.confint(c(10, 3), c(10000, 5000), methods = "exact")
     - 他們都來自於世界各地的貢獻者
 
 ```{r chart.correlation, results = 'hide', warning = FALSE}
-library(PerformanceAnalytics)
+suppressPackageStartupMessages(library(PerformanceAnalytics))
 chart.Correlation(iris[-5], bg=iris$Species, pch=21)
 ```
 
@@ -178,12 +178,52 @@ chart.ACFplus(edhec[,1,drop=FALSE])
 
 # 範例 - 相關性
 
-- <small>出處：<https://learnr.wordpress.com/2010/01/26/ggplot2-quick-heatmap-plotting/#more-2380></small>
-
-```{r heat.nba, echo = TRUE, eval = FALSE}
-nba <- read.csv("http://datasets.flowingdata.com/ppg2008.csv")
-nba$Name <- with(nba, reorder(Name, PTS))
-nba.m <- melt(nba)
+```{r heatmap, results = "hide"}
+round(Ca <- cor(attitude), 2)
+symnum(Ca) # simple graphic
+heatmap(Ca,               symm = TRUE, margins = c(6,6))
 ```
 
+# 範例 - 經濟學人風格的圖示
+
+```{r ggthemes}
+library(ggthemes)
+dsamp <- diamonds[sample(nrow(diamonds), 1000), ]
+q <- (qplot(carat, price, data=dsamp, colour=clarity)
+      + ggtitle("Diamonds Are Forever"))
+
+## Standard
+q + theme_economist() + scale_colour_economist()
+```
+
+# 範例 - 視覺化
+
+```{r}
+library(ggplot2)
+library(maps)
+library(rgeos)
+library(maptools)
+```
+
+# 一些R 的閃電秀：你可以用R 做什麼
+
+- [OpenCPU](https://docs.google.com/presentation/d/1VlmgZ5pTjmOf-qSa2iLWpeas12NxTzx3nIQLJiLn8YQ/edit#slide=id.gb89eb8dd3_0_0)
+- [Time Series Clustering](https://docs.google.com/presentation/d/180wT8FunXbGFGqj8Kv3p7mtHJ7g-BJt9XipRIlmNMEE/edit?usp=sharing)
+- [quantstrat](https://docs.google.com/presentation/d/16xjdjXf6hSdpV0hZDjNth9LdyVMVKkXs5WZHg6IFCTU/edit?usp=sharing)
+- [Text Mining](http://whizzalan.github.io/RTextMining/lightingTalk)
+- [Baseball](http://suensummit.github.io/lightning-DSC2015-R/#1)
+- [Crawler](http://chihchengliang.github.io/DSC2015_Crawler/)
+- [FeatureHashing](https://github.com/wush978/FeatureHashing/blob/master/vignettes/SentimentAnalysis.Rmd)
+- [Rcpp]()
+
+# R 的Community 非常活躍
+
+- 任何和資料相關的服務，有很大的機會可以和R 串接
+    - [Google Sheets R API](https://github.com/jennybc/googlesheets)
+    - [Google Map](https://cran.r-project.org/package=RgoogleMaps)
+    - [Excel](https://cran.r-project.org/web/packages/readxl/index.html)
+    - [Minitab, S, SAS, SPSS, Stata, Systat and Weka...](https://cran.r-project.org/web/packages/foreign/index.html)
+    - [DBI](https://cran.r-project.org/web/packages/DBI/index.html)
+
+# Community 甚至創造了一個學R 的套件：swirl
 
