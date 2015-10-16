@@ -7,7 +7,6 @@ output:
     keep_md: yes
 ---
 
-# Why Use R?
 ```{r setup, include=FALSE, cache=FALSE}
 library(knitr)
 library(magrittr)
@@ -20,7 +19,7 @@ library(quantmod)
 library(pander)
 library(wordcloud)
 library(RColorBrewer)
-opts_chunk$set(echo = FALSE, cache=TRUE, comment="", cache.path = ".cache-EDA/")
+opts_chunk$set(echo = FALSE, cache=FALSE, comment="", cache.path = ".cache-EDA/")
 fig <- function(path, size = 100) {
   sprintf("<img src='img/%s' style='max-width: %d%%;max-height: %d%%'></img>", 
           path, size, size)
@@ -33,6 +32,19 @@ sys_name <- Sys.info()["sysname"] %>% tolower
 sys_encode <- c("utf8", "utf8", "big5")[pmatch(sys_name, c("linux", "darwin", "windows"))]
 sessionInfo() %>% capture.output %>% cat(file = "sessionInfo.log", sep = "\n")
 ```
+
+# 目錄
+
+- R 簡介
+- R 的傳統用途
+- 來自R 社群的貢獻
+- 近代R 的演變與功能
+- 安裝R 與Rstudio
+- R 的開發環境簡介
+- R 的套件系統
+- 利用swirl 快速學習R 語言
+    - 00: 利用R 抓取公開資料做視覺化與數據建模
+    - 02: 作業示範
 
 # R 來自世界上最專業的統計學家 {.smaller}
 
@@ -184,7 +196,7 @@ symnum(Ca) # simple graphic
 heatmap(Ca,               symm = TRUE, margins = c(6,6))
 ```
 
-# 範例 - 經濟學人風格的圖示
+# 範例 - 經濟學人風格的視覺化
 
 ```{r ggthemes}
 library(ggthemes)
@@ -196,27 +208,23 @@ q <- (qplot(carat, price, data=dsamp, colour=clarity)
 q + theme_economist() + scale_colour_economist()
 ```
 
-# 範例 - 視覺化
+# R 不只有傳統的資料分析
 
-```{r}
-library(ggplot2)
-library(maps)
-library(rgeos)
-library(maptools)
-```
+- 收集數據
+- 特定領域的資料分析
+    - 股票分析
+    - 棒球分析
+    - 文字探勘
+- 收集數據、建造模型之餘，還要展現結果
+    - 互動式網頁服務
+    - API 伺服器
+- 大規模數據分析
 
-# 一些R 的閃電秀：你可以用R 做什麼
+# 收集數據
 
-- [OpenCPU](https://docs.google.com/presentation/d/1VlmgZ5pTjmOf-qSa2iLWpeas12NxTzx3nIQLJiLn8YQ/edit#slide=id.gb89eb8dd3_0_0)
-- [Time Series Clustering](https://docs.google.com/presentation/d/180wT8FunXbGFGqj8Kv3p7mtHJ7g-BJt9XipRIlmNMEE/edit?usp=sharing)
-- [quantstrat](https://docs.google.com/presentation/d/16xjdjXf6hSdpV0hZDjNth9LdyVMVKkXs5WZHg6IFCTU/edit?usp=sharing)
-- [Text Mining](http://whizzalan.github.io/RTextMining/lightingTalk)
-- [Baseball](http://suensummit.github.io/lightning-DSC2015-R/#1)
-- [Crawler](http://chihchengliang.github.io/DSC2015_Crawler/)
-- [FeatureHashing](https://github.com/wush978/FeatureHashing/blob/master/vignettes/SentimentAnalysis.Rmd)
-- [Rcpp]()
+- [ChihChengLiang: R Crawler（資料科學愛好者年會2015）](http://chihchengliang.github.io/DSC2015_Crawler/)
 
-# R 的Community 非常活躍
+# 收集數據 -- Google Spreadsheet
 
 - 任何和資料相關的服務，有很大的機會可以和R 串接
     - [Google Sheets R API](https://github.com/jennybc/googlesheets)
@@ -225,5 +233,254 @@ library(maptools)
     - [Minitab, S, SAS, SPSS, Stata, Systat and Weka...](https://cran.r-project.org/web/packages/foreign/index.html)
     - [DBI](https://cran.r-project.org/web/packages/DBI/index.html)
 
-# Community 甚至創造了一個學R 的套件：swirl
+# 特定領域 -- 股票分析
 
+```{r TWII, echo = TRUE}
+library(quantmod)
+getSymbols("^TWII")
+head(TWII)
+```
+
+# 特定領域 - 股票分析
+
+```{r signal, echo = TRUE}
+chartSeries(TWII, subset = "last 4 months", TA = c(addVo(), addBBands()))
+```
+
+# 特定領域 - 棒球分析
+
+```{r lahman, echo = TRUE}
+library(Lahman)
+head(Teams[,c("yearID", "name", "Rank", "W", "L", "R", "RA")])
+```
+
+# 特定領域 - 棒球分析
+
+```{r baseball, echo = TRUE}
+totalRS <- Teams %>% select(yearID, R, G) %>% 
+  mutate(AvgRperG = R/G) %>% group_by(yearID) %>% summarise(sum(AvgRperG))
+names(totalRS) <- c("yearID", "RUN")
+ggplot(data = totalRS, aes(x = yearID, y = RUN)) + stat_smooth() + geom_line()
+```
+
+# 特定領域 - 棒球分析
+
+```{r wangch01, echo = TRUE}
+head(filter(Pitching, playerID == "wangch01") %>% select(playerID, yearID, W, L, ERA))
+```
+
+# 特定領域 - 文字探勘
+
+```{r textmining, echo = TRUE}
+suppressPackageStartupMessages({
+  library(jiebaR)      # 斷詞利器
+  library(tm)          # 文字詞彙矩陣運算
+  library(slam)        # 稀疏矩陣運算
+  library(wordcloud)   # 文字雲
+  library(topicmodels) # 主題模型
+  library(igraph)      # 主題模型關聯
+})
+```
+
+# 特定領域 - 資料科學愛好者年會講者資料分析
+
+```{r demo}
+readSpeaker <- function(file,sep){
+    lines <- readLines(file)
+    allString <- do.call(paste,as.list(lines))
+    sepString <- strsplit(allString,sep,fixed=TRUE)
+    return(sepString[[1]])
+}
+speakers <- readSpeaker("speaker.txt",sep="-----")
+length(speakers)
+
+.tmp <- strsplit(speakers[1], "")[[1]] %>% split(rep(1:15, each = 30)) %>%
+  sapply(paste, collapse = "")
+names(.tmp) <- NULL
+cat(.tmp, sep = "\n")
+```
+
+# 特定領域 - 資料科學愛好者年會講者資料分析
+
+```{r jieba}
+mixseg = worker()
+cutter <- function(msg) {
+    filter_words = c("的","在","與","及","等","是","the","and","in","a","at","he","is","of","He")
+    pattern <- sprintf("[^%s]", paste(filter_words, collapse = "|^"))
+    filter_seg <- grep(pattern, mixseg <= msg ,value=TRUE)
+  return(filter_seg)
+}
+segRes = lapply(speakers,cutter)
+tmWordsVec = sapply(segRes,function(ws) paste(ws,collapse = " "))
+.tmp <- strsplit(tmWordsVec[1], "")[[1]] %>% split(rep(1:15, each = 30)) %>%
+  sapply(paste, collapse = "")
+names(.tmp) <- NULL
+cat(.tmp, sep = "\n")
+```
+
+# 特定領域 - 資料科學愛好者年會講者資料分析
+
+```{r tdm}
+# 語料庫 & TDM
+corpus <- Corpus(VectorSource(tmWordsVec))
+tdm = TermDocumentMatrix(corpus,control = list(wordLengths = c(1, Inf)))
+dtm1 <- DocumentTermMatrix(corpus,
+                           control = list(
+                             wordLengths=c(1, Inf), # to allow long words
+                             removeNumbers = TRUE, 
+                             weighting = weightTf, 
+                             encoding = "UTF-8")
+                          )
+# colnames(dtm1)
+m <- as.matrix(dtm1)
+v <- sort(colSums(m), decreasing=TRUE)
+myNames <- names(v)
+d <- data.frame(word=myNames, freq=v)
+pal2 <- brewer.pal(8,"Dark2")
+wordcloud(d$word,d$freq, scale=c(6,0.5), min.freq=mean(d$freq),
+          max.words=100, random.order=FALSE, rot.per=.01, colors=pal2)
+```
+
+# R 的Community 非常活躍
+
+- R 的套件開發非常簡單。[五分鐘學會「如何使用Rstudio建立R套件 」](https://www.youtube.com/watch?v=OCQU6M4pPiw)
+    - [Hadley Wickham：一个改变了R的人](http://cos.name/2015/09/hadley-wickham-the-man-who-revolutionized-r/)
+- 台灣的社群有：
+    - [Taiwan R User Group](http://www.meetup.com/Taiwan-R)
+    - [ptt R_Language](https://www.ptt.cc/bbs/R_Language/index.html)
+    - [台灣R 使用者論壇](https://groups.google.com/forum/#!forum/taiwanruser)
+- Community 甚至創造了一個學R 的套件：swirl
+
+# R 的環境設定
+
+- 安裝R
+- 安裝Rstudio
+
+# 安裝R
+
+- Windows: 請至 [CRAN](http://cran.csie.ntu.edu.tw) 上下載 R3.2 以上的安裝程式。
+    - 可參考 [![在Windows上安裝R](http://img.youtube.com/vi/FsOHPGUIDZU/0.jpg)](http://www.youtube.com/watch?v=FsOHPGUIDZU)
+    - 影片中的範例是 3.0.2 的版本，請使用者記得安裝 3.2 以上的版本喔！
+- Mac: 請至 [CRAN](http://cran.csie.ntu.edu.tw) 上下載 R3.2 以上的安裝程式。
+    - 可參考 [![Mac OS X 安裝R軟體](http://img.youtube.com/vi/72MYRBNo5Bk/0.jpg)](http://www.youtube.com/watch?v=72MYRBNo5Bk)
+    - 此影片由中華R軟體學會的李明昌老師提供
+- Ubuntu: Ubuntu 14.04 的使用者可以在 bash 執行以下指令來安裝學習環境。如果是其他版本的使用者，請修改上述 trusty 的部份。
+
+```sh
+sudo sh -c 'echo "deb http://cran.csie.ntu.edu.tw/bin/linux/ubuntu trusty/" >> /etc/apt/sources.list'
+sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E084DAB9
+sudo apt-get update && apt-get install -y r-base libcurl4-openssl-dev libxml2-dev
+```
+
+# 安裝Rstudio
+
+- 請到[Rstudio 官方網站](https://www.rstudio.com/products/RStudio/)下載社群版
+    - Rstudio 具備「自動完成」功能，同學不用背指令
+    - Windows 下具備編輯UTF-8 檔案的功能，我們作業會用到
+
+# Rstudio 環境說明
+
+- 程式碼編輯區
+- 命令列區
+- 其他資訊區
+- 檔案系統區
+
+# 熟悉RStudio的 命令列 界面
+
+- 注意最左下腳的符號是 `>`
+- 輸入 `"hello world"` 後按下Enter，檢查螢幕輸出（記得加上引號）
+- 輸入 `1 + 1` 後按下Enter，檢查螢幕輸出，注意有無引號
+- 輸入 `1 + ` 後按下Enter，檢查螢幕輸出，注意最左下角的開頭變成`+`
+- 按下Ctrl + C或ESC，檢查哪一個按鈕會讓左下角回復成`>`開頭
+- 在新的一行命令列區輸入 `me` 之後按下Enter
+- 在新的一行命令列區輸入 `me` 之後按下tab
+
+# 熟悉RStudio的 程式碼編輯 界面
+
+- 請建立再編輯界面寫程式的習慣
+- 開啟新的R Script檔案
+- 在第一行輸入 `me` 隻後按下Ctrl + Enter後，觀察命令列區
+- 利用滑鼠點選 `me` 後的位置，確認游標閃爍的位置在 `me` 之後，按下tab
+
+# 熟悉RStudio的其他頁面 {.flexbox .vcenter}
+
+- 請見現場示範
+
+# R 的套件系統
+
+<center>`r fig("fig_10_cran1.png", 50)`</center>
+
+# 安裝R 的套件
+
+- 使用Rstudio 安裝套件
+- 使用命令列安裝套件`r install.packages("套件名稱", repos = "套件庫網址")`
+- 使用套件的第一步：`library(套件名稱)`
+
+# 安裝swirl
+
+- swirl 官方套件目前在windows上無法顯示中文
+    - 請安裝Taiwan R User Group上的版本
+
+```r
+# 在命令列輸入：
+install.packages('swirl', repos = 'http://taiwanrusergroup.github.io/R')
+```
+
+# 載入swirl
+
+```r
+library(swirl)
+```
+
+# 進入swirl 界面
+
+```r
+swirl() # 括號很重要
+```
+
+- 執行動作（呼叫函數），需要在後面加上括號
+- 不加括號，R 會印出`swirl` 這個函數的定義
+
+# 手動安裝swirl 課程
+
+- 進入swirl 之後會跳出安裝課程的提示
+- 這次的作業就是一系列swirl 的課程
+- 請離開swirl 環境之後，執行：
+
+```r
+install_course_github("wush978", "DataScienceAndR", "course")
+```
+
+- 細節請參考上課示範
+
+# 再次進入swirl，並進入DataScienceAndR
+
+- 請見現場示範
+
+# swirl 疑難排解
+
+- 選錯課程
+- 錯誤的接關
+
+# 作業說明
+
+- 建立環境
+    - 安裝最新版本的R
+    - 安裝Rstudio(非必要，但是要有自行解決其他問題的能力)
+    - 安裝Taiwan R User Group 社群版的套件
+    - 安裝DataScienceAndR 系列課程
+- 完成作業：
+    1. RBasic-01-Introduction
+    1. RBasic-02-Data-Structure-Vectors
+    1. RBasic-03-Data-Structure-Object
+    1. RBasic-04-Factors
+    1. RBasic-05-Arrays-Matrices
+    1. RBasic-06-List-DataFrame
+    1. RBasic-07-Loading-Dataset
+- 除了`RBasic-01-Introduction`之外，每個作業最後都要編輯一個檔案。
+請在期限內完成作業之後，繳交該檔案到ceiba。
+- Bug 回報：<https://github.com/wush978/DataScienceAndR/issues>
+    - 看不懂敘述
+    - 有錯字、程式卡住...
+
+# Q&A
