@@ -38,7 +38,9 @@ library(swirl)
 install_course_github("wush978", "DataScienceAndR", "course")
 ```
 
-## 教學影片
+## 教學投影片
+
+- [R 語言上手篇](http://rpubs.com/wush978/DataScienceAndR)
 
 ## 測試結果
 
