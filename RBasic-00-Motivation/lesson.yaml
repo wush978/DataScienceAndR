@@ -17,7 +17,7 @@
   Output: 首先，我想要讓大家先體驗一個簡單的資料視覺化範例。透過我 在參加2015年臺北市政府黑客松的一個作品，我們可以迅速的抓取 臺北市政府的資料，並且利用R
     既有強大的功能，迅速驗證我們對資料的概念
 - Class: cmd_question
-  Output: R 本身的功能是受限制的，但是它具備有非常強大的套件庫！ 首先，我們先學著怎麼安裝套件。今天第一個要麻煩大家安裝的，是 名叫devtools的套件庫。請大家輸入：`install.packages(c("devtools",
+  Output: R 本身的功能是受限制的，但是它具備有非常強大的套件庫！ 首先，我們先學著怎麼安裝套件。今天第一個要麻煩大家安裝的，是 名叫devtools和curl的套件庫。請大家輸入：`install.packages(c("devtools",
     "curl"))` ps. 如果同學已經安裝過了，可以輸入`skip()`
   CorrectAnswer: check_then_install("devtools", "1.9.1");check_then_install("curl",
     "0.9.3")
@@ -25,13 +25,18 @@
     "0.9.3")
   Hint: check_then_install("devtools", "1.9.1");check_then_install("curl", "0.9.3")
 - Class: text
-  Output: 過了上一關之後，大家應該都已經安裝了devtools套件。 在R 之中，我們就是大量的呼叫R 本身，或是其他套件提供的函數，來做各種事情。 剛剛的`install.packages("devtools")`就是讓R
-    安裝一個名稱為devtools的套件。 接下來，我們要利用devtools套件的功能，來安裝DataTaipei這個套件。
+  Output: 過了上一關之後，大家應該都已經安裝了devtools和curl套件。 在R 之中，我們就是大量的呼叫R 本身，或是其他套件提供的函數，來做各種事情。
+    剛剛的`install.packages("devtools","curl")`就是讓R 安裝一個名稱為devtools和curl的套件。 接下來，我們要利用devtools和curl套件的功能，來安裝DataTaipei這個套件。
 - Class: cmd_question
   Output: 請各位同學在console輸入：`library(devtools)`
   CorrectAnswer: library(devtools)
   AnswerTests: test_search_path("devtools")
   Hint: library(devtools)
+- Class: cmd_question
+  Output: 請各位同學在console輸入：`library(curl)`
+  CorrectAnswer: library(curl)
+  AnswerTests: test_search_path("curl")
+  Hint: library(curl)
 - Class: cmd_question
   Output: 接著，請輸入：`install_github("TaipeiRHacker/DataTaipei")` 各位同學可以在這邊測試一下R的自動完成功能。如果我們輸入`install_`之後暫停一下（Rstudio的功能），
     或是連按tab兩下（傳統R gui的功能），就可以自動補完函數名稱，或是列出函數名稱符合`install_`開頭的函數。 ps. 如果同學已經安裝過了，可以輸入`skip()`

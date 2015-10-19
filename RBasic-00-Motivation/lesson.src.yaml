@@ -30,22 +30,28 @@
 - Class : cmd_question
   Output: R 本身的功能是受限制的，但是它具備有非常強大的套件庫！
     首先，我們先學著怎麼安裝套件。今天第一個要麻煩大家安裝的，是
-    名叫devtools的套件庫。請大家輸入：`install.packages(c("devtools", "curl"))`
+    名叫devtools和curl的套件庫。請大家輸入：`install.packages(c("devtools", "curl"))`
     ps. 如果同學已經安裝過了，可以輸入`skip()`
   CorrectAnswer: check_then_install("devtools", "1.9.1");check_then_install("curl", "0.9.3")
   AnswerTests: test_package_version("devtools", "1.9.1") & test_package_version("curl", "0.9.3")
 
 - Class : text
-  Output: 過了上一關之後，大家應該都已經安裝了devtools套件。
+  Output: 過了上一關之後，大家應該都已經安裝了devtools和curl套件。
     在R 之中，我們就是大量的呼叫R 本身，或是其他套件提供的函數，來做各種事情。
-    剛剛的`install.packages("devtools")`就是讓R 安裝一個名稱為devtools的套件。
-    接下來，我們要利用devtools套件的功能，來安裝DataTaipei這個套件。
+    剛剛的`install.packages("devtools","curl")`就是讓R 安裝一個名稱為devtools和curl的套件。
+    接下來，我們要利用devtools和curl套件的功能，來安裝DataTaipei這個套件。
 
 - Class : cmd_question
   Output: 請各位同學在console輸入：`library(devtools)`
   CorrectAnswer: library(devtools)
   AnswerTests:
     - test_search_path("devtools")
+
+- Class : cmd_question
+  Output: 請各位同學在console輸入：`library(curl)`
+  CorrectAnswer: library(curl)
+  AnswerTests:
+    - test_search_path("curl")
 
 - Class : cmd_question
   Output: 接著，請輸入：`install_github("TaipeiRHacker/DataTaipei")`
