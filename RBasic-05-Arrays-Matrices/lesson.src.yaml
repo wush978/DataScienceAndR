@@ -154,7 +154,7 @@
 - Class : mult_question
   Output: 請問同學，依照上述的說明，`x[c(TRUE, TRUE, FALSE), , ]`的效果就等同於
     以下哪一個程式碼？
-  AnswerChoicees: x[1:2,,];x[,1:2,];x[,,1:2]
+  AnswerChoices: x[1:2,,];x[,1:2,];x[,,1:2]
   CorrectAnswer: "x[1:2,,]"
   AnswerTests: omnitest(correctVal = "x[1:2,,]")
     
