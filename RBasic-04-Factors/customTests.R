@@ -25,7 +25,7 @@ rbasic_04_hw_test <- function() {
   tryCatch({
     for(name in name.list) {
       if (!isTRUE(all.equal(
-        get(name),
+        get(name, envir = globalenv()),
         get(sprintf("%s.ref", name))
       ))) stop(sprintf("%s is wrong! Try again.\n", name))
     }
