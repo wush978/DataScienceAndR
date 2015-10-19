@@ -82,8 +82,14 @@
   AnswerTests: omnitest(correctVal = array(1:18, c(3, 3, 2)))
 
 - Class : text
-  Output: 類似向量，我們可以利用中括號`[`來取出矩陣或陣列中的值。舉例來說，如果x 是矩陣，`x[2,1]`會取出x 第二列第一行
+  Output: 在RBasic-02-Data-Structure-Vectors的課程中，我們有提過兩種從
+    向量中挑選一部分的值得方式。一種是用座標，另外一種則是使用邏輯向量。
+    在矩陣和陣列上，還是可以用這兩種方式從矩陣或陣列中挑選一部分的值。
+
+- Class : text
+  Output: 我們可以利用中括號`[`來取出矩陣或陣列中的值。舉例來說，如果x 是矩陣，`x[2,1]`會取出x 第二列第一行
     的值。陣列的狀況，也是類似的。`x[1,2,3]`會拿出第一個維度的第1 個方向，第二個維度的第2 個方向，第三個維度的第3 個方向。
+    這就是以座標的方式做挑選。
 
 - Class : mult_question
   Output: 我們來測測看同學有沒有理解剛剛的說明。請問目前這個相當於`array(1:18, c(3, 3, 2))`的x , `x[1,2,2]`的值會是多少呢？
@@ -139,9 +145,21 @@
   AnswerChoices: c(7,8,9);c(3,6,9);c(16,17,18);c(12,15,18)
   CorrectAnswer: c(7,8,9)
   AnswerTests: omnitest(correctVal = "c(7,8,9)")
-
+  
 - Class : text
-  Output: 接著我們介紹如何存取矩陣和陣列的元素。
+  Output: 我們也可以利用中括號`[]`搭配邏輯向量取出矩陣或陣列中的值。
+    R 會根據邏輯向量在`[]`中的位置，選擇該維度，只挑出該邏輯向量為TRUE
+    的座標。
+
+- Class : mult_question
+  Output: 請問同學，依照上述的說明，`x[c(TRUE, TRUE, FALSE), , ]`的效果就等同於
+    以下哪一個程式碼？
+  AnswerChoicees: x[1:2,,];x[,1:2,];x[,,1:2]
+  CorrectAnswer: "x[1:2,,]"
+  AnswerTests: omnitest(correctVal = "x[1:2,,]")
+    
+- Class : text
+  Output: 接著我們介紹如何修改矩陣和陣列的元素。
 
 - Class : cmd_question
   Output: 如果我們要修改矩陣的值，就是搭配`[]`和`<-`就可以了。首先，如果我們要更改`x[1,1,1]`的值為2，
