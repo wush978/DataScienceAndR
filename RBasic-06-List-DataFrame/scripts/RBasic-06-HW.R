@@ -56,7 +56,7 @@ g <- lm(uptake ~ Type + Treatment + conc, CO2)
 #' summary(g)則會顯示各個參數的t 檢定，以及整個模型的R-squared
 g.s <- summary(g)
 #' mode(g.s)顯示它是一個list。
-#' 請找出一個名字，answer12，讓g[[answer12]]就是R-squared
+#' 請找出一個名字，answer12，讓g.s[[answer12]]就是R-squared
 #' 你可以參考help(summary.lm)裡面的說明。
 answer12 <- <你的程式碼>
 
