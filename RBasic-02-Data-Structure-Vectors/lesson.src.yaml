@@ -1,10 +1,10 @@
 - Class: meta
   Course: DataScienceAndR
-  Lesson: RBasic-Data-Structure
+  Lesson: RBasic-01-Data-Structure
   Author: Wush Wu
   Type: Standard
   Organization: Taiwan R User Group
-  Version: 0.1
+  Version: 1.0
 
 - Class: text
   Output: 這門課程，主要是講解R object的入門操作。

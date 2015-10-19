@@ -4,7 +4,7 @@
   Author: Wush Wu
   Type: Standard
   Organization: Taiwan R User Group
-  Version: 0.1
+  Version: 1.0
 
 - Class : output
   Output: 在R 中，我們操作的所有變數，都是一種R 物件(Object)。

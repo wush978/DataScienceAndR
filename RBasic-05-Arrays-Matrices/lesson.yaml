@@ -4,7 +4,7 @@
   Author: Wush Wu
   Type: Standard
   Organization: Taiwan R User Group
-  Version: 0.1
+  Version: 1.0
 - Class: text
   Output: 這門課程是要介紹R 的線性代數運算系統。線性代數在許多現代的統計方法、Data Mining方法上都很重要。 所以理解R 的線性代數系統，對於撰寫自己的演算法，以及了解Open
     Source的演算法，是非常重要的。

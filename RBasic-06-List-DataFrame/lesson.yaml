@@ -4,7 +4,7 @@
   Author: Wush Wu
   Type: Standard
   Organization: Taiwan R User Group
-  Version: 2.3.1
+  Version: 1.0
 - Class: text
   Output: 這堂課程要跟各位同學介紹list和data.frame這兩個很重要的資料結構。
 - Class: text
