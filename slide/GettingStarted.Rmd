@@ -341,15 +341,49 @@ wordcloud(d$word,d$freq, scale=c(6,0.5), min.freq=mean(d$freq),
           max.words=100, random.order=FALSE, rot.per=.01, colors=pal2)
 ```
 
-# R 的Community 非常活躍
+# 特定領域：互動式網頁服務
+
+- [Shiny](http://shiny.rstudio.com/)
+- Gallery:
+    - [K-means Example](http://shiny.rstudio.com/gallery/kmeans-example.html)
+
+
+# 特定領域：API Server
+
+- [OpenCPU](https://www.opencpu.org/)
+- APP:
+    - [Stocks](https://demo.ocpu.io/stocks/www/)
+
+# 大規模的數據分析
+
+- [SparkR](https://spark.apache.org/docs/latest/sparkr.html)
+- [RHadoop](https://github.com/RevolutionAnalytics/RHadoop/wiki)
+- MPI
+    - [Rmpi](http://www.stats.uwo.ca/faculty/yu/Rmpi/)
+    - [pbdMPI](https://en.wikipedia.org/wiki/Programming_with_Big_Data_in_R)
+
+# R 的Community
 
 - R 的套件開發非常簡單。[五分鐘學會「如何使用Rstudio建立R套件 」](https://www.youtube.com/watch?v=OCQU6M4pPiw)
     - [Hadley Wickham：一个改变了R的人](http://cos.name/2015/09/hadley-wickham-the-man-who-revolutionized-r/)
+- R 的Community 甚至創造了一個學R 的套件：swirl
+
+# Hadley近年來對R 的影響
+
+- 前十名的R 套件有一半是Hadley寫的
+
+```{r, results = 'asis'}
+suppressPackageStartupMessages(library(jsonlite))
+result <- fromJSON("http://cranlogs.r-pkg.org/top/last-month/10")
+print.xtable(xtable(result$downloads), type = "html")
+```
+
+# 台灣的本土R 社群
+
 - 台灣的社群有：
     - [Taiwan R User Group](http://www.meetup.com/Taiwan-R)
     - [ptt R_Language](https://www.ptt.cc/bbs/R_Language/index.html)
     - [台灣R 使用者論壇](https://groups.google.com/forum/#!forum/taiwanruser)
-- Community 甚至創造了一個學R 的套件：swirl
 
 # R 的環境設定
 
@@ -361,9 +395,15 @@ wordcloud(d$word,d$freq, scale=c(6,0.5), min.freq=mean(d$freq),
 - Windows: 請至 [CRAN](http://cran.csie.ntu.edu.tw) 上下載 R3.2 以上的安裝程式。
     - 可參考 [![在Windows上安裝R](http://img.youtube.com/vi/FsOHPGUIDZU/0.jpg)](http://www.youtube.com/watch?v=FsOHPGUIDZU)
     - 影片中的範例是 3.0.2 的版本，請使用者記得安裝 3.2 以上的版本喔！
+
+# 安裝R
+
 - Mac: 請至 [CRAN](http://cran.csie.ntu.edu.tw) 上下載 R3.2 以上的安裝程式。
     - 可參考 [![Mac OS X 安裝R軟體](http://img.youtube.com/vi/72MYRBNo5Bk/0.jpg)](http://www.youtube.com/watch?v=72MYRBNo5Bk)
-    - 此影片由中華R軟體學會的李明昌老師提供
+    - 此影片由中華R 軟體學會的李明昌老師提供
+
+# 安裝R
+
 - Ubuntu: Ubuntu 14.04 的使用者可以在 bash 執行以下指令來安裝學習環境。如果是其他版本的使用者，請修改上述 trusty 的部份。
 
 ```sh
@@ -461,6 +501,7 @@ install_course_github("wush978", "DataScienceAndR", "course")
 
 - 選錯課程
 - 錯誤的接關
+- Windows 下可能有編碼錯誤
 
 # 作業說明
 
@@ -477,10 +518,43 @@ install_course_github("wush978", "DataScienceAndR", "course")
     1. RBasic-05-Arrays-Matrices
     1. RBasic-06-List-DataFrame
     1. RBasic-07-Loading-Dataset
+
+# 繳交作業的格式
+
 - 除了`RBasic-01-Introduction`之外，每個作業最後都要編輯一個檔案。
-請在期限內完成作業之後，繳交該檔案到ceiba。
-- Bug 回報：<https://github.com/wush978/DataScienceAndR/issues>
-    - 看不懂敘述
-    - 有錯字、程式卡住...
+    - `RBasic-02-HW.R`
+    - `RBasic-03-HW.R`
+    - `RBasic-04-HW.R`
+    - `RBasic-05-HW.R`
+    - `RBasic-06-HW.R`
+    - `RBasic-07-HW.R`
+- 請在期限內完成作業之後，將`<學號>.zip`的檔案上傳到ceiba。該壓縮檔的內容應該為：
+
+```
+d01921016/
+d01921016/RBasic-02-HW.R
+d01921016/RBasic-03-HW.R
+d01921016/RBasic-04-HW.R
+d01921016/RBasic-05-HW.R
+d01921016/RBasic-06-HW.R
+d01921016/RBasic-07-HW.R
+```
+
+- 寫作業時，可以用`submit()`檢查是否有錯
+
+# 這份教材是最近寫出來的...
+
+- 有bug 的機會很高，所以請統一回報至：<https://github.com/wush978/DataScienceAndR/issues>
+    - 看不懂的敘述、有錯字、程式卡住、讓你不爽的體驗...
+    - 請附上`sessionInfo()`的輸出結果
+- 對使用windows 的同學，我先說聲抱歉：你們的教材會比較不穩定
 
 # Q&A
+
+# R vs Python
+
+- [Choosing R or Python for data analysis? An infographic](http://blog.datacamp.com/r-or-python-for-data-analysis/)
+- [Pros and Cons of R vs Python Sci-kit learn](https://www.kaggle.com/forums/f/208/getting-started/t/5243/pros-and-cons-of-r-vs-python-sci-kit-learn)
+- [Which is better for data analysis: R or Python?](https://www.quora.com/Which-is-better-for-data-analysis-R-or-Python)
+- [How to Choose Between Learning Python or R First](http://blog.udacity.com/2015/01/python-vs-r-learn-first.html)
+
