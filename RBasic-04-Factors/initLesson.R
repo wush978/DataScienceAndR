@@ -3,10 +3,12 @@
 # the user's working directory and thus be accessible to them
 # throughout the lesson.
 
-blood_type <- c("B","A","A","O","AB","O",
+assign("blood_type",
+       c("B","A","A","O","AB","O",
                 "A","AB","O","AB","O","AB",
                 "A","A","A","AB","A","AB",
                 "AB","A","AB","A","AB","B",
-                "A","O","A","A","AB","AB")
+                "A","O","A","A","AB","AB"),
+       envir = globalenv())
 
-grades <- c("A","C","B","B","A")
+assign("grades", c("A","C","B","B","A"), envir = globalenv())

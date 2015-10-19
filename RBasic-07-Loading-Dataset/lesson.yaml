@@ -150,7 +150,8 @@
   Output: 受限於課程內容，所以我們這裡只講讀取CSV 的方式。這應該是最泛用 的內容了。未來有時間，會再找社群的其他大大合作開寫其他和讀資料相關的 課程。同學如果很期待看到處理某些形態資料的課程，歡迎到
     <https://github.com/wush978/DataScienceAndR/issues> 許願。
 - Class: script
-  Output: 最後，還是要請同學利用這次所學的內容，做一個小練習。 請同學在完成之後存檔，並輸入`submit()`來檢查結果是否符合預期。
+  Output: 最後，還是要請同學利用這次所學的內容，做一個小練習。 請同學在完成之後存檔，並輸入`submit()`來檢查結果是否符合預期。 如果同學在檔案中看到亂碼，請使用Rstudio
+    左上角的File -> Reopen With Encoding... -> 選取：UTF-8
   Script: RBasic-07-HW.R
   AnswerTests: rbasic_07_hw_test()
 
