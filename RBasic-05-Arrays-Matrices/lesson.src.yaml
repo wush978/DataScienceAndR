@@ -323,6 +323,7 @@
 
 - Class : script
   Output: 最後，我們請同學用所學到的技巧，做一個簡短的練習。
+    請同學在完成之後存檔，並輸入`submit()`來檢查結果是否符合預期。
   Script: RBasic-05-HW.R
   AnswerTests: rbasic_05_hw_test()
 

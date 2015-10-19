@@ -97,7 +97,7 @@
   Output: 我們在這裡做個總結。 Factor向量用來儲存類別的資料。level屬性限制能在向量中出現的類別種類。 Factor本質上是整數向量，只是帶有levels。
     Factor可以是無順序或有順序的，可用在Factor函數中使用ordered=TRUE讓Factor變成有序。
 - Class: script
-  Output: 最後我們請同學運用這個課程所學到的技巧，做一個簡短的練習。
+  Output: 最後我們請同學運用這個課程所學到的技巧，做一個簡短的練習。 請同學在完成之後存檔，並輸入`submit()`來檢查結果是否符合預期。
   Script: RBasic-04-HW.R
   AnswerTests: rbasic_04_hw_test()
 

@@ -204,7 +204,7 @@
 - Class: text
   Output: 這個課程簡介了R 的物件系統。希望未來同學在接觸到沒學過得套件時，可以有系統得來摸索R 套件的輸出。
 - Class: script
-  Output: 最後我們請同學用這個課程所學的內容，處理一個PCA 的結果。
+  Output: 最後我們請同學用這個課程所學的內容，處理一個PCA 的結果。 請同學在完成之後存檔，並輸入`submit()`來檢查結果是否符合預期。
   Script: RBasic-03-HW.R
   AnswerTests: rbasic_03_hw_test()
 
