@@ -71,7 +71,8 @@
 - Class: text
   Output: 要把指令輸入到R ，也不一定要在console上一個字一個字的打。 我們可以透過`source`指令，來載入一個撰寫R 指令的文件，並且執行 文件中的expressions。
 - Class: cmd_question
-  Output: 請各位同學看一下`source`的說明。
+  Output: 請各位同學看一下`source`的說明。輸入之後，使用R 一般界面的同學 會看到跳出的說明視窗，內容則是R 對`source`的官方說明。。使用Rstudio
+    的同學則請檢查右下角的視窗是否有切換至`source`的官方說明。
   CorrectAnswer: help(source)
   AnswerTests: any_of_exprs("help(source)", "?source")
   Hint: help(source)

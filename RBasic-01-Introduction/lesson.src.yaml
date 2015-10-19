@@ -106,7 +106,9 @@
     文件中的expressions。
 
 - Class: cmd_question
-  Output: 請各位同學看一下`source`的說明。
+  Output: 請各位同學看一下`source`的說明。輸入之後，使用R 一般界面的同學
+    會看到跳出的說明視窗，內容則是R 對`source`的官方說明。。使用Rstudio 
+    的同學則請檢查右下角的視窗是否有切換至`source`的官方說明。
   CorrectAnswer: help(source)
   AnswerTests: any_of_exprs("help(source)", "?source")
 
