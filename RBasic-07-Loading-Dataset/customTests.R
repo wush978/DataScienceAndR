@@ -13,7 +13,7 @@
 
 rbasic_07_hw_test <- function() {
   e <- get("e", parent.frame())
-  source_result <- try(source(e$script_temp_path, local = new.env()), silent = TRUE)
+  source_result <- try(source(e$script_temp_path, local = new.env(), encoding = "UTF-8"), silent = TRUE)
   if (class(source_result)[1] == "try-error") return(FALSE)
   name.list <- c("answer")
   answer.ref <- read.table(file(orglist.path, encoding = "UTF-16"), header = TRUE, sep = ",")

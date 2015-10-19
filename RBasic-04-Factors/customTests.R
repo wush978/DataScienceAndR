@@ -13,7 +13,7 @@
 
 rbasic_04_hw_test <- function() {
   e <- get("e", parent.frame())
-  source_result <- try(source(e$script_temp_path, local = new.env()), silent = TRUE)
+  source_result <- try(source(e$script_temp_path, local = new.env(), , encoding = "UTF-8"), silent = TRUE)
   if (class(source_result)[1] == "try-error") return(FALSE)
   name.list <- c("species", "answer1", "answer2", "plant", "answer3", "answer4")
   species.ref <- datasets::iris$Species
