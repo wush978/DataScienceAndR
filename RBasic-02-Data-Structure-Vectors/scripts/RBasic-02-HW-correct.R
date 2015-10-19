@@ -23,5 +23,5 @@ power2.mean <- mean(power2)
 power2.sd <- sd(power2)
 power2.z <- (power2 - mean(power2)) / sd(power2)
 
-# 最後，請同學找出「社會服務業的用電量超過製造業10%的年度」
+# 最後，請同學找出「社會服務業的用電量比製造業用電量的10%還高的年度」
 year1.answer2 <- year1[power1 > 0.1 * power2]
