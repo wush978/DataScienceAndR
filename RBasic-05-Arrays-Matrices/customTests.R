@@ -13,7 +13,7 @@
 
 rbasic_05_hw_test <- function() {
   e <- get("e", parent.frame())
-  source_result <- try(source(e$script_temp_path, local = new.env()), silent = TRUE)
+  source_result <- try(source(e$script_temp_path, local = new.env(), encoding = "UTF-8"), silent = TRUE)
   if (class(source_result)[1] == "try-error") return(FALSE)
   name.list <- c("X", "beta", "y", "epsilon", "beta.hat")
   X.ref <- cbind(x1 = 1, x2 = 1:10, x3 = sin(1:10))
