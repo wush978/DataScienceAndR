@@ -10,7 +10,7 @@
 
 由於出自R 社群的緣故，所有的內容我都想公佈在這個repository，以創用CC釋出。如果有朋友想要看swirl course的原始碼，請到course這個branch觀看。因為`swirl::install_course_github`的API設計，讓我必須要把course的檔案切到另外一個branch之中。
 
-以下的內容是講給有興趣想利用這些資源做自學的朋友：
+以下的內容是提供給有興趣想利用這些資源做自學的朋友：
 
 ## 設定環境
 
@@ -47,7 +47,7 @@ install_course_github("wush978", "DataScienceAndR", "course")
 平台  | 測試結果
 ------------- | -------------
 Linux | ![](https://travis-ci.org/wush978/DataScienceAndR.svg?branch=course)
-Windows | [![Build status](https://ci.appveyor.com/api/projects/status/tej2qnpdxwy2r5lp/branch/course?svg=true)](https://ci.appveyor.com/project/wush978/datascienceandr/branch/course)
+Windows | [![Build status](https://ci.appveyor.com/api/projects/status/tej2qnpdxwy2r5lp/branch/course?svg=true)](https://ci.appveyor.com/project/wush978/datascienceandr/branch/course) ps. 目前windows的測試機制有問題，等待修復中
 
 ## License
 
