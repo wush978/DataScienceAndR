@@ -35,7 +35,7 @@ install.packages('swirl')
 
 ```r
 library(swirl)
-library(curl)
+library(curl) # 如果套件載入失敗，請先安裝：`install.packages("curl") `
 install_course_github("wush978", "DataScienceAndR", "course")
 ```
 
