@@ -35,6 +35,7 @@ install.packages('swirl')
 
 ```r
 library(swirl)
+library(curl)
 install_course_github("wush978", "DataScienceAndR", "course")
 ```
 
