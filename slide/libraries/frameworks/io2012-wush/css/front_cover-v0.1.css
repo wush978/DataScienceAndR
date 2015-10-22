@@ -1,0 +1,23 @@
+.title-slide {
+  background-color: #FFFFFF; /* #EDE0CF; ; #CA9F9D*/
+  background-image: url('../img/front-cover.png'); 
+  background-repeat:no-repeat; 
+  background-position:center; 
+  background-size: 100% 100%;
+}
+
+.title-slide hgroup {
+  position:relative; 
+  top: 75%; 
+  left: 50%; 
+}
+
+.title-slide hgroup > h1{
+ font-family: 'Oswald', 'Helvetica', sanserif; 
+}
+
+.title-slide hgroup > h1, 
+.title-slide hgroup > h2 {
+  color: #535E43 ;  /* ; #EF5150 */
+  font-size: 250%;
+}

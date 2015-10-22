@@ -1,11 +1,13 @@
 ---
-title: "R 語言上手篇"
-author: "Wush Wu"
-date: "2015年9月25日"
-output: 
-  slidy_presentation: 
-    keep_md: yes
----
+title       : "R 語言上手篇"
+author      : "Wush Wu"
+framework   : io2012-wush
+highlighter : highlight.js
+hitheme     : zenburn
+widgets     : [mathjax]            # {mathjax, quiz, bootstrap}
+mode        : selfcontained # {standalone, draft}
+knit        : slidify::knit2slides
+--- &vcenter .largecontent
 
 ```{r setup, include=FALSE, cache=FALSE}
 library(knitr)
@@ -19,13 +21,16 @@ library(quantmod)
 library(pander)
 library(wordcloud)
 library(RColorBrewer)
-opts_chunk$set(echo = FALSE, cache=FALSE, comment="", cache.path = ".cache-EDA/")
+library(miniCRAN)
+library(igraph)
+
+opts_chunk$set(echo = FALSE, cache=FALSE, comment="", cache.path = ".cache-EDA/", dev.args=list(bg="transparent"))
 fig <- function(path, size = 100) {
-  sprintf("<img src='img/%s' style='max-width: %d%%;max-height: %d%%'></img>", 
+  sprintf("<img src='assets/img/%s' style='max-width: %d%%;max-height: %d%%'></img>", 
           path, size, size)
 }
 fig2 <- function(path, size = 100) {
-  sprintf("<img src='img/%s' style='width: %d%%'></img>", 
+  sprintf("<img src='assets/img/%s' style='width: %d%%'></img>", 
           path, size)
 }
 sys_name <- Sys.info()["sysname"] %>% tolower
@@ -33,12 +38,12 @@ sys_encode <- c("utf8", "utf8", "big5")[pmatch(sys_name, c("linux", "darwin", "w
 sessionInfo() %>% capture.output %>% cat(file = "sessionInfo.log", sep = "\n")
 ```
 
-# 目錄
+## 目錄
 
 - R 簡介
 - R 的傳統用途
 - 來自R 社群的貢獻
-- 近代R 的演變與功能
+- 近代R 的演變
 - 安裝R 與Rstudio
 - R 的開發環境簡介
 - R 的套件系統
@@ -46,28 +51,37 @@ sessionInfo() %>% capture.output %>% cat(file = "sessionInfo.log", sep = "\n")
     - 00: 利用R 抓取公開資料做視覺化與數據建模
     - 02: 作業示範
 
-# R 來自世界上最專業的統計學家 {.smaller}
+--- .dark .segue
+
+## R 簡介
+
+--- &vcenter .largecontent
+
+## R 來自世界上最專業的統計學家
 
 <center>`r fig('statician_10521919-655x280.jpg')`</center>
 
 取自 <http://myfootpath.com/careers/engineering-careers/statistician-careers/>
 
+--- .largecontent
 
-# R 可以輸出高品質的視覺化 {.smaller}
+## R 可以輸出高品質的視覺化
 
-`r fig("flights_sml.jpg", 100)`
+<center>`r fig("flights_sml.jpg", 100)`</center>
 
 取自 <http://www.r-bloggers.com/mapping-the-worlds-biggest-airlines/>
 
+--- &vcenter .largecontent
 
-# R 有驚人彈性和潛力 {.smaller}
+## R 有驚人彈性和潛力
 
-<center>`r fig("fig_10_cran1.png", 50)`</center>
+<center>`r fig("fig_10_cran1.png", 75)`</center>
 
 取自 <http://r4stats.com/2013/03/19/r-2012-growth-exceeds-sas-all-time-total/>
 
+--- &vcenter .largecontent
 
-# R 很容易和其他工具整合 {.smaller}
+## R 很容易和其他工具整合
 
 <center>
 ```{r r-integration, warning=FALSE}
@@ -78,39 +92,69 @@ wordcloud(tools, freq, random.color = TRUE, colors = pal)
 ```
 </center>
 
-# R 很容易擴充和客製化 {.smaller}
+--- &vcenter .largecontent
+
+## R 很容易擴充和客製化
 
 <center>`r fig("t134_3ca_lg.jpg", 100)`</center>
 取自 <http://img.diynetwork.com/DIY/2003/09/18/t134_3ca_med.jpg>
 
-# 和其他工具相比，R 的特色
+--- &vcenter .largecontent
+
+## 和其他工具相比，R 的特色
 
 - R 有非常先進的數據視覺化系統
 - R 有很多的進階數據分析工具
 
-# 範例 - 探索數據的分佈
+--- .dark .segue
+
+## R 的傳統用途
+
+--- &vcenter .largecontent
+
+## 範例 - 探索數據的分佈
 
 - 統計很多理論都需要常態分佈
 - 但是一組數據真的是常態分佈嗎？
+
+--- &vcenter .largecontent
+
+## 範例 - 探索數據的分佈
+
+- 一行指令就可以畫圖：`plot(density(x))`
 
 ```{r ks.test1}
 x <- c(rnorm(50), rnorm(50, 4))
 plot(density(x))
 ```
 
-# 範例 - 探索數據的分佈
+--- &vcenter .largecontent
 
-- R 可以很快的告訴你
+## 範例 - 探索數據的分佈
 
-```{r ks.test2, echo = TRUE, dependson="ks.test"}
+- 做「是否為常態分佈」的統計檢定？再一行：`shaprio.test(x)`
+
+```{r ks.test2, echo = FALSE, dependson="ks.test"}
 shapiro.test(x)
 ```
 
-# 範例 - 探索數據的分佈
+--- &vcenter .largecontent
 
-- R 也可以比較兩個數據是不是來自相同的分佈
+## 範例 - 探索數據的分佈
 
-```{r ks.test3, echo = TRUE}
+- 比較兩個數據是不是來自相同的分佈？沒問題
+
+```r
+plot(density(x1), xlim = range(c(x1, x2)), main = "Sample PDF")
+lines(density(x2), col = 2)
+legend("topright", c("x1", "x2"), lty = 1, col = 1:2)
+```
+
+--- &vcenter .largecontent
+
+## 範例 - 探索數據的分佈
+
+```{r ks.test3, echo = FALSE}
 x1 <- rnorm(50)
 x2 <- rt(50, df = 2)
 plot(density(x1), xlim = range(c(x1, x2)), main = "Sample PDF")
@@ -118,86 +162,134 @@ lines(density(x2), col = 2)
 legend("topright", c("x1", "x2"), lty = 1, col = 1:2)
 ```
 
-# 範例 - 探索數據的分佈
+--- &vcenter .largecontent
 
-- 檢定？沒問題
+## 範例 - 探索數據的分佈
 
-```{r ks.test4, echo = TRUE, dependson="ks.test3"}
+- 檢定？`ks.test(x1, x2)`
+
+```{r ks.test4, echo = FALSE, dependson="ks.test3"}
 ks.test(x1, x2)
 ```
 
-# 範例 - 數據間的比較
+--- &vcenter .largecontent
+
+## 範例 - A/B 方法比較（常見於電子商務）
 
 - 我們使用有兩套方法做推薦，要比較推薦的成果
 - 方法A：在10000點擊有10個購買
 - 方法B：在5000 點擊有3 個購買
 - 我怎麼知道這兩種方法的轉換率（購買/點擊）是不是明顯不同？
 
-# 範例 - 數據間的比較
+--- &vcenter .largecontent
 
-- 我不懂檢定，但是簡單的跑模擬就可以告訴我們答案。
+## 範例 - A/B 方法比較（常見於電子商務）
 
-```{r conversion, echo = TRUE}
+- 統計檢定的概念：
+    - 如果方法A 的轉換率和方法B 相同，都是$3/5000$
+    - 那在10000個點擊裡面，發生10個購買或以上的機率是多少？
+- R 非常適合撰寫這類機率性質的模擬：
+
+```r
 # 假設方法A 真正的轉換率和就是 3 / 5000
 p <- 3/5000
 # 我們可以模擬1000次在10000個點擊下，方法A 的轉換數
 plot(density(x <- rbinom(1000, 10000, p)))
 ```
 
-# 範例 - 數據間的比較
+--- &vcenter .largecontent
 
-- 利用模擬結果做比較
+## 範例 - A/B 方法比較（常見於電子商務）
 
-```{r conversion2, echo = TRUE, dependson="conversion"}
+- 結果示意圖
+
+```{r conversion, echo = FALSE}
+p <- 3/5000
+plot(density(x <- rbinom(1000, 10000, p)))
+```
+
+--- &vcenter .largecontent
+
+## 範例 - A/B 方法比較（常見於電子商務）
+
+- 精確的模擬結果：`mean(x > 10)`
+
+```{r conversion2, echo = FALSE, dependson="conversion"}
 # 估計超過我們觀測值的機率
 mean(x > 10)
 ```
 
-# 範例 - 數據間的比較
+--- &vcenter .largecontent
 
-- 我大致上懂檢定，但是我不想自己寫程式算信賴區間。
+## 範例 - A/B 方法比較（常見於電子商務）
+
+- 想看信賴區間？透過套件，立馬取得結果：
 
 ```{r ci, echo = TRUE}
 library(binom)
 binom.confint(c(10, 3), c(10000, 5000), methods = "exact")
 ```
 
-# 範例 - 數據間的比較
+--- &vcenter .largecontent
 
-- 太棒了，但是我想用某篇paper的方法。你可以找找看有沒有你要的方法：
+## 範例 - A/B 方法比較（常見於電子商務）
+
+- 太棒了，但是我想用某篇paper的方法。
+- 你可以找找看有沒有你要的方法：
 
 <center>`r fig("binom-methods.png", 100)`</center>
 
-# 範例 - 相關性
+--- .dark .segue
+
+## 來自R 社群的貢獻
+
+--- &vcenter .largecontent
+
+## 範例 - 相關性
 
 - R 擁有許多你想像不到的方式來探索數據
     - 他們都來自於世界各地的貢獻者
 
-```{r chart.correlation, results = 'hide', warning = FALSE}
+--- &vcenter .largecontent
+
+## 範例 - 相關性
+
+```{r chart.correlation, results = 'hide', warning = FALSE, echo = TRUE}
 suppressPackageStartupMessages(library(PerformanceAnalytics))
 chart.Correlation(iris[-5], bg=iris$Species, pch=21)
 ```
 
-# 範例 - 相關性
+--- &vcenter .largecontent
 
-- 許多機器學習的方法，會假設數據彼此之間是獨立的
-    - R 可以迅速幫你檢驗數據是否是獨立的
+## 範例 - 相關性
 
-```{r chart.ACFplus}
-data(edhec)
-chart.ACFplus(edhec[,1,drop=FALSE])
-```
-
-# 範例 - 相關性
-
-```{r heatmap, results = "hide"}
+```{r heatmap, results = "hide", echo = TRUE}
 round(Ca <- cor(attitude), 2)
 symnum(Ca) # simple graphic
 heatmap(Ca,               symm = TRUE, margins = c(6,6))
 ```
 
-# 範例 - 經濟學人風格的視覺化
+--- &vcenter .largecontent
 
+## 範例 - 相關性
+
+- 許多機器學習的方法，會假設數據彼此之間是獨立的
+    - R 可以迅速幫你檢驗數據是否是獨立的
+
+--- &vcenter .largecontent
+
+## 範例 - 相關性
+
+```{r chart.ACFplus, echo = TRUE}
+data(edhec)
+chart.ACFplus(edhec[,1,drop=FALSE])
+```
+
+--- .largecontent
+
+## 範例 - 經濟學人風格的視覺化
+
+<center>
 ```{r ggthemes}
 library(ggthemes)
 dsamp <- diamonds[sample(nrow(diamonds), 1000), ]
@@ -207,8 +299,15 @@ q <- (qplot(carat, price, data=dsamp, colour=clarity)
 ## Standard
 q + theme_economist() + scale_colour_economist()
 ```
+</center>
 
-# R 不只有傳統的資料分析
+--- .segue .dark
+
+## 近代R 的演變
+
+--- &vcenter .largecontent
+
+## R 近年的進展
 
 - 收集數據
 - 特定領域的資料分析
@@ -220,11 +319,15 @@ q + theme_economist() + scale_colour_economist()
     - API 伺服器
 - 大規模數據分析
 
-# 收集數據
+--- &vcenter .largecontent
+
+## 收集數據
 
 - [ChihChengLiang: R Crawler（資料科學愛好者年會2015）](http://chihchengliang.github.io/DSC2015_Crawler/)
 
-# 收集數據 -- Google Spreadsheet
+--- &vcenter .largecontent
+
+## 和各種資料相關服務的串接
 
 - 任何和資料相關的服務，有很大的機會可以和R 串接
     - [Google Sheets R API](https://github.com/jennybc/googlesheets)
@@ -233,43 +336,73 @@ q + theme_economist() + scale_colour_economist()
     - [Minitab, S, SAS, SPSS, Stata, Systat and Weka...](https://cran.r-project.org/web/packages/foreign/index.html)
     - [DBI](https://cran.r-project.org/web/packages/DBI/index.html)
 
-# 特定領域 -- 股票分析
+--- &vcenter .largecontent
 
-```{r TWII, echo = TRUE}
+## 特定領域 -- 股票分析
+
+```r
 library(quantmod)
 getSymbols("^TWII")
 head(TWII)
 ```
 
-# 特定領域 - 股票分析
+```{r TWII, echo = FALSE, results='asis', warning=FALSE}
+suppressPackageStartupMessages(library(quantmod))
+options("getSymbols.warning4.0"=FALSE)
+suppressWarnings(getSymbols("^TWII", warnings = FALSE))
+kable(head(TWII))
+```
 
-```{r signal, echo = TRUE}
+
+--- &vcenter .largecontent
+
+## 特定領域 - 股票分析
+
+```{r signal, echo = TRUE, fig.width = 10, fig.height = 7}
 chartSeries(TWII, subset = "last 4 months", TA = c(addVo(), addBBands()))
 ```
 
-# 特定領域 - 棒球分析
+--- &vcenter .largecontent
 
-```{r lahman, echo = TRUE}
+## 特定領域 - 棒球分析
+
+```r
 library(Lahman)
 head(Teams[,c("yearID", "name", "Rank", "W", "L", "R", "RA")])
 ```
 
-# 特定領域 - 棒球分析
+```{r lahman, results="asis"}
+library(Lahman)
+kable(head(Teams[,c("yearID", "name", "Rank", "W", "L", "R", "RA")]))
+```
 
-```{r baseball, echo = TRUE}
+--- .largecontent
+
+## 特定領域 - 大聯盟歷年得分
+
+<center>
+```{r baseball, echo = FALSE}
 totalRS <- Teams %>% select(yearID, R, G) %>% 
   mutate(AvgRperG = R/G) %>% group_by(yearID) %>% summarise(sum(AvgRperG))
 names(totalRS) <- c("yearID", "RUN")
-ggplot(data = totalRS, aes(x = yearID, y = RUN)) + stat_smooth() + geom_line()
+suppressWarnings({
+  ggplot(data = totalRS, aes(x = yearID, y = RUN)) + stat_smooth(method = "loess") +
+    geom_line()
+})
+```
+</center>
+
+--- &vcenter .largecontent
+
+## 特定領域 - 王建民歷年成績
+
+```{r wangch01, echo = FALSE, results = "asis"}
+head(filter(Pitching, playerID == "wangch01") %>% select(playerID, yearID, W, L, ERA)) %>% kable
 ```
 
-# 特定領域 - 棒球分析
+--- &vcenter .largecontent
 
-```{r wangch01, echo = TRUE}
-head(filter(Pitching, playerID == "wangch01") %>% select(playerID, yearID, W, L, ERA))
-```
-
-# 特定領域 - 文字探勘
+## 特定領域 - 文字探勘
 
 ```{r textmining, echo = TRUE}
 suppressPackageStartupMessages({
@@ -282,7 +415,9 @@ suppressPackageStartupMessages({
 })
 ```
 
-# 特定領域 - 資料科學愛好者年會講者資料分析
+--- &vcenter .largecontent
+
+## 特定領域 - 資料收集
 
 ```{r demo}
 readSpeaker <- function(file,sep){
@@ -292,15 +427,19 @@ readSpeaker <- function(file,sep){
     return(sepString[[1]])
 }
 speakers <- readSpeaker("speaker.txt",sep="-----")
-length(speakers)
-
-.tmp <- strsplit(speakers[1], "")[[1]] %>% split(rep(1:15, each = 30)) %>%
-  sapply(paste, collapse = "")
+# length(speakers)
+suppressWarnings({
+  .tmp <- strsplit(speakers[1], "")[[1]] %>% 
+    split(rep(1:15, each = 30)) %>%
+    sapply(paste, collapse = "")
+})
 names(.tmp) <- NULL
 cat(.tmp, sep = "\n")
 ```
 
-# 特定領域 - 資料科學愛好者年會講者資料分析
+--- &vcenter .largecontent
+
+## 特定領域 - 斷詞
 
 ```{r jieba}
 mixseg = worker()
@@ -312,13 +451,18 @@ cutter <- function(msg) {
 }
 segRes = lapply(speakers,cutter)
 tmWordsVec = sapply(segRes,function(ws) paste(ws,collapse = " "))
-.tmp <- strsplit(tmWordsVec[1], "")[[1]] %>% split(rep(1:15, each = 30)) %>%
-  sapply(paste, collapse = "")
+suppressWarnings({
+  .tmp <- strsplit(tmWordsVec[1], "")[[1]] %>% 
+    split(rep(1:15, each = 30)) %>%
+    sapply(paste, collapse = "")
+})
 names(.tmp) <- NULL
 cat(.tmp, sep = "\n")
 ```
 
-# 特定領域 - 資料科學愛好者年會講者資料分析
+--- &vcenter .largecontent
+
+## 特定領域 - 文字雲
 
 ```{r tdm}
 # 語料庫 & TDM
@@ -341,20 +485,26 @@ wordcloud(d$word,d$freq, scale=c(6,0.5), min.freq=mean(d$freq),
           max.words=100, random.order=FALSE, rot.per=.01, colors=pal2)
 ```
 
-# 特定領域：互動式網頁服務
+--- &vcenter .largecontent
+
+## 特定領域：互動式網頁服務
 
 - [Shiny](http://shiny.rstudio.com/)
 - Gallery:
     - [K-means Example](http://shiny.rstudio.com/gallery/kmeans-example.html)
 
 
-# 特定領域：API Server
+--- &vcenter .largecontent
+
+## 特定領域：API Server
 
 - [OpenCPU](https://www.opencpu.org/)
 - APP:
     - [Stocks](https://demo.ocpu.io/stocks/www/)
 
-# 大規模的數據分析
+--- &vcenter .largecontent
+
+## 大規模的數據分析
 
 - [SparkR](https://spark.apache.org/docs/latest/sparkr.html)
 - [RHadoop](https://github.com/RevolutionAnalytics/RHadoop/wiki)
@@ -362,13 +512,17 @@ wordcloud(d$word,d$freq, scale=c(6,0.5), min.freq=mean(d$freq),
     - [Rmpi](http://www.stats.uwo.ca/faculty/yu/Rmpi/)
     - [pbdMPI](https://en.wikipedia.org/wiki/Programming_with_Big_Data_in_R)
 
-# R 的Community
+--- &vcenter .largecontent
+
+## R 的Community
 
 - R 的套件開發非常簡單。[五分鐘學會「如何使用Rstudio建立R套件 」](https://www.youtube.com/watch?v=OCQU6M4pPiw)
     - [Hadley Wickham：一个改变了R的人](http://cos.name/2015/09/hadley-wickham-the-man-who-revolutionized-r/)
 - R 的Community 甚至創造了一個學R 的套件：swirl
 
-# Hadley近年來對R 的影響
+--- &vcenter .largecontent
+
+## Hadley近年來對R 的影響
 
 - 前十名的R 套件有一半是Hadley寫的
 
@@ -378,54 +532,70 @@ result <- fromJSON("http://cranlogs.r-pkg.org/top/last-month/10")
 print.xtable(xtable(result$downloads), type = "html")
 ```
 
-# 台灣的本土R 社群
+--- &vcenter .largecontent
+
+## 台灣的本土R 社群
 
 - 台灣的社群有：
     - [Taiwan R User Group](http://www.meetup.com/Taiwan-R)
     - [ptt R_Language](https://www.ptt.cc/bbs/R_Language/index.html)
     - [台灣R 使用者論壇](https://groups.google.com/forum/#!forum/taiwanruser)
 
-# R 的環境設定
+--- .dark .segue
+
+## 安裝R 與Rstudio
+
+--- &vcenter .largecontent
+
+## R 的環境設定
 
 - 安裝R
 - 安裝Rstudio
 
-# 安裝R
+--- &vcenter .largecontent
+
+## 安裝R
 
 - Windows: 請至 [CRAN](http://cran.csie.ntu.edu.tw) 上下載 R3.2 以上的安裝程式。
     - 可參考 [![在Windows上安裝R](http://img.youtube.com/vi/FsOHPGUIDZU/0.jpg)](http://www.youtube.com/watch?v=FsOHPGUIDZU)
     - 影片中的範例是 3.0.2 的版本，請使用者記得安裝 3.2 以上的版本喔！
 
-# 安裝R
+--- &vcenter .largecontent
+
+## 安裝R
 
 - Mac: 請至 [CRAN](http://cran.csie.ntu.edu.tw) 上下載 R3.2 以上的安裝程式。
     - 可參考 [![Mac OS X 安裝R軟體](http://img.youtube.com/vi/72MYRBNo5Bk/0.jpg)](http://www.youtube.com/watch?v=72MYRBNo5Bk)
     - 此影片由中華R 軟體學會的李明昌老師提供
 
-# 安裝R
+--- &vcenter .largecontent
 
-- Ubuntu: Ubuntu 14.04 的使用者可以在 bash 執行以下指令來安裝學習環境。如果是其他版本的使用者，請修改上述 trusty 的部份。
+## 安裝R
 
-```sh
-sudo sh -c 'echo "deb http://cran.csie.ntu.edu.tw/bin/linux/ubuntu trusty/" >> /etc/apt/sources.list'
-sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E084DAB9
-sudo apt-get update && apt-get install -y r-base libcurl4-openssl-dev libxml2-dev
-```
+- Ubuntu: Ubuntu 14.04 的使用者可以參考CRAN上的安裝說明：
+    - <http://cran.csie.ntu.edu.tw/bin/linux/ubuntu/README.html>
 
-# 安裝Rstudio
+
+--- &vcenter .largecontent
+
+## 安裝Rstudio
 
 - 請到[Rstudio 官方網站](https://www.rstudio.com/products/RStudio/)下載社群版
     - Rstudio 具備「自動完成」功能，同學不用背指令
     - Windows 下具備編輯UTF-8 檔案的功能，我們作業會用到
 
-# Rstudio 環境說明
+--- &vcenter .largecontent
+
+## Rstudio 環境說明
 
 - 程式碼編輯區
 - 命令列區
 - 其他資訊區
 - 檔案系統區
 
-# 熟悉RStudio的 命令列 界面
+--- &vcenter .largecontent
+
+## 熟悉RStudio的 命令列 界面
 
 - 注意最左下腳的符號是 `>`
 - 輸入 `"hello world"` 後按下Enter，檢查螢幕輸出（記得加上引號）
@@ -435,44 +605,94 @@ sudo apt-get update && apt-get install -y r-base libcurl4-openssl-dev libxml2-de
 - 在新的一行命令列區輸入 `me` 之後按下Enter
 - 在新的一行命令列區輸入 `me` 之後按下tab
 
-# 熟悉RStudio的 程式碼編輯 界面
+--- &vcenter .largecontent
+
+## 熟悉RStudio的 程式碼編輯 界面
 
 - 請建立再編輯界面寫程式的習慣
 - 開啟新的R Script檔案
 - 在第一行輸入 `me` 隻後按下Ctrl + Enter後，觀察命令列區
 - 利用滑鼠點選 `me` 後的位置，確認游標閃爍的位置在 `me` 之後，按下tab
 
-# 熟悉RStudio的其他頁面 {.flexbox .vcenter}
+--- &vcenter .largecontent
+
+## 熟悉RStudio的其他頁面
 
 - 請見現場示範
 
-# R 的套件系統
+--- .dark .segue
 
-<center>`r fig("fig_10_cran1.png", 50)`</center>
+## R 的套件系統
 
-# 安裝R 的套件
+--- &vcenter .largecontent
+
+## R 的套件系統
+
+```{r pkg-data, cache = TRUE}
+pkgdata <- pkgAvail(repos = c(CRAN="http://cran.csie.ntu.edu.tw"), 
+                    type="source")
+tags <- c("httr", "stringr", "digest", "testthat", "yaml", "RCurl")
+p <- makeDepGraph(c("swirl"), availPkgs=pkgdata)
+```
+
+```{r pkg-graph, cache = TRUE, dependson="pkg-data", fig.width = 10, fig.height = 7, eval = FALSE}
+plotColours <- c("grey50", "orange")
+topLevel <- as.numeric(V(p)$name %in% tags)
+ 
+ 
+set.seed(50)
+vColor <- plotColours[1 + topLevel]
+par(mai=rep(0.25, 4), bg = "transparent")
+plot(p, vertex.size=8, edge.arrow.size=0.5, 
+     vertex.label.cex=0.7, vertex.label.color="black", 
+     vertex.color=vColor)
+# legend(x=0.9, y=-0.9, legend=c("Dependencies", "Initial list"), 
+       # col=c(plotColours, NA), pch=19, cex=0.9)
+text(0.9, -0.75, expression(xts %->% zoo), adj=0, cex=0.9)
+text(0.9, -0.8, "xts depends on zoo", adj=0, cex=0.9)
+# title("Package dependency graph")
+```
+
+<center>
+`r fig("swirl_dependency.png")`
+</center>
+
+--- &vcenter .largecontent
+
+## 安裝R 的套件
 
 - 使用Rstudio 安裝套件
 - 使用命令列安裝套件`r install.packages("套件名稱", repos = "套件庫網址")`
 - 使用套件的第一步：`library(套件名稱)`
 
-# 安裝swirl
+--- .dark .segue
+
+## 利用swirl 快速學習R 語言 
+
+--- &vcenter .largecontent
+
+## 安裝swirl
 
 - swirl 官方套件目前在windows上無法顯示中文
     - 請安裝Taiwan R User Group上的版本
 
 ```r
 # 在命令列輸入：
-install.packages('swirl', repos = 'http://taiwanrusergroup.github.io/R')
+install.packages(c('swirl', 'curl'), repos = 'http://taiwanrusergroup.github.io/R')
 ```
 
-# 載入swirl
+--- &vcenter .largecontent
+
+## 載入swirl
 
 ```r
 library(swirl)
+library(curl)
 ```
 
-# 進入swirl 界面
+--- &vcenter .largecontent
+
+## 進入swirl 界面
 
 ```r
 swirl() # 括號很重要
@@ -481,7 +701,9 @@ swirl() # 括號很重要
 - 執行動作（呼叫函數），需要在後面加上括號
 - 不加括號，R 會印出`swirl` 這個函數的定義
 
-# 手動安裝swirl 課程
+--- &vcenter .largecontent
+
+## 手動安裝swirl 課程
 
 - 進入swirl 之後會跳出安裝課程的提示
 - 這次的作業就是一系列swirl 的課程
@@ -493,24 +715,35 @@ install_course_github("wush978", "DataScienceAndR", "course")
 
 - 細節請參考上課示範
 
-# 再次進入swirl，並進入DataScienceAndR
+--- &vcenter .largecontent
+
+## 再次進入swirl，並進入DataScienceAndR
 
 - 請見現場示範
 
-# swirl 疑難排解
+--- &vcenter .largecontent
+
+## swirl 疑難排解
 
 - 選錯課程
 - 錯誤的接關
 - Windows 下可能有編碼錯誤
 
-# 作業說明
+--- &vcenter .largecontent
+
+## 作業說明
 
 - 建立環境
     - 安裝最新版本的R
     - 安裝Rstudio(非必要，但是要有自行解決其他問題的能力)
     - 安裝Taiwan R User Group 社群版的套件
     - 安裝DataScienceAndR 系列課程
-- 完成作業：
+
+--- &vcenter .largecontent
+
+## 作業說明
+
+- 完成以下作業：
     1. RBasic-01-Introduction
     1. RBasic-02-Data-Structure-Vectors
     1. RBasic-03-Data-Structure-Object
@@ -519,7 +752,9 @@ install_course_github("wush978", "DataScienceAndR", "course")
     1. RBasic-06-List-DataFrame
     1. RBasic-07-Loading-Dataset
 
-# 繳交作業的格式
+--- &vcenter .largecontent
+
+## 繳交作業的格式
 
 - 除了`RBasic-01-Introduction`之外，每個作業最後都要編輯一個檔案。
     - `RBasic-02-HW.R`
@@ -528,7 +763,13 @@ install_course_github("wush978", "DataScienceAndR", "course")
     - `RBasic-05-HW.R`
     - `RBasic-06-HW.R`
     - `RBasic-07-HW.R`
-- 請在期限內完成作業之後，將`<學號>.zip`的檔案上傳到ceiba。該壓縮檔的內容應該為：
+- 請在期限內完成作業之後，將`<學號>.zip`的檔案上傳到ceiba。
+
+--- &vcenter .largecontent
+
+## 繳交作業的格式
+
+- `<學號>.zip`的內容應該為：
 
 ```
 d01921016/
@@ -540,18 +781,24 @@ d01921016/RBasic-06-HW.R
 d01921016/RBasic-07-HW.R
 ```
 
-- 寫作業時，可以用`submit()`檢查是否有錯
+- 完成作業後，可以用`submit()`檢查是否有錯
 
-# 這份教材是最近寫出來的...
+--- &vcenter .largecontent
+
+## 這份教材是最近寫出來的...
 
 - 有bug 的機會很高，所以請統一回報至：<https://github.com/wush978/DataScienceAndR/issues>
     - 看不懂的敘述、有錯字、程式卡住、讓你不爽的體驗...
     - 請附上`sessionInfo()`的輸出結果
 - 對使用windows 的同學，我先說聲抱歉：你們的教材會比較不穩定
 
-# Q&A
+--- &vcenter .largecontent
 
-# R vs Python
+## Q&A
+
+--- &vcenter .largecontent
+
+## R vs Python
 
 - [Choosing R or Python for data analysis? An infographic](http://blog.datacamp.com/r-or-python-for-data-analysis/)
 - [Pros and Cons of R vs Python Sci-kit learn](https://www.kaggle.com/forums/f/208/getting-started/t/5243/pros-and-cons-of-r-vs-python-sci-kit-learn)
