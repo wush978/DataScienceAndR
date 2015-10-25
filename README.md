@@ -39,6 +39,38 @@ library(curl) # 如果套件載入失敗，請先安裝：`install.packages("cur
 install_course_github("wush978", "DataScienceAndR", "course")
 ```
 
+## 進入課程
+
+### 1. 進入swirl 環境
+
+![Imgur](http://i.imgur.com/sYGDy72.png)
+
+ps. 如果你之前有進行過swirl的課程，swirl會出現下圖的選項詢問你是否要接關。請根據你的需求作答：
+
+![Imgur](http://i.imgur.com/SwlSa3W.png)
+
+如不接關，請選取：`No. Let me start something new.`
+
+### 2. 選擇課程(Course)
+
+![Imgur](http://i.imgur.com/Sfj0K1l.png) 
+
+### 3. 選擇你要進行的單元(Lesson)
+
+![Imgur](http://i.imgur.com/OFgU4wM.png)
+
+我建議同學依序進行：
+
+- RBasic-01-Introduction
+- RBasic-02-Data-Structure-Vectors
+- RBasic-03-Data-Structure-Object
+- RBasic-04-Factors
+- RBasic-05-Arrays-Matrices
+- RBasic-06-List-DataFrame
+- RBasic-07-Loading-Dataset
+
+RBasic-02至RBasic-07課程最後都有大魔王要給同學攻克。
+
 ## 教學投影片
 
 - [R 語言上手篇](http://rpubs.com/wush978/DataScienceAndR)
