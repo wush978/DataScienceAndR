@@ -13,7 +13,7 @@
 
 rbasic_02_hw_test <- function() {
   e <- get("e", parent.frame())
-  source_result <- try(source(e$script_temp_path, local = new.env(), encoding = "UTF-8"), silent = TRUE)
+  source_result <- try(source(e$script_temp_path, encoding = "UTF-8"), silent = TRUE)
   if (class(source_result)[1] == "try-error") return(FALSE)
   name.list <- c("year1", "power1", "power2", "year1.answer1", "power1.mean","power1.sd", 
                  "power1.z", "power2.mean", "power2.sd", "power2.z", "year1.answer2")
