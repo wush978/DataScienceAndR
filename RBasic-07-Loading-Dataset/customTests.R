@@ -16,7 +16,9 @@ rbasic_07_hw_test <- function() {
   source_result <- try(source(e$script_temp_path, local = new.env(), encoding = "UTF-8"), silent = TRUE)
   if (class(source_result)[1] == "try-error") return(FALSE)
   name.list <- c("answer")
-  answer.ref <- read.table(file(orglist.path, encoding = "UTF-16"), header = TRUE, sep = ",")
+  answer.bin <- readBin(orglist.path, what = "raw", n = file.info(orglist.path)$size)
+  answer.txt <- stringi::stri_encode(answer.bin, "UTF-16", to = "UTF-8")
+  answer.ref <- read.table(textConnection(answer.txt), header = TRUE, sep = ",")
   tryCatch({
     for(name in name.list) {
       if (!isTRUE(all.equal(
@@ -36,3 +38,17 @@ val_is <- function(value, var_name) {
   target <- get(var_name, e)
   isTRUE(all.equal(value, target))
 }
+
+test_package_version <- function(pkg_name, pkg_version) {
+  e <- get("e", parent.frame())
+  tryCatch(
+    packageVersion(pkg_name) >= package_version(pkg_version),
+    error = function(e) FALSE)
+}
+
+test_search_path <- function(pkg_name) {
+  tryCatch(
+    length(grep(sprintf("/%s$", pkg_name), searchpaths())) > 0,
+    error = function(e) FALSE)
+}
+
