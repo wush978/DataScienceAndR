@@ -262,10 +262,10 @@
   Output: 如果我們要直接從`lvr_land.txt`的內容取出表格，一種方法是直接把
     `lvr_land.txt`寫成一個檔案，再用`read.table`讀取。另外一種方法，是把
     `lvr_land.txt`視為一個類似檔案的物件，也就是connection。我們可以用
-    `textConnection(lvr_land.txt)`來從`lvr_land.txt`建立一個connection。
-    請同學輸入：`read.table(textConnection(lvr_land.txt), header = TRUE, sep = ",")`
-  CorrectAnswer: read.table(textConnection(lvr_land.txt), header = TRUE, sep = ",")
-  AnswerTests: omnitest('read.table(textConnection(lvr_land.txt), header = TRUE, sep = ",")')
+    `textConnection(lvr_land.txt, encoding = "UTF-8")`來從`lvr_land.txt`建立一個connection。
+    請同學輸入：`read.table(textConnection(lvr_land.txt, encoding = "UTF-8"), header = TRUE, sep = ",")`
+  CorrectAnswer: read.table(textConnection(lvr_land.txt, encoding = "UTF-8"), header = TRUE, sep = ",")
+  AnswerTests: omnitest('read.table(textConnection(lvr_land.txt, encoding = "UTF-8"), header = TRUE, sep = ",")')
 
 - Class : text
   Output: 以上提供數種在R 中處理中文資料的方法給同學參考。
