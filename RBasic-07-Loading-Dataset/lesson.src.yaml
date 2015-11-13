@@ -128,6 +128,11 @@
 - Class : text
   Output: 一試就中，所以同學的R console 上應該顯示出正確的中文字串。
 
+- Class : text
+  Output: 這裡打個岔。`file`函數會建立一個代表檔案的物件，在R 之中叫做`connection`。
+    R 會不定時的關閉不使用的connection，並且在console 顯示警告訊息。
+    所以之後同學會不定時的看到：`closing unused connection`。
+
 - Class : cmd_question
   Output: 一開始先用`readLines`看一下資料是個好習慣。除了第一行外，我們應該
     多看幾行，好猜猜看檔案的格式。請同學再輸入一次`file` 和`readLines` 的組
@@ -136,6 +141,81 @@
   AnswerTests: omnitest(correctVal = readLines(file(lvr_land.path, encoding = "BIG5"), n = 5))
   Hint: 上一次我們使用的指令是：`readLines(file(lvr_land.path, encoding = "BIG5"), n = 1)`
     如果不知道怎麼改`readLines` 讀取的行數，可以回想一下參數n 的意義。
+
+- Class : text
+  Output: 有時候，由於不明原因，R 還是會發生無法讀取特定編碼的狀況。
+    這時候，我們可以先把資料以位元的方式讀取到R 中，再做轉碼。
+
+- Class : text
+  Output: 在程式的世界中，資料在電腦中最終都是儲存為0 和1 的位元。
+    在處理資料時，程式需要先對資料有一些認識才能做處理，例如把資料當成
+    字串、整數或浮點數。文字的資料才會被編碼影響，所以如果我們只是用位元
+    來處理檔案的內容，就可以避開編碼的問題。
+
+- Class : cmd_question
+  Output: R 是型態為raw 的向量來處理位元的物件。只要能知道檔案的大小，
+    readBin 就可以把所有的檔案資料以raw 的形式輸入到R 中。我們可以使用
+    `file.info`來查詢檔案的大小。請同學利用`file.info(lvr_land.path)` 
+    來查詢檔案的資訊，並且把結果存到變數`lvr_land.info`。
+  CorrectAnswer: lvr_land.info <- file.info(lvr_land.path) 
+  AnswerTests: any_of_exprs("lvr_land.info <- file.info(lvr_land.path)",
+    "lvr_land.info = file.info(lvr_land.path)")
+
+- Class : cmd_question
+  Output: 請同學先輸入`class(lvr_land.info)`
+  CorrectAnswer: class(lvr_land.info)
+  AnswerTests: any_of_exprs("class(lvr_land.info)")
+
+- Class : mult_question
+  Output: 請問同學，`file.info`的回傳值是什麼型態？
+  AnswerChoices: data.frame;character;numeric
+  CorrectAnswer: "data.frame"
+  AnswerTests: omnitest(correctVal = "data.frame")
+
+- Class : cmd_question
+  Output: 接下來請同學列出`lvr_land.info`的欄位名稱
+  CorrectAnswer: colnames(lvr_land.info)
+  AnswerTests: omnitest("colnames(lvr_land.info)")
+
+- Class : cmd_question
+  Output: 請問同學，`lvr_land.path`背後的檔案大小，應該是多少呢？
+    請輸入一個指令，讓R 輸出一個數值，代表這個檔案的大小。
+  CorrectAnswer: lvr_land.info$size
+  AnswerTests: omnitest(correctVal = lvr_land.info$size)
+
+- Class : cmd_question
+  Output: 接著請同學利用`readBin`來把`lvr_land.path`的檔案完全以
+    位元組的方式讀到R 中，並且存到名稱為`lvr_land.bin`的變數。
+  CorrectAnswer: lvr_land.bin <- readBin(lvr_land.path, what = "raw", n = lvr_land.info$size)
+  AnswerTests: any_of_exprs('lvr_land.bin <- readBin(lvr_land.path, what = "raw", n = lvr_land.info$size)',
+    'lvr_land.bin = readBin(lvr_land.path, what = "raw", n = lvr_land.info$size)')
+
+- Class : cmd_question
+  Output: 接著，請同學安裝stringi套件。這個套件提供很多解決編碼問題的函數。
+    未來同學如果在R 上遇到任何和文字編碼相關的問題，我也都很建議從這個套件中
+    尋找解決方法。
+  CorrectAnswer: check_then_install("stringi", "1.0.1")
+  AnswerTests: test_package_version("stringi", "1.0.1")
+  Hint: 請利用`install.packages`或是透過Rstudio的功能安裝套件
+
+- Class : cmd_question
+  Output: 請同學載入stringi
+  CorrectAnswer: library(stringi)
+  AnswerTests: test_search_path("stringi")
+
+- Class : text
+  Output: 透過stringi套件的`stri_encode`，我們可以把一個位元組的向量（在
+    R 中，這類向量的型態是raw ）從一個編碼轉換為另一個編碼。
+
+- Class : cmd_question
+  Output: 請同學把`stri_encode(lvr_land.bin, "BIG-5", "UTF-8")`
+    的結果存到`lvr_land.txt`之中。
+  CorrectAnswer: lvr_land.txt <- stri_encode(lvr_land.bin, "BIG-5", "UTF-8")
+  AnswerTests: any_of_exprs('lvr_land.txt <- stri_encode(lvr_land.bin, "BIG-5", "UTF-8")',
+    'lvr_land.txt = stri_encode(lvr_land.bin, "BIG-5", "UTF-8")')
+
+- Class : text
+  Output: 透過以上的方法，我們可以取得轉換編碼後的character 向量`lvr_land.txt`。
 
 - Class : text
   Output: 接著我們開始來講解`read.table`這個讀取CSV 格式檔案最泛用的指令。
@@ -178,8 +258,17 @@
   AnswerTests: val_is(read.table(file(lvr_land.path, encoding = "BIG5"), header = TRUE, sep = ","), 
     "lvr_land")
 
+- Class : cmd_question
+  Output: 如果我們要直接從`lvr_land.txt`的內容取出表格，一種方法是直接把
+    `lvr_land.txt`寫成一個檔案，再用`read.table`讀取。另外一種方法，是把
+    `lvr_land.txt`視為一個類似檔案的物件，也就是connection。我們可以用
+    `textConnection(lvr_land.txt, encoding = "UTF-8")`來從`lvr_land.txt`建立一個connection。
+    請同學輸入：`read.table(textConnection(lvr_land.txt, encoding = "UTF-8"), header = TRUE, sep = ",")`
+  CorrectAnswer: read.table(textConnection(lvr_land.txt, encoding = "UTF-8"), header = TRUE, sep = ",")
+  AnswerTests: omnitest('read.table(textConnection(lvr_land.txt, encoding = "UTF-8"), header = TRUE, sep = ",")')
+
 - Class : text
-  Output: 以上就是一個實際上，處理中文資料的流程。
+  Output: 以上提供數種在R 中處理中文資料的方法給同學參考。
 
 - Class : text
   Output: 事實上，如果同學自行下載原本的檔案來處理，上述的流程還是會出錯的。
