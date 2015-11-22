@@ -1,0 +1,104 @@
+- Class: meta
+  Course: DataScienceAndR
+  Lesson: RProgramming-02-Function
+  Author: Wush Wu
+  Type: Standard
+  Organization: Taiwan R User Group
+  Version: 1.0
+
+- Class : text
+  Output: 這門課程想要跟同學介紹R 中如何建立自己的函數。
+
+- Class : text
+  Output: R 中已經有非常多很方便的工具，例如`mean`、`sd`等各種
+    幫助使用者計算平均值、標準差的「函數」。而R 也可以讓使用者
+    建立自己的函數。
+
+- Class : text
+  Output: 舉例來說，如果我們有一個矩陣`m` 和一個向量`y` ，我們
+    想要找到一個向量`beta`，讓`sum((m %*% beta - y)^2)` 最小。
+    這個問題其實就是迴歸分析要解決的數值問題，因為
+    `sum((m %*% beta - y)^2)` 代表的就是預測誤差的平方和。
+
+- Class : text
+  Output: 以下我們想讓同學建立兩個函數，並且運用這兩個函數和
+    R 的`optim` 函數做結合，解決這個問題，並且和傳統解迴歸的
+    方式做比較。
+
+- Class : cmd_question
+  Output: 首先，我們希望能夠在找到一個`beta`向量的時候，很方便
+    的算出`sum((m %*% beta - y)^2)`。請同學先輸入：
+    `f <- function(beta) sum((m %*% beta - y)^2)`
+  CorrectAnswer: f <- function(beta) sum((m %*% beta - y)^2)
+  AnswerTests: omnitest("f <- function(beta) sum((m %*% beta - y)^2)")
+
+- Class : text
+  Output: 上述的操作，其實就是在建立一個計算`sum((m %*% beta - y)^2)`的函數。
+    沒有寫過程式的同學，可以把「函數」想成是一種「動作」。舉例來說，
+    `sum((m %*% beta - y)^2)` 就是告訴R 在拿到`beta`後要做怎麼樣的「動作」。
+
+- Class : text
+  Output: 這裡的`function`關鍵字，在R 的之中就是要自己創造函數的關鍵字。
+    `function`後面則告訴R ，做動作的時候，哪些名稱的變數是這個動作的「輸入」。
+    而`function(beta)`之後的expression，就是描述動作本身：拿`m` 和`beta`做矩陣乘法，
+    再把結果和`y` 相減、取平方、再算出平方和。
+
+- Class : text
+  Output: 透過上述的操作，我們就可以使用`f` 計算一個`beta`的
+    估計誤差的平方和。
+
+- Class : cmd_question
+  Output: 請同學輸入`f(c(1,2))`
+  CorrectAnswer: f(c(1,2))
+  AnswerTests: omnitest("f(c(1,2))")
+
+- Class : cmd_question
+  Output: 再請同學輸入`f(c(2,3))`
+  CorrectAnswer: f(c(2,3))
+  AnswerTests: omnitest("f(c(2,3))")
+
+- Class : mult_question
+  Output: 請問同學，哪一個`beta`的估計是比較好的？
+  AnswerChoices: c(1,2);c(2,3)
+  CorrectAnswer: c(2,3)
+  AnswerTests: omnitest(correctVal = "c(2,3)")
+
+- Class : text
+  Output: 在R 之中，函數本身也是一種物件。這是「函數式語言」的
+    一個特色。
+
+- Class : cmd_question
+  Output: 在R 之中我們可以利用`optim` 來尋找一個函數的最小值。
+    請同學輸入：`optim(par = c(0,0), f)`並且把結果儲存到變數
+    `r` 之中。我們先讓同學玩一玩`r` 之後，再解釋`optim` 。這段
+    玩的過程，也是當我們第一次使用R 強大的計算功能後，得到的結
+    果。
+  CorrectAnswer: r <- optim(par = c(0,0), f)
+  AnswerTests: any_of_exprs("r <- optim(par = c(0,0), f)", 
+    "r = optim(par = c(0,0), f)")
+
+- Class : cmd_question
+  Output: 這裡的optim 函數很厲害，可以找到一個向量讓`f` 的輸出最小。
+    這些資訊現在都在變數`r` 之中。請同學檢查一下`r` 的型態。
+  CorrectAnswer: class(r)
+  AnswerTests: omnitest("class(r)")
+
+- Class : cmd_question
+  Output: 接著，請同學列出所有`r`元素的名稱。
+  CorrectAnswer: names(r)
+  AnswerTests: omnitest(correctVal = names(r))
+
+- Class : cmd_question
+  Output: 請同學輸入`?optim`讀一讀`optim` 的說明，尤其是下一個問題
+    是要參考Value 這個段落中的說明文字。
+  CorrectAnswer: ?optim
+  AnswerTests: any_of_exprs("?optim", 'help("optim")')
+
+- Class : mult_question
+  Output: 請問同學，哪一個`r` 的元素代表著產生最小值的`beta`？
+  AnswerChoices: par;value;counts;convergence;message
+  CorrectAnswer: par
+  AnswerTests: omnitest(correctVal = "par")
+
+- Class : text
+  Output: 我們回過頭來解釋：``
