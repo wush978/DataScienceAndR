@@ -58,7 +58,7 @@
   Output: 首先，假定我們要重複算99次。請同學先建立一個長度
     為100 的數值向量，並且把它存到變數`x` 之中。
   CorrectAnswer: x <- numeric(100)
-  AnswerTests: test_x()
+  AnswerTests: test_x(x)
 
 - Class : cmd_question
   Output: 請把3 存到`x` 的第一個element

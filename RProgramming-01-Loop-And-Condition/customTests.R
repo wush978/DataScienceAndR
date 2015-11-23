@@ -11,8 +11,6 @@
 # can be used for for the purpose, but it also re-evaluates the
 # expression which the user entered, so care must be taken.
 
-test_x <- function() {
-  e <- get("e", parent.frame())
-  x <- get("x", globalenv())
+test_x <- function(x) {
   (length(x) == 100) & is.numeric(x)
 }
