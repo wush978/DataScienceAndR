@@ -2,15 +2,12 @@ Linux ![](https://travis-ci.org/wush978/DataScienceAndR.svg?branch=course) Windo
 
 # Data Science and R
 
-這個Repository主要是為了準備我在臺大的資料科學課程，幫陳老師講的兩堂R 的課程。課程素材主要就是投影片和swirl。內容則是參考CRAN上介紹R 的官方文件：[An Introduction to R](https://cran.r-project.org/doc/manuals/R-intro.pdf)。
-另外也要感謝社群中所有有參與籌備資料科學愛好者年會2015的同伴。
+這是一個以[swirl](http://swirlstats.com/)撰寫的**R 語言在地化中文教材**。和其他R 教材相比，這份教材具有以下的特色：
 
-第一堂課程的主軸，是要介紹R 語言的背景、特色，以及簡易的環境設定。目標是希望同學在聽完之後，可以開始利用swirl來自學所有R 的基礎。
-
-第二堂課程的主軸，是要介紹R 在Data Mining相關的功能。課程內容希望是涉獵一些我做過的專案，並且介紹一些R 在clustering、frequency pattern mining、
-和recommendation上的一些套件。
-
-由於出自R 社群的緣故，所有的內容我都想公佈在這個repository，以創用CC釋出。如果有朋友想要看swirl course的原始碼，請到course這個branch觀看。因為`swirl::install_course_github`的API設計，讓我必須要把course的檔案切到另外一個branch之中。
+1. **完整**。由於教材是參考CRAN上介紹R 的官方文件：[An Introduction to R](https://cran.r-project.org/doc/manuals/R-intro.pdf)所撰寫的，同學即使只有使用這份教材學R ，即可獲得所有用R 所需要的所有知識。
+2. **在地化的中文資料處理**。教材是特別針對處理台灣的Open Data所設計，所以會涵蓋所有要載入中文資料所需要的知識。網路上雖然已經有很多很棒的R 教材，但是他們通常沒有描述如何處理中文資料。
+3. **新**。在2012年以後，R 的成長是非常快速的，所以教材會納入許多近年來被R 社群證實很棒的套件們。
+4. **套件的使用與探索**。R 的一大優勢就是蓬勃的套件系統。雖然教材中無法介紹所有的套件，但是會教同學如何探索一個第一次接觸的R 套件。
 
 以下的內容是提供給有興趣想利用這些資源做自學的朋友：
 
@@ -76,6 +73,13 @@ RBasic-02至RBasic-07課程最後都有大魔王要給同學攻克。
 ## 教學投影片
 
 - [R 語言上手篇](http://rpubs.com/wush978/DataScienceAndR)
+
+## 緣起
+
+這個Repository主要是為了準備我在臺大的資料科學課程，幫陳老師講的兩堂R 的課程。課程素材主要就是投影片和swirl。內容則是參考CRAN上介紹R 的官方文件：[An Introduction to R](https://cran.r-project.org/doc/manuals/R-intro.pdf)。
+另外也要感謝社群中所有有參與籌備資料科學愛好者年會2015的同伴。
+
+
 
 ## License
 
