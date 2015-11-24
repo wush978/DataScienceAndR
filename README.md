@@ -80,7 +80,7 @@ RBasic-02至RBasic-07課程最後都有大魔王要給同學攻克。
 平台  | 測試結果
 ------------- | -------------
 Linux | ![](https://travis-ci.org/wush978/DataScienceAndR.svg?branch=course)
-Windows | [![Build status](https://ci.appveyor.com/api/projects/status/tej2qnpdxwy2r5lp/branch/course?svg=true)](https://ci.appveyor.com/project/wush978/datascienceandr/branch/course) ps. 目前windows的測試機制有問題，等待修復中
+Windows | [![Build status](https://ci.appveyor.com/api/projects/status/tej2qnpdxwy2r5lp/branch/course?svg=true)](https://ci.appveyor.com/project/wush978/datascienceandr/branch/course)
 
 ## License
 
