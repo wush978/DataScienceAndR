@@ -1,0 +1,389 @@
+---
+title       : "R 語言和Data Mining"
+author      : "Wush Wu"
+framework   : io2012-wush
+highlighter : highlight.js
+hitheme     : zenburn
+widgets     : [mathjax]            # {mathjax, quiz, bootstrap}
+mode        : selfcontained # {standalone, draft}
+knit        : slidify::knit2slides
+--- &vcenter .largecontent
+
+```{r setup, include=FALSE, cache=FALSE}
+library(knitr)
+library(magrittr)
+
+opts_chunk$set(echo = TRUE, results = "hide", cache=FALSE, comment="", 
+               cache.path = ".cache-EDA/", dev.args=list(bg="transparent"),
+               fig.width = 10, fig.height = 5)
+fig <- function(path, size = 100) {
+  sprintf("<img src='assets/img/%s' style='max-width: %d%%;max-height: %d%%'></img>", 
+          path, size, size)
+}
+fig2 <- function(path, size = 100) {
+  sprintf("<img src='assets/img/%s' style='width: %d%%'></img>", 
+          path, size)
+}
+sys_name <- Sys.info()["sysname"] %>% tolower
+sys_encode <- c("utf8", "utf8", "big5")[pmatch(sys_name, c("linux", "darwin", "windows"))]
+sessionInfo() %>% capture.output %>% cat(file = "sessionInfo.log", sep = "\n")
+```
+
+## 目錄
+
+- R 語言的視覺化
+- R 語言的Clustering 相關套件介紹
+- R 語言的Classification 相關套件介紹
+- R 語言的Frequency Pattern Mining 相關套件介紹
+- R 語言的Text Mining 相關套件介紹
+
+--- .dark .segue
+
+## R 語言的視覺化
+
+--- &vcenter .largecontent
+
+## R 的繪圖引擎
+
+- X11: Unix 作業系統上的X11 桌面系統
+- windows: 用於Windows系統
+- quartz: Mac OS X 系統
+- postscript: 用於印表機或是建立PostScript文件
+- pdf, png, jpeg: 用於建立特定格式的檔案
+- html 和 javascript: 用於建立網頁上的互動式圖表
+
+--- &vcenter .largecontent
+
+## R 的繪圖簡介
+
+- API 設計
+    - 基本繪圖API
+    - ggplot2
+- 大數據時代的視覺化
+
+```{r ggplot2-1, echo = FALSE}
+suppressPackageStartupMessages(library(ggplot2))
+qplot(Sepal.Length, Petal.Length, data = iris, color = Species)
+```
+
+--- .dark .segue
+
+## R 的各種基礎Visualization API
+
+--- &vcenter .largecontent
+
+## Visualization 簡單分類
+
+- 單變數
+    - 類別型變數
+    - 連續型變數
+- 雙變數
+    - 連續 vs 連續
+    - 連續 vs 離散
+    - 連續 vs 連續
+- 多變量
+
+--- &vcenter .largecontent
+
+## 類別型變數
+
+```{r categorical-plot}
+pie(table(iris$Species))
+```
+
+--- &vcenter .largecontent
+
+## 連續型變數
+
+```{r continuous-plot}
+par(mfrow = c(1, 2))
+plot(density(iris$Sepal.Length))
+hist(iris$Sepal.Length)
+```
+
+--- &vcenter .largecontent
+
+## 類別 v.s. 類別
+
+```{r categorical-categorical}
+data(Titanic)
+mosaicplot(~ Sex + Survived, data = Titanic, 
+           main = "Survival on the Titanic", color = TRUE)
+```
+
+--- &vcenter .largecontent
+
+## 類別 v.s. 連續
+
+```{r categorical-continuous}
+plot(Sepal.Length ~ Species, iris)
+```
+
+--- &vcenter .largecontent
+
+## 連續 v.s. 連續
+
+```{r continuous-continuous}
+plot(dist ~ speed, cars)
+```
+
+--- &vcenter .largecontent
+
+## 多變量
+
+```{r mv1}
+plot(iris)
+```
+
+--- &vcenter .largecontent
+
+## 多變量
+
+```{r mv2, warnings = FALSE}
+suppressPackageStartupMessages(library(PerformanceAnalytics))
+suppressWarnings(chart.Correlation(iris[-5], bg=iris$Species, pch=21))
+```
+
+--- &vcenter .largecontent
+
+## 多變量
+
+```{r mv3, warnings = FALSE}
+library(corrplot)
+corrplot(cor(mtcars), method = "circle")
+```
+
+--- .segue .dark
+
+## 各種R 和分析結果結合的視覺化
+
+--- &vcenter .largecontent
+
+## `plot`和Linear Regression
+
+```{r lm.plot, echo = TRUE, results = 'hide'}
+g <- lm(dist ~ speed, cars)
+par(mfrow = c(2,2))
+plot(g)
+```
+
+--- &vcenter .largecontent
+
+## `plot`和Regression
+
+```{r lowess}
+plot(cars, main = "lowess(cars)")
+lines(lowess(cars), col = 2)
+```
+
+<small>W. S. Cleveland, E. Grosse and W. M. Shyu (1992) Local regression models. Chapter 8 of Statistical Models in S eds J.M. Chambers and T.J. Hastie, Wadsworth & Brooks/Cole. </small>
+
+--- &vcenter .largecontent
+
+## `plot`和Regression
+
+```{r sm}
+suppressPackageStartupMessages(library(sm))
+with(cars, sm.regression(dist, speed, method = "aicc", 
+                         col = "red", model = "linear"))
+```
+
+<small>Bowman, A.W. and Azzalini, A. (1997). Applied Smoothing Techniques for Data Analysis: the Kernel Approach with S-Plus Illustrations. Oxford University Press, Oxford.</small>
+
+--- &vcenter .largecontent
+
+## `plot`和Decision Tree
+
+```{r rpart.plot, echo = TRUE, results = 'hide'}
+library(rpart)
+library(rpart.plot)
+rpart.plot(rpart(Species ~ ., iris))
+```
+
+--- &vcenter .largecontent
+
+## 多變量 PCA
+
+```{r ggplot2-mv1}
+library(ade4)
+g <- dudi.pca(iris[,-5], scan = FALSE)
+scatter(g)
+```
+
+--- &vcenter .largecontent
+
+## R 的基本繪圖API
+
+- 高階繪圖指令：依據輸入的資料產生完整的圖片
+- 低階繪圖指令：修飾當前的圖片
+
+--- &vcenter .largecontent
+
+## 基礎繪圖方式與R 的基本繪圖API
+
+- 泛用型的物件導向API：
+    - `plot`本身能以直角座標系統繪製各種幾何圖形
+    - `plot`能和模型結合，依據模型的型態繪製各種模型的結果
+        - `plot.lm`, `rpart::plot.rpart`
+
+--- &vcenter .largecontent
+
+## 基礎繪圖API
+
+- `pie`, `hist`, `boxplot`, `barplot`, ...
+    - 清空之前的繪圖結果
+- `lines`, `points`, `legend`, `title`, `text`, `polygon`, ..
+    - 修飾之前的繪圖結果
+- `par`
+    - 控制繪圖引擎的參數
+
+--- .segue .dark
+
+## ggplot2
+
+--- &vcenter .largecontent
+
+## Reference
+
+- Wilkinson, Leland (2005). The Grammar of Graphics. Springer. ISBN 978-0-387-98774-3.
+
+--- &vcenter .largecontent
+
+## ggplot2 的邏輯
+
+- 基礎API 是一種用紙筆模型來繪圖的設計思想
+- ggplot2 是一種以繪圖物件為主的設計思想
+
+--- &vcenter .largecontent
+
+## ggplot2 對R 的影響
+
+- 大量以ggplot2的API 為骨幹的套件
+
+--- &vcenter .largecontent
+
+## ggplot2 離散
+
+```{r ggplot2-categorical}
+data(diamonds, package = "ggplot2")
+ggplot(diamonds, aes(x = color)) +
+  geom_bar()
+```
+
+--- &vcenter .largecontent
+
+## ggplot2 連續
+
+```{r ggplot2-continuous}
+ggplot(diamonds, aes(x = price)) + 
+  geom_density()
+```
+
+--- &vcenter .largecontent
+
+## ggplot2 離散 v.s. 離散
+
+```{r ggplot2-categorical-categorical, echo = FALSE}
+## Mosaic plot: ggMMplot function - thanks to Edwin on Stackoverflow: http://stackoverflow.com/questions/19233365/how-to-create-a-marimekko-mosaic-plot-in-ggplot2
+
+ggMMplot <- function(var1, var2){
+  require(ggplot2)
+  levVar1 <- length(levels(var1))
+  levVar2 <- length(levels(var2))
+  
+  jointTable <- prop.table(table(var1, var2))
+  plotData <- as.data.frame(jointTable)
+  plotData$marginVar1 <- prop.table(table(var1))
+  plotData$var2Height <- plotData$Freq / plotData$marginVar1
+  plotData$var1Center <- c(0, cumsum(plotData$marginVar1)[1:levVar1 -1]) +
+    plotData$marginVar1 / 2
+  
+  ggplot(plotData, aes(var1Center, var2Height)) +
+    geom_bar(stat = "identity", aes(width = marginVar1, fill = var2), col = "Black") +
+    geom_text(aes(label = as.character(var1), x = var1Center, y = 1.05)) 
+}
+ggMMplot(diamonds$cut, diamonds$color)
+```
+
+<small>http://stackoverflow.com/questions/19233365/how-to-create-a-marimekko-mosaic-plot-in-ggplot2</small>
+
+--- &vcenter .largecontent
+
+## ggplot2 類別 v.s. 連續
+
+```{r ggplot2-categorical-continuous}
+ggplot(iris, aes(x = Species, y = Sepal.Width)) +
+  geom_boxplot()
+```
+
+--- &vcenter .largecontent
+
+## ggplot2 連續 v.s. 連續
+
+```{r ggplot2-continuous-continuous}
+ggplot(iris, aes(x = Sepal.Width, y = Sepal.Length, color = Species)) +
+  geom_point()
+```
+
+--- .segue .dark
+
+## 大數據時代的視覺化
+
+--- &vcenter .largecontent
+
+## 大數據時代視覺化的挑戰
+
+- 資料太大，直接化就當機，打開圖的人也會當機
+- 資料的維度太多，需要能對圖做操作，而不是程式碼
+- 資料的種類更廣泛，除了離散、數值之外，還包含如「圖資」等各種資料
+
+--- &vcenter .largecontent
+
+## tabplot
+
+- Google: "R big data visualization"
+- <https://cran.r-project.org/web/packages/tabplot/vignettes/tabplot-vignette.html>
+- 初步解決了數據量的問題
+
+--- &vcenter .largecontent
+
+## Web Based 的互動式解決方案
+
+- Java Script
+    - <http://www.htmlwidgets.org/>
+    - 透過互動圖表解決資料維度更多的問題
+    - <http://yihui.name/recharts/>
+- Shiny
+    - <http://shiny.rstudio.com/gallery/>
+
+--- &vcenter .largecontent
+
+## Open Source 太棒了
+
+- 新型態的資料，社群就會誕生新的套件
+    - 圖資：ggmap, ...
+    - 空間數據：各種3D的視覺化套件
+
+--- .dark .segue
+
+## Dimension Reduction
+
+--- .dark .segue
+
+## Clustering
+
+--- .dark .segue
+
+## Classification
+
+--- .dark .segue
+
+## Association Rule
+
+--- .dark .segue
+
+## Text Mining
+
+--- &vcenter .largecontent
+
+## Q&A
