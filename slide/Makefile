@@ -4,4 +4,4 @@ all : GettingStarted.html RDataMining.html
 	Rscript -e "slidify::slidify('$<')"
 
 clean :
-	-rm ./*.html ./*.md
+	-rm -rf GettingStarted.html RDataMining.html ./cache-RDataMining

@@ -14,7 +14,7 @@ library(knitr)
 library(magrittr)
 
 opts_chunk$set(echo = TRUE, results = "hide", cache=TRUE, comment="", 
-               cache.path = ".cache-EDA/", dev.args=list(bg="transparent"),
+               cache.path = "cache-RDataMining/", dev.args=list(bg="transparent"),
                fig.width = 10, fig.height = 5)
 fig <- function(path, size = 100) {
   sprintf("<img src='assets/img/%s' style='max-width: %d%%;max-height: %d%%'></img>", 
