@@ -196,7 +196,7 @@
     Shapiro-Wilk normality test
 
 data:  x
-W = 0.93385, p-value = 8.287e-05
+W = 0.93866, p-value = 0.0001598
 </code></pre>
 
 </article>
@@ -242,7 +242,7 @@ legend(&quot;topright&quot;, c(&quot;x1&quot;, &quot;x2&quot;), lty = 1, col = 1
     Two-sample Kolmogorov-Smirnov test
 
 data:  x1 and x2
-D = 0.2, p-value = 0.2719
+D = 0.18, p-value = 0.3959
 alternative hypothesis: two-sided
 </code></pre>
 
@@ -311,7 +311,7 @@ plot(density(x &lt;- rbinom(1000, 10000, p)))
 <li>精確的模擬結果：<code>mean(x &gt; 10)</code></li>
 </ul>
 
-<pre><code>[1] 0.046
+<pre><code>[1] 0.041
 </code></pre>
 
 </article>
@@ -327,12 +327,15 @@ plot(density(x &lt;- rbinom(1000, 10000, p)))
 </ul>
 
 <pre><code class="r">library(binom)
-binom.confint(c(10, 3), c(10000, 5000), methods = &quot;exact&quot;)
 </code></pre>
 
-<pre><code>  method  x     n  mean        lower       upper
-1  exact 10 10000 1e-03 0.0004796397 0.001838264
-2  exact  3  5000 6e-04 0.0001237515 0.001752444
+<pre><code>Error in library(binom): there is no package called &#39;binom&#39;
+</code></pre>
+
+<pre><code class="r">binom.confint(c(10, 3), c(10000, 5000), methods = &quot;exact&quot;)
+</code></pre>
+
+<pre><code>Error in eval(expr, envir, enclos): 沒有這個函數 &quot;binom.confint&quot;
 </code></pre>
 
 </article>
@@ -442,9 +445,15 @@ chart.ACFplus(edhec[,1,drop=FALSE])
     <h2>範例 - 經濟學人風格的視覺化</h2>
   </hgroup>
   <article data-timings="">
-    <p><center>
-<img src="assets/fig/ggthemes-1.png" alt="plot of chunk ggthemes"> 
-</center></p>
+    <p><center></p>
+
+<pre><code>Error in library(ggthemes): there is no package called &#39;ggthemes&#39;
+</code></pre>
+
+<pre><code>Error in eval(expr, envir, enclos): 沒有這個函數 &quot;theme_economist&quot;
+</code></pre>
+
+<p></center></p>
 
   </article>
   <!-- Presenter Notes -->
@@ -613,72 +622,11 @@ head(TWII)
 head(Teams[,c(&quot;yearID&quot;, &quot;name&quot;, &quot;Rank&quot;, &quot;W&quot;, &quot;L&quot;, &quot;R&quot;, &quot;RA&quot;)])
 </code></pre>
 
-<table><thead>
-<tr>
-<th align="right">yearID</th>
-<th align="left">name</th>
-<th align="right">Rank</th>
-<th align="right">W</th>
-<th align="right">L</th>
-<th align="right">R</th>
-<th align="right">RA</th>
-</tr>
-</thead><tbody>
-<tr>
-<td align="right">1871</td>
-<td align="left">Boston Red Stockings</td>
-<td align="right">3</td>
-<td align="right">20</td>
-<td align="right">10</td>
-<td align="right">401</td>
-<td align="right">303</td>
-</tr>
-<tr>
-<td align="right">1871</td>
-<td align="left">Chicago White Stockings</td>
-<td align="right">2</td>
-<td align="right">19</td>
-<td align="right">9</td>
-<td align="right">302</td>
-<td align="right">241</td>
-</tr>
-<tr>
-<td align="right">1871</td>
-<td align="left">Cleveland Forest Citys</td>
-<td align="right">8</td>
-<td align="right">10</td>
-<td align="right">19</td>
-<td align="right">249</td>
-<td align="right">341</td>
-</tr>
-<tr>
-<td align="right">1871</td>
-<td align="left">Fort Wayne Kekiongas</td>
-<td align="right">7</td>
-<td align="right">7</td>
-<td align="right">12</td>
-<td align="right">137</td>
-<td align="right">243</td>
-</tr>
-<tr>
-<td align="right">1871</td>
-<td align="left">New York Mutuals</td>
-<td align="right">5</td>
-<td align="right">16</td>
-<td align="right">17</td>
-<td align="right">302</td>
-<td align="right">313</td>
-</tr>
-<tr>
-<td align="right">1871</td>
-<td align="left">Philadelphia Athletics</td>
-<td align="right">1</td>
-<td align="right">21</td>
-<td align="right">7</td>
-<td align="right">376</td>
-<td align="right">266</td>
-</tr>
-</tbody></table>
+<pre><code>Error in library(Lahman): there is no package called &#39;Lahman&#39;
+</code></pre>
+
+<pre><code>Error in head(Teams[, c(&quot;yearID&quot;, &quot;name&quot;, &quot;Rank&quot;, &quot;W&quot;, &quot;L&quot;, &quot;R&quot;, &quot;RA&quot;)]): 找不到物件 &#39;Teams&#39;
+</code></pre>
 
 </article>
 <!-- Presenter Notes -->
@@ -688,9 +636,18 @@ head(Teams[,c(&quot;yearID&quot;, &quot;name&quot;, &quot;Rank&quot;, &quot;W&qu
     <h2>特定領域 - 大聯盟歷年得分</h2>
   </hgroup>
   <article data-timings="">
-    <p><center>
-<img src="assets/fig/baseball-1.png" alt="plot of chunk baseball"> 
-</center></p>
+    <p><center></p>
+
+<pre><code>Error in eval(expr, envir, enclos): 找不到物件 &#39;Teams&#39;
+</code></pre>
+
+<pre><code>Error in names(totalRS) &lt;- c(&quot;yearID&quot;, &quot;RUN&quot;): 找不到物件 &#39;totalRS&#39;
+</code></pre>
+
+<pre><code>Error in ggplot(data = totalRS, aes(x = yearID, y = RUN)): 找不到物件 &#39;totalRS&#39;
+</code></pre>
+
+<p></center></p>
 
   </article>
   <!-- Presenter Notes -->
@@ -700,58 +657,8 @@ head(Teams[,c(&quot;yearID&quot;, &quot;name&quot;, &quot;Rank&quot;, &quot;W&qu
   <h2>特定領域 - 王建民歷年成績</h2>
 </hgroup>
 <article class = 'flexbox vcenter'>
-<table><thead>
-<tr>
-<th align="left">playerID</th>
-<th align="right">yearID</th>
-<th align="right">W</th>
-<th align="right">L</th>
-<th align="right">ERA</th>
-</tr>
-</thead><tbody>
-<tr>
-<td align="left">wangch01</td>
-<td align="right">2005</td>
-<td align="right">8</td>
-<td align="right">5</td>
-<td align="right">4.02</td>
-</tr>
-<tr>
-<td align="left">wangch01</td>
-<td align="right">2006</td>
-<td align="right">19</td>
-<td align="right">6</td>
-<td align="right">3.63</td>
-</tr>
-<tr>
-<td align="left">wangch01</td>
-<td align="right">2007</td>
-<td align="right">19</td>
-<td align="right">7</td>
-<td align="right">3.70</td>
-</tr>
-<tr>
-<td align="left">wangch01</td>
-<td align="right">2008</td>
-<td align="right">8</td>
-<td align="right">2</td>
-<td align="right">4.07</td>
-</tr>
-<tr>
-<td align="left">wangch01</td>
-<td align="right">2009</td>
-<td align="right">1</td>
-<td align="right">6</td>
-<td align="right">9.64</td>
-</tr>
-<tr>
-<td align="left">wangch01</td>
-<td align="right">2011</td>
-<td align="right">4</td>
-<td align="right">3</td>
-<td align="right">4.04</td>
-</tr>
-</tbody></table>
+<pre><code>Error in filter_(.data, .dots = lazyeval::lazy_dots(...)): 找不到物件 &#39;Pitching&#39;
+</code></pre>
 
 </article>
 <!-- Presenter Notes -->
@@ -769,6 +676,9 @@ head(Teams[,c(&quot;yearID&quot;, &quot;name&quot;, &quot;Rank&quot;, &quot;W&qu
   library(topicmodels) # 主題模型
   library(igraph)      # 主題模型關聯
 })
+</code></pre>
+
+<pre><code>Error in library(tm): there is no package called &#39;tm&#39;
 </code></pre>
 
 </article>
@@ -827,7 +737,29 @@ head(Teams[,c(&quot;yearID&quot;, &quot;name&quot;, &quot;Rank&quot;, &quot;W&qu
   <h2>特定領域 - 文字雲</h2>
 </hgroup>
 <article class = 'flexbox vcenter'>
-<p><img src="assets/fig/tdm-1.png" alt="plot of chunk tdm"> </p>
+<pre><code>Error in eval(expr, envir, enclos): 沒有這個函數 &quot;Corpus&quot;
+</code></pre>
+
+<pre><code>Error in eval(expr, envir, enclos): 沒有這個函數 &quot;TermDocumentMatrix&quot;
+</code></pre>
+
+<pre><code>Error in eval(expr, envir, enclos): 沒有這個函數 &quot;DocumentTermMatrix&quot;
+</code></pre>
+
+<pre><code>Error in as.matrix(dtm1): 找不到物件 &#39;dtm1&#39;
+</code></pre>
+
+<pre><code>Error in is.data.frame(x): 找不到物件 &#39;m&#39;
+</code></pre>
+
+<pre><code>Error in eval(expr, envir, enclos): 找不到物件 &#39;v&#39;
+</code></pre>
+
+<pre><code>Error in data.frame(word = myNames, freq = v): 找不到物件 &#39;myNames&#39;
+</code></pre>
+
+<pre><code>Error in mean(d$freq): 找不到物件 &#39;d&#39;
+</code></pre>
 
 </article>
 <!-- Presenter Notes -->
@@ -911,22 +843,22 @@ head(Teams[,c(&quot;yearID&quot;, &quot;name&quot;, &quot;Rank&quot;, &quot;W&qu
 <li>前十名的R 套件有一半是Hadley寫的</li>
 </ul>
 
-<!-- html table generated in R 3.2.2 by xtable 1.7-4 package -->
+<!-- html table generated in R 3.2.2 by xtable 1.8-0 package -->
 
-<!-- Fri Oct 23 01:18:15 2015 -->
+<!-- Thu Nov 26 13:47:22 2015 -->
 
 <table border=1>
 <tr> <th>  </th> <th> package </th> <th> downloads </th>  </tr>
-  <tr> <td align="right"> 1 </td> <td> Rcpp </td> <td> 208987 </td> </tr>
-  <tr> <td align="right"> 2 </td> <td> ggplot2 </td> <td> 182208 </td> </tr>
-  <tr> <td align="right"> 3 </td> <td> stringr </td> <td> 168142 </td> </tr>
-  <tr> <td align="right"> 4 </td> <td> stringi </td> <td> 167407 </td> </tr>
-  <tr> <td align="right"> 5 </td> <td> plyr </td> <td> 166594 </td> </tr>
-  <tr> <td align="right"> 6 </td> <td> digest </td> <td> 158068 </td> </tr>
-  <tr> <td align="right"> 7 </td> <td> magrittr </td> <td> 156989 </td> </tr>
-  <tr> <td align="right"> 8 </td> <td> scales </td> <td> 152784 </td> </tr>
-  <tr> <td align="right"> 9 </td> <td> reshape2 </td> <td> 147723 </td> </tr>
-  <tr> <td align="right"> 10 </td> <td> RColorBrewer </td> <td> 140949 </td> </tr>
+  <tr> <td align="right"> 1 </td> <td> Rcpp </td> <td> 226777 </td> </tr>
+  <tr> <td align="right"> 2 </td> <td> stringi </td> <td> 199404 </td> </tr>
+  <tr> <td align="right"> 3 </td> <td> ggplot2 </td> <td> 185320 </td> </tr>
+  <tr> <td align="right"> 4 </td> <td> stringr </td> <td> 168450 </td> </tr>
+  <tr> <td align="right"> 5 </td> <td> plyr </td> <td> 165554 </td> </tr>
+  <tr> <td align="right"> 6 </td> <td> magrittr </td> <td> 156032 </td> </tr>
+  <tr> <td align="right"> 7 </td> <td> digest </td> <td> 153141 </td> </tr>
+  <tr> <td align="right"> 8 </td> <td> reshape2 </td> <td> 148109 </td> </tr>
+  <tr> <td align="right"> 9 </td> <td> scales </td> <td> 142792 </td> </tr>
+  <tr> <td align="right"> 10 </td> <td> RColorBrewer </td> <td> 139495 </td> </tr>
    </table>
 
 </article>
