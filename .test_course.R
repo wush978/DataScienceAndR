@@ -8,7 +8,7 @@ test_lesson = function(lesson_dir){
   attach(.e)
   on.exit(detach(.e))
   e = new.env()
-  
+  e$path <- lesson_dir
   # Since the initLesson might change working directory, load lesson yaml first before that happens.
   lesson = yaml.load_file(paste0(lesson_dir,"/lesson.yaml"))
   

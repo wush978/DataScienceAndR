@@ -27,51 +27,54 @@ group <- split(seq_len(nrow(LetterRecognition)), index.group)
 LetterRecognition.train <- LetterRecognition[group[[1]],]
 LetterRecognition.tune <- LetterRecognition[group[[2]],]
 LetterRecognition.test <- LetterRecognition[group[[3]],]
-
-#' 請同學用rpart 與預設參數，在LetterRecognition.train上學一個decision tree model
-#' 這裡的formula應該使用 lettr ~ .，代表依據lettr以外的變數來預測lettr
-g.dt <- rpart(lettr ~ ., LetterRecognition.train)
-stopifnot(class(g.dt) == "rpart")
-
-p.dt <- predict(g.dt, LetterRecognition.test, type = "class")
-stopifnot(class(p.dt) == "factor")
-stopifnot(levels(p.dt) == levels(LetterRecognition$Species))
-
-#' 由於xgboost 不吃formula interface，我們需要手動建立矩陣和輸出向量
-formula <- reformulate(setdiff(colnames(LetterRecognition), "lettr"))
-xgtrain <- xgb.DMatrix(data = model.matrix(formula, LetterRecognition.train), 
-                       label = as.integer(LetterRecognition.train$lettr) - 1)
-xgtune <- xgb.DMatrix(data = model.matrix(formula, LetterRecognition.tune),
-                      label = as.integer(LetterRecognition.tune$lettr) - 1)
-xgtest <- xgb.DMatrix(data = model.matrix(formula, LetterRecognition.test))
-
-#' 接著，我們利用xgboost從training dataset學出一個模型
-g.bst <- xgboost(xgtrain, nround = 10, 
-                 objective = "multi:softprob", num_class = 26)
-#' 我們可以再用以下的方法把xgboost的輸出轉回字母辨識的factor
-p.bst <- matrix(predict(g.bst, xgtest), ncol = 26, byrow = 3)
-stopifnot(class(p.bst) == "matrix")
-stopifnot(dim(p.bst) == c(nrow(LetterRecognition.test), 26L))
-
-p.bst <- factor(apply(p.bst, 1, which.max))
-levels(p.bst) <- levels(LetterRecognition$lettr)
-
-#' 最後，我們來學一個svm 的模型與預測
-g.svm <- svm(lettr ~ ., LetterRecognition.train)
-p.svm <- predict(g.svm, LetterRecognition.test)
-
 #' 取得測試資料的結果
 answer <- LetterRecognition.test$lettr
 
-#' 我們可以簡單用table來比較分類得到的字母和實際的字母
-table(p.dt, answer)
-table(p.bst, answer)
-table(p.svm, answer)
+if (interactive() & Sys.getenv("THIS_IS_NOT_HUMAN") != "TRUE") { # 自動測試會略過這段
 
-#' caret 套件的confusionMatrix函數可以更仔細的檢視三個分類器的表現
-confusionMatrix(p.dt, answer)
-confusionMatrix(p.bst, answer)
-confusionMatrix(p.svm, answer)
+  #' 請同學用rpart 與預設參數，在LetterRecognition.train上學一個decision tree model
+  #' 這裡的formula應該使用 lettr ~ .，代表依據lettr以外的變數來預測lettr
+  g.dt <- rpart(lettr ~ ., LetterRecognition.train)
+  stopifnot(class(g.dt) == "rpart")
+  
+  p.dt <- predict(g.dt, LetterRecognition.test, type = "class")
+  stopifnot(class(p.dt) == "factor")
+  stopifnot(levels(p.dt) == levels(LetterRecognition$Species))
+  
+  #' 由於xgboost 不吃formula interface，我們需要手動建立矩陣和輸出向量
+  formula <- reformulate(setdiff(colnames(LetterRecognition), "lettr"))
+  xgtrain <- xgb.DMatrix(data = model.matrix(formula, LetterRecognition.train), 
+                         label = as.integer(LetterRecognition.train$lettr) - 1)
+  xgtune <- xgb.DMatrix(data = model.matrix(formula, LetterRecognition.tune),
+                        label = as.integer(LetterRecognition.tune$lettr) - 1)
+  xgtest <- xgb.DMatrix(data = model.matrix(formula, LetterRecognition.test))
+  
+  #' 接著，我們利用xgboost從training dataset學出一個模型
+  g.bst <- xgboost(xgtrain, nround = 10, 
+                   objective = "multi:softprob", num_class = 26)
+  #' 我們可以再用以下的方法把xgboost的輸出轉回字母辨識的factor
+  p.bst <- matrix(predict(g.bst, xgtest), ncol = 26, byrow = 3)
+  stopifnot(class(p.bst) == "matrix")
+  stopifnot(dim(p.bst) == c(nrow(LetterRecognition.test), 26L))
+  
+  p.bst <- factor(apply(p.bst, 1, which.max))
+  levels(p.bst) <- levels(LetterRecognition$lettr)
+  
+  #' 最後，我們來學一個svm 的模型與預測
+  g.svm <- svm(lettr ~ ., LetterRecognition.train)
+  p.svm <- predict(g.svm, LetterRecognition.test)
+  
+  #' 我們可以簡單用table來比較分類得到的字母和實際的字母
+  table(p.dt, answer)
+  table(p.bst, answer)
+  table(p.svm, answer)
+  
+  #' caret 套件的confusionMatrix函數可以更仔細的檢視三個分類器的表現
+  confusionMatrix(p.dt, answer)
+  confusionMatrix(p.bst, answer)
+  confusionMatrix(p.svm, answer)
+}
+
 
 #' 其實我們可以把每一種模型的參數調整的更好，這就是當初保留tuning dataset的意義
 answer.tune <- LetterRecognition.tune$lettr
