@@ -29,6 +29,14 @@ LetterRecognition.tune <- LetterRecognition[group[[2]],]
 LetterRecognition.test <- LetterRecognition[group[[3]],]
 #' 取得測試資料的結果
 answer <- LetterRecognition.test$lettr
+#' 由於xgboost 不吃formula interface，我們需要手動建立矩陣和輸出向量
+formula <- reformulate(setdiff(colnames(LetterRecognition), "lettr"))
+xgtrain <- xgb.DMatrix(data = model.matrix(formula, LetterRecognition.train), 
+                       label = as.integer(LetterRecognition.train$lettr) - 1)
+xgtune <- xgb.DMatrix(data = model.matrix(formula, LetterRecognition.tune),
+                      label = as.integer(LetterRecognition.tune$lettr) - 1)
+xgtest <- xgb.DMatrix(data = model.matrix(formula, LetterRecognition.test))
+
 
 if (interactive() & Sys.getenv("THIS_IS_NOT_HUMAN") != "TRUE") { # 自動測試會略過這段
 
@@ -40,14 +48,6 @@ if (interactive() & Sys.getenv("THIS_IS_NOT_HUMAN") != "TRUE") { # 自動測試�
   p.dt <- predict(g.dt, LetterRecognition.test, type = "class")
   stopifnot(class(p.dt) == "factor")
   stopifnot(levels(p.dt) == levels(LetterRecognition$Species))
-  
-  #' 由於xgboost 不吃formula interface，我們需要手動建立矩陣和輸出向量
-  formula <- reformulate(setdiff(colnames(LetterRecognition), "lettr"))
-  xgtrain <- xgb.DMatrix(data = model.matrix(formula, LetterRecognition.train), 
-                         label = as.integer(LetterRecognition.train$lettr) - 1)
-  xgtune <- xgb.DMatrix(data = model.matrix(formula, LetterRecognition.tune),
-                        label = as.integer(LetterRecognition.tune$lettr) - 1)
-  xgtest <- xgb.DMatrix(data = model.matrix(formula, LetterRecognition.test))
   
   #' 接著，我們利用xgboost從training dataset學出一個模型
   g.bst <- xgboost(xgtrain, nround = 10, 
