@@ -1,6 +1,8 @@
 #' 這份作業會讓同學走一次實務做模型比較的流程
 #' 請同學先安裝好 mlbench和caret和glmnet套件，再進行這個作業
 
+Sys.setenv("THIS_IS_NOT_HUMAN" = "TRUE")
+
 library(rpart)
 library(xgboost)
 library(e1071)
@@ -75,7 +77,7 @@ confusionMatrix(p.svm, answer)
 answer.tune <- LetterRecognition.tune$lettr
 
 #' 我們讓參數cp 從1e-1跑到1e-6，看看在tuning dataset上的準確度
-if (interactive()) { # 自動測試會略過這段
+if (interactive() & Sys.getenv("THIS_IS_NOT_HUMAN") != "TRUE") { # 自動測試會略過這段
   cp.value.list <- c(1e-1, 1e-2, 1e-3, 1e-4, 1e-5, 1e-6)
   accuracy.dt <- sapply(cp.value.list, function(cp.value) {
     g.dt <- rpart(lettr ~ ., LetterRecognition.train, control = rpart.control(cp = cp.value))
@@ -101,7 +103,7 @@ p.dt2 <- NULL # 請把NULL換成你的程式碼
 #' 並且加大nround，為了預防overfitting，也啟用early stop 
 
 #' 列出想要測試的參數組合：
-if (interactive()) { # 自動測試會略過這段
+if (interactive() & Sys.getenv("THIS_IS_NOT_HUMAN") != "TRUE") { # 自動測試會略過這段
   xgb.param.grid <- expand.grid(
     eta = c(0.2, 0.3, 0.4),
     max_depth = c(5, 6, 7)
@@ -146,7 +148,7 @@ p.bst2 <- NULL # 請把NULL換成你的程式碼
 #' 另外請同學想想，max_depth 是不是越大越好？
 
 #' 最後，我們來調整svm 的cost parameter
-if (interactive()) { # 自動測試會略過這段
+if (interactive() & Sys.getenv("THIS_IS_NOT_HUMAN") != "TRUE") { # 自動測試會略過這段
   svm.cost.grid <- c(0.1, 0.5, 1.0, 2, 10)
   svm.cost.accuracy <- sapply(svm.cost.grid, function(svm.cost) {
     g.svm <- svm(lettr ~ ., LetterRecognition.train, cost = svm.cost)
@@ -181,7 +183,7 @@ confusionMatrix(p.svm2, answer)
 #' 請從c("dt", "bst", "svm")中挑選一個
 best.model <- NULL
 
-if (interactive()) { # 自動測試會略過這段
+if (interactive() & Sys.getenv("THIS_IS_NOT_HUMAN") != "TRUE") { # 自動測試會略過這段
   
   #' BONUS
   #' 趁這個機會，我們來試試看一個現代Machine Learning 競賽常用的技巧：

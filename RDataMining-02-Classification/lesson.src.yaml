@@ -493,5 +493,5 @@
 - Class : script
   Output: 請同學跟著作業的程式碼，利用`caret`套件比較rpart, xgboost和e1071在iris上的表現。
     完成後請輸入`submit()`做檢查。
-  Scripts: RDataMining-02-HW.R
+  Script: RDataMining-02-HW.R
   AnswerTests: rdatamining_02_test()
