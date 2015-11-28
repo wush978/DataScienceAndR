@@ -195,6 +195,9 @@ rpart_02_test <- function() {
 
 rdatamining_02_test <- function() {
   e <- get("e", parent.frame())
+  check_then_install("mlbench", "2.1.1")
+  check_then_install("caret", "6.0.62")
+  check_then_install("glmnet", "2.0.2")
   source_result <- try(source(e$script_temp_path, local = new.env(), encoding = "UTF-8"), silent = TRUE)
   if (class(source_result)[1] == "try-error") return(FALSE)
   name.list <- c("v1.dt2", "v2.dt2", "p.dt2", 
