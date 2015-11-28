@@ -267,6 +267,14 @@
   CorrectAnswer: predict(cfit, stagec)
   AnswerTests: omnitest("predict(cfit, stagec)")
 
+- Class : cmd_question
+  Output: 如果同學想要對rpart套件提供的預測函數`predict`有更多的了解可以輸入：`?predict.rpart`
+    注意歐，這裡我們使用的並不是`?predict`，因為這裡rpart 套件採用了R 的S3物件導向方法。由於
+    `class(cfit)`的輸出是`rpart`，所以`predict`函數最後會呼叫`predict.rpart`來對cfit做處理，
+    相關的說明文件也會放在`?predict.rpart`之中。
+  CorrectAnswer: ?predict.rpart
+  AnswerTests: omnitest("?predict.rpart")
+
 - Class : text
   Output: 以上就是對rpart 這個套件的介紹。接下來我們來看decision tree的進階版：
     gradient boosted decision tree(GDBT)。
@@ -315,6 +323,40 @@
   AnswerTests: omnitest('bst <- xgboost(data = agaricus.train$data, label = agaricus.train$label, objective = "binary:logistic", nround = 10)')
 
 - Class : cmd_question
+  Output: 如果要對xgboost的GDBT學習方法做調整，例如調整樹的深度、Boosting的次數、在函數空間上的learning rate，
+    請同學參考`?xgboost`的文件。讓我們輸入`?xgboost`一起看看說明文件。
+  CorrectAnswer: ?xgboost
+  AnswerTests: omnitest("?xgboost")
+    
+- Class : mult_question
+  Output: 請問同學，這些Boosting的迭代的最大次數，要用哪一個`xgboost`的參數調整呢？
+  AnswerChoices: nround;params;verbose;data;label;missing
+  CorrectAnswer: nround
+  AnswerTests: omnitest(correctVal = "nround")
+
+- Class : mult_question
+  Output: 請問同學，樹的深度，要用哪一個`xgboost`的參數調整呢？
+  AnswerChoices: nround;params;verbose;data;label;missing
+  CorrectAnswer: params
+  AnswerTests: omnitest(correctVal = "params")
+
+- Class : mult_question
+  Output: 更進一步，這個params參數應該要用什麼型態傳給它呢？（請回憶rpart的經驗）
+  AnswerChoices: character;list;numeric
+  CorrectAnswer: list
+  AnswerTests: omnitest(correctVal="list")
+
+- Class : text
+  Output: 至於在函數空間上的learning rate，是`params`底下的`eta`。
+
+- Class : text
+  Output: 一般來說，最後模型的準確度可以透過`nrounds`和`params`底下的`eta`、`max.depth`來控制。
+    `nrounds`越大，學的越慢，也越準。但是當太大的時候，模型會學過頭（overfit），導致結果變差。
+    `eta`越小，學到最好的模型通常就需要越多的`nrounds`，但是因為每次調整的幅度比較小，所以考量
+    （overfit）的效應後，得到的最好模型，也會比較好。`max.depth`越大，每次學的時間就比較長，
+    而且比較可以抓到變數之間的交互作用。以上是我對xgboost 的理解。
+
+- Class : cmd_question
   Output: 接著讓我們載入測試的資料集。請同學輸入：`data(agaricus.test, package = "xgboost")`
   CorrectAnswer: data(agaricus.test, package = "xgboost")
   AnswerTests: omnitest('data(agaricus.test, package = "xgboost")')
@@ -324,3 +366,132 @@
   CorrectAnswer: predict(bst, agaricus.test$data)
   AnswerTests: omnitest('predict(bst, agaricus.test$data)')
 
+- Class : text
+  Output: 如果同學想要查詢更多`predict`的參數呢？由於xgboost套件使用的是R 的S4物件導向系統，
+    所以要查詢的話需要使用以下的方式。
+
+- Class : cmd_question
+  Output: 請同學先輸入`showMethods(predict)`
+  CorrectAnswer: showMethods(predict)
+  AnswerTests: omnitest("showMethods(predict)")
+
+- Class : text
+  Output: 同學是不是看到R 列出一連串有Function有object的文字呢？我們從下往上看。
+    `object="xgb.Booster.handle"`代表當predict的第一個參數，或是名稱為object的參數
+    的型態（class）如果為`"xgb.Booster.handle"`時，會有一個針對這樣型態的函數來處理。
+
+- Class : cmd_question
+  Output: 接著請同學輸入：`getMethod(predict, "xgb.Booster.handle")`
+  CorrectAnswer: getMethod(predict, "xgb.Booster.handle")
+  AnswerTests: omnitest('getMethod(predict, "xgb.Booster.handle")')
+
+- Class : text
+  Output: 運用這種方式，R 就可以把predict遇到`"xgb.Booster.handle"`物件時會執行的
+    動作展現給我們看了。
+
+- Class : cmd_question
+  Output: 但是直接看說明文件可能是更方便的。請同學輸入：`?predict`
+  CorrectAnswer: ?predict
+  AnswerTests: omnitest("?predict")
+
+- Class : cmd_question
+  Output: 同學應該會看到R 對`predict`的說明文件，但是幫助不大，因為我們想要看的
+    是針對xgboost的GDBT模型做預測時的使用說明文件。這個文件的左上角：`predict {stats}`
+    告訴我們，這是stats這個基本套件底下的predict的說明文件。
+    如果我們想要看針對xgboost的GDBT模型的predict說明文件，要輸入：
+    `help("predict,xgb.Booster-method")`。請同學先試試看。
+  CorrectAnswer: help("predict,xgb.Booster-method")
+  AnswerTests: omnitest('help("predict,xgb.Booster-method")')
+
+- Class : text
+  Output: 這裡是因為xgboost採用的是R 的S4 系統，所以查閱`predict`需要這麼饒口。
+    而且和`rpart`套件使用的S3系統也不同。
+
+- Class : cmd_question
+  Output: 一般來說，我們可以利用`library(help=xgboost)`來打開所有xgboost套件作者
+    有撰寫的說明文件內容。我也是用這個方式才知道上一題的答案的。請同學試試看。
+  CorrectAnswer: library(help=xgboost)
+  AnswerTests: omnitest("library(help=xgboost)")
+
+- Class : text
+  Output: 我們對xgboost的介紹就到這邊了。
+
+- Class : cmd_question
+  Output: 接著我們來看`e1071`這個套件。請同學先安裝這個套件。
+  CorrectAnswer: check_then_install("e1071", "1.6.7")
+  AnswerTests: test_package_version("e1071", "1.6.7")
+  Hint: install.packages("e1071")
+
+- Class : cmd_question
+  Output: 再來請同學載入e1071這個套件。
+  CorrectAnswer: library(e1071)
+  AnswerTests: test_search_path("e1071")
+
+- Class : cmd_question
+  Output: 請同學檢查e1071上的vignette清單。
+  CorrectAnswer: vignette(package = "e1071")
+  AnswerTests: omnitest('vignette(package = "e1071")')
+
+- Class : cmd_question
+  Output: 請同學打開名稱為svmdoc的vignette。這份文件很清楚的介紹了SVM 演算法、
+    以及和e1071 相關的各種變形、原理，以及對應的參數。
+  CorrectAnswer: vignette("svmdoc", package = "e1071")
+  AnswerTests: omnitest('vignette("svmdoc", package = "e1071")')
+
+- Class : cmd_question
+  Output: 再來請同學輸入`?svm`打開svm 的說明文件。
+  CorrectAnswer: ?svm
+  AnswerTests: omnitest("?svm")
+
+- Class : cmd_question
+  Output: 由於svm 有formula interface，所以我們可以簡單利用`g <- svm(Species ~ ., iris)`
+    馬上學出一個svm 的模型。
+  CorrectAnswer: g <- svm(Species ~ ., iris)
+  AnswerTests: omnitest("g <- svm(Species ~ ., iris)")
+
+- Class : cmd_question
+  Output: svm 在學習時，可以依據應用解決不同的問題。這取決於目標的型態。舉例來說，如果我們
+    使用`svm(Species ~ ., iris)`，這裡的預測目標就是`iris$Species`這個變數了。請問同學，
+    這個變數的型態（class）是什麼？
+  CorrectAnswer: class(iris$Species)
+  AnswerTests: omnitest(correctVal = class(iris$Species))
+
+- Class : text
+  Output: 由於預測的目標是一個類別變數，所以R 會自動使用classification的模式來解決問題。
+    svm 中支援的模式列在說明文件的Arguments 項目下的`type`參數之中。
+
+- Class : text
+  Output: 至於`kernel`參數則可以讓svm 學習出資料中非線性的模式。不同的kernel也可以透過不同
+    的額外參數來調整。所有的細節，都可以在`?svm`打開的說明文件中找到。
+
+- Class : mult_question
+  Output: 依照說明文件，`degree`參數是用於哪一種kernel？
+  AnswerChoices: linear;polynomial;radial basis;sigmoid
+  CorrectAnswer: polynomial
+  AnswerTests: omnitest(correctVal = "polynomial")
+
+- Class : cmd_question
+  Output: 預測也是很直接的使用`predict(g, iris)`就可以了，請同學試試看。
+  CorrectAnswer: predict(g, iris)
+  AnswerTests: omnitest("predict(g, iris)")
+
+- Class : cmd_question
+  Output: 由於e1071套件是使用S3物件導向的系統，所以我們可以利用`?predict.svm`打開
+    說明文件，查閱如何調整`predict`的輸出。請同學試試看。
+  CorrectAnswer: ?predict.svm
+  AnswerTests: any_of_exprs("?predict.svm", 'help(predict.svm)', 'help("predict.svm")')
+
+- Class : cmd_question
+  Output: 根據說明文件，如果我們想要的不只是預測的類別結果，而是決定類別的分數，可以透
+    過`decision.values`這個參數。請同學試試看：`predict(g, iris, decision.values = TRUE)`
+  CorrectAnswer: predict(g, iris, decision.values = TRUE)
+  AnswerTests: omnitest("predict(g, iris, decision.values = TRUE)")
+
+- Class : text
+  Output: 限於篇幅，我們就只介紹rpart, xgboost和e1071這三個套件。
+
+- Class : script
+  Output: 請同學跟著作業的程式碼，利用`caret`套件比較rpart, xgboost和e1071在iris上的表現。
+    完成後請輸入`submit()`做檢查。
+  Scripts: RDataMining-02-HW.R
+  AnswerTests: rdatamining_02_test()

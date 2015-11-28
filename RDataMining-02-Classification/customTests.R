@@ -192,3 +192,26 @@ rpart_02_test <- function() {
     FALSE
   })
 }
+
+rdatamining_02_test <- function() {
+  e <- get("e", parent.frame())
+  source_result <- try(source(e$script_temp_path, local = new.env(), encoding = "UTF-8"), silent = TRUE)
+  if (class(source_result)[1] == "try-error") return(FALSE)
+  name.list <- c("v1.dt2", "v2.dt2", "p.dt2", 
+                 "v1.bst2", "v2.bst2", "p.svm2", 
+                 "v1.svm2", "v2.svm2", "p.svm2",
+                 "best.model")
+  
+  tryCatch({
+    for(name in name.list) {
+      if (!isTRUE(all.equal(
+        get(name, envir = globalenv()),
+        get(sprintf("%s.ref", name))
+      ))) stop(sprintf("%s is wrong! Try again.\n", name))
+    }
+    TRUE
+  }, error = function(e) {
+    cat(conditionMessage(e))
+    FALSE
+  })
+}
