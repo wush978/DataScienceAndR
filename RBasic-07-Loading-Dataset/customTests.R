@@ -53,6 +53,7 @@ test_search_path <- function(pkg_name) {
 }
 
 test_lvr_land_txt <- function() {
+  e <- get("e", parent.frame())
   reference <- read.table(get_text_connection_by_l10n_info(lvr_land.txt), header = TRUE, sep = ",")
   is.data.frame(reference) & nrow(reference) == 19 & omnitest(correctVal = reference)
 }
