@@ -24,9 +24,18 @@ test_search_path <- function(pkg_name) {
     error = function(e) FALSE)
 }
 
+source_by_l10n_info <- function(path) {
+  info <- l10n_info()
+  if (info$MBCS & !info$`UTF-8`) {
+    try(source(path, local = new.env()), silent = TRUE)
+  } else {
+    try(source(path, local = new.env(), encoding = "UTF-8"), silent = TRUE)
+  }
+}
+
 rpart_01_test <- function() {
   e <- get("e", parent.frame())
-  source_result <- try(source(e$script_temp_path, local = new.env(), encoding = "UTF-8"), silent = TRUE)
+  source_result <- source_by_l10n_info(e$script_temp_path)
   if (class(source_result)[1] == "try-error") return(FALSE)
   eval.x.ref <- seq(min(stagec$age) - 0.5, max(stagec$age) + 0.5, by = 1)
   index.ref <- local({
@@ -109,7 +118,7 @@ rpart_01_test <- function() {
 
 rpart_02_test <- function() {
   e <- get("e", parent.frame())
-  source_result <- try(source(e$script_temp_path, local = new.env(), encoding = "UTF-8"), silent = TRUE)
+  source_result <- source_by_l10n_info(e$script_temp_path)
   if (class(source_result)[1] == "try-error") return(FALSE)
   eval.x.ref <- seq(min(stagec$age) - 0.5, max(stagec$age) + 0.5, by = 1)
   index.ref <- local({
@@ -198,7 +207,7 @@ rdatamining_02_test <- function() {
   check_then_install("mlbench", "2.1.1")
   check_then_install("caret", "6.0.62")
   check_then_install("glmnet", "2.0.2")
-  source_result <- try(source(e$script_temp_path, local = new.env(), encoding = "UTF-8"), silent = TRUE)
+  source_result <- source_by_l10n_info(e$script_temp_path)
   if (class(source_result)[1] == "try-error") return(FALSE)
   name.list <- c("v1.dt2", "v2.dt2", "p.dt2", 
                  "v1.bst2", "v2.bst2", "p.svm2", 
