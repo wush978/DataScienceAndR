@@ -133,11 +133,11 @@
 - Class : cmd_question
   Output: 另外同學應該有注意到，node的編號並不是連續的。這是因為，
     每個編號為x 的node，他的分支一定是編號2x和2x+1。請問同學，編號
-    12的node是編號多少的node的分之？
-  AnswerChoices: 1;2;3;6;7;12;13
-  CorrectAnswer: 6
+    7 的node是編號多少的node的分支？
+  AnswerChoices: 1;2;3;6
+  CorrectAnswer: 3
   AnswerTests: omnitest(correctVal = "6")
-  Hint: 6 * 2 = 12
+  Hint: 3 * 2 + 1 = 7
 
 - Class : cmd_question
   Output: 接著，讓我們畫出cfit。這需要兩個指令，所以請同學先輸入：
