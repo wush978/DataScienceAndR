@@ -62,6 +62,6 @@ for(course in course_list) {
 if (Sys.info()["sysname"] == "Windows") {
   for(locale in c("Chinese", "Japanese", "Greek", "English", "cht")) {
     Sys.setlocale(locale = locale)
-    test_course("RBasic-07-Loading-Dataset")
+    test_lesson("RBasic-07-Loading-Dataset")
   }
 }
