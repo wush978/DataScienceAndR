@@ -194,16 +194,27 @@
     TRUE, sep = ","), "lvr_land")
   Hint: lvr_land <- read.table(file(lvr_land.path, encoding = "BIG5"), header = TRUE,
     sep = ",")
-- Class: cmd_question
+- Class: text
   Output: 如果我們要直接從`lvr_land.txt`的內容取出表格，一種方法是直接把 `lvr_land.txt`寫成一個檔案，再用`read.table`讀取。另外一種方法，是把
-    `lvr_land.txt`視為一個類似檔案的物件，也就是connection。我們可以用 `textConnection(lvr_land.txt, encoding
-    = "UTF-8")`來從`lvr_land.txt`建立一個connection。 請同學輸入：`read.table(textConnection(lvr_land.txt,
-    encoding = "UTF-8"), header = TRUE, sep = ",")`
-  CorrectAnswer: read.table(textConnection(lvr_land.txt, encoding = "UTF-8"), header
+    `lvr_land.txt`視為一個類似檔案的物件，也就是connection。
+- Class: text
+  Output: 在windows上，有一個很不方便的地方，是接下來的作法和Windows的語系有關。 如果同學的Windows的語系有支援多位元組字串（例如中文、日文等語系），那語法需要調整。
+- Class: cmd_question
+  Output: 我們可以用`l10n_info()`來查詢作業系統對於各種Encoding的支援狀況。 `l10n_info()`會回報系統對是否有支援UTF-8
+    （UTF-8 欄位），或是多位元字串 （MBCS欄位）。請同學試試看輸入：`l10n_info()`
+  CorrectAnswer: l10n_info()
+  AnswerTests: omnitest("l10n_info()")
+  Hint: l10n_info()
+- Class: cmd_question
+  Output: 根據經驗，如果`l10n_info()`的輸出中，MBCS為TRUE且UTF-8 為FALSE， 則要使用：`textConnection(lvr_land.txt)`來從`lvr_land.txt`建立一個
+    connection。除此之外，則使用`textConnection(lvr_land.txt, encoding = "UTF-8")` 即可。請同學依據上一題的結果，在MBCS為TRUE且UTF-8
+    為FALSE時執行： `read.table(textConnection(lvr_land.txt), header = TRUE, sep = ",")`
+    否則，執行： `read.table(textConnection(lvr_land.txt, encoding = "UTF-8"), header =
+    TRUE, sep = ",")`
+  CorrectAnswer: read.table(get_text_connection_by_l10n_info(lvr_land.txt), header
     = TRUE, sep = ",")
-  AnswerTests: omnitest('read.table(textConnection(lvr_land.txt, encoding = "UTF-8"),
-    header = TRUE, sep = ",")')
-  Hint: read.table(textConnection(lvr_land.txt, encoding = "UTF-8"), header = TRUE,
+  AnswerTests: test_lvr_land_txt()
+  Hint: read.table(get_text_connection_by_l10n_info(lvr_land.txt), header = TRUE,
     sep = ",")
 - Class: text
   Output: 以上提供數種在R 中處理中文資料的方法給同學參考。
