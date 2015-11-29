@@ -188,9 +188,10 @@
 - Class : mult_question
   Output: 請問同學，根據`rpart` 的說明文件（請參閱Arguments 底下的parms），
     當method為class 時（classification splitting），預設的prior 為何？
-  AnswerChoices: 每種類別都相等的機率;和資料中各類別出現的頻率成正比的機率
-  CorrectAnswer: 和資料中各類別出現的頻率成正比的機率
-  AnswerTests: omnitest(correctVal = "和資料中各類別出現的頻率成正比的機率")
+    1)每種類別都相等的機率;2)和資料中各類別出現的頻率成正比的機率
+  AnswerChoices: 1;2
+  CorrectAnswer: 2
+  AnswerTests: omnitest(correctVal = "2")
   Hint: 文件中說明了：The default priors are proportional to the data counts
 
 - Class : mult_question
