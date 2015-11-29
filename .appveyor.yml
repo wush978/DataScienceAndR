@@ -12,7 +12,7 @@ install:
 # Adapt as necessary starting from here
 
 build_script:
-  - Rscript -e "install.packages(c('swirl'), repos = 'http://cran.r-project.org')"
+  - Rscript -e "install.packages(c('swirl'), repos = 'http://taiwanrusergroup.github.io/R')"
 
 test_script:
   - Rscript -e "source('.test_course.R')"
