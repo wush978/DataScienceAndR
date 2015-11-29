@@ -18,7 +18,7 @@ rbasic_07_hw_test <- function() {
   name.list <- c("answer")
   answer.bin <- readBin(orglist.path, what = "raw", n = file.info(orglist.path)$size)
   answer.txt <- stringi::stri_encode(answer.bin, "UTF-16", to = "UTF-8")
-  answer.ref <- read.table(textConnection(answer.txt, encoding = "UTF-8"), header = TRUE, sep = ",")
+  answer.ref <- read.table(get_text_connection_by_l10n_info(answer.txt), header = TRUE, sep = ",")
   tryCatch({
     for(name in name.list) {
       if (!isTRUE(all.equal(
