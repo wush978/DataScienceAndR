@@ -181,7 +181,7 @@
   Hint: eval.x[which.max(index)]
 - Class: cmd_question
   Output: 上一題的答案和cfit的結果不一致。從前面cfit的輸出可以看到，rpart 的第一個切點是age >= 58.5。 這其實是受到`control`
-    這個參數的影響，所以rpart 不會切割初太小（包含太少資料點）的node。 請同學輸入：`rpart(pgstat ~ age, data = stagec,
+    這個參數的影響，所以rpart 不會切割出太小（包含太少資料點）的node。 請同學輸入：`rpart(pgstat ~ age, data = stagec,
     method = "class", control = rpart.control(minsplit = 1))`
   CorrectAnswer: rpart(pgstat ~ age, data = stagec, method = "class", control = rpart.control(minsplit
     = 1))
