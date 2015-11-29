@@ -136,7 +136,7 @@
     7 的node是編號多少的node的分支？
   AnswerChoices: 1;2;3;6
   CorrectAnswer: 3
-  AnswerTests: omnitest(correctVal = "6")
+  AnswerTests: omnitest(correctVal = "3")
   Hint: 3 * 2 + 1 = 7
 
 - Class : cmd_question
