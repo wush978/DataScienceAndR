@@ -4,7 +4,10 @@
 # throughout the lesson.
 
 .get_path <- function(fname) {
-  normalizePath(file.path(find.package("swirl", quiet = TRUE), sprintf("Courses/DataScienceAndR/RBasic-07-Loading-Dataset/%s", fname)), mustWork = TRUE)
+  path <- file.path(swirl::get_swirl_option("courses_dir"),
+            "DataScienceAndR", "RBasic-07-Loading-Dataset",
+            fname)
+  normalizePath(path, mustWork = TRUE)
 }
 
 assign("lvr_land.path", 
