@@ -95,9 +95,9 @@
     loss, yval, (yprob) 而且最後標記有星號的就是decision tree的leaf node。 舉例來說，`1) root 146 54
     0 (0.6301370 0.3698630)`代表這是第一個node， 他的切割規則是root，有146 個點，loss是54，deviance是0 。
     請問同學，第二個node的loss是什麼？
-  AnswerChoices: age>=58.5;114;38;0;0.6666667;0.3333333
-  CorrectAnswer: 38
-  AnswerTests: omnitest(correctVal = "38")
+  AnswerChoices: g2< 13.2;80;18;0;0.775;0.225
+  CorrectAnswer: 18
+  AnswerTests: omnitest(correctVal = "18")
 - Class: cmd_question
   Output: 這裡的loss代表的是錯誤的label的個數 ，俗稱0/1 losee。 在第一個node，也就是root之中，cfit對`stagec$pgstat`
     的預測是0 。請同學計算`stagec$pgstat` 中非0 的病患總數。看看是不是和第一行，1) root 中顯示的loss相同。
