@@ -40,7 +40,7 @@ xgtest <- xgb.DMatrix(data = model.matrix(formula, LetterRecognition.test))
 
 if (interactive() & Sys.getenv("THIS_IS_NOT_HUMAN") != "TRUE") { # 自動測試會略過這段
 
-  #' 請同學用rpart 與預設參數，在LetterRecognition.train上學一個decision tree model
+  #' 請同學用rpart 與預設參數，在LetterRecognition.train上學一個decision tree (rpart)model
   #' 這裡的formula應該使用 lettr ~ .，代表依據lettr以外的變數來預測lettr
   g.dt <- rpart(lettr ~ ., LetterRecognition.train)
   stopifnot(class(g.dt) == "rpart")
@@ -93,14 +93,20 @@ if (interactive() & Sys.getenv("THIS_IS_NOT_HUMAN") != "TRUE") { # 自動測試�
 #' 請同學使用剛剛結果最好的cp參數，
 #' 1) 在training dataset上學出一個decision tree的模型，
 #' 把這個模型在tuning dataset上的預測結果存到變數v1.dt2
-v1.dt2 <- NULL # 請把NULL換成你的程式碼
+v1.dt2 <- {
+  NULL # 請把NULL換成你的程式碼，可以多行
+}
 #' 2) 在tuning dataset上學出一個decision tree的模型，
 #' 把這個模型在training dataset上的預測結果存到變數v2.dt2
-v2.dt2 <- NULL # 請把NULL換成你的程式碼
+v2.dt2 <- {
+  NULL # 請把NULL換成你的程式碼，可以多行
+}
 #' 3) 在training 和 tuning dataset上共同學一個模型
 #'    ps. 你可以用rbind來合併兩個資料集
 #' 把這個模型在testing dataset的預測結果存到變數p.dt2
-p.dt2 <- NULL # 請把NULL換成你的程式碼
+p.dt2 <- {
+  NULL # 請把NULL換成你的程式碼，可以多行
+}
 
 #' 我們也可以eta, max_depth讓GDBT在tuning dataset上的效果最好
 #' 並且加大nround，為了預防overfitting，也啟用early stop 
@@ -133,16 +139,22 @@ if (interactive() & Sys.getenv("THIS_IS_NOT_HUMAN") != "TRUE") { # 自動測試�
 #' 請同學使用剛剛結果最好的參數組合，學出一個GDBT的模型物件，
 #' 1) 在training dataset上學出一個GDBT的模型，
 #' 把這個模型在tuning dataset上的預測結果存到變數v1.bst2
-v1.bst2 <- NULL # 請把NULL換成你的程式碼
+v1.bst2 <- {
+  NULL # 請把NULL換成你的程式碼，可以多行
+}
 #' 2) 在tuning dataset上學出一個GDBT的模型，
 #' 把這個模型在training dataset上的預測結果存到變數v2.bst2
-v2.bst2 <- NULL # 請把NULL換成你的程式碼
+v2.bst2 <- {
+  NULL # 請把NULL換成你的程式碼，可以多行
+}
 #' 3) 在training 和 tuning dataset上共同學一個模型
-#'    ps. 你可以用rbind來合併兩個資料集
-#' 把這個模型在testing dataset的預測結果存到變數p.bst2
 xgtrainall <- xgb.DMatrix(data = model.matrix(formula, rbind(LetterRecognition.train, LetterRecognition.tune)), 
                           label = as.integer(c(LetterRecognition.train$lettr, LetterRecognition.tune$lettr)) - 1)
-p.bst2 <- NULL # 請把NULL換成你的程式碼
+#'    ps. 你可以用上面建立的xgtrainall
+#' 把這個模型在testing dataset的預測結果存到變數p.bst2
+p.bst2 <- {
+  NULL # 請把NULL換成你的程式碼，可以多行
+}
 
 #' 
 #' 上述的結果可能也提示了未來要提昇結果時，參數組合的搜尋方向
@@ -164,14 +176,20 @@ if (interactive() & Sys.getenv("THIS_IS_NOT_HUMAN") != "TRUE") { # 自動測試�
 #' 請同學使用剛剛結果最好的cost參數，學出一個svm 的模型物件，
 #' 1) 在training dataset上學出一個svm 的模型，
 #' 把這個模型在tuning dataset上的預測結果存到變數v1.svm2
-v1.svm2 <- NULL # 請把NULL換成你的程式碼
+v1.svm2 <- {
+  NULL # 請把NULL換成你的程式碼，可以多行
+}
 #' 2) 在tuning dataset上學出一個GDBT的模型，
 #' 把這個模型在training dataset上的預測結果存到變數v2.svm2
-v2.svm2 <- NULL # 請把NULL換成你的程式碼
+v2.svm2 <- {
+  NULL # 請把NULL換成你的程式碼，可以多行
+}
 #' 3) 在training 和 tuning dataset上共同學一個模型
 #'    ps. 你可以用rbind來合併兩個資料集
 #' 把這個模型在testing dataset的預測結果存到變數p.svm2
-p.svm2 <- NULL # 請把NULL換成你的程式碼
+p.svm2 <- {
+  NULL # 請把NULL換成你的程式碼，可以多行
+}
 
 
 #' 另外請同學想想，cost 是不是越大越好？
@@ -183,8 +201,7 @@ confusionMatrix(p.bst2, answer)
 confusionMatrix(p.svm2, answer)
 
 #' 以Overall Accuracy來看，最好的結果是？ 
-#' 請從c("dt", "bst", "svm")中挑選一個
-best.model <- NULL
+best.model <- NULL # 請從c("dt", "bst", "svm")中挑選一個
 
 if (interactive() & Sys.getenv("THIS_IS_NOT_HUMAN") != "TRUE") { # 自動測試會略過這段
   
