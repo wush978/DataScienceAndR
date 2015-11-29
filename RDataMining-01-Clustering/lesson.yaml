@@ -1,0 +1,94 @@
+- Class: meta
+  Course: DataScienceAndR
+  Lesson: RDataMining-01-Clustering
+  Author: Wush Wu
+  Type: Standard
+  Organization: Taiwan R User Group
+  Version: 1.0
+- Class: text
+  Output: 這門課程會跟同學介紹在R 中常用的Clustering算法。
+- Class: cmd_question
+  Output: 我們第一個要介紹的是`hclust`這個算法。 請同學先輸入`?hclust` 打開`hclust`的說明頁面。
+  CorrectAnswer: ?hclust
+  AnswerTests: omnitest("?hclust")
+  Hint: ?hclust
+- Class: cmd_question
+  Output: hclust這個函數是用來計算Hierarchical Clustring。 它的參數共有三個。而第一個參數d 則是用來接受用`dist`指 令建立的距離矩陣。請同學先輸入：
+    `d <- dist(iris[c(1:2, 51:52, 101:102),1:4])` 用iris的資料建立6 筆量測數據間的距離。
+  CorrectAnswer: d <- dist(iris[c(1:2, 51:52, 101:102),1:4])
+  AnswerTests: omnitest("d <- dist(iris[c(1:2, 51:52, 101:102),1:4])")
+  Hint: d <- dist(iris[c(1:2, 51:52, 101:102),1:4])
+- Class: cmd_question
+  Output: 我們先請同學試試看輸入：`cl <- hclust(d)`
+  CorrectAnswer: cl <- hclust(d)
+  AnswerTests: omnitest("cl <- hclust(d)")
+  Hint: cl <- hclust(d)
+- Class: cmd_question
+  Output: 接著請同學輸入`plot(cl)`來簡單看看hclust的結果。
+  CorrectAnswer: plot(cl)
+  AnswerTests: omnitest("plot(cl)")
+  Hint: plot(cl)
+- Class: text
+  Output: 由圖中可以看到，最下方的地方，hclust把每個資料點 都當成是單獨的Cluster。然後依照距離，挑出兩個距離最近的 Cluster，合併成一個Cluster。
+    然後一直重複做出同樣的動作。 由下往上看，我們可以看出iris的第1 和第2 筆資料最像，所以 被先合併成一個Cluster。接下來是第51和第52，然後是101
+    和 102 筆資料。接著，51、52、101 和102 合併成一個Cluster， 最後是所有的資料合併成一個單一的Cluster。
+- Class: mult_question
+  Output: 請問同學，iris的第51和52，以及101 和102筆資料，何者 比較相近？1)51和52，2)101 和102 。
+  AnswerChoices: 1;2
+  CorrectAnswer: 1
+  AnswerTests: omnitest(correctVal = "1")
+- Class: cmd_question
+  Output: 如果我們希望把這六筆資料分成三群，可以輸入： `cl2 <- cutree(cl, k = 3)`，請同學試試看。
+  CorrectAnswer: cl2 <- cutree(cl, k = 3)
+  AnswerTests: omnitest("cl2 <- cutree(cl, k = 3)")
+  Hint: cl2 <- cutree(cl, k = 3)
+- Class: cmd_question
+  Output: rect.hclust會由上而下，依照距離，分出在計算 hclust時最後三個才合併的cluster。請同學輸入： `rect.hclust(cl,
+    k = 3)`，就可以在圖上看到結果。
+  CorrectAnswer: rect.hclust(cl, k = 3)
+  AnswerTests: omnitest("rect.hclust(cl, k = 3)")
+  Hint: rect.hclust(cl, k = 3)
+- Class: cmd_question
+  Output: 接下來我們來看一下`cl2` 的型態。請同學輸入 `class(cl2)`。
+  CorrectAnswer: class(cl2)
+  AnswerTests: omnitest("class(cl2)", "integer")
+  Hint: class(cl2)
+- Class: cmd_question
+  Output: 每個`cl2`的element，就代表是對應資料所分配到的 cluster編號。請同學把cl2 印出來看看。
+  CorrectAnswer: cl2
+  AnswerTests: omnitest("cl2")
+  Hint: cl2
+- Class: text
+  Output: 同學應該會看到，cl2 這個整數向量中包含了三個cluster， 並且R 透過cl2 告訴我們每一筆資料被分配到第幾個cluster。
+- Class: mult_question
+  Output: 請問第一筆資料，被分第幾個cluster？
+  AnswerChoices: 1;2;3
+  CorrectAnswer: 1
+  AnswerTests: omnitest(correctVal = "1")
+- Class: text
+  Output: 在使用許多R 提供的Cluster 演算法，常常最 終目標就是要拿到一個類似cl2 的整數向量。
+- Class: cmd_question
+  Output: 接著我們來試試看R 提供的`kmeans`函數。 請同學打開`kmeans`的說明文件。
+- Class: cmd_question
+  Output: 請同學輸入：`cl3 <- kmeans(iris[,1:4], centers = 3)`
+  CorrectAnswer: cl3 <- kmeans(iris[,1:4], centers = 3)
+  AnswerTests: omnitest("cl3 <- kmeans(iris[,1:4], centers = 3)")
+  Hint: cl3 <- kmeans(iris[,1:4], centers = 3)
+- Class: mult_question
+  Output: 請同學參閱說明文件中的Value 的段落。 請問哪一個cl3 的元素會包含各筆資料的分群結果，也就是 類似cl2 這樣的整數向量呢？
+  AnswerChoices: cluster;centers;totes;withinss
+  CorrectAnswer: cluster
+  AnswerTests: omnitest(correctVal = "cluster")
+- Class: text
+  Output: 透過說明文件，同學應該也能查閱到R 中的`kmeans` 所支援的演算法，以及提供的各種計算數據。
+- Class: cmd_question
+  Output: 最後我們請同學安裝fpc 套件。
+  CorrectAnswer: check_then_install("fpc", "2.1.10")
+  AnswerTests: test_package_version("fpc", "2.1.10")
+  Hint: 可以使用install.packages指令
+- Class: cmd_question
+  Output: 接著，我們載入fpc 套件。
+  CorrectAnswer: library(fpc)
+  AnswerTests: test_search_path("fpc")
+  Hint: library(fpc)
+
