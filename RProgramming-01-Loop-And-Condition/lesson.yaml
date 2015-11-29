@@ -86,10 +86,10 @@
   AnswerTests: omnitest("x")
   Hint: x
 - Class: mult_question
-  Output: 請問同學，這裡`1:99`的意義是？
-  AnswerChoices: 1和99，長度為2的向量;從1、2、...、99，長度為99的向量
-  CorrectAnswer: 從1、2、...、99，長度為99的向量
-  AnswerTests: omnitest(correctVal = "從1、2、...、99，長度為99的向量")
+  Output: 請問同學，這裡`1:99`的長度是多少？
+  AnswerChoices: 2;99
+  CorrectAnswer: '99'
+  AnswerTests: omnitest(correctVal = "99")
 - Class: text
   Output: 在R 中，`for(i in 1:99) expr`的語法代表的，就是讓`i`是 為`1:99`的第一個element，也就是`i=1` 的狀況下去運算`expr`。接著，
     讓`i`為`1:99`的第二個element，也就是`i=2`的狀況下去運算`expr`。 重複這個動作，直到`i`到`1:99`的最後一個element，也就是`i=99`的狀況。
