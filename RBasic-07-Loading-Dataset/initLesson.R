@@ -22,3 +22,12 @@ check_then_install <- function(pkg_name, pkg_version) {
   }
 }
 
+get_text_connection_by_l10n_info <- function(x) {
+  info <- l10n_info()
+  if (info$MBCS & !info$`UTF-8`) {
+    textConnection(x)
+  } else {
+    textConnection(x, encoding = "UTF-8")
+  }
+}
+
