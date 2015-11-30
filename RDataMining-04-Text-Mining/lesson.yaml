@@ -1,0 +1,10 @@
+- Class: meta
+  Course: DataScienceAndR
+  Lesson: RDataMining-04-Text-Mining
+  Author: Wush Wu
+  Type: Standard
+  Organization: Taiwan R User Group
+  Version: 1.0
+- Class: text
+  Output: 這門課程會跟同學介紹在R 中常用的Text Mining功能。
+

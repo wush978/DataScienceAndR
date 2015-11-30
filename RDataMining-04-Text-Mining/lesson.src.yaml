@@ -1,0 +1,44 @@
+- Class: meta
+  Course: DataScienceAndR
+  Lesson: RDataMining-04-Text-Mining
+  Author: Wush Wu
+  Type: Standard
+  Organization: Taiwan R User Group
+  Version: 1.0
+
+- Class: text
+  Output: 這門課程會跟同學介紹在R 中常用的Text Mining功能。
+
+- Class : cmd_question
+  Output: 請同學先安裝套件tm
+  CorrectAnswer: check_then_install("tm", "0.6.2")
+  AnswerTests: test_package_version("tm", "0.6.2")
+
+- Class : cmd_question
+  Output: 接著請同學載入tm套件
+  CorrectAnswer: library(tm)
+  AnswerTests: test_search_path("tm")
+
+- Class: cmd_question
+  Output: tm套件是目前R 中最泛用的Text Mining資料處理工具。
+    先請同學查查看tm套件有沒有vignette。
+  CorrectAnswer: vignette(package = "tm")
+  AnswerTests: omnitest('vignette(package = "tm")')
+
+- Class : cmd_question
+  Output: 接著請同學打開名為tm的vignette。
+  CorrectAnswer: vignette("tm")
+  AnswerTests: omnitest('vignette("tm")')
+
+- Class : text
+  Output: 有興趣深入研究tm套件的同學，隨時可以深入閱讀這份文件。
+
+- Class : text
+  Output: 在tm套件中，所有的文字資料，都會以文集(Corpus)為單位
+    做處理。同學可以先簡單把文集理解為一段有意義的文字，例如文章、
+    評論，或是句子。
+
+- Class : 
+
+- Class : cmd_question
+  Output: 
