@@ -206,7 +206,7 @@
     > 1.1)
 - Class: text
   Output: 結果資料中學不出任何這樣的規則，哈哈。
-- Class: Script
+- Class: script
   Output: 我們對Association Rule的介紹就到這。最後請同學 完成一個小練習後輸入`submit()`
   Script: RDataMining-03-HW.R
   AnswerTests: rdatamining_03_test()

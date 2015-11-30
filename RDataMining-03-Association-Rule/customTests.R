@@ -34,12 +34,13 @@ source_by_l10n_info <- function(path) {
 }
 
 rdatamining_03_test <- function() {
+  browser()
   e <- get("e", parent.frame())
   source_result <- source_by_l10n_info(e$script_temp_path)
   if (class(source_result)[1] == "try-error") return(FALSE)
   name.list <- c("rules2", "rules2.fulltime")
   rules2.ref <- apriori(Adult, parameter = list(support = 0.3, confidence = 0.9))
-  rules2.fulltime.ref <- subset(rules2.reference, subset = lhs %in% "hours-per-week=Full-time")
+  rules2.fulltime.ref <- subset(rules2.ref, subset = lhs %in% "hours-per-week=Full-time")
   tryCatch({
     for(name in name.list) {
       if (!isTRUE(all.equal(
