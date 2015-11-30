@@ -139,7 +139,7 @@
   CorrectAnswer: 2
   AnswerTests: omnitest(correctVal = "2")
 - Class: script
-  Output: 我們對分群演算法的使用就介紹就到這了。最後請同學完成一個小小的練習， 結束之後請輸入`submit()`檢查正確性。
+  Output: 我們對分群演算法的使用就介紹就到這了。最後請同學完成一個練習， 結束之後請輸入`submit()`檢查正確性。
   Script: RDataMining-01-HW.R
   AnswerTests: rdatamining_01_test()
 
