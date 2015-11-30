@@ -37,7 +37,6 @@ source_by_l10n_info <- function(path) {
 }
 
 rdatamining_03_test <- function() {
-  browser()
   e <- get("e", parent.frame())
   source_result <- source_by_l10n_info(e$script_temp_path)
   if (class(source_result)[1] == "try-error") return(FALSE)
