@@ -6,8 +6,8 @@ shapes <- mlbench.shapes(500)
 table(shapes$classes)
 d.shapes <- dist(shapes$x)
 
-#' 請使用hclust 的預設參數，建立第一個cluster的結果
-#' 最後吧
+#' 請使用hclust 的預設參數，建立一個Hierarchical Clustering的結果
+#' 再從上述結果產生一個有4群的cluster結果
 cl1 <- {
   NULL #' 請在這邊輸入你的程式碼
 }
@@ -15,7 +15,7 @@ cl1 <- {
 #' 結果應該是一個integer vector
 stopifnot(class(cl1)[1] == "integer")
 
-#' 請使用k.means 和以下參數得到第二個cluster的結果
+#' 請使用kmeans 和以下的centers參數得到cluster結果
 #' centers = shapes$x[c(1,126,251, 376),]
 
 cl2 <- {
@@ -25,7 +25,7 @@ cl2 <- {
 #' 結果應該是一個integer vector
 stopifnot(class(cl2)[1] == "integer")
 
-#' 請使用dbscan和參數eps = 10來建立第三個cluster的結果
+#' 請使用dbscan和參數eps = 0.1來建立cluster結果
 cl3 <- {
   NULL #' 請在這邊輸入你的程式碼
 }
