@@ -6,7 +6,8 @@
   Organization: Taiwan R User Group
   Version: 1.0
 - Class: text
-  Output: 這門課程會跟同學介紹在R 中常用的Clustering算法。
+  Output: 這門課程會跟同學介紹在R 中常用的三種Clustering算法。 第一種是Hierarchical Clustering ，第二種是K-means，第三種
+    是套件fpc 提供的Density Based Clustering演算法。
 - Class: cmd_question
   Output: 我們第一個要介紹的是`hclust`這個算法。 請同學先輸入`?hclust` 打開`hclust`的說明頁面。
   CorrectAnswer: ?hclust
@@ -69,6 +70,9 @@
   Output: 在使用許多R 提供的Cluster 演算法，常常最 終目標就是要拿到一個類似cl2 的整數向量。
 - Class: cmd_question
   Output: 接著我們來試試看R 提供的`kmeans`函數。 請同學打開`kmeans`的說明文件。
+  CorrectAnswer: ?kmeans
+  AnswerTests: any_of_exprs("?kmeans", "help(kmeans)", 'help("kmeans")')
+  Hint: ?kmeans
 - Class: cmd_question
   Output: 請同學輸入：`cl3 <- kmeans(iris[,1:4], centers = 3)`
   CorrectAnswer: cl3 <- kmeans(iris[,1:4], centers = 3)
@@ -91,4 +95,51 @@
   CorrectAnswer: library(fpc)
   AnswerTests: test_search_path("fpc")
   Hint: library(fpc)
+- Class: cmd_question
+  Output: 請同學打開`dbscan`函數的說明文件。
+  CorrectAnswer: ?dbscan
+  AnswerTests: any_of_exprs("?dbscan", "help('dbscan')", "help(dbscan)")
+  Hint: ?dbscan
+- Class: mult_question
+  Output: 請問dbscan 的第一個參數，「不能」接受以下哪一種物件？ 請同學參考Arguments章節的說明作答。
+  AnswerChoices: data matrix;data.frame;dissimilarity matrix;dist-object;numeric vector
+  CorrectAnswer: numeric vector
+  AnswerTests: omnitest(correctVal = "numeric vector")
+- Class: mult_question
+  Output: 請問參數`data`使用哪一種型態的物件時，需要額外設定`method`參數為`"dist"`？
+  AnswerChoices: data matrix;data.frame;dissimilarity matrix;dist-object;numeric vector
+  CorrectAnswer: dist-object
+  AnswerTests: omnitest(correctVal = "dist-object")
+- Class: Text
+  Output: 這裡提到的`dist-object`就是之前在介紹hclust函數時提到的`dist`函數。
+- Class: Text
+  Output: 同學也可以趁機認知一見事情：Cluster的核心之一，就是如何計算資料點之間的距離。 除了常用的歐式距離(Euclidean distance)之外，我們也能用dist搭配其他計算距離的演算
+    法來建構`dist-object` ，再使用Cluster演算法。
+- Class: text
+  Output: 回到主題。dbscan中最重要的兩個參數就是`eps`和`MinPts`。 同學可以參考<https://en.wikipedia.org/wiki/DBSCAN#Preliminary>理解eps（圖中的圓圈半徑）和MinPts
+    （要多少點聚集在一起才能成為一個Cluster的一部分）
+- Class: cmd_question
+  Output: 請同學輸入：`cl4 <- dbscan(iris[,1:4], 0.42)`
+  CorrectAnswer: cl4 <- dbscan(iris[,1:4], 0.42)
+  AnswerTests: omnitest("cl4 <- dbscan(iris[,1:4], 0.42)")
+  Hint: cl4 <- dbscan(iris[,1:4], 0.42)
+- Class: mult_question
+  Output: 請同學回答：「哪一個cl4 的element，會是每一筆資料被分配的Cluster結果（一個整數向量）」。 同學可以參考說明文件中的Value段的說明。
+  AnswerChoices: cluster;eps;MinPts;isseed
+  CorrectAnswer: cluster
+  AnswerTests: omnitest(correctVal = "cluster")
+- Class: cmd_question
+  Output: 讓我們輸入`cl4$cluster`，看看分群結果。
+  CorrectAnswer: cl4$cluster
+  AnswerTests: omnitest("cl4$cluster")
+  Hint: cl4$cluster
+- Class: text
+  Output: 除了數字1, 2, 和3 之外，同學還會看到數字0 。在dbscan的輸出中，0 的意義是？ 1) 一種cluster 2) 雜訊。請同學依照說明文件中的解釋作答。
+  AnswerChoices: 1;2
+  CorrectAnswer: 2
+  AnswerTests: omnitest(correctVal = "2")
+- Class: script
+  Output: 我們對分群演算法的使用就介紹就到這了。最後請同學完成一個小小的練習， 結束之後請輸入`submit()`檢查正確性。
+  Script: RDataMining-01-HW.R
+  AnswerTests: rdatamining_01_test()
 
