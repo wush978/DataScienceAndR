@@ -1,0 +1,146 @@
+- Class: meta
+  Course: DataScienceAndR
+  Lesson: RDataMining-03-Association-Rule
+  Author: Wush Wu
+  Type: Standard
+  Organization: Taiwan R User Group
+  Version: 1.0
+
+- Class : text
+  Output: 這門課程會跟同學介紹在R 中常用的Association Rule算法。
+
+- Class: cmd_question
+  Output: 首先請同學安裝arules 這個套件。
+  CorrectAnswer: check_then_install("arules", "1.3.0")
+  AnswerTests: test_package_version("arules", "1.3.0")
+
+- Class : cmd_question
+  Output: 載入arules套件。
+  CorrectAnswer: library(arules)
+  AnswerTests: test_search_path("arules")
+
+- Class : cmd_question
+  Output: 接著，我們查一查arules有沒有vignette。
+  CorrectAnswer: vignette(package = "arules")
+  AnswerTests: omnitest('vignette(package = "arules")')
+
+- Class : cmd_question
+  Output: 有一篇名叫arules的vignette。麻煩同學先打開它。
+  CorrectAnswer: vignette("arules", package = "arules")
+  AnswerTests: omnitest('vignette("arules", package = "arules")')
+
+- Class : text
+  Output: 這篇文章仔細的介紹arules套件所提供的演算法、參數，以及提供了範例。
+    如果想要深入了解apriori演算法的同學，可以花點時間細讀這份文件。
+
+- Class : cmd_question
+  Output: 讓我們先看看arules提供的apriori函數。請同學先打開apriori函數的說明頁面。
+  CorrectAnswer: ?apriori
+  AnswerTests: any_of_exprs("?apriori", "help(apriori)", 'help("apriori")')
+
+- Class : mult_question
+  Output: 請問下列哪一個「不是」apriori函數的參數？請參考說明文件作答。
+  AnswerChoices: data;parameter;appearance;control;confidence
+  CorrectAnswer: confidence
+  AnswerTests: omnitest(correctVal = "confidence")
+
+- Class : text
+  Output: apriori的data參數必須要是transactions型態。所以我們要先探索何謂
+    transactions型態的物件
+
+- Class : cmd_question
+  Output: 請同學輸入：`?"trandactions-class"`來打開transactions的說明文件。這裡因為文字中包含
+    `-`這個符號，所以要用雙引號。
+  CorrectAnswer: ?"trandactions-class"
+  AnswerTests: omnitest('?"trandactions-class"')
+
+- Class : mult_question
+  Output: 請問transactions物件預設「不能」從哪些物件轉換而來？請參考Details章節作答。
+  AnswerChoices: list;matrix;data.frames;numeric vector
+  CorrectAnswer: numeric vector
+  AnswerTests: omnitest(correctVal = "numeric vector")
+
+- Class : text
+  Output: Association Rules要挖掘的，就是透過探索哪些物品(Item)會共同出現在哪些交易(Transaction)中，
+    而衍生出來的技術。在R 裡面，我們要透過list、matrix或data.frame來告訴R 這些物品和交易的資訊。
+
+- Class : cmd_question
+  Output: 舉例來說，如果我們有三種物品：`c("a", "b", "c")`。而第一筆交易有`c("a", "b", "c")`，
+    第二筆交易有`c("a", "b")`，那我們就可以建立以下的list：
+    `record_list <- list(c("a", "b", "c"), c("a", "b"))`
+    請同學試試看。
+  CorrectAnswer: record_list <- list(c("a", "b", "c"), c("a", "b"))
+  AnswerTests: omnitest('record_list <- list(c("a", "b", "c"), c("a", "b"))')
+
+- Class : cmd_question
+  Output: 有了`record_list`之後，我們可以利用`as`來把`record_list`轉換成transactions物件。
+    請同學輸入：`record <- as(record_list, "transactions")`
+  CorrectAnswer: record <- as(record_list, "transactions")
+  AnswerTests: omnitest('record <- as(record_list, "transactions")')
+
+- Class : cmd_question
+  Output: 我們來看看record的結果。請同學輸入：`record`
+  CorrectAnswer: record
+  AnswerTests: omnitest('record')
+
+- Class : text
+  Output: 我們看到了2 筆交易，因為`length(record_list)`為2 。而且我們看到了3 個物品，它們
+    是：`c("a", "b", "c")`。
+
+- Class : cmd_question
+  Output: R 也提供了`summary`來更仔細的檢視`record`。請同學輸入：`summary(record)`
+  CorrectAnswer: summary(record)
+  AnswerTests: omnitest('summary(record)')
+
+- Class : text
+  Output: 我們看到了更多更深入的資訊，例如出現最多次的物品、交易中包含的物品類別的分佈
+
+- Class : cmd_question
+  Output: 接著，讓我們看一個真實的範例：AdultUCI資料。請同學輸入：`data(AdultUCI)`
+  CorrectAnswer: data(AdultUCI)
+  AnswerTests: omnitest("data(AdultUCI)")
+
+- Class : cmd_question
+  Output: 也請同學輸入：`?AdultUCI`來看一看arules套件針對這個範例資料的說明。
+    有興趣的同學可以深入閱讀關於這份資料的說明。這裡，我們把描述人的特色，當成「物品」，而把
+    每個人當成「交易」。透過Association Rule的技術，我們可以回答如：如果一個人的婚姻狀態、工作和
+    教育等屬性為何時，資料顯示會比較容易有高收入。**Association Rule的結果不代表因果關係**
+  CorrectAnswer: ?AdultUCI
+  AnswerTests: any_of_exprs("?Adult", "help(AdultUCI)", 'help("Adult")')
+
+- Class : cmd_question
+  Output: 
+
+- Class : cmd_question
+  Output: arules套件已經把Adult資料轉換成transactions物件了。請同學用`class(Adult)`來確認。
+  CorrectAnswer: class(Adult)
+  AnswerTests: omnitest("class(Adult)", "transactions")
+
+- Class : cmd_question
+  Output: 請同學輸入`summary(Adult)`，準備回答下一個問題。
+  CorrectAnswer: summary(Adult)
+  AnswerTests: omnitest("summary(Adult)")
+
+- Class: mult_question
+  Output: 請問哪一個物品是最頻繁出現的物品？
+  AnswerChoices: capital-loss=None;capital-gain=None;native-country=United-States;race=White;workclass=Private
+  CorrectAnswer: capital-loss=None
+  AnswerTests: omnitest('capital-loss=None')
+
+- Class : mult_question
+  Output: 如果我們計算每筆交易所包含物品的數量，哪一個數字是頻率最高的？
+  AnswerChoices: 9;10;11;12;13
+  AnswerTests: omnitest(correctVal = "13")
+
+- Class : cmd_question
+  Output: 接著我們再回到apriori函數的說明頁面。
+  CorrectAnswer: ?apriori
+  AnswerTests: any_of_exprs("?apriori", "help(apriori)", 'help("apriori")')
+
+- Class : cmd_question
+  Output: 我們請同學先輸入：`rules <- apriori(Adult, parameter = list(support = 0.01, confidence = 0.6))`
+  CorrectAnswer: rules <- apriori(Adult, parameter = list(support = 0.01, confidence = 0.6))
+  AnswerTests: omnitest('rules <- apriori(Adult, parameter = list(support = 0.01, confidence = 0.6))')
+
+
+
