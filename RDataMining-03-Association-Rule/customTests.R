@@ -26,10 +26,13 @@ test_search_path <- function(pkg_name) {
 
 source_by_l10n_info <- function(path) {
   info <- l10n_info()
+  e <- new.env()
+  e$subset <- arules::subset
+  e$`%in%` <- arules::`%in%`
   if (info$MBCS & !info$`UTF-8`) {
-    try(source(path, local = new.env()), silent = TRUE)
+    try(source(path, local = e), silent = TRUE)
   } else {
-    try(source(path, local = new.env(), encoding = "UTF-8"), silent = TRUE)
+    try(source(path, local = e, encoding = "UTF-8"), silent = TRUE)
   }
 }
 
@@ -40,7 +43,8 @@ rdatamining_03_test <- function() {
   if (class(source_result)[1] == "try-error") return(FALSE)
   name.list <- c("rules2", "rules2.fulltime")
   rules2.ref <- apriori(Adult, parameter = list(support = 0.3, confidence = 0.9))
-  rules2.fulltime.ref <- subset(rules2.ref, subset = lhs %in% "hours-per-week=Full-time")
+  `%in%` <- arules::`%in%`
+  rules2.fulltime.ref <- arules::subset(rules2.ref, subset = lhs %in% "hours-per-week=Full-time")
   tryCatch({
     for(name in name.list) {
       if (!isTRUE(all.equal(
