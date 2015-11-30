@@ -1,3 +1,5 @@
+#' 這份作業請同學先安裝套件 XML
+
 library(tm)
 crude.path <- system.file("texts", "crude", package = "tm")
 crude <- VCorpus(DirSource(crude.path), readerControl = list(reader = readReut21578XMLasPlain))
