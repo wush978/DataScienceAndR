@@ -138,9 +138,9 @@
     tm套件處理中文資料。
 
 - Class : script
-  Output: 請同學跟著作業的程式碼，整理一個簡單的文本。
+  Output: 請同學跟著作業的程式碼，整理一個簡單的文本。完成之後可以輸入`submit()`檢查。
   Script: RDataMining-04-HW.R
-  AnswerTests: rdatamining_04_test()- 
+  AnswerTests: rdatamining_04_test() 
 
 
   

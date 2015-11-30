@@ -116,7 +116,7 @@
   Output: 以上就是我們對tm套件的簡介。有興趣的同學可以參考 <https://github.com/wush978/DataScienceAndR/blob/master/slide/get_stupid_clown.R>
     上助教下載和清理ptt 笨版資料的程式碼，來看看如何在R 使用 tm套件處理中文資料。
 - Class: script
-  Output: 請同學跟著作業的程式碼，整理一個簡單的文本。
+  Output: 請同學跟著作業的程式碼，整理一個簡單的文本。完成之後可以輸入`submit()`檢查。
   Script: RDataMining-04-HW.R
-  AnswerTests: rdatamining_04_test()-
+  AnswerTests: rdatamining_04_test()
 
