@@ -124,7 +124,7 @@
   AnswerTests: omnitest(correctVal = "18")
 
 - Class : cmd_question
-  Output: 這裡的loss代表的是錯誤的label的個數 ，俗稱0/1 losee。
+  Output: 這裡的loss代表的是錯誤的label的個數 ，俗稱0/1 loss。
     在第一個node，也就是root之中，cfit對`stagec$pgstat` 的預測是0 。請同學計算`stagec$pgstat`
     中非0 的病患總數。看看是不是和第一行，1) root 中顯示的loss相同。
   CorrectAnswer: sum(stagec$pgstat != 0)
