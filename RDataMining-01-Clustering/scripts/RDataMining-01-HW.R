@@ -25,7 +25,7 @@ cl2 <- {
 #' 結果應該是一個integer vector
 stopifnot(class(cl2)[1] == "integer")
 
-#' 請使用dbscan和參數eps = 0.1來建立cluster結果
+#' 請使用dbscan和參數eps = 0.5來建立cluster結果
 cl3 <- {
   NULL #' 請在這邊輸入你的程式碼
 }
