@@ -49,7 +49,7 @@
     transactions型態的物件
 
 - Class : cmd_question
-  Output: 請同學輸入：`?"trandactions-class"`來打開transactions的說明文件。這裡因為文字中包含
+  Output: 請同學輸入：`?"transactions-class"`來打開transactions的說明文件。這裡因為文字中包含
     `-`這個符號，所以要用雙引號。
   CorrectAnswer: ?"trandactions-class"
   AnswerTests: omnitest('?"trandactions-class"')
