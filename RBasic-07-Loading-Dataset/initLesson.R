@@ -4,7 +4,10 @@
 # throughout the lesson.
 
 .get_path <- function(fname) {
-  normalizePath(file.path(find.package("swirl", quiet = TRUE), sprintf("Courses/DataScienceAndR/RBasic-07-Loading-Dataset/%s", fname)), mustWork = TRUE)
+  path <- file.path(swirl::get_swirl_option("courses_dir"),
+            "DataScienceAndR", "RBasic-07-Loading-Dataset",
+            fname)
+  normalizePath(path, mustWork = TRUE)
 }
 
 assign("lvr_land.path", 
@@ -15,3 +18,19 @@ assign("lvr_land.path",
 assign("orglist.path", 
        .get_path("orglist-100.CSV"), 
        envir = globalenv())
+
+check_then_install <- function(pkg_name, pkg_version) {
+  if (!require(pkg_name, character.only = TRUE)) utils::install.packages(pkg_name, repos = "http://cran.r-project.org") else {
+    if (packageVersion(pkg_name) < package_version(pkg_version)) utils::install.packages(pkg_name, repos = "http://cran.r-project.org")
+  }
+}
+
+get_text_connection_by_l10n_info <- function(x) {
+  info <- l10n_info()
+  if (info$MBCS & !info$`UTF-8`) {
+    textConnection(x)
+  } else {
+    textConnection(x, encoding = "UTF-8")
+  }
+}
+

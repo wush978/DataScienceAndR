@@ -8,7 +8,7 @@ test_lesson = function(lesson_dir){
   attach(.e)
   on.exit(detach(.e))
   e = new.env()
-  
+  e$path <- lesson_dir
   # Since the initLesson might change working directory, load lesson yaml first before that happens.
   lesson = yaml.load_file(paste0(lesson_dir,"/lesson.yaml"))
   
@@ -52,9 +52,17 @@ test_lesson = function(lesson_dir){
 
 setwd("..");install_course_directory("DataScienceAndR");setwd("DataScienceAndR")
 course_list <- list.dirs(".", recursive = FALSE)
+course_list <- grep("^..R", course_list, value = TRUE)
 course_list <- substring(course_list, 3, nchar(course_list))
 course_list <- grep("^[^\\.]", course_list, value = TRUE)
-course_list <- setdiff(course_list, c("RBasic-Motivation", "RBasic-00-Motivation"))
+course_list <- setdiff(course_list, c("ROpenData-DataTaipei"))
 for(course in course_list) {
-  test_lesson(course)
+  if (Sys.info()["sysname"] == "Windows") {
+    for(locale in c("Chinese", "Japanese", "Greek", "English", "cht")) {
+      Sys.setlocale(locale = locale)
+      test_lesson(course)
+    }
+  } else {
+    test_lesson(course)
+  }
 }
