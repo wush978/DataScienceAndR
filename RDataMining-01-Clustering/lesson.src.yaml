@@ -133,15 +133,15 @@
 - Class : mult_question
   Output: 請問dbscan 的第一個參數，「不能」接受以下哪一種物件？
     請同學參考Arguments章節的說明作答。
-  AnswerChoices: data matrix;data.frame;dissimilarity matrix;dist-object;numeric vector
+  AnswerChoices: data matrix;data.frame;dissimilarity matrix or dist-object;numeric vector
   CorrectAnswer: numeric vector
   AnswerTests: omnitest(correctVal = "numeric vector")
 
 - Class : mult_question
   Output: 請問參數`data`使用哪一種型態的物件時，需要額外設定`method`參數為`"dist"`？
-  AnswerChoices: data matrix;data.frame;dissimilarity matrix;dist-object;numeric vector
-  CorrectAnswer: dist-object
-  AnswerTests: omnitest(correctVal = "dist-object")
+  AnswerChoices: data matrix;data.frame;dissimilarity matrix or dist-object;numeric vector
+  CorrectAnswer: dissimilarity matrix or dist-object
+  AnswerTests: omnitest(correctVal = "dissimilarity matrix or dist-object")
 
 - Class : Text
   Output: 這裡提到的`dist-object`就是之前在介紹hclust函數時提到的`dist`函數。
