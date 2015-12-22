@@ -2,6 +2,8 @@ Linux ![](https://travis-ci.org/wush978/DataScienceAndR.svg?branch=course) Windo
 
 # Data Science and R
 
+[![Join the chat at https://gitter.im/wush978/DataScienceAndR](https://badges.gitter.im/wush978/DataScienceAndR.svg)](https://gitter.im/wush978/DataScienceAndR?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 這是一個以[swirl](http://swirlstats.com/)撰寫的**R 語言在地化中文教材**。和其他R 教材相比，這份教材具有以下的特色：
 
 1. **完整**。由於教材是參考CRAN上介紹R 的官方文件：[An Introduction to R](https://cran.r-project.org/doc/manuals/R-intro.pdf)所撰寫的，同學即使只有使用這份教材學R ，即可獲得所有用R 所需要的所有知識。
