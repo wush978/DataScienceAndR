@@ -56,8 +56,8 @@
   Output: 上述輸入的formula參數：`pgstat ~ age + eet + g2`，描述的是在建構decision tree 時，變數之間的關係。pgstat是要被預測、被分類的變數名稱，age、eet和g2則是用來對
     pgstat做預測的變數。
 - Class: mult_question
-  Output: 根據`rpart`的說明文件，我們剛剛輸入的： `cfit <- rpart(pgstat ~ age, data = stagec, method
-    = "class")`中 的`stagec`是對應到`rpart` 函數的哪一個參數呢？
+  Output: 根據`rpart`的說明文件，我們剛剛輸入的： `cfit <- rpart(pgstat ~ age + eet + g2, data = stagec,
+    method = "class")`中 的`stagec`是對應到`rpart` 函數的哪一個參數呢？
   AnswerChoices: formula;data;weights;subset;na.action
   CorrectAnswer: data
   AnswerTests: omnitest(correctVal="data")
@@ -195,7 +195,7 @@
   Output: rpart 在做分類時，是利用公式去計算各種切點的impurity的改善。 而這些切點的選擇也是有限制的（透過`rpart.control`）。使用者可以透過`control=rpart.control(minsplit
     = 1)` 來對這些限制條件做修正。
 - Class: script
-  Output: Impurity的計算則可以透過parms 的設定來調整。請同學閱讀檔案中的程式碼與註解後，輸入`submit`。
+  Output: Impurity的計算則可以透過parms 的設定來調整。請同學閱讀檔案中的程式碼與註解後，輸入`submit()`。
   Script: rpart_02.R
   AnswerTests: rpart_02_test()
 - Class: cmd_question
@@ -266,13 +266,13 @@
   Hint: data(agaricus.train, package = "xgboost")
 - Class: cmd_question
   Output: 讓我們利用xgboost學一個GDBT模型。請同學輸入： `bst <- xgboost(data = agaricus.train$data,
-    label = agaricus.train$label, objective = "binary:logistic", nround = 10)`
+    label = agaricus.train$label, objective = "binary:logistic", nrounds = 10)`
   CorrectAnswer: bst <- xgboost(data = agaricus.train$data, label = agaricus.train$label,
-    objective = "binary:logistic", nround = 10)
+    objective = "binary:logistic", nrounds = 10)
   AnswerTests: omnitest('bst <- xgboost(data = agaricus.train$data, label = agaricus.train$label,
-    objective = "binary:logistic", nround = 10)')
+    objective = "binary:logistic", nrounds = 10)')
   Hint: bst <- xgboost(data = agaricus.train$data, label = agaricus.train$label, objective
-    = "binary:logistic", nround = 10)
+    = "binary:logistic", nrounds = 10)
 - Class: cmd_question
   Output: 如果要對xgboost的GDBT學習方法做調整，例如調整樹的深度、Boosting的次數、在函數空間上的learning rate， 請同學參考`?xgboost`的文件。讓我們輸入`?xgboost`一起看看說明文件。
   CorrectAnswer: ?xgboost
@@ -280,12 +280,12 @@
   Hint: ?xgboost
 - Class: mult_question
   Output: 請問同學，這些Boosting的迭代的最大次數，要用哪一個`xgboost`的參數調整呢？
-  AnswerChoices: nround;params;verbose;data;label;missing
-  CorrectAnswer: nround
-  AnswerTests: omnitest(correctVal = "nround")
+  AnswerChoices: nrounds;params;verbose;data;label;missing
+  CorrectAnswer: nrounds
+  AnswerTests: omnitest(correctVal = "nrounds")
 - Class: mult_question
   Output: 請問同學，樹的深度，要用哪一個`xgboost`的參數調整呢？
-  AnswerChoices: nround;params;verbose;data;label;missing
+  AnswerChoices: nrounds;params;verbose;data;label;missing
   CorrectAnswer: params
   AnswerTests: omnitest(correctVal = "params")
 - Class: mult_question
