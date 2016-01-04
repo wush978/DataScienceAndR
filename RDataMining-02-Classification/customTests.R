@@ -215,6 +215,12 @@ rdatamining_02_test <- function() {
                  "best.model", "index.group")
   
   name.reference <- readRDS(file.path(e$path, "RDataMining-02-HW2.Rds"))
+  
+  name.reference$v2.dt2 <- local({
+    g.dt2 <- rpart(lettr ~ ., LetterRecognition.tune, control = rpart.control(cp = 1e-4))
+    predict(g.dt2, LetterRecognition.train, type = "class")
+  })
+
   tryCatch({
     for(name in name.list) {
       if (!isTRUE(all.equal(tolerance = 1e-4,
