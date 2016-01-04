@@ -217,7 +217,7 @@ rdatamining_02_test <- function() {
   name.reference <- readRDS(file.path(e$path, "RDataMining-02-HW2.Rds"))
   tryCatch({
     for(name in name.list) {
-      if (!isTRUE(all.equal(
+      if (!isTRUE(all.equal(tolerance = 1e-4,
         get(name, envir = globalenv()),
         name.reference[[name]]
       ))) stop(sprintf("%s is wrong! Try again.\n", name))
