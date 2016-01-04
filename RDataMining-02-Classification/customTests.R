@@ -223,10 +223,10 @@ rdatamining_02_test <- function() {
 
   tryCatch({
     for(name in name.list) {
-      if (!isTRUE(all.equal(tolerance = 1e-4,
+      if (!isTRUE(.tmp <- all.equal(tolerance = 1e-4,
         get(name, envir = globalenv()),
         name.reference[[name]]
-      ))) stop(sprintf("%s is wrong! Try again.\n", name))
+      ))) stop(sprintf("%s is wrong! (%s) Try again.", name, .tmp))
     }
     TRUE
   }, error = function(e) {
