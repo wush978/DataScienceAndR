@@ -221,6 +221,10 @@ rdatamining_02_test <- function() {
     predict(g.dt2, LetterRecognition.tune, type = "class")
   })
 
+  name.reference$v2.dt2 <- local({
+    g.dt2 <- rpart(lettr ~ ., LetterRecognition.tune, control = rpart.control(cp = 1e-4))
+    predict(g.dt2, LetterRecognition.train, type = "class")
+  })
 
   tryCatch({
     for(name in name.list) {
