@@ -216,10 +216,11 @@ rdatamining_02_test <- function() {
   
   name.reference <- readRDS(file.path(e$path, "RDataMining-02-HW2.Rds"))
   
-  name.reference$v2.dt2 <- local({
-    g.dt2 <- rpart(lettr ~ ., LetterRecognition.tune, control = rpart.control(cp = 1e-4))
-    predict(g.dt2, LetterRecognition.train, type = "class")
+  name.reference$v1.dt2 <- local({
+    g.dt2 <- rpart(lettr ~ ., LetterRecognition.train, control = rpart.control(cp = 1e-4))
+    predict(g.dt2, LetterRecognition.tune, type = "class")
   })
+
 
   tryCatch({
     for(name in name.list) {
