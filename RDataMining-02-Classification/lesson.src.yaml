@@ -70,7 +70,7 @@
 
 - Class : mult_question
   Output: 根據`rpart`的說明文件，我們剛剛輸入的：
-    `cfit <- rpart(pgstat ~ age, data = stagec, method = "class")`中
+    `cfit <- rpart(pgstat ~ age + eet + g2, data = stagec, method = "class")`中
     的`stagec`是對應到`rpart` 函數的哪一個參數呢？
   AnswerChoices: formula;data;weights;subset;na.action
   CorrectAnswer: data
@@ -239,7 +239,7 @@
     來對這些限制條件做修正。
 
 - Class : script
-  Output: Impurity的計算則可以透過parms 的設定來調整。請同學閱讀檔案中的程式碼與註解後，輸入`submit`。
+  Output: Impurity的計算則可以透過parms 的設定來調整。請同學閱讀檔案中的程式碼與註解後，輸入`submit()`。
   Script: rpart_02.R
   AnswerTests: rpart_02_test()
 
@@ -319,9 +319,9 @@
 
 - Class : cmd_question
   Output: 讓我們利用xgboost學一個GDBT模型。請同學輸入：
-    `bst <- xgboost(data = agaricus.train$data, label = agaricus.train$label, objective = "binary:logistic", nround = 10)`
-  CorrectAnswer: bst <- xgboost(data = agaricus.train$data, label = agaricus.train$label, objective = "binary:logistic", nround = 10)
-  AnswerTests: omnitest('bst <- xgboost(data = agaricus.train$data, label = agaricus.train$label, objective = "binary:logistic", nround = 10)')
+    `bst <- xgboost(data = agaricus.train$data, label = agaricus.train$label, objective = "binary:logistic", nrounds = 10)`
+  CorrectAnswer: bst <- xgboost(data = agaricus.train$data, label = agaricus.train$label, objective = "binary:logistic", nrounds = 10)
+  AnswerTests: omnitest('bst <- xgboost(data = agaricus.train$data, label = agaricus.train$label, objective = "binary:logistic", nrounds = 10)')
 
 - Class : cmd_question
   Output: 如果要對xgboost的GDBT學習方法做調整，例如調整樹的深度、Boosting的次數、在函數空間上的learning rate，
@@ -331,13 +331,13 @@
     
 - Class : mult_question
   Output: 請問同學，這些Boosting的迭代的最大次數，要用哪一個`xgboost`的參數調整呢？
-  AnswerChoices: nround;params;verbose;data;label;missing
-  CorrectAnswer: nround
-  AnswerTests: omnitest(correctVal = "nround")
+  AnswerChoices: nrounds;params;verbose;data;label;missing
+  CorrectAnswer: nrounds
+  AnswerTests: omnitest(correctVal = "nrounds")
 
 - Class : mult_question
   Output: 請問同學，樹的深度，要用哪一個`xgboost`的參數調整呢？
-  AnswerChoices: nround;params;verbose;data;label;missing
+  AnswerChoices: nrounds;params;verbose;data;label;missing
   CorrectAnswer: params
   AnswerTests: omnitest(correctVal = "params")
 

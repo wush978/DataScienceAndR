@@ -82,13 +82,13 @@
   AnswerTests: omnitest('ovid2 <- tm_map(ovid, stripWhitespace)')
   Hint: ovid2 <- tm_map(ovid, stripWhitespace)
 - Class: cmd_question
-  Output: 我們用`as.character(ovid2[[1]])`看看清理後的資料。 空白都消失了。
+  Output: 我們用`as.character(ovid2[[1]])`看看清理後的資料。 多餘的空白都消失了。
   CorrectAnswer: as.character(ovid2[[1]])
   AnswerTests: omnitest('as.character(ovid2[[1]])')
   Hint: as.character(ovid2[[1]])
 - Class: text
   Output: 這裡`tm_map`函數，就是把stripWhitespace函數套用到所有的ovid 資料集上。舉例來說，很類似：`ovid2[[1]] <-
-    stripWhitespace(ovid[[1]])`, `ovid2[[2]] <- stripWhitespace(ovid[[2]])`, ... 透過這個tw_map，我們可以很方便的使用各種函數來清理ovid
+    stripWhitespace(ovid[[1]])`, `ovid2[[2]] <- stripWhitespace(ovid[[2]])`, ... 透過這個tm_map，我們可以很方便的使用各種函數來清理ovid
 - Class: cmd_question
   Output: 在做進階的資料處理之前，我們可以把文本轉換成TermDocumentMatrix或是 DocumentTermMatrix。TermDocumentMatrix會把term當成列，而DocumentTermMatrix
     則是把Term當成欄。請同學試試看：`tdm <- TermDocumentMatrix(ovid2)`
