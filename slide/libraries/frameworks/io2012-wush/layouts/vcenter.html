@@ -1,0 +1,16 @@
+<slide class="{{ slide.class }}" id="{{ slide.id }}" style="background-image: url('{{page.url.framework}}/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  {{{ slide.header}}}
+</hgroup>
+<article class = 'flexbox vcenter'>
+{{{ slide.content }}}
+</article>
+<!-- Presenter Notes -->
+{{# slide.pnotes}}
+<aside class="note">
+  <section>
+    {{{ html }}}
+  </section>
+</aside>
+{{/ slide.pnotes}}
+</slide>
