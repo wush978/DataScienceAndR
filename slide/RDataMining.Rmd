@@ -15,7 +15,8 @@ library(magrittr)
 
 opts_chunk$set(echo = TRUE, results = "hide", cache=TRUE, comment="", 
                cache.path = "cache-RDataMining/", dev.args=list(bg="transparent"),
-               fig.width = 10, fig.height = 5, error = FALSE)
+               fig.width = 10, fig.height = 5, error = FALSE,
+               fig.path = "./assets/fig/rdatamining-")
 fig <- function(path, size = 100) {
   sprintf("<img src='assets/img/%s' style='max-width: %d%%;max-height: %d%%'></img>", 
           path, size, size)
@@ -1043,6 +1044,7 @@ plotmo(g, type = "class", type2 = "image", degree1 = FALSE,
 ## Transaction
 
 ```{r adultuci, echo = FALSE}
+library(methods)
 suppressPackageStartupMessages(library(arules))
 data(AdultUCI)
 for(name in c("fnlwgt", "education-num")) AdultUCI[[name]] <- NULL

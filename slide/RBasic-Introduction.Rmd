@@ -25,7 +25,10 @@ library(RColorBrewer)
 library(miniCRAN)
 library(igraph)
 
-opts_chunk$set(echo = FALSE, cache=FALSE, comment="", cache.path = ".cache-RBasic-Introduction/", dev.args=list(bg="transparent"))
+opts_chunk$set(echo = FALSE, cache=FALSE, comment="", 
+               cache.path = ".cache-RBasic-Introduction/", 
+               dev.args=list(bg="transparent"),
+               fig.path = "./assets/fig/rbasic-introduction-")
 fig <- function(path, size = 100) {
   sprintf("<img src='assets/img/%s' style='max-width: %d%%;max-height: %d%%'></img>", 
           path, size, size)
