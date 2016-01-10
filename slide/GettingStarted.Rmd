@@ -24,7 +24,7 @@ library(RColorBrewer)
 library(miniCRAN)
 library(igraph)
 
-opts_chunk$set(echo = FALSE, cache=FALSE, comment="", cache.path = ".cache-EDA/", dev.args=list(bg="transparent"))
+opts_chunk$set(echo = FALSE, cache=FALSE, comment="", cache.path = ".cache-GettingStarted/", dev.args=list(bg="transparent"))
 fig <- function(path, size = 100) {
   sprintf("<img src='assets/img/%s' style='max-width: %d%%;max-height: %d%%'></img>", 
           path, size, size)
