@@ -11,4 +11,4 @@ all : $(HTML) $(PDF)
 	wkhtmltopdf --orientation Landscape --print-media-type --dpi 96 --margin-top 0 --margin-bottom 0 --margin-right 0 --margin-left 0 --disable-smart-shrinking --page-width 297mm --page-height 370mm --javascript-delay 25000 $< $@
 
 clean :
-	-rm -rf $(HTML) $(PDF) ./cache-*
+	-rm -rf $(HTML) $(PDF) ./cache-* ./assets/fig/*
