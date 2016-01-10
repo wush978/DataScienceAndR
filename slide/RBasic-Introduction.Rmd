@@ -1,6 +1,7 @@
 ---
-title       : "R 語言上手篇"
+title       : "R 語言概論"
 author      : "Wush Wu"
+job         : 國立台灣大學
 framework   : io2012-wush
 highlighter : highlight.js
 hitheme     : zenburn
@@ -24,7 +25,7 @@ library(RColorBrewer)
 library(miniCRAN)
 library(igraph)
 
-opts_chunk$set(echo = FALSE, cache=FALSE, comment="", cache.path = ".cache-GettingStarted/", dev.args=list(bg="transparent"))
+opts_chunk$set(echo = FALSE, cache=FALSE, comment="", cache.path = ".cache-RBasic-Introduction/", dev.args=list(bg="transparent"))
 fig <- function(path, size = 100) {
   sprintf("<img src='assets/img/%s' style='max-width: %d%%;max-height: %d%%'></img>", 
           path, size, size)
@@ -38,7 +39,38 @@ sys_encode <- c("utf8", "utf8", "big5")[pmatch(sys_name, c("linux", "darwin", "w
 sessionInfo() %>% capture.output %>% cat(file = "sessionInfo.log", sep = "\n")
 ```
 
-## 目錄
+--- &vcenter .largecontent
+
+## 講師自介：吳齊軒 Wush Wu
+
+- 學經歷
+    - 國立台灣大學電機工程學研究所博士生
+    - 宇匯知識科技資料科學家
+    - Taiwan R User Group 共同創辦人
+
+- 著作：
+    - Wush Chi Hsuan Wu, Mi-Yen Yeh and Ming-Syan Chen: Predicting Winning Price in Real Time Bidding with Censored Data. KDD 2015.
+    - 以下R 套件的共同作者、貢獻者：digest, knitr, FeatureHashing...
+
+--- &vcenter .largecontent
+
+## R Basic 系列課程目標
+
+- 了解R 語言的基礎
+- 能利用R 語言進行資料的ETL
+- 善用R 強大的資料視覺化功能
+
+--- &vcenter .largecontent
+
+## 課程進行方式
+
+- 利用投影片講解R 的各種工具的設計理念與範例
+- 直接利用R 學R 語法，完成指定作業
+- 歡迎各種Feedback: <https://github.com/wush978/DataScienceAndR/issues>
+
+--- &vcenter .largecontent
+
+## 本次課程目錄
 
 - R 簡介
 - R 的傳統用途
@@ -48,8 +80,6 @@ sessionInfo() %>% capture.output %>% cat(file = "sessionInfo.log", sep = "\n")
 - R 的開發環境簡介
 - R 的套件系統
 - 利用swirl 快速學習R 語言
-    - 00: 利用R 抓取公開資料做視覺化與數據建模
-    - 02: 作業示範
 
 --- .dark .segue
 
@@ -609,7 +639,7 @@ print.xtable(xtable(result$downloads), type = "html")
 
 ## 熟悉RStudio的 程式碼編輯 界面
 
-- 請建立再編輯界面寫程式的習慣
+- 請建立在編輯界面寫程式的習慣
 - 開啟新的R Script檔案
 - 在第一行輸入 `me` 隻後按下Ctrl + Enter後，觀察命令列區
 - 利用滑鼠點選 `me` 後的位置，確認游標閃爍的位置在 `me` 之後，按下tab
@@ -662,7 +692,7 @@ text(0.9, -0.8, "xts depends on zoo", adj=0, cex=0.9)
 ## 安裝R 的套件
 
 - 使用Rstudio 安裝套件
-- 使用命令列安裝套件`r install.packages("套件名稱", repos = "套件庫網址")`
+- 使用命令列安裝套件 `install.packages("套件名稱", repos = "套件庫網址")`
 - 使用套件的第一步：`library(套件名稱)`
 
 --- .dark .segue
@@ -738,50 +768,6 @@ install_course_github("wush978", "DataScienceAndR", "course")
     - 安裝Rstudio(非必要，但是要有自行解決其他問題的能力)
     - 安裝Taiwan R User Group 社群版的套件
     - 安裝DataScienceAndR 系列課程
-
---- &vcenter .largecontent
-
-## 作業說明
-
-- 完成以下作業：
-    1. RBasic-01-Introduction
-    1. RBasic-02-Data-Structure-Vectors
-    1. RBasic-03-Data-Structure-Object
-    1. RBasic-04-Factors
-    1. RBasic-05-Arrays-Matrices
-    1. RBasic-06-List-DataFrame
-    1. RBasic-07-Loading-Dataset
-
---- &vcenter .largecontent
-
-## 繳交作業的格式
-
-- 除了`RBasic-01-Introduction`之外，每個作業最後都要編輯一個檔案。
-    - `RBasic-02-HW.R`
-    - `RBasic-03-HW.R`
-    - `RBasic-04-HW.R`
-    - `RBasic-05-HW.R`
-    - `RBasic-06-HW.R`
-    - `RBasic-07-HW.R`
-- 請在期限內完成作業之後，將`<學號>.zip`的檔案上傳到ceiba。
-
---- &vcenter .largecontent
-
-## 繳交作業的格式
-
-- `<學號>.zip`的內容應該為：
-
-```
-d01921016/
-d01921016/RBasic-02-HW.R
-d01921016/RBasic-03-HW.R
-d01921016/RBasic-04-HW.R
-d01921016/RBasic-05-HW.R
-d01921016/RBasic-06-HW.R
-d01921016/RBasic-07-HW.R
-```
-
-- 完成作業後，可以用`submit()`檢查是否有錯
 
 --- &vcenter .largecontent
 
