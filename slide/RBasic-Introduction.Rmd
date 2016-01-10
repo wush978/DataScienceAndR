@@ -26,7 +26,7 @@ library(miniCRAN)
 library(igraph)
 
 opts_chunk$set(echo = FALSE, cache=FALSE, comment="", 
-               cache.path = ".cache-RBasic-Introduction/", 
+               cache.path = "cache-RBasic-Introduction/", 
                dev.args=list(bg="transparent"),
                fig.path = "./assets/fig/rbasic-introduction-")
 fig <- function(path, size = 100) {
