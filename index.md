@@ -4,8 +4,8 @@
 ## 課程投影片
 
 1. RBasic
-  - Introduction [HTML]()
-  - Data Structure [HTML]()
+  - Introduction [HTML](http://wush978.github.io/DataScienceAndR/slide/RBasic-Introduction.html)
+  - Data Structure [HTML](http://wush978.github.io/DataScienceAndR/slide/RBasic-DataStructure.html)
 
 ## 安裝R 與下載（更新）教材
 
