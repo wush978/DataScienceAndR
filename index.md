@@ -44,3 +44,10 @@ ps. 如果你之前有進行過swirl的課程，swirl會出現下圖的選項詢
 - RBasic-07-Loading-Dataset
 
 RBasic-02至RBasic-07課程最後都有大魔王要給同學攻克。
+
+## 求助專區
+
+有問題的朋友，歡迎到以下地方討論。由於現在網路上機器人眾多，所以麻煩先註冊一個Github帳號後我才會在網路上和你討論。
+
+- [Issue回報區](https://github.com/wush978/DataScienceAndR/issues)
+- Gitter聊天室：[![Gitter](https://badges.gitter.im/wush978/DataScienceAndR.svg)](https://gitter.im/wush978/DataScienceAndR?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
