@@ -1,0 +1,669 @@
+---
+title       : "R 的資料結構"
+author      : "Wush Wu"
+job         : 國立台灣大學
+framework   : io2012-wush
+highlighter : highlight.js
+hitheme     : zenburn
+widgets     : [mathjax]            # {mathjax, quiz, bootstrap}
+mode        : selfcontained # {standalone, draft}
+knit        : slidify::knit2slides
+--- .segue .dark
+
+```{r setup, include=FALSE, cache=FALSE}
+library(knitr)
+library(magrittr)
+library(xtable)
+library(data.table)
+library(dplyr)
+library(ggplot2)
+library(quantmod)
+
+opts_chunk$set(echo = FALSE, cache=FALSE, comment="", 
+               cache.path = "cache-RBasic-DataStructure/", 
+               dev.args=list(bg="transparent"),
+               fig.path = "./assets/fig/rbasic-datastructure-",
+               fig.width = 10, fig.height = 6)
+fig <- function(path, size = 100) {
+  sprintf("<img src='assets/img/%s' style='max-width: %d%%;max-height: %d%%'></img>", 
+          path, size, size)
+}
+fig2 <- function(path, size = 100) {
+  sprintf("<img src='assets/img/%s' style='width: %d%%'></img>", 
+          path, size)
+}
+sys_name <- Sys.info()["sysname"] %>% tolower
+sys_encode <- c("utf8", "utf8", "big5")[pmatch(sys_name, c("linux", "darwin", "windows"))]
+sessionInfo() %>% capture.output %>% cat(file = "sessionInfo.log", sep = "\n")
+```
+
+## 分析的資料型態：數值系統
+
+--- &vcenter .largecontent
+
+## 數值系統的分類
+
+- 名目資料(nomial)
+- 順序資料(ordinal)
+- 區間資料(interval)
+- 比例資料(ratio)
+
+--- &vcenter .largecontent
+
+## 名目資料
+
+- 性別
+- Domain
+- 屬性的有無
+
+```{r}
+data(Titanic)
+par(cex = 1.5)
+mosaicplot(~ Sex + Survived, data = Titanic, 
+           main = "Survival on the Titanic", color = TRUE, 
+           cex.axis = 1)
+```
+
+--- &vcenter .largecontent
+
+## 順序資料
+
+- 硬度表
+- 名次
+- 排序表
+
+```{r}
+head(CO2$Plant)
+```
+
+--- &vcenter .largecontent
+
+## 區間資料
+
+- 溫度
+- 時間
+
+```{r}
+par(cex = 1.5)
+plot(speed ~ dist, cars)
+```
+
+--- &vcenter .largecontent
+
+## 比值資料
+
+- 營收
+- 股價
+
+```{r}
+TWII <- readRDS("TWII.Rds")
+chartSeries(TWII, subset = "last 4 months")
+```
+
+--- .dark .segue
+
+## R 的資料型態
+
+--- &vcenter .largecontent
+
+## R 的資料結構概論
+
+- R 是一種程式語言，程式語言都有對應的資料結構
+- [Rinternals.h](https://github.com/wch/r-source/blob/trunk/src/include/Rinternals.h#L102):
+
+```c
+typedef unsigned int SEXPTYPE;
+
+#define NILSXP	     0	  /* nil = NULL */
+#define SYMSXP	     1	  /* symbols */
+#define LISTSXP	     2	  /* lists of dotted pairs */
+#define CLOSXP	     3	  /* closures */
+#define ENVSXP	     4	  /* environments */
+...
+```
+
+--- &vcenter .largecontent
+
+## R 的資料結構
+
+- 所有的東西都是一種「R 物件」
+    - **資料**
+    - 函數
+    - 環境
+    - 外部指標
+
+--- &vcenter .largecontent
+
+## R 的物件結構
+
+- 複雜的R 物件們都是由基礎的R 物件所組合的
+
+```{r, echo = TRUE}
+g <- lm(dist ~ speed, cars)
+str(head(g))
+```
+
+--- &vcenter .largecontent
+
+## R 的物件結構
+
+<center>`r fig2("R-attributes.png")`</center>
+
+--- &vcenter .largecontent
+
+## R 中常見的原子物件
+
+- 邏輯向量
+- 整數向量
+- 數值向量
+- 字串向量
+
+--- &vcenter .largecontent
+
+## R 的所有設計都是為了分析資料而生
+
+- 資料的最小單位是「向量」
+
+--- &vcenter .largecontent
+
+## 邏輯向量
+
+- 用於作布林運算、流程控制
+
+```{r, echo = TRUE}
+c(T, F, TRUE, FALSE)
+```
+
+--- &vcenter .largecontent
+
+## 整數向量
+
+- 每個整數佔用4 bytes
+
+```{r, echo = TRUE}
+c(1L, 2L, 3L, 4L, 0xaL)
+```
+
+--- &vcenter .largecontent
+
+##  數值向量
+
+- 每個數值佔用8 bytes（雙精確浮點數）
+
+```{r, echo = TRUE}
+c(1.0, .1, 1e-2, 1e2, 1.2e2)
+```
+
+--- &vcenter .largecontent
+
+## 字串向量
+
+- NULL結尾的字串向量
+
+```{r, echo = TRUE}
+c("1", "a", "中文")
+```
+
+```{r, eval = FALSE, echo = TRUE}
+c("a\0b")
+```
+
+<font color="red">Error: nul character not allowed (line 1)</font>
+
+--- &vcenter .largecontent
+
+## 數值系統與原子資料結構
+
+- 名目資料(nomial): 字串向量、邏輯向量
+- 順序資料(ordinal): 無
+- 區間資料(interval): 整數向量、數值向量
+- 比例資料(ratio): 整數向量、數值向量
+
+--- &vcenter .largecontent
+
+## 習題時間
+
+- 請同學完成以下的swirl課程，練習操作上述介紹的R 物件
+
+- RBasic-02-Data-Structure-Vectors
+- RBasic-03-Data-Structure-Object
+
+--- .dark .segue
+
+## R 的factor
+
+--- &vcenter .largecontent
+
+## R 的物件結構
+
+<center>`r fig2("R-attributes.png")`</center>
+
+--- &vcenter .largecontent
+
+## 內建的`factor`範例
+
+```{r factor, echo = TRUE}
+head(CO2$Type)
+```
+
+--- &vcenter .largecontent
+
+## `factor`的真相
+
+```{r, echo = TRUE}
+dput(CO2$Type)
+```
+
+--- &vcenter .largecontent
+
+## `factor`的真相
+
+```{r, echo = TRUE}
+attributes(CO2$Type)
+```
+
+--- &vcenter .largecontent
+
+## R 的歷史包袱
+
+- `dput`函數會輸出如`.Label`這種標籤，但是並不是真正的屬性標籤
+- 以下內容擷取自`structure`的說明文件：
+
+    Adding a class "factor" will ensure that numeric codes are given integer storage mode.
+
+    For historical reasons (these names are used when deparsing), attributes ".Dim", ".Dimnames", ".Names", ".Tsp" and ".Label" are renamed to "dim", "dimnames", "names", "tsp" and "levels".
+
+--- &vcenter .largecontent
+
+## 數值系統與資料結構
+
+- 名目資料(nomial): 字串向量、邏輯向量、*factor*
+- 順序資料(ordinal): *factor*
+- 區間資料(interval): 整數向量、數值向量
+- 比例資料(ratio): 整數向量、數值向量
+
+--- &vcenter .largecontent
+
+## 習題時間
+
+- 請同學完成`RBasic-04-Factors`，練習操作R 的factor物件
+
+--- .dark .segue
+
+## R 的Matrix與array
+
+--- &vcenter .largecontent
+
+## R 的Matrix
+
+```r
+> x <- matrix(1:4, 2, 2)
+> x
+     [,1] [,2]
+[1,]    1    3
+[2,]    2    4
+> class(x)
+[1] "matrix"
+```
+
+--- &vcenter .largecontent
+
+## R 的Matrix與Attributes
+
+```r
+> attributes(x)
+$dim
+[1] 2 2
+```
+
+--- &vcenter .largecontent
+
+## R 的Matrix與Attributes
+
+```r
+> attributes(x) <- NULL
+> x # 同 1:4
+[1] 1 2 3 4
+```
+
+--- &vcenter .largecontent
+
+## R 的Matrix與Attributes
+
+<center>`r fig2("Matrix.png")`</center>
+
+--- &vcenter .largecontent
+
+## R 的Array與Attributes
+
+```r
+> attr(x, "dim") <- c(2, 2, 1)
+> x # 同 1:4
+, , 1
+
+     [,1] [,2]
+[1,]    1    3
+[2,]    2    4
+> class(x)
+[1] "array"
+```
+
+--- &vcenter .largecontent
+
+## 為什麼要使用R 的Matrix?
+
+- 各種方便的API
+- 優化過的運算效能(BLAS)
+
+--- &vcenter .largecontent
+
+## 為什麼要使用R 的Matrix?
+
+- 各種方便操作的API
+- 優化過的運算效能(BLAS)
+
+--- &vcenter .largecontent
+
+## 習題時間
+
+- 請同學完成`RBasic-05-Arrays-Matrices`，練習操作R 的matrix和array物件
+
+--- .dark .segue
+
+## List: R 物件的向量
+
+--- &vcenter .largecontent
+
+## 原子物件向量，具備有同質性
+
+- 牽一髮而動全身
+
+```r
+> x <- 1:10
+> class(x)
+[1] "integer"
+> x[1] <- "1"
+> class(x)
+[1] "character"
+> x
+ [1] "1"  "2"  "3"  "4"  "5"  "6"  "7"  "8"  "9"  "10"
+```
+
+--- &vcenter .largecontent
+
+## 實務的資料不只是單一型態
+
+- R 物件可以是任何型態的向量
+- R 物件的向量就是處理相異型態的工具
+
+--- &vcenter .largecontent
+
+## 整數向量
+
+```r
+1:5
+```
+
+<center>`r fig2("IntegerVector.png")`</center>
+
+--- &vcenter .largecontent
+
+## List
+
+```r
+x <- list(1:5, c("a", "b"))
+```
+
+<center>`r fig2("List.png")`</center>
+
+--- &vcenter .largecontent
+
+## `[`
+
+```r
+x[1]
+```
+
+<center>`r fig2("List[1].png")`</center>
+
+--- &vcenter .largecontent
+
+## `[[`
+
+```r
+x[[1]]
+```
+
+<center>`r fig2("List[[1]].png")`</center>
+
+--- &vcenter .largecontent
+
+## List and `names`
+
+```r
+> x <- list(1:5, c("a", "b"))
+> x
+[[1]]
+[1] 1 2 3 4 5
+
+[[2]]
+[1] "a" "b"
+
+> attributes(x)
+NULL
+```
+
+--- &vcenter .largecontent
+
+## List and `names`
+
+```r
+> x <- list(a = 1:5, b = c("a", "b"))
+> x
+$a
+[1] 1 2 3 4 5
+
+$b
+[1] "a" "b"
+
+> attributes(x)
+$names
+[1] "a" "b"
+```
+
+--- &vcenter .largecontent
+
+## `$`
+
+- 取出對應名稱的元素
+
+```r
+> x <- list(a = 1:5, b = c("a", "b"))
+> x$a
+[1] 1 2 3 4 5
+> x$b
+[1] "a" "b"
+```
+
+--- &vcenter .largecontent
+
+## 從List到`data.frame`
+
+- List提供了處理異質資料的工具
+- List非常的泛用，甚至延生出R 的S3物件導向系統
+- 但是對於結構化的資料，List不夠方便阿...
+    - 看看矩陣
+- `data.frame`是R 為了解決結構化資料所提出的解決方案
+
+--- .dark .segue
+
+## R 的 Data Frame
+
+--- &vcenter .largecontent
+
+## R 的Data Frame
+
+- 已經成為處理「結構化資料」的典範
+
+    The main driver for Distributed DataFrame is to have a cluster-based, big data representation that’s friendly to the RDBMSs and data science community. **Specifically we leverage SQL’s table and R’s data.frame concepts, taking advantage of 30 years of SQL development and R’s accumulated data science wisdom**.    
+    
+<center>Source: <http://ddf.io/design.html></center>
+
+--- &vcenter .largecontent
+
+## R 的Data Frame
+
+```r
+> head(iris)
+  Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+1          5.1         3.5          1.4         0.2  setosa
+2          4.9         3.0          1.4         0.2  setosa
+3          4.7         3.2          1.3         0.2  setosa
+4          4.6         3.1          1.5         0.2  setosa
+5          5.0         3.6          1.4         0.2  setosa
+6          5.4         3.9          1.7         0.4  setosa
+```
+
+--- &vcenter .largecontent
+
+## Data Frame是一種List
+
+```r
+> class(iris)
+[1] "data.frame"
+> is.list(iris)
+[1] TRUE
+> head(iris[[1]])
+[1] 5.1 4.9 4.7 4.6 5.0 5.4
+```
+
+--- &vcenter .largecontent
+
+## Data Frame 提供了類似矩陣的API
+
+```r
+> iris[1,]
+  Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+1          5.1         3.5          1.4         0.2  setosa
+> iris[1,1]
+[1] 5.1
+```
+
+--- &vcenter .largecontent
+
+## 習題時間
+
+- 請同學完成`RBasic-06-List-DataFrame`的課程，實際操作List和Data.Frame
+
+--- .dark .segue
+
+## 實務經驗
+
+--- &vcenter .largecontent
+
+## 記憶體問題
+
+- R 是一個以記憶體為主的分析工具
+    - R 假設你的記憶體是足夠的
+- R 跑得很慢
+    - CPU 不夠快（計算量太大）
+    - 記憶體不夠大（資料太大）
+
+--- &vcenter .largecontent
+
+## 如何估計記憶體的使用量？
+
+- 向量就是陣列，加上一些其它的metadata（型態、attributes、...）
+- 邏輯向量、整數向量和數值向量的空間大約為：$長度 \times 單位空間$
+
+--- &vcenter .largecontent
+
+## `object.size`
+
+```{r, echo = TRUE}
+object.size(logical(0))
+object.size(rep(TRUE, 1000))
+object.size(rep(TRUE, 1e6))
+```
+
+--- &vcenter .largecontent
+
+## `object.size`
+
+```{r, echo = TRUE}
+object.size(integer(0))
+object.size(seq(1L, by = 1L, length = 1e3))
+object.size(seq(1L, by = 1L, length = 1e6))
+```
+
+--- &vcenter .largecontent
+
+## `object.size`
+
+```{r, echo = TRUE}
+object.size(numeric(0))
+object.size(seq(0, by = 1, length = 1000))
+object.size(seq(0, by = 1, length = 1e6))
+```
+
+--- &vcenter .largecontent
+
+## 字串向量的記憶體用量不容易估計
+
+```{r, echo = TRUE}
+speaker <- readLines("speaker.txt")
+speaker[2]
+length(speaker)
+file.size("speaker.txt")
+object.size(speaker)
+```
+
+--- &vcenter .largecontent
+
+## 關於記憶體
+
+- 事前估計需要的記憶體用量
+    - 抓"0"的個數即可
+
+--- &vcenter .largecontent
+
+## R 的記憶體處理機制
+
+- 垃圾回收（`gc()`）
+- Pass By Value
+- Copy on Write
+
+--- &vcenter .largecontent
+
+## `gc`會進行以下動作：
+
+- 釋放不使用的記憶體
+- 關閉不使用的檔案連線
+
+--- &vcenter .largecontent
+
+## Pass By Value
+
+- 在R 的函數中對物件作修改，外部物件是不會被更改的
+    - 物件被複製了！
+
+--- &vcenter .largecontent
+
+## Copy on Write
+
+- 只有在修改物件的時候，才會複製記憶體
+
+--- &vcenter .largecontent
+
+## `tracemem`
+
+```r
+> x <- c(1, 2, 3)
+> tracemem(x)
+[1] "<0x8de5838>"
+> y <- x
+> y[2] <- 3
+tracemem[0x8de5838 -> 0x7f99070]
+```
+
+
