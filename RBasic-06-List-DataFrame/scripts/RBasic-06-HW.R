@@ -13,10 +13,12 @@ answer3 <- <你的程式碼>
 #' 請問uptake這欄的平均值為多少？
 answer4 <- <你的程式碼>
 
-#' 請挑出所有uptake的值超過uptake的平均值的列
+#' CO2 共有很多很多列（answer3）
+#' 請從CO2 中挑出一些列，滿足以下的條件：
+#' 這些列的uptake直，超過全部CO2的uptake值
+#' （`mean(CO2$uptake)`）
 #' 
 #'   你可以先取出uptake的向量、接著拿該向量和平均值做比較、把結果的logical vector丟到`[]`的第一個參數
-#'   ps. answer5 應該是一個data.frame
 answer5 <- <你的程式碼>
 
 #' 請問Type有多少種類別？
