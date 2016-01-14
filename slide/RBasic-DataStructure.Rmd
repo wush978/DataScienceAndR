@@ -352,13 +352,6 @@ $dim
 
 ## 為什麼要使用R 的Matrix?
 
-- 各種方便的API
-- 優化過的運算效能(BLAS)
-
---- &vcenter .largecontent
-
-## 為什麼要使用R 的Matrix?
-
 - 各種方便操作的API
 - 優化過的運算效能(BLAS)
 
