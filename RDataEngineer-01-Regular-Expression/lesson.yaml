@@ -31,7 +31,7 @@
   AnswerTests: omnitest('readLines(file(hospital_path, encoding = "UTF-8"), n = 6)')
   Hint: readLines(file(hospital_path, encoding = "UTF-8"), n = 6)
 - Class: cmd_question
-  Output: 接著我們再使用`readLines(file(hospital_path, encoding = "BIG5"), n = 6)` 試試看。
+  Output: 接著我們再使用`readLines(file(hospital_path, encoding = "BIG5"), n = 6)` 試試看。同學如果看到一些警告（warning）訊息，是因為這份檔案並非UTF-8編碼，所導致的小錯誤。
   CorrectAnswer: readLines(file(hospital_path, encoding = "BIG5"), n = 6)
   AnswerTests: omnitest('readLines(file(hospital_path, encoding = "BIG5"), n = 6)')
   Hint: readLines(file(hospital_path, encoding = "BIG5"), n = 6)
@@ -42,4 +42,17 @@
   AnswerTests: omnitest(correctVal = "BIG5")
 - Class: text
   Output: 像是這類編碼與文件不符的狀況，在實務上是很常見的。
+- Class: cmd_question
+  Output: 接著請同學依照在RBasic-07所學到的技巧，用`read.table`和`file`兩個函數的組合， 以及適當的設定`sep`、`header`和`encoding`等參數將`hospital_path`的內容存到`hospital`
+  CorrectAnswer: hospital <- read.table(file(hospital_path, encoding = "BIG5"), sep
+    = ",", header = TRUE)
+  AnswerTests: omnitest(correctVal = read.table(file(hospital_path, encoding = "BIG5"),
+    sep = ",", header = TRUE))
+  Hint: hospital <- read.table(file(hospital_path, encoding = "BIG5"), sep = ",",
+    header = TRUE)
+- Class: cmd_question
+  Output: 我們可能希望從欄位YQ中擷取出資料的年份。我們先看看名稱為YQ這欄，請同學自hospital中選出YQ欄位。 （同學可以使用`[[`、或`$`搭配名稱或是欄位順序）
+  CorrectAnswer: hospital$YQ
+  AnswerTests: omnitest(correctVal = hospital[[1]])
+  Hint: hospital$YQ
 
