@@ -28,7 +28,31 @@
   CorrectAnswer: readBin(hospital_path, "raw", n = 3L)
   AnswerTests: omnitest(correctVal = readBin(hospital_path, "raw", n = 3L))
 
-- Class: multi_question
+- Class: mult_question
   Output: 請問同學，根據這三個byte，他們的BOM可能是什麼呢？
-  AnswerChoices:
-  AnswerChoices: 
+  AnswerChoices: UTF-8(EF BB BF);UTF-16BE(FE FF);UTF-16LE(FF FE);以上皆非
+  CorrectAnswer: "以上皆非"
+  AnswerTests: omnitest(correctVal = "以上皆非")
+  Hint: 請比對R 讀取`hospital_path`前三Byte的值與常見的BOM值
+
+- Class: cmd_question
+  Output: 當BOM不能判斷的時候，我們只好用各種Encoding讀個前行試試看。由於政府公開資料網
+    宣稱這個檔案為UTF-8編碼的，我們先使用UTF-8讀讀看。請同學輸入：
+    `readLines(file(hospital_path, encoding = "UTF-8"), n = 6)`
+  CorrectAnswer: readLines(file(hospital_path, encoding = "UTF-8"), n = 6)
+  AnswerTests: omnitest('readLines(file(hospital_path, encoding = "UTF-8"), n = 6)')
+
+- Class: cmd_question
+  Output: 接著我們再使用`readLines(file(hospital_path, encoding = "BIG5"), n = 6)`
+    試試看。
+  CorrectAnswer: readLines(file(hospital_path, encoding = "BIG5"), n = 6)
+  AnswerTests: omnitest('readLines(file(hospital_path, encoding = "BIG5"), n = 6)')
+
+- Class: mult_question
+  Output: 透過上面的測試，請問同學，這個檔案的編碼應該是：
+  AnswerChoices: UTF-8;BIG5
+  CorrectAnswer: "BIG5"
+  AnswerTests: omnitest(correctVal = "BIG5")
+
+- Class: text
+  Output: 像是這類編碼與文件不符的狀況，在實務上是很常見的。
