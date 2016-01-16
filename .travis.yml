@@ -15,7 +15,7 @@ before_install:
 
 install:
   - sudo apt-get install -y libcurl4-openssl-dev
-  - Rscript -e "install.packages('swirl', repos = c('http://taiwanrusergroup.github.io/R', 'http://cran.r-project.org'))"
+  - Rscript -e "install.packages(c('swirl', 'curl'), repos = c('http://wush978.github.io/R'))"
 
 notifications:
   email:
