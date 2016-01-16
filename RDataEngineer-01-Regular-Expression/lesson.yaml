@@ -1,0 +1,21 @@
+- Class: meta
+  Course: DataScienceAndR
+  Lesson: RDataEngineer-01-Regular-Expression
+  Author: Wush Wu
+  Type: Standard
+  Organization: Taiwan R User Group
+  Version: 2.3.1
+- Class: text
+  Output: 各位同學好，這門課程將會帶大家走過一遍R 裡面提供的字串處理功能。
+- Class: text
+  Output: 在實務上，數據來源常常都是隱含某些規則的文字檔案。例如：伺服器依據 工程師擬定的規則所產生的資料。這個規則可能是工程師自己訂的，也可能是符合 眾人智慧所訂定的規範。
+- Class: text
+  Output: 但是不管是工程師自己的想法，或是眾人的智慧，Regular Expression都是 一個能用來從文字中萃取資訊的技術。
+- Class: text
+  Output: 這個課程中，我們事先從政府的公開資料平台抓取了參與試辦小兒腦性麻痺 的中醫門診的醫療院所。這個資料已經存放於`hospital_path`了
+- Class: cmd_question
+  Output: 請同學用上一堂課所學的技巧，先用`readBin`來看檢查這個檔案的BOM。
+  CorrectAnswer: readBin(hospital_path, "raw", n = 3L)
+  AnswerTests: omnitest(correctVal = readBin(hospital_path, "raw", n = 3L))
+  Hint: readBin(hospital_path, "raw", n = 3L)
+
