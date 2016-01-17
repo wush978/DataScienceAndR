@@ -1,0 +1,28 @@
+- Class: meta
+  Course: DataScienceAndR
+  Lesson: RDataEngineer-02-XML
+  Author: Wush Wu
+  Type: Standard
+  Organization: Taiwan R User Group
+  Version: 2.3.1.1
+- Class: text
+  Output: 大家好，這門課程的目的是想要教大家如何處理XML，這是大部分的網頁資料（HTML）所採用的格式。
+- Class: text
+  Output: R 有不少處理XML型態資料的套件，今天我們主要要介紹的是xml2這個套件。
+- Class: cmd_question
+  Output: 請同學先安裝xml2套件。
+  CorrectAnswer: check_then_install("xml2", "0.1.2")
+  AnswerTests: test_package_version("xml2", "0.1.2")
+  Hint: install.packages("xml2")
+- Class: cmd_question
+  Output: 請同學載入xml2套件
+  CorrectAnswer: library(xml2)
+  AnswerTests: test_search_path("xml2")
+  Hint: library(xml2)
+- Class: cmd_question
+  Output: 首先，我們嘗試用xml2套件來處理，來自政府電子採購網所爬下來的資料。 這個檔案的路徑已經設定到tender_path了。首先，請同學先用`readLines`
+    來看這個檔案的前6行。
+  CorrectAnswer: readLines(tender_path, n = 6)
+  AnswerTests: omnitest(correctVal = readLines(tender_path, n = 6))
+  Hint: readLines(tender_path, n = 6)
+

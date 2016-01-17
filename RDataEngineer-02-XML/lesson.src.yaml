@@ -1,0 +1,52 @@
+- Class: meta
+  Course: DataScienceAndR
+  Lesson: RDataEngineer-02-XML
+  Author: Wush Wu
+  Type: Standard
+  Organization: Taiwan R User Group
+  Version: 2.3.1.1
+
+- Class: text
+  Output: 大家好，這門課程的目的是想要教大家如何處理XML或HTML的資料。這是大部分的網頁資料
+    （HTML）所採用的格式。swirl 中並不會對XML或HTML的背景知識做介紹，有興趣的同學之後可以
+    輸入wiki_html()了解相關的背景知識。
+
+- Class: cmd_question
+  Output: 首先，我們先來看看政府電子採購網<http://web.pcc.gov.tw>所爬下來的決標資料。
+    這個檔案的路徑已經設定到tender_path了。首先，請同學先用`readLines`
+    來看這個檔案的前30行。
+  CorrectAnswer: readLines(tender_path, n = 30)
+  AnswerTests: omnitest(correctVal = readLines(tender_path, n = 30))
+
+- Class: text
+  Output: 根據上一題的輸出，這個檔案是貨真價實的以HTML格式撰寫的。這種格式若要我們用肉眼，
+    或是用上一堂課的方式來從HTML中萃取資訊，是非常不容易的。
+
+- Class: text
+  Output: R 有不少處理XML與HTML型態資料的套件，今天我們要介紹的是xml2這個套件。
+
+- Class: cmd_question
+  Output: 請同學先安裝xml2套件。
+  CorrectAnswer: check_then_install("xml2", "0.1.2")
+  AnswerTests: test_package_version("xml2", "0.1.2")
+  Hint: install.packages("xml2")
+
+- Class: cmd_question
+  Output: 請同學載入xml2套件
+  CorrectAnswer: library(xml2)
+  AnswerTests: test_search_path("xml2")
+
+- Class: text
+  Output: 在R 處理XML或HTML資料時，第一步是讓套件載入所有的XML或HTML資料，建立DOM
+    （Document Object Mode）樹。有了DOM樹之後，我們就可以透過如XPath等方式快速從文件
+    中找出我們需要的資訊。關於DOM樹的詳細介紹，同學可以輸入`wiki_dom()`閱讀wiki上對
+    DOM的介紹。XPath的詳細介紹則請參考`wiki_xpath()`。
+
+- Class: cmd_question
+  Output: 接著，我們使用`doc <- read_html(tender_path)`，透過xml2套件的`read_html`
+    函樹讓R 建立DOM樹，並且把建立後的DOM樹存入`doc`這個變數中。
+  CorrectAnswer: doc <- read_html(tender_path)
+  AnswerTests: omnitest("doc <- read_html(tender_path)")
+
+- Class: cmd_question
+  Output:
