@@ -22,9 +22,9 @@
   Hint: readBin(hospital_path, "raw", n = 3L)
 - Class: mult_question
   Output: 請問同學，根據這三個byte，他們的BOM可能是什麼呢？
-  AnswerChoices: UTF-8(EF BB BF);UTF-16BE(FE FF);UTF-16LE(FF FE);以上皆非
-  CorrectAnswer: 以上皆非
-  AnswerTests: omnitest(correctVal = "以上皆非")
+  AnswerChoices: UTF-8(EF BB BF);UTF-16BE(FE FF);UTF-16LE(FF FE);Unknown
+  CorrectAnswer: Unknown
+  AnswerTests: omnitest(correctVal = "Unknown")
   Hint: 請比對R 讀取`hospital_path`前三Byte的值與常見的BOM值
 - Class: cmd_question
   Output: 當BOM不能判斷的時候，我們只好用各種Encoding讀個前行試試看。由於政府公開資料網 宣稱這個檔案為UTF-8編碼的，我們先使用UTF-8讀讀看。請同學輸入：
