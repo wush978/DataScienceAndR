@@ -7,7 +7,8 @@ pirate_info <- readLines(file(pirate_path, encoding = "BIG5"))
 pirate_info_key_value <- {
   # 請在這邊填寫你的程式碼
   # 這個程式碼可以多行
-  strsplit(pirate_info, "：")
+  .delim <- strsplit(pirate_info[2], "")[[1]][3]
+  strsplit(pirate_info, .delim)
 }
 
 # 我們需要的欄位名稱是「經緯度」
@@ -27,7 +28,7 @@ stopifnot(class(pirate_info_key) == "character")
 pirate_is_coordinate <- {
   # 請在這邊填寫你的程式碼
   # 這個程式碼可以多行
-  pirate_info_key == "經緯度"
+  pirate_info_key == pirate_info_key[8]
 }
 
 # 確保你的結果是布林向量，否則答案會出錯

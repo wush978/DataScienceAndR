@@ -18,9 +18,10 @@ rdataengineer_01_hw_test <- function() {
   name.list <- c("pirate_info", "pirate_info_key_value", "pirate_info_key", "pirate_is_coordinate", 
                  "pirate_coordinate_raw", "pirate_coordinate_latitude", "pirate_df")
   pirate_info.ref <- readLines(file(pirate_path, encoding = "BIG5"))
-  pirate_info_key_value.ref <- strsplit(pirate_info.ref, "：")
+  .delim <- strsplit(pirate_info.ref[2], "")[[1]][3]
+  pirate_info_key_value.ref <- strsplit(pirate_info.ref, .delim)
   pirate_info_key.ref <- sapply(pirate_info_key_value.ref, "[", 1)
-  pirate_is_coordinate.ref <- pirate_info_key.ref == "經緯度"
+  pirate_is_coordinate.ref <- pirate_info_key.ref == pirate_info_key.ref[8]
   pirate_coordinate_raw.ref <- local({
     .tmp <- sapply(pirate_info_key_value.ref, "[", 2)
     .tmp[pirate_is_coordinate.ref]
