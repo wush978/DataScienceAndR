@@ -1,6 +1,6 @@
-language: c
+osx_image: xcode61
 
-sudo: true
+language: objective-c
 
 script: 
   - Rscript -e "source('.test_course.R')"
@@ -9,13 +9,13 @@ after_failure:
   - ./travis-tool.sh dump_logs
 
 before_install:
-  - curl -OL http://raw.github.com/craigcitro/r-travis/master/scripts/travis-tool.sh
+  - echo "options(repos = c(CRAN='http://cran.r-project.org'))" >> ~/.Rprofile
+  - curl -OL http://raw.github.com/craigcitro/r-travis-mac/master/scripts/travis-tool.sh
   - chmod 755 ./travis-tool.sh
   - ./travis-tool.sh bootstrap
 
 install:
-  - sudo apt-get install -y libcurl4-openssl-dev
-  - Rscript -e "install.packages('swirl', repos = c('http://taiwanrusergroup.github.io/R', 'http://cran.r-project.org'))"
+  - Rscript -e "source('http://wush978.github.io/R/init.R')"
 
 notifications:
   email:
@@ -25,4 +25,7 @@ env:
   - global:
     - WARNINGS_ARE_ERRORS=1
     - _R_CHECK_FORCE_SUGGESTS_=0
-    - BOOTSTRAP_LATEX=0
+    - R_BUILD_ARGS="--no-manual"
+    - R_CHECK_ARGS="--no-manual --as-cran --no-vignettes"
+    - PKG_CFLAGS="-g -O3 -Wall -pedantic -I../inst/include -DLOGGER_LEVEL=LL_WARN"
+
