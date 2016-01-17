@@ -6,3 +6,8 @@
 assign("hospital_path", 
        .get_path("DataGov25511.csv"),
        envir = globalenv())
+
+assign("pirate_path", 
+       .get_path("pirate-info-2015-09.txt"),
+       envir = globalenv())
+ 
