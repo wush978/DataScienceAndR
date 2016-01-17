@@ -1,0 +1,117 @@
+- Class: meta
+  Course: DataScienceAndR
+  Lesson: RDataEngineer-01-Parsing
+  Author: Wush Wu
+  Type: Standard
+  Organization: Taiwan R User Group
+  Version: 2.3.1
+- Class: text
+  Output: 各位同學好，這門課程將會帶大家走過一遍R 裡面提供的字串處理功能。
+- Class: text
+  Output: 在實務上，數據來源常常都是隱含某些規則的文字檔案。例如：伺服器依據 工程師擬定的規則所產生的資料。這個規則可能是工程師自己訂的，也可能是符合 眾人智慧所訂定的規範。
+- Class: text
+  Output: 但是不管是工程師自己的想法，或是眾人的智慧，R 都能從文字中萃取出資訊。 一般而言，這樣的技術就稱作Parsing。同學上一堂課程所學到的`read.table`，其實
+    就是一種Parsing的功能。
+- Class: text
+  Output: 這個課程中，我們事先從政府的公開資料平台抓取了血清白蛋白(Albumin)檢查比率 的資料。這個資料已經存放於`hospital_path`了。有興趣的同學，可以參考網址：
+    <http://data.gov.tw/node/25511>閱讀這個資料集的故事。
+- Class: cmd_question
+  Output: 請同學用上一堂課所學的技巧，先用`readBin`來看檢查這個檔案的BOM。
+  CorrectAnswer: readBin(hospital_path, "raw", n = 3L)
+  AnswerTests: omnitest(correctVal = readBin(hospital_path, "raw", n = 3L))
+  Hint: readBin(hospital_path, "raw", n = 3L)
+- Class: mult_question
+  Output: 請問同學，根據這三個byte，他們的BOM可能是什麼呢？
+  AnswerChoices: UTF-8(EF BB BF);UTF-16BE(FE FF);UTF-16LE(FF FE);以上皆非
+  CorrectAnswer: 以上皆非
+  AnswerTests: omnitest(correctVal = "以上皆非")
+  Hint: 請比對R 讀取`hospital_path`前三Byte的值與常見的BOM值
+- Class: cmd_question
+  Output: 當BOM不能判斷的時候，我們只好用各種Encoding讀個前行試試看。由於政府公開資料網 宣稱這個檔案為UTF-8編碼的，我們先使用UTF-8讀讀看。請同學輸入：
+    `readLines(file(hospital_path, encoding = "UTF-8"), n = 6)`
+  CorrectAnswer: readLines(file(hospital_path, encoding = "UTF-8"), n = 6)
+  AnswerTests: omnitest('readLines(file(hospital_path, encoding = "UTF-8"), n = 6)')
+  Hint: readLines(file(hospital_path, encoding = "UTF-8"), n = 6)
+- Class: cmd_question
+  Output: 接著我們再使用`readLines(file(hospital_path, encoding = "BIG5"), n = 6)` 試試看。同學如果看到一些警告（warning）訊息，是因為這份檔案並非UTF-8編碼，所導致的小錯誤。
+  CorrectAnswer: readLines(file(hospital_path, encoding = "BIG5"), n = 6)
+  AnswerTests: omnitest('readLines(file(hospital_path, encoding = "BIG5"), n = 6)')
+  Hint: readLines(file(hospital_path, encoding = "BIG5"), n = 6)
+- Class: mult_question
+  Output: 透過上面的測試，請問同學，這個檔案的編碼應該是：
+  AnswerChoices: UTF-8;BIG5
+  CorrectAnswer: BIG5
+  AnswerTests: omnitest(correctVal = "BIG5")
+- Class: text
+  Output: 像是這類編碼與文件不符的狀況，在實務上是很常見的。
+- Class: cmd_question
+  Output: 接著請同學依照在RBasic-07所學到的技巧，用`read.table`和`file`兩個函數的組合， 以及適當的設定`sep`、`header`和`encoding`等參數將`hospital_path`的內容存到`hospital`
+  CorrectAnswer: hospital <- read.table(file(hospital_path, encoding = "BIG5"), sep
+    = ",", header = TRUE)
+  AnswerTests: omnitest(correctVal = read.table(file(hospital_path, encoding = "BIG5"),
+    sep = ",", header = TRUE))
+  Hint: hospital <- read.table(file(hospital_path, encoding = "BIG5"), sep = ",",
+    header = TRUE)
+- Class: cmd_question
+  Output: 我們可能希望從欄位YEARYY中擷取出資料的年份。我們先看看名稱為YEARYY這欄，請同學自hospital中選出YEARYY欄位。 （同學可以使用`[[`、或`$`搭配名稱或是欄位順序）
+  CorrectAnswer: hospital$YEARYY
+  AnswerTests: omnitest(correctVal = hospital[[1]])
+  Hint: hospital$YEARYY
+- Class: text
+  Output: 有時候，觀察到太大量的資料可能會對R 、電腦帶來大量的負荷，同時也對我們沒有意義。因為 我們能同時處理的資料量是有限的。這裡我建議同學，可以用`head`這個函數篩選出資料的前6
+    列做觀察。
+- Class: mult_question
+  Output: 請問同學，`hospital`中的YEARYY欄位的型態為何？
+  AnswerChoices: character;factor;integer;numeric;list
+  CorrectAnswer: factor
+  AnswerTests: omnitest(correctVal = "factor")
+  Hint: 請注意，R 回報說這個欄位有36個Levels。
+- Class: cmd_question
+  Output: 從Levels上的資訊顯示，年份的資訊，可能是在前兩個數字，或是前三個數字。 如果通通都是兩個數字的話，我們可以透過`substring`函數直接擷取字串中的段落即可。
+    請同學輸入：`?substring`先看看substring函數的說明文件。
+  CorrectAnswer: ?substring
+  AnswerTests: any_of_exprs("?substring", "help(substring)", 'help("substring")')
+  Hint: ?substring
+- Class: mult_question
+  Output: 請問下列哪一個「不是」`substring`的參數？
+  AnswerChoices: x;text;first;last
+  CorrectAnswer: x
+  AnswerTests: omnitest(correctVal = "x")
+- Class: cmd_question
+  Output: R 的`substring`函數會把`text`參數所代表的字串，依照字符的位置，擷取出中間的段落。 舉例來說，`substring("abc",
+    1, 2)`就會擷取出"abc"中第1 個字母到第2 個字母的段落，也就 是"ab"。而`substring`也是向量式的函數。請同學輸入`substring(head(hospital$YEARYY),
+    1, 3)` 看看前6 筆數據經過R 的`substring`函數處理之後的結果。
+  CorrectAnswer: substring(head(hospital$YEARYY), 1, 3)
+  AnswerTests: omnitest("substring(head(hospital$YEARYY), 1, 3)")
+  Hint: substring(head(hospital$YEARYY), 1, 3)
+- Class: text
+  Output: 這樣的作法，有時候就夠了，可惜在現在的狀況不適合。因為年度可能是2 位數也可能是3 位數。
+- Class: cmd_question
+  Output: 另外一種想法，是拿`"Q"`當做定位點。我們如果利用`"Q"`把字串分割成兩部份，第一部份 就是我們需要的年份了。在R 中，我們可以運用函數`strsplit`達到這個目的。請同學打開`strsplit`
+    的說明文件。
+  CorrectAnswer: ?strsplit
+  AnswerTests: any_of_exprs("?strsplit", "help(strsplit)", 'help("strsplit")')
+  Hint: ?strsplit
+- Class: mult_question
+  Output: 請問同學，下列哪一個「不是」`strsplit`的參數？
+  AnswerChoices: x;split;fixed;str
+  CorrectAnswer: str
+  AnswerTests: omnitest(correctVal="str")
+- Class: cmd_question
+  Output: 根據說明文件，`strsplit`會利用`split`參數來切割`x`這個字串，並且回傳一個`list`。這是因為`x` 的長度可能超過1 ，而`strsplit`會用`split`去切割每一個`x`的元素。而切割出來的結果，第一個
+    元素可能切出兩段，但是第二個元素可能只切出一段。所以R 用`list`這個結構來處理。 但是`strsplit`並不接受factor參數，只接受字串向量。因此請同學用：`yearyy
+    <- as.character(hospital$YEARYY)` 把資料存到`yearyy`這個變數。
+  CorrectAnswer: yearyy <- as.character(hospital$YEARYY)
+  AnswerTests: omnitest("yearyy <- as.character(hospital$YEARYY)")
+  Hint: yearyy <- as.character(hospital$YEARYY)
+- Class: cmd_question
+  Output: 接著請同學輸入：`tmp <- strsplit(yearyy, "Q")`，把切割的結果儲存到`tmp`這個變數。
+  CorrectAnswer: tmp <- strsplit(yearyy, "Q")
+  AnswerTests: omnitest('tmp <- strsplit(yearyy, "Q")')
+  Hint: tmp <- strsplit(yearyy, "Q")
+- Class: cmd_question
+  Output: 請同學輸入：`head(tmp)`看看結果
+  CorrectAnswer: head(tmp)
+  AnswerTests: omnitest("head(tmp)")
+  Hint: head(tmp)
+
