@@ -10,9 +10,9 @@ after_failure:
 
 before_install:
   - echo "options(repos = c(CRAN='http://cran.r-project.org'))" >> ~/.Rprofile
-  - curl -OL http://raw.github.com/craigcitro/r-travis-mac/master/scripts/travis-tool.sh
+  - curl -OL http://raw.github.com/wush978/r-travis-mac/master/scripts/travis-tool.sh
   - chmod 755 ./travis-tool.sh
-  - bash travis-tool.sh bootstrap
+  - ./travis-tool.sh bootstrap
 
 install:
   - Rscript -e "source('http://wush978.github.io/R/init.R')"
