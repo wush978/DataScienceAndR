@@ -15,7 +15,7 @@ before_install:
   - ./travis-tool.sh bootstrap
 
 install:
-  - Rscript -e "source('http://wush978.github.io/R/init.R')"
+  - Rscript -e "source('http://wush978.github.io/R/init-swirl.R')"
 
 notifications:
   email:
