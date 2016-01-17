@@ -207,4 +207,9 @@
     把資訊放成非結構化的list物件中，我們可以運用`lapply`或`sapply` 做資料的整理。
 - Class: text
   Output: 事實上，如果同學能夠撰寫R 的函數，就可以適當的和`lapply`與`sapply`作組合，更有 效率的整理資料。
+- Class: script
+  Output: 最後，還是要請同學利用這次所學的內容，做一個小練習。 請同學在完成之後存檔，並輸入`submit()`來檢查結果是否符合預期。 如果同學在檔案中看到亂碼，請使用Rstudio
+    左上角的File -> Reopen With Encoding... -> 選取：UTF-8
+  Script: RDataEngineer-01-HW.R
+  AnswerTests: rdataengineer_01_hw_test()
 
