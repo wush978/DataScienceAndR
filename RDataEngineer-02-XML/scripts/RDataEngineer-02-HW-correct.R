@@ -40,7 +40,9 @@ stopifnot(class(ths) == "xml_nodeset")
 stopifnot(length(ths) == 116)
 
 # 請取出每個ths中的th標籤的值，並且和 "　廠商名稱" 作比較
-is_target <- xml_text(ths) == "　廠商名稱"
+player_name_reference <- rawToChar(as.raw(c(227L, 128L, 128L, 229L, 187L, 160L, 229L, 149L, 134L, 229L,
+  144L, 141L, 231L, 168L, 177L))) # "　廠商名稱"
+is_target <- xml_text(ths) == player_name_reference
 
 stopifnot(class(is_target) == "logical")
 stopifnot(sum(is_target) == 4)
@@ -71,7 +73,7 @@ stopifnot(class(trs_children_text) == "character")
 stopifnot(length(trs_children_text) == 8)
 
 # 只挑出那些值「不是」 "　廠商名稱"的元素
-players <- trs_children_text[trs_children_text != "　廠商名稱"]
+players <- trs_children_text[trs_children_text != player_name_reference]
 
 # 其實這樣取出的廠商名稱還是很髒，有一大堆換行、tab字元等等
 # 但是我們就先練習到這裡了
