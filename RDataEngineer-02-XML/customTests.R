@@ -10,3 +10,35 @@
 # variables when appropriate. The answer test, creates_new_var()
 # can be used for for the purpose, but it also re-evaluates the
 # expression which the user entered, so care must be taken.
+
+rdataengineer_02_hw_test <- function() {
+  e <- get("e", parent.frame())
+  source_result <- try(source(e$script_temp_path, local = new.env(), encoding = "UTF-8"), silent = TRUE)
+  if (class(source_result)[1] == "try-error") return(FALSE)
+  name.list <- c("tender", "ths", "is_target", "ths2",
+                 "trs", "trs_children", "trs_children_text")
+  tender.ref <- read_html(tender_path)
+  ths.ref <- xml_find_all(tender.ref, "//tr/th")
+  is_target.ref <- xml_text(ths.ref) == "　廠商名稱"
+  ths2.ref <- ths.ref[is_target.ref]
+  trs.ref <- xml_parent(ths2.ref)
+  trs_children.ref <- xml_children(trs.ref)
+  trs_children_text.ref <- xml_text(trs_children.ref)
+  players.ref <- trs_children_text.ref[trs_children_text.ref != "　廠商名稱"]
+  tryCatch({
+    for(name in name.list) {
+      .src <- get(name, envir = globalenv())
+      .ref <- get(sprintf("%s.ref", name))
+      if (class(.src)[1] %in% c("xml_document", "xml_nodeset", "xml_node")) {
+        if (!isTRUE(all.equal(xml_text(.src), xml_text(.ref)))) stop(sprintf("%s is wrong! Try again.\n", name))
+      } else {
+        if (!isTRUE(all.equal(.src, .ref))) stop(sprintf("%s is wrong! Try again.\n", name))
+      }
+    }
+    TRUE
+  }, error = function(e) {
+    cat(conditionMessage(e))
+    FALSE
+  })
+
+}

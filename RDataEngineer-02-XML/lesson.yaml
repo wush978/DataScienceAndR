@@ -145,7 +145,7 @@
   CorrectAnswer: xml_node
   AnswerTests: omnitest(correctVal = "xml_node")
 - Class: cmd_question
-  Output: 我們可以把第一個C標籤，存到變數`n1`。請同學輸入：`n1 <- ns[[1]]`
+  Output: 我們可以把第一個c標籤，存到變數`n1`。請同學輸入：`n1 <- ns[[1]]`
   CorrectAnswer: n1 <- ns[[1]]
   AnswerTests: omnitest("n1 <- ns[[1]]")
   Hint: n1 <- ns[[1]]
@@ -155,18 +155,87 @@
   CorrectAnswer: C1
   AnswerTests: omnitest(correctVal="C1")
 - Class: cmd_question
-  Output: 我們可以透過`xml_contents(n1)`取出xml_node的內容。在這裡，我們應該要看到"C1" 請同學試試看。
-  CorrectAnswer: xml_contents(n1)
-  AnswerTests: omnitest('xml_contents(n1)')
-  Hint: xml_contents(n1)
+  Output: 我們可以透過`xml_text(n1)`取出xml_node的內容。在這裡，我們應該要看到"C1" 請同學試試看。
+  CorrectAnswer: xml_text(n1)
+  AnswerTests: omnitest('xml_text(n1)')
+  Hint: xml_text(n1)
+- Class: cmd_question
+  Output: 我們也可以用`xml_parent`來看一個標籤的父標籤。請同學試試看輸入：`xml_parent(n1)`
+  CorrectAnswer: xml_parent(n1)
+  AnswerTests: omnitest("xml_parent(n1)")
+  Hint: xml_parent(n1)
 - Class: cmd_question
   Output: 接著請執行：`n2 <- ns[[2]]`
   CorrectAnswer: n2 <- ns[[2]]
   AnswerTests: omnitest('n2 <- ns[[2]]')
   Hint: n2 <- ns[[2]]
 - Class: cmd_question
-  Output: 我們可以檢查一下`xml_contents(n2)`的輸出，確認這是第二個C標籤
-  CorrectAnswer: xml_contents(n2)
+  Output: 我們可以檢查一下`xml_text(n2)`的輸出，確認這是第二個c標籤
+  CorrectAnswer: xml_text(n2)
   AnswerTests: omnitest(correctVal = "C2")
-  Hint: xml_contents(n2)
+  Hint: xml_text(n2)
+- Class: text
+  Output: 另一個檢查內容的函數是`xml_contents`。當含有子標籤時， 它和`xml_contents`的行為會不太一致。
+- Class: cmd_question
+  Output: 請同學輸入：`a <- xml_find_one(doc1, "/a")`。這裡我們使用`xml_find_one` 作選取，所以輸出的就只有一個node，型態就會是xml_node
+  CorrectAnswer: a <- xml_find_one(doc1, "/a")
+  AnswerTests: omnitest('a <- xml_find_one(doc1, "/a")')
+  Hint: a <- xml_find_one(doc1, "/a")
+- Class: cmd_question
+  Output: 接著我們試試看輸入：`xml_text(a)`，同學應該會看到在<a>...</a>之間的所有文字。
+  CorrectAnswer: xml_text(a)
+  AnswerTests: omnitest("xml_text(a)")
+  Hint: xml_text(a)
+- Class: cmd_question
+  Output: 但是我們若輸入：`xml_contents(a)`，R 就會回傳一個xml_nodeset給我們。請試試看。
+  CorrectAnswer: xml_contents(a)
+  AnswerTests: omnitest("xml_contents(a)")
+  Hint: xml_contents(a)
+- Class: cmd_question
+  Output: 我們也能透過`xml_children(a)`來取得所有以a 為父標籤的標籤們（在這裡，即是一個 b標籤和兩個c標籤）。請同學試試看。
+  CorrectAnswer: xml_children(a)
+  AnswerTests: omnitest("xml_children(a)")
+  Hint: xml_children(a)
+- Class: cmd_question
+  Output: 回到剛剛的節點`n2`和`n1`。這兩個節點在結構上不同的，`n2`附帶了屬性，而`n1`沒有。 請同學先看看`xml_attrs(n1)`的結果
+  CorrectAnswer: xml_attrs(n1)
+  AnswerTests: omnitest("xml_attrs(n1)")
+  Hint: xml_attrs(n1)
+- Class: text
+  Output: 同學應該看到一個空的結果，因為第一個c標籤並沒有夾帶屬性的資訊。
+- Class: cmd_question
+  Output: 請同學先看看`xml_attrs(n2)`的結果
+  CorrectAnswer: xml_attrs(n2)
+  AnswerTests: omnitest("xml_attrs(n2)")
+  Hint: xml_attrs(n2)
+- Class: text
+  Output: 同學應該看到一個帶有名字的字串向量。其中名稱為"class"的元素的值為"x"。 比對一下`x1`的內容："<a><b>B</b><c>C1</c><c
+    class='x'>C2</c></a>" 在給定某個標籤對應的節點後，我們是不是可以取出一個XML標籤的屬性呢？
+- Class: cmd_question
+  Output: 在使用XPath尋找標籤時，屬性是可以派上用場的。 舉例來說，`xml_find_all(doc1, "/a/c[@class]")`，就在搜尋時增加：「標籤必須要帶有
+    名稱為"class"的屬性」，所以這時候R 就只會回傳第二個c標籤，因為第一個c標籤並不帶有 class屬性。請同學試試看。
+  CorrectAnswer: xml_find_all(doc1, "/a/c[@class]")
+  AnswerTests: omnitest('xml_find_all(doc1, "/a/c[@class]")')
+  Hint: xml_find_all(doc1, "/a/c[@class]")
+- Class: cmd_question
+  Output: 我們甚至還可以指定屬性的值，例如：`xml_find_all(doc1, "/a/c[@class='g']")`， 就代表我們要找的c標籤不只是有class屬性而已，這個屬性還必須要是"g"。這裡也要請同學注意我們
+    是如何交替的使用雙引號和單引號。由於這裡的"g"必須要加上引號，但是整個文字的外面已經套上雙引 號，如果重複使用雙引號的話會造成R 在判斷字串的困難。因此這裡要使用單引號。請同學試試看。
+  CorrectAnswer: xml_find_all(doc1, "/a/c[@class='g']")
+  AnswerTests: omnitest("xml_find_all(doc1, \"/a/c[@class='g']\")")
+  Hint: xml_find_all(doc1, "/a/c[@class='g']")
+- Class: text
+  Output: 最後我們要介紹一種XPath中常常使用的定位方式："//"。這裡的"//"代表的就是任意位置。 當我們在處理複雜的網頁資料時，如果每次都要從根部尋找正確的路徑，是非常不方便的。此時，透過
+    "//a"，我們就可以找到在所有位置都出現的a標籤。這樣的語法等等會在最後一關用到。
+- Class: text
+  Output: 也請同學不要忘記，"//"的用法是可以搭配屬性的過濾使用的。
+- Class: text
+  Output: 以上的課程內容，我們介紹了在給定道標籤的名稱（a標籤<a>...</a>或b標籤<b>...</b>）、 標籤的位置（根部是"/"，任意位置是"//"）及標籤的屬性後，要如何利用xml_find_all來搜尋標籤。
+- Class: text
+  Output: 我們也知道當找到這些標籤後，要怎麼取出標籤的內容（xml_contents和xml_text）與屬性 （xml_attrs）。另外我們也可以沿著標籤往父標籤（xml_parent)，或是取出子標籤（xml_children）
+    最後跟同學報告，這些操作都是向量式的喔！你可以對xml_nodeset使用如xml_text等函數一次操作 大量的xml_nodeset。等等的練習就會用到這些功能。
+- Class: script
+  Output: 接著就請同學透過上述所學，從政府的決標公告網頁中找出各種資訊。 請同學在完成之後存檔，並輸入`submit()`來檢查結果是否符合預期。 如果同學在檔案中看到亂碼，請使用Rstudio
+    左上角的File -> Reopen With Encoding... -> 選取：UTF-8
+  Script: RDataEngineer-02-HW.R
+  AnswerTests: rdataengineer_02_hw_test()
 

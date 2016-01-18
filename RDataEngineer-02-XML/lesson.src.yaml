@@ -212,10 +212,15 @@
   AnswerTests: omnitest(correctVal="C1")
 
 - Class: cmd_question
-  Output: 我們可以透過`xml_contents(n1)`取出xml_node的內容。在這裡，我們應該要看到"C1"
+  Output: 我們可以透過`xml_text(n1)`取出xml_node的內容。在這裡，我們應該要看到"C1"
     請同學試試看。
-  CorrectAnswer: xml_contents(n1)
-  AnswerTests: omnitest('xml_contents(n1)')
+  CorrectAnswer: xml_text(n1)
+  AnswerTests: omnitest('xml_text(n1)')
+
+- Class: cmd_question
+  Output: 我們也可以用`xml_parent`來看一個標籤的父標籤。請同學試試看輸入：`xml_parent(n1)`
+  CorrectAnswer: xml_parent(n1)
+  AnswerTests: omnitest("xml_parent(n1)")
 
 - Class: cmd_question
   Output: 接著請執行：`n2 <- ns[[2]]`
@@ -223,12 +228,38 @@
   AnswerTests: omnitest('n2 <- ns[[2]]')
 
 - Class: cmd_question
-  Output: 我們可以檢查一下`xml_contents(n2)`的輸出，確認這是第二個c標籤
-  CorrectAnswer: xml_contents(n2)
+  Output: 我們可以檢查一下`xml_text(n2)`的輸出，確認這是第二個c標籤
+  CorrectAnswer: xml_text(n2)
   AnswerTests: omnitest(correctVal = "C2")
 
+- Class: text
+  Output: 另一個檢查內容的函數是`xml_contents`。當含有子標籤時，
+    它和`xml_contents`的行為會不太一致。
+
+- Class: cmd_question
+  Output: 請同學輸入：`a <- xml_find_one(doc1, "/a")`。這裡我們使用`xml_find_one`
+    作選取，所以輸出的就只有一個node，型態就會是xml_node
+  CorrectAnswer: a <- xml_find_one(doc1, "/a")
+  AnswerTests: omnitest('a <- xml_find_one(doc1, "/a")')
+
+- Class: cmd_question
+  Output: 接著我們試試看輸入：`xml_text(a)`，同學應該會看到在<a>...</a>之間的所有文字。
+  CorrectAnswer: xml_text(a)
+  AnswerTests: omnitest("xml_text(a)")
+
+- Class: cmd_question
+  Output: 但是我們若輸入：`xml_contents(a)`，R 就會回傳一個xml_nodeset給我們。請試試看。
+  CorrectAnswer: xml_contents(a)
+  AnswerTests: omnitest("xml_contents(a)")
+
+- Class: cmd_question
+  Output: 我們也能透過`xml_children(a)`來取得所有以a 為父標籤的標籤們（在這裡，即是一個
+    b標籤和兩個c標籤）。請同學試試看。
+  CorrectAnswer: xml_children(a)
+  AnswerTests: omnitest("xml_children(a)")
+
 - Class : cmd_question
-  Output: 節點`n2`和`n1`是在結構上不同的，`n2`附帶了屬性，而`n1`沒有。
+  Output: 回到剛剛的節點`n2`和`n1`。這兩個節點在結構上不同的，`n2`附帶了屬性，而`n1`沒有。
     請同學先看看`xml_attrs(n1)`的結果
   CorrectAnswer: xml_attrs(n1)
   AnswerTests: omnitest("xml_attrs(n1)")
@@ -275,7 +306,10 @@
     標籤的位置（根部是"/"，任意位置是"//"）及標籤的屬性後，要如何利用xml_find_all來搜尋標籤。
 
 - Class: text
-  Output: 我們也知道當找到這些標籤後，要怎麼取出標籤的內容與屬性
+  Output: 我們也知道當找到這些標籤後，要怎麼取出標籤的內容（xml_contents和xml_text）與屬性
+    （xml_attrs）。另外我們也可以沿著標籤往父標籤（xml_parent)，或是取出子標籤（xml_children）
+    最後跟同學報告，這些操作都是向量式的喔！你可以對xml_nodeset使用如xml_text等函數一次操作
+    大量的xml_nodeset。等等的練習就會用到這些功能。
 
 - Class: script
   Output: 接著就請同學透過上述所學，從政府的決標公告網頁中找出各種資訊。
