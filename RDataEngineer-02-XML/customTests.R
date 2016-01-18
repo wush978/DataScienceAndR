@@ -23,6 +23,7 @@ rdataengineer_02_hw_test <- function() {
   Encoding(ths_text.ref) <- "UTF-8"
   player_name_reference <- rawToChar(as.raw(c(227L, 128L, 128L, 229L, 187L, 160L, 229L, 149L, 134L, 229L,
     144L, 141L, 231L, 168L, 177L)))
+  Encoding(player_name_reference) <- "UTF-8"
   is_target.ref <- ths_text.ref == player_name_reference
   ths2.ref <- ths.ref[is_target.ref]
   trs.ref <- xml_parent(ths2.ref)

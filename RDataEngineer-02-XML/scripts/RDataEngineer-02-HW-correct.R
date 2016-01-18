@@ -42,6 +42,7 @@ stopifnot(length(ths) == 116)
 # 請取出每個ths中的th標籤的值，並且和 "　廠商名稱" 作比較
 player_name_reference <- rawToChar(as.raw(c(227L, 128L, 128L, 229L, 187L, 160L, 229L, 149L, 134L, 229L,
   144L, 141L, 231L, 168L, 177L))) # "　廠商名稱"
+Encoding(player_name_reference) <- "UTF-8"
 ths_text <- xml_text(ths)
 Encoding(ths_text) <- "UTF-8"
 is_target <- ths_text == player_name_reference
