@@ -1,0 +1,13 @@
+- Class: meta
+  Course: DataScienceAndR
+  Lesson: RDataEngineer-03-JSON
+  Author: Wush Wu
+  Type: Standard
+  Organization: Taiwan R User Group
+  Version: 2.3.1.1
+
+- Class: text
+  Output: 這門課程要跟各位同學介紹JSON資料的處理。
+
+- Class: text
+  Output: JSON的全名是：「」，在網際網路上已經是最廣泛使用的格式之一，尤其常見於各種傳遞資料的API之中。
