@@ -42,7 +42,9 @@ stopifnot(length(ths) == 116)
 # 請取出每個ths中的th標籤的值，並且和 "　廠商名稱" 作比較
 player_name_reference <- rawToChar(as.raw(c(227L, 128L, 128L, 229L, 187L, 160L, 229L, 149L, 134L, 229L,
   144L, 141L, 231L, 168L, 177L))) # "　廠商名稱"
-is_target <- xml_text(ths) == player_name_reference
+ths_text <- xml_text(ths)
+Encoding(ths_text) <- "UTF-8"
+is_target <- ths_text == player_name_reference
 
 stopifnot(class(is_target) == "logical")
 stopifnot(sum(is_target) == 4)
@@ -68,6 +70,7 @@ stopifnot(length(trs_children) == 8) # 一個tr有兩個子標籤
 
 # 取出這些標籤的值
 trs_children_text <- xml_text(trs_children)
+Encoding(trs_children_text) <- "UTF-8"
 
 stopifnot(class(trs_children_text) == "character")
 stopifnot(length(trs_children_text) == 8)

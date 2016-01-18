@@ -15,17 +15,20 @@ rdataengineer_02_hw_test <- function() {
   e <- get("e", parent.frame())
   source_result <- try(source(e$script_temp_path, local = new.env(), encoding = "UTF-8"), silent = TRUE)
   if (class(source_result)[1] == "try-error") return(FALSE)
-  name.list <- c("tender", "ths", "is_target", "ths2",
+  name.list <- c("tender", "ths", "ths_text", "is_target", "ths2",
                  "trs", "trs_children", "trs_children_text")
   tender.ref <- read_html(tender_path)
   ths.ref <- xml_find_all(tender.ref, "//tr/th")
+  ths_text.ref <- xml_text(ths.ref)
+  Encoding(ths_text.ref) <- "UTF-8"
   player_name_reference <- rawToChar(as.raw(c(227L, 128L, 128L, 229L, 187L, 160L, 229L, 149L, 134L, 229L,
     144L, 141L, 231L, 168L, 177L)))
-  is_target.ref <- xml_text(ths.ref) == player_name_reference
+  is_target.ref <- ths_text.ref == player_name_reference
   ths2.ref <- ths.ref[is_target.ref]
   trs.ref <- xml_parent(ths2.ref)
   trs_children.ref <- xml_children(trs.ref)
   trs_children_text.ref <- xml_text(trs_children.ref)
+  Encoding(trs_children_text.ref) <- "UTF-8"
   players.ref <- trs_children_text.ref[trs_children_text.ref != player_name_reference]
   tryCatch({
     for(name in name.list) {

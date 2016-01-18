@@ -41,7 +41,14 @@ ths <- {
 stopifnot(class(ths) == "xml_nodeset")
 stopifnot(length(ths) == 116)
 
-# 請取出每個ths中的th標籤的值，並且和 "　廠商名稱" 作比較
+# 請取出每個ths中的th標籤的值
+ths_text <- {
+  # 請在這裡填寫你的程式碼
+}
+# 在Windows上的機器，必需要額外告訴R 說這段文字是UTF-8編碼
+Encoding(ths_text) <- "UTF-8"
+
+# 請拿ths_text和 "　廠商名稱" 作比較
 is_target <- {
   # 請在這裡填寫你的程式碼
 }
@@ -76,6 +83,8 @@ stopifnot(length(trs_children) == 8) # 一個tr有兩個子標籤
 trs_children_text <- {
   # 請在這裡填寫你的程式碼
 }
+# 在Windows上的機器，必需要額外告訴R 說這段文字是UTF-8編碼
+Encoding(trs_children_text) <- "UTF-8"
 
 stopifnot(class(trs_children_text) == "character")
 stopifnot(length(trs_children_text) == 8)
