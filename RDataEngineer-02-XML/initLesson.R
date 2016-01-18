@@ -3,6 +3,10 @@
 # the user's working directory and thus be accessible to them
 # throughout the lesson.
 
+assign("x1",
+       "<a><b>B</b><c>C1</c><c class='x'>C2</c></a>",
+       envir = globalenv())
+
 assign("tender_path",
         .get_path("0080400004.html"),
         envir = globalenv())
@@ -13,6 +17,10 @@ wiki_dom <- function() {
 
 wiki_html <- function() {
   browseURL("https://zh.wikipedia.org/wiki/HTML")
+}
+
+wiki_xml <- function() {
+  browseURL("https://zh.wikipedia.org/wiki/XML")
 }
 
 wiki_xpath <- function() {
