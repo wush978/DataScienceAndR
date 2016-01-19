@@ -53,33 +53,35 @@
   AnswerTests: test_search_path("RSQLite")
 
 - Class: text
-  Output: 雖然目前在市面上，有許多的SQL Database，但是在R 中操作起來，都是非常類似的。
+  Output: 雖然目前在市面上，有許多的SQL 資料庫，但是在R 中操作起來，都是非常類似的。
     因為R 都是透過DBI 套件所定義的函數，讓使用者操作資料庫。
 
 - Class: text
-  Output: 等一下我們要帶同學作一次SQLite Database的連線、寫入資料、讀取資料、更改資料和刪除資料。
+  Output: 等一下我們要帶同學作一次SQLite 資料庫的連線、寫入資料、讀取資料、更改資料和刪除資料。
     這樣的操作是最基本的，並且未來當同學在使用R 操作其他資料庫，甚至是NoSQL等外部儲存裝置，
     使用的要領也是如此：連線、寫入、讀取、更改和刪除。
 
 - Class: cmd_question
-  Output: 我們先連接SQLite Database，再跟同學繼續解釋。我們已經事先準備了一個SQLite
-    Database的檔案，並且把路徑存在：`db_path`變數之中。請同學先輸入：`drv <- dbDriver("SQLite")`，
-    取得連接SQLite Database的方式。
+  Output: 我們先連接SQLite 資料庫，再跟同學繼續解釋。我們已經事先準備了一個SQLite
+    資料庫的檔案，並且把路徑存在：`db_path`變數之中。請同學先輸入：`drv <- dbDriver("SQLite")`，
+    取得連接SQLite 資料庫的方式。
   CorrectAnswer: drv <- dbDriver("SQLite")
   AnswerTests: omnitest('drv <- dbDriver("SQLite")')
 
 - Class: cmd_question
-  Output: 接著我們建立一個SQLite Database的連線：`db <- dbConnect(drv, db_path)`
+  Output: 接著我們建立一個SQLite 資料庫的連線：`db <- dbConnect(drv, db_path)`
   CorrectAnswer: db <- dbConnect(drv, db_path)
   AnswerTests: omnitest('db <- dbConnect(drv, db_path)')
 
 - Class: text
-  Output: 這裡的`db`物件，就是這個Database在R 的代理人。後續若要從這個Database作任何動作，
-    通常都要把`db`這個物件當成函數的參數之一。
+  Output: |
+    這裡的`db`物件，就是這個資料庫在R 的代理人。後續若要從這個資料庫作任何動作，
+    通常都要把`db`這個物件當成函數的參數之一。在DBI的文件中會把`db`這種角色的物件記載為：
+    `connection`
 
 - Class: cmd_question
   Output: |
-    接著我們來嘗試把這筆數據寫入SQL Database之中。在DBI界面中，提供了`dbWriteTable`這個
+    接著我們來嘗試把這筆數據寫入SQL 資料庫之中。在DBI界面中，提供了`dbWriteTable`這個
     函數，所以請大家先打開這個函數的說明頁面。
   CorrectAnswer: ?dbWriteTable
   AnswerTests: any_of_exprs("?dbWriteTable", "help(dbWriteTable)", 'help("dbWriteTable")')
@@ -98,7 +100,7 @@
 
 - Class: cmd_question
   Output: |
-    因為`db`是RSQLite提供的Database代理人（當初的`drv`是`dbDriver("SQLite")`)，所以
+    因為`db`是RSQLite提供的資料庫代理人（當初的`drv`是`dbDriver("SQLite")`)，所以
     除了DBI的`dbWriteTable`之外，我們還有額外的參數可以使用。請同學輸入：
     `help.search("dbWriteTable")`
   CorrectAnswer: help.search("dbWriteTable")
@@ -121,7 +123,7 @@
   AnswerTests: omnitest(correctVal="yes")
 
 - Class: text
-  Output: 這是R 在處理SQL Database的設計。如果使用者只有操作到DBI的dbWriteTable提供的功能，那
+  Output: 這是R 在處理SQL 資料庫的設計。如果使用者只有操作到DBI的dbWriteTable提供的功能，那
     未來相同的程式碼，運作在其他的資料庫系統時，不需要太大的修改即可運作。但是如果是用了RSQLite
     提供的功能（如overwrite），那在切換資料庫時，就要看新的資料庫的R 套件有沒有提供類似的功能。
 
@@ -153,6 +155,42 @@
 - Class: cmd_question
   Output: |
     接著，我們透過`dbWriteTable`將實價登錄資料寫入資料庫中。請同學輸入：
-    `dbWriteTable(db, "lvr_land", lvr_land)`
-  CorrectAnswer: dbWriteTable(db, "lvr_land", lvr_land)
+    `dbWriteTable(db, "lvr_land2", lvr_land)`
+  CorrectAnswer: dbWriteTable(db, "lvr_land2", lvr_land)
   AnswerTests: check_lvr_land(db)
+
+- Class: text
+  Output: |
+    這樣的動作，就非常類似在R 中執行：`lvr_land2 <- <lvr_land的值>`，差別在於lvr_land2
+    這個名字是一個SQLite資料庫的表格。
+
+- Class: cmd_question
+  Output: |
+    接下來，我們透過`dbReadTable`來從表格中取出資料。這個指令只需要兩個參數：`connection`
+    和`name`。請同學輸入：`dbReadTable(db, "lvr_land2")`，同學就應該可以看到剛剛的數據。
+  CorrectAnswer: dbReadTable(db, "lvr_land2")
+  AnswerTests: omnitest('dbReadTable(db, "lvr_land2")')
+
+- Class: cmd_question
+  Output: 我們也可以用`dbListTables(db)`列出目前已經存在於資料庫的表格。請同學試試看。
+  CorrectAnswer: dbListTables(db)
+  AnswerTests: omnitest('dbListTables(db)')
+
+- Class: cmd_question
+  Output: |
+    請試著用`iris2 <- dbReadTable(db, "iris")`來將剛剛看到的`iris`表格讀出，
+    並存入變數`iris2`。這是我是前先把R 內建的iris資料集寫入資料庫後產生的表格。
+  CorrectAnswer: iris2 <- dbReadTable(db, "iris")
+  AnswerTests: omnitest('iris2 <- dbReadTable(db, "iris")')
+
+- Class: cmd_question
+  Output: |
+    如同RDataMining-03中看到jsonlite的vignette，我們可以用`all.equal(iris, iris2)`
+    來比較看看兩者是不是一模一樣。
+  CorrectAnswer: all.equal(iris, iris2)
+  AnswerTests: omnitest('all.equal(iris, iris2)')
+
+- Class: text
+  Output: |
+    同學應該會看到：`"Component “Species”: 'current' is not a factor"`的字樣，這代表
+    當我們從資料庫中把iris拿出來後，Species的型態改變了。
