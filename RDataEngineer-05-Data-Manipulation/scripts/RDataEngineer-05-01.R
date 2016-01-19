@@ -9,4 +9,4 @@ answer01 <- local({
   is_target <- month_is_1 & day_is_1
   flights[is_target,]
 })
-# 撰寫完畢之後請執行 `submit()`
+# 完成後請在console輸入submit()

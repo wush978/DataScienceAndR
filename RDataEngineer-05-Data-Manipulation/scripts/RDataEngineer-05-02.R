@@ -3,3 +3,4 @@ answer02 <- local({
   target <- # 請填寫你的程式碼
   nrow(target)
 })
+# 完成後請在console輸入submit()

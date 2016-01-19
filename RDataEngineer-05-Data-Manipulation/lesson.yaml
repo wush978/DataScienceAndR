@@ -82,7 +82,58 @@
   Script: RDataEngineer-05-01.R
   AnswerTests: test_equal(answer01, flights[flights$month == 1 & flights$day == 1,])
 - Class: text
-  Output: 和原始的R 的設計比較起來
+  Output: 為了降低難度，所以我們在scripts中讓大家是一步一步的做操作。實務上，熟悉R 的使用者 會直接寫一行：`flights[flights$month
+    == 1 & flights$day == 1,]`，這是一種程式碼的壓縮。
+- Class: text
+  Output: |
+    程式碼的壓縮，讓使用者可以少打許多的字，和許多暫存變數，如剛剛寫的`month_is_1`、
+    `day_is_1`和`is_target`等等。但是即使如此，dplyr提供的`filter`還是可以用更簡潔
+    程式碼達到一樣的效果。背後的原因就在於`flights$month`和`flights$day`的`flights`
+    被省略了。
+- Class: text
+  Output: |
+    一般來說，`filter`的第一個參數代表要做處理的data.frame，而後面的參數通通都是條件。
+    每個條件就是一個expression，並且輸出布林向量。`filter`只會回傳那些滿足所有條件的
+    資料。
+- Class: cmd_question
+  Output: 請同學試著從`flights`中找出`flights$month`為 1，`flights$day`為2的資料。
+  CorrectAnswer: filter(flights, month == 1, day == 2)
+  AnswerTests: omnitest(correctVal = filter(flights, month == 1, day == 2))
+  Hint: filter(flights, month == 1, day == 2)
+- Class: script
+  Output: 請問同學，在2013年的紐約，共有多少班次的飛機起飛有延誤？(`dep_delay > 0`)
+  Script: RDataEngineer-05-02.R
+  AnswerTests: test_equal(answer02, nrow(filter(flights, dep_delay > 0)))
+- Class: text
+  Output: |
+    上一題的答案也是可以做程式碼的壓縮的。同學可以先用`filter(flights, dep_delay > 0)`
+    篩選出資料集之後，直接把結果的值傳到`nrow`的第一個參數，也就是：
+    `nrow(filter(flights, dep_delay > 0))`
+- Class: cmd_question
+  Output: |
+    有時候我們希望找出符合某些條件的文字。舉例來說，如果我們要找出`tailnum`中包含有`"AA"`，要
+    怎麼做呢？R 內建有一個`grepl`的函數可以解決這個問題。請同學先輸入`?grepl`打開他的說
+    名文件。
+  CorrectAnswer: ?grepl
+  AnswerTests: any_of_exprs("?grepl", "help(grepl)", 'help("grepl")')
+  Hint: ?grepl
+- Class: text
+  Output: |
+    `grepl`的參數很多，但是這裡我們只要學三個參數：`pattern`、`x`和、`fixed`就好。
+    第一個參數`pattern`代表的是，我們要找的模式。舉例來說，如果我們要找`"AA"`，pattern
+    就會是`"AA"`。但是如果`fixed = FALSE`狀態下，R 會使用「正則表示式」（Regular Expression）
+    來處理`pattern`，有時候會有預期外的結果。這部份在同學學會正則表示式之前，都設定`fixed = TRUE`
+    比較簡單。`x`則很單純，就是我們要搜尋文字。在這裡，就是`flights$tailnum`。
+- Class: mult_question
+  Output: |
+    我們想輸出的程式碼是：`filter(flights, grepl(pattern = <1>, x = <2>, fixed = TRUE))`
+    這裡透過適當的設定`grepl`的參數，就可以獲得我們想要的比對結果，也就是tailnum中
+    是不是有包含`"AA"`這樣的文字的結果。而`filter`在利用這樣的結果對資料做篩選。
+    請問同學，<1>應該要填寫什麼？
+  AnswerChoices: |
+    "AA";AA;flights;flights$tailnum
+  CorrectAnswer: '"AA"'
+  AnswerTests: omnitest(correctVal = '"AA"')
 - Class: text
   Output: |-
     `cl_info_other`是取自金管會銀行局的一般銀行及信用合作社消費者貸款業務項目，原始資料是
