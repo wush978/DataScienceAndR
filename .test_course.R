@@ -65,7 +65,7 @@ for(course in course_list) {
     test_lesson(course)
   } else {
     if (Sys.info()["sysname"] == "Windows") {
-      for(locale in c("Chinese", "Japanese", "Greek", "English", "cht")) {
+      for(locale in c("Chinese", "cht")) {
         Sys.setlocale(locale = locale)
         test_lesson(course)
       }
