@@ -397,6 +397,32 @@
   Script: RDataEngineer-05-04.R
   AnswerTests: rdataengineer_05_04(answer04.1, answer04.2, answer04.3)
 
+- Class: text
+  Output: |
+    剛剛的第一個練習題（answer04.1），我們計算了一月份平均的gain（arr_delay - dep_delay）。
+    但是如果我們要計算一月、二月到十二月份平均的gain，並且做比較，要怎麼辦呢？
+
+- Class: text
+  Output: |
+    某些同學可能會心想：`lapply`、`sapply`甚至是寫迴圈來解決這個問題。
+
+- Class: text
+  Output: |
+    dplyr提供了`group_by`這個函數來解決這個問題。它讓我們依照某個欄位，將整個資料切割成若干
+    份。之後，我們對它（經過`group_by`處理後的data.frame）做的動作都會同步作用在每一份資料
+    （data.frame）。
+
+- Class: cmd_question
+  Output: |
+    舉例來說，我們可以用`df <- group_by(flights, month)`先用`group_by`標記要根據`month`
+    對flights的資料做分割。並且把這個動作的結果存到`df`變數。請同學試試看。
+  CorrectAnswer: df <- group_by(flights, month)
+  AnswerTests: omnitest('df <- group_by(flights, month)')
+
+- Class: script
+  Output: 接著，我們把剛剛解答`answer04.1`的動作中，扣掉`filter`的部份，再做一次。
+  Script: RDataEngineer-05-05.R
+  AnswerTests: rdataengineer_05_05(answer05)
 
 - Class: text
   Output: |

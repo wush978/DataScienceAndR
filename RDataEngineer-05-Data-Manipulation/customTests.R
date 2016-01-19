@@ -38,3 +38,16 @@ rdataengineer_05_04 <- function(answer04.1, answer04.2, answer04.3) {
   TRUE
 
 }
+
+rdataengineer_05_05 <- function(answer05) {
+  answer05.ref <-
+    group_by(flights, month) %>%
+    mutate(gain = arr_delay - dep_delay) %>%
+    summarise(mean(gain, na.rm = TRUE)) %>%
+    `[[`(1)
+  if (!isTRUE(all.equal(answer05, answer05.ref))) {
+    message("answer05 is wrong")
+    return(FALSE)
+  }
+  TRUE
+}
