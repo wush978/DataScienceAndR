@@ -275,5 +275,90 @@
     「寫入完畢」。「還未寫入」的狀況下，我們只要重新執行程式即可。而「寫入完畢」的話就更棒了，我們
     只要繼續後續的工作。但是若是「寫到一半」的狀態，要接著工作就會非常麻煩（可能要改程式碼）。
 - Class: text
-  Output: Transaction就是一種保證資料庫的狀態一定是「還未寫入」或是「寫入完畢」的機制。
+  Output: |
+    Transaction就是一種保證資料庫的狀態一定是「還未寫入」或是「寫入完畢」的機制。
+- Class: cmd_question
+  Output: |
+    在R 裡面，我們可以利用`dbBegin(db)`來開啟一個Transaction。請同學試試看。
+  CorrectAnswer: dbBegin(db)
+  AnswerTests: omnitest('dbBegin(db)')
+  Hint: dbBegin(db)
+- Class: cmd_question
+  Output: |
+    接著，讓我們利用`dbRemoveTable(db, "CO2")`來刪除"CO2"表格。
+  CorrectAnswer: dbRemoveTable(db, "CO2")
+  AnswerTests: omnitest('dbRemoveTable(db, "CO2")')
+  Hint: dbRemoveTable(db, "CO2")
+- Class: cmd_question
+  Output: |
+    請同學用`dbListTables(db)`來檢查"CO2"是不是已經消失在表格清單之中。
+  CorrectAnswer: dbListTables(db)
+  AnswerTests: omnitest('dbListTables(db)')
+  Hint: dbListTables(db)
+- Class: cmd_question
+  Output: |
+    請同學輸入`dbDisconnect(db)`，模擬當意外發生時與資料庫的連線中斷的狀況。
+  CorrectAnswer: dbDisconnect(db)
+  AnswerTests: omnitest('dbDisconnect(db)')
+  Hint: dbDisconnect(db)
+- Class: cmd_question
+  Output: |
+    請同學輸入`db <- dbConnect(drv, db_path)`重新連接資料庫。
+  CorrectAnswer: db <- dbConnect(drv, db_path)
+  AnswerTests: omnitest('db <- dbConnect(drv, db_path)')
+  Hint: db <- dbConnect(drv, db_path)
+- Class: cmd_question
+  Output: |
+    請同學用`dbListTables(db)`來檢查"CO2"是不是又重出江湖了？
+  CorrectAnswer: dbListTables(db)
+  AnswerTests: omnitest('dbListTables(db)')
+  Hint: dbListTables(db)
+- Class: text
+  Output: |
+    除了中斷連線，我們也可以主動使用`dbRollback(db)`指令把資料庫的狀態復原至我們執行
+    `dbBegin(db)`的時間點。
+- Class: cmd_question
+  Output: |
+    再請同學輸入：`dbBegin(db)`
+  CorrectAnswer: dbBegin(db)
+  AnswerTests: omnitest('dbBegin(db)')
+  Hint: dbBegin(db)
+- Class: cmd_question
+  Output: |
+    接著，讓我們利用`dbRemoveTable(db, "CO2")`再刪除"CO2"表格一次。
+  CorrectAnswer: dbRemoveTable(db, "CO2")
+  AnswerTests: omnitest('dbRemoveTable(db, "CO2")')
+  Hint: dbRemoveTable(db, "CO2")
+- Class: cmd_question
+  Output: |
+    這次我們輸入`dbCommit(db)`
+  CorrectAnswer: dbCommit(db)
+  AnswerTests: omnitest('dbCommit(db)')
+  Hint: dbCommit(db)
+- Class: cmd_question
+  Output: |
+    請同學用`dbListTables(db)`來檢查"CO2"是不是確實消失了？
+  CorrectAnswer: dbListTables(db)
+  AnswerTests: omnitest('dbListTables(db)')
+  Hint: dbListTables(db)
+- Class: text
+  Output: 之後，就算我們斷線從連，CO2也不會回來了。
+- Class: text
+  Output: |
+    總而言之，當我們開始`dbBegin(db)`之後，所有的變更，都要等到我們執行`dbCommit(db)`才會生效。
+    中間只要發生任何狀況：無論是我們主動`dbRollback(db)`，或是發生意外導致斷線，資料庫
+    都會自動復原至我們執行`dbBegin(db)`時的狀態。這招在寫入大量數據時，也是很重要的技巧。
+    這個技巧可以保證我們的「資料正確性」
+- Class: text
+  Output: |
+    資料庫還有許多處理資料的技術與手法，例如JOIN等相關技術。但是這都牽涉到SQL語法的學習，
+    而且各家資料庫系統在這部份的語法也會略有差異，所以本次課程僅著重於R 與資料庫之間的簡易操作，
+    以及基礎概念。
+- Class: scripts
+  Output: |
+    最後還是請各位同學利用以上學習的內容，操作一次資料庫系統。
+    請同學在完成之後存檔，並輸入`submit()`來檢查結果是否符合預期。
+    如果同學在檔案中看到亂碼，請使用Rstudio 左上角的File -> Reopen
+  Script: RDataEngineer-04-HW.R
+  AnswerTests: rdataengineer_04_hw_test()
 
