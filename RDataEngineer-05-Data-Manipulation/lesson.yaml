@@ -134,6 +134,21 @@
     "AA";AA;flights;flights$tailnum
   CorrectAnswer: '"AA"'
   AnswerTests: omnitest(correctVal = '"AA"')
+- Class: mult_question
+  Output: |
+    我們想輸出的程式碼是：`filter(flights, grepl(pattern = <1>, x = <2>, fixed = TRUE))`
+    請問同學，<2>應該要填寫什麼？
+  AnswerChoices: |
+    "AA";AA;flights;flights$tailnum
+  CorrectAnswer: flights$tailnum
+  AnswerTests: omnitest(correctVal = 'flights$tailnum')
+- Class: mult_question
+  Output: |
+    在請問同學，`filter(flights, grepl(pattern = "AA", x = tailnum, fixed = TRUE))`
+    是不是也成立呢？
+  AnswerChoices: Yes;No
+  CorrectAnswer: 'Yes'
+  AnswerTests: omnitest(correctVal = "Yes")
 - Class: text
   Output: |-
     `cl_info_other`是取自金管會銀行局的一般銀行及信用合作社消費者貸款業務項目，原始資料是

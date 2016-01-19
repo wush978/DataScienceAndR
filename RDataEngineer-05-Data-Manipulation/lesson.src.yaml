@@ -43,7 +43,7 @@
 - Class: cmd_question
   Output: 請同學執行`vignette("introduction", package = "dplyr")`打開Introduction。
   CorrectAnswer: vignette("introduction", package = "dplyr")
-  AnswerTests: vignette("introduction", package = "dplyr")
+  AnswerTests: omnitest('vignette("introduction", package = "dplyr")')
 
 - Class: cmd_question
   Output: 簡單起見，我們直接跟著vignette，拿`nycflights13`裡面的`flights`資料集做練習。
@@ -153,6 +153,23 @@
     "AA";AA;flights;flights$tailnum
   CorrectAnswer: '"AA"'
   AnswerTests: omnitest(correctVal = '"AA"')
+
+- Class: mult_question
+  Output: |
+    我們想輸出的程式碼是：`filter(flights, grepl(pattern = <1>, x = <2>, fixed = TRUE))`
+    請問同學，<2>應該要填寫什麼？
+  AnswerChoices: |
+    "AA";AA;flights;flights$tailnum
+  CorrectAnswer: 'flights$tailnum'
+  AnswerTests: omnitest(correctVal = 'flights$tailnum')
+
+- Class: mult_question
+  Output: |
+    在請問同學，`filter(flights, grepl(pattern = "AA", x = tailnum, fixed = TRUE))`
+    是不是也成立呢？
+  AnswerChoices: Yes;No
+  CorrectAnswer: "Yes"
+  AnswerTests: omnitest(correctVal = "Yes")
 
 - Class: text
   Output: |
