@@ -1,0 +1,127 @@
+- Class: meta
+  Course: DataScienceAndR
+  Lesson: RDataEngineer-05-Data-Manipulation
+  Author: Wush Wu and Cheng-Yu Lin
+  Type: Standard
+  Organization: Taiwan R User Group
+  Version: 2.3.1.1
+
+- Class: text
+  Output: 前半段的課程，大部分著重於從資料中萃取出資訊，並且整理成一個data.frame（結構化）。
+    這門課程則是要開始討論，當資訊已經被結構化之後，我們要如何整理結構化的資料。
+
+- Class: text
+  Output: |
+    R 有許多解決這類問題的函數，例如：`melt`、`subset`等等。族繁不及備載。這些函數的名稱
+    不容易記憶，而且效能並不是很好。
+
+- Class: text
+  Output: |
+    dplyr套件是Hadley Wickham和Romain Francois在2014上架的一個套件，是目前我認為是在R 做
+    資料整理上最完善的套件之一。dplyr提供了直觀的函數，並且能夠和SQL expression做對應，效能
+    也被Romain透過C++去優化過，種種優勢讓我決定跳過傳統R 整理資料的工具，直接教大家dplyr。
+
+- Class: cmd_question
+  Output: 請大家先安裝`dplyr`套件。
+  CorrectAnswer: check_then_install("dplyr", "0.4.3")
+  AnswerTests: test_package_version("dplyr", "0.4.3")
+
+- Class: cmd_question
+  Output: 接著請大家載入dplyr套件
+  CorrectAnswer: test_search_path("dplyr")
+
+- Class: cmd_question
+  Output: 請同學輸入學套件的起手式：`vignette(package = "dplyr")`
+  CorrectAnswer: vignette(package = "dplyr")
+  AnswerTests: omnitest('vignette(package = "dplyr")')
+
+- Class: text
+  Output: Hadley等人都是開發R 套件界的大大，他們對vignette是非常重視的，所以我們會看到許多
+    vignette。說實話，我個人寫的dplyr套件的介紹絕對也不會比Hadley大大他們寫的精彩。不過透過
+    swirl的好處，就是我們可以把整個dplyr的功能走過一遍。
+
+- Class: cmd_question
+  Output: 請同學執行`vignette("introduction", package = "dplyr")`打開Introduction。
+  CorrectAnswer: vignette("introduction", package = "dplyr")
+  AnswerTests: vignette("introduction", package = "dplyr")
+
+- Class: cmd_question
+  Output: 簡單起見，我們直接跟著vignette，拿`nycflights13`裡面的`flights`資料集做練習。
+    請同學先安裝`nycflights13`套件。
+  CorrectAnswer: check_then_install("nycflights13", "0.1")
+  AnswerTests: test_package_version("nycflights13", "0.1")
+  Hint: install.packages("nycflights13")
+
+- Class: cmd_question
+  Output: 接著載入`nycflights13`套件。
+  CorrectAnswer: library(nycflights13)
+  AnswerTests: test_search_path("nycflights13")
+
+- Class: text
+  Output: 這個套件提供的flights資料集合，是所有於2013年在紐約起降的飛機資料。
+
+- Class: cmd_question
+  Output: Vignette中宣稱flights共有336776筆資料。我們應該要驗證一下，也順便讓同學複習
+    data.frame的操作。請同學用指令查詢flights共有多少資料。
+  CorrectAnswer: nrow(flights)
+  AnswerTests: omnitest(correctVal = nrow(flights))
+
+- Class: text
+  Output: |
+    dplyr中在處理data.frame的函數，共有：`filter`、`arrange`、`select`、
+    `distinct`、`mutate`、`summarise`和`sample_n`接下來的課程中，我們一邊
+    操作，一邊講解。
+
+- Class: cmd_question
+  Output: |
+    `filter`是用來做列方向的過濾，所以經過`filter`處理後，資料的個數（`nrow`）會
+    下降。`filter`函數的用法是，第一個參數放我們要處理的data.frame，後面接各種過濾
+    條件。例如：`filter(flights, month == 1, day == 1)`，請同學試試看。
+  CorrectAnswer: filter(flights, month == 1, day == 1)
+  AnswerTests: omnitest('filter(flights, month == 1, day == 1)')
+
+- Class: text
+  Output: |
+    同學應該會注意到，輸出結果中`month`和`day`都是1 了。因為`filter`
+    會把資料一筆一筆的對後面的語句（`month == 1`和`day == 1`）做檢查。R 在
+    解析這些語句時，自動把這些變數對應到`flights`的欄位。所以在`filter`中的
+    `month`就等同於`flights$month`，`day`就等同於`flights$day`
+
+- Class: script
+  Output: |
+    如果我們要使用RBasic系列所所使用的語法，要如何得到同樣的結果呢？請同學
+    試著寫寫看。提示：兩個布林比較和一個`[`
+  Script: RDataEngineer-05-01.R
+  AnswerTests: test_equal(answer01, flights[flights$month == 1 & flights$day == 1,])
+
+- Class: text
+  Output: 為了降低難度，所以我們在scripts中讓大家是一步一步的做操作。實務上，熟悉R 的使用者
+    會直接寫一行：`flights[flights$month == 1 & flights$day == 1,]`，這是一種程式碼的壓縮。
+
+- Class: text
+  Output: |
+    程式碼的壓縮，讓使用者可以少打許多的字，和許多暫存變數，如剛剛寫的`month_is_1`、
+    `day_is_1`和`is_target`等等。但是即使如此，dplyr提供的`filter`還是可以用更簡潔
+    程式碼達到一樣的效果。背後的原因就在於`flights$month`和`flights$day`的`flights`
+    被省略了。
+
+- Class: cmd_question
+  Output: |
+    一般來說，`filter`的第一個參數代表要做處理的data.frame，而後面的參數通通都是條件。
+    每個條件就是一個expression，並且輸出布林向量。`filter`只會回傳那些滿足所有條件的
+    資料。
+
+- Class: cmd_question
+  Output: 請同學試著從`flights`中找出`flights$month`為 1，`flights$day`為2的資料。
+  CorrectAnswer: filter(flights, month == 1, day == 2)
+  AnswerTests: omnitest(correctVal = filter(flights, month == 1, day == 2))
+
+- Class: script
+  Output: 請問同學，在2013年的紐約，共有多少班次的飛機起飛有延誤？(`dep_delay > 0`)
+  Script: RDataEngineer-05-02.R
+  AnswerTests: test_equal(answer02, nrow(filter(flights, dep_delay > 0)))
+
+- Class: text
+  Output: |
+    `cl_info_other`是取自金管會銀行局的一般銀行及信用合作社消費者貸款業務項目，原始資料是
+    一系列的excel檔案。
