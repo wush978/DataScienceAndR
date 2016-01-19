@@ -1,7 +1,34 @@
-.get_path <- function(fname) {
-  path <- file.path(lesPath, fname)
-  normalizePath(path, mustWork = TRUE)
-}
+assign(".get_path", 
+       function(fname) {
+         path <- file.path(lesPath, fname)
+         normalizePath(path, mustWork = TRUE)
+       },
+       envir = globalenv())
+
+assign("check_then_install",
+       function(pkg_name, pkg_version) {
+         if (!require(pkg_name, character.only = TRUE)) utils::install.packages(pkg_name, repos = "http://cran.r-project.org") else {
+           if (packageVersion(pkg_name) < package_version(pkg_version)) utils::install.packages(pkg_name, repos = "http://cran.r-project.org")
+         }
+       },
+       envir = globalenv())
+
+assign("test_package_version",
+       function(pkg_name, pkg_version) {
+         e <- get("e", parent.frame())
+         tryCatch(
+           packageVersion(pkg_name) >= package_version(pkg_version),
+           error = function(e) FALSE)
+       },
+       envir = globalenv())
+
+assign("test_search_path",
+       function(pkg_name) {
+         tryCatch(
+           length(grep(sprintf("/%s$", pkg_name), searchpaths())) > 0,
+           error = function(e) FALSE)
+       },
+       envir = globalenv())
 
 assign(".read.table.big5", 
        function(file, header = FALSE, sep = "", ...) {
