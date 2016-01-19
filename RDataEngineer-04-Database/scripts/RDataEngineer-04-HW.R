@@ -1,4 +1,6 @@
-# 首先，我們重新連線到令一個資料庫
+# 首先，我們重新連線到另一個資料庫
+library(RSQLite)
+drv <- dbDriver("SQLite")
 db <- dbConnect(drv, db_path2)
 
 # 如果重試時發生以下錯誤：
