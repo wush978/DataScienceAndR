@@ -1,4 +1,6 @@
-# 首先，我們重新連線到令一個資料庫
+# 首先，我們重新連線到另一個資料庫
+library(RSQLite)
+drv <- dbDriver("SQLite")
 db <- dbConnect(drv, db_path2)
 
 # 請列出現在的資料庫中的表格清單
