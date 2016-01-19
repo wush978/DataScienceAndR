@@ -1,0 +1,215 @@
+- Class: meta
+  Course: DataScienceAndR
+  Lesson: RDataEngineer-01-Parsing
+  Author: Wush Wu
+  Type: Standard
+  Organization: Taiwan R User Group
+  Version: 2.3.1
+- Class: text
+  Output: 各位同學好，這門課程將會帶大家走過一遍R 裡面提供的字串處理功能。
+- Class: text
+  Output: 在實務上，數據來源常常都是隱含某些規則的文字檔案。例如：伺服器依據 工程師擬定的規則所產生的資料。這個規則可能是工程師自己訂的，也可能是符合 眾人智慧所訂定的規範。
+- Class: text
+  Output: 但是不管是工程師自己的想法，或是眾人的智慧，R 都能從文字中萃取出資訊。 一般而言，這樣的技術就稱作Parsing。同學上一堂課程所學到的`read.table`，其實
+    就是一種Parsing的功能。
+- Class: text
+  Output: 這個課程中，我們事先從政府的公開資料平台抓取了血清白蛋白(Albumin)檢查比率 的資料。這個資料已經存放於`hospital_path`了。有興趣的同學，可以參考網址：
+    <http://data.gov.tw/node/25511>閱讀這個資料集的故事。
+- Class: cmd_question
+  Output: 請同學用上一堂課所學的技巧，先用`readBin`來看檢查這個檔案的BOM。
+  CorrectAnswer: readBin(hospital_path, "raw", n = 3L)
+  AnswerTests: omnitest(correctVal = readBin(hospital_path, "raw", n = 3L))
+  Hint: readBin(hospital_path, "raw", n = 3L)
+- Class: mult_question
+  Output: 請問同學，根據這三個byte，他們的BOM可能是什麼呢？
+  AnswerChoices: UTF-8(EF BB BF);UTF-16BE(FE FF);UTF-16LE(FF FE);Unknown
+  CorrectAnswer: Unknown
+  AnswerTests: omnitest(correctVal = "Unknown")
+  Hint: 請比對R 讀取`hospital_path`前三Byte的值與常見的BOM值
+- Class: cmd_question
+  Output: 當BOM不能判斷的時候，我們只好用各種Encoding讀個前行試試看。由於政府公開資料網 宣稱這個檔案為UTF-8編碼的，我們先使用UTF-8讀讀看。請同學輸入：
+    `readLines(file(hospital_path, encoding = "UTF-8"), n = 6)`
+  CorrectAnswer: readLines(file(hospital_path, encoding = "UTF-8"), n = 6)
+  AnswerTests: omnitest('readLines(file(hospital_path, encoding = "UTF-8"), n = 6)')
+  Hint: readLines(file(hospital_path, encoding = "UTF-8"), n = 6)
+- Class: cmd_question
+  Output: 接著我們再使用`readLines(file(hospital_path, encoding = "BIG5"), n = 6)` 試試看。同學如果看到一些警告（warning）訊息，是因為這份檔案並非UTF-8編碼，所導致的小錯誤。
+  CorrectAnswer: readLines(file(hospital_path, encoding = "BIG5"), n = 6)
+  AnswerTests: omnitest('readLines(file(hospital_path, encoding = "BIG5"), n = 6)')
+  Hint: readLines(file(hospital_path, encoding = "BIG5"), n = 6)
+- Class: mult_question
+  Output: 透過上面的測試，請問同學，這個檔案的編碼應該是：
+  AnswerChoices: UTF-8;BIG5
+  CorrectAnswer: BIG5
+  AnswerTests: omnitest(correctVal = "BIG5")
+- Class: text
+  Output: 像是這類編碼與文件不符的狀況，在實務上是很常見的。
+- Class: cmd_question
+  Output: 接著請同學依照在RBasic-07所學到的技巧，用`read.table`和`file`兩個函數的組合， 以及適當的設定`sep`、`header`和`encoding`等參數將`hospital_path`的內容存到`hospital`
+  CorrectAnswer: hospital <- .read.table.big5(hospital_path, header = TRUE, sep =
+    ",")
+  AnswerTests: omnitest(correctVal = .read.table.big5(hospital_path, header = TRUE,
+    sep = ","))
+  Hint: hospital <- read.table(file(hospital_path, encoding = "BIG5"), sep = ",",
+    header = TRUE)
+- Class: cmd_question
+  Output: 我們可能希望從欄位YEARYY中擷取出資料的年份。我們先看看名稱為YEARYY這欄，請同學自hospital中選出YEARYY欄位。 （同學可以使用`[[`、或`$`搭配名稱或是欄位順序）
+  CorrectAnswer: hospital$YEARYY
+  AnswerTests: omnitest(correctVal = hospital[[1]])
+  Hint: hospital$YEARYY
+- Class: text
+  Output: 有時候，觀察到太大量的資料可能會對R 、電腦帶來大量的負荷，同時也對我們沒有意義。因為 我們能同時處理的資料量是有限的。這裡我建議同學，可以用`head`這個函數篩選出資料的前6
+    列做觀察。
+- Class: mult_question
+  Output: 請問同學，`hospital`中的YEARYY欄位的型態為何？
+  AnswerChoices: character;factor;integer;numeric;list
+  CorrectAnswer: factor
+  AnswerTests: omnitest(correctVal = "factor")
+  Hint: 請注意，R 回報說這個欄位有36個Levels。
+- Class: cmd_question
+  Output: 從Levels上的資訊顯示，年份的資訊，可能是在前兩個數字，或是前三個數字。 如果通通都是兩個數字的話，我們可以透過`substring`函數直接擷取字串中的段落即可。
+    請同學輸入：`?substring`先看看substring函數的說明文件。
+  CorrectAnswer: ?substring
+  AnswerTests: any_of_exprs("?substring", "help(substring)", 'help("substring")')
+  Hint: ?substring
+- Class: mult_question
+  Output: 請問下列哪一個「不是」`substring`的參數？
+  AnswerChoices: x;text;first;last
+  CorrectAnswer: x
+  AnswerTests: omnitest(correctVal = "x")
+- Class: cmd_question
+  Output: R 的`substring`函數會把`text`參數所代表的字串，依照字符的位置，擷取出中間的段落。 舉例來說，`substring("abc",
+    1, 2)`就會擷取出"abc"中第1 個字母到第2 個字母的段落，也就 是"ab"。而`substring`也是向量式的函數。請同學輸入`substring(head(hospital$YEARYY),
+    1, 3)` 看看前6 筆數據經過R 的`substring`函數處理之後的結果。
+  CorrectAnswer: substring(head(hospital$YEARYY), 1, 3)
+  AnswerTests: omnitest("substring(head(hospital$YEARYY), 1, 3)")
+  Hint: substring(head(hospital$YEARYY), 1, 3)
+- Class: text
+  Output: 這樣的作法，有時候就夠了，可惜在現在的狀況不適合。因為年度可能是2 位數也可能是3 位數。
+- Class: cmd_question
+  Output: 另外一種想法，是拿`"Q"`當做定位點。我們如果利用`"Q"`把字串分割成兩部份，第一部份 就是我們需要的年份了。在R 中，我們可以運用函數`strsplit`達到這個目的。請同學打開`strsplit`
+    的說明文件。
+  CorrectAnswer: ?strsplit
+  AnswerTests: any_of_exprs("?strsplit", "help(strsplit)", 'help("strsplit")')
+  Hint: ?strsplit
+- Class: mult_question
+  Output: 請問同學，下列哪一個「不是」`strsplit`的參數？
+  AnswerChoices: x;split;fixed;str
+  CorrectAnswer: str
+  AnswerTests: omnitest(correctVal="str")
+- Class: cmd_question
+  Output: 根據說明文件，`strsplit`會利用`split`參數來切割`x`這個字串，並且回傳一個`list`。這是因為`x` 的長度可能超過1 ，而`strsplit`會用`split`去切割每一個`x`的元素。而切割出來的結果，第一個
+    元素可能切出兩段，但是第二個元素可能只切出一段。所以R 用`list`這個結構來處理。 但是`strsplit`並不接受factor參數，只接受字串向量。因此請同學用：`yearyy
+    <- as.character(hospital$YEARYY)` 把資料存到`yearyy`這個變數。
+  CorrectAnswer: yearyy <- as.character(hospital$YEARYY)
+  AnswerTests: omnitest("yearyy <- as.character(hospital$YEARYY)")
+  Hint: yearyy <- as.character(hospital$YEARYY)
+- Class: cmd_question
+  Output: 接著請同學輸入：`tmp <- strsplit(yearyy, "Q")`，把切割的結果儲存到`tmp`這個變數。
+  CorrectAnswer: tmp <- strsplit(yearyy, "Q")
+  AnswerTests: omnitest('tmp <- strsplit(yearyy, "Q")')
+  Hint: tmp <- strsplit(yearyy, "Q")
+- Class: cmd_question
+  Output: 請同學輸入：`head(tmp)`看看結果
+  CorrectAnswer: head(tmp)
+  AnswerTests: omnitest("head(tmp)")
+  Hint: head(tmp)
+- Class: text
+  Output: 同學應該會看到裝著許多字串向量的list。這樣，甚至是更複雜的結構，是我們在處理文字 資料時常常遇到的。
+- Class: cmd_question
+  Output: 由於我們要的是在`"Q"`之前的文字，而在經過`strsplit`處理後，這些文字會在每個list 元素的第一個。請同學先拿用`[[`拿出tmp的第一個字串向量元素，然後用`[`拿出這個字串向量的
+    第一個值。這就會是第一筆資料的年度。
+  CorrectAnswer: tmp[[1]][1]
+  AnswerTests: omnitest("tmp[[1]][1]")
+  Hint: tmp[[1]][1]
+- Class: text
+  Output: 同樣的要領，如果我們要拿出第二筆資料的年度，就只是把上一題`tmp[[1]][1]`的語法改 成`tmp[[2]][1]`。
+- Class: cmd_question
+  Output: 請問同學，`tmp`中總共有多少筆資料呢？
+  CorrectAnswer: length(tmp)
+  AnswerTests: omnitest(correctVal = length(tmp))
+  Hint: length(tmp)
+- Class: text
+  Output: 顯然一個一個處理是不可行的。R 當然有設計針對這種狀況的解答。首先我們看看 `tmp[[1]][1]`、`tmp[[2]][1]`、`tmp[[3]][1]`有什麼共通性？一種觀點是，我
+    們需要對`tmp`的每一個元素進行`[1]`的操作。
+- Class: cmd_question
+  Output: 這樣的需求，在parsing時是非常常見的。所以R 提供了`lapply`這個函數。 請同學先打開`lapply`的說明文件。
+  CorrectAnswer: ?lapply
+  AnswerTests: any_of_exprs("?lapply", "help(lapply)", 'help("lapply")')
+  Hint: ?lapply
+- Class: mult_question
+  Output: R 的`lapply`是同學接觸的第一個比較進階的函數。請問同學，下列哪一個 不是`lapply`的參數？
+  AnswerChoices: X;FUN;...;Y
+  CorrectAnswer: 'Y'
+  AnswerTests: omnitest(correctVal="Y")
+- Class: text
+  Output: R 的`lapply`的第一個參數`X`，通常是一個vector。第二個參數`FUN`，則是代表一種「 動作」。而`lapply`會對每一個`X`的元素進行`FUN`所定義的動作，並且把結果彙整回R
+    。
+- Class: mult_question
+  Output: 我們想要對`tmp`的每一個元素進行`[1]`的操作。根據上述的解釋，所以`lapply`的`X` 參數，應該要填何？
+  AnswerChoices: tmp;[[1]];[1]
+  CorrectAnswer: tmp
+  AnswerTests: omnitest(correctVal = "tmp")
+- Class: mult_question
+  Output: 而`lapply`的`FUN`參數，也就是對每個`X`的元素所進行的動作，應該是以下哪一個動作 呢？
+  AnswerChoices: '[1];[[1]]'
+  CorrectAnswer: '[1]'
+  AnswerTests: omnitest(correctVal="[1]")
+- Class: text
+  Output: 這裡再解釋一遍給還無法理解的同學。回到最前面，我們希望產生的結果 會等價於：`c(tmp[[1]][1], tmp[[2]][1], tmp[[3]][1],
+    ...)` 而第一個`[[1]]`、`[[2]]`、`[[3]]`是變動的，代表著從`tmp`中拿出第一個元素、第二個元素 和第三個元素等等。而`[1]`是不變的動作。
+- Class: text
+  Output: 因此`lapply`的第一個參數`X`放的是`tmp`，光這個動作就代表 著：`c(FUN(tmp[[1]]), FUN(tmp[[2]]),
+    FUN(tmp[[3]]), ...)` 而在此時此刻我們希望`FUN`就是作出`[1]`的動作。但是，`lapply(tmp, [1])`這種語法是不合法的。
+- Class: text
+  Output: 在R 裡面，所有的動作都是函數，所以`[1]`在R 中，其實是一個名叫`[`的函數。
+- Class: cmd_question
+  Output: 又因為這個函數比較特別，所以我們得使用`lapply(tmp, "[", 1)`這個語法來取 出`tmp`中每個元素（字串向量）的第一個欄位。請同學試試看。
+  CorrectAnswer: lapply(tmp, "[", 1)
+  AnswerTests: omnitest('lapply(tmp, "[", 1)')
+  Hint: lapply(tmp, "[", 1)
+- Class: cmd_question
+  Output: 如果我們要取出`tmp`中每個元素（字串向量）的第二個欄位，就是用：`lapply(tmp, "[", 2)` 請同學試試看。
+  CorrectAnswer: lapply(tmp, "[", 2)
+  AnswerTests: omnitest('lapply(tmp, "[", 2)')
+  Hint: lapply(tmp, "[", 2)
+- Class: text
+  Output: 到目前為止，同學應該可以理解`X`和`FUN`這兩個參數在`lapply`中扮演的角色。 但是最後一個`...`的參數是什麼意思呢？這是因為`lapply`並不清楚`FUN`需要什麼參數，
+    所以使用者可以在指定`X`和`FUN`之後，放入任意的參數，而這些參數並不是由`lapply` 所使用，而是由`FUN`所使用。
+- Class: text
+  Output: 所以`lapply(tmp, "[", 1)`的第三個參數`1`就會透過`lapply`轉交給`[`， 因此R 知道要從`tmp`的每個元素中拿出第**1**個元素。
+- Class: text
+  Output: 同理，`lapply(tmp, "[", 2)`的第三個參數`2`透過`lapply`轉交給`[`， 因此R 知道要從`tmp`的每個元素中拿出第**2**個元素。
+- Class: mult_question
+  Output: 接著，請教同學`lapply(tmp, "[", 1)`的輸出結果是什麼型態？
+  AnswerChoices: list;字串向量(character);整數向量(integer)
+  CorrectAnswer: list
+  AnswerTests: omnitest(correctVal = "list")
+- Class: cmd_question
+  Output: list型態對於後續的處理還是比較麻煩的。我們希望能夠將輸出轉換為字串向量。 一種做法是透過`unlist`把`lapply`所輸出的`list`拆開。請同學試試看先輸入
+    ：`tmp2 <- lapply(tmp, "[", 1)`將結果儲存到`tmp2`這個變數。
+  CorrectAnswer: tmp2 <- lapply(tmp, "[", 1)
+  AnswerTests: omnitest('tmp2 <- lapply(tmp, "[", 1)')
+  Hint: tmp2 <- lapply(tmp, "[", 1)
+- Class: cmd_question
+  Output: 接著，我們可以使用`unlist(tmp2)`，就可以取得字串向量了。請同學試試看。
+  CorrectAnswer: unlist(tmp2)
+  AnswerTests: omnitest("unlist(tmp2)")
+  Hint: unlist(tmp2)
+- Class: cmd_question
+  Output: 另外一種方式是使用`sapply`這個函數。`sapply`和`lapply`幾乎一樣，差別只在 於`sapply`最後會嘗試重新整理輸出的格式，從list轉成array。請同學試試`sapply(tmp,
+    "[", 1)`
+  CorrectAnswer: sapply(tmp, "[", 1)
+  AnswerTests: omnitest('sapply(tmp, "[", 1)')
+  Hint: sapply(tmp, "[", 1)
+- Class: text
+  Output: 以上示範的技巧在實務很常見。當我們想要從文字中擷取出資訊時，都可以優先考慮運用`substring` 或`strsplit`來擷取資訊。而當R
+    把資訊放成非結構化的list物件中，我們可以運用`lapply`或`sapply` 做資料的整理。
+- Class: text
+  Output: 事實上，如果同學能夠撰寫R 的函數，就可以適當的和`lapply`與`sapply`作組合，更有 效率的整理資料。
+- Class: script
+  Output: 最後，還是要請同學利用這次所學的內容，做一個小練習。 請同學在完成之後存檔，並輸入`submit()`來檢查結果是否符合預期。 如果同學在檔案中看到亂碼，請使用Rstudio
+    左上角的File -> Reopen With Encoding... -> 選取：UTF-8
+  Script: RDataEngineer-01-HW.R
+  AnswerTests: rdataengineer_01_hw_test()
+
