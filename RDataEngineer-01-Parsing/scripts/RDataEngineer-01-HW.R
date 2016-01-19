@@ -1,3 +1,8 @@
+# 這是從 <http://data.gov.tw/node/7769> 下載的海盜通報資料
+# 由於這份文件並沒有遵循任何已知的常見格式
+# 所以我們必須要利用這章所學的技巧
+# 才能從中翠取出資訊
+# 首先，我們把該檔案載入到R 之中
 pirate_info <- readLines(file(pirate_path, encoding = <請填寫正確的encoding>))
 
 # 接著我們要把經緯度從這份資料中萃取出來
