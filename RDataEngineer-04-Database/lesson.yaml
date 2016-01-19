@@ -6,7 +6,7 @@
   Organization: Taiwan R User Group
   Version: 2.3.1.1
 - Class: text
-  Output: 這次個課程將著重於如何用R 讀寫關聯式資料庫。
+  Output: 這次個課程將著重於如何用R 讀寫關聯式資料庫。**因為本次課程會操作資料庫，所以在接關 功能上會有些狀況。同學請儘量一口氣完成這門課程**
 - Class: text
   Output: 資料庫（Database）泛指能夠儲存資料的檔案櫃。使用者可以對檔案中的資料進行：新增、擷取、更新和刪除。
 - Class: text
@@ -132,6 +132,17 @@
   Output: |
     這樣的動作，就非常類似在R 中執行：`lvr_land2 <- <lvr_land的值>`，差別在於lvr_land2
     這個名字是一個SQLite資料庫的表格。
+- Class: text
+  Output: |
+    R 的大部分的資料庫套件，在`dbWriteTable`函數中都會提供`append`和`overwrite`兩個參數。
+- Class: text
+  Output: |
+    `overwrite = TRUE` 時，R 會自動把撞名的表格刪除，並且寫入新的資料。如果是`overwrite = FALSE`
+    時撞名，R 就會出錯。由於讓同學測試的話，swirl會跳掉，所以我們這邊就只能先帶過了。
+- Class: text
+  Output: |
+    `append = TRUE`時，R 會把我們要寫入的資料，接在撞名的表格之下。這等介紹完`dbReadTable`
+    之後，我們再試試。
 - Class: cmd_question
   Output: |
     接下來，我們透過`dbReadTable`來從表格中取出資料。這個指令只需要兩個參數：`connection`
@@ -140,7 +151,23 @@
   AnswerTests: omnitest('dbReadTable(db, "lvr_land2")')
   Hint: dbReadTable(db, "lvr_land2")
 - Class: cmd_question
-  Output: 我們也可以用`dbListTables(db)`列出目前已經存在於資料庫的表格。請同學試試看。
+  Output: |
+    我們可以再寫入一次`lvr_land`，並且設定`append = TRUE`。請同學試試看輸入：
+    `dbWriteTable(db, "lvr_land2", lvr_land, append = TRUE)`
+  CorrectAnswer: dbWriteTable(db, "lvr_land2", lvr_land, append = TRUE)
+  AnswerTests: omnitest('dbWriteTable(db, "lvr_land2", lvr_land, append = TRUE)')
+  Hint: dbWriteTable(db, "lvr_land2", lvr_land, append = TRUE)
+- Class: cmd_question
+  Output: |
+    請再次執行`dbReadTable(db, "lvr_land2")`，讀取"lvr_land2"表格看看。
+  CorrectAnswer: dbReadTable(db, "lvr_land2")
+  AnswerTests: omnitest('dbReadTable(db, "lvr_land2")')
+  Hint: dbReadTable(db, "lvr_land2")
+- Class: text
+  Output: 這次我們應該看到38筆資料（因為lvr_land總共有19筆資料，寫入兩次後應該有38筆）， 如果不幸需要接關的同學可能看到更多筆...
+- Class: cmd_question
+  Output: |
+    `dbListTables(db)`可以列出目前已經存在於資料庫的表格。請同學試試看。
   CorrectAnswer: dbListTables(db)
   AnswerTests: omnitest('dbListTables(db)')
   Hint: dbListTables(db)
@@ -159,7 +186,94 @@
   AnswerTests: omnitest('all.equal(iris, iris2)')
   Hint: all.equal(iris, iris2)
 - Class: text
-  Output: |-
+  Output: |
     同學應該會看到：`"Component “Species”: 'current' is not a factor"`的字樣，這代表
     當我們從資料庫中把iris拿出來後，Species的型態改變了。
+- Class: text
+  Output: |
+    型態改變這件事情，其實是可大可小的。在大部分的狀況下，例如建立統計模型、製作圖表，factor
+    字串（character）的互換並不會帶來太大個困擾。但是在某些很不常見的狀況下（如`strsplit`在
+    遇到factor的時候會出錯），可能會導致程式出錯。這是很討厭的。
+- Class: text
+  Output: |
+    我有開發過大型R 的應用系統的經驗，而像這類型態不符的地方，往往會導致系統產生無法預期的結果。
+    舉例來說，當我嘗試把資料處理的流程搬入資料庫後，某些原本可以運作的程式碼就壞掉了（就是`strsplit`）。
+- Class: text
+  Output: |
+    我猜大部分的R 使用者，大概都不用管到這件事情，但是如果有一天當R 不聽你話的時候，請記得檢查
+    這些小地方。
+- Class: text
+  Output: |
+    剛剛我們講解的`dbReadTable`和`dbWriteTable`都是一次把所有資料倒進去和拿出來的方法，
+    雖然方便，但是當數據量很大的時候，我們可能想要一次只拿一部分的資料。進階的使用者可能需要
+    更多關聯式資料庫所提供的功能。
+- Class: cmd_question
+  Output: |
+    DBI界面中，我們可以利用`dbGetQuery`和`dbSendQuery`來執行SQL語句。SQL是操作關聯式資料庫
+    必學的工具，也是資料科學家必備的工具之一。請同學執行：
+    `dbGetQuery(db, "SELECT * FROM iris WHERE species = \"virginica\"")`
+  CorrectAnswer: dbGetQuery(db, "SELECT * FROM iris WHERE species = \"virginica\"")
+  AnswerTests: omnitest('dbGetQuery(db, "SELECT * FROM iris WHERE species = \\"virginica\\"")')
+  Hint: dbGetQuery(db, "SELECT * FROM iris WHERE species = \"virginica\"")
+- Class: text
+  Output: |
+    剛剛的`"SELECT * FROM iris WHERE species = \"virtinica\""`是一段SQL expression。
+    而`dbGetQuery`會解析這樣的SQL expression，並且依照指令進行資料庫的操作後，再把結果直接
+    回傳給R 。
+- Class: cmd_question
+  Output: |
+    `dbSendQuery`函數則會先把結果儲存於Result物件中，再由使用者一段一段的取出。
+    請同學試著執行：`rs <- dbSendQuery(db, "SELECT * FROM iris")`
+  CorrectAnswer: rs <- dbSendQuery(db, "SELECT * FROM iris")
+  AnswerTests: omnitest('rs <- dbSendQuery(db, "SELECT * FROM iris")')
+  Hint: rs <- dbSendQuery(db, "SELECT * FROM iris")
+- Class: cmd_question
+  Output: 上一關所拿到的`rs`物件，就是整個資料集的「代理」。我們可以利用`fetch`方法， 一次拿一點資料出來。請同學試試看：`fetch(rs,
+    1)`
+  CorrectAnswer: fetch(rs, 1)
+  AnswerTests: omnitest('fetch(rs, 1)')
+  Hint: fetch(rs, 1)
+- Class: cmd_question
+  Output: 請同學再試一次：`fetch(rs, 1)`（你可以按一下 ↑ ，正常安裝的R 會顯示上一個輸入）
+  CorrectAnswer: fetch(rs, 1)
+  AnswerTests: omnitest('fetch(rs, 1)')
+  Hint: fetch(rs, 1)
+- Class: text
+  Output: 同學應該會注意到，兩次的結果是不同的。這是因為在第一次`dbSendQuery`指令完成之後， R 和資料庫就把結果暫存到某個地方，並且將代理物件回傳，而這就是`rs`。之後每次執行`fetch`
+    指令時，R 就會「依照順序」把結果一個又一個的回傳給使用者。如果使用者每次想多拿一些資料，則 可以使用第二個參數，如：`fetch(rs, 100)`一次取出100筆資料。
+- Class: cmd_question
+  Output: 當我們不需要再使用`rs`物件時，就刪除它：`dbClearResult(rs)`請同學試試看。
+  CorrectAnswer: dbClearResult(rs)
+  AnswerTests: omnitest('dbClearResult(rs)')
+  Hint: dbClearResult(rs)
+- Class: text
+  Output: |
+    `dbSendQuery`和`fetch`的技巧在使用R 處理「大量資料」，是非常有用的。尤其是當資料量
+    「超過記憶體」時，運用資料庫來優化在硬碟上處理資料的效能，是很有效率的方式。此時，如果
+    我們的演算法是不需要一次看到所有的資料，那`dbSendQuery`和`fetch`的方式就非常有用，
+    避免我們發生滑鼠不能移動的悲劇。
+- Class: text
+  Output: |
+    上述的課程中，我們並沒有講解SQL expression。同學如果有興趣的話，可以再找SQL相關的資料
+    學習。反之，我們把這部份的細節，留待後續`dplyr`套件的系列課程中，再跟同學介紹。
+    我們這裡想要強調的是，所有對資料庫的基礎操作，DBI有提供一些輔助函數，例如：`dbGetQuery`、
+    `dbSendQuery`
+- Class: text
+  Output: 最後，我們示範資料庫的transaction功能。這在處理資料時，也是非常重要的事情。
+- Class: text
+  Output: |
+    當我們在運用外部資源（如資料庫、如檔案系統）處理資料時，最害怕的狀況是被意外中斷。
+    舉例來說，網路可能剛好斷線、硬碟突然壞軌、或是發生各種平常沒遇到的狀況。這時候除
+    了幫工程師買乖乖之外，實務上其實有一些技巧可以避免意外帶來的困擾。
+- Class: text
+  Output: |
+    意外對我們最大的困擾並不是工作中斷。畢竟作分析的工作，畫畫的時候R 掛掉了，就... 重新開R
+    再跑一遍就好了。但是當我們正在寫入資料庫時，意外的中斷就會帶來以下的困擾。
+- Class: text
+  Output: |
+    當我們排除意外的原因，要繼續工作時，就會問：目前資料庫的狀態，是「還未寫入」、「寫到一半」還是
+    「寫入完畢」。「還未寫入」的狀況下，我們只要重新執行程式即可。而「寫入完畢」的話就更棒了，我們
+    只要繼續後續的工作。但是若是「寫到一半」的狀態，要接著工作就會非常麻煩（可能要改程式碼）。
+- Class: text
+  Output: Transaction就是一種保證資料庫的狀態一定是「還未寫入」或是「寫入完畢」的機制。
 
