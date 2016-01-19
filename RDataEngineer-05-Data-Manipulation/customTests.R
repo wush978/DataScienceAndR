@@ -12,6 +12,5 @@
 # expression which the user entered, so care must be taken.
 
 test_equal <- function(a, b) {
-  browser()
   isTRUE(all.equal(a, b))
 }
