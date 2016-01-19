@@ -278,6 +278,39 @@
   CorrectAnswer: summarise(flights, mean(dep_delay, na.rm = TRUE))
   AnswerTests: omnitest('summarise(flights, mean(dep_delay, na.rm = TRUE))')
   Hint: summarise(flights, mean(dep_delay, na.rm = TRUE))
+- Class: cmd_question
+  Output: |
+    我們也可以透過`sample_n`或`sample_frac`來從`flights`中抽出資料。這招在資料很大，
+    而我們的電腦又不夠力的狀況下，很有用。舉例來說，`sample_n(flights, 10)`會從數據中
+    抽10筆資料。請同學試試看。
+  CorrectAnswer: sample_n(flights, 10)
+  AnswerTests: omnitest('sample_n(flights, 10)')
+  Hint: sample_n(flights, 10)
+- Class: cmd_question
+  Output: |
+    也請同學試試看：`sample_frac(flights, 0.01)`
+  CorrectAnswer: sample_frac(flights, 0.01)
+  AnswerTests: omnitest('sample_frac(flights, 0.01)')
+  Hint: sample_frac(flights, 0.01)
+- Class: text
+  Output: |
+    當同學需要取後放回的隨機抽樣時，可以下參數：`replace = TRUE`。當我們希望機率
+    不相等時，可以把機率的比率送到`weight`這個參數。
+- Class: text
+  Output: |
+    在走過這些主要的dplyr功能，同學是不是有注意到：第一個參數總是我們要處理的data.frame呢？
+- Class: text
+  Output: 第二個要點是，我們可以在後面的參數，後續的expression中省略data.frame的變數名稱。
+- Class: text
+  Output: 第三個要點我們前面沒有強調，就是每次產生的data.frame都是新的，我們並沒有更動原本 的`flights`。
+- Class: text
+  Output: 有了這些工具之後，我們就可以組合出複雜的邏輯。
+- Class: script
+  Output: |
+    這裡出了一些應用問題。請同學在完成之後存檔，並輸入`submit()`來檢查結果是否符合預期。
+    如果同學在檔案中看到亂碼，請使用Rstudio 左上角的File -> Reopen
+  Script: RDataEngineer-05-04.R
+  AnswerTests: rdataengineer_05_04(answer04.1, answer04.2, answer04.3)
 - Class: text
   Output: |-
     `cl_info_other`是取自金管會銀行局的一般銀行及信用合作社消費者貸款業務項目，原始資料是
