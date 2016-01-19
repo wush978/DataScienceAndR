@@ -7,22 +7,59 @@
   Version: 2.3.1.1
 
 - Class: text
-  Output: 這次個課程將著重於如何用R 讀寫SQL Database。
+  Output: 這次個課程將著重於如何用R 讀寫關聯式資料庫。
+
+- Class: text
+  Output: 資料庫（Database）泛指能夠儲存資料的檔案櫃。使用者可以對檔案中的資料進行：新增、擷取、更新和刪除。
+
+- Class: text
+  Output: |
+    關聯式資料庫（Relational database），是近代資訊科學發展得非常成熟的一個領域。成熟到
+    目前當人們提到「資料庫」時，在沒有額外說明下，通常都是指「關聯式資料庫」。
+
+- Class: text
+  Output: 關聯式資料庫背後的設計，是牽涉到一種叫「Relational Model」的數學，並且由許多
+    資訊科學的學者發展出的理論在背後支撐。而關聯式資料庫設計的成功，則可以從現代資訊科學在
+    企業的應用層面所體現。
+
+- Class: text
+  Output: 在現代資訊時代，幾乎我們日常生活中所碰觸到的重要資訊，都過經過關聯式資料庫。
+    例如購票系統、會計系統、倉儲系統等等。關聯式資料庫的設計是可以滿足廣泛系統的需要。
+
+- Class: text
+  Output: 而有數據的地方，就有潛在的分析需求。R 語言身為大數據時代最火熱的工具之一，
+    在與各種資料庫系統的串接上，自然有一席之地。
+
+- Class: text
+  Output: 這次課程中我們會描述R 語言如何透過DBI和其系列套件為例，操作關聯式資料庫。
+    而這裡我們以SQLite這套精巧的關聯式資料庫系統為例。
+
+- Class: text
+  Output: |
+    在課程開始之前，我們也要先跟各位同學聲明，這次的教學並不會碰到太多資料庫的設計與效能問題。
+    這些問題都是需要搭配系統的架構後，才能妥善解決的問題。我們也要先警告同學，如果直接用R 大量
+    的撈取線上資料庫，是有可能影響資料庫的效能的。所以如果在實務使用時，最好是先知會與請教負責資料庫
+    系統的同仁。
 
 - Class: cmd_question
-  Output: 簡單起見，我們使用SQLite這個輕量級Database作演示。請同學先安裝RSQLite這個套件。
+  Output: 請同學先安裝RSQLite套件。它是R 與SQLite資料庫之間的橋樑。專業的術語叫：「客戶端」（Client）
   CorrectAnswer: check_then_install("RSQLite", "1.0.0")
   AnswerTests: test_package_version("RSQLite", "1.0.0")
   Hint: install.packages("RSQLite")
 
 - Class: cmd_question
-  Output: 並且請同學載入RSQLite
+  Output: 請同學載入RSQLite
   CorrectAnswer: library(RSQLite)
   AnswerTests: test_search_path("RSQLite")
 
 - Class: text
   Output: 雖然目前在市面上，有許多的SQL Database，但是在R 中操作起來，都是非常類似的。
     因為R 都是透過DBI 套件所定義的函數，讓使用者操作資料庫。
+
+- Class: text
+  Output: 等一下我們要帶同學作一次SQLite Database的連線、寫入資料、讀取資料、更改資料和刪除資料。
+    這樣的操作是最基本的，並且未來當同學在使用R 操作其他資料庫，甚至是NoSQL等外部儲存裝置，
+    使用的要領也是如此：連線、寫入、讀取、更改和刪除。
 
 - Class: cmd_question
   Output: 我們先連接SQLite Database，再跟同學繼續解釋。我們已經事先準備了一個SQLite
@@ -35,3 +72,87 @@
   Output: 接著我們建立一個SQLite Database的連線：`db <- dbConnect(drv, db_path)`
   CorrectAnswer: db <- dbConnect(drv, db_path)
   AnswerTests: omnitest('db <- dbConnect(drv, db_path)')
+
+- Class: text
+  Output: 這裡的`db`物件，就是這個Database在R 的代理人。後續若要從這個Database作任何動作，
+    通常都要把`db`這個物件當成函數的參數之一。
+
+- Class: cmd_question
+  Output: |
+    接著我們來嘗試把這筆數據寫入SQL Database之中。在DBI界面中，提供了`dbWriteTable`這個
+    函數，所以請大家先打開這個函數的說明頁面。
+  CorrectAnswer: ?dbWriteTable
+  AnswerTests: any_of_exprs("?dbWriteTable", "help(dbWriteTable)", 'help("dbWriteTable")')
+
+- Class: text
+  Output: |
+    各位同學應該可以在說明視窗的左上角看到：`dbReadTable {DBI}`的字樣。這代表我們目前操作
+    的函數，是DBI套件所提供的功能。而dbReadTable和dbWriteTable的說明頁面是寫在同一頁的，
+
+
+- Class: mult_question
+  Output: 請問下列哪一個選項「不是」DBI套件`dbWriteTable`的參數？
+  AnswerChoices: conn;name;value;overwrite
+  CorrectAnswer: "overwrite"
+  AnswerTests: omnitest(correctVal = "overwrite")
+
+- Class: cmd_question
+  Output: |
+    因為`db`是RSQLite提供的Database代理人（當初的`drv`是`dbDriver("SQLite")`)，所以
+    除了DBI的`dbWriteTable`之外，我們還有額外的參數可以使用。請同學輸入：
+    `help.search("dbWriteTable")`
+  CorrectAnswer: help.search("dbWriteTable")
+  AnswerTests: omnitest('help.search("dbWriteTable")')
+
+- Class: cmd_question
+  Output: |
+    R 應該會列出至少兩個dbWriteTable的說明，並且其中一個是來自RSQLite。在Rstudio下，同學
+    只要用滑鼠去點選連結即可。但是限於swirl環境，還是需要同學輸入以下指令（或是`skip()`）
+    `help("dbWriteTable,SQLiteConnection,character,data.frame-method")`
+    使用R 原生環境的同學平時也得利用上述指令查詢RSQLite提供的dbWriteTable
+  CorrectAnswer: help("dbWriteTable,SQLiteConnection,character,data.frame-method")
+  AnswerTests: omnitest('help("dbWriteTable,SQLiteConnection,character,data.frame-method")')
+
+- Class: mult_question
+  Output: 此時的說明頁面左上角，應該會註明這份文件是來自RSQLite套件。請同學參考文件內容後，
+    回答：`overwrite`是不是dbWRiteTable的參數呢？
+  AnswerChoices: yes;no
+  CorrectAnswer: "yes"
+  AnswerTests: omnitest(correctVal="yes")
+
+- Class: text
+  Output: 這是R 在處理SQL Database的設計。如果使用者只有操作到DBI的dbWriteTable提供的功能，那
+    未來相同的程式碼，運作在其他的資料庫系統時，不需要太大的修改即可運作。但是如果是用了RSQLite
+    提供的功能（如overwrite），那在切換資料庫時，就要看新的資料庫的R 套件有沒有提供類似的功能。
+
+- Class: text
+  Output: 在解釋`dbWriteTable`之前，我們要先對資料庫系統有一點簡單的認知。資料庫在處理數據時，
+    會將數據放在一個又一個的表格中。這感覺非常類似R 會把一個data.frame存放到對應的變數之中。
+
+- Class: text
+  Output: 回到`DBI::dbWriteTable(connection, name, value, ...)`的說明，R 就會嘗試透過
+    connection物件，把value的data.frame寫入到名稱為name的表格中。
+
+- Class: cmd_question
+  Output: |
+    舉例來說，我們現在想要把`lvr_land`這個記載實價登錄資訊的表格，寫到SQLite資料庫中。
+    請同學利用指令：`head(lvr_land)`看一下這個資料集。
+  CorrectAnswer: head(lvr_land)
+  AnswerTests: omnitest("head(lvr_land)")
+
+- Class: cmd_question
+  Output: |
+    我們看一下`lvr_land`這個資料集。這是取自我們政府的實價登錄資料。請同學輸入：
+    `head(lvr_land)`
+  CorrectAnswer: head(lvr_land)
+  AnswerTests: omnitest('head(lvr_land)')
+
+- Class: text
+  Output: 欄位名稱很清楚的註明每個欄位的數據意義。
+
+- Class: cmd_question
+  Output: |
+    接著，我們透過`dbWriteTable`將實價登錄資料寫入資料庫中。請同學輸入：
+    `dbWriteTable(db, "lvr_land", lvr_land)`
+  CorrectAnswer: dbWriteTable(db, "lvr_land", lvr_land)
+  AnswerTests: check_lvr_land(db)
