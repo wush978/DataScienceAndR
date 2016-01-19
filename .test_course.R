@@ -58,12 +58,19 @@ course_list <- substring(course_list, 3, nchar(course_list))
 course_list <- grep("^[^\\.]", course_list, value = TRUE)
 course_list <- setdiff(course_list, c("ROpenData-DataTaipei"))
 for(course in course_list) {
-  if (Sys.info()["sysname"] == "Windows") {
-    for(locale in c("Chinese", "Japanese", "Greek", "English", "cht")) {
-      Sys.setlocale(locale = locale)
+  if (course %in% "RDataMining-02-Classification") {
+    if (Sys.info()["sysname"] == "Windows") {
+      Sys.setlocale(locale = "cht")
+    } 
+    test_lesson(course)
+  } else {
+    if (Sys.info()["sysname"] == "Windows") {
+      for(locale in c("Chinese", "Japanese", "Greek", "English", "cht")) {
+        Sys.setlocale(locale = locale)
+        test_lesson(course)
+      }
+    } else {
       test_lesson(course)
     }
-  } else {
-    test_lesson(course)
   }
 }
