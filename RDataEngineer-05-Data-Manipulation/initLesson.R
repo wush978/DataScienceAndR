@@ -3,7 +3,7 @@
 # the user's working directory and thus be accessible to them
 # throughout the lesson.
 
-assign("cl_info_other",
+assign("cl_info",
        read.table(file=file(.get_path("cl_info_other.csv"), encoding = "UTF-8"),
          sep=",",stringsAsFactors=FALSE,header=TRUE),
        envir = globalenv())

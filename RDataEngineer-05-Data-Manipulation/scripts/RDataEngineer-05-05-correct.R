@@ -7,12 +7,11 @@
 #   retval[[1]]
 # })
 
-answer05 <- local({
-  result <-
-    # 為了清楚起見，再寫一次df的定義
-    group_by(flights, month) %>%
-    # mutate 和 summarise 的部份就照抄
-    mutate(gain = arr_delay - dep_delay) %>%
-    summarise(mean(gain, na.rm = TRUE))
-  result[[1]]
-})
+answer05 <-
+  # 為了清楚起見，再寫一次df的定義
+  group_by(flights, month) %>%
+  # mutate 和 summarise 的部份就照抄
+  mutate(gain = arr_delay - dep_delay) %>%
+  summarise(mean(gain, na.rm = TRUE))
+
+# 這裡的answer05是一個data.frame

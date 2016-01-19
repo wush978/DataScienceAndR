@@ -421,10 +421,45 @@
 
 - Class: script
   Output: 接著，我們把剛剛解答`answer04.1`的動作中，扣掉`filter`的部份，再做一次。
+    請同學看看改過之後的結果，輸入`submit()`即可。這題不用對程式做修改。
   Script: RDataEngineer-05-05.R
   AnswerTests: rdataengineer_05_05(answer05)
 
+- Class: cmd_question
+  Output: 讓我們看看結果吧。請同學輸入：`answer05`
+  CorrectAnswer: answer05
+  AnswerTests: omnitest('answer05')
+
 - Class: text
   Output: |
-    `cl_info_other`是取自金管會銀行局的一般銀行及信用合作社消費者貸款業務項目，原始資料是
-    一系列的excel檔案。
+    是不是很輕鬆就可以算出每個月份的gain的平均呢？
+
+- Class: text
+  Output: |
+    這裡我建議一個實務上撰寫`gruop_by`的思路。首先，我們針對某個欄位（例如月份）做
+    `filter`，挑出特定的類別。並對`filter`的結果做各種操作，回答並解決各種問題。
+    當我們想要把`filter`之後的動作，重複的操作在每一種類別（例如每一個月份），那我們
+    就把`filter`換掉改成`group_by`，而後面的動作照舊，即可得到答案。
+
+- Class: text
+  Output: |
+    以上的內容就是這門課程對dplyr的介紹。為了下一個課程，我們要做最後一個練習。
+
+- Class: cmd_question
+  Output: |
+    變數`cl_info`記載著從金管會銀行局的一般銀行及信用合作社消費者貸款業務項目。
+    同學可以使用`View(cl_info)`看一看資料。
+  CorrectAnswer: View(cl_info)
+  AnswerTests: omnitest('View(cl_info)')
+
+- Class: text
+  Output: |
+    這個練習是要對這個資料做一連串的整理之後，算出每個月份的銀行房貸放款數量。這個數字
+    會和我國的房地產是否泡沫化有關。
+
+- Class: script
+  Output: |
+    請在完成之後存檔，並輸入`submit()`來檢查結果是否符合預期。
+    如果同學在檔案中看到亂碼，請使用Rstudio 左上角的File -> Reopen
+  Script: RDataEngineer-05-06.R
+  AnswerTests: rdataengineer_05_06(cl_info2, cl_info3)
