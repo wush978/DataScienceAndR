@@ -68,9 +68,9 @@
 
 - Class: text
   Output: |
-    dplyr中在處理data.frame的函數，共有：`filter`、`arrange`、`select`、
-    `distinct`、`mutate`、`summarise`和`sample_n`接下來的課程中，我們一邊
-    操作，一邊講解。
+    dplyr中在處理data.frame的函數，共有：`filter`、`slice`、`arrange`、
+    `select`、`distinct`、`mutate`、`summarise`和`sample_n`接下來的課程
+    中，我們一邊操作，一邊講解。
 
 - Class: cmd_question
   Output: |
@@ -86,6 +86,9 @@
     會把資料一筆一筆的對後面的語句（`month == 1`和`day == 1`）做檢查。R 在
     解析這些語句時，自動把這些變數對應到`flights`的欄位。所以在`filter`中的
     `month`就等同於`flights$month`，`day`就等同於`flights$day`
+
+- Class: text
+  Output: 熟悉SQL expression的同學請注意，`filter`就是SQL的`WHERE`。
 
 - Class: script
   Output: |
@@ -110,6 +113,12 @@
     一般來說，`filter`的第一個參數代表要做處理的data.frame，而後面的參數通通都是條件。
     每個條件就是一個expression，並且輸出布林向量。`filter`只會回傳那些滿足所有條件的
     資料。
+
+- Class: text
+  Output: |
+    這堂課程介紹的dplyr的函數，都具有一樣的性質：第一個參數是要處理的data.frame，而其餘
+    的參數是各種expression，並且這些expression中的變數名稱，都會優先對應到data.frame
+    中的欄位。
 
 - Class: cmd_question
   Output: 請同學試著從`flights`中找出`flights$month`為 1，`flights$day`為2的資料。
@@ -170,6 +179,105 @@
   AnswerChoices: Yes;No
   CorrectAnswer: "Yes"
   AnswerTests: omnitest(correctVal = "Yes")
+
+- Class: cmd_question
+  Output: 最後請同學試試看：`filter(flights, grepl(pattern = "AA", x = tailnum, fixed = TRUE))`
+  CorrectAnswer: filter(flights, grepl(pattern = "AA", x = tailnum, fixed = TRUE))
+  AnswerTests: omnitest('filter(flights, grepl(pattern = "AA", x = tailnum, fixed = TRUE))')
+
+- Class: text
+  Output: |
+    對`filter`的介紹差不多了。接下來我們介紹`slice`。
+    `slice`很單純，`slice(flights, 1:6)`就等價於`flights[1:6,]`。
+
+- Class: cmd_question
+  Output: |
+    我們直接練習，「用肌肉記憶」。請同學選出`flights`的第10000 到 第20000資料。
+  CorrectAnswer: slice(flights, 10000:20000)
+  AnswerTests: omnitest(correctVal = slice(flights, 10000:20000))
+
+- Class: cmd_question
+  Output: |
+    接下來，我們練習`arrange`。`arrange`會把data.frame的資料，根據後面的expression
+    做排序。請同學試試看：`arrange(flights, month, day, dep_time)`。給熟悉SQL的同學，
+    `arrange`很類似SQL的`ORDER BY`
+  CorrectAnswer: arrange(flights, month, day, dep_time)
+  AnswerTests: omnitest('arrange(flights, month, day, dep_time)')
+
+- Class: text
+  Output: |
+    我們仔細觀察上一題的輸出。`arrange`會先比較`month`的值，然後當`month`平手就比`day`，
+    以此類推。所以我們會看到輸出的最前面，就是`month`、`day`最小的，平手的資料中，`dep_time`
+    最小的。
+
+- Class: mult_question
+  Output: 所以我們能不能根據上面的結果判斷：`dep_time`的最小值是517呢？（第一列的dep_time）
+  AnswerChoices: Yes;No
+  CorrectAnswer: "No"
+  AnswerTests: omnitest(correctVal = '"No"')
+
+- Class: cmd_question
+  Output: |
+    我們是不能確定這件事情的，因為有些資料可能有更小的`dep_time`，但是他們的`day`和
+    `month`太大，所以被排到後面。我們來找找看`dep_time`的最小值吧。請同學輸入：
+    `min(flights$dep_time)`
+  CorrectAnswer: min(flights$dep_time)
+  AnswerTests: omnitest('min(flights$dep_time)')
+
+- Class: cmd_question
+  Output: |
+    我們注意到dep_time的資料有missing data。導致上一題的輸出為`NA`。我們要怎麼忽略
+    `NA`呢？請同學試試看：`min(flights$dep_time, na.rm = TRUE)`
+  CorrectAnswer: min(flights$dep_time, na.rm = TRUE)
+  AnswerTests: omnitest('min(flights$dep_time, na.rm = TRUE)')
+
+- Class: cmd_question
+  Output: |
+    我們也可以把比較的順序從由小到大改成由大到小，只要加上`desc`就行了。
+    舉例來說：`arrange(flights, desc(month), desc(day), desc(dep_time))`
+    請試試看。
+  CorrectAnswer: arrange(flights, desc(month), desc(day), desc(dep_time))
+  AnswerTests: omnitest('arrange(flights, desc(month), desc(day), desc(dep_time))')
+
+- Class: cmd_question
+  Output: |
+    接下來我們來介紹`select`。通常一個很大的data.frame中，我們一次只會對少數幾欄有興趣，
+    `select`可以讓我們挑出我們有興趣的欄位。
+    請同學試試看：`select(flights, year, month, day)`
+  CorrectAnswer: select(flights, year, month, day)
+  AnswerTests: omnitest('select(flights, year, month, day)')
+
+- Class: cmd_question
+  Output: 我們先看看`flights`的欄位名稱與排序。請同學複習一下。
+  CorrectAnswer: colnames(flights)
+  AnswerTests: omnitest(correctVal = colnames(flights))
+
+- Class: cmd_question
+  Output: |
+    我們也可以用`select(flights, year:day)`來選取`year`和`day`之間的欄位。請同學
+    試試看。
+  CorrectAnswer: select(flights, year:day)
+  AnswerTests: omnitest('select(flights, year:day)')
+
+- Class: cmd_question
+  Output: |
+    如果是要反面選取，剃除掉`year`到`day`之間的欄位，只要使用：
+    `select(flights, -(year:day))`。請同學試試看。
+  CorrectAnswer: select(flights, -(year:day))
+  AnswerTests: omnitest('select(flights, -(year:day))')
+
+- Class: cmd_question
+  Output: 在`select`的過程中，我們也可以重新命名資料的欄位。
+    請同學試試看：`select(flights, tail_num = tailnum)`
+  CorrectAnswer: select(flights, tail_num = tailnum)
+  AnswerTests: omnitest(select(flights, tail_num = tailnum))
+
+- Class: script
+  Output: |
+    這裡出一個小問題讓大家練習：請同學選出`flights`中`dep_time`為NA的資料，並只挑出
+    `year`、`month`和`day`這三欄。
+  Script: RDataEngineer-05-03.R
+  AnswerTests: test_equal(answer03, select(filter(flights, is.na(dep_time)), year:day))
 
 - Class: text
   Output: |
