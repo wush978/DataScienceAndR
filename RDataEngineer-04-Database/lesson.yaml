@@ -1,0 +1,35 @@
+- Class: meta
+  Course: DataScienceAndR
+  Lesson: RDataEngineer-04-Database
+  Author: Wush Wu
+  Type: Standard
+  Organization: Taiwan R User Group
+  Version: 2.3.1.1
+- Class: text
+  Output: 這次個課程將著重於如何用R 讀寫SQL Database。
+- Class: cmd_question
+  Output: 簡單起見，我們使用SQLite這個輕量級Database作演示。請同學先安裝RSQLite這個套件。
+  CorrectAnswer: check_then_install("RSQLite", "1.0.0")
+  AnswerTests: test_package_version("RSQLite", "1.0.0")
+  Hint: install.packages("RSQLite")
+- Class: cmd_question
+  Output: 並且請同學載入RSQLite
+  CorrectAnswer: library(RSQLite)
+  AnswerTests: test_search_path("RSQLite")
+  Hint: library(RSQLite)
+- Class: text
+  Output: 雖然目前在市面上，有許多的SQL Database，但是在R 中操作起來，都是非常類似的。 因為R 都是透過DBI 套件所定義的函數，讓使用者操作資料庫。
+- Class: cmd_question
+  Output: 我們先連接SQLite Database，再跟同學繼續解釋。我們已經事先準備了一個SQLite Database的檔案，並且把路徑存在：`db_path`變數之中。請同學先輸入：`drv
+    <- dbDriver("SQLite")`， 取得連接SQLite Database的方式。
+  CorrectAnswer: drv <- dbDriver("SQLite")
+  AnswerTests: omnitest('drv <- dbDriver("SQLite")')
+  Hint: drv <- dbDriver("SQLite")
+- Class: cmd_question
+  Output: 接著我們建立一個SQLite Database的連線：`db <- dbConnect(drv, db_path)`
+  CorrectAnswer: db <- dbConnect(drv, db_path)
+  AnswerTests: omnitest('db <- dbConnect(drv, db_path)')
+  Hint: db <- dbConnect(drv, db_path)
+- Class: text
+  Output: ~
+
