@@ -12,5 +12,14 @@
 # expression which the user entered, so care must be taken.
 
 check_lvr_land <- function(db) {
-  isTRUE(all.equal(dbReadTable(db, "lvr_land"), readRDS(.get_path("lvr_land_read.Rds"))))
+  .tmp1 <- dbReadTable(db, "lvr_land")
+  .tmp2 <- readRDS(.get_path("lvr_land_read.Rds"))
+  .tmp1.1 <- lapply(.tmp1, function(x) x)
+  .tmp2.1 <- lapply(.tmp2, function(x) {
+    if (is.character(x)) {
+      Encoding(x) <- "UTF-8"
+      enc2native(x)
+    } else x
+    })
+  isTRUE(all.equal(.tmp1.1, .tmp2.1))
 }
