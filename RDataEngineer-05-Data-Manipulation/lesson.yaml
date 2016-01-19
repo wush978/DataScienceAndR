@@ -23,9 +23,9 @@
   Hint: check_then_install("dplyr", "0.4.3")
 - Class: cmd_question
   Output: 接著請大家載入dplyr套件
-  CorrectAnswer: test_search_path("dplyr")
-  AnswerTests: omnitest('test_search_path("dplyr")')
-  Hint: test_search_path("dplyr")
+  CorrectAnswer: library(dplyr)
+  AnswerTests: test_search_path("dplyr")
+  Hint: library(dplyr)
 - Class: cmd_question
   Output: 請同學輸入學套件的起手式：`vignette(package = "dplyr")`
   CorrectAnswer: vignette(package = "dplyr")
@@ -307,7 +307,40 @@
   Output: 有了這些工具之後，我們就可以組合出複雜的邏輯。
 - Class: script
   Output: |
-    這裡出了一些應用問題。請同學在完成之後存檔，並輸入`submit()`來檢查結果是否符合預期。
+    這裡請同學做一些小練習。請在完成之後存檔，並輸入`submit()`來檢查結果是否符合預期。
+    如果同學在檔案中看到亂碼，請使用Rstudio 左上角的File -> Reopen
+  Script: RDataEngineer-05-04.R
+  AnswerTests: rdataengineer_05_04(answer04.1, answer04.2, answer04.3)
+- Class: text
+  Output: |
+    接下來我們跟同學介紹R 在2014年開始發展的一種寫法，稱作「pipeline operator」。
+- Class: text
+  Output: |
+    在剛剛的練習中，同學可能會寫出如：`summarise(filter(flights, ...))`的程式碼。
+    或是使用大量的暫存變數，如：`a1 <- filter(flights, ...)`然後`a2 <- summarise(a1, ...)`
+    在整理資料的時候，我們常常要對數據做連續的操作（例如先`filter`再`summarise`）
+- Class: text
+  Output: |
+    這時後，我們可能只能建立大量的暫存變數，如`a1`，`a2`，或者是寫出不好讀的程式碼，如：
+    `summarise(filter(flights, ...))`
+- Class: text
+  Output: |
+    而在dplyr中，導入了magrittr在2014年的發明：pipeline operator：`%>%`。
+    `%>%`會把上一個前面函數的輸出，放到後面函數的第一個參數。也就是說，我們可以
+    把剛剛的程式碼寫成：`filter(flights, ...) %>% summarise(...)`
+- Class: text
+  Output: |
+    而`%>%`是可以串接的，所以實務上，我們就可以寫出：
+    `filter(flights, ...) %>% select(...) %>% mutate(...) %>% summarise`
+    每一個函數的輸出，都是下一個函數的第一個參數（也就是要作處理的data.frame）。
+    所以這段程式碼中，`filter`的輸出就交給`select`處理後，再交給`mutate`，最後給
+    `summarise`。各位同學從這邊，就可以看出dplyr在設計函數時所下的苦心。
+- Class: text
+  Output: 使用`%>%`寫程式，不只不用命名大量的變數，如：`a1`、`a2`等，程式碼的看起來 也比`summarise(mutate(select(filter(flights,
+    ...), ...), ...), ...)` 簡單的多了。
+- Class: script
+  Output: |
+    請同學試著用`%>%`完成剛剛寫過得題目。請在完成之後存檔，並輸入`submit()`來檢查結果是否符合預期。
     如果同學在檔案中看到亂碼，請使用Rstudio 左上角的File -> Reopen
   Script: RDataEngineer-05-04.R
   AnswerTests: rdataengineer_05_04(answer04.1, answer04.2, answer04.3)

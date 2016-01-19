@@ -28,7 +28,8 @@
 
 - Class: cmd_question
   Output: 接著請大家載入dplyr套件
-  CorrectAnswer: test_search_path("dplyr")
+  CorrectAnswer: library(dplyr)
+  AnswerTests: test_search_path("dplyr")
 
 - Class: cmd_question
   Output: 請同學輸入學套件的起手式：`vignette(package = "dplyr")`
