@@ -20,6 +20,8 @@
 1. RBasic
   - Introduction [HTML](http://wush978.github.io/DataScienceAndR/slide/RBasic-Introduction.html) [PDF](http://wush978.github.io/DataScienceAndR/slide/RBasic-Introduction.pdf)
   - Data Structure [HTML](http://wush978.github.io/DataScienceAndR/slide/RBasic-DataStructure.html) [PDF](http://wush978.github.io/DataScienceAndR/slide/RBasic-DataStructure.pdf)
+1. RDataEngineer
+  - Introduction [HTML](http://wush978.github.io/DataScienceAndR/slide/RDataEngineer-Introduction.html) [PDF](http://wush978.github.io/DataScienceAndR/slide/RDataEngineer-Introduction.pdf)
 
 ## 線上體驗區（需參加實體課程）
 
