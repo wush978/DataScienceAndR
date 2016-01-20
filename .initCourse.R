@@ -1,4 +1,4 @@
-assign(".get_path", 
+assign(".get_path",
        function(fname) {
          path <- file.path(lesPath, fname)
          normalizePath(path, mustWork = TRUE)
@@ -30,13 +30,15 @@ assign("test_search_path",
        },
        envir = globalenv())
 
-assign(".read.table.big5", 
+assign(".read.table.big5",
        function(file, header = FALSE, sep = "", ...) {
          info <- l10n_info()
          if ("codepage" %in% names(info)) {
-           read.table(file, header = header, sep = sep, ...) 
+           read.table(file, header = header, sep = sep, ...)
          } else {
-           read.table(file(file, encoding = "BIG5"), header = header, sep = sep, ...) 
+           read.table(file(file, encoding = "BIG5"), header = header, sep = sep, ...)
          }
        },
        envir = globalenv())
+
+if (!interactive()) assign("View", function(x) invisible(x), envir = globalenv())
