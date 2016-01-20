@@ -15,32 +15,35 @@
 
 ## 設定環境
 
-### Windows
+## 課程投影片
 
-目前swirl沒辦法在windows上正常顯示中文（ 修正問題的方式 https://github.com/swirldev/swirl/pull/300 已經提交給swirl的開發團隊，等待他們處理中），
-所以請暫時先安裝我修改過的版本：
+1. RBasic
+  - Introduction [HTML](http://wush978.github.io/DataScienceAndR/slide/RBasic-Introduction.html) [PDF](http://wush978.github.io/DataScienceAndR/slide/RBasic-Introduction.pdf)
+  - Data Structure [HTML](http://wush978.github.io/DataScienceAndR/slide/RBasic-DataStructure.html) [PDF](http://wush978.github.io/DataScienceAndR/slide/RBasic-DataStructure.pdf)
+
+## 線上體驗區（需參加實體課程）
+
+請奇數編號的同學打開： <http://140.112.170.201:28787>
+
+請偶數編號的同學打開： <http://www.wush978.idv.tw:28787>
+
+並依照課堂上給的帳號密碼登入
+
+## 環境設定
+
+快速設定區：
 
 ```r
-install.packages('swirl', repos = 'http://taiwanrusergroup.github.io/R')
+source("http://wush978.github.io/R/init-swirl.R")
 ```
 
-### Mac, Ubuntu
+或是前往wiki頁面做更仔細的設定
 
-請直接安裝CRAN上的swirl
+- [Windows](https://github.com/wush978/DataScienceAndR/wiki/Windows-%E8%A8%AD%E5%AE%9A%E6%8C%87%E5%8D%97)
+- [Mac OS X](https://github.com/wush978/DataScienceAndR/wiki/Mac-OS-X-%E8%A8%AD%E5%AE%9A%E6%8C%87%E5%8D%97)
+- [Ubuntu](https://github.com/wush978/DataScienceAndR/wiki/Ubuntu-%E8%A8%AD%E5%AE%9A%E6%8C%87%E5%8D%97)
 
-```r
-install.packages('swirl')
-```
-
-## 安裝課程
-
-```r
-library(swirl)
-library(curl) # 如果套件載入失敗，請先安裝：`install.packages("curl") `
-install_course_github("wush978", "DataScienceAndR", "course")
-```
-
-## 進入課程
+## swirl 快速上手區
 
 ### 1. 進入swirl 環境
 
@@ -54,7 +57,7 @@ ps. 如果你之前有進行過swirl的課程，swirl會出現下圖的選項詢
 
 ### 2. 選擇課程(Course)
 
-![Imgur](http://i.imgur.com/Sfj0K1l.png) 
+![Imgur](http://i.imgur.com/Sfj0K1l.png)
 
 ### 3. 選擇你要進行的單元(Lesson)
 
@@ -72,9 +75,12 @@ ps. 如果你之前有進行過swirl的課程，swirl會出現下圖的選項詢
 
 RBasic-02至RBasic-07課程最後都有大魔王要給同學攻克。
 
-## 教學投影片
+## 求助專區
 
-- [R 語言上手篇](http://rpubs.com/wush978/DataScienceAndR)
+有問題的朋友，歡迎到以下地方討論。由於現在網路上機器人眾多，所以麻煩先註冊一個Github帳號後我才會在網路上和你討論。
+
+- [Issue回報區](https://github.com/wush978/DataScienceAndR/issues)
+- Gitter聊天室：[![Gitter](https://badges.gitter.im/wush978/DataScienceAndR.svg)](https://gitter.im/wush978/DataScienceAndR?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
 ## 緣起
 
