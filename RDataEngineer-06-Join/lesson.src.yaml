@@ -211,3 +211,32 @@
     現在我們輸入`View(answer03)`看看這個包含航班資訊、天氣資訊與出發機場的地理位置資訊的資料。
   CorrectAnswer: View(answer03)
   AnswerTests: omnitest('View(answer03)')
+
+- Class: cmd_question
+  Output: |
+    最後，我們再把`answer03`與`airports`做一次整合，但是這次是比對`answer03$dest`與`airports$faa`
+    請同學寫寫看，並且把結果存到變數`answer04`
+  CorrectAnswer: answer04 <- left_join(answer03, airports, by = c("dest" = "faa"))
+  AnswerTests: omnitest(correctVal = left_join(answer03, airports, by = c("dest" = "faa")))
+
+- Class: cmd_question
+  Output: |
+    請同學輸入`colnames(answer04)`看一下比對後的名稱
+  CorrectAnswer: colnames(answer04)
+  AnswerTests: omnitest('colnames(answer04)')
+
+- Class: text
+  Output: |
+    在最後，是不是有看到lat.x或lat.y 這些欄位名稱呢？這是因為`answer03`和`airports`
+    比對時，`answer03$lat`與`airports$lat`撞名，而且也不在`by`之內，所以產生的資料
+    就會有兩種`lat`。`left_join`在這邊的處理方式，就在把來自參數`x`的`lat`標記做`lat.x`，
+    來自參數`y`（比對機場代碼後被貼上去的`lat`）則取名作`lat.y`
+
+- Class: script
+  Output: |
+    以上的內容，大致上把`left_join`的所有功能與應用上可能發生的狀況細解一遍。
+    接著我們來練習計算，起飛機場的風速對抵達時間的延遲是不是有影響。
+    請同學在完成之後存檔，並輸入`submit()`來檢查結果是否符合預期。
+    如果同學在檔案中看到亂碼，請使用Rstudio 左上角的File -> Reopen
+  Script: RDataEngineer-06-02.R
+  AnswerTests: rdataengineer_06_02(answer02.1, answer02.2, answer02.3)
