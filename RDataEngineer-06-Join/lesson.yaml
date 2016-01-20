@@ -99,9 +99,96 @@
 - Class: text
   Output: |
     `by`則代表「黏貼規則」的欄位。回憶一下航空公司的範例，我們是透過比對「航空公司簡稱（carrier）」
-    才能完成比對，所以`by`在這裡的值就是`"carrier"`，也就是欄位名稱。
+    才能完成比對，所以`by`在這裡的值就是`"carrier"`，也就是欄位名稱。在慣例中，當我們提到：
+    依據「xxx」來比對`x`和`y`兩張表格的時候，通常我們就是指要作上述的動作，而「xxx」扮演的角色
+    就是航空公司簡稱所扮演的角色。
 - Class: script
-  Output: 接著請同學從flights中「依序」選出`year:day`、`tailnum`和`carrier`的欄位，前100筆記資料之後 和`airlines`做`left_join`。
-  Scripts: RDataEngineer-06-01.R
+  Output: |
+    接著請同學從flights中「依序」選出`year:day, hour, origin, dest, tailnum, carrier`
+    等欄位，再抽出前100筆記資料，最後和`airlines`做`left_join`。
+  Script: RDataEngineer-06-01.R
   AnswerTests: rdataengineer_06_01(answer01)
+- Class: cmd_question
+  Output: |
+    `weather`資料中也包含了天氣的資訊。所以我們可以依據時間和地點，把天氣的資料貼到`answer01`之上。
+    請同學輸入：`View(weather)`先看一下天氣資料
+  CorrectAnswer: View(weather)
+  AnswerTests: omnitest('View(weather)')
+  Hint: View(weather)
+- Class: cmd_question
+  Output: |
+    接著請同學輸入：`answer02 <- left_join(answer01, weather)`，請注意到我們沒有給任何
+    `by`的資訊。
+  CorrectAnswer: answer02 <- left_join(answer01, weather)
+  AnswerTests: omnitest('answer02 <- left_join(answer01, weather)')
+  Hint: answer02 <- left_join(answer01, weather)
+- Class: cmd_question
+  Output: |
+    請輸入`View(answer02)`，我們看一下`answer02`的資料，黏貼後的結果。
+  CorrectAnswer: View(answer02)
+  AnswerTests: omnitest('View(answer02)')
+  Hint: View(answer02)
+- Class: text
+  Output: |
+    剛剛我們為什麼省略`by`之後，`left_join`還是仍然正常運作呢？它是依據什麼欄位來比對資料的？
+- Class: cmd_question
+  Output: |
+    根據文件，在沒有給定`by`的狀況下，`left_join`會比對兩個data.frame的欄位名稱（`colnames`），
+    並且用重複的欄位名稱做比對的依據。請同學輸入：
+    `intersect(colnames(answer01), colnames(weather))`
+  CorrectAnswer: intersect(colnames(answer01), colnames(weather))
+  AnswerTests: omnitest('intersect(colnames(answer01), colnames(weather))')
+  Hint: intersect(colnames(answer01), colnames(weather))
+- Class: text
+  Output: |
+    螢幕上顯示的四個欄位：`"year"   "month"  "day" "hour" "origin"`就是`left_join`比對
+    `answer01`與`weather`的依據。這代表說，要這四個欄位全部都一模一樣，`left_join`才會
+    把對應的天氣資料黏貼到`answer01`上。
+    另外同學也可以體會，上一課所學的`select`搭配重新命名的機制在此是很有用的。
+- Class: text
+  Output: |
+    課程進行至今，我們開始會跳過一些字面意義上很簡單的函數，例如`intersect`。
+    同學可以自行打開說明文件查詢這些函數的用法。如果覺得太難需要說明，我也很歡迎
+    同學到<https://github.com/wush978/DataScienceAndR/issues>或是聊天室
+    <https://gitter.im/wush978/DataScienceAndR>進行回報。
+- Class: text
+  Output: |
+    另外在剛剛的比對過程中，R 有發出警告：這是因為我們在比較一個字串向量與一個`factor`。
+    有走過RBasic系列的同學應該可以同意，這兩者的本質是非常類似的，所以`left_join`就會
+    自動把factor轉換成字串向量後再做比對。
+- Class: cmd_question
+  Output: |
+    接著，我們看一下`airports`這個資料集。請同學輸入：`View(airports)`，可以看到
+    裡面有不少關於機場的資訊（如：經緯度、簡稱等等）
+  CorrectAnswer: View(airports)
+  AnswerTests: omnitest('View(airports)')
+  Hint: View(airports)
+- Class: text
+  Output: |
+    這裡我們要比對的依據是地點，但是`flights`的資料裡面有兩個關於地點的欄位：`origin`與
+    `dest`。這兩個欄位都是記載著美國機場的代號。而`airports`資料中機場的代號是`faa`。
+    問題來了，請問我們應該要怎麼告訴`left_join`做比對呢？
+- Class: cmd_question
+  Output: |
+    我們可以透過`by`參數來指定比對的方法。`by`的參數除了是一般的字串向量外，也可以是
+    有名字的字串向量。舉例來說：`c("origin" = "faa")`就是一個有名字的字串向量。
+    請同學輸入：`c("origin" = "faa")`看看。
+  CorrectAnswer: c("origin" = "faa")
+  AnswerTests: omnitest('c("origin" = "faa")')
+  Hint: c("origin" = "faa")
+- Class: cmd_question
+  Output: |
+    接著，我們透過`answer03 <- left_join(answer02, airports, by = c("origin" = "faa"))`
+    來比對這兩筆資料。比對的依據分別是`answer02$origin`與`airports$faa`。請同學試試看執行
+    `left_join`那段程式碼。
+  CorrectAnswer: answer03 <- left_join(answer02, airports, by = c("origin" = "faa"))
+  AnswerTests: omnitest('answer03 <- left_join(answer02, airports, by = c("origin"
+    = "faa"))')
+  Hint: answer03 <- left_join(answer02, airports, by = c("origin" = "faa"))
+- Class: cmd_question
+  Output: |
+    現在我們輸入`View(answer03)`看看這個包含航班資訊、天氣資訊與出發機場的地理位置資訊的資料。
+  CorrectAnswer: View(answer03)
+  AnswerTests: omnitest('View(answer03)')
+  Hint: View(answer03)
 
