@@ -143,13 +143,6 @@
   CorrectAnswer: head(lvr_land)
   AnswerTests: omnitest("head(lvr_land)")
 
-- Class: cmd_question
-  Output: |
-    我們看一下`lvr_land`這個資料集。這是取自我們政府的實價登錄資料。請同學輸入：
-    `head(lvr_land)`
-  CorrectAnswer: head(lvr_land)
-  AnswerTests: omnitest('head(lvr_land)')
-
 - Class: text
   Output: 欄位名稱很清楚的註明每個欄位的數據意義。
 
@@ -200,7 +193,7 @@
   AnswerTests: omnitest('dbReadTable(db, "lvr_land2")')
 
 - Class: text
-  Output: 這次我們應該看到38筆資料（因為lvr_land總共有19筆資料，寫入兩次後應該有38筆），
+  Output: 這次我們應該看到38或57筆資料（因為lvr_land總共有19筆資料，寫入兩次或三次後應該有38筆或57筆），
     如果不幸需要接關的同學可能看到更多筆...
 
 - Class: cmd_question
@@ -330,6 +323,18 @@
 - Class: text
   Output: |
     Transaction就是一種保證資料庫的狀態一定是「還未寫入」或是「寫入完畢」的機制。
+
+- Class: cmd_question
+  Output: |
+    在進行接下來關於Transaction的練習之前，我們先重新連線。請同學先中斷連線，輸入：
+    `dbDisconnect(db)`
+  CorrectAnswer: dbDisconnect(db)
+  AnswerTests: omnitest('dbDisconnect(db)')
+
+- Class: cmd_question
+  Output: 請同學再次輸入：db <- dbConnect(drv, db_path)`
+  CorrectAnswer: db <- dbConnect(drv, db_path)
+  AnswerTests: omnitest('db <- dbConnect(drv, db_path)')
 
 - Class: cmd_question
   Output: |

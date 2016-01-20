@@ -234,7 +234,7 @@
 
 - Class: text
   Output: 另一個檢查內容的函數是`xml_contents`。當含有子標籤時，
-    它和`xml_contents`的行為會不太一致。
+    它和`xml_text`的行為會不太一致。
 
 - Class: cmd_question
   Output: 請同學輸入：`a <- xml_find_one(doc1, "/a")`。這裡我們使用`xml_find_one`
