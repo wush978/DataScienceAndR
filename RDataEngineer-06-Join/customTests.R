@@ -63,3 +63,7 @@ rdataengineer_06_02 <- function(answer02.1, answer02.2, answer02.3) {
   }
   TRUE
 }
+
+rdataengineer_06_hw <- function() {
+  TRUE
+}

@@ -214,9 +214,162 @@
 - Class: script
   Output: |
     以上的內容，大致上把`left_join`的所有功能與應用上可能發生的狀況細解一遍。
-    接著我們來練習計算，起飛機場的風速對抵達時間的延遲是不是有影響。
+    接著我們來練習解決一個問題：起飛機場的風速對抵達時間的延遲是不是有影響。
     請同學在完成之後存檔，並輸入`submit()`來檢查結果是否符合預期。
     如果同學在檔案中看到亂碼，請使用Rstudio 左上角的File -> Reopen
   Script: RDataEngineer-06-02.R
   AnswerTests: rdataengineer_06_02(answer02.1, answer02.2, answer02.3)
+- Class: cmd_question
+  Output: 請同學看用`View(answer02.3)`，觀察我們在上一題得到的結果。
+  CorrectAnswer: View(answer02.3)
+  AnswerTests: omnitest('View(answer02.3)')
+  Hint: View(answer02.3)
+- Class: text
+  Output: |
+    這樣的數據顯示，當起飛機場的風速越大，飛機在降落時的延誤就越大。
+- Class: text
+  Output: 接著我們來講解dplyr提供的各種合併表格的方法。
+- Class: text
+  Output: 除了`left_join`之外，dplyr還提供了6 種join函數。而他們 的參數都非常類似：`x`、`y`和`by`，而且他們的用法都一模一樣，比對的
+    方法也一模一樣。他們的差異只在於：當比對結束之後，產生的data.frame中 到底要包含哪些資料呢？
+  AnswerTests: browseURL("http://www.google.com")
+- Class: cmd_question
+  Output: 為了等下的說明，我們仿照vignette，建立了兩個變數：`df1`與`df2`。 請同學輸入`View(df1)`來看看`df1`的資料。
+  CorrectAnswer: View(df1)
+  AnswerTests: omnitest('View(df1)')
+  Hint: View(df1)
+- Class: cmd_question
+  Output: |
+    請同學輸入`View(df2)`來看看`df2`的資料。
+  CorrectAnswer: View(df2)
+  AnswerTests: omnitest('View(df2)')
+  Hint: View(df2)
+- Class: text
+  Output: |
+    我們先拿`left_join`作解說。做完`left_join`之後，最後的data.frame，
+    就是`x`中所有的資料。而`y`的資料只有在和`x`比對成功之後，才會貼當輸出
+    的欄位中。否則就是NA。
+- Class: cmd_question
+  Output: |
+    請同學輸入：`wiki_join()`來打開這六種JOIN的圖示。
+  CorrectAnswer: wiki_join()
+  AnswerTests: omnitest('wiki_join()')
+  Hint: wiki_join()
+- Class: text
+  Output: |
+    `wiki_join()`中的第一張圖中淺藍色的部份，就代表最後輸出的`data.frame`
+    剛剛好就是原本`x`的資料。
+- Class: mult_question
+  Output: 請問同學，如果輸入：`left_join(df1, df2)`的話，`left_join` 會以什麼基準作比對呢？
+  AnswerChoices: x;y;a;b
+  CorrectAnswer: x
+  AnswerTests: omnitest(correctVal = "x")
+- Class: cmd_question
+  Output: 請同學輸入：`left_join(df1, df2)`
+  CorrectAnswer: left_join(df1, df2)
+  AnswerTests: omnitest('left_join(df1, df2)')
+  Hint: left_join(df1, df2)
+- Class: text
+  Output: |
+    我們會看到`df1`資料都有保留下來。（結果的`x`欄的值為`c(1,2)`）
+    而第二筆資料，因為對不到`y`的資料，所以`a`與`b`的欄位都是NA
+- Class: text
+  Output: |
+    `wiki_join()`中的第二張圖中淺藍色的部份，就代表`right_join`最後輸出
+    的`data.frame`，剛剛好就是原本`y`的資料。事實上，`right_join(x, y)`就
+    等價於`left_join(y, x)`，差別只在欄位排序的不同。
+- Class: cmd_question
+  Output: 請同學輸入：`right_join(df2, df1)`。請注意，我們這次是`x = df2`。
+  CorrectAnswer: right_join(df2, df1)
+  AnswerTests: omnitest('right_join(df2, df1)')
+  Hint: right_join(df2, df1)
+- Class: text
+  Output: |
+    和`left_join(df1, df2)`相比，`x`欄位的值一樣是`c(1,2)`，但是欄位順序不同了。
+- Class: text
+  Output: |
+    `wiki_join()`中的第三張圖中淺藍色的部份，就代表`inner_join`最後輸出
+    的`data.frame`，資料必須要同時存在於`x`和`y`之中。
+- Class: cmd_question
+  Output: 請同學輸入：`inner_join(df1, df2)`。
+  CorrectAnswer: inner_join(df1, df2)
+  AnswerTests: omnitest('inner_join(df1, df2)')
+  Hint: inner_join(df1, df2)
+- Class: text
+  Output: 結果的`x`欄位只剩下`1`的狀況了，`df1` 和 `df2`都有`x = 1`的資料。
+- Class: text
+  Output: |
+    接續著的`full_join`與`anti_join`為止，都是非常類似的。
+    我們練習一下，用肌肉作記憶。
+- Class: cmd_question
+  Output: 請同學輸入：`full_join(df1, df2)`。
+  CorrectAnswer: full_join(df1, df2)
+  AnswerTests: omnitest('full_join(df1, df2)')
+  Hint: full_join(df1, df2)
+- Class: text
+  Output: |
+    輸出的結果的`x`欄位為`c(1,2,3)`，是df1和df2的聯集。
+- Class: cmd_question
+  Output: 請同學輸入：`anti_join(df1, df2)`。
+  CorrectAnswer: anti_join(df1, df2)
+  AnswerTests: omnitest('anti_join(df1, df2)')
+  Hint: anti_join(df1, df2)
+- Class: text
+  Output: 結果只列出`df1`中和`df2`比對失敗的資料。這是目前為止 唯一欄位只剩下`x`的欄位的JOIN結果。
+- Class: text
+  Output: |
+    在講解`semi_join`之前，我們要先提醒同學一個狀況：當比對的欄位，
+    值不唯一的時候，JOIN要如何作操作呢？
+- Class: cmd_question
+  Output: |
+    舉例來說，我們已經建立了兩個data.frame: `df3`與`df4`。
+    他們的`x`欄位都有兩個1。請同學輸入`View(df3)`看看`df3`
+  CorrectAnswer: View(df3)
+  AnswerTests: omnitest('View(df3)')
+  Hint: View(df3)
+- Class: cmd_question
+  Output: 請同學輸入`View(df4)`看看`df4`
+  CorrectAnswer: View(df4)
+  AnswerTests: omnitest('View(df4)')
+  Hint: View(df4)
+- Class: cmd_question
+  Output: 接著，我們輸入`inner_join(df3, df4)`看看結果有多少列。
+  CorrectAnswer: inner_join(df3, df4)
+  AnswerTests: omnitest('inner_join(df3, df4)')
+  Hint: inner_join(df3, df4)
+- Class: text
+  Output: |
+    上述的這些`join`都會窮舉出所有可能排列組合。因為`df3`的`x`有
+    兩個1, `df4`的`x`有兩個1, 所以所有可能的排列組合有：2 * 2 = 4
+    因此`inner_join`就回傳4列。
+- Class: text
+  Output: |
+    最後一個`semi_join`非常類似`inner_join`，但是當比對的資料不是
+    唯一時，它不會窮舉所有的可能性，而只是把有比對成功的`x`的資料留下
+    來。
+- Class: cmd_question
+  Output: 請同學輸入：`semi_join(df3, df4)`看看結果。
+  CorrectAnswer: semi_join(df3, df4)
+  AnswerTests: omnitest('semi_join(df3, df4)')
+  Hint: semi_join(df3, df4)
+- Class: text
+  Output: 結果幾乎等價於`df3[1:2,]`，這是因為只有前兩列資料 有和`df4`比對成功。
+- Class: text
+  Output: |
+    這次的大魔王要延續RDataEngineer-05-Data-Manipulation最後所
+    使用的`cl_info`資料。
+- Class: text
+  Output: |
+    同時，我們也準備了從央行抓取的GDP資料。但是這份資料要請同學自己想辦法讀出來。
+- Class: text
+  Output: |
+    我們的目標，是要比對房貸餘額是否超過GDP的40%。這是一種拿來評估房地產是否會泡沫化
+    的指標。
+- Class: script
+  Output: |
+    就請同學多多加油了！利用從RBasic到RDataEngineer系列所學到的知識，完成這個挑戰。
+    請同學在完成之後存檔，並輸入`submit()`來檢查結果是否符合預期。
+    如果同學在檔案中看到亂碼，請使用Rstudio 左上角的File -> Reopen
+  Script: RDataEngineer-06-HW.R
+  AnswerTests: rdataengineer_06_hw()
 
