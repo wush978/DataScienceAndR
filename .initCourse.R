@@ -41,4 +41,7 @@ assign(".read.table.big5",
        },
        envir = globalenv())
 
-if (!interactive()) assign("View", function(x) invisible(x), envir = globalenv())
+if (!interactive()) {
+  assign("View", function(x) invisible(x), envir = globalenv())
+  assign("browseURL", function(x) invisible(x), envir = globalenv())
+}
