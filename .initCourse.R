@@ -45,3 +45,6 @@ if (!interactive()) {
   assign("View", function(x) invisible(x), envir = globalenv())
   assign("browseURL", function(x) invisible(x), envir = globalenv())
 }
+
+assign("issue", function() browseURL("https://github.com/wush978/DataScienceAndR/issues"), envir = globalenv())
+assign("chat", function() browseURL("https://gitter.im/wush978/DataScienceAndR"), envir = globalenv())
