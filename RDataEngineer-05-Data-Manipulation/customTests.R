@@ -16,6 +16,9 @@ test_equal <- function(a, b) {
 }
 
 rdataengineer_05_04 <- function(answer04.1, answer04.2, answer04.3) {
+  e <- get("e", parent.frame())
+  source_result <- try(source(e$script_temp_path, local = new.env(), encoding = "UTF-8"), silent = TRUE)
+  if (class(source_result)[1] == "try-error") return(FALSE)
   if (answer04.1 !=
     filter(flights, month == 1) %>%
     mutate(gain = arr_delay - dep_delay) %>%
@@ -40,6 +43,9 @@ rdataengineer_05_04 <- function(answer04.1, answer04.2, answer04.3) {
 }
 
 rdataengineer_05_05 <- function(answer05) {
+  e <- get("e", parent.frame())
+  source_result <- try(source(e$script_temp_path, local = new.env(), encoding = "UTF-8"), silent = TRUE)
+  if (class(source_result)[1] == "try-error") return(FALSE)
   answer05.ref <-
     group_by(flights, month) %>%
     mutate(gain = arr_delay - dep_delay) %>%
@@ -52,6 +58,9 @@ rdataengineer_05_05 <- function(answer05) {
 }
 
 rdataengineer_05_06 <- function(cl_info2, cl_info3) {
+  e <- get("e", parent.frame())
+  source_result <- try(source(e$script_temp_path, local = new.env(), encoding = "UTF-8"), silent = TRUE)
+  if (class(source_result)[1] == "try-error") return(FALSE)
   check_equal <- function(a, b) {
     isTRUE(all.equal(a, b))
   }
