@@ -5,52 +5,62 @@
   Type: Standard
   Organization: Taiwan R User Group
   Version: 2.3.1.1
+
 - Class: text
   Output: 這門課程要介紹資料科學團隊在剛成立時，一定要經常使用的技術：資料比對。
+
 - Class: text
-  Output: 現代資料科學有很豐富的內涵。每天都有新的統計方法、新的演算法的發明，讓人類 在處理資料的能力上更進一步。
+  Output: 現代資料科學有很豐富的內涵。每天都有新的統計方法、新的演算法的發明，讓人類
+    在處理資料的能力上更進一步。
+
 - Class: text
   Output: 但是在企業中，或是實際應用中，最重要的是「價值」，而不是「處理資料的手法」。
+
 - Class: text
-  Output: 而一種很重要的「價值」來自於，我們能夠完成過去辦不到的事情。資料科學也是如此。 我們在企業內，就是要能夠在「有限的資源中」做出「過去做不到的事情」。而一個資料科學團隊，
+  Output: 而一種很重要的「價值」來自於，我們能夠完成過去辦不到的事情。資料科學也是如此。
+    我們在企業內，就是要能夠在「有限的資源中」做出「過去做不到的事情」。而一個資料科學團隊，
     所擁有的最特別的資產，就是檢視各種不同資料源的能力。
+
 - Class: text
   Output: |
     當我們取得一個來源的資料之後，前面的課程協助我們從中萃取出有用的資訊（01~04）、並且能夠
     轉換成結構化資料（05），而這個課程的目的是要讓大家可以將複數資料源的知識彙整起來。
+
 - Class: text
   Output: 就我個人的經驗，這是資料科學團隊為企業帶來價值的捷徑。
+
 - Class: cmd_question
   Output: 首先，請同學安裝套件dplyr。已經裝過得同學請輸入`skip()`略過
   CorrectAnswer: check_then_install("dplyr", "0.4.3")
   AnswerTests: test_package_version("dplyr", "0.4.3")
-  Hint: check_then_install("dplyr", "0.4.3")
+
 - Class: cmd_question
   Output: 接著，請同學載入dplyr
   CorrectAnswer: library(dplyr)
   AnswerTests: test_search_path("dplyr")
-  Hint: library(dplyr)
+
 - Class: cmd_question
   Output: 再來，請同學打開：`vignette("two-table", package = "dplyr")`
   CorrectAnswer: vignette("two-table", package = "dplyr")
   AnswerTests: omnitest('vignette("two-table", package = "dplyr")')
-  Hint: vignette("two-table", package = "dplyr")
+
 - Class: text
   Output: |
     這份文件很清楚的說明dplyr所提供的各種整合兩個data.frame的功能。
     接下來的課程中，我們就依照這份文件的脈落，用肌肉記住它們。
+
 - Class: cmd_question
   Output: |
     請同學安裝nycflights13的資料。已經載入的同學可以輸入`skip()`
   CorrectAnswer: check_then_install("nycflights13", "0.1")
   AnswerTests: test_package_version("nycflights13", "0.1")
-  Hint: check_then_install("nycflights13", "0.1")
+
 - Class: cmd_question
   Output: |
     請同學載入套件：`nycflights13`
   CorrectAnswer: library(nycflights13)
   AnswerTests: test_search_path("nycflights13")
-  Hint: library(nycflights13)
+
 - Class: cmd_question
   Output: |
     nycflights13的`flights`，有航空公司的簡稱（在`carrier`欄位）。
@@ -58,7 +68,7 @@
     的資料了。現在請同學輸入：`View(airlines)`看一下航空公司的資料。
   CorrectAnswer: View(airlines)
   AnswerTests: omnitest('View(airlines)')
-  Hint: View(airlines)
+
 - Class: cmd_question
   Output: |
     dplyr提供的`left_join`可以讓我們把航空公司的全名貼到`flights`資料上。
@@ -66,42 +76,47 @@
     我們先看一下`flights`的第一筆資料，請同學用`slice`作答。
   CorrectAnswer: slice(flights, 1)
   AnswerTests: omnitest(correctVal = slice(flights, 1))
-  Hint: slice(flights, 1)
+
 - Class: mult_question
   Output: |
     參考airlines的資料後，我們要貼哪一筆航空公司的全名到`flights`的第一筆資料呢？
   AnswerChoices: United Air Lines Inc.(UA);American Airlines Inc.(AA);US Airways Inc.(US)
-  CorrectAnswer: United Air Lines Inc.(UA)
+  CorrectAnswer: "United Air Lines Inc.(UA)"
   AnswerTests: omnitest(correctVal="United Air Lines Inc.(UA)")
+
 - Class: text
   Output: |
     在同學剛剛的思考過程中，應該是這樣的。`flights`的第一筆資料的航空公司簡稱是UA，而
     United Air Lines Inc.的簡稱也是UA，所以我們把United Air Lines Inc.當成第一筆
     資料的航空公司全名。
+
 - Class: cmd_question
   Output: |
     這樣的比對過程中，我們是透過航空公司簡稱（carrier欄位），當兩者相同的時候，才宣佈
     比對成功，貼上資料。接下來，我們請同學打開`left_join`的說明文件。
   CorrectAnswer: ?left_join
   AnswerTests: any_of_exprs("?left_join", "help(left_join)", 'help("left_join")')
-  Hint: ?left_join
+
 - Class: mult_question
   Output: |
     請問以下哪一個「不是」`left_join`的參數呢？
   AnswerChoices: x;y;by;copy;key
-  CorrectAnswer: key
+  CorrectAnswer: "key"
   AnswerTests: omnitest(correctVal = 'key')
+
 - Class: text
   Output: |
     我們來講解`left_join`的參數意義。`x`和`y`在這邊，扮演的角色就是兩個data.frame。
     `x`是我們關心的、主要的data.frame，我們的目的是想把`y`的資料貼到`x`之上。所以
     在剛剛航空公司名稱的範例中，`x`是`flights`，`y`是`airlies`。
+
 - Class: text
   Output: |
     `by`則代表「黏貼規則」的欄位。回憶一下航空公司的範例，我們是透過比對「航空公司簡稱（carrier）」
     才能完成比對，所以`by`在這裡的值就是`"carrier"`，也就是欄位名稱。
+
 - Class: script
-  Output: 接著請同學從flights中「依序」選出`year:day`、`tailnum`和`carrier`的欄位，前100筆記資料之後 和`airlines`做`left_join`。
+  Output: 接著請同學從flights中「依序」選出`year:day`、`tailnum`和`carrier`的欄位，前100筆記資料之後
+    和`airlines`做`left_join`。
   Scripts: RDataEngineer-06-01.R
   AnswerTests: rdataengineer_06_01(answer01)
-
