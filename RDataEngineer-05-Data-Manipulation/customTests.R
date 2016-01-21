@@ -64,20 +64,20 @@ rdataengineer_05_06 <- function(cl_info2, cl_info3) {
   check_equal <- function(a, b) {
     isTRUE(all.equal(a, b))
   }
-  cl_info2.ref <- mutate(cl_info, month = substring(data_dt, 1, 7)) %>%
-    select(month, mortgage_bal)
-  if (!check_equal(cl_info2$month, cl_info2.ref$month)) {
-    message("cl_info2$month is wrong")
+  cl_info2.ref <- mutate(cl_info, year_month = substring(data_dt, 1, 7)) %>%
+    select(year_month, mortgage_bal)
+  if (!check_equal(cl_info2$year_month, cl_info2.ref$year_month)) {
+    message("cl_info2$year_month is wrong")
     return(FALSE)
   }
   if (!check_equal(cl_info2$mortgage_bal, cl_info2.ref$mortgage_bal)) {
     message("cl_info2$mortgage_bal is wrong")
     return(FALSE)
   }
-  cl_info3.ref <- group_by(cl_info2.ref, month) %>%
+  cl_info3.ref <- group_by(cl_info2.ref, year_month) %>%
     summarise(mortgage_total_bal = sum(mortgage_bal)) %>%
-    arrange(month)
-    if (!check_equal(cl_info3$month, cl_info3.ref$month)) {
+    arrange(year_month)
+    if (!check_equal(cl_info3$year_month, cl_info3.ref$year_month)) {
       message("cl_info3$month is wrong")
       return(FALSE)
     }
