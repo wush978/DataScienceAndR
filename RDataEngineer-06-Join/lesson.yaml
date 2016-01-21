@@ -95,7 +95,7 @@
   Output: |
     我們來講解`left_join`的參數意義。`x`和`y`在這邊，扮演的角色就是兩個data.frame。
     `x`是我們關心的、主要的data.frame，我們的目的是想把`y`的資料貼到`x`之上。所以
-    在剛剛航空公司名稱的範例中，`x`是`flights`，`y`是`airlies`。
+    在剛剛航空公司名稱的範例中，`x`是`flights`，`y`是`airlines`。
 - Class: text
   Output: |
     `by`則代表「黏貼規則」的欄位。回憶一下航空公司的範例，我們是透過比對「航空公司簡稱（carrier）」

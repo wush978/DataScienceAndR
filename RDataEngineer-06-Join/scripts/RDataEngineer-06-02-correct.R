@@ -1,4 +1,4 @@
-# 請依據year:day, hour, origin, hour比對`flights`和`weather`
+# 請依據year:day, hour, origin 比對`flights`和`weather`
 # 比對完畢後，請先做資料的清理：
 # 只選出wind_speed與arr_delay這兩個欄位
 # 並且這些欄位中都不應該有NA或NaN
