@@ -1,6 +1,6 @@
 - Class: meta
   Course: DataScienceAndR
-  Lesson: RBasic-Motivation
+  Lesson: ROpenData-DataTaipei
   Author: Wush Wu
   Type: Standard
   Organization: Taiwan R User Group
@@ -43,7 +43,7 @@
   CorrectAnswer: check_then_install_github("DataTaipei", "0.1", "TaipeiRHacker/DataTaipei")
   AnswerTests: test_package_version("DataTaipei", "0.1")
   Hint: check_then_install_github("DataTaipei", "0.1", "TaipeiRHacker/DataTaipei")
-- Class: Text
+- Class: text
   Output: 然後我們要利用DataTaipei從<http://data.taipei>中： 1. 搜尋Youbike的資料源；2. 下載Youbike的資料；3.
     繪製到google map上
 - Class: cmd_question

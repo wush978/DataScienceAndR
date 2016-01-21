@@ -256,7 +256,7 @@
 - Class : text
   Output: 可以看到差不多的結果。
 
-- Class : Script
+- Class : script
   Output: rpart 也可以讓我們自己定義分割的邏輯。這題會打開rpart 套件提供的範例給同學參考。
     有興趣的同學可以仔細研究。讀完之後請輸入`submit()`
   Script: rpart_03.R
@@ -328,7 +328,7 @@
     請同學參考`?xgboost`的文件。讓我們輸入`?xgboost`一起看看說明文件。
   CorrectAnswer: ?xgboost
   AnswerTests: omnitest("?xgboost")
-    
+
 - Class : mult_question
   Output: 請問同學，這些Boosting的迭代的最大次數，要用哪一個`xgboost`的參數調整呢？
   AnswerChoices: nrounds;params;verbose;data;label;missing
