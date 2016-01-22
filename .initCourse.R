@@ -48,3 +48,12 @@ if (!interactive()) {
 
 assign("issue", function() browseURL("https://github.com/wush978/DataScienceAndR/issues"), envir = globalenv())
 assign("chat", function() browseURL("https://gitter.im/wush978/DataScienceAndR"), envir = globalenv())
+
+assign("source_by_l10n_info", function(path) {
+  info <- l10n_info()
+  if (info$MBCS & !info$`UTF-8`) {
+    try(source(path, local = new.env()), silent = TRUE)
+  } else {
+    try(source(path, local = new.env(), encoding = "UTF-8"), silent = TRUE)
+  }
+}, envir = globalenv())

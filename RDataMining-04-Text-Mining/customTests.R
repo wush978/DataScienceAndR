@@ -11,15 +11,6 @@
 # can be used for for the purpose, but it also re-evaluates the
 # expression which the user entered, so care must be taken.
 
-source_by_l10n_info <- function(path) {
-  info <- l10n_info()
-  if (info$MBCS & !info$`UTF-8`) {
-    try(source(path, local = new.env()), silent = TRUE)
-  } else {
-    try(source(path, local = new.env(), encoding = "UTF-8"), silent = TRUE)
-  }
-}
-
 rdatamining_04_test <- function() {
   e <- get("e", parent.frame())
   source_result <- source_by_l10n_info(e$script_temp_path)
