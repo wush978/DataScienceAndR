@@ -11,19 +11,6 @@
 # can be used for for the purpose, but it also re-evaluates the
 # expression which the user entered, so care must be taken.
 
-test_package_version <- function(pkg_name, pkg_version) {
-  e <- get("e", parent.frame())
-  tryCatch(
-    packageVersion(pkg_name) >= package_version(pkg_version),
-    error = function(e) FALSE)
-}
-
-test_search_path <- function(pkg_name) {
-  tryCatch(
-    length(grep(sprintf("/%s$", pkg_name), searchpaths())) > 0,
-    error = function(e) FALSE)
-}
-
 source_by_l10n_info <- function(path) {
   info <- l10n_info()
   if (info$MBCS & !info$`UTF-8`) {
