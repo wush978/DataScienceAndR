@@ -96,7 +96,7 @@
     請同學打開`kmeans`的說明文件。
   CorrectAnswer: ?kmeans
   AnswerTests: any_of_exprs("?kmeans", "help(kmeans)", 'help("kmeans")')
-  
+
 - Class : cmd_question
   Output: 請同學輸入：`cl3 <- kmeans(iris[,1:4], centers = 3)`
   CorrectAnswer: cl3 <- kmeans(iris[,1:4], centers = 3)
@@ -143,10 +143,10 @@
   CorrectAnswer: dissimilarity matrix or dist-object
   AnswerTests: omnitest(correctVal = "dissimilarity matrix or dist-object")
 
-- Class : Text
+- Class : text
   Output: 這裡提到的`dist-object`就是之前在介紹hclust函數時提到的`dist`函數。
 
-- Class : Text
+- Class : text
   Output: 同學也可以趁機認知一見事情：Cluster的核心之一，就是如何計算資料點之間的距離。
     除了常用的歐式距離(Euclidean distance)之外，我們也能用dist搭配其他計算距離的演算
     法來建構`dist-object` ，再使用Cluster演算法。
@@ -184,5 +184,4 @@
   Output: 我們對分群演算法的使用就介紹就到這了。最後請同學完成一個練習，
     結束之後請輸入`submit()`檢查正確性。
   Script: RDataMining-01-HW.R
-  AnswerTests: rdatamining_01_test()  
-
+  AnswerTests: rdatamining_01_test()

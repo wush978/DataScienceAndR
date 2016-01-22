@@ -50,8 +50,8 @@ test_lesson = function(lesson_dir){
   print(paste("-----Testing", lesson_dir, "Done"))
 }
 
-
-setwd("..");install_course_directory("DataScienceAndR");setwd("DataScienceAndR")
+course_name <- basename(getwd())
+setwd("..");install_course_directory(course_name);setwd(course_name)
 course_list <- list.dirs(".", recursive = FALSE)
 course_list <- grep("^..R", course_list, value = TRUE)
 course_list <- substring(course_list, 3, nchar(course_list))
