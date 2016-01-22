@@ -4,7 +4,7 @@
 
 聊天室： [![Gitter](https://badges.gitter.im/wush978/DataScienceAndR.svg)](https://gitter.im/wush978/DataScienceAndR?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
-# R 語言翻轉教室
+## 簡介
 
 這是一個以著重於實作，一個動態的**R 語言在地化中文教材**。和其他R 教材相比，這份教材具有以下的特色：
 
