@@ -1,3 +1,7 @@
+# The following script is based on `mystate` dataset.
+mystate <- data.frame(state.x77, region=state.region)
+colnames(mystate) <- tolower(colnames(mystate))
+
 # The 'evaluation' function.  Called once per node.
 #  Produce a label (1 or more elements long) for labeling each node,
 #  and a deviance.  The latter is
