@@ -1,0 +1,26 @@
+- Class: meta
+  Course: DataScienceAndR
+  Lesson: Hello-DataScienceAndR
+  Author: Wush Wu
+  Type: Standard
+  Organization: Taiwan R User Group
+  Version: 2.3.1.2
+
+- Class: text
+  Output: 這個課程的目的是為了測試同學的環境是否正常
+
+- Class: cmd_question
+  Output: 請同學在螢幕上輸入：`skip()`來檢查套件版本。
+  CorrectAnswer: packageVersion("swirl")
+  AnswerTests: check_version()
+
+- Class: script
+  Output: |
+    請同學確認，Rstudio是否有打開一個名稱為「test-script.R」的檔案，
+    並且裡面已經有：「# 這是測試功能的檔案」等字眼？如果同學沒辦法看到中文，請依序點
+    選Rstudio左上角的File -> Reopen With Encoding... -> 選取：UTF-8
+  Script: test-script.R
+  AnswerTests: check_version()
+
+- Class: text
+  Output: 測試已經完成，請同學回到選單選擇你想進行的課程。
