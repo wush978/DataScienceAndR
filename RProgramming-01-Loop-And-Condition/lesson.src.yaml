@@ -77,9 +77,9 @@
 
 - Class : cmd_question
   Output: 其實`x[1]`在這裡，可以看成是`x[1] - 0.2 * x[1]`的運算
-    的輸入位置，是x 的第一個element 。理解了這一點之後，為了讓R 
+    的輸入位置，是x 的第一個element 。理解了這一點之後，為了讓R
     可以在改變`x[1]` 的情形下重複`x[1] - 0.2 * x[1]` 這樣的運算，
-    我們可以利用一個變數`i` 來代表現在要運算的位置。請同學把1 
+    我們可以利用一個變數`i` 來代表現在要運算的位置。請同學把1
     存入變數`i`。
   CorrectAnswer: i <- 1
   AnswerTests: any_of_exprs("i <- 1", "i = 1")
@@ -140,7 +140,7 @@
 
 - Class : text
   Output: 這裡的`paste0`函數可以把輸入的R 物件粘接成一個字串。另一個非常相似
-    的函數是：`paste`。兩者最主要的差異，在於`paste0` 是直接粘接，而`paste` 
+    的函數是：`paste`。兩者最主要的差異，在於`paste0` 是直接粘接，而`paste`
     在粘接時預設會插入空格。
 
 - Class : text
@@ -195,7 +195,7 @@
     請同學在R 打開編輯器之後，閱讀程式碼，再回到swirl中
     輸入`submit()`
   Script: for-example1.R
-  AnswerTests: function() TRUE
+  AnswerTests: for_example1()
 
 - Class : cmd_question
   Output: 請同學先印出`x` 得值
@@ -212,4 +212,3 @@
   Output: 這份課程利用兩個常見的範例來跟同學介紹R 中的`for`
     和`if`兩個功能。適當的使用這兩個功能，我們可以讓R 來完
     成許多複雜的任務。
-

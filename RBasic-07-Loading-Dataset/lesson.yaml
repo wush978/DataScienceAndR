@@ -142,13 +142,7 @@
     n = lvr_land.info$size)')
   Hint: lvr_land.bin <- readBin(lvr_land.path, what = "raw", n = lvr_land.info$size)
 - Class: cmd_question
-  Output: 接著，請同學安裝stringi套件。這個套件提供很多解決編碼問題的函數。 未來同學如果在R 上遇到任何和文字編碼相關的問題，我也都很建議從這個套件中
-    尋找解決方法。
-  CorrectAnswer: check_then_install("stringi", "1.0.1")
-  AnswerTests: test_package_version("stringi", "1.0.1")
-  Hint: 請利用`install.packages`或是透過Rstudio的功能安裝套件
-- Class: cmd_question
-  Output: 請同學載入stringi
+  Output: 接著，我們需要使用stringi套件。由於swirl本身已經相依於stringi，所以請同學 直接載入stringi。
   CorrectAnswer: library(stringi)
   AnswerTests: test_search_path("stringi")
   Hint: library(stringi)

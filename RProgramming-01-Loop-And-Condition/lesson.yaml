@@ -138,7 +138,7 @@
 - Class: script
   Output: 回到原本的問題，我們可能會寫出這樣的程式碼。 請同學在R 打開編輯器之後，閱讀程式碼，再回到swirl中 輸入`submit()`
   Script: for-example1.R
-  AnswerTests: function() TRUE
+  AnswerTests: for_example1()
 - Class: cmd_question
   Output: 請同學先印出`x` 得值
   CorrectAnswer: x

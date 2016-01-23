@@ -112,9 +112,9 @@
     vector
   CorrectAnswer: dissimilarity matrix or dist-object
   AnswerTests: omnitest(correctVal = "dissimilarity matrix or dist-object")
-- Class: Text
+- Class: text
   Output: 這裡提到的`dist-object`就是之前在介紹hclust函數時提到的`dist`函數。
-- Class: Text
+- Class: text
   Output: 同學也可以趁機認知一見事情：Cluster的核心之一，就是如何計算資料點之間的距離。 除了常用的歐式距離(Euclidean distance)之外，我們也能用dist搭配其他計算距離的演算
     法來建構`dist-object` ，再使用Cluster演算法。
 - Class: text

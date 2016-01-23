@@ -88,7 +88,7 @@
     == 1 & flights$day == 1,]`，這是一種程式碼的壓縮。
 - Class: text
   Output: |
-    程式碼的壓縮，讓使用者可以少打許多的字，和許多暫存變數，如剛剛寫的`month_is_1`、
+    程式碼的壓縮，讓使用者可以少打字、少設定暫存變數，如剛剛寫的`month_is_1`、
     `day_is_1`和`is_target`等等。但是即使如此，dplyr提供的`filter`還是可以用更簡潔
     程式碼達到一樣的效果。背後的原因就在於`flights$month`和`flights$day`的`flights`
     被省略了。
@@ -108,7 +108,9 @@
   AnswerTests: omnitest(correctVal = filter(flights, month == 1, day == 2))
   Hint: filter(flights, month == 1, day == 2)
 - Class: script
-  Output: 請問同學，在2013年的紐約，共有多少班次的飛機起飛有延誤？(`dep_delay > 0`)
+  Output: |
+    請問同學，在2013年的紐約，共有多少班次的飛機起飛有延誤？(`dep_delay > 0`)
+    請同學在視窗開啟的Script中編寫，並且在完成後輸入`submit()`
   Script: RDataEngineer-05-02.R
   AnswerTests: test_equal(answer02, nrow(filter(flights, dep_delay > 0)))
 - Class: text
@@ -223,7 +225,7 @@
   AnswerTests: omnitest('select(flights, year, month, day)')
   Hint: select(flights, year, month, day)
 - Class: cmd_question
-  Output: 我們先看看`flights`的欄位名稱與排序。請同學複習一下。
+  Output: 我們先檢查`flights`的欄位名稱。請同學複習一下之前所學的data.frame的操作。
   CorrectAnswer: colnames(flights)
   AnswerTests: omnitest(correctVal = colnames(flights))
   Hint: colnames(flights)
@@ -245,6 +247,7 @@
   Output: |
     這裡出一個小問題讓大家練習：請同學選出`flights`中`dep_time`為NA的資料，並只挑出
     `year`、`month`和`day`這三欄。
+    請同學在視窗開啟的Script中編寫，並且在完成後輸入`submit()`
   Script: RDataEngineer-05-03.R
   AnswerTests: test_equal(answer03, select(filter(flights, is.na(dep_time)), year:day))
 - Class: text
@@ -338,9 +341,14 @@
 - Class: text
   Output: 使用`%>%`寫程式，不只不用命名大量的變數，如：`a1`、`a2`等，程式碼的看起來 也比`summarise(mutate(select(filter(flights,
     ...), ...), ...), ...)` 簡單的多了。
+- Class: text
+  Output: |
+    請同學先把剛剛做的檔案：RDataEngineer-05-04.R 再讀一次。
+    我們等等要再做一次這一個練習。
 - Class: script
   Output: |
-    請同學試著用`%>%`完成剛剛寫過得題目。請在完成之後存檔，並輸入`submit()`來檢查結果是否符合預期。
+    請同學試著用`%>%`完成剛剛 RDataEngineer-05-04.R。
+    請在完成之後存檔，並輸入`submit()`來檢查結果是否符合預期。
     如果同學在檔案中看到亂碼，請使用Rstudio 左上角的File -> Reopen
   Script: RDataEngineer-05-04.R
   AnswerTests: rdataengineer_05_04(answer04.1, answer04.2, answer04.3)

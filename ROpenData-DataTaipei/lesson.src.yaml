@@ -61,8 +61,8 @@
   CorrectAnswer: check_then_install_github("DataTaipei", "0.1", "TaipeiRHacker/DataTaipei")
   AnswerTests: test_package_version("DataTaipei", "0.1")
 
-- Class : Text
-  Output: 
+- Class : text
+  Output:
     然後我們要利用DataTaipei從<http://data.taipei>中：
     1. 搜尋Youbike的資料源；2. 下載Youbike的資料；3. 繪製到google map上
 
@@ -121,7 +121,7 @@
 - Class: cmd_question
   Output: 請同學再度輸入使用套件的起手式：`library(ggmap)`
   CorrectAnswer: library(ggmap)
-  AnswerTests: 
+  AnswerTests:
     - test_search_path("ggmap")
 
 - Class: cmd_question
@@ -202,7 +202,7 @@
     請同學輸入：`daan <- df$bemp[grep("Daan Dist.", df$sareaen)]`來取得大安區的所有Youbike站點空位數
   CorrectAnswer: daan <- df$bemp[grep("Daan Dist.", df$sareaen)]
   AnswerTests: omnitest('daan <- df$bemp[grep("Daan Dist.", df$sareaen)]')
-  
+
 - Class: cmd_question
   Output: 請同學輸入： `mean(pred > daan)` 來計算我們預測的Youbike站點空位數，
     在所有大安區中的Youbike站點空位數中的百分位數，大概是多少
@@ -216,4 +216,3 @@
 
 - Class : text
   Output: 各位同學友沒有覺得R 很有趣也很有用呢？接下來再請各位回到投影片的課程之中。
-

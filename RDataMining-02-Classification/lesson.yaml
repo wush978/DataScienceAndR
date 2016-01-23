@@ -214,7 +214,7 @@
     "information"), control = rpart.control(minsplit=1))
 - Class: text
   Output: 可以看到差不多的結果。
-- Class: Script
+- Class: script
   Output: rpart 也可以讓我們自己定義分割的邏輯。這題會打開rpart 套件提供的範例給同學參考。 有興趣的同學可以仔細研究。讀完之後請輸入`submit()`
   Script: rpart_03.R
   AnswerTests: yes

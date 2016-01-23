@@ -1,4 +1,4 @@
-# 請依據year:day, hour, origin, dest, tailnum, carrier比對`flights`和`weather`
+# 請依據year:day, hour, origin `flights`和`weather`
 # 比對完畢後，請先做資料的清理：
 # 只選出wind_speed與arr_delay這兩個欄位
 # 並且這些欄位中都不應該有NA或NaN
@@ -31,8 +31,13 @@ stopifnot(answer02.2[5] == max(answer02.2))
 # 介於 answer02.2[2]至answer02.2[3]的風速，會被歸類為等級3
 # 介於 answer02.2[3]至answer02.2[4]的風速，會被歸類為等級4
 # 介於 answer02.2[4]至answer02.2[5]的風速，會被歸類為等級5
+# 接著，我們計算arr_delay在每一種分類中的平均數
 answer02.3 <- local({
   mutate(answer02.1, wind_speed = cut(wind_speed, breaks = c(-Inf, answer02.2))) %>%
   # 請完成你的程式碼
 })
+stopifnot(nrow(answer02.3) == 5)
+stopifnot(colnames(answer02.3) == c("wind_speed", "mean(arr_delay)"))
+stopifnot(answer02.3[[2]] > 4)
+stopifnot(answer02.3[[2]] < 16)
 # 請同學完成後回到console輸入`submit()`做檢查

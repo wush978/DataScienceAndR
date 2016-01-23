@@ -79,7 +79,7 @@
     是以一個分隔符號來讓使用者或程式分辨欄位。常見的分隔符號有： tab (\t)或逗號(,) 。
     若以逗號做為分隔符號，則學生姓名加上4次小考分數的一筆紀錄，可用CSV表達如下：
     `柯小哲,77,82,87,92`
-  
+
 - Class : text
   Output: 我們拿一個自<http://data.gov.tw/node/6213>下載的csv 檔
     做範例。這個檔案的目錄已經存入了`lvr_land.path` 變數之中。
@@ -155,9 +155,9 @@
 - Class : cmd_question
   Output: R 是型態為raw 的向量來處理位元的物件。只要能知道檔案的大小，
     readBin 就可以把所有的檔案資料以raw 的形式輸入到R 中。我們可以使用
-    `file.info`來查詢檔案的大小。請同學利用`file.info(lvr_land.path)` 
+    `file.info`來查詢檔案的大小。請同學利用`file.info(lvr_land.path)`
     來查詢檔案的資訊，並且把結果存到變數`lvr_land.info`。
-  CorrectAnswer: lvr_land.info <- file.info(lvr_land.path) 
+  CorrectAnswer: lvr_land.info <- file.info(lvr_land.path)
   AnswerTests: any_of_exprs("lvr_land.info <- file.info(lvr_land.path)",
     "lvr_land.info = file.info(lvr_land.path)")
 
@@ -191,15 +191,8 @@
     'lvr_land.bin = readBin(lvr_land.path, what = "raw", n = lvr_land.info$size)')
 
 - Class : cmd_question
-  Output: 接著，請同學安裝stringi套件。這個套件提供很多解決編碼問題的函數。
-    未來同學如果在R 上遇到任何和文字編碼相關的問題，我也都很建議從這個套件中
-    尋找解決方法。
-  CorrectAnswer: check_then_install("stringi", "1.0.1")
-  AnswerTests: test_package_version("stringi", "1.0.1")
-  Hint: 請利用`install.packages`或是透過Rstudio的功能安裝套件
-
-- Class : cmd_question
-  Output: 請同學載入stringi
+  Output: 接著，我們需要使用stringi套件。由於swirl本身已經相依於stringi，所以請同學
+    直接載入stringi。
   CorrectAnswer: library(stringi)
   AnswerTests: test_search_path("stringi")
 
@@ -255,7 +248,7 @@
   Output: 依照以上問答題的答案，請同學利用`read.table`，用BIG5編碼讀取
     `lvr_land.path` ，並且把輸出存到變數`lvr_land`
   CorrectAnswer: lvr_land <- read.table(file(lvr_land.path, encoding = "BIG5"), header = TRUE, sep = ",")
-  AnswerTests: val_is(read.table(file(lvr_land.path, encoding = "BIG5"), header = TRUE, sep = ","), 
+  AnswerTests: val_is(read.table(file(lvr_land.path, encoding = "BIG5"), header = TRUE, sep = ","),
     "lvr_land")
 
 - Class : text
@@ -273,7 +266,7 @@
     （MBCS欄位）。請同學試試看輸入：`l10n_info()`
   CorrectAnswer: l10n_info()
   AnswerTests: omnitest("l10n_info()")
-    
+
 - Class : cmd_question
   Output: 根據經驗，如果`l10n_info()`的輸出中，MBCS為TRUE且UTF-8 為FALSE，
     則要使用：`textConnection(lvr_land.txt)`來從`lvr_land.txt`建立一個
@@ -306,7 +299,7 @@
 - Class : text
   Output: 我們在這門課程中簡單展示了如何從套件中載入資料，以及如何從檔案中讀取
     CSV 的資料。
-    
+
 - Class : text
   Output: 如果要使用R 讀取XML 的資料，可以使用套件XML 。如果要讀取JSON，
     可以使用rjsonlite 。只要資料格式是公開格式，我們很容易找到R 的套件來
@@ -321,8 +314,7 @@
 - Class : script
   Output: 最後，還是要請同學利用這次所學的內容，做一個小練習。
     請同學在完成之後存檔，並輸入`submit()`來檢查結果是否符合預期。
-    如果同學在檔案中看到亂碼，請使用Rstudio 左上角的File -> Reopen 
+    如果同學在檔案中看到亂碼，請使用Rstudio 左上角的File -> Reopen
     With Encoding... -> 選取：UTF-8
   Script: RBasic-07-HW.R
   AnswerTests: rbasic_07_hw_test()
-

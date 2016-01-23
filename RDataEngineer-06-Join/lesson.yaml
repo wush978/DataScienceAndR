@@ -95,7 +95,7 @@
   Output: |
     我們來講解`left_join`的參數意義。`x`和`y`在這邊，扮演的角色就是兩個data.frame。
     `x`是我們關心的、主要的data.frame，我們的目的是想把`y`的資料貼到`x`之上。所以
-    在剛剛航空公司名稱的範例中，`x`是`flights`，`y`是`airlies`。
+    在剛剛航空公司名稱的範例中，`x`是`flights`，`y`是`airlines`。
 - Class: text
   Output: |
     `by`則代表「黏貼規則」的欄位。回憶一下航空公司的範例，我們是透過比對「航空公司簡稱（carrier）」
@@ -142,15 +142,16 @@
 - Class: text
   Output: |
     螢幕上顯示的四個欄位：`"year"   "month"  "day" "hour" "origin"`就是`left_join`比對
-    `answer01`與`weather`的依據。這代表說，要這四個欄位全部都一模一樣，`left_join`才會
+    `answer01`與`weather`的依據。這代表說，要這五個欄位全部都一模一樣，`left_join`才會
     把對應的天氣資料黏貼到`answer01`上。
     另外同學也可以體會，上一課所學的`select`搭配重新命名的機制在此是很有用的。
 - Class: text
   Output: |
     課程進行至今，我們開始會跳過一些字面意義上很簡單的函數，例如`intersect`。
     同學可以自行打開說明文件查詢這些函數的用法。如果覺得太難需要說明，我也很歡迎
-    同學到<https://github.com/wush978/DataScienceAndR/issues>或是聊天室
-    <https://gitter.im/wush978/DataScienceAndR>進行回報。
+    同學到<https://github.com/wush978/DataScienceAndR/issues>（輸入：
+    `issue()`）或是聊天室
+    <https://gitter.im/wush978/DataScienceAndR>（輸入：chat()）進行回報。
 - Class: text
   Output: |
     另外在剛剛的比對過程中，R 有發出警告：這是因為我們在比較一個字串向量與一個`factor`。
@@ -178,9 +179,8 @@
   Hint: c("origin" = "faa")
 - Class: cmd_question
   Output: |
-    接著，我們透過`answer03 <- left_join(answer02, airports, by = c("origin" = "faa"))`
-    來比對這兩筆資料。比對的依據分別是`answer02$origin`與`airports$faa`。請同學試試看執行
-    `left_join`那段程式碼。
+    接著，我們透過`left_join`來比對這兩筆資料。比對的依據分別是`answer02$origin`與`airports$faa`。
+    請同學試試看執行`answer03 <- left_join(answer02, airports, by = c("origin" = "faa"))`
   CorrectAnswer: answer03 <- left_join(answer02, airports, by = c("origin" = "faa"))
   AnswerTests: omnitest('answer03 <- left_join(answer02, airports, by = c("origin"
     = "faa"))')
