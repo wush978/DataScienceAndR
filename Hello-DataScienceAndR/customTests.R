@@ -14,10 +14,10 @@
 check_version <- function() {
   rv <- package_version(paste(R.Version()$major, R.Version()$minor, sep = "."))
   if (rv < package_version("3.2.3")) {
-    message(sprintf("你的R 版本過舊(%s)，請考慮更新R至版本：%s或以上", rv, "3.2.3"))
+    message(sprintf(readRDS(.get_path("pattern.Rds")), rv, "3.2.3"))
   }
   if (packageVersion("swirl") != package_version("2.3.1.2")) {
-    message('你的swirl版本過舊，請重開R 後執行： install.packages("swirl", repos = "http://wush978.github.io/R", type = "source") ')
+    message(readRDS(.get_path("swirl_msg.Rds")))
     FALSE
   } else TRUE
 }
