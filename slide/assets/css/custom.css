@@ -1,0 +1,19 @@
+.title-slide hgroup {
+  position:relative; 
+  top: 50%; 
+  left: 15%; 
+}
+
+.title-slide hgroup > h1 {
+  color: #535E43 ;  /* ; #EF5150 */
+  font-size: 200%;
+}
+
+.title-slide hgroup > h2 {
+  color: #535E43 ;  /* ; #EF5150 */
+  font-size: 150%;
+}
+
+.title-slide hgroup > p {
+  font-size: 150%;
+}
