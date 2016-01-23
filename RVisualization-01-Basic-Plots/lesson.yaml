@@ -1,0 +1,132 @@
+- Class: meta
+  Course: DataScienceAndR
+  Lesson: RVisualization-01-Basic-Plots
+  Author: Wush Wu
+  Type: Standard
+  Organization: Taiwan R User Group
+  Version: 2.3.1.2
+- Class: text
+  Output: 各位同學好，這個章節的課程在教大家R 的基礎繪圖系統。
+- Class: text
+  Output: 透過對繪圖系統的掌握，我們就可以控制R 要把圖輸出至哪裡，並且理解R 基礎繪圖的設計。
+- Class: text
+  Output: R 有許多個繪圖引擎，也有第三方套件提供第三方的繪圖引擎。
+- Class: cmd_question
+  Output: 這個課程的目的則很簡單：讓同學理解R 的`plot`函數。請同學先輸入`?plot`打開說明 頁面。
+  CorrectAnswer: ?plot
+  AnswerTests: omnitest('?plot')
+  Hint: ?plot
+- Class: text
+  Output: |
+    `plot`主要有兩個參數：`x`和`y`。同學可能會認為，`x`代表x座標的值，`y`代表y座標的值。
+    一般來說這是對的，但是也不盡然。`plot`是個會依據`x`的型態不同、`y`的型態不同，
+    而有不同行為的函數。
+- Class: text
+  Output: |
+    這聽起來很複雜，但是如果同學能理解統計學家是如何看待數據的，那就能很快的理解`plot`的功能。
+- Class: cmd_question
+  Output: 首先，我們拿R 的內建的infert資料集為範例。這是當年研究流產與不孕症之間關係的資料 集。請同學輸入：`?infert`先看看資料對每個欄位的說明。
+  CorrectAnswer: ?infert
+  AnswerTests: omnitest("?infert")
+  Hint: ?infert
+- Class: text
+  Output: |
+    infert得第一欄(education)代表該名婦女的教育程度；第二欄(age)代表年齡；第三欄(parity)
+    代表已經生產的子女數（經產狀況）；第四欄(induced)代表人工流產的次數；第五欄(case)代表是
+    實驗組或是對照組（也就是有無不孕）；第六欄(spontaneous)代表自然流產的次數；第七欄與第八
+    欄則是與實驗設計相關的資料。
+- Class: cmd_question
+  Output: 接著我們來具體看看資料。請同學輸入：`View(infert)`來看看實際的資料的值。這裡 每筆資料都代表一名婦女。
+  CorrectAnswer: View(infert)
+  AnswerTests: omnitest('View(infert)')
+  Hint: View(infert)
+- Class: cmd_question
+  Output: 我們等等先拿`infert$spontaneous`做說明。請同學先把`infert$spontaneous`存到 `spon`變數中。
+  CorrectAnswer: spon <- infert$spontaneous
+  AnswerTests: check_val("spon", infert$spontaneous)
+  Hint: spon <- infert$spontaneous
+- Class: cmd_question
+  Output: |
+    請問同學，`spon`是什麼型態？
+  CorrectAnswer: class(spon)
+  AnswerTests: omnitest(correctVal = class(spon))
+  Hint: class(spon)
+- Class: cmd_question
+  Output: |
+    在R 中，`plot`是最泛用的繪圖指令。我們先請同學輸入：plot(spon)。
+  CorrectAnswer: plot(spon)
+  AnswerTests: omnitest('plot(spon)')
+  Hint: plot(spon)
+- Class: text
+  Output: |
+    走過上一步之後，同學應該會看到R 產生一張有很多點點的圖形。同學可以搭配之前打開的
+    `infert`資料來看。這張圖中，每個點的x 軸代表一名婦女的編號，y 軸代表著一名婦女
+    自然流產的次數。所以最左邊的點，x 軸座標是1 代表是第一筆婦女的資料，y 軸座標是
+    `2.0`，代表她自然流產過兩次。
+- Class: cmd_question
+  Output: 接著，我們請同學先輸入： `spon <- factor(spon)`，轉換一下 數據形態。
+  CorrectAnswer: spon <- factor(spon)
+  AnswerTests: check_val("spon", factor(infert$spontaneous))
+  Hint: spon <- factor(spon)
+- Class: cmd_question
+  Output: 我們再輸入一次：`plot(spon)`
+  CorrectAnswer: plot(spon)
+  AnswerTests: omnitest("plot(spon)")
+  Hint: plot(spon)
+- Class: text
+  Output: 這次R 的繪圖結果就不同了。從左邊數來第一個灰色的bar，x 軸的說明文字是：`0`，y軸 座標約140，代表`spon`中有140個`0`。
+- Class: mult_question
+  Output: 請問同學，`spon`中大約有多少個`1`?
+  AnswerChoices: 100;70;40
+  CorrectAnswer: '70'
+  AnswerTests: omnitest(correctVal="70")
+- Class: cmd_question
+  Output: 請同學輸入：`table(spon)`。這個函數會計算一個向量中各種值的個數。
+  CorrectAnswer: table(spon)
+  AnswerTests: omnitest("table(spon)")
+  Hint: table(spon)
+- Class: text
+  Output: R 會告訴各位同學，`spon`中剛好有71個`1`。
+- Class: text
+  Output: |
+    所以如果當我們輸入`plot(x)`時，`x`是數值向量或整數向量時，R 會依序把`x`的值當成y 座標，
+    連續的點在圖中。
+- Class: text
+  Output: |
+    反之，當`x`是類別向量或字串向量時，R 則會把各種類別的個數化成長條圖。因為這種狀況下，
+    R不知道合理的方法把數據轉換成y座標(數值)。
+- Class: mult_question
+  Output: 我們也拿`spon`來複習一下初等統計學的數值系統。根據`?infert`的說明，`spon`的值 為0時代表該名婦女沒有自然流產過，值為1時代表該名婦女自然流產過一次，值為2時代表該名婦女
+    自然流產過兩次以上。請問同學，`spon`比較適合名目尺度(選1)、順序尺度(選2)、區間尺度(選3)、 還是比例尺度(選4)？
+  AnswerChoices: 1;2;3;4
+  CorrectAnswer: '2'
+  AnswerTests: omnitest(correctVal="2")
+  Hint: |
+    `spon`有順序性是無庸置疑。但是因為可能的值只有3種，所以我認為「順序尺度」比較適合。
+- Class: text
+  Output: |
+    有些同學可能會不服氣，而我想告訴同學：這個答案是主觀的，不是絕對的。我的經驗法則是，如果
+    值的種類數相對數據量小很多時，用名目或順序尺度處理數據有時候效果會更好。
+- Class: text
+  Output: |
+    以自然流產數據`spon`為例，我認為第二張的長條圖(把數據當成順序尺度)，是比較容易解讀的。
+    這張圖直接告訴我們：`spon`只有3種值，而「0次流產」的婦女數量比「1次流產」和「超過2次流產」
+    的次數還要多。
+- Class: cmd_question
+  Output: 請同學把`infert$age`存到變數`age`
+  CorrectAnswer: age <- infert$age
+  AnswerTests: check_val("age", infert$age)
+  Hint: age <- infert$age
+- Class: cmd_question
+  Output: 請問`age`的型態是？
+  CorrectAnswer: class(age)
+  AnswerTests: omnitest(correctVal = class(age))
+  Hint: class(age)
+- Class: cmd_question
+  Output: 請同學輸入：`plot(spon, age)`
+  CorrectAnswer: plot(spon, age)
+  AnswerTests: omnitest("plot(spon, age)")
+  Hint: plot(spon, age)
+- Class: text
+  Output: 我們注意到，這次畫的圖又不同了。x 軸
+
