@@ -59,8 +59,9 @@ assign("source_by_l10n_info", function(path) {
 }, envir = globalenv())
 
 assign("check_val", function(name, value) {
+  e <- get("e", parent.frame())
   tryCatch({
-    result <- all.equal(get(name, globalenv()), value)
+    result <- all.equal(get(name, e), value)
     if (!isTRUE(result)) {
       message(result)
       FALSE
