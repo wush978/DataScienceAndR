@@ -109,6 +109,15 @@
     這張圖直接告訴我們：`spon`只有3種值，而「0次流產」的婦女數量比「1次流產」和「超過2次流產」
     的次數還要多。
 - Class: cmd_question
+  Output: |
+    另外一種常用的圖形是圓餅圖。請同學輸入：`pie(table(spon))`
+  CorrectAnswer: pie(table(spon))
+  AnswerTests: omnitest("pie(table(spon))")
+  Hint: pie(table(spon))
+- Class: text
+  Output: 圓餅圖利用面積與角度，告訴我們數據分佈的比率。由圖中可以明顯看出，"0"類別的個數 佔了整體數據的一半。這點是長條圖比較難直接看出來的。 R 的`pie`函數是需要名字與個數比率的，所以我們需要先利用`table`計算每個類別的個數，再把
+    `table`的結果傳遞給`pie`使用。
+- Class: cmd_question
   Output: 請同學把`infert$age`存到變數`age`
   CorrectAnswer: age <- infert$age
   AnswerTests: check_val("age", infert$age)
@@ -318,9 +327,129 @@
   Output: |
     同學注意到，這次的圖中同時有折線，也有資料點。而且我們也更清楚地看到圖上的資料。
 - Class: text
-  Output: |-
+  Output: |
     R 之中，有非常多修飾圖的函數，例如剛剛同學使用的`lines`就是其一。當`lines`收到單一的數值向量後，
     就會有類似`plot(x, type = "l")`的效果。而`lines`這類函數不會像`plot`「另起新圖」，而是在原本
     的圖上做修飾。因此，在R中稱呼`plot`、`hist`這種會「另起新圖」的函數為「高階繪圖函數」，而
     `lines`或是`points`等做修飾的函數，稱為「低階繪圖函數」。
+- Class: cmd_question
+  Output: |
+    請同學輸入：`lines(x, lty = 3, lwd = 3, col = 2)`。
+  CorrectAnswer: lines(x, lty = 3, lwd = 3, col = 2)
+  AnswerTests: omnitest("lines(x, lty = 3, lwd = 3, col = 2)")
+  Hint: lines(x, lty = 3, lwd = 3, col = 2)
+- Class: text
+  Output: |
+    這裡的lty參數讓我們可以把線段從直線改成虛線、lwd參數讓我們調整線段的
+    粗細、col讓線段變成紅色。R有大量的低階繪圖函數，讓我們可以對圖形做細膩的調教。
+    然而以現代的眼光來看，R 預設的圖形可能不夠精緻了。
+- Class: text
+  Output: |
+    R 社群的使用者則提供非常多的繪圖套件，想要提供更好的預設視覺效果。
+    例如之後會仔細介紹的`ggplot2`。
+- Class: text
+  Output: 接下來我們介紹，要如何輸出R的圖片。
+- Class: cmd_question
+  Output: |
+    輸出圖片最簡單的方式，就是先用互動式的console畫圖，然後用`savePlot`將圖用給定的格式
+    儲存到給定的檔名。我們先輸入`dst <- tempfile(fileext = ".png")`來產生一個隨機的
+    暫存檔案名稱。
+  CorrectAnswer: dst <- tempfile(fileext = ".png")
+  AnswerTests: omnitest('dst <- tempfile(fileext = ".png")')
+  Hint: dst <- tempfile(fileext = ".png")
+- Class: text
+  Output: |
+    接著請輸入：`savePlot(dst, type = "png")`，R 就會把我們視窗上看到的圖片輸出至檔案。
+    然而在Rstudio環境中`savePlot`函數不一定能使用。所以我們這邊就不帶著同學練習。
+- Class: cmd_question
+  Output: |
+    另一種做法是透過設定繪圖引擎（在R 中稱為`device`）。R 預設的繪圖引擎是把圖呈現
+    在使用者面前。而我們可以更改繪圖引擎為「把圖以特定格式繪製到檔案中」。舉例來說，
+    `png`函數就會讓R 建立一個繪圖引擎。請同學輸入：`png(dst)`開啟`png`的繪圖引擎。
+  CorrectAnswer: png(dst)
+  AnswerTests: omnitest("png(dst)")
+  Hint: png(dst)
+- Class: cmd_question
+  Output: |
+    請同學輸入：plot(x)。同學應該可以注意到，右邊的圖像沒有反應。
+  CorrectAnswer: plot(x)
+  AnswerTests: omnitest("plot(x)")
+  Hint: plot(x)
+- Class: cmd_question
+  Output: |
+    最後請同學輸入：`dev.off()`，關閉png的繪圖引擎，讓R 把圖片的資料寫入檔案。
+  CorrectAnswer: try(dev.off(), silent = TRUE)
+  AnswerTests: any_of_exprs("dev.off()", "try(dev.off(), silent = TRUE)")
+  Hint: dev.off()
+- Class: text
+  Output: |
+    最後，使用rstudio的同學等等可以輸入：`library(rstudioapi)`後使用`viewer(dst)`看看這個圖片。
+    沒有使用rstudio的同學請輸入`dst`取得儲存路徑後，自行透過作業系統打開該檔案看看繪圖的結果。
+    透過這樣的動作，確認圖片確實寫入這個檔案。
+- Class: cmd_question
+  Output: |
+    接下來讓我們進入大魔王時間。保險起見，請同學先輸入`skip()`讓我們重新初始化繪圖環境。
+  CorrectAnswer: try(dev.off(), silent = TRUE)
+  AnswerTests: omnitest("try(dev.off(), silent = TRUE)")
+  Hint: try(dev.off(), silent = TRUE)
+- Class: cmd_question
+  Output: |
+    `hsb`是我們事先準備好的資料，裡面記載了學生的基礎資料與學生在各個科目的考試成績。
+    請同學輸入View(hsb)先看看數據。
+  CorrectAnswer: View(hsb)
+  AnswerTests: omnitest("View(hsb)")
+  Hint: View(hsb)
+- Class: mult_question
+  Output: 請問同學，`write`欄位應該用哪一個R 型態處理？類別請選1, 數值請選2
+  AnswerChoices: 1;2
+  CorrectAnswer: '2'
+  AnswerTests: omnitest(correctVal = "2")
+- Class: cmd_question
+  Output: 請同學用`plot`和`density`的函數組合繪製`hsb$write`的數據。`bw`請用"SJ"
+  CorrectAnswer: plot(density(hsb$write, bw = "SJ"))
+  AnswerTests: any_of_exprs('plot(density(hsb$write, "SJ"))', 'plot(density(hsb$write,
+    bw = "SJ"))', 'plot(density(x = hsb$write, bw = "SJ"))')
+  Hint: plot(density(hsb$write, bw = "SJ"))
+- Class: mult_question
+  Output: 請問這張圖一共有幾個峰？
+  AnswerChoices: 0;2;4
+  CorrectAnswer: '2'
+  AnswerTests: omnitest(correctVal = "2")
+- Class: mult_question
+  Output: 請問資料有沒有異常的極大值或極小值？
+  AnswerChoices: Yes;No
+  CorrectAnswer: 'Yes'
+  AnswerTests: omnitest(correctVal="Yes")
+- Class: mult_question
+  Output: 請問極小值大概是多少？
+  AnswerChoices: -100;-50;0
+  CorrectAnswer: -100
+  AnswerTests: omnitest(correctVal = "-100")
+- Class: text
+  Output: |
+    其實`hsb$write`的數據中，是以-99來記載遺失的資料。這在社會科學的數據中很常見。
+    而適當的視覺化可以讓我們在分析之前，就注意到這些資料的異常。
+- Class: cmd_question
+  Output: 請同學對`hsb$sex`畫出圓餅圖
+  CorrectAnswer: pie(table(hsb$sex))
+  AnswerTests: omnitest("pie(table(hsb$sex))")
+  Hint: pie(table(hsb$sex))
+- Class: text
+  Output: 最後我們直接用大量的範例繪圖程式碼，讓同學學習各種圖形繪製的細節調教。
+- Class: script
+  Output: 我們看看圓餅圖的範例。結束請按`submit()`
+  Script: RVisualization-01-pie.R
+  AnswerTests: pass()
+- Class: script
+  Output: 我們看看長條圖的範例。結束請按`submit()`
+  Script: RVisualization-01-pie.R
+  AnswerTests: pass()
+- Class: script
+  Output: 我們看看機率分佈圖的範例。結束請按`submit()`
+  Script: RVisualization-01-pie.R
+  AnswerTests: pass()
+- Class: script
+  Output: 我們看看折線圖的範例。結束請按`submit()`
+  Script: RVisualization-01-pie.R
+  AnswerTests: pass()
 
