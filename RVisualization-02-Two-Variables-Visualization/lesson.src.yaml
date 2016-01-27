@@ -10,7 +10,7 @@
   Output: |
     這個課程是讓同學理解，如何透過資料視覺化的方式，找出不同欄位之間的關係與特徵。
 
-- Class: text
+- Class: cmd_question
   Output: |
     我們拿事先準備好的`hsb`資料集作為範例，記載了高中學生的基礎資料與各個科目的考試成績的資料，
     在RVisualization-01-One-Variable-Visualization 課程中曾使用過。
@@ -24,7 +24,6 @@
     請同學輸入View(hsb)先看看數據。
   CorrectAnswer: View(hsb)
   AnswerTests: omnitest('View(hsb)')
-  Hint: View(hsb)
 
 - Class: text
   Output: |
@@ -222,7 +221,7 @@
   AnswerTests: omnitest('?boxplot')
   Hint: ?boxplot
 
-- Class: cmd_question
+- Class: mult_question
   Output: |
     請問下列哪一個統計指標「不會」出現在boxplot的結果中？
     請參考說明文件中，Value段落關於`stats`的說明作答。
@@ -260,17 +259,17 @@
     因為兩組數據的boxplot結果高度重疊，所以判斷公立學校與私立學校的學生在數學表現上沒有明顯差距。
 
 - Class: text
-  Outplot: |
+  Output: |
     Part E. 數值欄位 vs. 數值欄位的資料視覺化。
 
 - Class: text
-  Outplot: |
+  Output: |
     繪製兩個數值型欄位最簡單的圖形就是散佈圖 (scatter plot)，
     在R 語言中使用繪圖函數`plot(x, y)`進行繪製。
     其中第一個參數`x`表示x軸的變數、第二參數則表示y軸的變數。
 
 - Class: cmd_question
-  Outplot: |
+  Output: |
     請輸入：`plot(x=hsb$math, y=hsb$read)`
     繪製`hsb`資料集中數學 (`x=hsb$math`) 跟閱讀 (`y=hsb$read`) 成績的散佈圖。
   CorrectAnswer: plot(x=hsb$math, y=hsb$read)
