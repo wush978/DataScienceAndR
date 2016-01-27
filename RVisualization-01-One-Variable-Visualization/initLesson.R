@@ -3,4 +3,4 @@
 # the user's working directory and thus be accessible to them
 # throughout the lesson.
 
-hsb <- readRDS(.get_path("hsb.Rds"))
+assign("hsb", read.csv(.get_path("hsb.csv"), header = TRUE), envir = globalenv())
