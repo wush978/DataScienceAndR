@@ -56,7 +56,9 @@ course_list <- list.dirs(".", recursive = FALSE)
 course_list <- grep("^..R", course_list, value = TRUE)
 course_list <- substring(course_list, 3, nchar(course_list))
 course_list <- grep("^[^\\.]", course_list, value = TRUE)
-course_list <- setdiff(course_list, c("ROpenData-DataTaipei"))
+course_list <- setdiff(course_list, c("ROpenData-DataTaipei", "RDataMining-01-Clustering", 
+                                      "RDataMining-02-Classification", "RDataMining-03-Association-Rule",
+                                      "RDataMining-04-Text-Mining"))
 for(course in course_list) {
   if (course %in% "RDataMining-02-Classification") {
     if (Sys.info()["sysname"] == "Windows") {
