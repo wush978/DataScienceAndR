@@ -465,5 +465,11 @@
     請同學想辦法從`population`資料中畫出自己居住地的性別與年齡的分佈圖。具體細節請見參考圖。
     如果想要再看一次參考圖，請輸入：`hw_03()`。如果想要直接看參考答案，請輸入：`hw_03`
   Script: RVisualization-03-HW-03.R
-  AnswerTests: rvisualization_03_hw_finish()
+  AnswerTests: rvisualization_03_hw_04()
+- Class: script
+  Output: |
+    請同學想辦法從`population`資料中畫出自己居住地的性別與年齡的分佈圖。具體細節請見參考圖。
+    如果想要再看一次參考圖，請輸入：`hw_04()`。如果想要直接看參考答案，請輸入：`hw_04`
+  Script: RVisualization-03-HW-04.R
+  AnswerTests: rvisualization_03_hw_05()
 
