@@ -226,9 +226,10 @@
   Output: |
     請問下列哪一個統計指標「不會」出現在boxplot的結果中？
     請參考說明文件中，Value段落關於`stats`的說明作答。
-  AnswerChoices: the lower hinge;the median;the mean;the upper hinge
-  CorrectAnswer: "the mean"
-  AnswerTests: omnitest("the mean")
+    A: the lower hinge B: the median C: the mean D: the upper hinge
+  AnswerChoices: A;B;C;D
+  CorrectAnswer: "C"
+  AnswerTests: omnitest(correctVal = "C")
 
 - Class: cmd_question
   Output: |
