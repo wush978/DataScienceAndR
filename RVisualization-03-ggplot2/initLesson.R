@@ -8,6 +8,7 @@ population_src <- function() {
   browseURL("http://data.moi.gov.tw/MoiOD/Data/DataDetail.aspx?oid=F4478CE5-7A72-4B14-B91A-F4701758328F")
 }
 suppressWarnings(try(rm(list = ".start_rvisualization_03", envir = globalenv()), silent = TRUE))
+.hw_description <- readLines(file(.get_path(".hw_description.txt"), encoding = "UTF-8"))
 
 begin_rvisualization_03 <- function() { }
 hw_01 <- function() {
@@ -22,20 +23,20 @@ hw_01 <- function() {
 }
 
 hw_02 <- function() {
-  cat("新北市板橋區各里的人口分佈圖(依性別分類)\n")
+  cat(.hw_description[1]);cat("\n")
   g <-
-    filter(population, site_id == "新北市板橋區") %>%
+    filter(population, site_id == .hw_description[2], village == .hw_description[5]) %>%
     group_by(village, sex) %>%
     summarise(count = sum(count)) %>%
     ggplot(aes(x = village, y = count, fill = sex)) +
-    geom_bar(dodge = FALSE, stat = "identity")
+    geom_bar(position = "dodge", stat = "identity")
   print(g)
 }
 
 hw_03 <- function() {
-  cat("新北市板橋區留侯里的年齡與人口分布圖(依性別分類)\n")
+  cat(.hw_description[3]);cat("\n")
   g <-
-    filter(population, site_id == "新北市板橋區", village == "留侯里") %>%
+    filter(population, site_id == .hw_description[4], village == .hw_description[5]) %>%
     ggplot(aes(x = age, y = count, color = sex)) +
     geom_point() + geom_line()
   print(g)
