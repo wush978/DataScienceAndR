@@ -443,6 +443,13 @@
 - Class: cmd_question
   Output: |
     `hsb`是我們事先準備好的資料，裡面記載了學生的基礎資料與學生在各個科目的考試成績。
+    本資料包含11個欄位、200筆記錄（200位學生），
+    第一欄(id)代表該名學生的編號；
+    第二欄(sex)代表學生性別；第三欄(race)代表學生的種族；
+    第四欄(ses)代表學生家庭社經等級；
+    第五欄(schtyp)代表是學校是公立或私立；
+    第六欄(prog)代表學校的類型；
+    第七欄至第十一欄則是各科考試成績。
     請同學輸入View(hsb)先看看數據。
   CorrectAnswer: View(hsb)
   AnswerTests: omnitest("View(hsb)")
