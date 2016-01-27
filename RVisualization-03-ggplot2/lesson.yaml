@@ -327,6 +327,18 @@
   Hint: g + geom_point()
 - Class: cmd_question
   Output: |
+    還記得上一個課程最後所繪製的一張圖：，一口氣運用點的大小、形狀、顏色來表示science的表現、
+    公立私立與學生的性別。我們也可以在ggplot2中做到：
+    `g + geom_point(aes(size = science, pch = schtyp, color = sex))`
+  CorrectAnswer: g + geom_point(aes(size = science, pch = schtyp, color = sex))
+  AnswerTests: omnitest('g + geom_point(aes(size = science, pch = schtyp, color =
+    sex))')
+  Hint: g + geom_point(aes(size = science, pch = schtyp, color = sex))
+- Class: text
+  Output: |
+    而且ggplot也自動加上圖標了！
+- Class: cmd_question
+  Output: |
     接著我們來介紹如何調整ggplot2的配色。假設各位同學想要使用對色盲友善的配色系列，
     在參考Wong. B (2011) Points of View: Color blindness. Nature Methods 8:411後，
     請同學輸入以下的指令：`cb7 <- c("#000000", "#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7")`
