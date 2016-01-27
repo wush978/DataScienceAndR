@@ -23,7 +23,7 @@ assign("pirate_path",
 
 assign("hw", function() {
   src <- readLines(file(pirate_path, encoding = "BIG5"))
-  tmp <- strsplit(src, "：")
+  tmp <- strsplit(src, readLines(.get_path(".hw")[2]))
   key <- sapply(tmp, "[[", 1)
   is_target <- key == readLines(.get_path(".hw")[1])
   value <- sapply(tmp[is_target], "[[", 2)
