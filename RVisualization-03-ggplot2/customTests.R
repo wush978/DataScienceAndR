@@ -52,6 +52,12 @@ rvisualization_03_hw_03 <- function() {
   TRUE
 }
 
-rvisualization_03_hw_finish <- function() {
+rvisualization_03_hw_04 <- function() {
+  e <- get("e", parent.frame())
+  hw_04()
+  TRUE
+}
+
+rvisualization_03_hw_05 <- function() {
   TRUE
 }

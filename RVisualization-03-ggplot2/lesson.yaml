@@ -23,8 +23,8 @@
     資料視覺化」的動作了。
 - Class: cmd_question
   Output: 請同學先安裝ggplot2
-  CorrectAnswer: check_then_install("ggplot2", "1.0.1")
-  AnswerTests: test_package_version("ggplot2", "1.0.1")
+  CorrectAnswer: check_then_install("ggplot2", "2.0.0")
+  AnswerTests: test_package_version("ggplot2", "2.0.0")
   Hint: install.packages("ggplot2")
 - Class: cmd_question
   Output: 請同學載入ggplot2
@@ -211,6 +211,134 @@
     `geom_`系列函數的前兩個參數一定是`data`和`mapping`。剩下的函數參數才是該函數特有的參數。
 - Class: cmd_question
   Output: |
+    接下來我們來比較各種性別在公立、私立學校的數學表現。請同學先輸入以下程式碼：
+    `dat2 <- summarise(group_by(hsb, sex, schtyp), math.avg = mean(math))`
+  CorrectAnswer: dat2 <- summarise(group_by(hsb, sex, schtyp), math.avg = mean(math))
+  AnswerTests: omnitest("dat2 <- summarise(group_by(hsb, sex, schtyp), math.avg =
+    mean(math))")
+  Hint: dat2 <- summarise(group_by(hsb, sex, schtyp), math.avg = mean(math))
+- Class: cmd_question
+  Output: |
+    接著，我們輸入：`g <- ggplot(dat2, aes(x = sex, y = math.avg, fill = schtyp))`
+    先建立一個基於dat2的ggplot物件。
+  CorrectAnswer: g <- ggplot(dat2, aes(x = sex, y = math.avg, fill = schtyp))
+  AnswerTests: omnitest('g <- ggplot(dat2, aes(x = sex, y = math.avg, fill = schtyp))')
+  Hint: g <- ggplot(dat2, aes(x = sex, y = math.avg, fill = schtyp))
+- Class: mult_question
+  Output: |
+    請同學先回憶我們對`geom_bar`的參數`stat`的解說。請問同學，如果我們輸入：
+    `g + geom_bar(stat = <??>)`，`stat`的參數要給多少？
+  AnswerChoices: bin;identity
+  CorrectAnswer: identity
+  AnswerTests: omnitest(correctVal = "identity")
+- Class: cmd_question
+  Output: |
+    請輸入：`g2 <- g + geom_bar(stat = "identity", position = "dodge")`
+  CorrectAnswer: g2 <- g + geom_bar(stat = "identity", position = "dodge")
+  AnswerTests: omnitest('g2 <- g + geom_bar(stat = "identity", position = "dodge")')
+  Hint: g2 <- g + geom_bar(stat = "identity", position = "dodge")
+- Class: cmd_question
+  Output: |
+    請同學輸入`g2`看一下繪圖結果。
+  CorrectAnswer: g2
+  AnswerTests: omnitest('g2')
+  Hint: g2
+- Class: cmd_question
+  Output: |
+    ggplot 依照性別與公立私立，分別呈現了數學平均。
+    更貼心的是，圖例也已經自動產生了。
+    如果我們要放大視覺化的差異，想要調整y軸的範圍呢？
+    請同學輸入：`g2 + coord_cartesian(ylim=c(40,60))`
+  CorrectAnswer: g2 + coord_cartesian(ylim=c(40,60))
+  AnswerTests: omnitest('g2 + coord_cartesian(ylim=c(40,60))')
+  Hint: g2 + coord_cartesian(ylim=c(40,60))
+- Class: text
+  Output: |
+    同學除了可以學習`coord_cartesian`這個語法之外，也可以注意到
+    我們可以把畫圖的指令當成變數給存到如`g2`的R物件之中。
+    之後若我們要做調整（例如調整y軸的範圍）只要從`g2`開始用`+`下指令即可。
+    這樣的設計讓我們在調整圖形上更方便。
+- Class: cmd_question
+  Output: |
+    在上一堂課程中，我們有介紹過dotchart。ggplot2中也有提供類似的圖層: geom_point。
+    請同學輸入：`g3 <- g + geom_point(aes(color = schtyp), size = 10)`
+  CorrectAnswer: g3 <- g + geom_point(aes(color = schtyp), size = 10)
+  AnswerTests: omnitest('g3 <- g + geom_point(aes(color = schtyp), size = 10)')
+  Hint: g3 <- g + geom_point(aes(color = schtyp), size = 10)
+- Class: cmd_question
+  Output: |
+    請輸入`g3`，看看繪圖結果。
+  CorrectAnswer: g3
+  AnswerTests: omnitest('g3')
+  Hint: g3
+- Class: cmd_question
+  Output: |
+    如果要改成水平方向，可以使用：`g3 + coord_flip()`
+  CorrectAnswer: g3 + coord_flip()
+  AnswerTests: omnitest('g3 + coord_flip()')
+  Hint: g3 + coord_flip()
+- Class: text
+  Output: |
+    ggplot2把這些跟座標軸的縮放、翻轉的功能都放到`coord`開頭的函數了。
+    一些繪圖常用的座標轉換，像是取log，也都有對應的函數呢，而且都是以
+    `coord_`開頭。就如同繪圖、製作圖層的函數都是`geom_`開頭一樣。
+    這些API的設計相對R 的繪圖API，是更有系統了。
+- Class: cmd_question
+  Output: |
+    除了觀察單一統計量之外，統計學常用的boxplot，ggplot2也有支援。
+    請同學輸入：`g <- ggplot(hsb, aes(x = sex, y = math, fill = schtyp))`
+    我們先告訴ggplot2要如何對數據分組。
+  CorrectAnswer: g <- ggplot(hsb, aes(x = sex, y = math, fill = schtyp))
+  AnswerTests: omnitest('g <- ggplot(hsb, aes(x = sex, y = math, fill = schtyp))')
+  Hint: g <- ggplot(hsb, aes(x = sex, y = math, fill = schtyp))
+- Class: cmd_question
+  Output: |
+    接著，我們可以使用geom_boxplot產生圖層：
+    `g + geom_boxplot()`
+  CorrectAnswer: g + geom_boxplot()
+  AnswerTests: omnitest('g + geom_boxplot()')
+  Hint: g + geom_boxplot()
+- Class: cmd_question
+  Output: |
+    需要的話，我們可以增加更多欄位，讓boxplot有更多的變化。
+    舉例來說，我們可以加上linetype: `g + geom_boxplot(aes(linetype = race))`
+  CorrectAnswer: g + geom_boxplot(aes(linetype = race))
+  AnswerTests: omnitest('g + geom_boxplot(aes(linetype = race))')
+  Hint: g + geom_boxplot(aes(linetype = race))
+- Class: mult_question
+  Output: |
+    雖然這張圖有點複雜，但是因為ggplot2會自動生成圖例，所以仔細看也是很清楚地看到個群分組的差異。
+    舉例來說，圖中顯示某族裔美國人的女學生，在公立與私立學校的數學表現差異很大。請問同學，這是哪一
+    個種族呢？A: African American, B: Asian, C: Hispanic, D: White
+  AnswerChoices: A;B;C;D;E
+  CorrectAnswer: C
+  AnswerTests: omnitest(correctVal = "C")
+- Class: cmd_question
+  Output: |
+    接下來我們試試看畫散佈圖。請同學輸入：`g <- ggplot(hsb, aes(x = math, y = read))`
+  CorrectAnswer: g <- ggplot(hsb, aes(x = math, y = read))
+  AnswerTests: omnitest('g <- ggplot(hsb, aes(x = math, y = read))')
+  Hint: g <- ggplot(hsb, aes(x = math, y = read))
+- Class: cmd_question
+  Output: |
+    輸入`g + geom_point()`讓ggplot以散佈圖的方式繪製圖層。
+  CorrectAnswer: g + geom_point()
+  AnswerTests: omnitest('g + geom_point()')
+  Hint: g + geom_point()
+- Class: cmd_question
+  Output: |
+    還記得上一個課程最後所繪製的一張圖：，一口氣運用點的大小、形狀、顏色來表示science的表現、
+    公立私立與學生的性別。我們也可以在ggplot2中做到：
+    `g + geom_point(aes(size = science, pch = schtyp, color = sex))`
+  CorrectAnswer: g + geom_point(aes(size = science, pch = schtyp, color = sex))
+  AnswerTests: omnitest('g + geom_point(aes(size = science, pch = schtyp, color =
+    sex))')
+  Hint: g + geom_point(aes(size = science, pch = schtyp, color = sex))
+- Class: text
+  Output: |
+    而且ggplot也自動加上圖標了！
+- Class: cmd_question
+  Output: |
     接著我們來介紹如何調整ggplot2的配色。假設各位同學想要使用對色盲友善的配色系列，
     在參考Wong. B (2011) Points of View: Color blindness. Nature Methods 8:411後，
     請同學輸入以下的指令：`cb7 <- c("#000000", "#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7")`
@@ -282,6 +410,26 @@
     剛剛的`face_grid`是一個比較進階的函數。同學只要記得，如果我們是要對某一個欄位做展開
     （例如剛剛的動作就是對`race`做展開：每個`race`畫一張圖），第一個參數的formula中，
     `~`的左邊放`.`，右邊放要展開的欄位名稱即可（不需要加引號）。
+- Class: cmd_question
+  Output: |
+    如果我們要一次畫出多筆數據兩兩間的散佈圖，就需要使用GGally這個套件。
+    請同學安裝。
+  CorrectAnswer: check_then_install("GGally", "1.0.1")
+  AnswerTests: test_package_version("GGally", "1.0.1")
+  Hint: check_then_install("GGally", "1.0.1")
+- Class: cmd_question
+  Output: 請載入GGally套件。
+  CorrectAnswer: library(GGally)
+  AnswerTests: test_search_path("GGally")
+  Hint: library(GGally)
+- Class: cmd_question
+  Output: |
+    如果我們想要看read, write, math, science 兩兩組合的x-y散佈圖，
+    我們只要輸入：`ggpairs(hsb, 7:10)`
+    註: 這些欄位分別位於hsb的第7至第10欄。
+  CorrectAnswer: ggpairs(hsb, 7:10)
+  AnswerTests: omnitest('ggpairs(hsb, 7:10)')
+  Hint: ggpairs(hsb, 7:10)
 - Class: text
   Output: |
     我們這堂課對ggplot2的介紹就到這裡了。接下來就是挑戰時間。
@@ -317,5 +465,11 @@
     請同學想辦法從`population`資料中畫出自己居住地的性別與年齡的分佈圖。具體細節請見參考圖。
     如果想要再看一次參考圖，請輸入：`hw_03()`。如果想要直接看參考答案，請輸入：`hw_03`
   Script: RVisualization-03-HW-03.R
-  AnswerTests: rvisualization_03_hw_finish()
+  AnswerTests: rvisualization_03_hw_04()
+- Class: script
+  Output: |
+    請同學想辦法從`population`資料中畫出自己居住地的性別與年齡的分佈圖。具體細節請見參考圖。
+    如果想要再看一次參考圖，請輸入：`hw_04()`。如果想要直接看參考答案，請輸入：`hw_04`
+  Script: RVisualization-03-HW-04.R
+  AnswerTests: rvisualization_03_hw_05()
 

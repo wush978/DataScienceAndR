@@ -66,3 +66,20 @@ assign("hw_03", function() {
     geom_point() + geom_line()
   print(g)
 }, envir = globalenv())
+
+assign("hw_04", function() {
+  g <-
+    mutate(population, city = substring(site_id, 1, 3)) %>%
+    filter(city %in% c(.hw_description[6], .hw_description[7])) %>%
+    group_by(city, age) %>%
+    summarise(count = sum(count)) %>%
+    group_by(city) %>%
+    mutate(ratio = count / sum(count)) %>%
+    ggplot(aes(x = age, y = ratio, color = city)) +
+    geom_point() + geom_line()
+  if (Sys.info()["sysname"] == "Darwin") {
+    print(g + theme_grey(base_family="STKaiti"))
+  } else {
+    print(g)
+  }
+})
