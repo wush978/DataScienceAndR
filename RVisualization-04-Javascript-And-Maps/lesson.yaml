@@ -58,10 +58,10 @@
   Hint: g <- gvisBarChart(dat1)
 - Class: cmd_question
   Output: |
-    接著，我們輸入：`print(g)`
-  CorrectAnswer: print(g)
-  AnswerTests: omnitest('print(g)')
-  Hint: print(g)
+    接著，我們輸入：`plot(g)`
+  CorrectAnswer: plot(g)
+  AnswerTests: omnitest('plot(g)')
+  Hint: plot(g)
 - Class: text
   Output: |
     同學的電腦瀏覽器中，就會打開一個網頁，上面繪製著一份barchart。

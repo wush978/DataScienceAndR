@@ -54,7 +54,7 @@
 
 - Class: cmd_question
   Output: |
-    接著，我們輸入：`print(g)`
+    接著，我們輸入：`plot(g)`
 
 - Class: text
   Output: |
