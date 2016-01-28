@@ -449,14 +449,14 @@
   AnswerTests: pass()
 - Class: script
   Output: 我們看看長條圖的範例。結束請按`submit()`
-  Script: RVisualization-01-pie.R
+  Script: RVisualization-01-hist.R
   AnswerTests: pass()
 - Class: script
   Output: 我們看看機率分佈圖的範例。結束請按`submit()`
-  Script: RVisualization-01-pie.R
+  Script: RVisualization-01-density.R
   AnswerTests: pass()
 - Class: script
   Output: 我們看看折線圖的範例。結束請按`submit()`
-  Script: RVisualization-01-pie.R
+  Script: RVisualization-01-plot.ts.R
   AnswerTests: pass()
 
