@@ -122,35 +122,30 @@
     但是儘管我們輸入"purple"，ggplot2還是用粉紅色來呈現，而不是紫色。
     這是因為ggplot2收到"purple"之後，因為有加雙引號，所以就會假設infert中有一個欄位，所有
     的值都是"purple"。而ggplot2有內建的調色盤，所以就運用調色盤中第一個顏色來著色。在ggplot2
-    中如果要指定顏色，只有設定調色盤一途，無法單純透過`ggplot`或`geom_bar`來達成。
+    中如果要指定顏色，只有設定調色盤的顏色一途，無法單純透過`ggplot`或`geom_bar`來達成。
+    這點和R 基礎的繪圖API是不同的。
 
 - Class: text
   Output: |
     所有`mapping`參數，也就是`aes`中的設定，ggplot都是依照同樣的思維來處理：一律都是對應到
     `data`的欄位。
 
-- Class: text
-  Output: |
-    `geom_bar`的`stat`和`position`參數則會影響繪圖的結果。這兩個參數則是`geom_bar`所
-    特有的。ggplot2把共用概念的繪圖參數，如：`x`、`y`和`fill`這些在大部分的圖表都會用到的參數
-    放在`aes`之中，而像長條圖特有的參數如：`stat`和`position`，則放在`geom_bar`的參數之中。
-
 - Class: cmd_question
   Output: |
-    接著我們使用前面課程用過的`hsb`資料集。請同學輸入：`g <- ggplot(hsb)`
+    接著我們使用前面課程用過的`hsb`資料集做範例。請同學輸入：`g <- ggplot(hsb)`
   CorrectAnswer: g <- ggplot(hsb)
   AnswerTests: omnitest('g <- ggplot(hsb)')
 
 - Class: cmd_question
   Output: |
     在我們沒有指定圖層的時候，R是不會畫出圖的，所以上一個指令沒有畫出新的圖。
-    接著請同學輸入：`g + geom_bar(aes(x = sex))`畫出基於性別的長條圖。
+    接著請同學輸入：`g + geom_bar(aes(x = sex))`畫出「呈現性別分佈」的長條圖。
   CorrectAnswer: g + geom_bar(aes(x = sex))
   AnswerTests: omnitest('g + geom_bar(aes(x = sex))')
 
 - Class: cmd_question
   Output: |
-    同學應該會看到基於性別個數的長條圖。請同學這次輸入：
+    同學應該會看到「呈現性別分佈」的長條圖。請同學這次輸入：
     `g + geom_bar(aes(x = sex, fill = race))`
   CorrectAnswer: g + geom_bar(aes(x = sex, fill = race))
   AnswerTests: omnitest('g + geom_bar(aes(x = sex, fill = race))')
@@ -194,7 +189,7 @@
 
 - Class: cmd_question
   Output: |
-    我們應該會看到一張長條圖，指示兩種性別都是1。這是因為，在`answer01`中，兩種性別各佔一筆資料。
+    我們會看到一張長條圖，指示兩種性別都是1。這是因為，在`answer01`中，兩種性別各佔一筆資料。
     為了要讓長條圖理解值位於`count`的欄位，我們必須要改成輸入：
     `ggplot(answer01, aes(x = sex, y = count)) + geom_bar(stat = "identity")`
   CorrectAnswer: ggplot(answer01, aes(x = sex, y = count)) + geom_bar(stat = "identity")
@@ -204,6 +199,13 @@
   Output: |
     剛剛的`stat = "identity"`的意思，就是告訴ggplot不用再去數資料的個數了，直接取用`count`
     欄位當成高度即可。
+
+- Class: text
+  Output: |
+    `geom_bar`的`stat`和`position`參數是和長條圖相關的參數。而在`aes`中的參數，如：
+    `x`、`y`和`fill`，即使是x-y散佈圖或boxplot等，都會使用到的參數。
+    ggplot2的設計就是把能共通使用的繪圖參數放到`aes`中，個別圖種自己使用的參數，則放在
+    `geom_`開頭的函數中。
 
 - Class: cmd_question
   Output: 接著請同學輸入：`ggplot(hsb, aes(x = math)) + geom_density()`
