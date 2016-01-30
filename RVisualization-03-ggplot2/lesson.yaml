@@ -137,9 +137,11 @@
   Hint: g + geom_bar(aes(x = sex, fill = race), position = "dodge")
 - Class: text
   Output: |
-    透過剛剛的比較，我們可以看出`position`的用途就是：當有第二個類別出現的時候，我們是要把
-    所有的個數依照第一個類別疊加在同樣的長條上(重點在比較第一個類別)，還是把它們肩並肩站著
-    呢(重點在比較第一類別中的第二個類別)？
+    請比較用`g + geom_bar(aes(x = sex,fill=race))`與
+    `g + geom_bar(aes(x = sex, fill = race), position = "dodge")`的差異。
+    當`position = "stack"`（預設值）時，長條圖型會將race推疊呈現，而此時圖的重點是在於比較
+    sex個數的差異。當`position = "dodge"`時，長條圖會將race錯開呈現，而此時圖的重點是在於
+    比較相同sex中，不同race個數的差異。
 - Class: cmd_question
   Output: |
     接著請同學輸入`skip()`檢查有無安裝dplyr
