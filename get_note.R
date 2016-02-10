@@ -3,14 +3,20 @@ library(yaml)
 library(git2r)
 
 repo_tmp_dir <- tempfile(pattern = "DataScienceAndR")
-repo <- clone("http://github.com/wush978/DataScienceAndR", local_path = repo_tmp_dir, branch = "course")
+repo <- clone(".", local_path = repo_tmp_dir)
+remote_add(repo, "wush978", "git@github.com:wush978/DataScienceAndR.git")
+fetch(repo, "wush978")
+checkout(repo, branch = "course")
+.tmp <- remote_ls("wush978", repo)
+stopifnot(.tmp["refs/heads/course"] == branch_target(head(repo)))
+
 course_list <- dir(repo_tmp_dir, "lesson.yaml", full.names = TRUE, recursive = TRUE)
 get_lecture_note <- function(course, out_dir = tempdir()) {
   
   from_text <- function(level, i) {
 sprintf("
 
-## Ãö¥d %d
+## é—œå¡ %d
 
 %s
 
@@ -20,7 +26,7 @@ sprintf("
   from_cmd_question <- function(level, i) {
 sprintf("
 
-## Ãö¥d %d
+## é—œå¡ %d
 
 %s
 
@@ -34,7 +40,7 @@ sprintf("
   from_mult_question <- function(level, i) {
 sprintf("
 
-## Ãö¥d %d
+## é—œå¡ %d
 
 %s
 
@@ -43,12 +49,18 @@ sprintf("
   }
   
   from_script <- function(level, i) {
-    script <- 
-      readLines(file.path(dirname(course), "scripts", gsub(".R", "-correct.R", level$Script, fixed = TRUE))) %>%
+    script_path <- file.path(dirname(course), "scripts", level$Script)
+    correct_script_path <- file.path(dirname(course), "scripts", gsub(".R", "-correct.R", level$Script, fixed = TRUE))
+    if (file.exists(correct_script_path)) {
+      script <- readLines(correct_script_path)
+    } else {
+      script <- readLines(script_path)
+    }
+    script <- script %>%
       paste(collapse = "\n")
 sprintf("
 
-## Ãö¥d %d
+## é—œå¡ %d
 
 %s
 
@@ -86,5 +98,15 @@ for(i in seq_along(course_list)) {
   htmls %<>% append(get_lecture_note(course_list[i], "./note"))
 }
 
-sprintf("- [%s](%s)", basename(htmls) %>% tools::file_path_sans_ext(), file.path(".note", basename(htmls))) %>%
-  cat(file = ".note.md", sep="\n", append = FALSE)
+readme.src <- readLines("README-src.md")
+readme.src <- 
+  sprintf("- [%s](%s)", basename(htmls) %>% tools::file_path_sans_ext(), file.path("note", basename(htmls))) %>%
+  paste(collapse = "\n") %>%
+  gsub(pattern = "<r-note>", x = readme.src, fixed = TRUE)
+
+readme.src <- 
+  branch_target(head(repo)) %>%
+  substring(1, 8) %>%
+  gsub(pattern = "<r-sha-hash>", x = readme.src, fixed = TRUE)
+
+cat(readme.src, file = "README.md", append = FALSE, sep = "\n")
