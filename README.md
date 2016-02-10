@@ -13,21 +13,24 @@
 3. **新**。在2012年以後，R 的成長是非常快速的，所以教材會納入許多近年來被R 社群證實很棒的套件們。
 4. **套件的使用與探索**。R 的一大優勢就是蓬勃的套件系統。雖然教材中無法介紹所有的套件，但是會教同學如何探索一個第一次接觸的R 套件。
 5. **互動**。我們基於R Community貢獻的R 語言套件swirl 所撰寫的互動式學習環境，可以讓同學以最貼近實際使用R 的狀況來學R
-5. **教材設計**。每個單元的開始，我們設計大量的操作讓同學是透過用**肌肉**來記憶R 的指令。並且在單元的最後都擁有來自實務且具有挑戰性的關卡。
+6. **教材設計**。每個單元的開始，我們設計大量的操作讓同學是透過用**肌肉**來記憶R 的指令。並且在單元的最後都擁有來自實務且具有挑戰性的關卡。
+7. **自由**。老師們可以很方便與自由地將本教材整合至您的教案之中。您可以將本教材當成同學學習R語言的補充教材，讓同學透過本教材學習如何處理政府的公開資料集。本教材不會涉獵過多的專業分析技術，而是把這些內容留給專業的老師們。有興趣合作的老師歡迎來信：[wush@datascienceandr.org](mailto:wush@datascienceandr.org)
 
 ## 線上體驗區（需參加實體課程）
 
-請奇數編號的同學打開： <http://140.112.170.201:28787>
-
-請偶數編號的同學打開： <http://www.wush978.idv.tw:28787>
+請有參加實體課程的同學打開： <http://server.datascienceandr.org:28787>
 
 並依照課堂上給的帳號密碼登入。
 
-有興趣的同學也可以在聊天室聯繫我們，取得線上體驗的帳號密碼。
+有興趣的同學也歡迎聯繫我們（無論是在聊天室或是來信：[wush@datascienceandr.org](mailto:wush@datascienceandr.org)），取得線上體驗的帳號密碼。
 
 ## 快速安裝區
 
-同學也可以依照以下的動作快速設定學習環境：
+同學可以參考以下的快速上手影片：
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/fcd6zSk0yd8" frameborder="0" allowfullscreen></iframe>
+
+或是依照以下的動作快速設定學習環境：
 
 1. 安裝R
 2. 安裝Rstudio(Windows 使用者請安裝Rstudio或自備編輯UTF-8 編碼的程式碼，OS X 與Linux使用者可依據自己喜好決定是否使用Rstudio)
@@ -116,4 +119,4 @@ ps. 如果你之前有進行過swirl的課程，swirl會出現下圖的選項詢
 
 ## License
 
-<a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/tw/"><img alt="創用 CC 授權條款" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/3.0/tw/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">Data Science and R</span>由<a xmlns:cc="http://creativecommons.org/ns#" href="https://github.com/wush978/DataScienceAndR" property="cc:attributionName" rel="cc:attributionURL">Wush Wu和Chih Cheng Liang</a>製作，以<a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/tw/">創用CC 姓名標示-相同方式分享 3.0 台灣 授權條款</a>釋出。
+<a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/tw/"><img alt="創用 CC 授權條款" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/3.0/tw/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">Data Science and R</span>由<a xmlns:cc="http://creativecommons.org/ns#" href="https://github.com/wush978/DataScienceAndR" property="cc:attributionName" rel="cc:attributionURL">Wush Wu、Chih Cheng Liang和Johnson Hsieh</a>製作，以<a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/tw/">創用CC 姓名標示-相同方式分享 3.0 台灣 授權條款</a>釋出。
