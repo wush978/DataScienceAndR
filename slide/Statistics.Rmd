@@ -1,0 +1,278 @@
+---
+title       : "Statistics"
+author      : "Wush Wu"
+job         : 國立台灣大學
+framework   : io2012-wush
+highlighter : highlight.js
+hitheme     : zenburn
+widgets     : [mathjax]            # {mathjax, quiz, bootstrap}
+mode        : selfcontained # {standalone, draft}
+knit        : slidify::knit2slides
+--- .largecontent &vcenter
+
+```{r setup, include=FALSE, cache=FALSE}
+library(knitr)
+library(magrittr)
+library(data.table)
+library(dplyr)
+library(ggplot2)
+library(quantmod)
+library(jsonlite)
+
+opts_chunk$set(echo = FALSE, cache=FALSE, comment="", 
+               cache.path = "cache-RBasic-DataStructure/", 
+               dev.args=list(bg="transparent"),
+               fig.path = "./assets/fig/rbasic-datastructure-",
+               fig.width = 10, fig.height = 6)
+fig <- function(path, size = 100) {
+  sprintf("<img src='assets/img/%s' style='max-width: %d%%;max-height: %d%%'></img>", 
+          path, size, size)
+}
+fig2 <- function(path, size = 100) {
+  sprintf("<img src='assets/img/%s' style='width: %d%%'></img>", 
+          path, size)
+}
+sys_name <- Sys.info()["sysname"] %>% tolower
+sys_encode <- c("utf8", "utf8", "big5")[pmatch(sys_name, c("linux", "darwin", "windows"))]
+sessionInfo() %>% capture.output %>% cat(file = "sessionInfo.log", sep = "\n")
+construction <- local(suppressWarnings({
+  construction <- fromJSON("construction.json")
+  .tmp <- 
+    readLines("construction.txt") %>%
+    strsplit(",") %>%
+    extract2(1)
+  .tmp2 <- 
+    regexec("(.*)\\((.*)\\)$", .tmp) %>%
+    regmatches(x = .tmp)
+  .tmp3 <- sapply(.tmp2, "[", 2)
+  names(.tmp3) <- 
+    sapply(.tmp2, "[", 3) %>%
+    toupper()
+  .drop <- match(colnames(construction), names(.tmp3)) %>%
+    is.na %>%
+    which
+  construction <- construction[,-.drop]
+  colnames(construction) <- .tmp3[colnames(construction)]
+  construction$X座標 <- as.numeric(construction$X座標)
+  construction$Y座標 <- as.numeric(construction$Y座標)
+  construction
+}))
+```
+
+## 課程大綱
+
+- 敘述統計
+- 機率論
+- 抽樣與預估
+- 假設檢定
+- 信賴區間
+- 回歸分析
+- 統計科學的各領域簡介
+
+--- &vcenter .largecontent
+
+## 課程目標
+
+- 具備和統計學家溝通的能力
+    - 理解統計科學要解決的問題
+    - 理解統計科學的名詞與其背後的含義
+    - 理解統計學家解決問題的方式
+
+--- .dark .segue
+
+## 敘述統計
+
+--- &vcenter .largecontent
+
+## 何謂敘述統計？
+
+- 描述數據的方法
+    - 圖形化
+    - 數值指標
+
+--- &vcenter .largecontent
+
+## 數值系統
+
+- 名目尺度（數字之間無意義）
+- 順序尺度（數字的順序有意義）
+- 區間尺度（數字的加減有意義）
+- 比例尺度（數字的倍數有意義）
+- 類別型變數：名目尺度與順序尺度
+- 數值型變數：區間尺度與比例尺度
+
+--- &vcenter .largecontent
+
+## 範例一
+
+- 請問下列各欄位屬於哪種數值系統？
+
+```{r construction1, results="asis"}
+construction %>%
+  extract(c(1, 5, 6, 7, 8)) %>%
+  head() %>%
+  kable()
+```
+
+--- &vcenter .largecontent
+
+## 數值系統間的互換
+
+- `X座標` + `Y座標` => `行政區`
+
+```{r construction2, results="asis"}
+construction %>%
+  extract(c(5, 6, 9, 10)) %>%
+  head() %>%
+  kable()
+```
+
+--- &vcenter .largecontent
+
+## 類別型變數的圖形化(長條圖)
+
+```{r construction-vis-bar}
+g <- 
+  group_by(construction, 行政區) %>%
+  summarise(count = n()) %>%
+  ggplot(aes(y = count, fill = 行政區)) + 
+  theme(text = element_text(family = "STKaiti"))
+g + geom_bar(aes(x = 行政區), stat = "identity")
+```
+
+--- &vcenter .largecontent
+
+## 類別型變數的圖形化（圓形圖）
+
+```{r construction-vis-pie, dependson="construction-vis"}
+g + 
+  geom_bar(aes(x = ""), width = 1, stat = "identity", position = "stack") +
+  coord_polar("y")
+```
+
+--- &vcenter .largecontent
+
+## 連續型變數的圖形化(直方圖)
+
+```{r construction-vis-histogram, warnings = FALSE}
+suppressMessages({
+(ggplot(construction, aes(x = X座標)) +
+  geom_histogram() +
+  theme(text = element_text(family = "STKaiti"))) %>%
+    print
+})
+```
+
+--- &vcenter .largecontent
+
+## 直方圖 v.s. 長條圖
+
+- 長條圖適用於類別型資料，直方圖適用於連續型資料
+- 長條圖的bar 之間有間隔，直方圖則是連續
+- 長條圖的順序不一定有意義，直方圖的順序有意義
+
+--- &vcenter .largecontent
+
+## 數據指標
+
+- 中心位置
+- 散佈程度
+
+--- &vcenter .largecontent
+
+## 數據的中心位置
+
+- 平均數（適用於數值型變數）
+- 中位數（適用於數值型變數）
+- 眾數（適用於類別型變數）
+
+--- &vcenter .largecontent
+
+## 平均數(mean)
+
+- $\frac{1}{N} \sum_{i=1}^N x_i$
+- 最小化$\sum_{i = 1}^N {(x - x_i)^2}$
+
+```{r}
+f.mean <- Vectorize(function(x) {
+  sum((x - construction$X座標)^2)
+})
+curve(f.mean, from = min(construction$X座標), to = max(construction$X座標))
+abline(v = mean(construction$X座標), col = 2)
+```
+
+--- &vcenter .largecontent
+
+## 中位數(median)
+
+- 觀測值中間的數值
+    - 50%的數值小於中位數
+    - 50%的數值大於中位數
+- 最小化$\sum_{i = 1}^N {\left\lVert x - x_i \right\rVert}$
+
+```{r}
+f.median <- Vectorize(function(x) {
+  sum(abs(x - construction$X座標))
+})
+curve(f.median, from = min(construction$X座標), to = max(construction$X座標))
+abline(v = median(construction$X座標), col = 2)
+```
+
+--- &vcenter .largecontent
+
+## 眾數(mode)
+
+- 出現次數最多的觀測值
+- 可用於類別型變數
+- 最小化$\sum_{i = 1}^N I(x_i != x)$
+- 討論機率論的時候，我們會再更新定義
+
+--- &vcenter .largecontent
+
+## 練習二之一
+
+- $x1 = \{1, 10, 2, 3, 7, 1, 7, 8, 1\}$
+    - 請問$x1$的平均數為何？
+    - 請問$x1$的中位數為何？
+    - 請問$x1$的眾數為何？
+
+--- &vcenter .largecontent
+
+## 練習二之二
+
+- 把$x1$的10改成100後，得到：$x2 = \{1, 100, 2, 3, 7, 1, 7, 8, 1\}$
+    - 請問$x2$的平均數為何？和$x1$的平均數是否一樣？
+    - 請問$x2$的中位數為何？和$x1$的中位數是否一樣？
+    - 請問$x2$的眾數為何？和$x1$的眾數是否一樣？
+
+--- &vcenter .largecontent
+
+## 練習二之三
+
+- 把$x1$的每個元素平方後，得到：$x3 = \{1, 100, 4, 9, 49, 1, 49, 64, 1\}$
+    - 請問$x3$的平均數為何？和$x1$的平均數的平方是否一樣？
+    - 請問$x3$的中位數為何？和$x1$的中位數的平方是否一樣？
+    - 請問$x3$的眾數為何？和$x1$的眾數的平方是否一樣？
+
+--- &vcenter .largecontent
+
+## 數據的分散程度
+
+- 最大值、最小值與全距
+- 四分位差
+- 變異數與標準差
+
+--- &vcenter .largecontent
+
+## 
+
+--- &vcenter .largecontent
+
+## 離群值（Outlier）
+
+- 和其他觀測值差異很大的觀測值
+    - 量測單位
+    - 收集資料的錯誤
+- 離群值對平均數、中位數與眾數的影響不同（想想$x1$與$x2$的結果比較）
+
+--- &vcenter .largecontent
