@@ -26,7 +26,7 @@
 
 ## 快速安裝區
 
-同學可以參考以下的快速上手影片：
+同學可以參考以下的上手影片：
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/fcd6zSk0yd8" frameborder="0" allowfullscreen></iframe>
 
