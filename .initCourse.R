@@ -71,3 +71,8 @@ assign("check_val", function(name, value) {
     FALSE
   })
 })
+
+options(
+  "SWIRL_TRACKING_SERVER_IP" = "api.datascienceandr.org",
+  "SWIRL_COURSE_VERSION" = "e0334fff35e5d8342ec58f8c73de07d9d43cb026"
+)
