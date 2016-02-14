@@ -20,9 +20,9 @@ library(quantmod)
 library(jsonlite)
 
 opts_chunk$set(echo = FALSE, cache=FALSE, comment="",
-               cache.path = "cache-RBasic-DataStructure/",
+               cache.path = "cache-Statistics/",
                dev.args=list(bg="transparent"),
-               fig.path = "./assets/fig/rbasic-datastructure-",
+               fig.path = "./assets/fig/rstatistics-",
                fig.width = 10, fig.height = 6)
 fig <- function(path, size = 100) {
   sprintf("<img src='assets/img/%s' style='max-width: %d%%;max-height: %d%%'></img>",
@@ -64,10 +64,9 @@ taipei.tax <- read.table(file("taipei-tax.csv", encoding = "UTF-8"), skip = 1, h
 
 - 敘述統計
 - 機率論
-- 抽樣與預估
 - 假設檢定
 - 信賴區間
-- 回歸分析
+- 統計模型
 - 統計科學的各領域簡介
 
 --- &vcenter .largecontent
@@ -402,12 +401,10 @@ abline(v = median(construction$X座標), col = 2)
 
 ## 練習三之二
 
-- $x1 = \{1, 10, 2, 3, 7, 1, 7, 8, 1\}$
-    - 請問$x1$的平均差為何？
-- 把$x1$的10改成100後，得到：$x2 = \{1, 100, 2, 3, 7, 1, 7, 8, 1\}$
-    - 請問$x2$的平均差為何？
-- 把$x1$的資料全部乘以100後，得到：$x3 = \{100, 1000, 200, 300, 700, 100, 700, 800, 100\}$
-    - 請問$x3$的平均差為何？
+- $x1, x2, x3$如前述
+- 請問$x1$的平均差為何？
+- 請問$x2$的平均差為何？
+- 請問$x3$的平均差為何？
 
 --- &vcenter .largecontent
 
@@ -427,12 +424,10 @@ abline(v = median(construction$X座標), col = 2)
 
 ## 練習三之三
 
-- $x1 = \{1, 10, 2, 3, 7, 1, 7, 8, 1\}$
-    - 請問$x1$的MAD為何？
-- 把$x1$的10改成100後，得到：$x2 = \{1, 100, 2, 3, 7, 1, 7, 8, 1\}$
-    - 請問$x2$的MAD為何？
-- 把$x1$的資料全部乘以100後，得到：$x3 = \{100, 1000, 200, 300, 700, 100, 700, 800, 100\}$
-    - 請問$x3$的MAD為何？
+- $x1, x2, x3$如前述
+- 請問$x1$的MAD為何？
+- 請問$x2$的MAD為何？
+- 請問$x3$的MAD為何？
 
 --- &vcenter .largecontent
 
@@ -451,12 +446,12 @@ abline(v = median(construction$X座標), col = 2)
     - $i$代表百分位數的計算方式，在R 中實作了九種計算quantile的方法，也就是$i \in \{1, 2, 3, ..., 9\}$
     - 一般來說，百分位數都類似中位數，是取兩個最靠近$p$的資料點作加權平均，加權的方式則和$i$有關
     - 中位數的計算方式：排序後取最靠近中間的資料點取平均
-- 現代數據處理軟體都提供了計算百分位數的功能
 
 --- &vcenter .largecontent
 
 ## 百分位數(quantile)與四分位差(interquartile range)
 
+- 現代數據處理軟體都提供了計算百分位數的功能
 - 百分位數
     - 以$\{1, 2, 3, 4, 5, 6, 7, 8, 9, 10\}$為例：
     - 第25百分位數，又稱第一四分位數：$3.25$，代表有25%的數據比$3.25$小
@@ -476,12 +471,10 @@ abline(v = median(construction$X座標), col = 2)
 
 ## 練習三之四
 
-- $x1 = \{1, 10, 2, 3, 7, 1, 7, 8, 1\}$
-    - 請問$x1$的四分位差為何？
-- 把$x1$的10改成100後，得到：$x2 = \{1, 100, 2, 3, 7, 1, 7, 8, 1\}$
-    - 請問$x2$的四分位差為何？
-- 把$x1$的資料全部乘以100後，得到：$x3 = \{100, 1000, 200, 300, 700, 100, 700, 800, 100\}$
-    - 請問$x3$的四分位差為何？
+- $x1, x2, x3$如前述
+- 請問$x1$的四分位差為何？
+- 請問$x2$的四分位差為何？
+- 請問$x3$的四分位差為何？
 
 --- &vcenter .largecontent
 
@@ -515,12 +508,10 @@ abline(v = median(construction$X座標), col = 2)
 
 ## 練習三之五
 
-- $x1 = \{1, 10, 2, 3, 7, 1, 7, 8, 1\}$
-    - 請問$x1$的樣本變異數與樣本標準差為何？
-- 把$x1$的10改成100後，得到：$x2 = \{1, 100, 2, 3, 7, 1, 7, 8, 1\}$
-    - 請問$x2$的樣本變異數與樣本標準差為何？
-- 把$x1$的資料全部乘以100後，得到：$x3 = \{100, 1000, 200, 300, 700, 100, 700, 800, 100\}$
-    - 請問$x3$的樣本變異數與樣本標準差為何？
+- $x1, x2, x3$如前述
+- 請問$x1$的樣本變異數與樣本標準差為何？
+- 請問$x2$的樣本變異數與樣本標準差為何？
+- 請問$x3$的樣本變異數與樣本標準差為何？
 
 --- &vcenter .largecontent
 
@@ -541,12 +532,10 @@ abline(v = median(construction$X座標), col = 2)
 
 ## 練習三之六
 
-- $x1 = \{1, 10, 2, 3, 7, 1, 7, 8, 1\}$
-    - 請問$x1$的變異係數為何？
-- 把$x1$的10改成100後，得到：$x2 = \{1, 100, 2, 3, 7, 1, 7, 8, 1\}$
-    - 請問$x2$的變異係數為何？
-- 把$x1$的資料全部乘以100後，得到：$x3 = \{100, 1000, 200, 300, 700, 100, 700, 800, 100\}$
-    - 請問$x3$的變異係數為何？
+- $x1, x2, x3$如前述
+- 請問$x1$的變異係數為何？
+- 請問$x2$的變異係數為何？
+- 請問$x3$的變異係數為何？
 - 把$x1$的資料全部-1後，得到：$x4 = \{0, 9, 1, 2, 6, 0, 6, 7, 0\}$
     - 請問$x4$的變異係數為何？
 
@@ -571,14 +560,11 @@ abline(v = median(construction$X座標), col = 2)
 
 ## 練習三之七
 
-- $x1 = \{1, 10, 2, 3, 7, 1, 7, 8, 1\}$
-    - 請問$x1$的Quartile coefficient of dispersion為何？
-- 把$x1$的10改成100後，得到：$x2 = \{1, 100, 2, 3, 7, 1, 7, 8, 1\}$
-    - 請問$x2$的Quartile coefficient of dispersion為何？
-- 把$x1$的資料全部乘以100後，得到：$x3 = \{100, 1000, 200, 300, 700, 100, 700, 800, 100\}$
-    - 請問$x3$的Quartile coefficient of dispersion為何？
-- 把$x1$的資料全部-1後，得到：$x4 = \{0, 9, 1, 2, 6, 0, 6, 7, 0\}$
-    - 請問$x4$的Quartile coefficient of dispersion為何？
+- $x1, x2, x3, x4$如前述
+- 請問$x1$的Quartile coefficient of dispersion為何？
+- 請問$x2$的Quartile coefficient of dispersion為何？
+- 請問$x3$的Quartile coefficient of dispersion為何？
+- 請問$x4$的Quartile coefficient of dispersion為何？
 
 --- &vcenter .largecontent
 
@@ -605,7 +591,209 @@ abline(v = median(construction$X座標), col = 2)
 
 --- &vcenter .largecontent
 
-## 敘述統計的應用：比較
+## 敘述統計的應用：綜合所得稅所得總額
 
 - 我的收入是高還是低？
-    - 我們可以查詢政府開放資料的「綜合所得稅所得總額」
+    - 可以查詢政府開放資料的「綜合所得稅所得總額」，了解自己的收入高低
+    - 資料來源：<http://data.gov.tw/node/17983>
+
+--- &vcenter .largecontent
+
+## 敘述統計的應用：綜合所得稅所得總額
+
+```{r, taipei-tax1}
+taipei.tax %>%
+  head(1) %>%
+  kable()
+```
+<small>單位：金額(千元)</small>
+
+- 請問能不能從上述數據中看出貧富差距的跡象呢？
+
+--- &vcenter .largecontent
+
+## 模擬中崙里的所得總額分佈
+
+```{r taipei.tax2, warning=FALSE}
+LunLane <- taipei.tax[1,]
+alpha <- (LunLane$平均數 / LunLane$標準差)^2
+beta <- LunLane$平均數 / LunLane$標準差^2
+# curve(dgamma(x, shape = alpha, rate = beta), 0, LunLane$平均數 + 3 * LunLane$標準差,
+#       ylab = "", col = 2, lty = 2)
+# curve(dnorm(x, mean = LunLane$平均數, sd = LunLane$標準差), add = TRUE, col = 3, lty = 3)
+.x <- rgamma(floor(LunLane$綜合所得總額 / LunLane$平均數), shape = alpha, rate = beta)
+.g <- qplot(.x, geom = "histogram", main = "")
+suppressMessages(print(.g))
+```
+
+--- .dark .segue
+
+## 機率論
+
+--- &vcenter .largecontent
+
+## 母體
+
+- 研究對象全體所構成的集合
+- 例：全金門縣縣民
+
+料，建構了全金門縣人民的年齡母體：
+
+```{r taiwan-population, cache = TRUE, results = "hidden"}
+population.src <- local({
+  population.src <- read.csv(bzfile("opendata10412M030.csv.bz2", encoding = "UTF-8"), skip = 1, header = T)
+  df0 <- population.src[,2:3]
+  tmp <- lapply(0:100, function(age) {
+    tmp2 <- lapply(c("m", "f"), function(sex) {
+      name <- ifelse(age == 100,
+                     sprintf("people_age_100up_%s", sex),
+                     sprintf("people_age_%03d_%s", age, sex))
+      df <- df0
+      df$age <- age
+      df$sex <- sex
+      df$count <- population.src[[name]]
+      df
+    })
+    do.call(rbind, tmp2)
+  })
+  do.call(rbind, tmp)
+}) %>%
+  dplyr::mutate(city = substring(site_id, 1, 3), district = substring(site_id, 4, 6))
+```
+
+--- &vcenter .largecontent
+
+## 母體
+
+- 我們自內政部資料開放平台下載了個村（里）戶籍人口統計月報表，依據這份資
+
+```{r population-Kinmen, dependson="taiwan-population", results = "figure"}
+population.Kinmen <- population.src %>%
+  dplyr::filter(city == "金門縣") %>%
+  dplyr::group_by(city, age, sex) %>%
+  dplyr::summarise(count = sum(count)) %>%
+  dplyr::group_by(age) %>%
+  dplyr::summarise(count = sum(count)) %>%
+  select(age, count) %>%
+  apply(1, function(x) {
+    rep(x["age"], x["count"])
+  }) %>%
+  unlist(use.names = FALSE)
+.g <- qplot(population.Kinmen, geom = "histogram", xlab = "age")
+suppressMessages(print(.g))
+```
+
+--- &vcenter .largecontent
+
+## 母體
+
+- 依據母體資料，我們可以算出金門縣縣民的平均年齡、標準差、最大值、最小值... 等等數據
+    - 金門縣縣民年齡的平均值為：`r mean(population.Kinmen)`
+
+--- &vcenter .largecontent
+
+## 樣本
+
+- 實務上，要收集所有的資料可能有困難，所以我們可能透過隨機抽樣的方式，抽出20名金門縣縣民當成母體的代表
+    - 我們希望能透過對20名金門縣縣民的了解，推論到全金門縣縣民，這就是**統計推論**
+    - 例：20名金門縣縣民的平均年齡
+
+--- &vcenter .largecontent
+
+## 樣本
+
+- 這20名金門縣縣民的平均年齡，在每次抽樣時都會不同...
+
+```{r population-Kinmen-sample1}
+set.seed(1)
+sapply(1:10, function(i) {
+  sample(population.Kinmen, 10, FALSE) %>%
+    mean()
+})
+```
+
+--- &vcenter .largecontent
+
+## 樣本空間
+
+- 抽出20名金門縣縣民，所有可能的結果就構成了「樣本空間」
+    - 例：抽出20名0歲的金門縣縣民與抽出20名100歲的金門縣縣民，都是可能的組合，所以都屬於「樣本空間」之中
+
+
+--- &vcenter .largecontent
+
+## 隨機變數（不嚴謹）
+
+- 而把樣本空間的每種可能的結果，計算成一個單一的數字的**方法**，就叫做「隨機變數」
+- 例：20名金門縣縣民的平均年齡，就是一種隨機變數
+
+--- &vcenter .largecontent
+
+## 估計母體平均數 - 統計量
+
+--- &vcenter .largecontent
+
+## 評估估計的好壞
+
+--- &vcenter .largecontent
+
+## 隨機變數與模擬
+
+--- &vcenter .largecontent
+
+## 相關性
+
+--- &vcenter .largecontent
+
+## 離散對連續
+
+--- &vcenter .largecontent
+
+--- .dark .segue
+
+## 假設檢定
+
+--- &vcenter .largecontent
+
+## 母體未知
+
+--- &vcenter .largecontent
+
+## 假想的母體（假設）
+
+--- &vcenter .largecontent
+
+## 檢定統計量
+
+--- &vcenter .largecontent
+
+## 檢定統計量在假想母體的分佈
+
+--- &vcenter .largecontent
+
+## 比較觀測的檢定統計量與上述的分佈
+
+--- &vcenter .largecontent
+
+## 評估檢定統計量
+
+--- &vcenter .largecontent
+
+--- .dark .segue
+
+## 信賴區間
+
+--- .dark .segue
+
+## 統計模型到機器學習
+
+--- &vcenter .largecontent
+
+## ...
+
+- $x$, $y$
+- $y = f(x) + \varepsilon$, 假設 $\varepsilon \sim P$
+
+--- .dark .segue
+
+## 統計科學簡介
