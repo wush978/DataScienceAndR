@@ -16,9 +16,9 @@ library(data.table)
 library(dplyr)
 
 opts_chunk$set(echo = FALSE, cache=FALSE, comment="",
-               cache.path = "cache-RBasic-DataStructure/",
+               cache.path = "cache-RDataEngineer-Introduction/",
                dev.args=list(bg="transparent"),
-               fig.path = "./assets/fig/rbasic-datastructure-",
+               fig.path = "./assets/fig/rdataengineer-introduction-",
                fig.width = 10, fig.height = 6)
 fig <- function(path, size = 100) {
   sprintf("<img src='assets/img/%s' style='max-width: %d%%;max-height: %d%%'></img>",

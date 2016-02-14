@@ -1,0 +1,1965 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Statistics</title>
+  <meta charset="utf-8">
+  <meta name="description" content="Statistics">
+  <meta name="author" content="Wush Wu">
+  <meta name="generator" content="slidify" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <link rel="stylesheet" href="libraries/frameworks/io2012-wush/css/default.css" media="all" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012-wush/css/phone.css" 
+    media="only screen and (max-device-width: 480px)" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012-wush/css/slidify.css" >
+  <link rel="stylesheet" href="libraries/highlighters/highlight.js/css/zenburn.css" />
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->  <link rel=stylesheet href="./assets/css/custom.css"></link>
+<link rel=stylesheet href="./assets/css/ribbons.css"></link>
+
+  
+  <!-- Grab CDN jQuery, fall back to local if offline -->
+  <script src="libraries/frameworks/io2012-wush/js/jquery-1.7.min.js"></script>
+  <!-- <script>window.jQuery || document.write('<script src="libraries/widgets/quiz/js/jquery.js"><\/script>')</script> -->
+  <script data-main="libraries/frameworks/io2012-wush/js/slides" 
+    src="libraries/frameworks/io2012-wush/js/require-1.0.8.min.js">
+  </script>
+  
+  
+
+</head>
+<body style="opacity: 0">
+  <slides class="layout-widescreen">
+    
+    <!-- LOGO SLIDE -->
+        <slide class="title-slide segue nobackground">
+  <hgroup class="auto-fadein">
+    <h1>Statistics</h1>
+    <h2></h2>
+    <p>Wush Wu<br/>國立台灣大學</p>
+  </hgroup>
+  <article></article>  
+</slide>
+    
+
+    <!-- SLIDES -->
+    <slide class="largecontent" id="slide-1" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>課程大綱</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>敘述統計</li>
+<li>機率論</li>
+<li>假設檢定</li>
+<li>信賴區間</li>
+<li>統計模型</li>
+<li>統計科學的各領域簡介</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-2" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>課程目標</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>具備和統計學家溝通的能力
+
+<ul>
+<li>理解統計科學要解決的問題</li>
+<li>理解統計科學的名詞與其背後的含義</li>
+<li>理解統計學家解決問題的方式</li>
+</ul></li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-3" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>關於練習</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>請使用R 搭配swirl課程：<strong>RStatistics</strong>進行</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="dark segue" id="slide-4" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2>敘述統計</h2>
+  </hgroup>
+  <article data-timings="">
+    
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-5" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>何謂敘述統計？</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>描述數據的方法
+
+<ul>
+<li>圖形化</li>
+<li>數值指標</li>
+</ul></li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-6" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>數值系統</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>名目尺度（數字之間無意義）</li>
+<li>順序尺度（數字的順序有意義）</li>
+<li>區間尺度（數字的加減有意義）</li>
+<li>比例尺度（數字的倍數有意義）</li>
+<li>類別型變數：名目尺度與順序尺度</li>
+<li>數值型變數：區間尺度與比例尺度</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-7" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>範例一</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>請問下列各欄位屬於哪種數值系統？</li>
+</ul>
+
+<table><thead>
+<tr>
+<th align="left">核備文號</th>
+<th align="right">X座標</th>
+<th align="right">Y座標</th>
+<th align="left">通報時間</th>
+<th align="left">施工單位</th>
+</tr>
+</thead><tbody>
+<tr>
+<td align="left">102002163</td>
+<td align="right">305380.1</td>
+<td align="right">2771131</td>
+<td align="left">1031030102858</td>
+<td align="left">台電輸變電</td>
+</tr>
+<tr>
+<td align="left">102002875</td>
+<td align="right">304886.2</td>
+<td align="right">2770306</td>
+<td align="left">1031028080916</td>
+<td align="left">台電輸變電</td>
+</tr>
+<tr>
+<td align="left">102004900</td>
+<td align="right">302735.8</td>
+<td align="right">2770178</td>
+<td align="left">1040428094229</td>
+<td align="left">台電輸變電</td>
+</tr>
+<tr>
+<td align="left">103000673</td>
+<td align="right">307602.7</td>
+<td align="right">2764702</td>
+<td align="left">1040819162541</td>
+<td align="left">新工處</td>
+</tr>
+<tr>
+<td align="left">104000052</td>
+<td align="right">305401.1</td>
+<td align="right">2772324</td>
+<td align="left">1040912082416</td>
+<td align="left">新工處</td>
+</tr>
+<tr>
+<td align="left">104000101</td>
+<td align="right">306300.3</td>
+<td align="right">2769063</td>
+<td align="left">1041218085247</td>
+<td align="left">新工處</td>
+</tr>
+</tbody></table>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-8" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>數值系統間的互換</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li><code>X座標</code> + <code>Y座標</code> =&gt; <code>行政區</code></li>
+</ul>
+
+<table><thead>
+<tr>
+<th align="right">X座標</th>
+<th align="right">Y座標</th>
+<th align="left">行政區</th>
+<th align="left">施工位置</th>
+</tr>
+</thead><tbody>
+<tr>
+<td align="right">305380.1</td>
+<td align="right">2771131</td>
+<td align="left">松山</td>
+<td align="left">敦化南路1段68號前分隔島綠帶</td>
+</tr>
+<tr>
+<td align="right">304886.2</td>
+<td align="right">2770306</td>
+<td align="left">大安</td>
+<td align="left">大安路1段116巷於復興南路一段與仁愛路四段27巷間</td>
+</tr>
+<tr>
+<td align="right">302735.8</td>
+<td align="right">2770178</td>
+<td align="left">中正</td>
+<td align="left">紹興南街17~21-3號與仁愛路1段1~19號</td>
+</tr>
+<tr>
+<td align="right">307602.7</td>
+<td align="right">2764702</td>
+<td align="left">文山</td>
+<td align="left">木新路一段，南起指南路一段，北至木柵路三段。</td>
+</tr>
+<tr>
+<td align="right">305401.1</td>
+<td align="right">2772324</td>
+<td align="left">松山</td>
+<td align="left">松山信義區</td>
+</tr>
+<tr>
+<td align="right">306300.3</td>
+<td align="right">2769063</td>
+<td align="left">松山</td>
+<td align="left">1.松山及信義區8米以上計畫道路</td>
+</tr>
+<tr>
+<td align="right">2.其它交辦指定之行政區</td>
+<td align="right"></td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+</tbody></table>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-9" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>類別型變數的圖形化(長條圖)</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<p><img src="./assets/fig/rstatistics-construction-vis-bar-1.png" alt="plot of chunk construction-vis-bar"></p>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-10" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>類別型變數的圖形化（圓形圖）</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<p><img src="./assets/fig/rstatistics-construction-vis-pie-1.png" alt="plot of chunk construction-vis-pie"></p>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-11" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>連續型變數的圖形化(直方圖)</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<p><img src="./assets/fig/rstatistics-construction-vis-histogram-1.png" alt="plot of chunk construction-vis-histogram"></p>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-12" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>直方圖 v.s. 長條圖</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>長條圖適用於類別型資料，直方圖適用於連續型資料</li>
+<li>長條圖的bar 之間有間隔，直方圖則是連續</li>
+<li>長條圖的順序不一定有意義，直方圖的順序有意義</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-13" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>數據指標</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>中心位置</li>
+<li>散佈程度</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-14" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>數據的中心位置</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>平均數（適用於數值型變數）</li>
+<li>中位數（適用於數值型變數）</li>
+<li>眾數（適用於類別型變數）</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-15" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>平均數(mean)</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>\(\bar{x} = \frac{1}{N} \sum_{i=1}^N x_i\)</li>
+<li>\(x = \{1, 2, 3, 4, 6\}\) 的平均數為 \(\frac{1 + 2 + 3 + 4 + 6}{5} = 3.2\)</li>
+<li>總和(sum)、平均與個數</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-16" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>平均數(mean)</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>最小化\(\sum_{i = 1}^N {(x - x_i)^2}\)</li>
+</ul>
+
+<p><img src="./assets/fig/rstatistics-unnamed-chunk-1-1.png" alt="plot of chunk unnamed-chunk-1"></p>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-17" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>平均數(mean)的應用</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>過去三十天，每天網路廣告平均的營業額為50萬
+
+<ul>
+<li>平均數常常被當成基準做比較
+
+<ul>
+<li>今天的營業額為60萬 ==&gt; 好</li>
+<li>今天的營業額為40萬 ==&gt; 不好</li>
+</ul></li>
+</ul></li>
+<li>移動平均
+
+<ul>
+<li>處理時間序列（隨著時間不斷延伸的資料）常用的技巧</li>
+<li>例：股票的周線、月線</li>
+</ul></li>
+<li>加權平均
+
+<ul>
+<li>每筆資料的重要性不同</li>
+</ul></li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-18" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>移動平均在股票分析的應用</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<p><center><img src='assets/img/MovingAverage.GIF' style='max-width: 75%;max-height: 75%'></img></center>
+<small><a href="https://upload.wikimedia.org/wikipedia/commons/d/d9/MovingAverage.GIF">https://upload.wikimedia.org/wikipedia/commons/d/d9/MovingAverage.GIF</a></small></p>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-19" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>平均數的濫用</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<p><br/><br/><br/>
+<center><img src='assets/img/average.jpg' style='max-width: 50%;max-height: 50%'></img></center>
+<small><a href="https://www.facebook.com/nagee.tw/photos/a.10151409298917312.1073741829.353390642311/10152262445242312">https://www.facebook.com/nagee.tw/photos/a.10151409298917312.1073741829.353390642311/10152262445242312</a></small></p>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-20" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>中位數(median)</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>觀測值中間的數值
+
+<ul>
+<li>50%的數值小於中位數</li>
+<li>50%的數值大於中位數</li>
+</ul></li>
+<li>\(x = \{1, 2, 3, 4, 6\}\) 的中位數為 \(3\)</li>
+<li>\(x = \{1, 2, 3, 4, 6, 7\}\) 的中位數為 \(\frac{3 + 4}{2} = 3.5\)</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-21" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>中位數(median)</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>最小化\(\sum_{i = 1}^N {\left\lVert x - x_i \right\rVert}\)</li>
+</ul>
+
+<p><img src="./assets/fig/rstatistics-unnamed-chunk-2-1.png" alt="plot of chunk unnamed-chunk-2"></p>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-22" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>中位數的應用</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>中位數是可以取代大多數平均數的角色</li>
+<li>中位數比較穩定，不容易受到少數資料的影響</li>
+<li>中位數的解釋和總和無關</li>
+<li>台灣每人可支配所得：
+
+<ul>
+<li>逐年(100年至103年)平均數：275984, 285939, 293523, 303762</li>
+<li>逐年(100年至103年)中位數：233527, 243131, 250308, 259926</li>
+<li>資料來源：行政院主計總處家庭收支調查</li>
+</ul></li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-23" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>眾數(mode)</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>出現次數最多的觀測值</li>
+<li>可用於類別型變數</li>
+<li>最小化\(\sum_{i = 1}^N I(x_i != x)\)</li>
+<li>討論機率論的時候，我們會再更新定義</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-24" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>眾數的應用</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>在分析類別型數據前，常用來探測是否有類別不平衡的狀態</li>
+<li>預測類別型變數時，眾數是常用的基準
+
+<ul>
+<li>點擊率預測，點擊行為的眾數是「無點擊」，約佔99.9%。所以一個比較基準就是：「全部猜不會點」</li>
+</ul></li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-25" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>練習二之一</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>\(x1 = \{1, 10, 2, 3, 7, 1, 7, 8, 1\}\)
+
+<ul>
+<li>請問$x1$的平均數為何？</li>
+<li>請問$x1$的中位數為何？</li>
+<li>請問$x1$的眾數為何？</li>
+</ul></li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-26" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>練習二之二</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>把$x1$的10改成100後，得到：\(x2 = \{1, 100, 2, 3, 7, 1, 7, 8, 1\}\)
+
+<ul>
+<li>請問$x2$的平均數為何？和$x1$的平均數是否一樣？</li>
+<li>請問$x2$的中位數為何？和$x1$的中位數是否一樣？</li>
+<li>請問$x2$的眾數為何？和$x1$的眾數是否一樣？</li>
+</ul></li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-27" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>評論</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>平均數最容易受到特異獨行的樣本影響</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-28" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>練習二之三</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>把$x1$的資料全部乘以100後，得到：\(x3 = \{100, 1000, 200, 300, 700, 100, 700, 800, 100\}\)
+
+<ul>
+<li>請問$x3$的平均數為何？和$x1$的平均數乘以100是否一樣？</li>
+<li>請問$x3$的中位數為何？和$x1$的中位數乘以100是否一樣？</li>
+<li>請問$x3$的眾數為何？和$x1$的眾數乘以100是否一樣？</li>
+</ul></li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-29" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>評論</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>線性轉換後的平均數、中位數、眾數與對平均數、中位數、眾數做相同的線性轉換後結果相同</li>
+<li>線性轉換的範例
+
+<ul>
+<li>改變單位：1元 ==&gt; 1萬元、公分 ==&gt; 公尺</li>
+</ul></li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-30" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>數據的分散程度</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>最大值、最小值與全距(range)</li>
+<li>平均差(MD, Mean Deviation)</li>
+<li>MAD(Median Absolute Deviation)</li>
+<li>四分位差(IQR, Interqwuartile Range)</li>
+<li>變異數與標準差(Variance and standard deviation)</li>
+<li>變異係數(CV, Coefficient of Variation)</li>
+<li>Quartile coefficient of dispersion</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-31" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>最大值、最小值與全距(range)</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>描述數據分佈的範圍</li>
+<li>\(x1 = \{1, 10, 2, 3, 7, 1, 7, 8, 1\}\)
+
+<ul>
+<li>最大值為\(10\)</li>
+<li>最小值為\(1\)</li>
+<li>全距為「最大值-最小值」，為\(10 - 1 = 9\)</li>
+</ul></li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-32" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>最大值、最小值與全距的應用</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>了解數據是不是全部都是正數
+
+<ul>
+<li>是的話，常常先取log或開根號後再處理</li>
+<li>範例：網路即時競價的出價預測</li>
+</ul></li>
+<li>了解數據的範圍是否合理
+
+<ul>
+<li>了解數據的散布行為才能了解數據是否正常</li>
+<li>出價範圍是否合理</li>
+</ul></li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-33" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>練習三之一</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>\(x1 = \{1, 10, 2, 3, 7, 1, 7, 8, 1\}\)
+
+<ul>
+<li>請問$x1$的最大值、最小值與全距為何？</li>
+</ul></li>
+<li>把$x1$的10改成100後，得到：\(x2 = \{1, 100, 2, 3, 7, 1, 7, 8, 1\}\)
+
+<ul>
+<li>請問$x2$的最大值、最小值與全距為何？</li>
+</ul></li>
+<li>把$x1$的資料全部乘以100後，得到：\(x3 = \{100, 1000, 200, 300, 700, 100, 700, 800, 100\}\)
+
+<ul>
+<li>請問$x3$的最大值、最小值與全距為何？</li>
+</ul></li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-34" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>評論</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>全距越大，代表數據的散布程度越大
+
+<ul>
+<li>全距容易受到異常資料的影響</li>
+</ul></li>
+<li>全距會隨著數據的放大而變大</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-35" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>平均差(MD, Mean Deviation)</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>差的平均</li>
+<li>\(\frac{1}{n} \sum_{i = 1} ^n {\left\lVert x_i - \bar{x} \right\rVert}\)</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-36" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>練習三之二</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>$x1, x2, x3$如前述</li>
+<li>請問$x1$的平均差為何？</li>
+<li>請問$x2$的平均差為何？</li>
+<li>請問$x3$的平均差為何？</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-37" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>評論</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>平均差越大，代表數據的散布程度越大
+
+<ul>
+<li>平均差容易受到異常資料的影響</li>
+</ul></li>
+<li>平均差會隨著數據的放大而變大</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-38" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>MAD(Mean Absolute Deviation)</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>若$x_m$代表$x$的中位數，則MAD \(= median(\left\lVert x_i - x_m \right\rVert)\)</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-39" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>練習三之三</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>$x1, x2, x3$如前述</li>
+<li>請問$x1$的MAD為何？</li>
+<li>請問$x2$的MAD為何？</li>
+<li>請問$x3$的MAD為何？</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-40" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>評論</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>MAD越大，代表數據的散布程度越大
+
+<ul>
+<li>MAD<strong>不容易</strong>受到異常資料的影響</li>
+</ul></li>
+<li>MAD會隨著數據的放大而變大</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-41" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>百分位數(quantile)與四分位差(interquartile range)</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>$p$百分位數的計算方式（這裡的\(p\) 滿足 $0 \leq \frac{p}{100} \leq 1$）：
+
+<ul>
+<li>\(Q_i(p) = (1 - \gamma) x_{(j)} + \gamma x_{(j + 1)}\)</li>
+<li>$i$代表百分位數的計算方式，在R 中實作了九種計算quantile的方法，也就是\(i \in \{1, 2, 3, ..., 9\}\)</li>
+<li>一般來說，百分位數都類似中位數，是取兩個最靠近$p$的資料點作加權平均，加權的方式則和$i$有關</li>
+<li>中位數的計算方式：排序後取最靠近中間的資料點取平均</li>
+</ul></li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-42" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>百分位數(quantile)與四分位差(interquartile range)</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>現代數據處理軟體都提供了計算百分位數的功能</li>
+<li>百分位數
+
+<ul>
+<li>以${1, 2, 3, 4, 5, 6, 7, 8, 9, 10}$為例：</li>
+<li>第25百分位數，又稱第一四分位數：$3.25$，代表有25%的數據比$3.25$小</li>
+<li>第50百分位數，即為中位數：$5.5$，代表有50%的數據比$5.5$小</li>
+<li>第75百分位數，又稱第三四分位數：$7.75$，代表有75%的數據比$7.75$小</li>
+</ul></li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-43" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>百分位數(quantile)與四分位差(interquartile range)</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>四分位差：
+
+<ul>
+<li>第75百分位數與25百分位數的差，即為四分位差</li>
+<li>所以上例的四分位差為\(4.5\)</li>
+</ul></li>
+<li>四分位差代表數據<strong>中間</strong>層的散布程度</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-44" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>練習三之四</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>$x1, x2, x3$如前述</li>
+<li>請問$x1$的四分位差為何？</li>
+<li>請問$x2$的四分位差為何？</li>
+<li>請問$x3$的四分位差為何？</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-45" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>評論</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>四分位差越大，代表數據的散布程度越大
+
+<ul>
+<li>四分位差<strong>不容易</strong>受到異常資料的影響</li>
+</ul></li>
+<li>四分位差會隨著數據的放大而變大</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-46" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>變異數(variance)與標準差(standard deviation)</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>變異數的計算方式： \(\sigma^2 = \frac{1}{n} \sum_{i=1}^n (x - \bar{x})^2\)</li>
+<li>標準差的計算方式： \(\sigma = \sqrt{\frac{1}{n} \sum_{i=1}^n (x - \bar{x})^2}\)</li>
+<li>變異數與標準差的值越大，代表數據的散布程度越大</li>
+<li>變異數與標準差是最常用的散布程度的指標：
+
+<ul>
+<li>容易計算（只需要\(\sum_{i=1}^n{x_i}\) 與 \(\sum_{i=1}^n {x_i^2}\) 即可</li>
+<li>變異數的相關理論性質很泛用，如切比雪夫不等式（Chebyshev&#39;s Inequality）</li>
+<li>機率論中有許多好性質，例如獨立的變異數可相加</li>
+</ul></li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-47" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>變異數(variance)與標準差(standard deviation)</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>當資料為抽樣結果時，通常使用樣本變異數與樣本標準差：
+
+<ul>
+<li>樣本變異數的計算方式： \(s^2 = \frac{1}{n - 1} \sum_{i=1}^n (x - \bar{x})^2\)</li>
+<li>樣本標準差的計算方式： \(s = \sqrt{\frac{1}{n - 1} \sum_{i=1}^n (x - \bar{x})^2}\)</li>
+</ul></li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-48" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>練習三之五</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>$x1, x2, x3$如前述</li>
+<li>請問$x1$的樣本變異數與樣本標準差為何？</li>
+<li>請問$x2$的樣本變異數與樣本標準差為何？</li>
+<li>請問$x3$的樣本變異數與樣本標準差為何？</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-49" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>評論</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>變異數與標準差差越大，代表數據的散布程度越大
+
+<ul>
+<li>變異數與標準差容易受到異常資料的影響</li>
+</ul></li>
+<li>變異數與標準差會隨著數據的放大而變大</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-50" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>變異係數(CV, Coefficient of Variation)</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>變異係數的定義為：標準差除以平均值，實務常以$\frac{s}{\bar{x}}$來計算樣本的變異係數</li>
+<li>變異係數在區間尺度上無意義，只有在比例尺度上才有意義</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-51" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>練習三之六</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>$x1, x2, x3$如前述</li>
+<li>請問$x1$的變異係數為何？</li>
+<li>請問$x2$的變異係數為何？</li>
+<li>請問$x3$的變異係數為何？</li>
+<li>把$x1$的資料全部-1後，得到：\(x4 = \{0, 9, 1, 2, 6, 0, 6, 7, 0\}\)
+
+<ul>
+<li>請問$x4$的變異係數為何？</li>
+</ul></li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-52" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>評論</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>變異係數越大，代表數據<strong>相對於平均值</strong>的散布程度越大
+
+<ul>
+<li>變異係數容易受到異常資料的影響</li>
+</ul></li>
+<li>變異係數<strong>不會</strong>隨著數據的放大而變大</li>
+<li>平移（$x1 \Rightarrow x4$）會<strong>影響</strong>變異係數，所以只有比例尺度的資料才能使用變異係數</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-53" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>Quartile coefficient of dispersion</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>Quartile coefficient of dispersion的定義為：IQR / Median
+
+<ul>
+<li>非常類似變異係數的定義：標準差除以平均值</li>
+</ul></li>
+<li>Quartile coefficient of dispersion在區間尺度上無意義，只有在比例尺度上才有意義</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-54" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>練習三之七</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>$x1, x2, x3, x4$如前述</li>
+<li>請問$x1$的Quartile coefficient of dispersion為何？</li>
+<li>請問$x2$的Quartile coefficient of dispersion為何？</li>
+<li>請問$x3$的Quartile coefficient of dispersion為何？</li>
+<li>請問$x4$的Quartile coefficient of dispersion為何？</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-55" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>評論</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>在上述練習中，$x1$、$x2$與$x3$的Quartile coefficient of dispersion不變
+
+<ul>
+<li>對異常資料不敏感</li>
+<li>不會隨著轉換單位而改變</li>
+</ul></li>
+<li>平移（$x1 \Rightarrow x4$）會<strong>影響</strong>Quartile coefficient of dispersion，所以只有比例尺度的資料才能使用Quartile coefficient of dispersion</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-56" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>總結</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>視覺化：直方圖、圓餅圖與長條圖</li>
+<li>資料中心：平均數、中位數與眾數</li>
+<li>資料的散布程度：全距(range)、平均差(MD, Mean Deviation)、MAD(Median Absolute Deviation)、四分位差(IQR, Interqwuartile Range)、變異數與標準差(Variance and standard deviation)、變異係數(CV, Coefficient of Variation)、Quartile coefficient of dispersion</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-57" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>討論</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>穩健(Robust，代表資料敘述不容易受到少數異常資料的影響)是優點還是缺點？</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-58" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>敘述統計的應用：綜合所得稅所得總額</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>我的收入是高還是低？
+
+<ul>
+<li>可以查詢政府開放資料的「綜合所得稅所得總額」，了解自己的收入高低</li>
+<li>資料來源：<a href="http://data.gov.tw/node/17983">http://data.gov.tw/node/17983</a></li>
+</ul></li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-59" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>敘述統計的應用：綜合所得稅所得總額</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<table><thead>
+<tr>
+<th align="left">鄉鎮市區</th>
+<th align="left">村里</th>
+<th align="right">納稅單位</th>
+<th align="right">綜合所得總額</th>
+<th align="right">平均數</th>
+<th align="right">中位數</th>
+<th align="right">第一分位數</th>
+<th align="right">第三分位數</th>
+<th align="right">標準差</th>
+<th align="right">變異係數</th>
+</tr>
+</thead><tbody>
+<tr>
+<td align="left">松山區</td>
+<td align="left">中崙里</td>
+<td align="right">1427</td>
+<td align="right">1782134</td>
+<td align="right">1249</td>
+<td align="right">823</td>
+<td align="right">433</td>
+<td align="right">1559</td>
+<td align="right">1609.98</td>
+<td align="right">128.92</td>
+</tr>
+</tbody></table>
+
+<p><small>單位：金額(千元)</small></p>
+
+<ul>
+<li>請問能不能從上述數據中看出貧富差距的跡象呢？</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-60" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>模擬中崙里的所得總額分佈</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<p><img src="./assets/fig/rstatistics-taipei.tax2-1.png" alt="plot of chunk taipei.tax2"></p>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="dark segue" id="slide-61" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2>機率論</h2>
+  </hgroup>
+  <article data-timings="">
+    
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-62" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>母體</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>研究對象全體所構成的集合</li>
+<li>例：全金門縣縣民</li>
+</ul>
+
+<p>料，建構了全金門縣人民的年齡母體：</p>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-63" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>母體</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>我們自內政部資料開放平台下載了個村（里）戶籍人口統計月報表，依據這份資</li>
+</ul>
+
+<p><img src="./assets/fig/rstatistics-population-Kinmen-1.png" alt="plot of chunk population-Kinmen"></p>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-64" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>母體</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>依據母體資料，我們可以算出金門縣縣民的平均年齡、標準差、最大值、最小值... 等等數據
+
+<ul>
+<li>金門縣縣民年齡的平均值為：40.452398</li>
+</ul></li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-65" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>樣本</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>實務上，要收集所有的資料可能有困難，所以我們可能透過隨機抽樣的方式，抽出20名金門縣縣民當成母體的代表
+
+<ul>
+<li>我們希望能透過對20名金門縣縣民的了解，推論到全金門縣縣民，這就是<strong>統計推論</strong></li>
+<li>例：20名金門縣縣民的平均年齡</li>
+</ul></li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-66" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>樣本</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>這20名金門縣縣民的平均年齡，在每次抽樣時都會不同...</li>
+</ul>
+
+<pre><code> [1] 43.9 45.6 34.7 42.0 46.0 34.1 40.7 48.6 34.3 43.9
+</code></pre>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-67" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>樣本空間</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>抽出20名金門縣縣民，所有可能的結果就構成了「樣本空間」
+
+<ul>
+<li>例：抽出20名0歲的金門縣縣民與抽出20名100歲的金門縣縣民，都是可能的組合，所以都屬於「樣本空間」之中</li>
+</ul></li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-68" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>隨機變數（不嚴謹）</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>而把樣本空間的每種可能的結果，計算成一個單一的數字的<strong>方法</strong>，就叫做「隨機變數」</li>
+<li>例：20名金門縣縣民的平均年齡，就是一種隨機變數</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-69" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>估計母體平均數 - 統計量</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-70" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>評估估計的好壞</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-71" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>隨機變數與模擬</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-72" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>相關性</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-73" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>離散對連續</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-74" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  
+</hgroup>
+<article class = 'flexbox vcenter'>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="dark segue" id="slide-75" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2>假設檢定</h2>
+  </hgroup>
+  <article data-timings="">
+    
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-76" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>母體未知</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-77" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>假想的母體（假設）</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-78" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>檢定統計量</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-79" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>檢定統計量在假想母體的分佈</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-80" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>比較觀測的檢定統計量與上述的分佈</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-81" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>評估檢定統計量</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-82" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  
+</hgroup>
+<article class = 'flexbox vcenter'>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="dark segue" id="slide-83" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2>信賴區間</h2>
+  </hgroup>
+  <article data-timings="">
+    
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="dark segue" id="slide-84" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2>統計模型到機器學習</h2>
+  </hgroup>
+  <article data-timings="">
+    
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-85" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>...</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>\(x\), \(y\)</li>
+<li>\(y = f(x) + \varepsilon\), 假設 \(\varepsilon \sim P\)</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="dark segue" id="slide-86" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2>統計科學簡介</h2>
+  </hgroup>
+  <article data-timings="">
+    
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+    <slide class="backdrop"></slide>
+  </slides>
+  <div class="pagination pagination-small" id='io2012-ptoc' style="display:none;">
+    <ul>
+      <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=1 title='課程大綱'>
+         1
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=2 title='課程目標'>
+         2
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=3 title='關於練習'>
+         3
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=4 title='敘述統計'>
+         4
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=5 title='何謂敘述統計？'>
+         5
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=6 title='數值系統'>
+         6
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=7 title='範例一'>
+         7
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=8 title='數值系統間的互換'>
+         8
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=9 title='類別型變數的圖形化(長條圖)'>
+         9
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=10 title='類別型變數的圖形化（圓形圖）'>
+         10
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=11 title='連續型變數的圖形化(直方圖)'>
+         11
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=12 title='直方圖 v.s. 長條圖'>
+         12
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=13 title='數據指標'>
+         13
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=14 title='數據的中心位置'>
+         14
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=15 title='平均數(mean)'>
+         15
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=16 title='平均數(mean)'>
+         16
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=17 title='平均數(mean)的應用'>
+         17
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=18 title='移動平均在股票分析的應用'>
+         18
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=19 title='平均數的濫用'>
+         19
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=20 title='中位數(median)'>
+         20
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=21 title='中位數(median)'>
+         21
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=22 title='中位數的應用'>
+         22
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=23 title='眾數(mode)'>
+         23
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=24 title='眾數的應用'>
+         24
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=25 title='練習二之一'>
+         25
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=26 title='練習二之二'>
+         26
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=27 title='評論'>
+         27
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=28 title='練習二之三'>
+         28
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=29 title='評論'>
+         29
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=30 title='數據的分散程度'>
+         30
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=31 title='最大值、最小值與全距(range)'>
+         31
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=32 title='最大值、最小值與全距的應用'>
+         32
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=33 title='練習三之一'>
+         33
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=34 title='評論'>
+         34
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=35 title='平均差(MD, Mean Deviation)'>
+         35
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=36 title='練習三之二'>
+         36
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=37 title='評論'>
+         37
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=38 title='MAD(Mean Absolute Deviation)'>
+         38
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=39 title='練習三之三'>
+         39
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=40 title='評論'>
+         40
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=41 title='百分位數(quantile)與四分位差(interquartile range)'>
+         41
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=42 title='百分位數(quantile)與四分位差(interquartile range)'>
+         42
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=43 title='百分位數(quantile)與四分位差(interquartile range)'>
+         43
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=44 title='練習三之四'>
+         44
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=45 title='評論'>
+         45
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=46 title='變異數(variance)與標準差(standard deviation)'>
+         46
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=47 title='變異數(variance)與標準差(standard deviation)'>
+         47
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=48 title='練習三之五'>
+         48
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=49 title='評論'>
+         49
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=50 title='變異係數(CV, Coefficient of Variation)'>
+         50
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=51 title='練習三之六'>
+         51
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=52 title='評論'>
+         52
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=53 title='Quartile coefficient of dispersion'>
+         53
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=54 title='練習三之七'>
+         54
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=55 title='評論'>
+         55
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=56 title='總結'>
+         56
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=57 title='討論'>
+         57
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=58 title='敘述統計的應用：綜合所得稅所得總額'>
+         58
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=59 title='敘述統計的應用：綜合所得稅所得總額'>
+         59
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=60 title='模擬中崙里的所得總額分佈'>
+         60
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=61 title='機率論'>
+         61
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=62 title='母體'>
+         62
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=63 title='母體'>
+         63
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=64 title='母體'>
+         64
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=65 title='樣本'>
+         65
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=66 title='樣本'>
+         66
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=67 title='樣本空間'>
+         67
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=68 title='隨機變數（不嚴謹）'>
+         68
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=69 title='估計母體平均數 - 統計量'>
+         69
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=70 title='評估估計的好壞'>
+         70
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=71 title='隨機變數與模擬'>
+         71
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=72 title='相關性'>
+         72
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=73 title='離散對連續'>
+         73
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=74 title='NA'>
+         74
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=75 title='假設檢定'>
+         75
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=76 title='母體未知'>
+         76
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=77 title='假想的母體（假設）'>
+         77
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=78 title='檢定統計量'>
+         78
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=79 title='檢定統計量在假想母體的分佈'>
+         79
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=80 title='比較觀測的檢定統計量與上述的分佈'>
+         80
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=81 title='評估檢定統計量'>
+         81
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=82 title='NA'>
+         82
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=83 title='信賴區間'>
+         83
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=84 title='統計模型到機器學習'>
+         84
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=85 title='...'>
+         85
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=86 title='統計科學簡介'>
+         86
+      </a>
+    </li>
+  </ul>
+  </div>  <!--[if IE]>
+    <script 
+      src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js">  
+    </script>
+    <script>CFInstall.check({mode: 'overlay'});</script>
+  <![endif]-->
+</body>
+  <!-- Load Javascripts for Widgets -->
+  
+  <!-- MathJax: Fall back to local if CDN offline but local image fonts are not supported (saves >100MB) -->
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        processEscapes: true
+      }
+    });
+  </script>
+  <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/2.0-latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  <!-- <script src="https://c328740.ssl.cf1.rackcdn.com/mathjax/2.0-latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script> -->
+  <script>window.MathJax || document.write('<script type="text/x-mathjax-config">MathJax.Hub.Config({"HTML-CSS":{imageFont:null}});<\/script><script src="libraries/widgets/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"><\/script>')
+</script>
+<!-- LOAD HIGHLIGHTER JS FILES -->
+  <script src="libraries/highlighters/highlight.js/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <!-- DONE LOADING HIGHLIGHTER JS FILES -->
+   
+  </html>

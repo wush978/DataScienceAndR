@@ -1,0 +1,1316 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>R 的資料視覺化</title>
+  <meta charset="utf-8">
+  <meta name="description" content="R 的資料視覺化">
+  <meta name="author" content="Wush Wu">
+  <meta name="generator" content="slidify" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <link rel="stylesheet" href="libraries/frameworks/io2012-wush/css/default.css" media="all" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012-wush/css/phone.css" 
+    media="only screen and (max-device-width: 480px)" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012-wush/css/slidify.css" >
+  <link rel="stylesheet" href="libraries/highlighters/highlight.js/css/zenburn.css" />
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->  <link rel=stylesheet href="./assets/css/custom.css"></link>
+<link rel=stylesheet href="./assets/css/ribbons.css"></link>
+
+  
+  <!-- Grab CDN jQuery, fall back to local if offline -->
+  <script src="libraries/frameworks/io2012-wush/js/jquery-1.7.min.js"></script>
+  <!-- <script>window.jQuery || document.write('<script src="libraries/widgets/quiz/js/jquery.js"><\/script>')</script> -->
+  <script data-main="libraries/frameworks/io2012-wush/js/slides" 
+    src="libraries/frameworks/io2012-wush/js/require-1.0.8.min.js">
+  </script>
+  
+  
+
+</head>
+<body style="opacity: 0">
+  <slides class="layout-widescreen">
+    
+    <!-- LOGO SLIDE -->
+        <slide class="title-slide segue nobackground">
+  <hgroup class="auto-fadein">
+    <h1>R 的資料視覺化</h1>
+    <h2></h2>
+    <p>Wush Wu<br/>國立台灣大學</p>
+  </hgroup>
+  <article></article>  
+</slide>
+    
+
+    <!-- SLIDES -->
+    <slide class="largecontent" id="slide-1" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>課程內容</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>R 語言的視覺化</li>
+<li>大數據的資料視覺化</li>
+<li>關於swirl</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="dark segue" id="slide-2" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2>R 語言的視覺化</h2>
+  </hgroup>
+  <article data-timings="">
+    
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-3" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>R 的繪圖引擎</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>X11: Unix 作業系統上的X11 桌面系統</li>
+<li>windows: 用於Windows系統</li>
+<li>quartz: Mac OS X 系統</li>
+<li>postscript: 用於印表機或是建立PostScript文件</li>
+<li>pdf, png, jpeg: 用於建立特定格式的檔案</li>
+<li>html 和 javascript: 用於建立網頁上的互動式圖表</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-4" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>R 的繪圖簡介</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>API 設計
+
+<ul>
+<li>基本繪圖API</li>
+<li>ggplot2</li>
+</ul></li>
+</ul>
+
+<p><img src="./assets/fig/rvisualization-ggplot2-1-1.png" alt="plot of chunk ggplot2-1"></p>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="dark segue" id="slide-5" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2>R 的各種基礎Visualization API</h2>
+  </hgroup>
+  <article data-timings="">
+    
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-6" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>Visualization 簡單分類</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>單變數
+
+<ul>
+<li>類別型變數</li>
+<li>連續型變數</li>
+</ul></li>
+<li>雙變數
+
+<ul>
+<li>連續 vs 連續</li>
+<li>連續 vs 離散</li>
+<li>連續 vs 連續</li>
+</ul></li>
+<li>多變量</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-7" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>類別型變數</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<pre><code class="r">pie(table(iris$Species))
+</code></pre>
+
+<p><img src="./assets/fig/rvisualization-categorical-plot-1.png" alt="plot of chunk categorical-plot"></p>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-8" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>連續型變數</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<pre><code class="r">par(mfrow = c(1, 2))
+plot(density(iris$Sepal.Length))
+hist(iris$Sepal.Length)
+</code></pre>
+
+<p><img src="./assets/fig/rvisualization-continuous-plot-1.png" alt="plot of chunk continuous-plot"></p>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-9" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>類別 v.s. 類別</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<pre><code class="r">data(Titanic)
+mosaicplot(~ Sex + Survived, data = Titanic,
+           main = &quot;Survival on the Titanic&quot;, color = TRUE)
+</code></pre>
+
+<p><img src="./assets/fig/rvisualization-categorical-categorical-1.png" alt="plot of chunk categorical-categorical"></p>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-10" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>類別 v.s. 連續</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<pre><code class="r">plot(Sepal.Length ~ Species, iris)
+</code></pre>
+
+<p><img src="./assets/fig/rvisualization-categorical-continuous-1.png" alt="plot of chunk categorical-continuous"></p>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-11" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>連續 v.s. 連續</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<pre><code class="r">plot(dist ~ speed, cars)
+</code></pre>
+
+<p><img src="./assets/fig/rvisualization-continuous-continuous-1.png" alt="plot of chunk continuous-continuous"></p>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-12" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>多變量</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<pre><code class="r">plot(iris)
+</code></pre>
+
+<p><img src="./assets/fig/rvisualization-mv1-1.png" alt="plot of chunk mv1"></p>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-13" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>多變量</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<pre><code class="r">suppressPackageStartupMessages(library(PerformanceAnalytics))
+suppressWarnings(chart.Correlation(iris[-5], bg=iris$Species, pch=21))
+</code></pre>
+
+<p><img src="./assets/fig/rvisualization-mv2-1.png" alt="plot of chunk mv2"></p>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-14" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>多變量</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<pre><code class="r">library(corrplot)
+corrplot(cor(mtcars), method = &quot;circle&quot;)
+</code></pre>
+
+<p><img src="./assets/fig/rvisualization-mv3-1.png" alt="plot of chunk mv3"></p>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="segue dark" id="slide-15" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2>各種R 和分析結果結合的視覺化</h2>
+  </hgroup>
+  <article data-timings="">
+    
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-16" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2><code>plot</code>和Linear Regression</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<pre><code class="r">g &lt;- lm(dist ~ speed, cars)
+par(mfrow = c(2,2))
+plot(g)
+</code></pre>
+
+<p><img src="./assets/fig/rvisualization-lm.plot-1.png" alt="plot of chunk lm.plot"></p>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-17" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2><code>plot</code>和Regression</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<pre><code class="r">plot(cars, main = &quot;lowess(cars)&quot;)
+lines(lowess(cars), col = 2)
+</code></pre>
+
+<p><img src="./assets/fig/rvisualization-lowess-1.png" alt="plot of chunk lowess"></p>
+
+<p><small>W. S. Cleveland, E. Grosse and W. M. Shyu (1992) Local regression models. Chapter 8 of Statistical Models in S eds J.M. Chambers and T.J. Hastie, Wadsworth &amp; Brooks/Cole. </small></p>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-18" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2><code>plot</code>和Regression</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<pre><code class="r">suppressPackageStartupMessages(library(sm))
+with(cars, sm.regression(dist, speed, method = &quot;aicc&quot;,
+                         col = &quot;red&quot;, model = &quot;linear&quot;))
+</code></pre>
+
+<p><img src="./assets/fig/rvisualization-sm-1.png" alt="plot of chunk sm"></p>
+
+<p><small>Bowman, A.W. and Azzalini, A. (1997). Applied Smoothing Techniques for Data Analysis: the Kernel Approach with S-Plus Illustrations. Oxford University Press, Oxford.</small></p>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-19" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2><code>plot</code>和Decision Tree</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<pre><code class="r">library(rpart)
+library(rpart.plot)
+rpart.plot(rpart(Species ~ ., iris))
+</code></pre>
+
+<p><img src="./assets/fig/rvisualization-rpart.plot-1.png" alt="plot of chunk rpart.plot"></p>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-20" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>多變量 PCA</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<pre><code class="r">library(ade4)
+g &lt;- dudi.pca(iris[,-5], scan = FALSE)
+scatter(g)
+</code></pre>
+
+<p><img src="./assets/fig/rvisualization-ggplot2-mv1-1.png" alt="plot of chunk ggplot2-mv1"></p>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-21" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>R 的基本繪圖API</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>高階繪圖指令：依據輸入的資料產生完整的圖片</li>
+<li>低階繪圖指令：修飾當前的圖片</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-22" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>基礎繪圖方式與R 的基本繪圖API</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>泛用型的物件導向API：
+
+<ul>
+<li><code>plot</code>本身能以直角座標系統繪製各種幾何圖形</li>
+<li><code>plot</code>能和模型結合，依據模型的型態繪製各種模型的結果
+
+<ul>
+<li><code>plot.lm</code>, <code>rpart::plot.rpart</code></li>
+</ul></li>
+</ul></li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-23" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>基礎繪圖API</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li><code>pie</code>, <code>hist</code>, <code>boxplot</code>, <code>barplot</code>, ...
+
+<ul>
+<li>清空之前的繪圖結果</li>
+</ul></li>
+<li><code>lines</code>, <code>points</code>, <code>legend</code>, <code>title</code>, <code>text</code>, <code>polygon</code>, ..
+
+<ul>
+<li>修飾之前的繪圖結果</li>
+</ul></li>
+<li><code>par</code>
+
+<ul>
+<li>控制繪圖引擎的參數</li>
+</ul></li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="segue dark" id="slide-24" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2>ggplot2</h2>
+  </hgroup>
+  <article data-timings="">
+    
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-25" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>Reference</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>Wilkinson, Leland (2005). The Grammar of Graphics. Springer. ISBN 978-0-387-98774-3.</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-26" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>ggplot2 的邏輯</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>基礎API 是一種用紙筆模型來繪圖的設計思想</li>
+<li>ggplot2 是一種以繪圖物件為主的設計思想</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-27" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>ggplot2 對R 的影響</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>大量以ggplot2的API 為骨幹的套件</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-28" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>ggplot2 離散</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<pre><code class="r">data(diamonds, package = &quot;ggplot2&quot;)
+ggplot(diamonds, aes(x = color)) +
+  geom_bar()
+</code></pre>
+
+<p><img src="./assets/fig/rvisualization-ggplot2-categorical-1.png" alt="plot of chunk ggplot2-categorical"></p>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-29" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>ggplot2 連續</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<pre><code class="r">ggplot(diamonds, aes(x = price)) +
+  geom_density()
+</code></pre>
+
+<p><img src="./assets/fig/rvisualization-ggplot2-continuous-1.png" alt="plot of chunk ggplot2-continuous"></p>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-30" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>ggplot2 離散 v.s. 離散</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<p><img src="./assets/fig/rvisualization-ggplot2-categorical-categorical-1.png" alt="plot of chunk ggplot2-categorical-categorical"></p>
+
+<p><small><a href="http://stackoverflow.com/questions/19233365/how-to-create-a-marimekko-mosaic-plot-in-ggplot2">http://stackoverflow.com/questions/19233365/how-to-create-a-marimekko-mosaic-plot-in-ggplot2</a></small></p>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-31" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>ggplot2 類別 v.s. 連續</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<pre><code class="r">ggplot(iris, aes(x = Species, y = Sepal.Width)) +
+  geom_boxplot()
+</code></pre>
+
+<p><img src="./assets/fig/rvisualization-ggplot2-categorical-continuous-1.png" alt="plot of chunk ggplot2-categorical-continuous"></p>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-32" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>ggplot2 連續 v.s. 連續</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<pre><code class="r">ggplot(iris, aes(x = Sepal.Width, y = Sepal.Length, color = Species)) +
+  geom_point()
+</code></pre>
+
+<p><img src="./assets/fig/rvisualization-ggplot2-continuous-continuous-1.png" alt="plot of chunk ggplot2-continuous-continuous"></p>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="segue dark" id="slide-33" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2>大數據時代的視覺化</h2>
+  </hgroup>
+  <article data-timings="">
+    
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-34" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>大數據時代視覺化的挑戰</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>資料太大，直接化就當機，打開圖的人也會當機</li>
+<li>資料的維度太多，需要能對圖做操作，而不是程式碼</li>
+<li>資料的種類更廣泛，除了離散、數值之外，還包含如「圖資」等各種資料</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-35" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>tabplot</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>Google: &quot;R big data visualization&quot;</li>
+<li><a href="https://cran.r-project.org/web/packages/tabplot/vignettes/tabplot-vignette.html">https://cran.r-project.org/web/packages/tabplot/vignettes/tabplot-vignette.html</a></li>
+<li>初步解決了數據量的問題</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-36" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>Web Based 的互動式解決方案</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>Java Script
+
+<ul>
+<li><a href="http://www.htmlwidgets.org/">http://www.htmlwidgets.org/</a></li>
+<li>透過互動圖表解決資料維度更多的問題</li>
+<li><a href="http://yihui.name/recharts/">http://yihui.name/recharts/</a></li>
+</ul></li>
+<li>Shiny
+
+<ul>
+<li><a href="http://shiny.rstudio.com/gallery/">http://shiny.rstudio.com/gallery/</a></li>
+</ul></li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-37" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>Open Source 太棒了</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>新型態的資料，社群就會誕生新的套件
+
+<ul>
+<li><a href="https://cran.r-project.org/doc/contrib/intro-spatial-rl.pdf">圖資</a></li>
+<li><a href="http://kateto.net/network-visualization">社群網路</a></li>
+</ul></li>
+<li>甚至是新型態的Visualization</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-38" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>地圖</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<pre><code class="r">suppressPackageStartupMessages(library(Rtwmap))
+data(county1984)
+random.color &lt;- as.factor(sample(1:3, length(county1984), TRUE))
+color &lt;- rainbow(3)
+county1984$random.color &lt;- random.color
+spplot(county1984, &quot;random.color&quot;, col.regions = color, main = &quot;Taiwan Random Color&quot;)
+</code></pre>
+
+<p><img src="./assets/fig/rvisualization-twmap-1.png" alt="plot of chunk twmap"></p>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-39" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>Network Visualization</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<pre><code class="r">suppressPackageStartupMessages(library(networkD3))
+data(MisLinks)
+data(MisNodes)
+# Create graph
+forceNetwork(Links = MisLinks, Nodes = MisNodes, Source = &quot;source&quot;,
+             Target = &quot;target&quot;, Value = &quot;value&quot;, NodeID = &quot;name&quot;,
+             Group = &quot;group&quot;, opacity = 0.4, zoom = TRUE)
+</code></pre>
+
+<iframe src="networkD3-eval.html" style="width:100%;height:125%"></iframe>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-40" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>資料的流動 - Sankey Diagram</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<!-- Sankey generated in R 3.2.3 by googleVis 0.5.10 package -->
+
+<!-- Mon Feb 15 02:38:04 2016 -->
+
+<!-- jsHeader -->
+
+<script type="text/javascript">
+ 
+// jsData 
+function gvisDataSankeyID3a2b6c72854a () {
+var data = new google.visualization.DataTable();
+var datajson =
+[
+ [
+ "France",
+"UK",
+3.816 
+],
+[
+ "Germany",
+"UK",
+3.18 
+],
+[
+ "USA",
+"UK",
+2.862 
+],
+[
+ "Irish Republic",
+"UK",
+2.544 
+],
+[
+ "Netherlands",
+"UK",
+1.908 
+],
+[
+ "Spain",
+"UK",
+1.908 
+],
+[
+ "Italy",
+"UK",
+1.59 
+],
+[
+ "Poland",
+"UK",
+1.272 
+],
+[
+ "Belgium",
+"UK",
+1.272 
+],
+[
+ "Australia",
+"UK",
+0.954 
+],
+[
+ "Other countries",
+"UK",
+10.494 
+],
+[
+ "UK",
+"Scotland",
+2.2 
+],
+[
+ "UK",
+"Wales",
+0.9 
+],
+[
+ "UK",
+"Northern Ireland",
+0.4 
+],
+[
+ "UK",
+"England",
+12.8 
+],
+[
+ "UK",
+"London",
+15.5 
+] 
+];
+data.addColumn('string','origin');
+data.addColumn('string','visit');
+data.addColumn('number','weights');
+data.addRows(datajson);
+return(data);
+}
+ 
+// jsDrawChart
+function drawChartSankeyID3a2b6c72854a() {
+var data = gvisDataSankeyID3a2b6c72854a();
+var options = {};
+options["width"] =    400;
+options["height"] =    250;
+options["sankey"] = {link:{color:{fill:'lightblue'}}};
+
+    var chart = new google.visualization.Sankey(
+    document.getElementById('SankeyID3a2b6c72854a')
+    );
+    chart.draw(data,options);
+    
+
+}
+  
+ 
+// jsDisplayChart
+(function() {
+var pkgs = window.__gvisPackages = window.__gvisPackages || [];
+var callbacks = window.__gvisCallbacks = window.__gvisCallbacks || [];
+var chartid = "sankey";
+  
+// Manually see if chartid is in pkgs (not all browsers support Array.indexOf)
+var i, newPackage = true;
+for (i = 0; newPackage && i < pkgs.length; i++) {
+if (pkgs[i] === chartid)
+newPackage = false;
+}
+if (newPackage)
+  pkgs.push(chartid);
+  
+// Add the drawChart function to the global list of callbacks
+callbacks.push(drawChartSankeyID3a2b6c72854a);
+})();
+function displayChartSankeyID3a2b6c72854a() {
+  var pkgs = window.__gvisPackages = window.__gvisPackages || [];
+  var callbacks = window.__gvisCallbacks = window.__gvisCallbacks || [];
+  window.clearTimeout(window.__gvisLoad);
+  // The timeout is set to 100 because otherwise the container div we are
+  // targeting might not be part of the document yet
+  window.__gvisLoad = setTimeout(function() {
+  var pkgCount = pkgs.length;
+  google.load("visualization", "1", { packages:pkgs, callback: function() {
+  if (pkgCount != pkgs.length) {
+  // Race condition where another setTimeout call snuck in after us; if
+  // that call added a package, we must not shift its callback
+  return;
+}
+while (callbacks.length > 0)
+callbacks.shift()();
+} });
+}, 100);
+}
+ 
+// jsFooter
+</script>
+ 
+
+<!-- jsChart -->  
+
+<script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartSankeyID3a2b6c72854a"></script>
+ 
+
+<!-- divChart -->
+
+<div id="SankeyID3a2b6c72854a" 
+  style="width: 400; height: 250;">
+</div>
+
+<p><small><a href="http://www.magesblog.com/2014/03/sankey-diagrams-with-googlevis.html">http://www.magesblog.com/2014/03/sankey-diagrams-with-googlevis.html</a></small></p>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="dark segue" id="slide-41" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2>R 與數據模型</h2>
+  </hgroup>
+  <article data-timings="">
+    
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-42" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>數據模型的API 設計模式</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>線性代數介面</li>
+<li>Formula 介面</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-43" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>線性代數介面</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<pre><code class="r">g &lt;- lm.fit(X, y, ...)
+</code></pre>
+
+<ul>
+<li>\(X\): 一個代表解釋變數的矩陣</li>
+<li>\(y\): 一個代表應變數的向量</li>
+<li>\(...\): 控制演算法的參數</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-44" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>Formula 介面</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<pre><code class="r">g &lt;- lm(y ~ x1 + x2 + x3, data, ...)
+predict(g, data2)
+</code></pre>
+
+<ul>
+<li>\(y \sim x_1 + x_2 + x_3\): 描述y 和X 的關係</li>
+<li>\(data\): 描述$y, x_1, x_2, x_3$的來源</li>
+<li>\(...\): 控制演算法的參數</li>
+<li>Formula 介面支援各種Operator: <code>+-:*|^I1</code>
+
+<ul>
+<li><a href="http://faculty.chicagobooth.edu/richard.hahn/teaching/FormulaNotation.pdf">Statistical Formula Notation in R</a></li>
+</ul></li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-45" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>兩種介面的比較</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>線性代數介面：
+
+<ul>
+<li>可以控制資料結構</li>
+<li>可以做更高的客製化</li>
+<li>必須要自己從資料建立矩陣ex: <code>model.matrix</code></li>
+</ul></li>
+<li>Formula 介面：
+
+<ul>
+<li>更清楚的程式碼</li>
+<li>更彈性、簡潔的語法ex: <code>log(dist) ~ I(speed^2)</code></li>
+<li>被公認的好設計</li>
+</ul></li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="dark segue" id="slide-46" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2>關於swirl</h2>
+  </hgroup>
+  <article data-timings="">
+    
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-47" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>今日課程規劃</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>RDataEngineer-05-Data-Manipulation</li>
+<li>RDataEngineer-06-Join</li>
+<li>RVisualization-01-One-Variable-Visualization</li>
+<li>RVisualization-02-Two-Variables-Visualization</li>
+<li>RVisualization-03-ggplot2</li>
+<li>RVisualization-04-Javascript-And-Maps</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-48" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>中文顯示問題</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<p>Mac:</p>
+
+<ul>
+<li>Basic plots: <code>par(family=&quot;STKaiti&quot;)</code></li>
+<li>ggplot2: <code>+ theme_grey(base_family=&quot;STKaiti&quot;)</code> 需要透過<code>theme</code>改字型</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-49" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>課程筆記</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>會透過電子信箱寄給同學</li>
+<li>未來在課程網頁上也會更新</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-50" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>課程內容更新</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>今天早上Github遭受攻擊...</li>
+</ul>
+
+<pre><code class="r">library(swirl)
+delete_progress(&quot;&lt;你在swirl所輸入的id&gt;&quot;)
+uninstall_all_courses()
+dst &lt;- tempfile(fileext = &quot;.zip&quot;)
+download.file(&quot;http://www.wush978.idv.tw/DataScienceAndR.zip&quot;, dst)
+install_course_zip(dst)
+swirl()
+</code></pre>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-51" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>Q&amp;A</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+    <slide class="backdrop"></slide>
+  </slides>
+  <div class="pagination pagination-small" id='io2012-ptoc' style="display:none;">
+    <ul>
+      <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=1 title='課程內容'>
+         1
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=2 title='R 語言的視覺化'>
+         2
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=3 title='R 的繪圖引擎'>
+         3
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=4 title='R 的繪圖簡介'>
+         4
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=5 title='R 的各種基礎Visualization API'>
+         5
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=6 title='Visualization 簡單分類'>
+         6
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=7 title='類別型變數'>
+         7
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=8 title='連續型變數'>
+         8
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=9 title='類別 v.s. 類別'>
+         9
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=10 title='類別 v.s. 連續'>
+         10
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=11 title='連續 v.s. 連續'>
+         11
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=12 title='多變量'>
+         12
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=13 title='多變量'>
+         13
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=14 title='多變量'>
+         14
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=15 title='各種R 和分析結果結合的視覺化'>
+         15
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=16 title='<code>plot</code>和Linear Regression'>
+         16
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=17 title='<code>plot</code>和Regression'>
+         17
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=18 title='<code>plot</code>和Regression'>
+         18
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=19 title='<code>plot</code>和Decision Tree'>
+         19
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=20 title='多變量 PCA'>
+         20
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=21 title='R 的基本繪圖API'>
+         21
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=22 title='基礎繪圖方式與R 的基本繪圖API'>
+         22
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=23 title='基礎繪圖API'>
+         23
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=24 title='ggplot2'>
+         24
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=25 title='Reference'>
+         25
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=26 title='ggplot2 的邏輯'>
+         26
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=27 title='ggplot2 對R 的影響'>
+         27
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=28 title='ggplot2 離散'>
+         28
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=29 title='ggplot2 連續'>
+         29
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=30 title='ggplot2 離散 v.s. 離散'>
+         30
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=31 title='ggplot2 類別 v.s. 連續'>
+         31
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=32 title='ggplot2 連續 v.s. 連續'>
+         32
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=33 title='大數據時代的視覺化'>
+         33
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=34 title='大數據時代視覺化的挑戰'>
+         34
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=35 title='tabplot'>
+         35
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=36 title='Web Based 的互動式解決方案'>
+         36
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=37 title='Open Source 太棒了'>
+         37
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=38 title='地圖'>
+         38
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=39 title='Network Visualization'>
+         39
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=40 title='資料的流動 - Sankey Diagram'>
+         40
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=41 title='R 與數據模型'>
+         41
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=42 title='數據模型的API 設計模式'>
+         42
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=43 title='線性代數介面'>
+         43
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=44 title='Formula 介面'>
+         44
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=45 title='兩種介面的比較'>
+         45
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=46 title='關於swirl'>
+         46
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=47 title='今日課程規劃'>
+         47
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=48 title='中文顯示問題'>
+         48
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=49 title='課程筆記'>
+         49
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=50 title='課程內容更新'>
+         50
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=51 title='Q&amp;A'>
+         51
+      </a>
+    </li>
+  </ul>
+  </div>  <!--[if IE]>
+    <script 
+      src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js">  
+    </script>
+    <script>CFInstall.check({mode: 'overlay'});</script>
+  <![endif]-->
+</body>
+  <!-- Load Javascripts for Widgets -->
+  
+  <!-- MathJax: Fall back to local if CDN offline but local image fonts are not supported (saves >100MB) -->
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        processEscapes: true
+      }
+    });
+  </script>
+  <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/2.0-latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  <!-- <script src="https://c328740.ssl.cf1.rackcdn.com/mathjax/2.0-latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script> -->
+  <script>window.MathJax || document.write('<script type="text/x-mathjax-config">MathJax.Hub.Config({"HTML-CSS":{imageFont:null}});<\/script><script src="libraries/widgets/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"><\/script>')
+</script>
+<!-- LOAD HIGHLIGHTER JS FILES -->
+  <script src="libraries/highlighters/highlight.js/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <!-- DONE LOADING HIGHLIGHTER JS FILES -->
+   
+  </html>
