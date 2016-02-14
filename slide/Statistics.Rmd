@@ -19,17 +19,17 @@ library(ggplot2)
 library(quantmod)
 library(jsonlite)
 
-opts_chunk$set(echo = FALSE, cache=FALSE, comment="", 
-               cache.path = "cache-RBasic-DataStructure/", 
+opts_chunk$set(echo = FALSE, cache=FALSE, comment="",
+               cache.path = "cache-RBasic-DataStructure/",
                dev.args=list(bg="transparent"),
                fig.path = "./assets/fig/rbasic-datastructure-",
                fig.width = 10, fig.height = 6)
 fig <- function(path, size = 100) {
-  sprintf("<img src='assets/img/%s' style='max-width: %d%%;max-height: %d%%'></img>", 
+  sprintf("<img src='assets/img/%s' style='max-width: %d%%;max-height: %d%%'></img>",
           path, size, size)
 }
 fig2 <- function(path, size = 100) {
-  sprintf("<img src='assets/img/%s' style='width: %d%%'></img>", 
+  sprintf("<img src='assets/img/%s' style='width: %d%%'></img>",
           path, size)
 }
 sys_name <- Sys.info()["sysname"] %>% tolower
@@ -37,15 +37,15 @@ sys_encode <- c("utf8", "utf8", "big5")[pmatch(sys_name, c("linux", "darwin", "w
 sessionInfo() %>% capture.output %>% cat(file = "sessionInfo.log", sep = "\n")
 construction <- local(suppressWarnings({
   construction <- fromJSON("construction.json")
-  .tmp <- 
+  .tmp <-
     readLines("construction.txt") %>%
     strsplit(",") %>%
     extract2(1)
-  .tmp2 <- 
+  .tmp2 <-
     regexec("(.*)\\((.*)\\)$", .tmp) %>%
     regmatches(x = .tmp)
   .tmp3 <- sapply(.tmp2, "[", 2)
-  names(.tmp3) <- 
+  names(.tmp3) <-
     sapply(.tmp2, "[", 3) %>%
     toupper()
   .drop <- match(colnames(construction), names(.tmp3)) %>%
@@ -132,10 +132,10 @@ construction %>%
 ## 類別型變數的圖形化(長條圖)
 
 ```{r construction-vis-bar}
-g <- 
+g <-
   group_by(construction, 行政區) %>%
   summarise(count = n()) %>%
-  ggplot(aes(y = count, fill = 行政區)) + 
+  ggplot(aes(y = count, fill = 行政區)) +
   theme(text = element_text(family = "STKaiti"))
 g + geom_bar(aes(x = 行政區), stat = "identity")
 ```
@@ -145,7 +145,7 @@ g + geom_bar(aes(x = 行政區), stat = "identity")
 ## 類別型變數的圖形化（圓形圖）
 
 ```{r construction-vis-pie, dependson="construction-vis"}
-g + 
+g +
   geom_bar(aes(x = ""), width = 1, stat = "identity", position = "stack") +
   coord_polar("y")
 ```
@@ -191,9 +191,16 @@ suppressMessages({
 ## 平均數(mean)
 
 - $\frac{1}{N} \sum_{i=1}^N x_i$
+- $x = \{1, 2, 3, 4, 6\}$ 的平均數為 $\frac{1 + 2 + 3 + 4 + 6}{5} = 3.2$
+- 總和(sum)、平均與個數
+
+--- &vcenter .largecontent
+
+## 平均數(mean)
+
 - 最小化$\sum_{i = 1}^N {(x - x_i)^2}$
 
-```{r}
+```{r, fig.width = 10, fig.height = 5}
 f.mean <- Vectorize(function(x) {
   sum((x - construction$X座標)^2)
 })
@@ -203,14 +210,51 @@ abline(v = mean(construction$X座標), col = 2)
 
 --- &vcenter .largecontent
 
+## 平均數(mean)的應用
+
+- 過去三十天，每天網路廣告平均的營業額為50萬
+    - 平均數常常被當成基準做比較
+        - 今天的營業額為60萬 ==> 好
+        - 今天的營業額為40萬 ==> 不好
+- 移動平均
+    - 處理時間序列（隨著時間不斷延伸的資料）常用的技巧
+    - 例：股票的周線、月線
+- 加權平均
+    - 每筆資料的重要性不同
+
+--- &vcenter .largecontent
+
+## 移動平均在股票分析的應用
+
+<center>`r fig("MovingAverage.GIF", 75)`</center>
+<small><https://upload.wikimedia.org/wikipedia/commons/d/d9/MovingAverage.GIF></small>
+
+
+--- &vcenter .largecontent
+
+## 平均數的濫用
+
+<br/><br/><br/>
+<center>`r fig("average.jpg", 50)`</center>
+<small><https://www.facebook.com/nagee.tw/photos/a.10151409298917312.1073741829.353390642311/10152262445242312></small>
+
+--- &vcenter .largecontent
+
 ## 中位數(median)
 
 - 觀測值中間的數值
     - 50%的數值小於中位數
     - 50%的數值大於中位數
+- $x = \{1, 2, 3, 4, 6\}$的中位數為$3$
+- $x = \{1, 2, 3, 4, 6, 7\}$的中位數為$\frac{3 + 4}{2} = 3.5$
+
+--- &vcenter .largecontent
+
+## 中位數(median)
+
 - 最小化$\sum_{i = 1}^N {\left\lVert x - x_i \right\rVert}$
 
-```{r}
+```{r, fig.width = 8, fig.height = 4}
 f.median <- Vectorize(function(x) {
   sum(abs(x - construction$X座標))
 })
@@ -220,12 +264,32 @@ abline(v = median(construction$X座標), col = 2)
 
 --- &vcenter .largecontent
 
+## 中位數的應用
+
+- 中位數是可以取代大多數平均數的角色
+- 中位數比較穩定，不容易受到少數資料的影響
+- 中位數的解釋和總和無關
+- 台灣每人可支配所得：
+    - 逐年(100年至103年)平均數：275984, 285939, 293523, 303762
+    - 逐年(100年至103年)中位數：233527, 243131, 250308, 259926
+    - 資料來源：行政院主計總處家庭收支調查
+
+--- &vcenter .largecontent
+
 ## 眾數(mode)
 
 - 出現次數最多的觀測值
 - 可用於類別型變數
 - 最小化$\sum_{i = 1}^N I(x_i != x)$
 - 討論機率論的時候，我們會再更新定義
+
+--- &vcenter .largecontent
+
+## 眾數的應用
+
+- 在分析類別型數據前，常用來探測是否有類別不平衡的狀態
+- 預測類別型變數時，眾數是常用的基準
+    - 點擊率預測，點擊行為的眾數是「無點擊」，約佔99.9%。所以一個比較基準就是：「全部猜不會點」
 
 --- &vcenter .largecontent
 
@@ -247,12 +311,26 @@ abline(v = median(construction$X座標), col = 2)
 
 --- &vcenter .largecontent
 
+## 評論
+
+- 平均數最容易受到特異獨行的樣本影響
+
+--- &vcenter .largecontent
+
 ## 練習二之三
 
-- 把$x1$的每個元素平方後，得到：$x3 = \{1, 100, 4, 9, 49, 1, 49, 64, 1\}$
-    - 請問$x3$的平均數為何？和$x1$的平均數的平方是否一樣？
-    - 請問$x3$的中位數為何？和$x1$的中位數的平方是否一樣？
-    - 請問$x3$的眾數為何？和$x1$的眾數的平方是否一樣？
+- 把$x1$的資料全部乘以100後，得到：$x3 = \{100, 1000, 200, 300, 700, 100, 700, 800, 100\}$
+    - 請問$x3$的平均數為何？和$x1$的平均數乘以100是否一樣？
+    - 請問$x3$的中位數為何？和$x1$的中位數乘以100是否一樣？
+    - 請問$x3$的眾數為何？和$x1$的眾數乘以100是否一樣？
+
+--- &vcenter .largecontent
+
+## 評論
+
+- 線性轉換後的平均數、中位數、眾數與對平均數、中位數、眾數做相同的線性轉換後結果相同
+- 線性轉換的範例
+    - 改變單位：1元 ==> 1萬元、公分 ==> 公尺
 
 --- &vcenter .largecontent
 
@@ -264,7 +342,37 @@ abline(v = median(construction$X座標), col = 2)
 
 --- &vcenter .largecontent
 
-## 
+## 最大值、最小值與全距
+
+- 描述數據分佈的範圍
+- $x1 = \{1, 10, 2, 3, 7, 1, 7, 8, 1\}$
+    - 最大值為$10$
+    - 最小值為$1$
+    - 全距為「最大值-最小值」，為$10 - 1 = 9$
+
+--- &vcenter .largecontent
+
+## 最大值、最小值與全距的應用
+
+- 了解數據是不是全部都是正數
+    - 是的話，常常先取log或開根號後再處理
+    - 範例：網路即時競價的出價預測
+- 了解數據的範圍是否合理
+    - 了解數據的散布行為才能了解數據是否正常
+    - 出價範圍是否合理
+
+--- &vcenter .largecontent
+
+## 百分位數(quantile)與四分位差(interquartile range)
+
+- 百分位數
+    - 以$\{1, 2, 3, 4, 5, 6, 7, 8, 9, 10\}$為例：
+    - 第25百分位數，又稱第一四分位數：$3.25$，代表有25%的數據比$3.25$小
+    - 第50百分位數，即為中位數：$5.5$，代表有50%的數據比$5.5$小
+    - 第75百分位數，又稱第三四分位數：$7.75$，代表有75%的數據比$7.75$小
+- 四分位差：
+    - 第75百分位數與25百分位數的差，即為四分位差
+    - 所以上例的四分位差為$4.5$
 
 --- &vcenter .largecontent
 
