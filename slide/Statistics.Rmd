@@ -78,6 +78,12 @@ construction <- local(suppressWarnings({
     - 理解統計科學的名詞與其背後的含義
     - 理解統計學家解決問題的方式
 
+--- &vcenter .largecontent
+
+## 關於練習
+
+- 請使用R 搭配swirl課程：**RStatistics**進行
+
 --- .dark .segue
 
 ## 敘述統計
@@ -190,7 +196,7 @@ suppressMessages({
 
 ## 平均數(mean)
 
-- $\frac{1}{N} \sum_{i=1}^N x_i$
+- $\bar{x} = \frac{1}{N} \sum_{i=1}^N x_i$
 - $x = \{1, 2, 3, 4, 6\}$ 的平均數為 $\frac{1 + 2 + 3 + 4 + 6}{5} = 3.2$
 - 總和(sum)、平均與個數
 
@@ -245,8 +251,8 @@ abline(v = mean(construction$X座標), col = 2)
 - 觀測值中間的數值
     - 50%的數值小於中位數
     - 50%的數值大於中位數
-- $x = \{1, 2, 3, 4, 6\}$的中位數為$3$
-- $x = \{1, 2, 3, 4, 6, 7\}$的中位數為$\frac{3 + 4}{2} = 3.5$
+- $x = \{1, 2, 3, 4, 6\}$ 的中位數為 $3$
+- $x = \{1, 2, 3, 4, 6, 7\}$ 的中位數為 $\frac{3 + 4}{2} = 3.5$
 
 --- &vcenter .largecontent
 
@@ -336,13 +342,17 @@ abline(v = median(construction$X座標), col = 2)
 
 ## 數據的分散程度
 
-- 最大值、最小值與全距
-- 四分位差
-- 變異數與標準差
+- 最大值、最小值與全距(range)
+- 平均差(MD, Mean Deviation)
+- MAD(Median Absolute Deviation)
+- 四分位差(IQR, Interqwuartile Range)
+- 變異數與標準差(Variance and standard deviation)
+- 變異係數(CV, Coefficient of Variation)
+- Quartile coefficient of dispersion
 
 --- &vcenter .largecontent
 
-## 最大值、最小值與全距
+## 最大值、最小值與全距(range)
 
 - 描述數據分佈的範圍
 - $x1 = \{1, 10, 2, 3, 7, 1, 7, 8, 1\}$
@@ -363,6 +373,87 @@ abline(v = median(construction$X座標), col = 2)
 
 --- &vcenter .largecontent
 
+## 練習三之一
+
+- $x1 = \{1, 10, 2, 3, 7, 1, 7, 8, 1\}$
+    - 請問$x1$的最大值、最小值與全距為何？
+- 把$x1$的10改成100後，得到：$x2 = \{1, 100, 2, 3, 7, 1, 7, 8, 1\}$
+    - 請問$x2$的最大值、最小值與全距為何？
+- 把$x1$的資料全部乘以100後，得到：$x3 = \{100, 1000, 200, 300, 700, 100, 700, 800, 100\}$
+    - 請問$x3$的最大值、最小值與全距為何？
+
+--- &vcenter .largecontent
+
+## 評論
+
+- 全距越大，代表數據的散布程度越大
+    - 全距容易受到異常資料的影響
+- 全距會隨著數據的放大而變大
+
+--- &vcenter .largecontent
+
+## 平均差(MD, Mean Deviation)
+
+- 差的平均
+- $\frac{1}{n} \sum_{i = 1} ^n {\left\lVert x_i - \bar{x} \right\rVert}$
+
+--- &vcenter .largecontent
+
+## 練習三之二
+
+- $x1 = \{1, 10, 2, 3, 7, 1, 7, 8, 1\}$
+    - 請問$x1$的平均差為何？
+- 把$x1$的10改成100後，得到：$x2 = \{1, 100, 2, 3, 7, 1, 7, 8, 1\}$
+    - 請問$x2$的平均差為何？
+- 把$x1$的資料全部乘以100後，得到：$x3 = \{100, 1000, 200, 300, 700, 100, 700, 800, 100\}$
+    - 請問$x3$的平均差為何？
+
+--- &vcenter .largecontent
+
+## 評論
+
+- 平均差越大，代表數據的散布程度越大
+    - 平均差容易受到異常資料的影響
+- 平均差會隨著數據的放大而變大
+
+--- &vcenter .largecontent
+
+## MAD(Mean Absolute Deviation)
+
+- 若$x_m$代表$x$的中位數，則MAD $= median(\left\lVert x_i - x_m \right\rVert)$
+
+--- &vcenter .largecontent
+
+## 練習三之三
+
+- $x1 = \{1, 10, 2, 3, 7, 1, 7, 8, 1\}$
+    - 請問$x1$的MAD為何？
+- 把$x1$的10改成100後，得到：$x2 = \{1, 100, 2, 3, 7, 1, 7, 8, 1\}$
+    - 請問$x2$的MAD為何？
+- 把$x1$的資料全部乘以100後，得到：$x3 = \{100, 1000, 200, 300, 700, 100, 700, 800, 100\}$
+    - 請問$x3$的MAD為何？
+
+--- &vcenter .largecontent
+
+## 評論
+
+- MAD越大，代表數據的散布程度越大
+    - MAD**不容易**受到異常資料的影響
+- MAD會隨著數據的放大而變大
+
+--- &vcenter .largecontent
+
+## 百分位數(quantile)與四分位差(interquartile range)
+
+- $p$百分位數的計算方式（這裡的$p$ 滿足 $0 \leq \frac{p}{100} \leq 1$）：
+    - $Q_i(p) = (1 - \gamma) x_{(j)} + \gamma x_{(j + 1)}$
+    - $i$代表百分位數的計算方式，在R 中實作了九種計算quantile的方法，也就是$i \in \{1, 2, 3, ..., 9\}$
+    - 一般來說，百分位數都類似中位數，是取兩個最靠近$p$的資料點作加權平均，加權的方式則和$i$有關
+    - 中位數的計算方式：排序後取最靠近中間的資料點取平均
+- 現代數據處理軟體都提供了計算百分位數的功能
+
+--- &vcenter .largecontent
+
 ## 百分位數(quantile)與四分位差(interquartile range)
 
 - 百分位數
@@ -370,17 +461,153 @@ abline(v = median(construction$X座標), col = 2)
     - 第25百分位數，又稱第一四分位數：$3.25$，代表有25%的數據比$3.25$小
     - 第50百分位數，即為中位數：$5.5$，代表有50%的數據比$5.5$小
     - 第75百分位數，又稱第三四分位數：$7.75$，代表有75%的數據比$7.75$小
+
+--- &vcenter .largecontent
+
+## 百分位數(quantile)與四分位差(interquartile range)
+
 - 四分位差：
     - 第75百分位數與25百分位數的差，即為四分位差
     - 所以上例的四分位差為$4.5$
+- 四分位差代表數據**中間**層的散布程度
 
 --- &vcenter .largecontent
 
-## 離群值（Outlier）
+## 練習三之四
 
-- 和其他觀測值差異很大的觀測值
-    - 量測單位
-    - 收集資料的錯誤
-- 離群值對平均數、中位數與眾數的影響不同（想想$x1$與$x2$的結果比較）
+- $x1 = \{1, 10, 2, 3, 7, 1, 7, 8, 1\}$
+    - 請問$x1$的四分位差為何？
+- 把$x1$的10改成100後，得到：$x2 = \{1, 100, 2, 3, 7, 1, 7, 8, 1\}$
+    - 請問$x2$的四分位差為何？
+- 把$x1$的資料全部乘以100後，得到：$x3 = \{100, 1000, 200, 300, 700, 100, 700, 800, 100\}$
+    - 請問$x3$的四分位差為何？
 
 --- &vcenter .largecontent
+
+## 評論
+
+- 四分位差越大，代表數據的散布程度越大
+    - 四分位差**不容易**受到異常資料的影響
+- 四分位差會隨著數據的放大而變大
+
+--- &vcenter .largecontent
+
+## 變異數(variance)與標準差(standard deviation)
+
+- 變異數的計算方式： $\sigma^2 = \frac{1}{n} \sum_{i=1}^n (x - \bar{x})^2$
+- 標準差的計算方式： $\sigma = \sqrt{\frac{1}{n} \sum_{i=1}^n (x - \bar{x})^2}$
+- 變異數與標準差的值越大，代表數據的散布程度越大
+- 變異數與標準差是最常用的散布程度的指標：
+    - 容易計算（只需要$\sum_{i=1}^n{x_i}$ 與 $\sum_{i=1}^n {x_i^2}$ 即可
+    - 變異數的相關理論性質很泛用，如切比雪夫不等式（Chebyshev's Inequality）
+    - 機率論中有許多好性質，例如獨立的變異數可相加
+
+--- &vcenter .largecontent
+
+## 變異數(variance)與標準差(standard deviation)
+
+- 當資料為抽樣結果時，通常使用樣本變異數與樣本標準差：
+    - 樣本變異數的計算方式： $s^2 = \frac{1}{n - 1} \sum_{i=1}^n (x - \bar{x})^2$
+    - 樣本標準差的計算方式： $s = \sqrt{\frac{1}{n - 1} \sum_{i=1}^n (x - \bar{x})^2}$
+
+--- &vcenter .largecontent
+
+## 練習三之五
+
+- $x1 = \{1, 10, 2, 3, 7, 1, 7, 8, 1\}$
+    - 請問$x1$的樣本變異數與樣本標準差為何？
+- 把$x1$的10改成100後，得到：$x2 = \{1, 100, 2, 3, 7, 1, 7, 8, 1\}$
+    - 請問$x2$的樣本變異數與樣本標準差為何？
+- 把$x1$的資料全部乘以100後，得到：$x3 = \{100, 1000, 200, 300, 700, 100, 700, 800, 100\}$
+    - 請問$x3$的樣本變異數與樣本標準差為何？
+
+--- &vcenter .largecontent
+
+## 評論
+
+- 變異數與標準差差越大，代表數據的散布程度越大
+    - 變異數與標準差容易受到異常資料的影響
+- 變異數與標準差會隨著數據的放大而變大
+
+--- &vcenter .largecontent
+
+## 變異係數(CV, Coefficient of Variation)
+
+- 變異係數的定義為：標準差除以平均值，實務常以$\frac{s}{\bar{x}}$來計算樣本的變異係數
+- 變異係數在區間尺度上無意義，只有在比例尺度上才有意義
+
+--- &vcenter .largecontent
+
+## 練習三之六
+
+- $x1 = \{1, 10, 2, 3, 7, 1, 7, 8, 1\}$
+    - 請問$x1$的變異係數為何？
+- 把$x1$的10改成100後，得到：$x2 = \{1, 100, 2, 3, 7, 1, 7, 8, 1\}$
+    - 請問$x2$的變異係數為何？
+- 把$x1$的資料全部乘以100後，得到：$x3 = \{100, 1000, 200, 300, 700, 100, 700, 800, 100\}$
+    - 請問$x3$的變異係數為何？
+- 把$x1$的資料全部-1後，得到：$x4 = \{0, 9, 1, 2, 6, 0, 6, 7, 0\}$
+    - 請問$x4$的變異係數為何？
+
+--- &vcenter .largecontent
+
+## 評論
+
+- 變異係數越大，代表數據**相對於平均值**的散布程度越大
+    - 變異係數容易受到異常資料的影響
+- 變異係數**不會**隨著數據的放大而變大
+- 平移（$x1 \Rightarrow x4$）會**影響**變異係數，所以只有比例尺度的資料才能使用變異係數
+
+--- &vcenter .largecontent
+
+## Quartile coefficient of dispersion
+
+- Quartile coefficient of dispersion的定義為：IQR / Median
+    - 非常類似變異係數的定義：標準差除以平均值
+- Quartile coefficient of dispersion在區間尺度上無意義，只有在比例尺度上才有意義
+
+--- &vcenter .largecontent
+
+## 練習三之七
+
+- $x1 = \{1, 10, 2, 3, 7, 1, 7, 8, 1\}$
+    - 請問$x1$的Quartile coefficient of dispersion為何？
+- 把$x1$的10改成100後，得到：$x2 = \{1, 100, 2, 3, 7, 1, 7, 8, 1\}$
+    - 請問$x2$的Quartile coefficient of dispersion為何？
+- 把$x1$的資料全部乘以100後，得到：$x3 = \{100, 1000, 200, 300, 700, 100, 700, 800, 100\}$
+    - 請問$x3$的Quartile coefficient of dispersion為何？
+- 把$x1$的資料全部-1後，得到：$x4 = \{0, 9, 1, 2, 6, 0, 6, 7, 0\}$
+    - 請問$x4$的Quartile coefficient of dispersion為何？
+
+--- &vcenter .largecontent
+
+## 評論
+
+- 在上述練習中，$x1$、$x2$與$x3$的Quartile coefficient of dispersion不變
+    - 對異常資料不敏感
+    - 不會隨著轉換單位而改變
+- 平移（$x1 \Rightarrow x4$）會**影響**Quartile coefficient of dispersion，所以只有比例尺度的資料才能使用Quartile coefficient of dispersion
+
+--- &vcenter .largecontent
+
+## 總結
+
+- 視覺化：直方圖、圓餅圖與長條圖
+- 資料中心：平均數、中位數與眾數
+- 資料的散布程度：全距(range)、平均差(MD, Mean Deviation)、MAD(Median Absolute Deviation)、四分位差(IQR, Interqwuartile Range)、變異數與標準差(Variance and standard deviation)、變異係數(CV, Coefficient of Variation)、Quartile coefficient of dispersion
+
+--- &vcenter .largecontent
+
+## 討論
+
+- 穩健(Robust，代表資料敘述不容易受到少數異常資料的影響)是優點還是缺點？
+
+--- &vcenter .largecontent
+
+## 敘述統計的應用：比較
+
+- 我的收入是高還是低？
+- 我的工時是長還是短？
+
+
+
