@@ -1,0 +1,1 @@
+核備文號(Ac_no),期數(St_no),序號(sno),通報類別(AppMode),X座標(X),Y座標(Y),通報時間(AppTime),施工單位(App_Name),行政區(C_Name),施工位置(Addr),核准施工起日(Cb_Da),核准施工迄日(Ce_Da),施工時段(Co_Ti),監工(Tc_Ma),監工電話(Tc_Tl),廠商現場施工人員(Tc_Ma3),現場施工人員手機(Tc_Tl3),挖掘目的(NPurp),逾時原因(DType)
