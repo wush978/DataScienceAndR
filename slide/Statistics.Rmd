@@ -57,6 +57,7 @@ construction <- local(suppressWarnings({
   construction$Y座標 <- as.numeric(construction$Y座標)
   construction
 }))
+taipei.tax <- read.table(file("taipei-tax.csv", encoding = "UTF-8"), skip = 1, header = TRUE, sep = ",")
 ```
 
 ## 課程大綱
@@ -607,7 +608,4 @@ abline(v = median(construction$X座標), col = 2)
 ## 敘述統計的應用：比較
 
 - 我的收入是高還是低？
-- 我的工時是長還是短？
-
-
-
+    - 我們可以查詢政府開放資料的「綜合所得稅所得總額」
