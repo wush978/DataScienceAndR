@@ -6,6 +6,7 @@ all : $(HTML)
 # $(PDF)
 
 %.html : %.Rmd
+	-rm $@
 	Rscript -e "slidify::slidify('$<')"
 
 %.pdf : %.html
