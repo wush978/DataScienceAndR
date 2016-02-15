@@ -850,11 +850,21 @@ print(.g)
     - $\int_{-\infty}^{\infty} f_X(x) = 1$
     - $Pr(a \leq X \leq b) = \int_{a}^b f_X(x)$
 
+--- &vcenter .largecontent
+
+## 機率密度函數
+
+- 範例：以下是$X$的機率密度函數。陰影面積則是$Pr(30 \leq X \leq 40)$
+
 ```{r continuous-mean-Kinmen, cache = TRUE}
 x <- sapply(1:10000, function(i) {
   mean(sample(population.Kinmen, 20))
 })
-qplot(x = x, geom = "density")
+df <- data.frame(x = density(x)$x, density = density(x)$y)
+# ggplot(df, aes(x = x, y = density)) +
+#   geom_line() +
+qplot(x, geom = "density") +
+  geom_ribbon(data = dplyr::filter(df, x > 30, x < 40), aes(x = x, ymax = density), ymin = 0, alpha = 0.3)
 ```
 
 
