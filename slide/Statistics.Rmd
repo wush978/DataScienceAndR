@@ -18,6 +18,7 @@ library(dplyr)
 library(ggplot2)
 library(quantmod)
 library(jsonlite)
+library(binom)
 
 opts_chunk$set(echo = FALSE, cache=FALSE, comment="",
                cache.path = "cache-Statistics/",
@@ -301,34 +302,34 @@ abline(v = median(construction$X座標), col = 2)
 
 ## 練習二之一
 
-- $x1 = \{1, 10, 2, 3, 7, 1, 7, 8, 1\}$
-    - 請問$x1$的平均數為何？
-    - 請問$x1$的中位數為何？
-    - 請問$x1$的眾數為何？
+- `x1` = \{1, 10, 2, 3, 7, 1, 7, 8, 1\}
+    - 請問`x1`的平均數為何？
+    - 請問`x1`的中位數為何？
+    - 請問`x1`的眾數為何？
 
 --- &vcenter .largecontent
 
 ## 練習二之二
 
-- 把$x1$的10改成100後，得到：$x2 = \{1, 100, 2, 3, 7, 1, 7, 8, 1\}$
-    - 請問$x2$的平均數為何？和$x1$的平均數是否一樣？
-    - 請問$x2$的中位數為何？和$x1$的中位數是否一樣？
-    - 請問$x2$的眾數為何？和$x1$的眾數是否一樣？
+- 把`x1`的10改成100後，得到：`x2` = \{1, 100, 2, 3, 7, 1, 7, 8, 1\}
+    - 請問`x2`的平均數為何？和`x1`的平均數是否一樣？
+    - 請問`x2`的中位數為何？和`x1`的中位數是否一樣？
+    - 請問`x2`的眾數為何？和`x1`的眾數是否一樣？
 
 --- &vcenter .largecontent
 
 ## 評論
 
-- 平均數最容易受到特異獨行的樣本影響
+- 平均數、中位數與眾數中，平均數最容易受到特異獨行的樣本影響
 
 --- &vcenter .largecontent
 
 ## 練習二之三
 
-- 把$x1$的資料全部乘以100後，得到：$x3 = \{100, 1000, 200, 300, 700, 100, 700, 800, 100\}$
-    - 請問$x3$的平均數為何？和$x1$的平均數乘以100是否一樣？
-    - 請問$x3$的中位數為何？和$x1$的中位數乘以100是否一樣？
-    - 請問$x3$的眾數為何？和$x1$的眾數乘以100是否一樣？
+- 把`x1`的資料全部乘以100後，得到：`x3` = \{100, 1000, 200, 300, 700, 100, 700, 800, 100\}
+    - 請問`x3`的平均數為何？和`x1`的平均數乘以100是否一樣？
+    - 請問`x3`的中位數為何？和`x1`的中位數乘以100是否一樣？
+    - 請問`x3`的眾數為何？和`x1`的眾數乘以100是否一樣？
 
 --- &vcenter .largecontent
 
@@ -355,10 +356,10 @@ abline(v = median(construction$X座標), col = 2)
 ## 最大值、最小值與全距(range)
 
 - 描述數據分佈的範圍
-- $x1 = \{1, 10, 2, 3, 7, 1, 7, 8, 1\}$
-    - 最大值為$10$
-    - 最小值為$1$
-    - 全距為「最大值-最小值」，為$10 - 1 = 9$
+- `x1` = \{1, 10, 2, 3, 7, 1, 7, 8, 1\}
+    - 最大值為10
+    - 最小值為1
+    - 全距為「最大值-最小值」，為10 - 1 = 9
 
 --- &vcenter .largecontent
 
@@ -375,12 +376,12 @@ abline(v = median(construction$X座標), col = 2)
 
 ## 練習三之一
 
-- $x1 = \{1, 10, 2, 3, 7, 1, 7, 8, 1\}$
-    - 請問$x1$的最大值、最小值與全距為何？
-- 把$x1$的10改成100後，得到：$x2 = \{1, 100, 2, 3, 7, 1, 7, 8, 1\}$
-    - 請問$x2$的最大值、最小值與全距為何？
-- 把$x1$的資料全部乘以100後，得到：$x3 = \{100, 1000, 200, 300, 700, 100, 700, 800, 100\}$
-    - 請問$x3$的最大值、最小值與全距為何？
+- `x1` = \{1, 10, 2, 3, 7, 1, 7, 8, 1\}
+    - 請問`x1`的最大值、最小值與全距為何？
+- 把`x1`的10改成100後，得到：`x2` = \{1, 100, 2, 3, 7, 1, 7, 8, 1\}
+    - 請問`x2`的最大值、最小值與全距為何？
+- 把`x1`的資料全部乘以100後，得到：`x3` = \{100, 1000, 200, 300, 700, 100, 700, 800, 100\}
+    - 請問`x3`的最大值、最小值與全距為何？
 
 --- &vcenter .largecontent
 
@@ -401,10 +402,10 @@ abline(v = median(construction$X座標), col = 2)
 
 ## 練習三之二
 
-- $x1, x2, x3$如前述
-- 請問$x1$的平均差為何？
-- 請問$x2$的平均差為何？
-- 請問$x3$的平均差為何？
+- `x1`, `x2`, `x3`如前述
+- 請問`x1`的平均差為何？
+- 請問`x2`的平均差為何？
+- 請問`x3`的平均差為何？
 
 --- &vcenter .largecontent
 
@@ -424,10 +425,10 @@ abline(v = median(construction$X座標), col = 2)
 
 ## 練習三之三
 
-- $x1, x2, x3$如前述
-- 請問$x1$的MAD為何？
-- 請問$x2$的MAD為何？
-- 請問$x3$的MAD為何？
+- `x1`, `x2`, `x3`如前述
+- 請問`x1`的MAD為何？
+- 請問`x2`的MAD為何？
+- 請問`x3`的MAD為何？
 
 --- &vcenter .largecontent
 
@@ -453,10 +454,10 @@ abline(v = median(construction$X座標), col = 2)
 
 - 現代數據處理軟體都提供了計算百分位數的功能
 - 百分位數
-    - 以$\{1, 2, 3, 4, 5, 6, 7, 8, 9, 10\}$為例：
-    - 第25百分位數，又稱第一四分位數：$3.25$，代表有25%的數據比$3.25$小
-    - 第50百分位數，即為中位數：$5.5$，代表有50%的數據比$5.5$小
-    - 第75百分位數，又稱第三四分位數：$7.75$，代表有75%的數據比$7.75$小
+    - 以\{1, 2, 3, 4, 5, 6, 7, 8, 9, 10\}為例：
+    - 第25百分位數，又稱第一四分位數：3.25，代表有25%的數據比3.25小
+    - 第50百分位數，即為中位數：5.5，代表有50%的數據比5.5小
+    - 第75百分位數，又稱第三四分位數：7.75，代表有75%的數據比7.75小
 
 --- &vcenter .largecontent
 
@@ -464,17 +465,17 @@ abline(v = median(construction$X座標), col = 2)
 
 - 四分位差：
     - 第75百分位數與25百分位數的差，即為四分位差
-    - 所以上例的四分位差為$4.5$
+    - 所以上例的四分位差為7.75 - 3.25 = 4.5
 - 四分位差代表數據**中間**層的散布程度
 
 --- &vcenter .largecontent
 
 ## 練習三之四
 
-- $x1, x2, x3$如前述
-- 請問$x1$的四分位差為何？
-- 請問$x2$的四分位差為何？
-- 請問$x3$的四分位差為何？
+- `x1`, `x2`, `x3`如前述
+- 請問`x1`的四分位差為何？
+- 請問`x2`的四分位差為何？
+- 請問`x3`的四分位差為何？
 
 --- &vcenter .largecontent
 
@@ -508,10 +509,10 @@ abline(v = median(construction$X座標), col = 2)
 
 ## 練習三之五
 
-- $x1, x2, x3$如前述
-- 請問$x1$的樣本變異數與樣本標準差為何？
-- 請問$x2$的樣本變異數與樣本標準差為何？
-- 請問$x3$的樣本變異數與樣本標準差為何？
+- `x1`, `x2`, `x3`如前述
+- 請問`x1`的樣本變異數與樣本標準差為何？
+- 請問`x2`的樣本變異數與樣本標準差為何？
+- 請問`x3`的樣本變異數與樣本標準差為何？
 
 --- &vcenter .largecontent
 
@@ -532,12 +533,12 @@ abline(v = median(construction$X座標), col = 2)
 
 ## 練習三之六
 
-- $x1, x2, x3$如前述
-- 請問$x1$的變異係數為何？
-- 請問$x2$的變異係數為何？
-- 請問$x3$的變異係數為何？
-- 把$x1$的資料全部-1後，得到：$x4 = \{0, 9, 1, 2, 6, 0, 6, 7, 0\}$
-    - 請問$x4$的變異係數為何？
+- `x1`, `x2`, `x3`如前述
+- 請問`x1`的變異係數為何？
+- 請問`x2`的變異係數為何？
+- 請問`x3`的變異係數為何？
+- 把`x1`的資料全部-1後，得到：`x4` = \{0, 9, 1, 2, 6, 0, 6, 7, 0\}
+    - 請問`x4`的變異係數為何？
 
 --- &vcenter .largecontent
 
@@ -546,7 +547,7 @@ abline(v = median(construction$X座標), col = 2)
 - 變異係數越大，代表數據**相對於平均值**的散布程度越大
     - 變異係數容易受到異常資料的影響
 - 變異係數**不會**隨著數據的放大而變大
-- 平移（$x1 \Rightarrow x4$）會**影響**變異係數，所以只有比例尺度的資料才能使用變異係數
+- 平移（`x1` $\Rightarrow$ `x4`）會**影響**變異係數，所以只有比例尺度的資料才能使用變異係數
 
 --- &vcenter .largecontent
 
@@ -560,20 +561,20 @@ abline(v = median(construction$X座標), col = 2)
 
 ## 練習三之七
 
-- $x1, x2, x3, x4$如前述
-- 請問$x1$的Quartile coefficient of dispersion為何？
-- 請問$x2$的Quartile coefficient of dispersion為何？
-- 請問$x3$的Quartile coefficient of dispersion為何？
-- 請問$x4$的Quartile coefficient of dispersion為何？
+- `x1`, `x2`, `x3`, `x4`如前述
+- 請問`x1`的Quartile coefficient of dispersion為何？
+- 請問`x2`的Quartile coefficient of dispersion為何？
+- 請問`x3`的Quartile coefficient of dispersion為何？
+- 請問`x4`的Quartile coefficient of dispersion為何？
 
 --- &vcenter .largecontent
 
 ## 評論
 
-- 在上述練習中，$x1$、$x2$與$x3$的Quartile coefficient of dispersion不變
+- 在上述練習中，`x1`、`x2`與`x3`的Quartile coefficient of dispersion不變
     - 對異常資料不敏感
     - 不會隨著轉換單位而改變
-- 平移（$x1 \Rightarrow x4$）會**影響**Quartile coefficient of dispersion，所以只有比例尺度的資料才能使用Quartile coefficient of dispersion
+- 平移（`x1` $\Rightarrow$ `x4`）會**影響**Quartile coefficient of dispersion，所以只有比例尺度的資料才能使用Quartile coefficient of dispersion
 
 --- &vcenter .largecontent
 
@@ -635,9 +636,7 @@ suppressMessages(print(.g))
 ## 母體
 
 - 研究對象全體所構成的集合
-- 例：全金門縣縣民
-
-料，建構了全金門縣人民的年齡母體：
+- 例：金門縣縣民
 
 ```{r taiwan-population, cache = TRUE, results = "hidden"}
 population.src <- local({
@@ -665,7 +664,7 @@ population.src <- local({
 
 ## 母體
 
-- 我們自內政部資料開放平台下載了個村（里）戶籍人口統計月報表，依據這份資
+- 我們自內政部資料開放平台下載了個村（里）戶籍人口統計月報表，依據這份資料，建構了全金門縣人民的年齡母體
 
 ```{r population-Kinmen, dependson="taiwan-population", results = "figure"}
 population.Kinmen <- population.src %>%
@@ -695,8 +694,8 @@ suppressMessages(print(.g))
 ## 樣本
 
 - 實務上，要收集所有的資料可能有困難，所以我們可能透過隨機抽樣的方式，抽出20名金門縣縣民當成母體的代表
-    - 我們希望能透過對20名金門縣縣民的了解，推論到全金門縣縣民，這就是**統計推論**
-    - 例：20名金門縣縣民的平均年齡
+- 我們希望能透過對20名金門縣縣民的了解，推論到全金門縣縣民，這就是**統計推論**
+    - 例：利用「20名金門縣縣民的平均年齡」來猜測「全金門縣縣民的平均年齡」
 
 --- &vcenter .largecontent
 
@@ -719,13 +718,145 @@ sapply(1:10, function(i) {
 - 抽出20名金門縣縣民，所有可能的結果就構成了「樣本空間」
     - 例：抽出20名0歲的金門縣縣民與抽出20名100歲的金門縣縣民，都是可能的組合，所以都屬於「樣本空間」之中
 
+--- &vcenter .largecontent
+
+## 練習四之一
+
+- 如果今天的母體共有四個人，記做：\{A, B, C, D\}。我們想要從母體中抽出兩個人，這個動作所構成的「樣本空間」是？
 
 --- &vcenter .largecontent
 
 ## 隨機變數（不嚴謹）
 
-- 而把樣本空間的每種可能的結果，計算成一個單一的數字的**方法**，就叫做「隨機變數」
+- 把樣本空間的每種可能的結果，計算成一個單一的數字的**方法**，就叫做「隨機變數」
 - 例：20名金門縣縣民的平均年齡，就是一種隨機變數
+
+--- &vcenter .largecontent
+
+## 隨機變數
+
+- 隨機變數的性質往往是我們的研究目的
+    - 例：「抽樣的20名金門縣縣民的平均年齡」是不是會靠近「全金門縣縣民的平均年齡」？
+- 機率論就是一套處理隨機變數的數學工具
+
+--- &vcenter .largecontent
+
+## 機率質量函數
+
+- 若$X$代表一個隨機變數，$S$代表X可能的值，則機率質量函數的定義為：
+$$f_X(x) = \left\{
+\begin{array}{lc}
+Pr(X = x) & \text{ if } x \in S \\ 
+0 & \text{ if } x \not\in S
+\end{array}
+\right.$$
+- 範例：若$X$代表骰六面骰子產生的點數，則：
+$$f_X(i) = \left\{
+\begin{array}{lc}
+\frac{1}{6} & \text{ if } i \in \{1, 2, 3, 4, 5, 6\} \\
+0 & \text{ otherwise }
+\end{array}
+\right.$$
+
+--- &vcenter .largecontent
+
+## 計算機率
+
+- **假設**事件空間內，每個結果發生的機率都一樣，則$Pr(X = x)$為：
+$$\frac{\text{使得} X = x \text{的結果個數}}{\text{事件空間的結果個數}}$$
+
+--- &vcenter .largecontent
+
+## 計算機率
+
+- 範例：假設我們丟出兩個銅板，則事件空間為：\{(正,正), (正,反), (反,正), (反,反)\}
+    - 若$X$為正面的個數，則：
+$$Pr(X = x) = \left\{
+\begin{array}{lc}
+\frac{1}{4} & \text{if } x = 2 \\
+\frac{2}{4} & \text{if } x = 1 \\
+\frac{1}{4} & \text{if } x = 0
+\end{array}
+\right.$$
+
+--- &vcenter .largecontent
+
+## 模擬機率
+
+- 在R 中，我們可以利用模擬來估計機率
+
+```{r coins1000, echo = TRUE}
+set.seed(1)
+# 樣本大小為1000的模擬
+x <- sapply(1:1000, function(i) {
+  sum(sample(c(T, F), 2, replace = TRUE))
+})
+table(x) / length(x)
+```
+
+
+--- &vcenter .largecontent
+
+## 大數法則(LLN, Law of Large Numbers)
+
+- Borel's law of large numbers：如果每次實驗的條件都一模一樣，並且獨立，則當實驗的次數越來越大時：
+$$\frac{事件發生的次數}{實驗的次數} \rightarrow 事件的機率$$
+
+--- &vcenter .largecontent
+
+## 大數法則(LLN, Law of Large Numbers)
+
+```{r coins-lln, cache = TRUE}
+set.seed(1)
+p <- sapply(2^(10:24), function(n) {
+  mean(rbinom(n, size = 2, prob = 0.5) == 2)
+}, USE.NAMES = FALSE)
+.g <- 
+  data.frame(size = 2^(10:24), probability = p) %>%
+  mutate(upper = 0.25 + 3 * sqrt((0.25 * 0.75) / size), 
+         lower = 0.25 - 3 * sqrt((0.25 * 0.75) / size)) %>%
+  ggplot(aes(x = size, y = probability)) +
+  geom_line() +
+  geom_point() + 
+  geom_ribbon(aes(ymin = lower, ymax = upper), alpha = 0.1) +
+  scale_x_continuous(trans = "log2")
+print(.g)
+```
+
+--- &vcenter .largecontent
+
+## 連續型隨機變數
+
+- 若$X$代表20個金門縣縣民樣本的平均年齡，則$X$可能的值為：\{0, 1/20, 2/20, ..., 2000/20\}，一共有2001種
+- 當隨機變數的可能值過多時，我們可以把$X$視為連續型隨機變數
+    - 例：可以把$X$視為是介於0和100間的實數
+- 連續型隨機變數個別的結果的值為0
+    - $Pr(X = x) = 0 \text{  } \forall x$
+
+--- &vcenter .largecontent
+
+## 練習四之二
+
+- 若$X$代表20個金門縣縣民樣本的平均年齡，則$X$可能的值為：\{0, 1/20, 2/20, ..., 2000/20\}，一共有2001種
+- 請用模擬的方式估計$Pr(X = x)$的最大值
+
+--- &vcenter .largecontent
+
+## 機率密度函數
+
+- 機率論中，我們使用「機率密度函數」來描述連續型隨機變數
+- 若$X$是一個連續型隨機變數，$f_X$是$X$的機率密度函數，則：
+    - $f_X(x) \geq 0 \text{  } \forall x \in \mathbb{R}$
+    - $\int_{-\infty}^{\infty} f_X(x) = 1$
+    - $Pr(a \leq X \leq b) = \int_{a}^b f_X(x)$
+
+```{r continuous-mean-Kinmen, cache = TRUE}
+x <- sapply(1:10000, function(i) {
+  mean(sample(population.Kinmen, 20))
+})
+qplot(x = x, geom = "density")
+```
+
 
 --- &vcenter .largecontent
 
