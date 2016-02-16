@@ -927,7 +927,7 @@ qplot(x, geom = "density") +
 
 ## 中心點與散佈程度
 
-```{r, rv-description}
+```{r, rv-description1}
 .plot <- function(x, y) {
   plot(x, y, type = "p", xlim = c(-5, 5), ylim = c(-5, 5), 
        xlab = "", ylab = "", bty = 'n', xaxt = 'n', yaxt = 'n')
@@ -953,8 +953,8 @@ layout(1)
 
 ## 隨機變數的中心點：平均數(mean)
 
-- 如果把整個density函數想像成一個物體，平均數代表的是重心的位置
-- $E(X) = \int_{-\infty}^{\infty} x f_X(x) dx$
+- 如果把整個機率密度函數想像成一個物體，平均數代表的是重心的位置
+- $\int_{-\infty}^{\infty} x f_X(x) dx$
 
 ```{r rv}
 shape <- 1.25
@@ -983,8 +983,30 @@ arrows(.m, -0.025, y1 = 0)
 
 ## 期望值
 
-- 在介紹平均數之前，先介紹機率論的
+- 在機率論中，擴充了平均數的概念：
+- 給定一個函數：$g$，例：對縣民的年齡四捨五入到十位數
+- $g(X)$也會是一個隨機變數
+- $E(g(X))$就表示$g(X)$的平均數
+- $E(g(X))$的動作，稱為$g(X)$的期望值
+- 數學上的定義為：$\int_{-\infty}^{\infty} g(x) f_X(x) dx$
 
+--- &vcenter .largecontent
+
+## 練習四之四
+
+- $X$表示抽出一個金門縣縣民的年齡
+    - 請問$X$可能的值是什麼？
+- $g$表示對縣民的年齡四捨五入到十位數
+    - 請問$g(X)$可能的值是什麼？
+
+--- &vcenter .largecontent
+
+## 大數法則與平均數
+
+- 如果我們能不停地產生$X$ 的樣本，如：$x_1, x_2, ..., x_n$
+- 只要當$n$ 越來越大： $\frac{1}{n} \sum_{i=1}^n {x_i} \rightarrow E(X)$
+- 同理，如果給定一個函數$g$，當$n$ 越來越大：$\frac{1}{n} \sum_{i=1}^n {g(x_i)} \rightarrow E(g(X))$
+    - 這部份衍生了一種統計計算方式：用$\frac{1}{n} \sum_{i=1}^n {g(x_i)} \rightarrow \int_{-\infty}^{\infty} g(x) f_X(x) dx$
 
 --- &vcenter .largecontent
 
@@ -1042,29 +1064,226 @@ arrows(.m3, -0.025, y1 = 0)
 
 --- &vcenter .largecontent
 
-## 大數法則與平均數
-
-- 如果我們能不停地產生$X$ 的樣本，如：$x_1, x_2, ..., x_n$
-- 只要當$n$越來越大：$\frac{1}{n} \sum_{i=1}^n {x_i} \rightarrow E(X)$
-
---- &vcenter .largecontent
-
-## Bias
+## 比較隨機變數與常數
 
 - $\mu$是我們的目標，例：全金門縣縣民的年齡
 - $X$是我們的方法（演算法）代表的隨機變數，例：抽20名樣本的平均年齡
-- Bias的定義是：$E(X) - \mu$
+- 機率論中，定義偏差(bias)為$E(X) - \mu$
 
 --- &vcenter .largecontent
 
 ## 變異數
 
-- $X$是一個隨機變數時，變異數常常用於描述散布程度
-- $Var(X) = E((X - E(X))^2)$
+- 當$X$是一個隨機變數時，變異數常常用於描述散布程度
+- 我們通常將$X$的變異數記作：$Var(X)$
+- 數學上，我們定義：$Var(X) = E((X - E(X))^2)$
+    - 回憶敘述統計量中母體變異數的定義：$\frac{1}{n}sum_{i=1}{n}{(x_i - \bar{x})^2}$
 
 --- &vcenter .largecontent
 
-## 估計母體平均數 - 統計量
+## 變異數
+
+```{r variance}
+curve(dnorm(x, sd = 1/2), -6, 6, col = 2, xlab = "", 
+      lwd = 2, xaxt = "n", yaxt = "n", ylab = "")
+curve(dnorm(x, sd = 1), col = 3, lwd = 2, add = TRUE)
+curve(dnorm(x, sd = 2), col = 4, lwd = 2, add = TRUE)
+legend("topright", sprintf("variance = %0.2f", c(1/2, 1, 2)^2), 
+       lwd = 2, lty = 1, col = 2:4)
+```
+
+--- &vcenter .largecontent
+
+## 偏移與變異數
+
+```{r, rv-description2}
+.plot <- function(x, y) {
+  plot(x, y, type = "p", xlim = c(-5, 5), ylim = c(-5, 5), 
+       xlab = "", ylab = "", bty = 'n', xaxt = 'n', yaxt = 'n')
+  points(0, 0, pch = "+", cex = 3, col = 2)
+}
+layout(matrix(1:4, 2, 2))
+set.seed(1)
+.plot(rnorm(25, 0, 0.5), rnorm(25, 0, 0.5))
+.plot(rnorm(25, 0, 1.5), rnorm(25, 0, 1.5))
+.plot(rnorm(25, 1, 0.5), rnorm(25, 1, 0.5))
+.plot(rnorm(25, 2, 1.5), rnorm(25, 2, 1.5))
+layout(1)
+```
+
+--- &vcenter .largecontent
+
+## 估計Bias和Variance
+
+- 我們可以用模擬的方式逼近$E(X)$，所以就可以逼近偏差
+- 我們可以用模擬結果的樣本變異數逼近變異數
+
+--- &vcenter .largecontent
+
+## 練習四之五
+
+- 給定20個金門縣縣民樣本
+    - $X1$代表樣本的年齡平均數
+    - $X2$代表樣本的年齡中位數
+    - $X3$代表樣本的年齡平均數再乘以0.99
+- 請分別估計$X1$、$X2$與$X3$和金門縣全縣縣民的偏差和變異數
+
+--- &vcenter .largecontent
+
+## 練習四之六
+
+- $X1$代表20名金門縣縣民的樣本平均數
+- $X2$代表50名金門縣縣民的樣本平均數
+- $X3$代表100名金門縣縣民的樣本平均數
+- 請分別估計$X1$、$X2$與$X3$和金門縣全縣縣民的偏差和變異數
+
+--- &vcenter .largecontent
+
+## 機率論的總結
+
+- 事件空間與隨機變數
+- 描述隨機變數的方式
+    - 機率密度函數與機率質量函數
+    - 期望值與變異數
+- 計算機率與期望值的方式
+    - 大數法則與模擬
+- 比較隨機變數與常數
+    - 偏差
+    - 變異數
+
+--- .dark .segue
+
+## 假設檢定
+
+--- &vcenter .largecontent
+
+## 現實世界的母體
+
+- 在上一個章節中，「母體」是「已知」
+- 實務上，母體是「未知」，我們只能獲取樣本
+
+--- &vcenter .largecontent
+
+## 科學的運作原理
+
+1. 大膽假設
+1. 小心求證
+
+--- &vcenter .largecontent
+
+## 大膽假設
+
+```{r hypothesis}
+curve(dnorm(x), -3, 3, xlab = "", ylab = "", main = "Model", ylim = c(-0.05, 0.4), lwd = 3)
+lines(c(-3, 3), c(0, 0), lwd = 3)
+```
+
+--- &vcenter .largecontent
+
+## 小心求證
+
+```{r testing}
+curve(dnorm(x), -3, 3, xlab = "", ylab = "", main = "Model", ylim = c(-0.05, 0.4), lwd = 3)
+lines(c(-3, 3), c(0, 0), lwd = 3)
+.x <- seq(2.1, 3, by = 0.01)
+polygon(c(.x, rev(.x)), c(dnorm(.x), rep(0, length(.x))), col = rgb(1, 0, 0, 0.3))
+arrows(x0 = 2.1, y0 = -0.05, y1 = 0, lwd = 3)
+text(2.1, -0.035, "observation", pos = 2)
+```
+
+--- &vcenter .largecontent
+
+## 不公正的銅板
+
+- 有一個銅板，丟十次後，全部都是正面
+- 縣民：這銅板有問題，作假
+
+--- &vcenter .largecontent
+
+## 不公正的銅板
+
+- 有一個銅板，丟三次後，全部都是正面
+- 縣民：才丟三次，說不定是巧合
+
+--- &vcenter .largecontent
+
+## 如何證明銅板不公正？
+
+- 公正的銅板，也是有可能丟十次後，得到十次的正面
+    - 根據模擬，100000次「丟十次公正的銅板」，獲得「十次正面」的次數，約有100次左右
+- 根據機率，丟出一百次公平的銅板得到一百次正面，也是「可能」的
+    - 因為機率不為0
+
+--- &vcenter .largecontent
+
+## 與犯錯妥協
+
+<center>`r fig("accept-mistake.jpg", 100)`</center>
+<small><http://www.jhak.com/shidian/xqgw/2014-02/14/content_9397.html></small>
+
+--- &vcenter .largecontent
+
+## 處理犯錯
+
+- 控制犯錯的機率
+    - 接受1%的犯錯機率
+- 計算「出現觀測值（或更糟）的機率」
+- 如果機率值比我們設定的犯錯機率更低 => 表示當初的假設是錯誤的
+
+```{r testing2, fig.width = 10, fig.height = 4}
+curve(dnorm(x), -3, 3, xlab = "", ylab = "", main = "Model", ylim = c(-0.05, 0.4), lwd = 3)
+lines(c(-3, 3), c(0, 0), lwd = 3)
+.x <- seq(2.1, 3, by = 0.01)
+polygon(c(.x, rev(.x)), c(dnorm(.x), rep(0, length(.x))), col = rgb(1, 0, 0, 0.3))
+arrows(x0 = 2.1, y0 = -0.05, y1 = 0, lwd = 3)
+text(2.1, -0.035, "observation", pos = 2)
+```
+
+--- &vcenter .largecontent
+
+## 練習五之一
+
+- 假設銅板是公正的，並且我們接受錯誤的機率為5%
+- 請計算丟十次銅板出現十次正面的機率
+- 請計算丟三次銅板出現三次正面的機率
+
+--- &vcenter .largecontent
+
+## 專業的假設檢定描述
+
+- $H_0$: 銅板正面的機率是$0.05$
+- $H_1$: 銅板正面的機率不是$0.025$
+- 丟十次銅板出現十次正面，在顯著水準$\alpha = 0.05$之下，檢定結果P-value為0.000977 < 0.05，故拒絕虛無假設
+
+--- &vcenter .largecontent
+
+## 專業名詞對應表
+
+- $H_0$（虛無假設），代表我們對未知事物的猜測
+- $H_1$為$H_0$的反面敘述
+- 顯著水準$\alpha$表示我們對犯錯的忍受程度
+- 計算觀測到的現象（或更糟）的機率，此機率稱為「P-value」
+- 拒絕虛無假設 ==> 表示我們認為原本的假設是錯誤的
+    - 銅板正面的機率**不是** 0.5
+    - 我們不知道銅板正面的機率是多少
+
+--- &vcenter .largecontent
+
+## 問題
+
+```{r testing3, fig.width = 10, fig.height = 4}
+curve(dnorm(x), -3, 3, xlab = "", ylab = "", main = "Model", ylim = c(-0.05, 0.4), lwd = 3)
+lines(c(-3, 3), c(0, 0), lwd = 3)
+.x <- seq(2.1, 3, by = 0.01)
+polygon(c(.x, rev(.x)), c(dnorm(.x), rep(0, length(.x))), col = rgb(1, 0, 0, 0.3))
+arrows(x0 = 2.1, y0 = -0.05, y1 = 0, lwd = 3)
+text(2.1, -0.035, "observation", pos = 2)
+```
+
+
+--- &vcenter .largecontent
+
+## 統計量
 
 --- &vcenter .largecontent
 
