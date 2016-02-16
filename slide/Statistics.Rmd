@@ -81,6 +81,13 @@ taipei.tax <- read.table(file("taipei-tax.csv", encoding = "UTF-8"), skip = 1, h
 
 --- &vcenter .largecontent
 
+## 限制聲明
+
+- 統計是一門需要時間學習的專業技能。同學若想要學習專業的統計知識，仍然需要找專門介紹統計的課程
+    - 本課程的目的在讓同學透過R來「體驗」統計的思維，以增加未來和統計學家的溝通能力
+
+--- &vcenter .largecontent
+
 ## 關於練習
 
 - 請使用R 搭配swirl課程：**RStatistics**進行
@@ -274,7 +281,7 @@ abline(v = median(construction$X座標), col = 2)
 ## 中位數的應用
 
 - 中位數是可以取代大多數平均數的角色
-- 中位數比較穩定，不容易受到少數資料的影響
+- 中位數比較穩健，不容易受到少數資料的影響
 - 中位數的解釋和總和無關
 - 台灣每人可支配所得：
     - 逐年(100年至103年)平均數：275984, 285939, 293523, 303762
@@ -706,7 +713,7 @@ suppressMessages(print(.g))
 ```{r population-Kinmen-sample1}
 set.seed(1)
 sapply(1:10, function(i) {
-  sample(population.Kinmen, 10, FALSE) %>%
+  sample(population.Kinmen, 20, FALSE) %>%
     mean()
 })
 ```
@@ -757,6 +764,17 @@ $$f_X(i) = \left\{
 0 & \text{ otherwise }
 \end{array}
 \right.$$
+
+--- &vcenter .largecontent
+
+## 機率質量函數的用途
+
+- 機率質量函數「定義」了一個隨機變數的所有數學性質
+    - 只要能得知「機率質量函數」，就能夠計算所有「隨機變數」的相關問題
+        - 中心點
+        - 散布程度
+        - 計算各種事件發生的機率
+- 我們等等會再針對這類函數的應用做說明
 
 --- &vcenter .largecontent
 
@@ -844,7 +862,7 @@ print(.g)
 
 ## 機率密度函數
 
-- 機率論中，我們使用「機率密度函數」來描述連續型隨機變數
+- 在機率論中，我們使用「機率密度函數」來描述連續型隨機變數
 - 若$X$是一個連續型隨機變數，$f_X$是$X$的機率密度函數，則：
     - $f_X(x) \geq 0 \text{  } \forall x \in \mathbb{R}$
     - $\int_{-\infty}^{\infty} f_X(x) = 1$
@@ -867,6 +885,182 @@ qplot(x, geom = "density") +
   geom_ribbon(data = dplyr::filter(df, x > 30, x < 40), aes(x = x, ymax = density), ymin = 0, alpha = 0.3)
 ```
 
+--- &vcenter .largecontent
+
+## 機率密度函數與機率質量函數的用途
+
+- 當專家提到對$X$建立「統計模型」或「模型」時，背後就是代表一系列的機率密度函數與機率質量函數
+- 運用這些模型，專家就可以計算出重要事件的機率
+
+<center>`r fig2("weather-predict.png", 75)`</center>
+
+--- &vcenter .largecontent
+
+## 樣本平均數的機率密度函數
+
+- 根據大數法則，只要我們能夠不停地產生隨機變數的觀測值，就可以用大量的運算逼近機率值
+- 只要具備「產生隨機變數的觀測值」，很類似用數學推導出「機率密度函數」
+
+--- &vcenter .largecontent
+
+## 隨機變數的比較
+
+- 樣本平均數是隨機變數$X$
+- 母體平均數是常數$\mu$
+- 如何比較$X$ 與 $\mu$？
+    - $P(\left\lVert X - \mu \right\rVert < 1) = ?$
+    - $X$ 的中心位置與 $\mu$是否一致？
+    - $X$ 的散布程度是大還是小？
+
+--- &vcenter .largecontent
+
+## 練習四之三
+
+- $X$代表20名金門縣縣民樣本的平均年齡
+- $\mu$代表全金門縣縣民的平均年齡
+- 請用模擬的方式估計：
+    - $Pr(\left\lVert X - \mu \right\rVert < 4.4)$
+    - $Pr(\left\lVert X - \mu \right\rVert < 8.8)$
+    - $Pr(\left\lVert X - \mu \right\rVert < 13.2)$
+
+--- &vcenter .largecontent
+
+## 中心點與散佈程度
+
+```{r, rv-description}
+.plot <- function(x, y) {
+  plot(x, y, type = "p", xlim = c(-5, 5), ylim = c(-5, 5), 
+       xlab = "", ylab = "", bty = 'n', xaxt = 'n', yaxt = 'n')
+  points(0, 0, pch = "+", cex = 3, col = 2)
+}
+layout(matrix(1:4, 2, 2))
+set.seed(1)
+.plot(rnorm(25, 0, 0.5), rnorm(25, 0, 0.5))
+.plot(rnorm(25, 0, 1.5), rnorm(25, 0, 1.5))
+.plot(rnorm(25, 1, 0.5), rnorm(25, 1, 0.5))
+.plot(rnorm(25, 2, 1.5), rnorm(25, 2, 1.5))
+layout(1)
+```
+
+--- &vcenter .largecontent
+
+## 隨機變數的中心點
+
+- 我們假設$X$的結果是區間尺度或順序尺度
+- 敘述統計中介紹的平均數(mean)、中位數(median)與眾數(mode)在連續型隨機變數中都有對應
+
+--- &vcenter .largecontent
+
+## 隨機變數的中心點：平均數(mean)
+
+- 如果把整個density函數想像成一個物體，平均數代表的是重心的位置
+- $E(X) = \int_{-\infty}^{\infty} x f_X(x) dx$
+
+```{r rv}
+shape <- 1.25
+scale <- 3
+d <- function(x) dgamma(x, shape = shape, scale = scale)
+p <- function(x) pgamma(x, shape = shape, scale = scale)
+q <- function(x) qgamma(x, shape = shape, scale = scale)
+```
+
+```{r rv-mean}
+curve(d(x), 0, 15, ylab = "", ylim = c(-0.025, 0.2), bty = "n",
+      yaxt = "n", xaxt = "n", lwd = 3)
+lines(c(0, 15), c(0, 0), lwd = 3)
+.m <- 4
+lines(c(.m, .m), c(0, d(.m)), col = 2, lwd = 3)
+# .m2 <- q(0.5)
+# lines(c(.m2, .m2), c(0, d(.m2)), col = 3)
+# .m3 <- (shape - 1) * scale
+# lines(c(.m3, .m3), c(0, d(.m3)), col = 4)
+# legend("topright", c("mean", "median", "mode"), 
+#        col = 2:4, lty = 1)
+arrows(.m, -0.025, y1 = 0)
+```
+
+--- &vcenter .largecontent
+
+## 期望值
+
+- 在介紹平均數之前，先介紹機率論的
+
+
+--- &vcenter .largecontent
+
+## 隨機變數的中心點：中位數(median)
+
+- 中位數則是代表左邊面積與右邊面積都是0.5的位置點
+
+```{r rv-median}
+curve(d(x), 0, 15, ylab = "", ylim = c(-0.025, 0.2), bty = "n",
+      yaxt = "n", xaxt = "n", lwd = 3)
+lines(c(0, 15), c(0, 0), lwd = 3)
+# .m <- 4
+# lines(c(.m, .m), c(0, d(.m)), col = 2)
+.m2 <- q(0.5)
+lines(c(.m2, .m2), c(0, d(.m2)), col = 3, lwd = 3)
+# .m3 <- (shape - 1) * scale
+# lines(c(.m3, .m3), c(0, d(.m3)), col = 4)
+# legend("topright", c("mean", "median", "mode"), 
+#        col = 2:4, lty = 1)
+.x <- seq(0, .m2, by = 0.001)
+polygon(c(.x, rev(.x)), c(d(.x), rep(0, length(.x))), 
+        col = rgb(1, 0, 0, 0.3))
+.x <- seq(.m2, 15, by = 0.001)
+polygon(c(.x, rev(.x)), c(d(.x), rep(0, length(.x))), 
+        col = rgb(0, 0, 1, 0.3))
+arrows(.m2, -0.025, y1 = 0)
+```
+
+--- &vcenter .largecontent
+
+## 隨機變數的中心點：眾數(mode)
+
+- 眾數的位置是機率密度函數的最大值
+
+```{r rv-mode}
+curve(d(x), 0, 15, ylab = "", ylim = c(-0.025, 0.2), bty = "n",
+      yaxt = "n", xaxt = "n", lwd = 3)
+lines(c(0, 15), c(0, 0), lwd = 3)
+# .m <- 4
+# lines(c(.m, .m), c(0, d(.m)), col = 2)
+# .m2 <- q(0.5)
+# lines(c(.m2, .m2), c(0, d(.m2)), col = 3, lwd = 3)
+.m3 <- (shape - 1) * scale
+lines(c(.m3, .m3), c(0, d(.m3)), col = 4, lwd = 3)
+# legend("topright", c("mean", "median", "mode"), 
+#        col = 2:4, lty = 1)
+# .x <- seq(0, .m2, by = 0.001)
+# polygon(c(.x, rev(.x)), c(d(.x), rep(0, length(.x))), 
+#         col = rgb(1, 0, 0, 0.3))
+# .x <- seq(.m2, 15, by = 0.001)
+# polygon(c(.x, rev(.x)), c(d(.x), rep(0, length(.x))), 
+#         col = rgb(0, 0, 1, 0.3))
+arrows(.m3, -0.025, y1 = 0)
+```
+
+--- &vcenter .largecontent
+
+## 大數法則與平均數
+
+- 如果我們能不停地產生$X$ 的樣本，如：$x_1, x_2, ..., x_n$
+- 只要當$n$越來越大：$\frac{1}{n} \sum_{i=1}^n {x_i} \rightarrow E(X)$
+
+--- &vcenter .largecontent
+
+## Bias
+
+- $\mu$是我們的目標，例：全金門縣縣民的年齡
+- $X$是我們的方法（演算法）代表的隨機變數，例：抽20名樣本的平均年齡
+- Bias的定義是：$E(X) - \mu$
+
+--- &vcenter .largecontent
+
+## 變異數
+
+- $X$是一個隨機變數時，變異數常常用於描述散布程度
+- $Var(X) = E((X - E(X))^2)$
 
 --- &vcenter .largecontent
 
