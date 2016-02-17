@@ -144,13 +144,6 @@ rstatistics_03_07 <- function() {
     e <- script_test_prefix()
     QCD <- function(x) IQR(x) / median(x)
     rstatistics_template("answer_03_07", c("QCD"))
-    retval <- lapply(sprintf("answer_03_%02d", 1:7), function(name) {
-      get(name, envir = globalenv())
-    })
-    answer <- do.call(rbind, retval)
-    answer <- data.frame(robustness = answer[,2] == answer[,1], "ratio invariant" = abs(answer[,3] - answer[,1]) < 1e-8, "ratio" = abs(answer[,3] / answer[,1] - 100) < 1e-8, "shift invariant" = answer[,1] == answer[,4])
-    answer <- tail(answer, -2)
-    assign("answer", answer, envir = globalenv())
     TRUE
   }, error = function(e) {
     message(conditionMessage(e))
