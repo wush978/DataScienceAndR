@@ -1,0 +1,518 @@
+- Class: meta
+  Course: DataScienceAndR
+  Lesson: RVisualization-01-One-Variable-Visualization
+  Author: Wush Wu
+  Type: Standard
+  Organization: Taiwan R User Group
+  Version: 2.3.1.2
+
+- Class: text
+  Output: 這個課程的目是讓同學理解，如何依據數據的型態，在一個維度上適當的呈現數據。
+
+- Class: cmd_question
+  Output: 請同學先打開`plot`的說明。
+  CorrectAnswer: ?plot
+  AnswerTests: omnitest('?plot')
+
+- Class: text
+  Output: |
+    `plot`主要有兩個參數：`x`和`y`。同學可能會認為，`x`代表x座標的值，`y`代表y座標的值。
+    一般來說這是對的，但是也不盡然。`plot`是個會依據`x`的型態不同、`y`的型態不同，
+    而有不同行為的函數。
+
+- Class: cmd_question
+  Output: 首先，我們拿R 的內建的infert資料集為範例。這是當年研究流產與不孕症之間關係的資料
+    集。請同學輸入：`?infert`先看看資料對每個欄位的說明。
+  CorrectAnswer: ?infert
+  AnswerTests: omnitest("?infert")
+
+- Class: text
+  Output: |
+    infert得第一欄(education)代表該名婦女的教育程度；第二欄(age)代表年齡；第三欄(parity)
+    代表已經生產的子女數（經產狀況）；第四欄(induced)代表人工流產的次數；第五欄(case)代表是
+    實驗組或是對照組（也就是有無不孕）；第六欄(spontaneous)代表自然流產的次數；第七欄與第八
+    欄則是與實驗設計相關的資料。
+
+- Class: cmd_question
+  Output: 接著我們來具體看看資料。請同學輸入：`View(infert)`來看看實際的資料的值。這裡
+    每筆資料都代表一名婦女。
+  CorrectAnswer: View(infert)
+  AnswerTests: omnitest('View(infert)')
+
+- Class: cmd_question
+  Output: 我們等等先拿`infert$spontaneous`做說明。請同學先把`infert$spontaneous`存到
+    `spon`變數中。
+  CorrectAnswer: spon <- infert$spontaneous
+  AnswerTests: check_val("spon", infert$spontaneous)
+
+- Class: cmd_question
+  Output: |
+    請問同學，`spon`是什麼型態？
+  CorrectAnswer: class(spon)
+  AnswerTests: omnitest(correctVal = class(spon))
+
+- Class: cmd_question
+  Output: |
+    在R 中，`plot`是最泛用的繪圖指令。我們先請同學輸入：plot(spon)。
+  CorrectAnswer: plot(spon)
+  AnswerTests: omnitest('plot(spon)')
+
+- Class: text
+  Output: |
+    當`plot`收到一個數值向量或整數向量時，會把該向量的值當成y軸座標，而對應的`x`軸座標則為數據的
+    順序。舉例來說，這張圖上的第一筆數據的座標是：(1, spon[1])、第二筆數據的座標是：(2, spon[2])
+    以此類推。
+    同學可以搭配之前打開的`infert`資料來看。最左邊的點，x 軸座標是1 代表是第一筆婦女的資料，y 軸座標是
+    `2.0`，代表她自然流產過兩次。
+
+- Class: text
+  Output: |
+    這張`plot(spon)`的結果，可以讓我們觀察`spon`是否和資料的順序有相關性。由於整個圖形
+    並沒有看出特別的趨勢，所以「沒有證據」顯示兩者有特別的關係。請大家記下這張圖的特徵：
+    數據均勻的上下散步，並沒有群聚的現象。這就是「沒有證據」的徵狀。
+
+- Class: cmd_question
+  Output: 接著，我們請同學先輸入： `spon <- factor(spon)`，轉換一下
+    數據形態。
+  CorrectAnswer: spon <- factor(spon)
+  AnswerTests: check_val("spon", factor(infert$spontaneous))
+
+- Class: cmd_question
+  Output: 我們再輸入一次：`plot(spon)`
+  CorrectAnswer: plot(spon)
+  AnswerTests: omnitest("plot(spon)")
+
+- Class: text
+  Output: |
+    當`plot`收到一個類別向量或字串向量時，會依序畫出不同類別的個數。
+    因為這種狀況下，R不知道合理的方法把數據轉換成y座標(數值)。
+    舉例來說，圖中從左邊數來第一個灰色的bar，x 軸的說明文字是：`0`，y軸
+    座標約140，代表`spon`中有140個`0`。
+
+- Class: mult_question
+  Output: 請問同學，`spon`中大約有多少個`1`?
+  AnswerChoices: 100;70;40
+  CorrectAnswer: "70"
+  AnswerTests: omnitest(correctVal="70")
+
+- Class: cmd_question
+  Output: 請同學輸入：`table(spon)`。這個函數會計算一個向量中各種值的個數。
+  CorrectAnswer: table(spon)
+  AnswerTests: omnitest("table(spon)")
+
+- Class: text
+  Output: R 會告訴各位同學，`spon`中剛好有71個`1`。
+
+- Class: mult_question
+  Output: 我們也拿`spon`來複習一下初等統計學的數值系統。根據`?infert`的說明，`spon`的值
+    為0時代表該名婦女沒有自然流產過，值為1時代表該名婦女自然流產過一次，值為2時代表該名婦女
+    自然流產過兩次以上。請問同學，`spon`比較適合名目尺度(選1)、順序尺度(選2)、區間尺度(選3)、
+    還是比例尺度(選4)？
+  AnswerChoices: 1;2;3;4
+  CorrectAnswer: "2"
+  AnswerTests: omnitest(correctVal="2")
+  Hint: |
+    `spon`有順序性是無庸置疑。但是`spon`中的2是「兩次或以上」，而不是單純的「兩次」，所以
+    會應該要使用「順序尺度」。
+
+- Class: text
+  Output: |
+    以自然流產數據`spon`為例，我也認為第二張的長條圖(把數據當成順序尺度)，是比較容易解讀的。
+    事實上，統計學家在看名目尺度與順序尺度的資料時，也只能看各種類別的個數。而順序尺度應該在
+    成像長條的排列順序時，依照類別的順序做排序。
+
+- Class : text
+  Output: |
+    這張圖直接告訴我們：`spon`只有3種值，而「0次流產」的婦女數量比「1次流產」和「超過2次流產」
+    的次數還要多。
+
+- Class: cmd_question
+  Output: |
+    另外一種常用的圖形是圓餅圖。請同學輸入：`pie(table(spon))`
+  CorrectAnswer: pie(table(spon))
+  AnswerTests: omnitest("pie(table(spon))")
+
+- Class: text
+  Output: 圓餅圖利用面積與角度，告訴我們數據分佈的比率。由圖中可以明顯看出，"0"類別的個數
+    佔了整體數據的一半。這點是長條圖比較難直接看出來的。
+    R 的`pie`函數是需要名字與個數比率的，所以我們需要先利用`table`計算每個類別的個數，再把
+    `table`的結果傳遞給`pie`使用。
+
+- Class: cmd_question
+  Output: 請同學把`infert$age`存到變數`age`
+  CorrectAnswer: age <- infert$age
+  AnswerTests: check_val("age", infert$age)
+
+- Class: cmd_question
+  Output: 請問`age`的型態是？
+  CorrectAnswer: class(age)
+  AnswerTests: omnitest(correctVal = class(age))
+
+- Class: cmd_question
+  Output: 請同學輸入`plot(age)`
+  CorrectAnswer: plot(age)
+  AnswerTests: omnitest("plot(age)")
+
+- Class: text
+  Output: |
+    這張`plot(age)`的結果，可以讓我們觀察`age`是否和資料的順序有相關性。由於整個圖形
+    並沒有看出特別的趨勢，所以「沒有證據」顯示兩者有特別的關係。請大家記下這張圖的特徵：
+    數據均勻的上下散步，並沒有群聚的現象。這就是「沒有證據」的徵狀。
+
+- Class: cmd_question
+  Output: 我們除了畫散佈圖，也可以畫折線圖。請同學輸入：`plot(age, type = "l")`
+  CorrectAnswer: plot(age, type = "l")
+  AnswerTests: omnitest('plot(age, type = "l")')
+
+- Class: text
+  Output: |
+    透過折線圖，我們可以看到整體數據有個週期性。整個數據有一個不甚明顯的三個波峰。如果我們
+    繼續鑽研這個數據，會發現數據中其實有許多組比對組合，我推測這三個不明顯的趨勢，可能和資料
+    的收集有關。
+
+- Class: cmd_question
+  Output: |
+    分析時，我們常常用直方圖來觀看區間尺度或比例尺度的數據分佈。請同學輸入：`x <- hist(age)`
+    來繪製`age`的直方圖，觀察`age`的分佈。
+  CorrectAnswer: x <- hist(age)
+  AnswerTests: omnitest("x <- hist(age)")
+
+- Class: cmd_question
+  Output: |
+    根據右邊的直方圖，我們看到有三個年齡層的樣本數特別高。雖然圖中可以告訴我們，最高峰位於
+    25~30歲之間，但是並沒辦法清楚的告訴我們圖的範圍。剛剛的assignment會把R 如何繪製直方圖
+    的細節存至變數`x`中。請同學輸入：`x`來顯示繪圖的細節
+  CorrectAnswer: x
+  AnswerTests: omnitest("x")
+
+- Class: mult_question
+  Output: |
+    `x`本質上是一個list，而它名為"breaks"的切點記載了直方圖的切割點。請由`$breaks`
+    (也就是`x$breaks`)的值，回答：「樣本數最高的年齡層為：」
+  AnswerChoices: (25,27];(26,28];(27,29]
+  CorrectAnswer: "(26,28]"
+  AnswerTests: omnitest(correctVal="(26,28]")
+
+- Class: cmd_question
+  Output: |
+    這裡幫同學複習：(26,28]的意思是說，age > 26 且 age <= 28。`x$counts`則記載著每個
+    層級的個數。根據`x$counts`，(26,28]的資料共有45筆。請同學輸入：`sum(age > 26 & age <= 28)`
+    來驗證。
+  CorrectAnswer: sum(age > 26 & age <= 28)
+  AnswerTests: omnitest("sum(age > 26 & age <= 28)")
+
+- Class: text
+  Output: |
+    從`hist`的結果出發，同學有沒有發現`hist(age)`本質上，就是把`age`透過`x$breaks`切成
+    一段一段，變成順序尺度的數據之後，再用類似剛剛我們繪`spon`的方式做呈現。
+
+- Class: cmd_question
+  Output: |
+    請同學輸入：`plot(cut(age, breaks = x$breaks))`。`cut`的功能就
+  CorrectAnswer: plot(cut(age, breaks = x$breaks))
+  AnswerTests: omnitest("plot(cut(age, breaks = x$breaks))")
+
+- Class: text
+  Output: 我們會看到一張圖，以`plot(spon)`的格式顯示`hist(age)`的內容。
+
+- Class: text
+  Output: |
+    這種把順序尺度、比例尺度的數據切片後變成順序尺度的技巧，在實務分析上非常常用。如何選取
+    切點，以及切點的個數，也是非常藝術的。
+
+- Class: text
+  Output: |
+    舉例來說，我在做政府採購分析時，由於法規會把標案做分類(例如一百萬以下的標案不用公開
+    招標，兩億以上的招標有更多法規需要遵守)，此時法規會很自然地告訴我們合理的切點。
+
+- Class: text
+  Output: |
+    而`hist`在`age`的例子，則是抓好上下界之後，等距切割。
+
+- Class: text
+  Output: |
+    另外一種做法，是透過`quantile`函數做切割。這樣每個切片中的資料個數會非常接近，在做進階
+    分析時有好處。
+
+- Class: cmd_question
+  Output: 請同學輸入：`infert$education`，這筆數據本身就是把比例尺度切片後得到順序尺度的結果。
+  CorrectAnswer: infert$education
+  AnswerTests: omnitest("infert$education")
+
+- Class: cmd_question
+  Output: |
+    在R 之中，處理區間尺度與比例尺度的資料，還有其他的方法。請同學輸入：plot(density(age))。
+  CorrectAnswer: plot(density(age))
+  AnswerTests: omnitest("plot(density(age))")
+
+- Class: text
+  Output: |
+    這種做法會得到一個平滑的曲線，因為R 並沒有先把`age`做切片，而是用一種叫做`kernel density estimation`
+    的統計方法來估計`age`這筆數據的probability density function。這個函數在實務上，和長條分配圖
+    一樣是拿來看數據的分佈。
+
+- Class: text
+  Output: |
+    所以我們也可以從這個圖中來觀察：有多少個尖峰？數據在右邊或左邊的尾巴有沒有拉得很長？有沒有明顯的
+    異常值？
+
+- Class: mult_question
+  Output: 請問同學，圖中的曲線，共有幾個尖峰？
+  AnswerChoices: 0;1;2;3
+  CorrectAnswer: "2"
+  AnswerTests: omnitest(correctVal = "2")
+
+- Class: mult_question
+  Output: |
+    請問同學，圖中的曲線，是1:左偏（少數特別小的`age`）、2:右偏（少數特別大的`age`）或
+    3:不偏（沒有上述兩種狀況）？
+  AnswerChoices: 1;2;3
+  CorrectAnswer: "3"
+  AnswerTests: omnitest(correctVal = "3")
+
+- Class: mult_question
+  Output: |
+    請問同學，這個曲線有沒有在某個地方有奇怪的尖峰？
+  AnswerChoices: Yes;No
+  CorrectAnswer: "No"
+  AnswerTests: omnitest(correctVal = "No")
+
+- Class: cmd_question
+  Output: |
+    這個統計方法中，很重要的參數是：`bw`。我們先請同學來畫出不同`bw`的結果。
+    請同學先輸入：`plot(density(age, bw = 0.1))`
+  CorrectAnswer: plot(density(age, bw = 0.1))
+  AnswerTests: omnitest("plot(density(age, bw = 0.1))")
+
+- Class: text
+  Output: |
+    在`bw`特別小的狀態，我們會看到一個很醜，而且很接近長條圖的結果。這是因為這筆數據是整數資料，
+    所以當`bw`小於1 很多時，就會看到一個個的尖峰，而這些尖峰的高度則和寬度有關。舉例來說，位在
+    25的尖峰，他的面積必須接近： `sum(age == 25) / length(age)`，也就是`age`為25的樣本
+    數比率。所以越小的`bw`，尖峰的寬度越小，尖峰就要越高。
+
+- Class: cmd_question
+  Output: |
+    請同學輸入：`plot(density(age, bw = 1))`
+  CorrectAnswer: plot(density(age, bw = 1))
+  AnswerTests: omnitest("plot(density(age, bw = 1))")
+
+- Class: text
+  Output: |
+    我們可以看到整體的曲線變得平滑許多。但是和`plot(density(age))`的結果相比，圖形上
+    只剩下兩個峰。同學應該可以就這個例子注意到，`bw`的參數會影響到結果的拓樸特質，例如
+    峰的個數。
+
+- Class: cmd_question
+  Output: |
+    那我們應該如何挑選`bw`的值呢？這個問題已經有許多統計學家做過相關研究，並且已經有許多
+    學術論文在探討這個問題。而R的`density`函數的文件中載明了，預設的`bw`是考量到歷史包袱，
+    所以採用`bw.nrd0`函數的計算結果。而統計文獻中，比較推薦的方法是`bw.SJ`函數的計算結果。
+    請同學輸入：`plot(density(age, bw = "SJ"))`，使用主流的推薦選`bw`的方法來繪圖。
+  CorrectAnswer: plot(density(age, bw = "SJ"))
+  AnswerTests: omnitest('plot(density(age, bw = "SJ"))')
+
+- Class: text
+  Output: |
+    如果採用`nr.SJ`方法所選出來的`bw`參數，得到的結果是只有兩個峰值的。
+
+- Class: text
+  Output: |
+    這裡總結一下上述的討論給同學。我們介紹了一種統計方法來從一筆數值向量中，觀察數據分佈的方法。
+    這裡要強調，我們的目的通常是要觀察數據是否單峰、是否有少數值特別大或特別小，以及不尋常的尖峰。
+    最後我們簡單探討，有些繪圖的參數，是會影響到我們對上述問題的答案。也介紹了R如何實作文獻上的
+    方法，讓我們可以直接站在巨人的肩膀上。
+
+- Class: cmd_question
+  Output: 接下來，我們請同學輸入`sunspot.year`。這是1700年至1988年，每年的太陽黑子數量。
+  CorrectAnswer: sunspot.year
+  AnswerTests: omnitest("sunspot.year")
+
+- Class: cmd_question
+  Output: 請問同學，`sunspot.year`的資料型態是？
+  CorrectAnswer: class(sunspot.year)
+  AnswerTests: omnitest(correctVal = "ts")
+
+- Class: cmd_question
+  Output: |
+    "ts"型態是R專門用來處理時間序列的型態。請同學輸入：`plot(sunspot.year)`
+  CorrectAnswer: plot(sunspot.year)
+  AnswerTests: omnitest("plot(sunspot.year)")
+
+- Class: cmd_question
+  Output: |
+    R在繪製時間序列的圖形時，會用線段依序將數據給連接起來。透過這種圖，我們可以判斷資料的值與順序（時間）
+    的相關性強不強。然而，我認為這張圖太密了，資料太多，反而讓我們不容易看出太陽黑子的週期性。
+    請同學輸入：`x <- tail(sunspot.year, 100)`，直接取出最後的100筆數據。
+  CorrectAnswer: x <- tail(sunspot.year, 100)
+  AnswerTests: omnitest("x <- tail(sunspot.year, 100)")
+
+- Class: cmd_question
+  Output: 請同學先檢查`x`的型態。經過`tail`函數處理後，`x`變成數值向量了。
+  CorrectAnswer: class(x)
+  AnswerTests: omnitest(correctVal = class(x))
+
+- Class: cmd_question
+  Output: 請同學還是先輸入：`plot(x)`
+  CorrectAnswer: plot(x)
+  AnswerTests: omnitest("plot(x)")
+
+- Class: cmd_question
+  Output: 接著再請同學輸入：`lines(x)`
+  CorrectAnswer: lines(x)
+  AnswerTests: omnitest("lines(x)")
+
+- Class: text
+  Output: |
+    同學注意到，這次的圖中同時有折線，也有資料點。而且我們也更清楚地看到圖上的資料。
+
+- Class: text
+  Output: |
+    R 之中，有非常多修飾圖的函數，例如剛剛同學使用的`lines`就是其一。當`lines`收到單一的數值向量後，
+    就會有類似`plot(x, type = "l")`的效果。而`lines`這類函數不會像`plot`「另起新圖」，而是在原本
+    的圖上做修飾。因此，在R中稱呼`plot`、`hist`這種會「另起新圖」的函數為「高階繪圖函數」，而
+    `lines`或是`points`等做修飾的函數，稱為「低階繪圖函數」。
+
+- Class: cmd_question
+  Output: |
+    請同學輸入：`lines(x, lty = 3, lwd = 3, col = 2)`。
+  CorrectAnswer: lines(x, lty = 3, lwd = 3, col = 2)
+  AnswerTests: omnitest("lines(x, lty = 3, lwd = 3, col = 2)")
+
+- Class: text
+  Output: |
+    這裡的lty參數讓我們可以把線段從直線改成虛線、lwd參數讓我們調整線段的
+    粗細、col讓線段變成紅色。R有大量的低階繪圖函數，讓我們可以對圖形做細膩的調教。
+    然而以現代的眼光來看，R 預設的圖形可能不夠精緻了。
+
+- Class: text
+  Output: |
+    R 社群的使用者則提供非常多的繪圖套件，想要提供更好的預設視覺效果。
+    例如之後會仔細介紹的`ggplot2`。
+
+- Class: text
+  Output: 接下來我們介紹，要如何輸出R的圖片。
+
+- Class: cmd_question
+  Output: |
+    輸出圖片最簡單的方式，就是先用互動式的console畫圖，然後用`savePlot`將圖用給定的格式
+    儲存到給定的檔名。我們先輸入`dst <- tempfile(fileext = ".png")`來產生一個隨機的
+    暫存檔案名稱。
+  CorrectAnswer: dst <- tempfile(fileext = ".png")
+  AnswerTests: omnitest('dst <- tempfile(fileext = ".png")')
+
+- Class: text
+  Output: |
+    接著請輸入：`savePlot(dst, type = "png")`，R 就會把我們視窗上看到的圖片輸出至檔案。
+    然而在Rstudio環境中`savePlot`函數不一定能使用。所以我們這邊就不帶著同學練習。
+
+- Class: cmd_question
+  Output: |
+    另一種做法是透過設定繪圖引擎（在R 中稱為`device`）。R 預設的繪圖引擎是把圖呈現
+    在使用者面前。而我們可以更改繪圖引擎為「把圖以特定格式繪製到檔案中」。舉例來說，
+    `png`函數就會讓R 建立一個繪圖引擎。請同學輸入：`png(dst)`開啟`png`的繪圖引擎。
+  CorrectAnswer: png(dst)
+  AnswerTests: omnitest("png(dst)")
+
+- Class: cmd_question
+  Output: |
+    請同學輸入：plot(x)。同學應該可以注意到，右邊的圖像沒有反應。
+  CorrectAnswer: plot(x)
+  AnswerTests: omnitest("plot(x)")
+
+- Class: cmd_question
+  Output: |
+    最後請同學輸入：`dev.off()`，關閉png的繪圖引擎，讓R 把圖片的資料寫入檔案。
+  CorrectAnswer: try(dev.off(), silent = TRUE)
+  AnswerTests: any_of_exprs("dev.off()", "try(dev.off(), silent = TRUE)")
+  Hint: dev.off()
+
+- Class: text
+  Output: |
+    最後，使用rstudio的同學等等可以輸入：`library(rstudioapi)`後使用`viewer(dst)`看看這個圖片。
+    沒有使用rstudio的同學請輸入`dst`取得儲存路徑後，自行透過作業系統打開該檔案看看繪圖的結果。
+    透過這樣的動作，確認圖片確實寫入這個檔案。
+
+- Class: cmd_question
+  Output: |
+    接下來讓我們進入大魔王時間。保險起見，請同學先輸入`skip()`讓我們重新初始化繪圖環境。
+  CorrectAnswer: try(dev.off(), silent = TRUE)
+  AnswerTests: omnitest("try(dev.off(), silent = TRUE)")
+
+
+- Class: cmd_question
+  Output: |
+    `hsb`是我們事先準備好的資料，裡面記載了學生的基礎資料與學生在各個科目的考試成績。
+    本資料包含11個欄位、200筆記錄（200位學生），
+    第一欄(id)代表該名學生的編號；
+    第二欄(sex)代表學生性別；第三欄(race)代表學生的種族；
+    第四欄(ses)代表學生家庭社經等級；
+    第五欄(schtyp)代表是學校是公立或私立；
+    第六欄(prog)代表學校的類型；
+    第七欄至第十一欄則是各科考試成績。
+    請同學輸入View(hsb)先看看數據。
+  CorrectAnswer: View(hsb)
+  AnswerTests: omnitest("View(hsb)")
+
+- Class: mult_question
+  Output: 請問同學，`write`欄位應該用哪一個R 型態處理？類別請選1, 數值請選2
+  AnswerChoices: 1;2
+  CorrectAnswer: "2"
+  AnswerTests: omnitest(correctVal = "2")
+
+- Class: cmd_question
+  Output: 請同學用`plot`和`density`的函數組合繪製`hsb$write`的數據。`bw`請用"SJ"
+  CorrectAnswer: plot(density(hsb$write, bw = "SJ"))
+  AnswerTests: any_of_exprs('plot(density(hsb$write, "SJ"))',
+    'plot(density(hsb$write, bw = "SJ"))', 'plot(density(x = hsb$write, bw = "SJ"))')
+
+- Class: mult_question
+  Output: 請問這張圖一共有幾個峰？
+  AnswerChoices: 0;2;4
+  CorrectAnswer: "2"
+  AnswerTests: omnitest(correctVal = "2")
+
+- Class: mult_question
+  Output: 請問資料有沒有異常的極大值或極小值？
+  AnswerChoices: Yes;No
+  CorrectAnswer: "Yes"
+  AnswerTests: omnitest(correctVal="Yes")
+
+- Class: mult_question
+  Output: 請問極小值大概是多少？
+  AnswerChoices: -100;-50;0
+  CorrectAnswer: -100
+  AnswerTests: omnitest(correctVal = "-100")
+
+- Class: text
+  Output: |
+    其實`hsb$write`的數據中，是以-99來記載遺失的資料。這在社會科學的數據中很常見。
+    而適當的視覺化可以讓我們在分析之前，就注意到這些資料的異常。
+
+- Class: cmd_question
+  Output: 請同學對`hsb$sex`畫出圓餅圖
+  CorrectAnswer: pie(table(hsb$sex))
+  AnswerTests: omnitest("pie(table(hsb$sex))")
+
+- Class: text
+  Output: 最後我們直接用大量的範例繪圖程式碼，讓同學學習各種圖形繪製的細節調教。
+
+- Class: script
+  Output: 我們看看圓餅圖的範例。結束請按`submit()`
+  Script: RVisualization-01-pie.R
+  AnswerTests: pass()
+
+- Class: script
+  Output: 我們看看長條圖的範例。結束請按`submit()`
+  Script: RVisualization-01-hist.R
+  AnswerTests: pass()
+
+- Class: script
+  Output: 我們看看機率分佈圖的範例。結束請按`submit()`
+  Script: RVisualization-01-density.R
+  AnswerTests: pass()
+
+- Class: script
+  Output: 我們看看折線圖的範例。結束請按`submit()`
+  Script: RVisualization-01-plot.ts.R
+  AnswerTests: pass()

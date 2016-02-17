@@ -57,3 +57,17 @@ assign("source_by_l10n_info", function(path) {
     try(source(path, local = new.env(), encoding = "UTF-8"), silent = TRUE)
   }
 }, envir = globalenv())
+
+assign("check_val", function(name, value) {
+  e <- get("e", parent.frame())
+  tryCatch({
+    result <- all.equal(get(name, e), value)
+    if (!isTRUE(result)) {
+      message(result)
+      FALSE
+    } else TRUE
+  }, error = function(e) {
+    message(conditionMessage(e))
+    FALSE
+  })
+})
