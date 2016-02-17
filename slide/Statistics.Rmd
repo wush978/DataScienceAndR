@@ -68,7 +68,6 @@ taipei.tax <- read.table(file("taipei-tax.csv", encoding = "UTF-8"), skip = 1, h
 - 假設檢定
 - 信賴區間
 - 統計模型
-- 統計科學的各領域簡介
 
 --- &vcenter .largecontent
 
@@ -1375,6 +1374,32 @@ text(2.1, -0.035, "observation", pos = 2)
 
 --- &vcenter .largecontent
 
+## 顯著
+
+- 當P-Value小於我們設定的顯著水準時，我們稱之「檢定顯著」
+    - 顯著的意思是：在排除掉隨機性的影響後，仍然有證據顯示假設錯誤
+
+--- &vcenter .largecontent
+
+## 有證據顯示常識錯誤，就是進步
+
+- 牛頓 ==> 光的行為無法以既有的物理知識解釋
+    - 做實驗、收集數據、有證據顯示與既有的知識不符
+- 這就是資料分析所追求的價值之一
+    - 否決常識，找到其他競爭對手不知道的知識
+
+--- &vcenter .largecontent
+
+## 如何解讀假設檢定
+
+- 虛無假設($H_0$)代表「常識」
+    - 目標通常是找到「破除常識的證據」
+- 不顯著，通常代表「沒突破」
+    - 在學術界，通常這代表不能發paper
+    - 在業界，檢定本身不會是最終目的
+
+--- &vcenter .largecontent
+
 ## 檢定不容易
 
 - 上述的檢定，都是簡單的檢定：
@@ -1442,6 +1467,29 @@ text(2.1, -0.035, "observation", pos = 2)
 - 如果我們動態的調整候選人的支持率，找出一個區間 I 使得：
     - 當x $\in$ I時，我們檢定「候選人的支持率是x」的結果P-Value會超過$\alpha$
 - 區間 I 稱為：候選人支持率的$1 - \alpha$信賴區間
+- 「候選人支持率」常被稱為「參數」
+
+--- &vcenter .largecontent
+
+## 信賴區間的計算
+
+- 需要知道參數、觀測值與P-Value之間的關係
+    - 要熟悉機率論等數學工具
+- 靠專家，用專家寫的統計軟體
+
+--- &vcenter .largecontent
+
+## 練習六之一
+
+- 轉換率是電子商務中重要的指標
+    - $轉換率 = \frac{購買數}{點擊數}$
+    - 主流網路廣告計費方式是依照點擊數收費，轉換率代表廣告商的效率
+- 假設我們和三間網路廣告商A、B、C合作，在第一週取得了以下的成效：
+    - 網路廣告商A 在1000個點擊中，帶來10個轉換
+    - 網路廣告商B 在1000個點擊中，帶來11個轉換
+    - 網路廣告商C 在10000個點擊中，帶來70個轉換
+- 請計算三間廣告商的轉換率在95%信心指數下的信賴區間
+- 以效率的觀點來看，在95%信心指數之下，我們對A、B或C可以怎樣的推論？
 
 --- &vcenter .largecontent
 
@@ -1449,18 +1497,226 @@ text(2.1, -0.035, "observation", pos = 2)
 
 - 將信賴區間視覺化，對於比較數據非常有幫助
 
-
 --- .dark .segue
 
-## 統計模型到機器學習
+## 檢定與信賴區間和實務
 
 --- &vcenter .largecontent
 
-## ...
+## 物理上的顯著與統計上的顯著
 
-- $x$, $y$
-- $y = f(x) + \varepsilon$, 假設 $\varepsilon \sim P$
+- 我們要達到業績目標的轉換率至少需要5%
+- 實驗結果：
+    - 廣告商A：10000個點擊有600個轉換
+        - P-value < 0.001(模擬顯示約$10^{-6}$)
+    - 廣告商B：550個點擊有40個轉換
+        - P-value $\approx$ 0.008
+- 我們該選哪一個廣告商？
+    - P-value 小的？比較顯著的？
+    - 轉換率比較高的？
+
+--- &vcenter .largecontent
+
+## 現實
+
+- 我們要選可以幫我們賺比較多錢的廣告商
+    - 永遠記得，資料分析的目的在於「價值」，而不是統計
+
+--- &vcenter .largecontent
+
+## 統計檢定的意義
+
+- 統計檢定的目的，在於控制隨機性帶來的影響，讓我們做出比較
+    - 比較本身不一定有意義
+    - 顯著的比較結果不一定重要
+    - 不顯著的比較的結果不一定重要
 
 --- .dark .segue
 
-## 統計科學簡介
+## 統計模型
+
+--- &vcenter .largecontent
+
+## 模型
+
+- 在做進階分析時，我們會嘗試以兩種方向來描述數據
+    - 數據的期望值
+    - 隨機的性質
+- 描述的方式是具備彈性的
+    - 數學上會附帶參數
+- 數學上，最終能透過這兩種特色，推導出數據的分布
+    - 有假設，有觀測值 ==> 估計參數
+    - 有假設，有參數 ==> 有分布 ==> 統計推論
+    - 有假設，有參數 ==> 有分布 ==> 假設檢定
+
+--- &vcenter .largecontent
+
+## 成績預測
+
+```{r score}
+set.seed(1)
+score <- lapply(1:10, function(i) {
+  x <- integer(10)
+  x[1] <- sample(1:100, 1)
+  for(i in 2:10) {
+    while(TRUE) {
+      tmp <- sample((-10):10, 1)
+      x[i] <- x[i-1] + tmp
+      if (x[i] %in% 1:100) break
+    }
+  }
+  x
+})
+score <- do.call(rbind, score) %>%
+  as.data.frame
+rownames(score) <- sprintf("Student%02d", 1:10)
+colnames(score) <- sprintf("Test%02d", 1:10)
+kable(local({
+  score$Test10 <- sprintf('<font color = "red">%d</font>', score$Test10)
+  score
+}))
+```
+
+--- &vcenter .largecontent
+
+## 統計學家的統計模型
+
+$$Y = f(X) + \varepsilon$$
+
+- $Y$ 是我們有興趣的隨機變數
+- $X$ 是我們能觀測得到的常數
+    - $X$ 也可以是隨機變數，但是很難...
+- $f(X)$是我們對$Y$的變化，可以控制的部分
+- $\varepsilon$稱為「雜訊」，是用機率論來描述我們對$Y$的變化不能控制的部分
+
+--- &vcenter .largecontent
+
+## 成績預測（練習七之一）
+
+- 假設：成績是常態分佈
+    - $考試成績 = \mu + \varepsilon$
+    - $\varepsilon \sim 常態分布$
+- 請計算前九次考試成績的平均
+- 請預測第十次考試
+- 請比較第十次考試的預測值與實際值
+
+--- &vcenter .largecontent
+
+## 成績預測（練習七之二）
+
+- 假設：成績是上一次考試的成績再加上常態分布的隨機變動
+    - $考試成績 = 上一次考試成績 + \varepsilon$
+    - $\varepsilon \sim 常態分布$
+- 請用迴歸分析建立模型
+- 請預測第十次考試
+- 請比較第十次考試的預測值與實際值
+
+--- &vcenter .largecontent
+
+## 討論
+
+- 哪一個方法比較好？
+
+--- &vcenter .largecontent
+
+## 成績預測二
+
+```{r score2}
+set.seed(1)
+score <- lapply(1:10, function(i) {
+  x <- integer(10)
+  x[1] <- sample(1:100, 1)
+  if (x[1] < 6) {
+    x[2:10] <- sample(seq(1, 11, by = 1), 9, TRUE)
+  } else if (x[1] > 95) {
+    x[2:10] <- sample(seq(90, 100, by = 1), 9, TRUE)
+  } else {
+    x[2:10] <- sample(seq(x[1] - 5, x[1] + 5, by = 1), 9, TRUE)
+  }
+  x
+})
+score <- do.call(rbind, score) %>%
+  as.data.frame
+rownames(score) <- sprintf("Student%02d", 1:10)
+colnames(score) <- sprintf("Test%02d", 1:10)
+kable(local({
+  score$Test10 <- sprintf('<font color = "red">%d</font>', score$Test10)
+  score
+}))
+```
+
+--- &vcenter .largecontent
+
+## 成績預測（練習七之三）
+
+- 假設：成績是常態分佈
+    - $考試成績 = \mu + \varepsilon$
+    - $\varepsilon \sim 常態分布$
+- 請計算前九次考試成績的平均
+- 請預測第十次考試
+- 請比較第十次考試的預測值與實際值
+
+--- &vcenter .largecontent
+
+## 成績預測（練習七之四）
+
+- 假設：成績是上一次考試的成績再加上常態分布的隨機變動
+    - $考試成績 = 上一次考試成績 + \varepsilon$
+    - $\varepsilon \sim 常態分布$
+- 請用迴歸分析建立模型
+- 請預測第十次考試
+- 請比較第十次考試的預測值與實際值
+
+--- &vcenter .largecontent
+
+## 討論
+
+- 哪一個方法比較好？
+
+--- &vcenter .largecontent
+
+## Lack-of-fit v.s. Overfitting
+
+- 第一個成績數據的答案：$考試成績 = 上一次成績 + \varepsilon$
+    - 第一個模型的期望值不完整：
+        - 期望值的變化，跑到$\varepsilon$中，導致變異數變大
+        - Lack-of-fit
+- 第二個成績數據的答案：$考試成績 = \mu + \varepsilon$
+    - 第二個模型的期望值部分「過度複雜」
+        - $\varepsilon$跑到期望值的變化，導致模型參數的估計不穩定
+        - Overfitting
+
+--- &vcenter .largecontent
+
+## 實際的數據
+
+- 只有上帝才知道數據產生的規則
+    - 把我們預期的到的變化，放到期望值的規則
+    - 把超過我們理解能力、處理能力的變化，放到$\varepsilon$
+
+--- &vcenter .largecontent
+
+## 數據方法的「不可複製性」
+
+- 數據模型帶有藝術成分
+    - 同樣的數據，不同的方法建立的模型，表現也會不同
+    - 同樣的數據，同樣的方法，不同的專家建立的模型，表現也可能不同
+    - 同樣的方法，不同的數據，方法的優劣也會不同
+
+--- &vcenter .largecontent
+
+## 數據方法的「不可複製性」
+
+- 數據領域的論文，對重現性質的要求不如傳統科學
+    - 許多物理、生物領域的論文因為無法重現而被撤銷
+    - 數據領域的論文，數據換了，都不一定能重現
+        - 許多領先的公司願意分享它們的數據處理手法
+        - 甚至是分享他們的演算法實作
+
+--- &vcenter .largecontent
+
+## 機器學習
+
+- 機器學習是近年來很火紅的領域
+    - 機器學習是統計模型的應用
+- 下次上課，我們會簡介一些近年來很火紅的機器學習方法
