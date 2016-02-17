@@ -10,7 +10,7 @@
     }
   }
   assign(name, value, envir = globalenv())
-  lockBinding(name, globalenv())
+  # lockBinding(name, globalenv())
   invisible(NULL)
 }
 

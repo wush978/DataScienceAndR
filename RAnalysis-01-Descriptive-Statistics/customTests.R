@@ -51,7 +51,7 @@ rstatistics_template <- function(retval_name, f.name.list, var.name.list = c("x1
     retval[var.f, var.name] <- answer
   }
   assign(retval_name, retval, envir = globalenv())
-  lockBinding(retval_name, globalenv())
+#   lockBinding(retval_name, globalenv())
   NULL
 }
 
