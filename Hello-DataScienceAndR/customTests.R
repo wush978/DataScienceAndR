@@ -16,7 +16,7 @@ check_version <- function() {
   if (rv < package_version("3.2.3")) {
     message(sprintf(readRDS(.get_path("pattern.Rds")), rv, "3.2.3"))
   }
-  if (packageVersion("swirl") != package_version("2.3.1.2")) {
+  if (packageVersion("swirl") < package_version("2.3.1.2")) {
     message(readRDS(.get_path("swirl_msg.Rds")))
     FALSE
   } else TRUE
