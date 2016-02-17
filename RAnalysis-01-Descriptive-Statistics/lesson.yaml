@@ -11,10 +11,6 @@
     的各種工具，讓同學可以用R 體驗統計的思維。
 - Class: text
   Output: |
-    由於課程中有許多牽涉到隨機性，所以我們無法幫同學診斷
-    結果是否正確。有需要的同學，可以上`chat()`討論。
-- Class: text
-  Output: |
     R 提供了許多敘述統計的計算函數。我們先介紹描述資料中心點的
     工具。`mean`可用於計算向量的平均數、`median`可用於計算向量
     的中位數、`table + sort`可以尋找眾數
@@ -464,4 +460,13 @@
   AnswerChoices: Yes;No
   CorrectAnswer: 'Yes'
   AnswerTests: omnitest(correctVal = "Yes")
+- Class: cmd_question
+  Output: |
+    我們將各種分散指標的特性：不受極端值影響（robustness）、
+    不受數據等比例放大的影響（ratio.invariant）、會隨著數據等
+    比例放大（ratio）與不會被數據同加同減影響(shift.invariant)
+    整理到變數`answer`。請同學看一看
+  CorrectAnswer: answer
+  AnswerTests: omnitest('answer')
+  Hint: answer
 
