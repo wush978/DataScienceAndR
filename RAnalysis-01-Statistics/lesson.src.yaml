@@ -1,0 +1,58 @@
+- Class: meta
+  Course: RAnalysis-01-Statistics-Introduction
+  Lesson: DataScienceAndR
+  Author: Wush Wu
+  Type: Standard
+  Organization: Taiwan R User Group
+  Version: 2.3.1.2
+
+- Class: text
+  Output: |
+    這門課程是讓同學使用R做一些統計相關的練習。我們會介紹R
+    的各種工具，讓同學可以用R 體驗統計的思維。
+
+- Class: text
+  Output: |
+    由於課程中有許多牽涉到隨機性，所以我們無法幫同學診斷
+    結果是否正確。有需要的同學，可以上`chat()`討論。
+
+- Class: text
+  Output: |
+    R 提供了許多敘述統計的計算函數。`mean`可用於計算向量的平均數、
+    `median`可用於計算向量的中位數、`table + sort`可以尋找眾數
+
+- Class: cmd_question
+  Output: 請同學輸入`mean(x1)`計算x1的平均數
+
+- Class: cmd_question
+  Output: 請同學輸入`median(x1)`計算x1的平均數
+
+- Class: cmd_question
+  Output: |
+    目前R 沒有內建函數可以計算眾數。最簡單的方法是
+    請同學輸入`table(x1)`來看看x1各種值所出現個數。
+
+- Class: mult_question
+  Output: 根據上一題的答案，x1的眾數為？
+  AnswerChoices: 1;2;3;4;5;6;7;8;9;10
+  CorrectAnswer: "1"
+  AnswerTests: omnitest(correctVal = "1")
+
+- Class: text
+  Output: |
+    如果要取得眾數的值，我們可以使用：`names(sort(-table(x1)))[1]`
+    但是這樣會讓結果變成字串型態。在Stack Overflow這個網站中，有許多
+    網友討論了如何更方便地計算眾數。有興趣的同學可以參考：
+    <http://stackoverflow.com/q/2547402/1182304>
+
+- Class: text
+  Output: |
+    另外也有一個套件：modeest可以幫助我們計算眾數。有興趣的同學也可以
+    自行摸索。
+
+- Class: script
+  Output: |
+    請同學計算分別計算x1, x2, x3的平均數、中位數與眾數。
+  Script: rstatistics-02.R
+  AnswerTests: rstatistics_02()
+
