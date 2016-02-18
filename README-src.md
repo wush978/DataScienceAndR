@@ -93,6 +93,16 @@ ps. 如果你之前有進行過swirl的課程，swirl會出現下圖的選項詢
 
 <r-note>
 
+## 課程投影片
+
+以下連結是課程中使用的投影片
+
+- [RBasic-Introduction](slide/RBasic-Introduction.html)
+- [RBasic-DataStructure](slide/RBasic-DataStructure.html)
+- [RDataEngineer-Introduction](slide/RDataEngineer-Introduction.html)
+- [RVisualization-Introduction](slide/RVisualization-Introduction.html)
+- [Statistics](slide/Statistics.html)
+
 ## License
 
 <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/tw/"><img alt="創用 CC 授權條款" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/3.0/tw/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">Data Science and R</span>由<a xmlns:cc="http://creativecommons.org/ns#" href="https://github.com/wush978/DataScienceAndR" property="cc:attributionName" rel="cc:attributionURL">Wush Wu、Chih Cheng Liang和Johnson Hsieh</a>製作，以<a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/tw/">創用CC 姓名標示-相同方式分享 3.0 台灣 授權條款</a>釋出。
