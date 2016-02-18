@@ -339,6 +339,15 @@ abline(v = median(construction$X座標), col = 2)
 
 --- &vcenter .largecontent
 
+## 練習二之四
+
+- 把`x1`的資料全部加上1後，得到：`x4` = \{2, 11, 3, 4, 8, 2, 8, 9, 2\}
+    - 請問`x4`的平均數為何？和`x1`的平均數+1是否一樣？
+    - 請問`x4`的中位數為何？和`x1`的中位數+1是否一樣？
+    - 請問`x4`的眾數為何？和`x1`的眾數+1是否一樣？
+
+--- &vcenter .largecontent
+
 ## 評論
 
 - 線性轉換後的平均數、中位數、眾數與對平均數、中位數、眾數做相同的線性轉換後結果相同
@@ -382,12 +391,11 @@ abline(v = median(construction$X座標), col = 2)
 
 ## 練習三之一
 
-- `x1` = \{1, 10, 2, 3, 7, 1, 7, 8, 1\}
-    - 請問`x1`的最大值、最小值與全距為何？
-- 把`x1`的10改成100後，得到：`x2` = \{1, 100, 2, 3, 7, 1, 7, 8, 1\}
-    - 請問`x2`的最大值、最小值與全距為何？
-- 把`x1`的資料全部乘以100後，得到：`x3` = \{100, 1000, 200, 300, 700, 100, 700, 800, 100\}
-    - 請問`x3`的最大值、最小值與全距為何？
+- `x1`, `x2`, `x3`, `x4`如前述
+- 請問`x1`的最大值、最小值與全距為何？
+- 請問`x2`的最大值、最小值與全距為何？
+- 請問`x3`的最大值、最小值與全距為何？
+- 請問`x4`的最大值、最小值與全距為何？
 
 --- &vcenter .largecontent
 
@@ -396,6 +404,7 @@ abline(v = median(construction$X座標), col = 2)
 - 全距越大，代表數據的散布程度越大
     - 全距容易受到異常資料的影響
 - 全距會隨著數據的放大而變大
+- 全距不會被數據的平移所影響
 
 --- &vcenter .largecontent
 
@@ -408,10 +417,11 @@ abline(v = median(construction$X座標), col = 2)
 
 ## 練習三之二
 
-- `x1`, `x2`, `x3`如前述
+- `x1`, `x2`, `x3`, `x4`如前述
 - 請問`x1`的平均差為何？
 - 請問`x2`的平均差為何？
 - 請問`x3`的平均差為何？
+- 請問`x4`的平均差為何？
 
 --- &vcenter .largecontent
 
@@ -423,7 +433,7 @@ abline(v = median(construction$X座標), col = 2)
 
 --- &vcenter .largecontent
 
-## MAD(Mean Absolute Deviation)
+## MAD(Median Absolute Deviation)
 
 - 若$x_m$代表$x$的中位數，則MAD $= median(\left\lVert x_i - x_m \right\rVert)$
 
@@ -431,10 +441,11 @@ abline(v = median(construction$X座標), col = 2)
 
 ## 練習三之三
 
-- `x1`, `x2`, `x3`如前述
+- `x1`, `x2`, `x3`, `x4`如前述
 - 請問`x1`的MAD為何？
 - 請問`x2`的MAD為何？
 - 請問`x3`的MAD為何？
+- 請問`x4`的MAD為何？
 
 --- &vcenter .largecontent
 
@@ -589,6 +600,20 @@ abline(v = median(construction$X座標), col = 2)
 - 視覺化：直方圖、圓餅圖與長條圖
 - 資料中心：平均數、中位數與眾數
 - 資料的散布程度：全距(range)、平均差(MD, Mean Deviation)、MAD(Median Absolute Deviation)、四分位差(IQR, Interqwuartile Range)、變異數與標準差(Variance and standard deviation)、變異係數(CV, Coefficient of Variation)、Quartile coefficient of dispersion
+
+--- &vcenter .largecontent
+
+## 性質
+
+```{r summary-deviation}
+kable(structure(list(robustness = c(FALSE, FALSE, TRUE, TRUE, FALSE, 
+FALSE, FALSE, TRUE), ratio.invariant = c(FALSE, FALSE, FALSE, 
+FALSE, FALSE, FALSE, TRUE, TRUE), ratio = c(TRUE, TRUE, TRUE, 
+TRUE, FALSE, TRUE, FALSE, FALSE), shift.invariant = c(TRUE, TRUE, 
+TRUE, TRUE, TRUE, TRUE, FALSE, FALSE)), .Names = c("robustness", 
+"ratio.invariant", "ratio", "shift.invariant"), row.names = c("range", 
+"MD", "MAD", "IQR", "var", "sd", "CV", "QCD"), class = "data.frame"))
+```
 
 --- &vcenter .largecontent
 
@@ -1125,7 +1150,7 @@ layout(1)
     - $X1$代表樣本的年齡平均數
     - $X2$代表樣本的年齡中位數
     - $X3$代表樣本的年齡平均數再乘以0.99
-- 請分別估計$X1$、$X2$與$X3$和金門縣全縣縣民的偏差和變異數
+- 請分別估計$X1$、$X2$與$X3$和金門縣全縣縣民比較的偏差和變異數
 
 --- &vcenter .largecontent
 
@@ -1488,8 +1513,8 @@ text(2.1, -0.035, "observation", pos = 2)
     - 網路廣告商A 在1000個點擊中，帶來10個轉換
     - 網路廣告商B 在1000個點擊中，帶來11個轉換
     - 網路廣告商C 在10000個點擊中，帶來70個轉換
-- 請計算三間廣告商的轉換率在95%信心指數下的信賴區間
-- 以效率的觀點來看，在95%信心指數之下，我們對A、B或C可以怎樣的推論？
+- 請計算三間廣告商的轉換率在95%信心水準下的信賴區間
+- 以效率的觀點來看，在95%信心水準之下，我們對A、B或C可以怎樣的推論？
 
 --- &vcenter .largecontent
 
