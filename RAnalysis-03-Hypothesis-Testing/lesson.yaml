@@ -54,8 +54,7 @@
     假設金門縣縣民的年齡分布是常態分布（平均值：40.45, 變異數：417.94）
     我們想用`rnorm`抽出20個金門縣縣民的年齡樣本。請問參數`mean`要設定為？
   CorrectAnswer: 40.45
-  AnswerTest: omnitest(correctVal = 40.45)
-  AnswerTests: omnitest('40.45')
+  AnswerTests: omnitest(correctVal = 40.45)
   Hint: 40.45
 - Class: cmd_question
   Output: |
