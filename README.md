@@ -89,9 +89,14 @@ ps. 如果你之前有進行過swirl的課程，swirl會出現下圖的選項詢
 
 ## 課程筆記
 
-以下連結記載swirl中的課程內容(sha-hash: 2a60bbda 版本)
+以下連結記載swirl中的課程內容(sha-hash: 4faddb27 版本)
 
 - [Hello-DataScienceAndR](note/Hello-DataScienceAndR.html)
+- [RAnalysis-01-Descriptive-Statistics](note/RAnalysis-01-Descriptive-Statistics.html)
+- [RAnalysis-02-Probability](note/RAnalysis-02-Probability.html)
+- [RAnalysis-03-Hypothesis-Testing](note/RAnalysis-03-Hypothesis-Testing.html)
+- [RAnalysis-04-Confidence-Interval](note/RAnalysis-04-Confidence-Interval.html)
+- [RAnalysis-05-Statistical-Modeling](note/RAnalysis-05-Statistical-Modeling.html)
 - [RBasic-01-Introduction](note/RBasic-01-Introduction.html)
 - [RBasic-02-Data-Structure-Vectors](note/RBasic-02-Data-Structure-Vectors.html)
 - [RBasic-03-Data-Structure-Object](note/RBasic-03-Data-Structure-Object.html)

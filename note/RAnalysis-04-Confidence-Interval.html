@@ -63,256 +63,68 @@ img {
 
 <div id="-1" class="section level2">
 <h2>關卡 1</h2>
-<p>這個課程是讓同學理解，如何透過資料視覺化的方式，找出不同欄位之間的關係與特徵。</p>
+<p>以下的內容是為了練習六之一</p>
 </div>
 <div id="-2" class="section level2">
 <h2>關卡 2</h2>
-<p>我們拿事先準備好的<code>hsb</code>資料集作為範例，記載了高中學生的基礎資料與各個科目的考試成績的資料，在RVisualization-01-One-Variable-Visualization課程中曾使用過。本資料包含11個欄位、200筆記錄（200位學生），第一欄(id)代表該名學生的編號；第二欄(sex)代表學生性別；第三欄(race)代表學生的種族；第四欄(ses)代表學生家庭社經等級；第五欄(schtyp)代表是學校是公立或私立；第六欄(prog)代表學校的類型；第七欄至第十一欄則是各科考試成績。請同學輸入View(hsb)先看看數據。</p>
-<pre class="r"><code>View(hsb)</code></pre>
+<p>由於信賴區間的計算比較複雜，我們之前寫程式跑模擬的方法不適用，所以這裡介紹大家一個套件：binom，他很適合計算各種機率的信賴區間</p>
 </div>
 <div id="-3" class="section level2">
 <h2>關卡 3</h2>
-<p>在第一課中，<code>hsb$math</code>有混入-99，模擬現實社會科學界在處理數據時，常常用-99或99等不自然的值來表示遺失的資料。而這一課中，我們使用完整的<code>hsb</code>資料給同學練習。</p>
+<p>請同學安裝套件binom</p>
+<pre class="r"><code>check_then_install(&quot;binom&quot;, &quot;1.1.1&quot;)</code></pre>
 </div>
 <div id="-4" class="section level2">
 <h2>關卡 4</h2>
-<p>PartA.類別欄位vs.類別欄位的資料視覺化。</p>
+<p>請同學載入套件binom</p>
+<pre class="r"><code>library(binom)</code></pre>
 </div>
 <div id="-5" class="section level2">
 <h2>關卡 5</h2>
-<p>考慮兩個類別型欄位的視覺化。我們關心這筆資料中學生性別(sex)與公私立(schtyp)學校的關聯。先使用<code>table()</code>函數來建立交叉表(crosstable)，請同學輸入以下指令，將交叉表指向<code>tab1</code>這個變數：<code>tab1&lt;-table(hsb$sex,hsb$schtyp)</code></p>
-<pre class="r"><code>tab1 &lt;- table(hsb$sex, hsb$schtyp)</code></pre>
+<p>請同學輸入：<code>?binom.confint</code>打開計算信賴區間的說明</p>
+<pre class="r"><code>?binom.confint</code></pre>
 </div>
 <div id="-6" class="section level2">
 <h2>關卡 6</h2>
-<p>接下來，請同學輸入<code>barplot(tab1,legend=TRUE)</code>這個長條圖繪製函數，針對<code>tab1</code>這筆數據畫出堆疊長條圖(stackdbarplot)</p>
-<pre class="r"><code>barplot(tab1, legend=TRUE)</code></pre>
+<p>binom.confint的重要參數有四個。<code>x</code>代表的是事件發生的次數；<code>n</code>代表的是實驗的次數；<code>conf.level</code>代表信心水準；而<code>methods</code>代表逼近信賴區間的統計方法。</p>
 </div>
 <div id="-7" class="section level2">
 <h2>關卡 7</h2>
-<p>堆疊長條圖中有兩個顏色：淺灰、深灰分別代表男性(male)與女性(female)，</p>
+<p>請同學利用<code>binom.confint</code>計算以下三間廣告商，在95%信心水準之下轉換率的信賴區間：網路廣告商A在1000個點擊中，帶來10個轉換；網路廣告商B在1000個點擊中，帶來11個轉換；網路廣告商C在10000個點擊中，帶來70個轉換。<code>methods</code>參數使用“exact”(Pearson-Kloppermethod)你的答案應該是：`df&lt;-binom.confint(x=c(??,??,??),n=c(??,??,??),methods=“exact”)</p>
+<pre class="r"><code>df &lt;- binom.confint(x = c(10, 11, 70), n = c(1000, 1000, 10000), methods = &quot;exact&quot;)</code></pre>
 </div>
 <div id="-8" class="section level2">
 <h2>關卡 8</h2>
-<p>請問從這張圖中可以發現，哪種學校的數量比較多?A.公立學校(public);B.私立學校(private)</p>
-<p>A</p>
+<p>我們來看一下<code>binom.confint</code>的輸出。請同學輸入：<code>df</code></p>
+<pre class="r"><code>df</code></pre>
 </div>
 <div id="-9" class="section level2">
 <h2>關卡 9</h2>
-<p>請問從這張圖中可以發現，私立學校的男生多還是女生多?A.男生(male);B.女生(female)</p>
-<p>B</p>
+<p>df的每個列，代表每個實驗結果，也就是依序對應到廣告商A、B和C的結果。<code>mean</code>欄位代表事件機率（也就是轉換率），而lower與upper代表轉換率的信賴區間。信賴區間很適合用圖形來比較，所以我提供了<code>confint.plot</code>這個函數做範例，使用<code>ggplot2</code>視覺化實驗結果。請同學先檢查有無安裝ggplot2套件。請輸入：skip()</p>
+<pre class="r"><code>check_then_install(&quot;ggplot2&quot;, &quot;2.0.0&quot;)</code></pre>
 </div>
 <div id="-10" class="section level2">
 <h2>關卡 10</h2>
-<p>同學在作答時可能會發現，直接從堆疊長條圖上觀察不同顏色的區塊的大小其實不是太容易，如果我們的目的是要比較不同顏色的區塊大小，應該採用分組長條圖(groupedbarplot)。請同學輸入：<code>barplot(tab1,legend=TRUE,beside=TRUE,args.legend=list(x=3,y=90))</code>畫出分組長條圖：</p>
-<pre class="r"><code>barplot(tab1, legend=TRUE, beside = TRUE, args.legend=list(x=3, y=90))</code></pre>
+<p>請同學載入ggplot2</p>
+<pre class="r"><code>library(ggplot2)</code></pre>
 </div>
 <div id="-11" class="section level2">
 <h2>關卡 11</h2>
-<p>透過觀察分組長條圖，我們可以更輕易的發現私立學校(private)的女生人數多於男生(female&gt;male)。</p>
+<p>請同學先輸入：<code>confint.plot(df)</code></p>
+<pre class="r"><code>confint.plot(df)</code></pre>
 </div>
 <div id="-12" class="section level2">
 <h2>關卡 12</h2>
-<p>在畫長條圖時，新增之圖例可能會蓋住原本的圖片，我們可以透過<code>args.legend</code>參數來調整圖例位置。</p>
+<p>當我們在比較機率事件時，視覺化比較好的做法，是適當的加上信賴區間可以告訴我們很多額外資訊，例如：樣本數夠不夠（信賴區間的寬度）當樣本數越大，結果越可靠，信賴區間就會越短。</p>
 </div>
 <div id="-13" class="section level2">
 <h2>關卡 13</h2>
-<p>PartB.類別欄位vs.類別欄位vs.單一數值的資料視覺化。</p>
+<p>信賴區間也可以讓我們對比較的結果評估信心。一個不嚴謹且偏向保守的做法，是比較實驗間的信賴區間有無重疊。如果有重疊的話，表示結果沒有明顯區別，實驗沒有答案。如果完全沒有重疊，則我們就會對比較的結果很有信心。</p>
 </div>
 <div id="-14" class="section level2">
 <h2>關卡 14</h2>
-<p>在畫長條圖時，不一定只使用次數作圖，也有可以是某變數的數值結果，譬如：平均數(<code>mean</code>)、中位數(<code>median</code>)以及標準差(<code>sd</code>)。</p>
-</div>
-<div id="-15" class="section level2">
-<h2>關卡 15</h2>
-<p>我們可以使用R的<code>dplyr</code>套件中的<code>group_by</code>與<code>summarise</code>，計算特定組別下的統計指標。譬如在給定學校公立或私立(schtyp)、性別為男生或女生(sex)之下，學生的平均數學成績(math)。這部分的操作在RDataEngineer-05-Data-Manipulation課程中有詳盡的介紹。</p>
-</div>
-<div id="-16" class="section level2">
-<h2>關卡 16</h2>
-<p>請大家先安裝<code>dplyr</code>套件。</p>
-<pre class="r"><code>check_then_install(&quot;dplyr&quot;, &quot;0.4.3&quot;)</code></pre>
-</div>
-<div id="-17" class="section level2">
-<h2>關卡 17</h2>
-<p>接著請大家載入dplyr套件</p>
-<pre class="r"><code>library(dplyr)</code></pre>
-</div>
-<div id="-18" class="section level2">
-<h2>關卡 18</h2>
-<p>請同學利用以下範例計算組內平均數學成績<code>dat2&lt;-summarise(group_by(hsb,sex,schtyp),math.avg=mean(math))</code>：</p>
-<pre class="r"><code>dat2 &lt;- summarise(group_by(hsb, sex, schtyp), math.avg=mean(math))</code></pre>
-</div>
-<div id="-19" class="section level2">
-<h2>關卡 19</h2>
-<p>接著利用R預設的<code>xtabs</code>函數將變數<code>dat2</code>轉換成交叉<code>tab2</code>表。請同學利用以下範例計算組內平均數學成績<code>tab2&lt;-xtabs(formula=math.avg~sex+schtyp,data=dat2)</code>：</p>
-<pre class="r"><code>tab2 &lt;- xtabs(formula = math.avg ~ sex + schtyp , data = dat2)</code></pre>
-</div>
-<div id="-20" class="section level2">
-<h2>關卡 20</h2>
-<p>在<code>xtabs</code>的函數中有一個特別的參數<code>formula</code>，我們可以使用<code>?xtabs</code>透過說明文件來理解<code>formula</code>的意涵。<code>formula</code>是R語言中一個特別的物件，常被用來模化欄位與欄位之間的模型關係。在本例中，波浪符號<code>~</code>的左邊欄位表示應填入交叉表內的值(數值型態)，波浪符號右邊的的欄位則是交叉表的類型(類別型態)，波浪符號右邊的欄位則以加號<code>+</code>作為連結。有關於其他<code>formula</code>物件的使用方式可參考線性模型函數的說明文件<code>?lm</code>。</p>
-</div>
-<div id="-21" class="section level2">
-<h2>關卡 21</h2>
-<p>現在請同學針對交叉表<code>tab2</code>，輸入指令：<code>barplot(tab2,beside=TRUE,ylim=c(50,58),xpd=FALSE)</code>繪製分組長條圖：</p>
-<pre class="r"><code>barplot(tab2, beside = TRUE, ylim = c(50, 58), xpd = FALSE)</code></pre>
-</div>
-<div id="-22" class="section level2">
-<h2>關卡 22</h2>
-<p>為了讓視覺上的差異放大，我們透過<code>ylim</code>和<code>xpd</code>兩個參數讓長條圖的起始值不是0，而是50參數<code>ylim</code>能控制圖形的最低與最高值；參數<code>xpd</code>則表示長條圖是否能超出圖形繪製區域如果<code>xpd=TRUE</code>則長條圖會跨越x軸，超過圖形繪製範圍。</p>
-</div>
-<div id="-23" class="section level2">
-<h2>關卡 23</h2>
-<p>PartC.類別欄位vs.單一數值的資料視覺化。</p>
-</div>
-<div id="-24" class="section level2">
-<h2>關卡 24</h2>
-<p>關於類別欄位對單一數值的視覺化，一般而言有兩種做法：長條圖(barplot)、點標圖(dorplot)。先計算各種族學生(race)的閱讀成績中位數(<code>read.med=median(read)</code>)，請同學輸入以下指令：<code>dat3&lt;-summarise(group_by(hsb,race),read.med=median(read))</code>建立<code>dat3</code></p>
-<pre class="r"><code>dat3 &lt;- summarise(group_by(hsb, race), read.med=median(read))</code></pre>
-</div>
-<div id="-25" class="section level2">
-<h2>關卡 25</h2>
-<p>請同學輸入以下指令來繪製長條圖：<code>barplot(dat3$read.med,names.arg=dat3$race,horiz=TRUE)</code></p>
-<pre class="r"><code>barplot(dat3$read.med, names.arg=dat3$race, horiz=TRUE)</code></pre>
-</div>
-<div id="-26" class="section level2">
-<h2>關卡 26</h2>
-<p>在函數<code>barplot</code>中的參數<code>names.arg</code>用來控制每一塊長條的別名。<code>horiz</code>讓長條圖以水平的方式呈現。</p>
-</div>
-<div id="-27" class="section level2">
-<h2>關卡 27</h2>
-<p>請同學輸入以下指令來繪製點標圖：<code>dotchart(dat3$read.med,labels=dat3$race)</code></p>
-<pre class="r"><code>dotchart(dat3$read.med, labels = dat3$race)</code></pre>
-</div>
-<div id="-28" class="section level2">
-<h2>關卡 28</h2>
-<p>在函數<code>dotchart</code>中的參數<code>labels</code>用來控制每一塊長條的別名。</p>
-</div>
-<div id="-29" class="section level2">
-<h2>關卡 29</h2>
-<p>本範例中，使用相同的資料<code>dat3</code>繪製兩種圖形，要說的是這兩種圖形的使用時機可能不完全相同，長條圖強調的目的是各類別下的數值之大小(離零或是起始值有多遠)，點標圖強調的則是各類別下數值的位置，譬如政黨傾向偏左還是偏右(越大不一定越好)。</p>
-</div>
-<div id="-30" class="section level2">
-<h2>關卡 30</h2>
-<p>PartD.類別欄位vs.數值欄位的資料視覺化。</p>
-</div>
-<div id="-31" class="section level2">
-<h2>關卡 31</h2>
-<p>與點標圖不同當每一種類別對應一個數值時，應使用箱形圖(boxplot)進行視覺化，譬如各種族學生的閱讀成績之分布，請同學輸入以下指令：<code>plot(math~race,data=hsb)</code></p>
-<pre class="r"><code>plot(math ~ race, data=hsb)</code></pre>
-</div>
-<div id="-32" class="section level2">
-<h2>關卡 32</h2>
-<p>請問同學，圖中的顯示哪一種種族的學生有最好的數學成績?A.AfricanAmerican；B.Asian；C.Hispanic；D.White?</p>
-<p>B</p>
-</div>
-<div id="-33" class="section level2">
-<h2>關卡 33</h2>
-<p>傳統上，繪製箱形圖會使用<code>boxplot</code>函數，現今的R版本已經支援高階繪圖函數<code>plot</code>透過<code>formula</code>的控制來繪製箱型圖(請注意波浪符號<code>~</code>左邊放數值型態的欄位，右邊放類別型態的欄位，並用加號<code>+</code>連結)，關於箱型圖詳細的控制參數請使用<code>?boxplot</code>閱讀說名文件。請同學打開<code>boxplot</code>的說明文件：</p>
-<pre class="r"><code>?boxplot</code></pre>
-</div>
-<div id="-34" class="section level2">
-<h2>關卡 34</h2>
-<p>請問下列哪一個統計指標「不會」出現在boxplot的結果中？請參考說明文件中，Value段落關於<code>stats</code>的說明作答。A:thelowerhingeB:themedianC:themeanD:theupperhinge</p>
-<p>C</p>
-</div>
-<div id="-35" class="section level2">
-<h2>關卡 35</h2>
-<p>練習在<code>boxplot</code>中控制<code>formula</code>以加入更多類別行欄位進行比較。請同學輸入以下指令：<code>boxplot(math~schtyp,data=hsb,col=c(&quot;darkblue&quot;,&quot;gold&quot;))</code></p>
-<pre class="r"><code>boxplot(math ~ schtyp, data=hsb, col=c(&quot;darkblue&quot;, &quot;gold&quot;))</code></pre>
-</div>
-<div id="-36" class="section level2">
-<h2>關卡 36</h2>
-<p>在<code>boxplot</code>上加入圖例<code>legend</code>。請同學輸入以下指令：<code>legend(&quot;topleft&quot;,c(&quot;private&quot;,&quot;public&quot;),fill=c(&quot;darkblue&quot;,&quot;gold&quot;))</code></p>
-<pre class="r"><code>legend(&quot;topleft&quot;, c(&quot;private&quot;, &quot;public&quot;), fill=c(&quot;darkblue&quot;, &quot;gold&quot;))</code></pre>
-</div>
-<div id="-37" class="section level2">
-<h2>關卡 37</h2>
-<p>請問同學，依照圖中的結果，就讀公立學校的學生的數學成績比較好還是私立學校的學生的數學成績比較好?A.公立(public.Hispanic)；B.私立(private.Hispanic)C.沒有明顯差距</p>
-<p>C</p>
-</div>
-<div id="-38" class="section level2">
-<h2>關卡 38</h2>
-<p>因為兩組數據的boxplot結果高度重疊，所以判斷公立學校與私立學校的學生在數學表現上沒有明顯差距。</p>
-</div>
-<div id="-39" class="section level2">
-<h2>關卡 39</h2>
-<p>PartE.數值欄位vs.數值欄位的資料視覺化。</p>
-</div>
-<div id="-40" class="section level2">
-<h2>關卡 40</h2>
-<p>繪製兩個數值型欄位最簡單的圖形就是散佈圖(scatterplot)，在R語言中使用繪圖函數<code>plot(x,y)</code>進行繪製。其中第一個參數<code>x</code>表示x軸的變數、第二參數則表示y軸的變數。</p>
-</div>
-<div id="-41" class="section level2">
-<h2>關卡 41</h2>
-<p>請輸入：<code>plot(x=hsb$math,y=hsb$read)</code>繪製<code>hsb</code>資料集中數學(<code>x=hsb$math</code>)跟閱讀(<code>y=hsb$read</code>)成績的散佈圖。</p>
-<pre class="r"><code>plot(x=hsb$math, y=hsb$read)</code></pre>
-</div>
-<div id="-42" class="section level2">
-<h2>關卡 42</h2>
-<p>由散佈圖可以發現，學生的數學與閱讀成績呈現正相關，即數學成績越高，閱讀成績越高，反之亦然。</p>
-</div>
-<div id="-43" class="section level2">
-<h2>關卡 43</h2>
-<p>繪圖函數<code>plot</code>也可以使用<code>formula</code>進行繪圖。請同學在<code>plot</code>函數中的第一個參數使用<code>read~math</code>，第二個參數使用<code>data=hsb</code>，重新繪製學生數學與閱讀成績的散佈圖。請注意波浪符號<code>~</code>左邊的參數表示反應變數(responsevariable)；右邊的參數表示解釋變數(dependentvariable)。</p>
-<pre class="r"><code>plot(read ~ math, data=hsb)</code></pre>
-</div>
-<div id="-44" class="section level2">
-<h2>關卡 44</h2>
-<p>值得一提的是也可以在<code>plot</code>中改用<code>~read+math</code>達到完全一樣的效果，請同學在<code>plot</code>函數中的第一個參數使<code>~read+math</code>，第二個參數使用<code>data=hsb</code>，重新繪製學生數學與閱讀成績的散佈圖。</p>
-<pre class="r"><code>plot(~ read + math, data=hsb)</code></pre>
-</div>
-<div id="-45" class="section level2">
-<h2>關卡 45</h2>
-<p>當欄位數大於二時，可以透過<code>plot</code>函數中的formula功能對欄位間的兩兩比較進行作圖。請同學輸入以下範例以了解的使用方式：plot(~read+math+science+socst,data=hsb,main=“HSBscore”)</p>
-<pre class="r"><code>plot(~read+math+science+socst,data=hsb, main=&quot;HSB score&quot;)</code></pre>
-</div>
-<div id="-46" class="section level2">
-<h2>關卡 46</h2>
-<p>PartF.數值欄位vs.數值欄位vs.類別欄位的資料視覺化。</p>
-</div>
-<div id="-47" class="section level2">
-<h2>關卡 47</h2>
-<p>當欲進行資料探索的欄位大於兩個維度時，可以對散佈圖做進一步的加工，譬如改變點的顏色(<code>col</code>)、形狀(<code>pch</code>)以及大小(<code>cex</code>)，上述參數可以使用向量型態進行設定。定義以下變數：</p>
-</div>
-<div id="-48" class="section level2">
-<h2>關卡 48</h2>
-<p>請同學定義變數<code>col.sex&lt;-ifelse(hsb$sex==&quot;male&quot;,&quot;#e34a3355&quot;,&quot;#2c7fb855&quot;)</code>；</p>
-<pre class="r"><code>col.sex &lt;- ifelse(hsb$sex==&quot;male&quot;, &quot;#e34a3355&quot;, &quot;#2c7fb855&quot;)</code></pre>
-</div>
-<div id="-49" class="section level2">
-<h2>關卡 49</h2>
-<p>請同學定義變數<code>pch.schtyp&lt;-ifelse(hsb$schtyp==&quot;public&quot;,1,19)</code>；</p>
-<pre class="r"><code>pch.schtyp &lt;- ifelse(hsb$schtyp==&quot;public&quot;, 1, 19)</code></pre>
-</div>
-<div id="-50" class="section level2">
-<h2>關卡 50</h2>
-<p>請同學定義變數<code>cex.science&lt;-(hsb$science-25)/(50)*5</code>；</p>
-<pre class="r"><code>cex.science &lt;- (hsb$science-25)/(50)*5</code></pre>
-</div>
-<div id="-51" class="section level2">
-<h2>關卡 51</h2>
-<p>透過上述三個新增變數，我們可以對數學與閱讀成績的散佈圖作進一步的加工，請同學輸入以下範例：<code>plot(~read+math,data=hsb,col=col.sex,pch=pch.schtyp,cex=cex.science)</code></p>
-<pre class="r"><code>plot(~read+math, data=hsb, col=col.sex, pch=pch.schtyp, cex=cex.science)</code></pre>
-</div>
-<div id="-52" class="section level2">
-<h2>關卡 52</h2>
-<p>以上這張圖，除了原本的readv.s.math的相關性之外，還多了以下的資訊：</p>
-</div>
-<div id="-53" class="section level2">
-<h2>關卡 53</h2>
-<p>一個是cex.science觀察發現圓點隨著左下到右上逐漸放大，顯示科學成績與閱讀、數學成績程正相關。</p>
-</div>
-<div id="-54" class="section level2">
-<h2>關卡 54</h2>
-<p>一個是pch.public觀察發現，實心的圓點散佈的程度叫空心圓點來得緊密，顯示私立學校的學生成績變異較大。</p>
-</div>
-<div id="-55" class="section level2">
-<h2>關卡 55</h2>
-<p>這樣的圖，如果沒有圖例<code>legend</code>是不及格的。雖然我們可以看出剛剛的資訊，可是若要對回原本的資料，（空心和實心表示公立與私立、顏色表示性別…等等）製作這張圖的圖例，其實需要複雜的程式碼才能辦到。</p>
-</div>
-<div id="-56" class="section level2">
-<h2>關卡 56</h2>
-<p>這門課，最主要是希望同學能夠吸收圖形的解讀方式，以及了解R的基本繪圖指令的設計。尤其是formula的部份，是我們在R中描述數據間關係的一種語法，未來在許多進階演算法中也都會用到。至於R眾多的低階繪圖指令（<code>pch</code>、<code>cex</code>、<code>legend</code>等等），要不要熟悉則是見仁見智。熟悉的同學，可以雕圖，雕出令人驚豔的視覺化效果。反而我們比較希望同學可以理解下一堂課所介紹的ggplot2套件，用一套一致、簡單的邏輯來快速畫出有一定質感的圖。</p>
+<p>請同學輸入：<code>confint.plot</code>看看我是如何用ggplot2繪製信賴區間。關於ggplot2的解說，請參考RVisualization-03</p>
+<pre class="r"><code>confint.plot</code></pre>
 </div>
 
 
