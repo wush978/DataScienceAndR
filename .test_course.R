@@ -29,6 +29,11 @@ test_lesson = function(lesson_dir){
             e$expr <- parse(text = question$CorrectAnswer)[[1]]
             stopifnot(eval(parse(text=question$AnswerTests), envir = e))
           })
+          if (grepl("correctVal", question$AnswerTests) && grepl("omnitest", question$AnswerTests)) {
+            # Test if correctVal only compare with character or numeric vector of length 1
+            stopifnot(is.character(e$val) || is.numeric(e$val))
+            if (mode(e$val) == "numeric") stopifnot(length(e$val) == 1)
+          }
         },
         "mult_question" = {
           e$val <- as.character(question$CorrectAnswer)
