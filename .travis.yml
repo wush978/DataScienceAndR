@@ -3,7 +3,7 @@ osx_image: xcode61
 language: objective-c
 
 script: 
-  - Rscript -e "source('.test_course.R')"
+  - Rscript .test_course.R push
 
 after_failure:
   - ./travis-tool.sh dump_logs
