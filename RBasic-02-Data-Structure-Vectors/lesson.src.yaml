@@ -9,14 +9,14 @@
 - Class: text
   Output: 這門課程，主要是講解R object的入門操作。
 
-- Class: text 
+- Class: text
   Output: R 的object結構是針對資料分析所設計的。所以最簡單
     的object，就是一連串的數字。
-  
+
 - Class : text
   Output: 這讓R 和其他的程式語言不同，因為一般的程式語言
     最簡單的object會是一個數字。
-    
+
 - Class : text
   Output: R 這樣設計的理由是因為在資料分析的應用中，
     我們一定是處理一些資料，而不會只有一筆資料。
@@ -25,7 +25,7 @@
 - Class: cmd_question
   Output: 要用R 建立一個內容為10.4, 5.6, 3.1和6.4的向量，
     最常用的方式就是輸入：`c(10.4, 5.6, 3.1, 6.4)`
-    請同學依照這樣的語法建立一個這樣的向量，並且把它存到變數x。    
+    請同學依照這樣的語法建立一個這樣的向量，並且把它存到變數x。
   CorrectAnswer: x <- c(10.4, 5.6, 3.1, 6.4)
   AnswerTests: any_of_exprs("x <- c(10.4, 5.6, 3.1, 6.4)",
     "x = c(10.4, 5.6, 3.1, 6.4)")
@@ -43,15 +43,17 @@
     再接一個1 。而`c(x, 2, 3)`則會在x 之後接上2 和3 。請同學依照這個要領，
     撰寫一個expression，內容是建立一個在x 後面接上x 的向量。
   CorrectAnswer: c(x, x)
-  AnswerTests: omnitest(correctExpr='c(x, x)', 
-    correctVal=c(10.4, 5.6, 3.1, 6.4, 10.4, 5.6, 3.1, 6.4))
+  AnswerTests: |
+    test_all(omnitest(correctExpr='c(x, x)'),
+      val_is(c(10.4, 5.6, 3.1, 6.4, 10.4, 5.6, 3.1, 6.4)))
 
 - Class : cmd_question
   Output: 在R 中，大部份的運算都是向量式的。舉例來說，加法`+`在R 就是向量式。
     請同學輸入：`c(1, 2, 3) + c(2, 4, 6)` 並觀察結果。
   CorrectAnswer: c(1, 2, 3) + c(2, 4, 6)
-  AnswerTests: omnitest(correctExpr='c(1, 2, 3) + c(2, 4, 6)',
-    correctVal = c(3, 6, 9))
+  AnswerTests: |
+    test_all(omnitest('c(1, 2, 3) + c(2, 4, 6)'),
+      val_is(c(3, 6, 9)))
 
 - Class: text
   Output: 有沒有注意到，結果的第一個值，就是輸入的兩個向量的第一個
@@ -77,16 +79,14 @@
     就很有用。請同學寫一個expression來建立一個兩個值的向量，
     而且第一個值是x 的最小值，第二個是x 的最大值。
   CorrectAnswer: c(min(x), max(x))
-  AnswerTests: omnitest(correctExpr = 'c(min(x), max(x))',
-    correctVal = range(x))
+  AnswerTests: val_is(c(min(x), max(x)))
 
 - Class : cmd_question
   Output: 在R 中，有一個函數`range`就能直接傳回輸入向量的
     範圍（最小到最大）。請同學再算一次x 的範圍，但是是使用
     `range`
   CorrectAnswer: range(x)
-  AnswerTests: omnitest(correctExpr = 'range(x)',
-    correctVal = range(x))
+  AnswerTests: omnitest('range(x)')
 
 - Class : cmd_question
   Output: 在R 中，`sum(x)`會傳回x 所有值的加總。
@@ -122,7 +122,7 @@
 - Class : text
   Output: 在數學上，輸入的x 可能是整數、實數甚至是複數。
     R 的數學計算，會自動根據x 的屬性做調整。
-    
+
 - Class : cmd_question
   Output: 舉例來說，如果我們輸入`sqrt(-17)`，我們會得到NaN（Not A Number）。
     請同學試試看輸入`sqrt(-17)`。這裡的`sqrt`代表的就是數學上開根號的運算。
@@ -136,7 +136,7 @@
   Output: 但是若我們使用`sqrt(-17 + 0i)`，這時候因為輸入的是一個複數，
     R 會自動調整行為，不再回傳一個NaN。請同學試試看。
   CorrectAnswer: sqrt(-17 + 0i)
-  AnswerTests: omnitest(correctExpr = 'sqrt(-17 + 0i)', correctVal = complex(real = 0, imaginary = sqrt(17)))
+  AnswerTests: omnitest(correctExpr = 'sqrt(-17 + 0i)')
 
 - Class : cmd_question
   Output: R 也有簡易的功能可以產生一些附帶有規則的序列。例如：
@@ -145,7 +145,7 @@
     用到類似的語法。
     請同學嘗試利用`:`建立一個從20到40的序列。
   CorrectAnswer: 20:40
-  AnswerTests: omnitest(correctExpr = '20:40', correctVal = 20:40)
+  AnswerTests: omnitest("20:40")
 
 - Class : cmd_question
   Output: 在R 中，`:`這個運算子的優先層級很高，也就是說如果R 看到：`2 * 1:10`
@@ -170,15 +170,15 @@
 
 - Class : text
   Output: 我們可以在說明文件上，閱讀 Default S3 method 之下的那段說明程式碼：
-    `seq(from = 1, to = 1, by = ((to - from)/(length.out - 1)), 
+    `seq(from = 1, to = 1, by = ((to - from)/(length.out - 1)),
     length.out = NULL, along.with = NULL, ...)`
     這段說明文字顯示了，`seq`一般來說接受五個參數，而他們分別為：
     `from`、`to`、`by`、`length.out`和`along.with`。
 
 - Class : text
   Output: 對於個別參數的使用方法，我們可以閱讀在Arguments之下的細節說明。
-    比如說，`from, to from, to     the starting and (maximal) end values of 
-    the sequence. Of length 1 unless just from is supplied as an unnamed 
+    比如說，`from, to from, to     the starting and (maximal) end values of
+    the sequence. Of length 1 unless just from is supplied as an unnamed
     argument.` 這段文字就說明了`from`和`to`的用法。
 
 - Class : text
@@ -224,7 +224,7 @@
     讓R 辨別argument名稱的字母就可以了。舉例來說：
     `seq(from = 1, by = 2, length = 10)`也可以讓R 知道argument `length.out`的值
     是10。
-  
+
 - Class : cmd_question
   Output: 如果我們不想要序列，而是想要重複一個數字，則可以用`rep`
     請同學試試看：`rep(2, times = 10)`
@@ -332,7 +332,7 @@
     這類的資料，常常被人稱為：「字串」。
 
 - Class : cmd_question
-  Output: 舉例來說，如果我們直接輸入`x`而不用雙引號包覆它，R 
+  Output: 舉例來說，如果我們直接輸入`x`而不用雙引號包覆它，R
     會把這個`x`當成變數名稱，而回傳x 的內容。請同學試試看輸入：`x`
   CorrectAnswer: x
   AnswerTests: omnitest('x')
@@ -434,8 +434,7 @@
 - Class: script
   Output: 最後我們想請同學試試看用今天所學的方法，整理台電的公開數據。
     請同學在完成之後存檔，並輸入`submit()`來檢查結果是否符合預期。
-    如果同學在檔案中看到亂碼，請使用Rstudio 左上角的File -> Reopen 
+    如果同學在檔案中看到亂碼，請使用Rstudio 左上角的File -> Reopen
     With Encoding... -> 選取：UTF-8
   Script: RBasic-02-HW.R
   AnswerTests: rbasic_02_hw_test()
-

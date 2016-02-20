@@ -16,13 +16,13 @@
 - Class: cmd_question
   Output: 首先我們先看看m 的值。請同學輸入`m`
   CorrectAnswer: m
-  AnswerTests: omnitest("m")
+  AnswerTests: omnitest('m')
   Hint: m
 - Class: cmd_question
   Output: 我們再看看y 的值。請同學輸入`y`
-  CorrectAnswer: get("y")
-  AnswerTests: omnitest(correctVal = y)
-  Hint: get("y")
+  CorrectAnswer: 'y'
+  AnswerTests: omnitest('y')
+  Hint: 'y'
 - Class: cmd_question
   Output: 因為`m` 是一個50 * 2 的矩陣，所以在R 裡面找一個長度為2 的向量， 例如`c(-17, 4)` ，我們就可以用`m %*% c(-17,
     4)`來當作是對y 的趨近。 請同學算算看`m %*% `c(-17, 4)`

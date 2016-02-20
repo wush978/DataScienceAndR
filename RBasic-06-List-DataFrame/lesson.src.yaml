@@ -75,7 +75,7 @@
   AnswerTests: omnitest('x$n', x$n)
 
 - Class : text
-  Output: 在windows上，如果名字是中文時，使用`$`的語法可能會出錯。一個比較保險的方式是： x$`中文名稱` 。這裡的 ` 
+  Output: 在windows上，如果名字是中文時，使用`$`的語法可能會出錯。一個比較保險的方式是： x$`中文名稱` 。這裡的 `
     符號的按鍵，在美式鍵盤中位於1的左方，這個符號唸作：Grave accent，是R 在console中的跳脫字元。以特殊符號
     為名稱的變數，可以透過兩邊包覆Grave accent來在console中存取。
 
@@ -133,8 +133,6 @@
 - Class : cmd_question
   Output: 除了list的語法之外，我們也可以使用類似matrix的語法。舉例來說，我們可以用`a[,1]`選取第一欄。
     請同學試試看。
-  CorrectAnswer: a[,1]
-  AnswerTests: omnitest('a[,1]', rep(1, 10))
 
 - Class : mult_question
   Output: 根據螢幕上的輸出，請問同學`a[,1]`的類別是什麼呢？
@@ -145,8 +143,6 @@
 
 - Class : cmd_question
   Output: 同理，我們也可以用`a[1,2]`來取出第1 列、第2 欄的資料。請同學試試看。
-  CorrectAnswer: a[1,2]
-  AnswerTests: omnitest('a[1,2]', 1)
 
 - Class : cmd_question
   Output: 欄位的方向，也可以用名字代替。舉例來說，`a[2,"id"]`可以選到第二列第二欄，因為`a[2,]`代表第二列，
@@ -164,14 +160,12 @@
 
 - Class : cmd_question
   Output: 另一個用法是：`a[1:2,1:2]`，可以選出前兩列和前兩欄。請同學試試看。
-  CorrectAnswer: a[1:2,1:2]
-  AnswerTests: omnitest('a[1:2,1:2]', a[1:2,1:2])
 
 - Class : cmd_question
   Output: 請問同學，能不能用`class`查看`a[1:2,1:2]`的型態呢？
   CorrectAnswer: class(a[1:2,1:2])
   AnswerTests: omnitest('class(a[1:2,1:2])', 'data.frame')
-  
+
 - Class : text
   Output: 有沒有注意到，在輸入`a[1:2,"id"]`的時候R 會輸出一個向量，但是輸入`a[1:2,1:2]`的時候R 反而
     會給一個data.frame呢？其實這樣不一致的行為，在未來同學如果寫一些複雜的資料整理時，會帶來困擾的。
@@ -194,11 +188,7 @@
 - Class : script
   Output: 接著，請同學依照這個課程所學到的技巧，做一個簡單的練習。
     請同學在完成之後存檔，並輸入`submit()`來檢查結果是否符合預期。
-    如果同學在檔案中看到亂碼，請使用Rstudio 左上角的File -> Reopen 
+    如果同學在檔案中看到亂碼，請使用Rstudio 左上角的File -> Reopen
     With Encoding... -> 選取：UTF-8
   Script: RBasic-06-HW.R
   AnswerTests: rbasic_06_hw_test()
-
-    
-
-

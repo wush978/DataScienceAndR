@@ -47,7 +47,7 @@
 
 - Class : text
   Output: 通常每一個給R 的指令，不是一個expression，就是一個assignment
-  
+
 - Class : cmd_question
   Output: 舉例來說，`a <- 1`就是一個assigment的動作。
     請各位同學在console輸入`a <- 1`
@@ -56,7 +56,7 @@
 
 - Class : text
   Output: 通常R 在收到一個expression之後，它會做出以下的動作：
-  
+
 - Class : cmd_question
   Output: R 會evaluate這個expression，然後把結果顯示到螢幕上。
     舉例來說，請同學輸入：`a + 1`
@@ -94,7 +94,7 @@
   Output: 我們也可以在程式碼中插入註解：`#`。所有在# 之後的輸入，R 都會略過。
 
 - Class : text
-  Output: 如果有一個expression還沒有完成，（可能是少了`)`或`}`），那R 
+  Output: 如果有一個expression還沒有完成，（可能是少了`)`或`}`），那R
     會在console的開頭用`+`來提示你。
 
 - Class : text
@@ -107,7 +107,7 @@
 
 - Class: cmd_question
   Output: 請各位同學看一下`source`的說明。輸入之後，使用R 一般界面的同學
-    會看到跳出的說明視窗，內容則是R 對`source`的官方說明。。使用Rstudio 
+    會看到跳出的說明視窗，內容則是R 對`source`的官方說明。。使用Rstudio
     的同學則請檢查右下角的視窗是否有切換至`source`的官方說明。
   CorrectAnswer: help(source)
   AnswerTests: any_of_exprs("help(source)", "?source")
@@ -133,7 +133,7 @@
   Output: 我們可以刪除已經存在的物件。舉例來說，如果我們要刪除`a`，
     就只要輸入：`rm(a)`。請同學試試看：
   CorrectAnswer: rm(a)
-  AnswerTests: omnitest("rm(a)", correctVal = NULL)
+  AnswerTests: omnitest("rm(a)")
 
 - Class : text
   Output: 所有的R 物件都可以儲存到硬碟中，讓你之後可以從硬碟讀出資料
@@ -149,4 +149,3 @@
 
 - Class : text
   Output : 第一章的內容就到此結束了。
-

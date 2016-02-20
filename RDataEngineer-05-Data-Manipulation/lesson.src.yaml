@@ -124,7 +124,7 @@
 - Class: cmd_question
   Output: 請同學試著從`flights`中找出`flights$month`為 1，`flights$day`為2的資料。
   CorrectAnswer: filter(flights, month == 1, day == 2)
-  AnswerTests: omnitest(correctVal = filter(flights, month == 1, day == 2))
+  AnswerTests: val_is(filter(flights, month == 1, day == 2))
 
 - Class: script
   Output: |
@@ -197,7 +197,7 @@
   Output: |
     我們直接練習，「用肌肉記憶」。請同學選出`flights`的第10000 到 第20000資料。
   CorrectAnswer: slice(flights, 10000:20000)
-  AnswerTests: omnitest(correctVal = slice(flights, 10000:20000))
+  AnswerTests: val_is(slice(flights, 10000:20000))
 
 - Class: cmd_question
   Output: |
