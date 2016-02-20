@@ -25,13 +25,9 @@
 
 - Class : cmd_question
   Output: 首先我們先看看m 的值。請同學輸入`m`
-  CorrectAnswer: m
-  AnswerTests: omnitest("m")
 
 - Class : cmd_question
   Output: 我們再看看y 的值。請同學輸入`y`
-  CorrectAnswer: get("y")
-  AnswerTests: omnitest(correctVal = y)
 
 - Class : cmd_question
   Output: 因為`m` 是一個50 * 2 的矩陣，所以在R 裡面找一個長度為2 的向量，
@@ -93,7 +89,7 @@
   AnswerChoices: m;c(-17, 4);m %*% c(-17, 4)
   CorrectAnswer: m %*% c(-17, 4)
   AnswerTests: omnitest(correctVal = "m %*% c(-17, 4)")
-  
+
 - Class : text
   Output: 透過`f` ，我們就可以很方便的計算估計的誤差的平方和。
 
@@ -136,7 +132,7 @@
     玩的過程，也是當我們第一次使用R 強大的計算功能後，得到的結
     果。
   CorrectAnswer: r <- optim(par = c(0,0), f1)
-  AnswerTests: any_of_exprs("r <- optim(c(0,0), f1)", 
+  AnswerTests: any_of_exprs("r <- optim(c(0,0), f1)",
     "r = optim(c(0,0), f1)")
 
 - Class : cmd_question
@@ -208,4 +204,3 @@
 
 - Class : text
   Output: 以上就是對於R 的函數功能的簡單簡介。
-

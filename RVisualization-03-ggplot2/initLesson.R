@@ -77,7 +77,7 @@ assign("hw_04", function() {
     mutate(ratio = count / sum(count)) %>%
     ggplot(aes(x = age, y = ratio, color = city)) +
     geom_point() + geom_line()
-  if (Sys.info()["sysname"] == "Darwin") {
+  if (Sys.info()["sysname"] == "Darwin" & interactive()) {
     print(g + theme_grey(base_family="STKaiti"))
   } else {
     print(g)

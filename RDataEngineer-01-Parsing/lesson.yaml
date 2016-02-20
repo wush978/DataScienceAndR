@@ -18,7 +18,7 @@
 - Class: cmd_question
   Output: 請同學用上一堂課所學的技巧，先用`readBin`來看檢查這個檔案的BOM。
   CorrectAnswer: readBin(hospital_path, "raw", n = 3L)
-  AnswerTests: omnitest(correctVal = readBin(hospital_path, "raw", n = 3L))
+  AnswerTests: val_is(readBin(hospital_path, "raw", n = 3L))
   Hint: readBin(hospital_path, "raw", n = 3L)
 - Class: mult_question
   Output: 請問同學，根據這三個byte，他們的BOM可能是什麼呢？
@@ -48,14 +48,13 @@
   Output: 接著請同學依照在RBasic-07所學到的技巧，用`read.table`和`file`兩個函數的組合， 以及適當的設定`sep`、`header`和`encoding`等參數將`hospital_path`的內容存到`hospital`
   CorrectAnswer: hospital <- .read.table.big5(hospital_path, header = TRUE, sep =
     ",")
-  AnswerTests: omnitest(correctVal = .read.table.big5(hospital_path, header = TRUE,
-    sep = ","))
+  AnswerTests: val_is(.read.table.big5(hospital_path, header = TRUE, sep = ","))
   Hint: hospital <- read.table(file(hospital_path, encoding = "BIG5"), sep = ",",
     header = TRUE)
 - Class: cmd_question
   Output: 我們可能希望從欄位YEARYY中擷取出資料的年份。我們先看看名稱為YEARYY這欄，請同學自hospital中選出YEARYY欄位。 （同學可以使用`[[`、或`$`搭配名稱或是欄位順序）
   CorrectAnswer: hospital$YEARYY
-  AnswerTests: omnitest(correctVal = hospital[[1]])
+  AnswerTests: val_is(hospital[[1]])
   Hint: hospital$YEARYY
 - Class: text
   Output: 有時候，觀察到太大量的資料可能會對R 、電腦帶來大量的負荷，同時也對我們沒有意義。因為 我們能同時處理的資料量是有限的。這裡我建議同學，可以用`head`這個函數篩選出資料的前6

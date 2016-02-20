@@ -65,7 +65,7 @@
     但是在貼資料的時候，我們一定要有一個依據。
     我們先看一下`flights`的第一筆資料，請同學用`slice`作答。
   CorrectAnswer: slice(flights, 1)
-  AnswerTests: omnitest(correctVal = slice(flights, 1))
+  AnswerTests: val_is(slice(flights, 1))
   Hint: slice(flights, 1)
 - Class: mult_question
   Output: |
@@ -196,8 +196,7 @@
     最後，我們再把`answer03`與`airports`做一次整合，但是這次是比對`answer03$dest`與`airports$faa`
     請同學寫寫看，並且把結果存到變數`answer04`
   CorrectAnswer: answer04 <- left_join(answer03, airports, by = c("dest" = "faa"))
-  AnswerTests: omnitest(correctVal = left_join(answer03, airports, by = c("dest" =
-    "faa")))
+  AnswerTests: val_is(left_join(answer03, airports, by = c("dest" = "faa")))
   Hint: answer04 <- left_join(answer03, airports, by = c("dest" = "faa"))
 - Class: cmd_question
   Output: |

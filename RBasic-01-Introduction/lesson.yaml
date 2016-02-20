@@ -89,7 +89,7 @@
 - Class: cmd_question
   Output: 我們可以刪除已經存在的物件。舉例來說，如果我們要刪除`a`， 就只要輸入：`rm(a)`。請同學試試看：
   CorrectAnswer: rm(a)
-  AnswerTests: omnitest("rm(a)", correctVal = NULL)
+  AnswerTests: omnitest("rm(a)")
   Hint: rm(a)
 - Class: text
   Output: 所有的R 物件都可以儲存到硬碟中，讓你之後可以從硬碟讀出資料 繼續做分析。每次退出R 的時候，你都有機會把所有的物件存到一個叫做 .RData的檔案之中。之後，只要在相同的目錄打開R，這些資料就會自動

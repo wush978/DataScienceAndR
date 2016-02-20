@@ -108,7 +108,7 @@
 - Class: cmd_question
   Output: 除了list的語法之外，我們也可以使用類似matrix的語法。舉例來說，我們可以用`a[,1]`選取第一欄。 請同學試試看。
   CorrectAnswer: a[,1]
-  AnswerTests: omnitest('a[,1]', rep(1, 10))
+  AnswerTests: omnitest('a[,1]')
   Hint: a[,1]
 - Class: mult_question
   Output: 根據螢幕上的輸出，請問同學`a[,1]`的類別是什麼呢？
@@ -119,7 +119,7 @@
 - Class: cmd_question
   Output: 同理，我們也可以用`a[1,2]`來取出第1 列、第2 欄的資料。請同學試試看。
   CorrectAnswer: a[1,2]
-  AnswerTests: omnitest('a[1,2]', 1)
+  AnswerTests: omnitest('a[1,2]')
   Hint: a[1,2]
 - Class: cmd_question
   Output: 欄位的方向，也可以用名字代替。舉例來說，`a[2,"id"]`可以選到第二列第二欄，因為`a[2,]`代表第二列， `a[,"id"]` 會選到名稱為`"id"`的第二欄。而兩者的交集，就是第2
@@ -136,7 +136,7 @@
 - Class: cmd_question
   Output: 另一個用法是：`a[1:2,1:2]`，可以選出前兩列和前兩欄。請同學試試看。
   CorrectAnswer: a[1:2,1:2]
-  AnswerTests: omnitest('a[1:2,1:2]', a[1:2,1:2])
+  AnswerTests: omnitest('a[1:2,1:2]')
   Hint: a[1:2,1:2]
 - Class: cmd_question
   Output: 請問同學，能不能用`class`查看`a[1:2,1:2]`的型態呢？

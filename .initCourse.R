@@ -7,7 +7,7 @@ assign(".get_path",
 
 assign("check_then_install",
        function(pkg_name, pkg_version) {
-         if (!require(pkg_name, character.only = TRUE)) utils::install.packages(pkg_name, repos = "http://cran.r-project.org") else {
+         if (!suppressWarnings(suppressMessages(require(pkg_name, character.only = TRUE)))) utils::install.packages(pkg_name, repos = "http://cran.r-project.org") else {
            if (packageVersion(pkg_name) < package_version(pkg_version)) utils::install.packages(pkg_name, repos = "http://cran.r-project.org")
          }
        },
@@ -70,4 +70,36 @@ assign("check_val", function(name, value) {
     message(conditionMessage(e))
     FALSE
   })
+}, envir = globalenv())
+
+assign("val_is", function(value) {
+  tryCatch({
+    e <- get("e", parent.frame())
+    result <- all.equal(e$val, value)
+    if (!isTRUE(result)) {
+      message(result)
+      FALSE
+    } else TRUE
+  }, error = function(e) {
+    message(conditionMessage(e))
+    FALSE
+  })
+}, envir = globalenv())
+
+assign("test_all", function(...) {
+  tryCatch({
+    e <- get("e", parent.frame())
+    calls <- tail(as.list(match.call()), -1)
+    for(i in seq_along(calls)) {
+      if (!eval(calls[[i]])) stop("")
+    }
+    TRUE
+  }, error = function(e) {
+    FALSE
+  })
 })
+
+options(
+  "SWIRL_TRACKING_SERVER_IP" = "api.datascienceandr.org",
+  "SWIRL_COURSE_VERSION" = "e0334fff35e5d8342ec58f8c73de07d9d43cb026"
+)
