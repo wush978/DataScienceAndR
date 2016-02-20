@@ -99,11 +99,11 @@
   AnswerTests: val_is(charToRaw("\xb6m\xc2"))
 
 - Class : text
-  Output: R 中的`readBin` 是一個很可以直接讀取檔案包含的位元的指令
+  Output: R 中的`readBin` 是一個很可以直接讀取檔案中的位元組的指令
     ，所以可以正確的處理BOM 。第一個參數是檔案的路徑。第二個名稱為
     what的參數，是告訴R 要如何處理讀入的資料。`what = "raw"`代表讀
     入的資料用位元處理，而不是文字。第三個名稱為n 的參數，代表要輸
-    入的長度。這裡選`n = 3` 是因為通常BOM 最多就是3 個位元。
+    入的長度。這裡選`n = 3` 是因為通常BOM 最多就是3 個位元組。
 
 - Class : text
   Output: 接著，我們可以到<https://zh.wikipedia.org/wiki/位元組順序記號>查詢
@@ -185,7 +185,7 @@
 
 - Class : cmd_question
   Output: 接著請同學利用`readBin`來把`lvr_land.path`的檔案完全以
-    位元組的方式讀到R 中，並且存到名稱為`lvr_land.bin`的變數。
+    位元的方式讀到R 中，並且存到名稱為`lvr_land.bin`的變數。
   CorrectAnswer: lvr_land.bin <- readBin(lvr_land.path, what = "raw", n = lvr_land.info$size)
   AnswerTests: any_of_exprs('lvr_land.bin <- readBin(lvr_land.path, what = "raw", n = lvr_land.info$size)',
     'lvr_land.bin = readBin(lvr_land.path, what = "raw", n = lvr_land.info$size)')
@@ -261,7 +261,7 @@
 
 - Class : cmd_question
   Output: 我們可以用`l10n_info()`來查詢作業系統對於各種Encoding的支援狀況。
-    `l10n_info()`會回報系統對是否有支援UTF-8 （UTF-8 欄位），或是多位元字串
+    `l10n_info()`會回報系統對是否有支援UTF-8 （UTF-8 欄位），或是多位元組字串
     （MBCS欄位）。請同學試試看輸入：`l10n_info()`
   CorrectAnswer: l10n_info()
   AnswerTests: omnitest("l10n_info()")
