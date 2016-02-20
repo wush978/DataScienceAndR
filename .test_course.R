@@ -16,7 +16,7 @@ test_lesson = function(lesson_dir){
   e$lesPath <- lesson_dir
   # Since the initLesson might change working directory, load lesson yaml first before that happens.
   lesson = yaml.load_file(paste0(lesson_dir,"/lesson.yaml"))
-  
+  stopifnot(lesson[[1]]$Lesson == lesson_dir)
   
   for(R_file in c("/customTests.R", "/../.initCourse.R", "/initLesson.R")){
     R_file_path = paste0(lesson_dir, R_file)
@@ -68,18 +68,21 @@ test_lesson = function(lesson_dir){
 course_name <- basename(getwd())
 setwd("..");install_course_directory(course_name);setwd(course_name)
 course_list <- list.dirs(".", recursive = FALSE)
-course_list <- grep("^..R", course_list, value = TRUE)
+course_list <- grep("^\\./[^\\.]", course_list, value = TRUE)
 course_list <- substring(course_list, 3, nchar(course_list))
 course_list <- grep("^[^\\.]", course_list, value = TRUE)
-course_list <- setdiff(course_list, c("ROpenData-DataTaipei", "RDataMining-01-Clustering", 
-                                      "RDataMining-02-Classification", "RDataMining-03-Association-Rule",
-                                      "RDataMining-04-Text-Mining"))
+course_list <- setdiff(course_list, c("Project-ROpenData-DataTaipei", "Optional-RDataMining-01-Clustering", 
+                                      "Optional-RDataMining-02-Classification", "Optional-RDataMining-03-Association-Rule",
+                                      "Optional-RDataMining-04-Text-Mining"))
 
 result.path <- ".result.csv"
 result <- if (file.exists(result.path) && argv == "commit") {
   read.csv(result.path, header = TRUE, stringsAsFactors = FALSE)
 } else {
   data.frame(course = course_list, result = FALSE, hash = "", stringsAsFactors = FALSE)
+}
+for(course in setdiff(course_list, result$course)) {
+  result <- rbind(result, data.frame(course = course, result = FALSE, hash = "", stringsAsFactors = FALSE))
 }
 
 for(course in course_list) {
@@ -92,7 +95,7 @@ for(course in course_list) {
       next
     }
   }
-  if (course %in% "RDataMining-02-Classification") {
+  if (course %in% "Optional-RDataMining-02-Classification") {
     if (Sys.info()["sysname"] == "Windows") {
       Sys.setlocale(locale = "cht")
     } 

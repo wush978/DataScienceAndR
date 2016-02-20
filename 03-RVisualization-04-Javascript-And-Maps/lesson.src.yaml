@@ -1,0 +1,203 @@
+- Class: meta
+  Course: DataScienceAndR
+  Lesson: 03-RVisualization-04-Javascript-And-Maps
+  Author: Wush Wu
+  Type: Standard
+  Organization: Taiwan R User Group
+  Version: 2.3.1.1
+
+- Class: text
+  Output: |
+    大家好，本課程主要跟大家解說如何在R 裡面處理新時代的互動式繪圖與新型態的數據。
+
+- Class: cmd_question
+  Output: 我們想介紹的是googleVis套件。請同學試著安裝googleVis
+  CorrectAnswer: check_then_install("googleVis", "0.5.10")
+  AnswerTests: test_package_version("googleVis", "0.5.10")
+
+- Class: cmd_question
+  Output: 請同學載入googleVis套件
+  CorrectAnswer: library(googleVis)
+  AnswerTests: test_search_path("googleVis")
+
+- Class: cmd_question
+  Output: |
+    同學可以打開`vignette("googleVis_examples", package = "googleVis")`，
+    我們簡單用這個文件做範例。
+
+- Class: text
+  Output: |
+    在第一章Line chart的部份，同學可以把滑鼠移動到線上。這就是用網頁技術做
+    視覺化的好處：圖形可以「直接」跟使用者互動，而不需要透過程式碼。
+
+- Class: cmd_question
+  Output: |
+    然而googleVis的API設計是要我們完全自行整理資料。因此我們
+    得先載入`dplyr`。請同學安裝`dplyr`或是輸入skip()跳過。
+  CorrectAnswer: check_then_install("dplyr", "0.4.3")
+  AnswerTests: test_package_version("dplyr", "0.4.3")
+
+- Class: cmd_question
+  Output: 請同學載入dplyr
+  CorrectAnswer: library(dplyr)
+  AnswerTests: test_search_path("dplyr")
+
+- Class: cmd_question
+  Output: |
+    請同學輸入：
+    `dat1 <- group_by(hsb, race, sex) %>% summarise(math.avg = mean(math))`
+
+- Class: cmd_question
+  Output: |
+    接著我們輸入：`g <- gvisBarChart(dat1)`建立一個gvis物件。如果同學
+    去探索這個物件，會發現它是一個網頁的HTML。
+
+- Class: cmd_question
+  Output: |
+    接著，我們輸入：`plot(g)`
+
+- Class: text
+  Output: |
+    同學的電腦瀏覽器中，就會打開一個網頁，上面繪製著一份barchart。
+    如果我們把滑鼠移上去，還會跳出確切的值。
+
+- Class: cmd_question
+  Output: |
+    然而gvisBarChart吃資料的邏輯和dplyr所整理出的資料不太一致。
+    gvisBarChart是把操作顏色的類別，放在data.frame的column方向。
+    因此，我們需要用一個套件快速做轉換。請同學輸入`skip()`檢查
+    是否有安裝reshape2套件。若無，課程會自動安裝該套件。
+  CorrectAnswer: check_then_install("reshape2", "1.4.1")
+  AnswerTests: test_package_version("reshape2", "1.4.1")
+
+- Class: cmd_question
+  Output: |
+    請同學載入reshape2
+  CorrectAnswer: library(reshape2)
+  AnswerTests: test_search_path("reshape2")
+
+- Class: cmd_question
+  Output: |
+    接著我們試著執行：`dcast(dat1, race ~ sex)`
+
+- Class: text
+  Output: |
+    同學會看到sex欄位被拉到data.frame的欄位，也就是female一欄，male一欄。
+
+- Class: cmd_question
+  Output: |
+    讓我們把這筆資料餵給gvisBarChart後呈現在網頁上。請同學輸入：
+    `dcast(dat1, race ~ sex) %>% gvisBarChart() %>% plot()`
+
+- Class: text
+  Output: |
+    這次就會看到不同的性別有不同的顏色。
+
+- Class: cmd_question
+  Output: |
+    接著我們挑出read和math做scatter plot。請同學輸入：
+    `select(hsb, read, math) %>% gvisScatterChart() %>% plot()`
+
+- Class: text
+  Output: |
+    目前googleVis整合了google Chart API，提供了許多功能。但是和ggplot2相比，它的功能相對簡單。
+    googleVis這類套件帶給R社群的影響，是讓大家了解javascript based的繪圖引擎所帶來的可能性。
+
+- Class: text
+  Output: |
+    傳統工具要讓使用者與R互動，技術門檻很高。但是javascript等網頁技術大幅度的降低這類門檻。
+
+- Class: text
+  Output: |
+    因此，現在R 與javascript整合的套件可說是百花齊放，可惜我還沒有注意到有一套像ggplot2一樣
+    有代表性的套件。
+
+- Class: text
+  Output: |
+    googleVis也帶來了傳統R所沒有提供的繪圖類型。例如：Sankey Diagram。
+
+- Class: cmd_question
+  Output: |
+    請同學輸入：`gvisSankey(dat_sk) %>% plot()`
+
+- Class: text
+  Output: |
+    這張圖描述了兩個state之間的流動。舉例來說，如果我們知道去年購買各種品牌筆電的消費者，今年
+    各自是買哪一個品牌的筆電，那透過分析品牌間的變化，我們就可以利用Sankey Diagram來觀察變化
+    的細節。
+
+- Class: cmd_question
+  Output: 接著，請同學輸入： `gvisCalendar(TWII) %>% plot`
+
+- Class: text
+  Output: |
+    這是拿台股指數搭配googleVis提供的月曆API所繪製的圖。我們可以從中清楚的看到台股停止交易
+    (或是yahoo沒有抓到資料)的日期，期中大部份是週末。這樣的數據如果拿來呈現和人的活動很相關
+    的資料，會比直接用傳統的line chart還要容易發現是不是有和周末等日期的相關性。
+
+- Class: cmd_question
+  Output: |
+    還有如：`gvisOrgChart(Regions) %>% plot`，則是拿來繪製組織圖的選擇。
+
+- Class: cmd_question
+  Output: |
+    接著我們介紹ggmap這個可以處理地理資料的套件。請同學輸入`skip()`檢查
+    有無安裝ggmap
+  CorrectAnswer: check_then_install("ggmap", "2.6.1")
+  AnswerTests: test_package_version("ggmap", "2.6.1")
+
+- Class: cmd_question
+  Output: |
+    接著，我們載入ggmap
+  CorrectAnswer: library(ggmap)
+  AnswerTests: test_search_path("ggmap")
+
+- Class: cmd_question
+  Output: |
+    eq是來自<http://earthquake.usgs.gov>所抓取的地震資料。請同學輸入`View(eq)`看一下這筆資料。
+
+- Class: text
+  Output: |
+    同學可以看到eq中有提供地震的位置(經緯度：longitude, latitude)和地震的規模(mag)
+
+- Class: cmd_question
+  Output: |
+    接著我們示範一次怎麼把地震畫在地圖中。首先我們要先從google拿到圖資。請同學輸入：
+    `twmap <- try(get_map("Taiwan", 3), silent = TRUE)`
+    第一個參數是告訴google我們要抓取的圖資的位置。第二個參數則是地圖的範圍大小，值從3（世界規模）到21（建築物的規模）
+  CorrectAnswer: twmap <- readRDS(.get_path("twmap.Rds"))
+  AnswerTests: any_of_exprs('twmap <- try(get_map("Taiwan", 3), silent = TRUE)', 'twmap <- readRDS(.get_path("twmap.Rds"))')
+
+- Class: cmd_question
+  Output: |
+    接著請同學輸入: `skip()`來確認圖資有確實載入。
+  CorrectAnswer: if (class(twmap)[1] == "try-error") twmap <- readRDS(.get_path("twmap.Rds"))
+  AnswerTests: omnitest('if (class(twmap)[1] == "try-error") twmap <- readRDS(.get_path("twmap.Rds"))')
+
+- Class: cmd_question
+  Output: |
+    我們接著建立ggplot物件：`g <- ggmap(twmap, extent = "device")`
+
+- Class: cmd_question
+  Output: |
+    我們輸入`g`看一下剛剛抓回來的圖資。
+
+- Class: cmd_question
+  Output: |
+    接著請同學輸入：`g + geom_point(aes(x = longitude, y = latitude), data = eq)`
+    來繪製新的圖層標示地震位置。
+
+- Class: cmd_question
+  Output: |
+    接著請同學輸入：`g + geom_point(aes(x = longitude, y = latitude, size = mag), data = eq)`
+    來用點的大小表示地震規模。
+
+- Class: text
+  Output: |
+    如果同學熟悉ggplot2的話，ggmap應該就可以很快的上手了。
+
+- Class: script
+  Output: |
+    最後我們請同學利用之前所學，從`pirate_path`中爬取經緯度，再利用ggmap將海盜的通報事件畫到地圖上。
+  Script: RVisualization-04-HW.R
+  AnswerTests: pass()
