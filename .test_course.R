@@ -68,7 +68,7 @@ test_lesson = function(lesson_dir){
 course_name <- basename(getwd())
 setwd("..");install_course_directory(course_name);setwd(course_name)
 course_list <- list.dirs(".", recursive = FALSE)
-course_list <- grep("^\\./[^\\.]", course_list, value = TRUE)
+course_list <- grep("^\\./(\\d{2})|(Project)|(Optional)-", course_list, value = TRUE)
 course_list <- substring(course_list, 3, nchar(course_list))
 course_list <- grep("^[^\\.]", course_list, value = TRUE)
 course_list <- setdiff(course_list, c("Project-ROpenData-DataTaipei", "Optional-RDataMining-01-Clustering", 
