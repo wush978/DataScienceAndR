@@ -19,15 +19,21 @@ test_lesson = function(lesson_dir){
     if(file.exists(R_file_path)) source(R_file_path,local = e)
   }
   
-  for(question in lesson){
+  for(.i in seq_along(lesson)) {
+    question <- lesson[[.i]]
     if(question$Class %in% c("cmd_question", "mult_question", "script")) {
-      print(paste(">", question$CorrectAnswer))
+      cat(sprintf("(%d) > %s\n", .i, question$CorrectAnswer))
       switch(question$Class, 
         "cmd_question" = {
           suppressWarnings({
             e$val <- eval(parse(text=question$CorrectAnswer), envir = e)
             e$expr <- parse(text = question$CorrectAnswer)[[1]]
-            stopifnot(eval(parse(text=question$AnswerTests), envir = e))
+            tryCatch({
+              attach(e)
+              stopifnot(eval(parse(text=question$AnswerTests), envir = e))
+            }, finally = {
+              detach(e)
+            })
           })
           if (grepl("correctVal", question$AnswerTests) && grepl("omnitest", question$AnswerTests)) {
             # Test if correctVal only compare with character or numeric vector of length 1
