@@ -13,7 +13,7 @@
   Output: |
     R 內建有列出所有組合可能的功能，請同學輸入：`?combn`查詢該
     功能的說明
-  
+
 - Class: text
   Output: |
     請同學先閱讀Arguments中對於`x`與`m`的解釋。
@@ -81,13 +81,13 @@
     請同學用`X.sample`來估計X.sample與mu的距離小於4.4的機率
   CorrectAnswer: mean(abs(X.sample - mu) < 4.4)
   AnswerTests: omnitest(correctVal = mean(abs(X.sample - mu) < 4.4))
-  
+
 - Class: cmd_question
   Output: |
     請同學用`X.sample`來估計X.sample與mu的距離小於8.8的機率
   CorrectAnswer: mean(abs(X.sample - mu) < 8.8)
   AnswerTests: omnitest(correctVal = mean(abs(X.sample - mu) < 8.8))
-  
+
 - Class: cmd_question
   Output: |
     請同學用`X.sample`來估計X.sample與mu的距離小於13.2的機率
@@ -102,13 +102,13 @@
   Output: X表示抽出某位金門縣縣民的年齡。請問X可能的值為何？
     答案請由小到大排列
   CorrectAnswer: unique(population.Kinmen)
-  AnswerTests: omnitest(correctVal = unique(population.Kinmen))
+  AnswerTests: val_is(unique(population.Kinmen))
 
 - Class: cmd_question
   Output: g表示四捨五入至十位數。請問g(X)可能的值為何？答案請
     由小到大排列
   CorrectAnswer: unique(round(0:100, -2))
-  AnswerTests: omnitest(correctVal = unique(round(0:100, -2)))
+  AnswerTests: val_is(unique(round(0:100, -2)))
 
 - Class: script
   Output: |
@@ -193,13 +193,13 @@
     作答
   CorrectAnswer: |
     c("X1", "X2", "X3")[which.min(c(
-      mean(X1.sample - mu)^2 + var(X1.sample), 
+      mean(X1.sample - mu)^2 + var(X1.sample),
       mean(X2.sample - mu)^2 + var(X2.sample),
       mean(X3.sample - mu)^2 + var(X3.sample)
       ))]
   AnswerTests: |
     omnitest(correctVal = c("X1", "X2", "X3")[which.min(c(
-      mean(X1.sample - mu)^2 + var(X1.sample), 
+      mean(X1.sample - mu)^2 + var(X1.sample),
       mean(X2.sample - mu)^2 + var(X2.sample),
       mean(X3.sample - mu)^2 + var(X3.sample)
       ))])
@@ -253,4 +253,3 @@
     作答
   CorrectAnswer: c("X1", "X2", "X3")[which.min(c(var(X1.sample), var(X2.sample), var(X3.sample)))]
   AnswerTests: omnitest(correctVal = c("X1", "X2", "X3")[which.min(c(var(X1.sample), var(X2.sample), var(X3.sample)))])
-

@@ -41,12 +41,6 @@ rbasic_07_hw_test <- function() {
   })
 }
 
-val_is <- function(value, var_name) {
-  e <- get("e", parent.frame())
-  target <- get(var_name, e)
-  isTRUE(all.equal(value, target))
-}
-
 test_package_version <- function(pkg_name, pkg_version) {
   e <- get("e", parent.frame())
   tryCatch(

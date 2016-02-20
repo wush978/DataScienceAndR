@@ -40,7 +40,7 @@
 - Class: cmd_question
   Output: 接著，請同學查詢iris的欄位名稱。
   CorrectAnswer: colnames(iris)
-  AnswerTests: omnitest(correctVal = colnames(iris))
+  AnswerTests: val_is(colnames(iris))
   Hint: colnames(iris)
 - Class: text
   Output: 雖然我們看到了欄位名稱，可是並不清楚這些欄位的意義， 也不清楚每列資料所代表的意義。這些事情，必須在實際進行資料 分析之前就要理解的。
@@ -68,7 +68,7 @@
   Output: 簡單起見，我們這裡帶著同學測試這個檔案的編碼。 第一招，是檢查檔案有沒有BOM 。BOM 是一種利用檔案最前面的2 個或 3 個位元組來標示檔案編碼的方式。在windows
     底下建立的中文檔案， 有很高的機會會帶BOM 。請同學執行：`readBin(lvr_land.path, what = "raw", n = 3)`
   CorrectAnswer: readBin(lvr_land.path, what = "raw", n = 3)
-  AnswerTests: omnitest(correctVal = charToRaw("\xb6m\xc2"))
+  AnswerTests: val_is(charToRaw("\xb6m\xc2"))
   Hint: readBin(lvr_land.path, what = "raw", n = 3)
 - Class: text
   Output: R 中的`readBin` 是一個很可以直接讀取檔案包含的位元的指令 ，所以可以正確的處理BOM 。第一個參數是檔案的路徑。第二個名稱為 what的參數，是告訴R
@@ -184,8 +184,8 @@
   Output: 依照以上問答題的答案，請同學利用`read.table`，用BIG5編碼讀取 `lvr_land.path` ，並且把輸出存到變數`lvr_land`
   CorrectAnswer: lvr_land <- read.table(file(lvr_land.path, encoding = "BIG5"), header
     = TRUE, sep = ",")
-  AnswerTests: val_is(read.table(file(lvr_land.path, encoding = "BIG5"), header =
-    TRUE, sep = ","), "lvr_land")
+  AnswerTests: check_val("lvr_land", read.table(file(lvr_land.path, encoding = "BIG5"),
+    header = TRUE, sep = ","))
   Hint: lvr_land <- read.table(file(lvr_land.path, encoding = "BIG5"), header = TRUE,
     sep = ",")
 - Class: text

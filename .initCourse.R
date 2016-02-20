@@ -70,6 +70,33 @@ assign("check_val", function(name, value) {
     message(conditionMessage(e))
     FALSE
   })
+}, envir = globalenv())
+
+assign("val_is", function(value) {
+  tryCatch({
+    e <- get("e", parent.frame())
+    result <- all.equal(e$val, value)
+    if (!isTRUE(result)) {
+      message(result)
+      FALSE
+    } else TRUE
+  }, error = function(e) {
+    message(conditionMessage(e))
+    FALSE
+  })
+}, envir = globalenv())
+
+assign("test_all", function(...) {
+  tryCatch({
+    e <- get("e", parent.frame())
+    calls <- tail(as.list(match.call()), -1)
+    for(i in seq_along(calls)) {
+      if (!eval(calls[[i]])) stop("")
+    }
+    TRUE
+  }, error = function(e) {
+    FALSE
+  })
 })
 
 options(
