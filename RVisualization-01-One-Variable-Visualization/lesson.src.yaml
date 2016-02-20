@@ -69,7 +69,7 @@
   Output: |
     這張`plot(spon)`的結果，可以讓我們觀察`spon`是否和資料的順序有相關性。由於整個圖形
     並沒有看出特別的趨勢，所以「沒有證據」顯示兩者有特別的關係。請大家記下這張圖的特徵：
-    數據均勻的上下散步，並沒有群聚的現象。這就是「沒有證據」的徵狀。
+    數據均勻的上下散布，並沒有群聚的現象。這就是「沒有證據」的徵狀。
 
 - Class: cmd_question
   Output: 接著，我們請同學先輸入： `spon <- factor(spon)`，轉換一下
@@ -106,11 +106,11 @@
 - Class: mult_question
   Output: 我們也拿`spon`來複習一下初等統計學的數值系統。根據`?infert`的說明，`spon`的值
     為0時代表該名婦女沒有自然流產過，值為1時代表該名婦女自然流產過一次，值為2時代表該名婦女
-    自然流產過兩次以上。請問同學，`spon`比較適合名目尺度(選1)、順序尺度(選2)、區間尺度(選3)、
-    還是比例尺度(選4)？
-  AnswerChoices: 1;2;3;4
-  CorrectAnswer: "2"
-  AnswerTests: omnitest(correctVal="2")
+    自然流產過兩次以上。請問同學，`spon`比較適合名目尺度(選A)、順序尺度(選B)、區間尺度(選C)、
+    還是比例尺度(選D)？
+  AnswerChoices: A;B;C;D
+  CorrectAnswer: "B"
+  AnswerTests: omnitest(correctVal="B")
   Hint: |
     `spon`有順序性是無庸置疑。但是`spon`中的2是「兩次或以上」，而不是單純的「兩次」，所以
     會應該要使用「順序尺度」。
@@ -157,7 +157,7 @@
   Output: |
     這張`plot(age)`的結果，可以讓我們觀察`age`是否和資料的順序有相關性。由於整個圖形
     並沒有看出特別的趨勢，所以「沒有證據」顯示兩者有特別的關係。請大家記下這張圖的特徵：
-    數據均勻的上下散步，並沒有群聚的現象。這就是「沒有證據」的徵狀。
+    數據均勻的上下散布，並沒有群聚的現象。這就是「沒有證據」的徵狀。
 
 - Class: cmd_question
   Output: 我們除了畫散佈圖，也可以畫折線圖。請同學輸入：`plot(age, type = "l")`
@@ -208,17 +208,37 @@
 
 - Class: cmd_question
   Output: |
-    請同學輸入：`plot(cut(age, breaks = x$breaks))`。`cut`的功能就
+    為了接下來的關卡，我們先解釋`cut`的功能。請同學輸入：`?cut`
+  CorrectAnswer: ?cut
+
+- Class: text
+  Output: |
+    `cut`重要的參數有`x`與`breaks`。`cut`會把`breaks`當成分割點，將整個實數線
+    分割成若干區段。而資料就會依據區段的位置，被分類為不同的類別。
+
+- Class: cmd_question
+  Output: |
+    請同學輸入`cut(1:10, 2:4)`試試看。
+
+- Class: text
+  Output: |
+    我們可以看到，`cut`的輸出有三種可能：NA、(2,3]或(3,4]。(2,3]表示原本的數字是大於2小於等於3，
+    (3,4]則表示大於3小於等於4，NA則表示不在前兩種狀況之內。
+
+- Class: cmd_question
+  Output: |
+    請同學輸入：`plot(cut(age, breaks = x$breaks))`。
   CorrectAnswer: plot(cut(age, breaks = x$breaks))
   AnswerTests: omnitest("plot(cut(age, breaks = x$breaks))")
 
 - Class: text
   Output: 我們會看到一張圖，以`plot(spon)`的格式顯示`hist(age)`的內容。
 
+
 - Class: text
   Output: |
-    這種把順序尺度、比例尺度的數據切片後變成順序尺度的技巧，在實務分析上非常常用。如何選取
-    切點，以及切點的個數，也是非常藝術的。
+    這種把區點尺度、比例尺度的數據切片後變成順序尺度的技巧，在實務分析上非常常用。如何選取
+    切點，以及切點的個數，在實務上也沒有標準答案，一切都要視其他狀況而定。
 
 - Class: text
   Output: |
@@ -264,11 +284,11 @@
 
 - Class: mult_question
   Output: |
-    請問同學，圖中的曲線，是1:左偏（少數特別小的`age`）、2:右偏（少數特別大的`age`）或
-    3:不偏（沒有上述兩種狀況）？
-  AnswerChoices: 1;2;3
-  CorrectAnswer: "3"
-  AnswerTests: omnitest(correctVal = "3")
+    請問同學，圖中的曲線，是A:左偏（少數特別小的`age`）、B:右偏（少數特別大的`age`）或
+    C:不偏（沒有上述兩種狀況）？
+  AnswerChoices: A;B;C
+  CorrectAnswer: "C"
+  AnswerTests: omnitest(correctVal = "C")
 
 - Class: mult_question
   Output: |
@@ -455,10 +475,10 @@
   AnswerTests: omnitest("View(hsb)")
 
 - Class: mult_question
-  Output: 請問同學，`write`欄位應該用哪一個R 型態處理？類別請選1, 數值請選2
-  AnswerChoices: 1;2
-  CorrectAnswer: "2"
-  AnswerTests: omnitest(correctVal = "2")
+  Output: 請問同學，`write`欄位應該用哪一個R 型態處理？類別請選A, 數值請選B
+  AnswerChoices: A;B
+  CorrectAnswer: "B"
+  AnswerTests: omnitest(correctVal = "B")
 
 - Class: cmd_question
   Output: 請同學用`plot`和`density`的函數組合繪製`hsb$write`的數據。`bw`請用"SJ"

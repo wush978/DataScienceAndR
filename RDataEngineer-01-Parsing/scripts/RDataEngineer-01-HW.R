@@ -49,7 +49,7 @@ stopifnot(class(pirate_coordinate_raw) == "character")
 stopifnot(length(pirate_coordinate_raw) == 11)
 
 # 我們接著可以使用`substring`抓出經緯度的數字
-# 請先抓出緯度（「分」的部份就無條件捨去吧！）
+# 請先抓出緯度並忽略「分」的部份
 # 結果應該是整數（請用as.integer轉換）
 pirate_coordinate_latitude <- {
   # 請在這邊填寫你的程式碼
@@ -60,7 +60,7 @@ stopifnot(class(pirate_coordinate_latitude) == "integer")
 stopifnot(length(pirate_coordinate_latitude) == 11)
 stopifnot(sum(pirate_coordinate_latitude) == 43)
 
-# 請用同樣的要領取出經度
+# 請用同樣的要領取出經度並忽略「分」的部份
 # 結果同樣應該是整數
 pirate_coordinate_longitude <- {
   # 請在這邊填寫你的程式碼
