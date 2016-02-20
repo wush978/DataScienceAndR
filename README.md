@@ -36,7 +36,7 @@
 2. 安裝Rstudio(Windows 使用者請安裝Rstudio或自備編輯UTF-8 編碼的程式碼，OS X 與Linux使用者可依據自己喜好決定是否使用Rstudio)
 3. 打開R ，執行：`source("http://wush978.github.io/R/init-swirl.R")`
 4. 輸入`library(swirl);swirl()`後即進入教學環境。
-5. 進入Hello DataScienceAndR課程檢查你的電腦能不能執行本教材的所有功能，並瞭解本教材所提供的功能。
+5. 進入00-Hello-DataScienceAndR課程檢查你的電腦能不能執行本教材的所有功能，並瞭解本教材所提供的功能。
 
 有興趣了解安裝細節的同學，請操考：
 
@@ -44,7 +44,7 @@
 - [Mac OS X](https://github.com/wush978/DataScienceAndR/wiki/Mac-OS-X-%E8%A8%AD%E5%AE%9A%E6%8C%87%E5%8D%97)
 - [Ubuntu](https://github.com/wush978/DataScienceAndR/wiki/Ubuntu-%E8%A8%AD%E5%AE%9A%E6%8C%87%E5%8D%97)
 
-安裝上和執行Hello DataScienceAndR課程的同學請到[求助專區](#求助專區)取得協助
+安裝上有問題，或是在執行00-Hello-DataScienceAndR不順利的同學請到[求助專區](#求助專區)取得協助
 
 ## 互動式學習環境快速上手區
 
@@ -68,16 +68,21 @@ ps. 如果你之前有進行過swirl的課程，swirl會出現下圖的選項詢
 
 ![Imgur](http://i.imgur.com/OFgU4wM.png)
 
-目前課程主要分成：
+目前主要課程分成以下三塊：
 
-- RBasic區：講解R 語言的基礎知識與使用方法。所有以下的課程都需要知道RBasic的知識。
-- RDataEngineer區：講解載入資料至R 語言，以及清理、整理資料的所需知識。
-- RProgramming區：介紹R 語言的程式功能。
-- RDataMining區：介紹R 語言在Data Mining中常用的套件。
+- 01-RBasic區：講解R 語言的基礎知識與使用方法。所有以下的課程都需要知道RBasic的知識。
+- 02-RDataEngineer區：講解載入資料至R 語言，以及清理、整理資料的所需知識。
+- 03-RVisualization區：介紹R的視覺化功能
+
+其他的課程，同學可以視自己的興趣決定要不要完成
+
+- Optional-RProgramming區：介紹R 語言的程式功能。
+- Optional-RDataMining區：介紹R 語言在Data Mining中常用的套件。
+- Optional-RStatistic區：搭配實體課程所使用的swirl課程，不建議同學自行使用
 
 ## 求助專區
 
-有問題的朋友，歡迎到以下地方討論。由於現在網路上機器人眾多，所以麻煩先註冊一個Github帳號後我才會在網路上和你討論。
+有問題的朋友，麻煩先註冊一個Github帳號後，可以到以下地方討論：
 
 - [Issue回報區](https://github.com/wush978/DataScienceAndR/issues)
 - Gitter聊天室：[![Gitter](https://badges.gitter.im/wush978/DataScienceAndR.svg)](https://gitter.im/wush978/DataScienceAndR?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
@@ -89,38 +94,38 @@ ps. 如果你之前有進行過swirl的課程，swirl會出現下圖的選項詢
 
 ## 課程筆記
 
-以下連結記載swirl中的課程內容(sha-hash: 4faddb27 版本)
+以下連結記載swirl中的課程內容(sha-hash: 6d1e098c 版本)
 
-- [Hello-DataScienceAndR](note/Hello-DataScienceAndR.html)
-- [RAnalysis-01-Descriptive-Statistics](note/RAnalysis-01-Descriptive-Statistics.html)
-- [RAnalysis-02-Probability](note/RAnalysis-02-Probability.html)
-- [RAnalysis-03-Hypothesis-Testing](note/RAnalysis-03-Hypothesis-Testing.html)
-- [RAnalysis-04-Confidence-Interval](note/RAnalysis-04-Confidence-Interval.html)
-- [RAnalysis-05-Statistical-Modeling](note/RAnalysis-05-Statistical-Modeling.html)
-- [RBasic-01-Introduction](note/RBasic-01-Introduction.html)
-- [RBasic-02-Data-Structure-Vectors](note/RBasic-02-Data-Structure-Vectors.html)
-- [RBasic-03-Data-Structure-Object](note/RBasic-03-Data-Structure-Object.html)
-- [RBasic-04-Factors](note/RBasic-04-Factors.html)
-- [RBasic-05-Arrays-Matrices](note/RBasic-05-Arrays-Matrices.html)
-- [RBasic-06-List-DataFrame](note/RBasic-06-List-DataFrame.html)
-- [RBasic-07-Loading-Dataset](note/RBasic-07-Loading-Dataset.html)
-- [RDataEngineer-01-Parsing](note/RDataEngineer-01-Parsing.html)
-- [RDataEngineer-02-XML](note/RDataEngineer-02-XML.html)
-- [RDataEngineer-03-JSON](note/RDataEngineer-03-JSON.html)
-- [RDataEngineer-04-Database](note/RDataEngineer-04-Database.html)
-- [RDataEngineer-05-Data-Manipulation](note/RDataEngineer-05-Data-Manipulation.html)
-- [RDataEngineer-06-Join](note/RDataEngineer-06-Join.html)
-- [RDataMining-01-Clustering](note/RDataMining-01-Clustering.html)
-- [RDataMining-02-Classification](note/RDataMining-02-Classification.html)
-- [RDataMining-03-Association-Rule](note/RDataMining-03-Association-Rule.html)
-- [RDataMining-04-Text-Mining](note/RDataMining-04-Text-Mining.html)
-- [ROpenData-DataTaipei](note/ROpenData-DataTaipei.html)
-- [RProgramming-01-Loop-And-Condition](note/RProgramming-01-Loop-And-Condition.html)
-- [RProgramming-02-Function](note/RProgramming-02-Function.html)
-- [RVisualization-01-One-Variable-Visualization](note/RVisualization-01-One-Variable-Visualization.html)
-- [RVisualization-02-Two-Variables-Visualization](note/RVisualization-02-Two-Variables-Visualization.html)
-- [RVisualization-03-ggplot2](note/RVisualization-03-ggplot2.html)
-- [RVisualization-04-Javascript-And-Maps](note/RVisualization-04-Javascript-And-Maps.html)
+- [00-Hello-DataScienceAndR](note/00-Hello-DataScienceAndR.html)
+- [01-RBasic-01-Introduction](note/01-RBasic-01-Introduction.html)
+- [01-RBasic-02-Data-Structure-Vectors](note/01-RBasic-02-Data-Structure-Vectors.html)
+- [01-RBasic-03-Data-Structure-Object](note/01-RBasic-03-Data-Structure-Object.html)
+- [01-RBasic-04-Factors](note/01-RBasic-04-Factors.html)
+- [01-RBasic-05-Arrays-Matrices](note/01-RBasic-05-Arrays-Matrices.html)
+- [01-RBasic-06-List-DataFrame](note/01-RBasic-06-List-DataFrame.html)
+- [01-RBasic-07-Loading-Dataset](note/01-RBasic-07-Loading-Dataset.html)
+- [02-RDataEngineer-01-Parsing](note/02-RDataEngineer-01-Parsing.html)
+- [02-RDataEngineer-02-XML](note/02-RDataEngineer-02-XML.html)
+- [02-RDataEngineer-03-JSON](note/02-RDataEngineer-03-JSON.html)
+- [02-RDataEngineer-04-Database](note/02-RDataEngineer-04-Database.html)
+- [02-RDataEngineer-05-Data-Manipulation](note/02-RDataEngineer-05-Data-Manipulation.html)
+- [02-RDataEngineer-06-Join](note/02-RDataEngineer-06-Join.html)
+- [03-RVisualization-01-One-Variable-Visualization](note/03-RVisualization-01-One-Variable-Visualization.html)
+- [03-RVisualization-02-Multiple-Variables-Visualization](note/03-RVisualization-02-Multiple-Variables-Visualization.html)
+- [03-RVisualization-03-ggplot2](note/03-RVisualization-03-ggplot2.html)
+- [03-RVisualization-04-Javascript-And-Maps](note/03-RVisualization-04-Javascript-And-Maps.html)
+- [Optional-RDataMining-01-Clustering](note/Optional-RDataMining-01-Clustering.html)
+- [Optional-RDataMining-02-Classification](note/Optional-RDataMining-02-Classification.html)
+- [Optional-RDataMining-03-Association-Rule](note/Optional-RDataMining-03-Association-Rule.html)
+- [Optional-RDataMining-04-Text-Mining](note/Optional-RDataMining-04-Text-Mining.html)
+- [Optional-RProgramming-01-Loop-And-Condition](note/Optional-RProgramming-01-Loop-And-Condition.html)
+- [Optional-RProgramming-02-Function](note/Optional-RProgramming-02-Function.html)
+- [Optional-RStatistic-01-Descriptive-Statistics](note/Optional-RStatistic-01-Descriptive-Statistics.html)
+- [Optional-RStatistic-02-Probability](note/Optional-RStatistic-02-Probability.html)
+- [Optional-RStatistic-03-Hypothesis-Testing](note/Optional-RStatistic-03-Hypothesis-Testing.html)
+- [Optional-RStatistic-04-Confidence-Interval](note/Optional-RStatistic-04-Confidence-Interval.html)
+- [Optional-RStatistic-05-Statistical-Modeling](note/Optional-RStatistic-05-Statistical-Modeling.html)
+- [Project-ROpenData-DataTaipei](note/Project-ROpenData-DataTaipei.html)
 
 ## 課程投影片
 

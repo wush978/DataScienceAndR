@@ -4,7 +4,7 @@ library(git2r)
 
 repo_tmp_dir <- tempfile(pattern = "DataScienceAndR")
 repo <- clone(".", local_path = repo_tmp_dir)
-remote_add(repo, "wush978", "git@github.com:wush978/DataScienceAndR.git")
+remote_add(repo, "wush978", "https://github.com/wush978/DataScienceAndR.git")
 fetch(repo, "wush978")
 checkout(repo, branch = "course")
 .tmp <- remote_ls("wush978", repo)

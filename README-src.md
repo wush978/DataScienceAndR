@@ -36,7 +36,7 @@
 2. 安裝Rstudio(Windows 使用者請安裝Rstudio或自備編輯UTF-8 編碼的程式碼，OS X 與Linux使用者可依據自己喜好決定是否使用Rstudio)
 3. 打開R ，執行：`source("http://wush978.github.io/R/init-swirl.R")`
 4. 輸入`library(swirl);swirl()`後即進入教學環境。
-5. 進入Hello DataScienceAndR課程檢查你的電腦能不能執行本教材的所有功能，並瞭解本教材所提供的功能。
+5. 進入00-Hello-DataScienceAndR課程檢查你的電腦能不能執行本教材的所有功能，並瞭解本教材所提供的功能。
 
 有興趣了解安裝細節的同學，請操考：
 
@@ -44,7 +44,7 @@
 - [Mac OS X](https://github.com/wush978/DataScienceAndR/wiki/Mac-OS-X-%E8%A8%AD%E5%AE%9A%E6%8C%87%E5%8D%97)
 - [Ubuntu](https://github.com/wush978/DataScienceAndR/wiki/Ubuntu-%E8%A8%AD%E5%AE%9A%E6%8C%87%E5%8D%97)
 
-安裝上和執行Hello DataScienceAndR課程的同學請到[求助專區](#求助專區)取得協助
+安裝上有問題，或是在執行00-Hello-DataScienceAndR不順利的同學請到[求助專區](#求助專區)取得協助
 
 ## 互動式學習環境快速上手區
 
@@ -68,16 +68,21 @@ ps. 如果你之前有進行過swirl的課程，swirl會出現下圖的選項詢
 
 ![Imgur](http://i.imgur.com/OFgU4wM.png)
 
-目前課程主要分成：
+目前主要課程分成以下三塊：
 
-- RBasic區：講解R 語言的基礎知識與使用方法。所有以下的課程都需要知道RBasic的知識。
-- RDataEngineer區：講解載入資料至R 語言，以及清理、整理資料的所需知識。
-- RProgramming區：介紹R 語言的程式功能。
-- RDataMining區：介紹R 語言在Data Mining中常用的套件。
+- 01-RBasic區：講解R 語言的基礎知識與使用方法。所有以下的課程都需要知道RBasic的知識。
+- 02-RDataEngineer區：講解載入資料至R 語言，以及清理、整理資料的所需知識。
+- 03-RVisualization區：介紹R的視覺化功能
+
+其他的課程，同學可以視自己的興趣決定要不要完成
+
+- Optional-RProgramming區：介紹R 語言的程式功能。
+- Optional-RDataMining區：介紹R 語言在Data Mining中常用的套件。
+- Optional-RStatistic區：搭配實體課程所使用的swirl課程，不建議同學自行使用
 
 ## 求助專區
 
-有問題的朋友，歡迎到以下地方討論。由於現在網路上機器人眾多，所以麻煩先註冊一個Github帳號後我才會在網路上和你討論。
+有問題的朋友，麻煩先註冊一個Github帳號後，可以到以下地方討論：
 
 - [Issue回報區](https://github.com/wush978/DataScienceAndR/issues)
 - Gitter聊天室：[![Gitter](https://badges.gitter.im/wush978/DataScienceAndR.svg)](https://gitter.im/wush978/DataScienceAndR?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
