@@ -1,7 +1,9 @@
-# 請依據year:day, hour, origin 比對`flights`和`weather`
+# 請同學使用`left_join`將`weather`的資訊貼到`flights`資料中
+#   合併的過程請使用 year:day, hour, origin 當成合併的key
+#   提示：請檢查weather與flights的欄位名稱重複的部分
 # 比對完畢後，請先做資料的清理：
-# 只選出wind_speed與arr_delay這兩個欄位
-# 並且這些欄位中都不應該有NA或NaN
+# - 結果只包含wind_speed與arr_delay這兩個欄位
+# - 並且這些欄位中都不應該有NA或NaN
 answer02.1 <- local({
   select(flights, year:day, hour, origin, dest, tailnum, carrier, arr_delay) %>%
     left_join(weather) %>%
