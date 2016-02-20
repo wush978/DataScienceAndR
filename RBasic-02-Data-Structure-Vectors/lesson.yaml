@@ -28,14 +28,16 @@
   Output: 在R 中，`c()`可以接受任意數量的的向量參數，並且會依照順序把它們 串接成一個單一向量。舉例來說：`c(x, 1)`會在剛剛我們建立的x 後面
     再接一個1 。而`c(x, 2, 3)`則會在x 之後接上2 和3 。請同學依照這個要領， 撰寫一個expression，內容是建立一個在x 後面接上x 的向量。
   CorrectAnswer: c(x, x)
-  AnswerTests: omnitest(correctExpr='c(x, x)', correctVal=c(10.4, 5.6, 3.1, 6.4, 10.4,
-    5.6, 3.1, 6.4))
+  AnswerTests: |
+    test_all(omnitest(correctExpr='c(x, x)'),
+      val_is(c(10.4, 5.6, 3.1, 6.4, 10.4, 5.6, 3.1, 6.4)))
   Hint: c(x, x)
 - Class: cmd_question
   Output: 在R 中，大部份的運算都是向量式的。舉例來說，加法`+`在R 就是向量式。 請同學輸入：`c(1, 2, 3) + c(2, 4, 6)` 並觀察結果。
   CorrectAnswer: c(1, 2, 3) + c(2, 4, 6)
-  AnswerTests: omnitest(correctExpr='c(1, 2, 3) + c(2, 4, 6)', correctVal = c(3, 6,
-    9))
+  AnswerTests: |
+    test_all(omnitest('c(1, 2, 3) + c(2, 4, 6)'),
+      val_is(c(3, 6, 9)))
   Hint: c(1, 2, 3) + c(2, 4, 6)
 - Class: text
   Output: 有沒有注意到，結果的第一個值，就是輸入的兩個向量的第一個 值的相加呢？以此類推，一直到第三個值都還是這樣。這就是「向量式」 的意思。
@@ -52,12 +54,12 @@
   Output: 不是所有的運算都是向量式的。如果給定一個向量x , `max(x)`會傳回x 中最大的值，而`min(x)`會傳回x 最小的值。 有時候在分析的時候，我們如果想要知道數值的範圍，這兩個函數
     就很有用。請同學寫一個expression來建立一個兩個值的向量， 而且第一個值是x 的最小值，第二個是x 的最大值。
   CorrectAnswer: c(min(x), max(x))
-  AnswerTests: omnitest(correctExpr = 'c(min(x), max(x))', correctVal = range(x))
+  AnswerTests: val_is(c(min(x), max(x)))
   Hint: c(min(x), max(x))
 - Class: cmd_question
   Output: 在R 中，有一個函數`range`就能直接傳回輸入向量的 範圍（最小到最大）。請同學再算一次x 的範圍，但是是使用 `range`
   CorrectAnswer: range(x)
-  AnswerTests: omnitest(correctExpr = 'range(x)', correctVal = range(x))
+  AnswerTests: omnitest('range(x)')
   Hint: range(x)
 - Class: cmd_question
   Output: 在R 中，`sum(x)`會傳回x 所有值的加總。 `length(x)`函數能直接傳回x 的長度。請同學利用 `sum`和`length`計算x
@@ -95,14 +97,13 @@
 - Class: cmd_question
   Output: 但是若我們使用`sqrt(-17 + 0i)`，這時候因為輸入的是一個複數， R 會自動調整行為，不再回傳一個NaN。請同學試試看。
   CorrectAnswer: sqrt(-17 + 0i)
-  AnswerTests: omnitest(correctExpr = 'sqrt(-17 + 0i)', correctVal = complex(real
-    = 0, imaginary = sqrt(17)))
+  AnswerTests: omnitest(correctExpr = 'sqrt(-17 + 0i)')
   Hint: sqrt(-17 + 0i)
 - Class: cmd_question
   Output: R 也有簡易的功能可以產生一些附帶有規則的序列。例如： `1:10`就會產生自1 至10的序列。這樣的功能，在整理資料的時候 很常用。例如說，如果我們需要取出第5筆到第100筆的資料，就會
     用到類似的語法。 請同學嘗試利用`:`建立一個從20到40的序列。
   CorrectAnswer: '20:40'
-  AnswerTests: omnitest(correctExpr = '20:40', correctVal = 20:40)
+  AnswerTests: omnitest("20:40")
   Hint: '20:40'
 - Class: cmd_question
   Output: 在R 中，`:`這個運算子的優先層級很高，也就是說如果R 看到：`2 * 1:10` 這段expression，會優先處理`1:10`，然後再把所有結果乘以2。

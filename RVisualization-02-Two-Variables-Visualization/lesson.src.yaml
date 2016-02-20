@@ -240,7 +240,7 @@
 - Class: cmd_question
   Output: |
     在`boxplot`上加入圖例`legend`。請同學輸入以下指令：
-    `legend("top", c("private", "public"), fill=c("darkblue", "gold"))`
+    `legend("topleft", c("private", "public"), fill=c("darkblue", "gold"))`
   CorrectAnswer: legend("topleft", c("private", "public"), fill=c("darkblue", "gold"))
   AnswerTests: omnitest('legend("topleft", c("private", "public"), fill=c("darkblue", "gold"))')
 
