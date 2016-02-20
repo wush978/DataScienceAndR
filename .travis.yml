@@ -3,7 +3,7 @@ language: c
 sudo: true
 
 script: 
-  - Rscript -e "source('.test_course.R')"
+  - Rscript .test_course.R push
 
 after_failure:
   - ./travis-tool.sh dump_logs
