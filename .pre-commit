@@ -49,4 +49,4 @@ fi
 git diff-index --check --cached $against --
 
 # Running unit tests before commit
-(cd `git rev-parse --show-toplevel` && Rscript .test_course.R)
+(cd `git rev-parse --show-toplevel` && Rscript .test_course.R commit)
