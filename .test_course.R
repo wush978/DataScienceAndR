@@ -2,6 +2,10 @@ library(methods)
 library(yaml)
 library(swirl)
 
+argv <- if (interactive()) "commit" else commandArgs(TRUE)
+stopifnot(length(argv) == 1)
+stopifnot(argv %in% c("commit", "push"))
+
 test_lesson = function(lesson_dir){
   print(paste("####Begin testing", lesson_dir))
   .e <- environment(swirl:::any_of_exprs)
@@ -70,7 +74,24 @@ course_list <- grep("^[^\\.]", course_list, value = TRUE)
 course_list <- setdiff(course_list, c("ROpenData-DataTaipei", "RDataMining-01-Clustering", 
                                       "RDataMining-02-Classification", "RDataMining-03-Association-Rule",
                                       "RDataMining-04-Text-Mining"))
+
+result.path <- ".result.csv"
+result <- if (file.exists(result.path) && argv == "commit") {
+  read.csv(result.path, header = TRUE, stringsAsFactors = FALSE)
+} else {
+  data.frame(course = course_list, result = FALSE, hash = "", stringsAsFactors = FALSE)
+}
+
 for(course in course_list) {
+  course.result <- result[course == result$course,]
+  ## check result
+  if (course.result$result) {
+    ## check hash
+    if (tools::md5sum(file.path(course, "lesson.yaml")) == course.result$hash) {
+      cat(sprintf("course: %s is passed! \n", course))
+      next
+    }
+  }
   if (course %in% "RDataMining-02-Classification") {
     if (Sys.info()["sysname"] == "Windows") {
       Sys.setlocale(locale = "cht")
@@ -86,4 +107,10 @@ for(course in course_list) {
       test_lesson(course)
     }
   }
+
+  ## update result
+  result$hash[result$course == course] <- tools::md5sum(file.path(course, "lesson.yaml"))
+  result$result[result$course == course] <- TRUE
+  write.csv(result, file = result.path, row.names = FALSE)
 }
+
