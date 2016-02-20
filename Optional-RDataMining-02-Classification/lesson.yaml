@@ -1,0 +1,419 @@
+- Class: meta
+  Course: DataScienceAndR
+  Lesson: Optional-RDataMining-02-Classification
+  Author: Wush Wu
+  Type: Standard
+  Organization: Taiwan R User Group
+  Version: 1.0
+- Class: text
+  Output: 這門課程會跟同學介紹在R 中常用的Classification算法。
+- Class: cmd_question
+  Output: 我們第一個介紹的是Decision Tree。先請同學安裝套件rpart。
+  CorrectAnswer: check_then_install("rpart", "4.1.10")
+  AnswerTests: test_package_version("rpart", "4.1.10")
+  Hint: ?install.packages
+- Class: cmd_question
+  Output: 接著，請載入套件rpart
+  CorrectAnswer: library(rpart)
+  AnswerTests: test_search_path("rpart")
+  Hint: library(rpart)
+- Class: cmd_question
+  Output: 在摸索一個套件時，我們可以找找看套件作者有沒有撰寫vignette。 請同學輸入：`vignette(package = "rpart")`
+  CorrectAnswer: vignette(package = "rpart")
+  AnswerTests: omnitest('vignette(package = "rpart")')
+  Hint: vignette(package = "rpart")
+- Class: text
+  Output: 由跳出的視窗，我們可以看到一個名為：`"longintro"`的文件名稱， 是一份介紹rpart的文件。請輸入`vignette("longintro",
+    package = "rpart")` 打開這份文件。
+  CorrectAnswer: vignette("longintro", package = "rpart")
+  AnswerTests: omnitest('vignette("longintro", package = "rpart")')
+- Class: text
+  Output: 有興趣的同學可以閱讀這份文件的前半段。我們則直接用範例來解說 rpart 的功能。
+- Class: cmd_question
+  Output: 請同學先輸入`data(stagec)`載入一個關於C 期前列腺癌的研究數據。 這比數據中，記錄著146 位病患的資訊。
+  CorrectAnswer: data(stagec)
+  AnswerTests: omnitest("data(stagec)")
+  Hint: data(stagec)
+- Class: cmd_question
+  Output: 請同學輸入：`cfit <- rpart(pgstat ~ age + eet + g2, data = stagec, method = "class")`。
+  CorrectAnswer: cfit <- rpart(pgstat ~ age + eet + g2, data = stagec, method = "class")
+  AnswerTests: omnitest('cfit <- rpart(pgstat ~ age + eet + g2, data = stagec, method
+    = "class")')
+  Hint: cfit <- rpart(pgstat ~ age + eet + g2, data = stagec, method = "class")
+- Class: cmd_question
+  Output: 這裡的函數`rpart`就是用於建立decision tree的函數。請同學打開`rpart`的說明頁面。
+  CorrectAnswer: ?rpart
+  AnswerTests: any_of_exprs("?rpart", "help('rpart')", "help(rpart)")
+  Hint: ?rpart
+- Class: mult_question
+  Output: 根據`rpart`的說明文件，我們剛剛輸入的： `cfit <- rpart(pgstat ~ age + eet + g2, data = stagec,
+    method = "class")`中 的`pgstat ~ age + eet + g2`是對應到`rpart` 函數的哪一個參數呢？
+  AnswerChoices: formula;data;weights;subset;na.action
+  CorrectAnswer: formula
+  AnswerTests: omnitest(correctVal="formula")
+  Hint: R 的函數參數，是先依照參數名稱，再依照剩下的順序來做辨識。
+- Class: text
+  Output: 上述輸入的formula參數：`pgstat ~ age + eet + g2`，描述的是在建構decision tree 時，變數之間的關係。pgstat是要被預測、被分類的變數名稱，age、eet和g2則是用來對
+    pgstat做預測的變數。
+- Class: mult_question
+  Output: 根據`rpart`的說明文件，我們剛剛輸入的： `cfit <- rpart(pgstat ~ age + eet + g2, data = stagec,
+    method = "class")`中 的`stagec`是對應到`rpart` 函數的哪一個參數呢？
+  AnswerChoices: formula;data;weights;subset;na.action
+  CorrectAnswer: data
+  AnswerTests: omnitest(correctVal="data")
+- Class: cmd_question
+  Output: 接著，請列出stagec的欄位名稱。
+  CorrectAnswer: colnames(stagec)
+  AnswerTests: omnitest(correctVal = colnames(stagec))
+  Hint: colnames(stagec)
+- Class: text
+  Output: 我們可以看到，剛剛formula中的變數名稱，都在stagec之中。
+- Class: mult_question
+  Output: rpart 這個函數有許多功能，使用者可以在method的參數指定要使用的功能。 請同學參考rpart 的說明文件中，關於method參數的說明。請問下列哪一個選項「不
+    是」rpart 的method參數的有效選項？
+  AnswerChoices: anova;poisson;class;exp;regression
+  CorrectAnswer: regression
+  AnswerTests: omnitest(correctVal = "regression")
+- Class: cmd_question
+  Output: 在關於method的說明文件中，仔細地解釋了rpart是如何依照formula 中選擇 的變數形態來智慧的選擇預設的method。請同學查詢stagec
+    的pgstat欄位的形態 為何。
+  CorrectAnswer: class(stagec$pgstat)
+  AnswerTests: omnitest(correctVal = class(stagec$pgstat))
+  Hint: class(stagec$pgstat)
+- Class: mult_question
+  Output: 依照rpart的說明文件和stagec$pgstat的型態，請問如果我們沒有指定method 的話，rpart會用哪一種method參數來運作？
+  AnswerChoices: anova;poisson;class;exp
+  CorrectAnswer: anova
+  AnswerTests: omnitest(correctVal = "anova")
+- Class: cmd_question
+  Output: 接著，請輸入`cfit`來看看rpart 的結果。
+  CorrectAnswer: cfit
+  AnswerTests: omnitest("cfit")
+  Hint: cfit
+- Class: mult_question
+  Output: R 會把從資料中學到的decision tree顯示到console 中。 前段的文字說明了每一行的資訊依序是：node), split, n,
+    loss, yval, (yprob) 而且最後標記有星號的就是decision tree的leaf node。 舉例來說，`1) root 146 54
+    0 (0.6301370 0.3698630)`代表這是第一個node， 他的切割規則是root，有146 個點，loss是54，deviance是0 。
+    請問同學，第二個node的loss是什麼？
+  AnswerChoices: g2< 13.2;80;18;0;0.775;0.225
+  CorrectAnswer: 18
+  AnswerTests: omnitest(correctVal = "18")
+- Class: cmd_question
+  Output: 這裡的loss代表的是錯誤的label的個數 ，俗稱0/1 loss。 在第一個node，也就是root之中，cfit對`stagec$pgstat`
+    的預測是0 。請同學計算`stagec$pgstat` 中非0 的病患總數。看看是不是和第一行，1) root 中顯示的loss相同。
+  CorrectAnswer: sum(stagec$pgstat != 0)
+  AnswerTests: omnitest(correctVal = sum(stagec$pgstat != 0))
+  Hint: sum(stagec$pgstat != 0)
+- Class: cmd_question
+  Output: 另外同學應該有注意到，node的編號並不是連續的。這是因為， 每個編號為x 的node，他的分支一定是編號2x和2x+1。請問同學，編號 7 的node是編號多少的node的分支？
+  AnswerChoices: 1;2;3;6
+  CorrectAnswer: 3
+  AnswerTests: omnitest(correctVal = "3")
+  Hint: 3 * 2 + 1 = 7
+- Class: cmd_question
+  Output: 接著，讓我們畫出cfit。這需要兩個指令，所以請同學先輸入： `plot(cfit)`
+  CorrectAnswer: plot(cfit)
+  AnswerTests: omnitest("plot(cfit)")
+  Hint: plot(cfit)
+- Class: cmd_question
+  Output: 再請同學輸入`text(cfit)`
+  CorrectAnswer: text(cfit)
+  AnswerTests: omnitest("text(cfit)")
+  Hint: text(cfit)
+- Class: cmd_question
+  Output: 我們可以發現，圖的上下維有一點被切掉。這可以透過`par`函數的 mar 參數做調整。但是其實已經有人發現這件事情，並且寫了一個叫做 rpart.plot的套件。請同學安裝這個套件
+  CorrectAnswer: check_then_install("rpart.plot", "1.5.3")
+  AnswerTests: test_package_version("rpart.plot", "1.5.3")
+  Hint: install.packages("rpart.plot")
+- Class: cmd_question
+  Output: 接著，請載入rpart.plot套件。
+  CorrectAnswer: library(rpart.plot)
+  AnswerTests: test_search_path("rpart.plot")
+  Hint: library(rpart.plot)
+- Class: cmd_question
+  Output: 我們直接輸入：`rpart.plot(cfit)`來看看畫圖的結果。
+  CorrectAnswer: rpart.plot(cfit)
+  AnswerTests: omnitest("rpart.plot(cfit)")
+  Hint: rpart.plot(cfit)
+- Class: text
+  Output: rpart.plot套件對於rpart的圖片輸出做過調整，所以就不會 出現圖形被截掉的狀態。
+- Class: text
+  Output: 接著讓我們來探索rpart 是如何產生cfit這棵樹。
+- Class: text
+  Output: rpart 其實有非常多的參數，並且各類參數的細節分佈在`rpart` 的參數parms和control中。
+- Class: text
+  Output: 在我們剛剛打開的vignette的Chapter 3.1 ，作者說明了如何建構一個decision tree。 裡面解釋了何謂prior 、loss和splitting
+    index。
+- Class: text
+  Output: rpart 的參數`parms` 裡面可以設定和method相關的參數。
+- Class: mult_question
+  Output: 請問同學，根據`rpart` 的說明文件（請參閱Arguments 底下的parms）， 當method為class 時（classification
+    splitting），預設的prior 為何？ 1)每種類別都相等的機率;2)和資料中各類別出現的頻率成正比的機率
+  AnswerChoices: 1;2
+  CorrectAnswer: 2
+  AnswerTests: omnitest(correctVal = "2")
+  Hint: 文件中說明了：The default priors are proportional to the data counts
+- Class: mult_question
+  Output: 請問同學，根據`rpart` 的說明文件（請參閱Arguments 底下的parms）， 當method為class 時（classification
+    splitting），預設的splitting index 為何？
+  AnswerChoices: gini;information
+  CorrectAnswer: gini
+  AnswerTests: omnitest(correctVal = "gini")
+- Class: cmd_question
+  Output: rpart 把和method無關的參數放到`control`底下，並且提供一個輔助函數`rpart.control` 來協助使用者在實作時也限制了每個split
+    時，該node的個數限制。請同學輸入`?rpart.control` 來看一下這些控制有哪些參數。
+  CorrectAnswer: ?rpart.control
+  AnswerTests: omnitest("?rpart.control")
+  Hint: ?rpart.control
+- Class: script
+  Output: 接著，我們來重現cfit的第一層結果。請同學閱讀檔案中的程式碼與註解後，輸入`submit()`。
+  Script: rpart_01.R
+  AnswerTests: rpart_01_test()
+- Class: cmd_question
+  Output: 請問同學，讓impurity改善最大的切點，是第幾個呢？同學可以用`which.max`函數作答。
+  CorrectAnswer: which.max(index)
+  AnswerTests: omnitest(correctVal = which.max(index))
+  Hint: which.max(index)
+- Class: cmd_question
+  Output: 對應的切點的值是多少呢？請利用上一題的答案。
+  CorrectAnswer: eval.x[which.max(index)]
+  AnswerTests: omnitest(correctVal = eval.x[which.max(index)])
+  Hint: eval.x[which.max(index)]
+- Class: cmd_question
+  Output: 上一題的答案和cfit的結果不一致。從前面cfit的輸出可以看到，rpart 的第一個切點是age >= 58.5。 這其實是受到`control`
+    這個參數的影響，所以rpart 不會切割出太小（包含太少資料點）的node。 請同學輸入：`rpart(pgstat ~ age, data = stagec,
+    method = "class", control = rpart.control(minsplit = 1))`
+  CorrectAnswer: rpart(pgstat ~ age, data = stagec, method = "class", control = rpart.control(minsplit
+    = 1))
+  AnswerTests: omnitest('rpart(pgstat ~ age, data = stagec, method = "class", control
+    = rpart.control(minsplit = 1))')
+  Hint: rpart(pgstat ~ age, data = stagec, method = "class", control = rpart.control(minsplit
+    = 1))
+- Class: text
+  Output: 同學是不是看到第一個切點變成我們之前算出來的50.5了？
+- Class: text
+  Output: rpart 在做分類時，是利用公式去計算各種切點的impurity的改善。 而這些切點的選擇也是有限制的（透過`rpart.control`）。使用者可以透過`control=rpart.control(minsplit
+    = 1)` 來對這些限制條件做修正。
+- Class: script
+  Output: Impurity的計算則可以透過parms 的設定來調整。請同學閱讀檔案中的程式碼與註解後，輸入`submit()`。
+  Script: rpart_02.R
+  AnswerTests: rpart_02_test()
+- Class: cmd_question
+  Output: 在改成用information index後，對應的切點的值是多少呢？
+  CorrectAnswer: eval.x[which.max(index)]
+  AnswerTests: omnitest(correctVal = eval.x[which.max(index)])
+  Hint: eval.x[which.max(index)]
+- Class: cmd_question
+  Output: 請同學輸入：`rpart(pgstat ~ age, data = stagec, method = "class", parms = list(split
+    = "information"), control = rpart.control(minsplit=1))`
+  CorrectAnswer: rpart(pgstat ~ age, data = stagec, method = "class", parms = list(split
+    = "information"), control = rpart.control(minsplit=1))
+  AnswerTests: omnitest('rpart(pgstat ~ age, data = stagec, method = "class", parms
+    = list(split = "information"), control = rpart.control(minsplit=1))')
+  Hint: rpart(pgstat ~ age, data = stagec, method = "class", parms = list(split =
+    "information"), control = rpart.control(minsplit=1))
+- Class: text
+  Output: 可以看到差不多的結果。
+- Class: script
+  Output: rpart 也可以讓我們自己定義分割的邏輯。這題會打開rpart 套件提供的範例給同學參考。 有興趣的同學可以仔細研究。讀完之後請輸入`submit()`
+  Script: rpart_03.R
+  AnswerTests: yes
+- Class: cmd_question
+  Output: 我們可以利用`predict`函數來使用學習好的cfit函數做預測。舉例來說，`predict(cfit, stagec)` 就可以用我們學到的模型回頭預測stagec的pgstat的值。請同學試試看。
+  CorrectAnswer: predict(cfit, stagec)
+  AnswerTests: omnitest("predict(cfit, stagec)")
+  Hint: predict(cfit, stagec)
+- Class: cmd_question
+  Output: 如果同學想要對rpart套件提供的預測函數`predict`有更多的了解可以輸入：`?predict.rpart` 注意歐，這裡我們使用的並不是`?predict`，因為這裡rpart
+    套件採用了R 的S3物件導向方法。由於 `class(cfit)`的輸出是`rpart`，所以`predict`函數最後會呼叫`predict.rpart`來對cfit做處理，
+    相關的說明文件也會放在`?predict.rpart`之中。
+  CorrectAnswer: ?predict.rpart
+  AnswerTests: omnitest("?predict.rpart")
+  Hint: ?predict.rpart
+- Class: text
+  Output: 以上就是對rpart 這個套件的介紹。接下來我們來看decision tree的進階版： gradient boosted decision tree(GDBT)。
+- Class: text
+  Output: Boosting 是一個利用較簡單的模型（例如：decision tree），重複學習很多次 來加強學習效果的機器學習演算法。Gradient
+    Boosting 則是Friedman et al. (1999) 在更進一步把Boosting 的概念擴展到function space上的最佳化問題。把這個概念
+    和decision tree結合，就是近年來在機器學習競賽上火熱的GDBT演算法。
+- Class: text
+  Output: R 有一個很優秀的GDBT實作的套件：gbm。但是近年來又竄起一個在多個機器學 習競賽拿到冠軍的實作套件：xgboost。
+- Class: cmd_question
+  Output: 請同學安裝xgboost套件。
+  CorrectAnswer: check_then_install("xgboost", "0.4.2")
+  AnswerTests: test_package_version("xgboost", "0.4.2")
+  Hint: install.packages("xgboost")
+- Class: cmd_question
+  Output: 請同學載入xgboost套件
+  CorrectAnswer: library(xgboost)
+  AnswerTests: test_search_path("xgboost")
+  Hint: library(xgboost)
+- Class: cmd_question
+  Output: 請同學找找看xgboost 的vignette。
+  CorrectAnswer: vignette(package = "xgboost")
+  AnswerTests: omnitest('vignette(package = "xgboost")')
+  Hint: vignette(package = "xgboost")
+- Class: cmd_question
+  Output: 請同學打開名為"xgboost"的vignette
+  CorrectAnswer: vignette("xgboost", package = "xgboost")
+  AnswerTests: omnitest('vignette("xgboost", package = "xgboost")')
+  Hint: vignette("xgboost", package = "xgboost")
+- Class: cmd_question
+  Output: xgboost 的使用非常簡單。請同學從xgboost套件先載入範例的資料集：`agaricus.train`。 請輸入：`data(agaricus.train,
+    package = "xgboost")`
+  CorrectAnswer: data(agaricus.train, package = "xgboost")
+  AnswerTests: omnitest('data(agaricus.train, package = "xgboost")')
+  Hint: data(agaricus.train, package = "xgboost")
+- Class: cmd_question
+  Output: 讓我們利用xgboost學一個GDBT模型。請同學輸入： `bst <- xgboost(data = agaricus.train$data,
+    label = agaricus.train$label, objective = "binary:logistic", nrounds = 10)`
+  CorrectAnswer: bst <- xgboost(data = agaricus.train$data, label = agaricus.train$label,
+    objective = "binary:logistic", nrounds = 10)
+  AnswerTests: omnitest('bst <- xgboost(data = agaricus.train$data, label = agaricus.train$label,
+    objective = "binary:logistic", nrounds = 10)')
+  Hint: bst <- xgboost(data = agaricus.train$data, label = agaricus.train$label, objective
+    = "binary:logistic", nrounds = 10)
+- Class: cmd_question
+  Output: 如果要對xgboost的GDBT學習方法做調整，例如調整樹的深度、Boosting的次數、在函數空間上的learning rate， 請同學參考`?xgboost`的文件。讓我們輸入`?xgboost`一起看看說明文件。
+  CorrectAnswer: ?xgboost
+  AnswerTests: omnitest("?xgboost")
+  Hint: ?xgboost
+- Class: mult_question
+  Output: 請問同學，這些Boosting的迭代的最大次數，要用哪一個`xgboost`的參數調整呢？
+  AnswerChoices: nrounds;params;verbose;data;label;missing
+  CorrectAnswer: nrounds
+  AnswerTests: omnitest(correctVal = "nrounds")
+- Class: mult_question
+  Output: 請問同學，樹的深度，要用哪一個`xgboost`的參數調整呢？
+  AnswerChoices: nrounds;params;verbose;data;label;missing
+  CorrectAnswer: params
+  AnswerTests: omnitest(correctVal = "params")
+- Class: mult_question
+  Output: 更進一步，這個params參數應該要用什麼型態傳給它呢？（請回憶rpart的經驗）
+  AnswerChoices: character;list;numeric
+  CorrectAnswer: list
+  AnswerTests: omnitest(correctVal="list")
+- Class: text
+  Output: 至於在函數空間上的learning rate，是`params`底下的`eta`。
+- Class: text
+  Output: 一般來說，最後模型的準確度可以透過`nrounds`和`params`底下的`eta`、`max.depth`來控制。 `nrounds`越大，學的越慢，也越準。但是當太大的時候，模型會學過頭（overfit），導致結果變差。
+    `eta`越小，學到最好的模型通常就需要越多的`nrounds`，但是因為每次調整的幅度比較小，所以考量 （overfit）的效應後，得到的最好模型，也會比較好。`max.depth`越大，每次學的時間就比較長，
+    而且比較可以抓到變數之間的交互作用。以上是我對xgboost 的理解。
+- Class: cmd_question
+  Output: 接著讓我們載入測試的資料集。請同學輸入：`data(agaricus.test, package = "xgboost")`
+  CorrectAnswer: data(agaricus.test, package = "xgboost")
+  AnswerTests: omnitest('data(agaricus.test, package = "xgboost")')
+  Hint: data(agaricus.test, package = "xgboost")
+- Class: cmd_question
+  Output: 讓我們利用bst 對`agricus.test`做預測。請同學輸入：`predict(bst, agaricus.test$data)`。
+  CorrectAnswer: predict(bst, agaricus.test$data)
+  AnswerTests: omnitest('predict(bst, agaricus.test$data)')
+  Hint: predict(bst, agaricus.test$data)
+- Class: text
+  Output: 如果同學想要查詢更多`predict`的參數呢？由於xgboost套件使用的是R 的S4物件導向系統， 所以要查詢的話需要使用以下的方式。
+- Class: cmd_question
+  Output: 請同學先輸入`showMethods(predict)`
+  CorrectAnswer: showMethods(predict)
+  AnswerTests: omnitest("showMethods(predict)")
+  Hint: showMethods(predict)
+- Class: text
+  Output: 同學是不是看到R 列出一連串有Function有object的文字呢？我們從下往上看。 `object="xgb.Booster.handle"`代表當predict的第一個參數，或是名稱為object的參數
+    的型態（class）如果為`"xgb.Booster.handle"`時，會有一個針對這樣型態的函數來處理。
+- Class: cmd_question
+  Output: 接著請同學輸入：`getMethod(predict, "xgb.Booster.handle")`
+  CorrectAnswer: getMethod(predict, "xgb.Booster.handle")
+  AnswerTests: omnitest('getMethod(predict, "xgb.Booster.handle")')
+  Hint: getMethod(predict, "xgb.Booster.handle")
+- Class: text
+  Output: 運用這種方式，R 就可以把predict遇到`"xgb.Booster.handle"`物件時會執行的 動作展現給我們看了。
+- Class: cmd_question
+  Output: 但是直接看說明文件可能是更方便的。請同學輸入：`?predict`
+  CorrectAnswer: ?predict
+  AnswerTests: omnitest("?predict")
+  Hint: ?predict
+- Class: cmd_question
+  Output: 同學應該會看到R 對`predict`的說明文件，但是幫助不大，因為我們想要看的 是針對xgboost的GDBT模型做預測時的使用說明文件。這個文件的左上角：`predict
+    {stats}` 告訴我們，這是stats這個基本套件底下的predict的說明文件。 如果我們想要看針對xgboost的GDBT模型的predict說明文件，要輸入：
+    `help("predict,xgb.Booster-method")`。請同學先試試看。
+  CorrectAnswer: help("predict,xgb.Booster-method")
+  AnswerTests: omnitest('help("predict,xgb.Booster-method")')
+  Hint: help("predict,xgb.Booster-method")
+- Class: text
+  Output: 這裡是因為xgboost採用的是R 的S4 系統，所以查閱`predict`需要這麼饒口。 而且和`rpart`套件使用的S3系統也不同。
+- Class: cmd_question
+  Output: 一般來說，我們可以利用`library(help=xgboost)`來打開所有xgboost套件作者 有撰寫的說明文件內容。我也是用這個方式才知道上一題的答案的。請同學試試看。
+  CorrectAnswer: library(help=xgboost)
+  AnswerTests: omnitest("library(help=xgboost)")
+  Hint: library(help=xgboost)
+- Class: text
+  Output: 我們對xgboost的介紹就到這邊了。
+- Class: cmd_question
+  Output: 接著我們來看`e1071`這個套件。請同學先安裝這個套件。
+  CorrectAnswer: check_then_install("e1071", "1.6.7")
+  AnswerTests: test_package_version("e1071", "1.6.7")
+  Hint: install.packages("e1071")
+- Class: cmd_question
+  Output: 再來請同學載入e1071這個套件。
+  CorrectAnswer: library(e1071)
+  AnswerTests: test_search_path("e1071")
+  Hint: library(e1071)
+- Class: cmd_question
+  Output: 請同學檢查e1071上的vignette清單。
+  CorrectAnswer: vignette(package = "e1071")
+  AnswerTests: omnitest('vignette(package = "e1071")')
+  Hint: vignette(package = "e1071")
+- Class: cmd_question
+  Output: 請同學打開名稱為svmdoc的vignette。這份文件很清楚的介紹了SVM 演算法、 以及和e1071 相關的各種變形、原理，以及對應的參數。
+  CorrectAnswer: vignette("svmdoc", package = "e1071")
+  AnswerTests: omnitest('vignette("svmdoc", package = "e1071")')
+  Hint: vignette("svmdoc", package = "e1071")
+- Class: cmd_question
+  Output: 再來請同學輸入`?svm`打開svm 的說明文件。
+  CorrectAnswer: ?svm
+  AnswerTests: omnitest("?svm")
+  Hint: ?svm
+- Class: cmd_question
+  Output: 由於svm 有formula interface，所以我們可以簡單利用`g <- svm(Species ~ ., iris)` 馬上學出一個svm
+    的模型。
+  CorrectAnswer: g <- svm(Species ~ ., iris)
+  AnswerTests: omnitest("g <- svm(Species ~ ., iris)")
+  Hint: g <- svm(Species ~ ., iris)
+- Class: cmd_question
+  Output: svm 在學習時，可以依據應用解決不同的問題。這取決於目標的型態。舉例來說，如果我們 使用`svm(Species ~ ., iris)`，這裡的預測目標就是`iris$Species`這個變數了。請問同學，
+    這個變數的型態（class）是什麼？
+  CorrectAnswer: class(iris$Species)
+  AnswerTests: omnitest(correctVal = class(iris$Species))
+  Hint: class(iris$Species)
+- Class: text
+  Output: 由於預測的目標是一個類別變數，所以R 會自動使用classification的模式來解決問題。 svm 中支援的模式列在說明文件的Arguments
+    項目下的`type`參數之中。
+- Class: text
+  Output: 至於`kernel`參數則可以讓svm 學習出資料中非線性的模式。不同的kernel也可以透過不同 的額外參數來調整。所有的細節，都可以在`?svm`打開的說明文件中找到。
+- Class: mult_question
+  Output: 依照說明文件，`degree`參數是用於哪一種kernel？
+  AnswerChoices: linear;polynomial;radial basis;sigmoid
+  CorrectAnswer: polynomial
+  AnswerTests: omnitest(correctVal = "polynomial")
+- Class: cmd_question
+  Output: 預測也是很直接的使用`predict(g, iris)`就可以了，請同學試試看。
+  CorrectAnswer: predict(g, iris)
+  AnswerTests: omnitest("predict(g, iris)")
+  Hint: predict(g, iris)
+- Class: cmd_question
+  Output: 由於e1071套件是使用S3物件導向的系統，所以我們可以利用`?predict.svm`打開 說明文件，查閱如何調整`predict`的輸出。請同學試試看。
+  CorrectAnswer: ?predict.svm
+  AnswerTests: any_of_exprs("?predict.svm", 'help(predict.svm)', 'help("predict.svm")')
+  Hint: ?predict.svm
+- Class: cmd_question
+  Output: 根據說明文件，如果我們想要的不只是預測的類別結果，而是決定類別的分數，可以透 過`decision.values`這個參數。請同學試試看：`predict(g,
+    iris, decision.values = TRUE)`
+  CorrectAnswer: predict(g, iris, decision.values = TRUE)
+  AnswerTests: omnitest("predict(g, iris, decision.values = TRUE)")
+  Hint: predict(g, iris, decision.values = TRUE)
+- Class: text
+  Output: 限於篇幅，我們就只介紹rpart, xgboost和e1071這三個套件。
+- Class: script
+  Output: 請同學跟著作業的程式碼，利用`caret`套件比較rpart, xgboost和e1071在iris上的表現。 完成後請輸入`submit()`做檢查。
+  Script: RDataMining-02-HW.R
+  AnswerTests: rdatamining_02_test()
+
