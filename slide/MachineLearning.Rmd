@@ -19,6 +19,7 @@ library(ggplot2)
 library(quantmod)
 library(jsonlite)
 library(binom)
+library(stargazer)
 
 opts_chunk$set(echo = FALSE, cache=FALSE, comment="",
                cache.path = "cache-MachineLearning/",
@@ -183,30 +184,34 @@ sys_encode <- c("utf8", "utf8", "big5")[pmatch(sys_name, c("linux", "darwin", "w
 
 --- &vcenter .largecontent
 
-## 分類問題：預測點擊行為
+## 分類問題（$Y$ 是類別型變數）
 
-- $Y$ ： 瀏覽者會不會點擊廣告
-
---- &vcenter .largecontent
-
-## 回歸問題：預測股票價格
-
-- $Y$ ： 下一個單位時間時，特定股票的股價
-
---- &vcenter .largecontent
-
-## 叢集問題：顧客分群
-
-- $Y$ ： 不存在
-- $X$ ： 每一筆數據都是顧客們的特徵
+- 二元分類
+    - 點擊預測： $Y =$ 使用者會不會點廣告
+    - 股票的漲跌： $Y =$ 下一個單位時間股價會往上走或往下走
+- 多元分類
+    - 手寫辨識： $Y =$ 使用者所撰寫的字
+    - 語音辨識： $Y =$ 使用者所發出的聲音
 
 --- &vcenter .largecontent
 
-## 機器學習技術較常用於預測
+## 回歸問題（$Y$是連續型變數）
 
-- 分析目的：
-    - 預測型分析
-    - 解釋型分析
+- 股價預測 ：$Y =$ 下一個單位時間時，特定股票的股價
+- 物價預測 ：$Y =$ 特定商品在下一個單位時間的價格
+
+--- &vcenter .largecontent
+
+## 叢集問題（$Y$不存在）
+
+- 顧客分群： $X =$ 顧客的特徵
+- 廣告分群： $X =$ 廣告的特徵
+
+--- &vcenter .largecontent
+
+## 機器學習技術較常用應用於預測
+
+- 鑑往知來
 
 --- &vcenter .largecontent
 
@@ -258,6 +263,46 @@ sys_encode <- c("utf8", "utf8", "big5")[pmatch(sys_name, c("linux", "darwin", "w
 
 --- &vcenter .largecontent
 
+## 點擊率預測
+
+- 評分： $l(y, \hat{y})$
+    - 點擊預測： $l(y, \hat{y}) = \left\{\begin{array}{lc}  0 & \text{if } y = \hat{y} \\  1 & \text{if } y \neq \hat{y} \end{array}\right.$
+
+--- &vcenter .largecontent
+
+## 機器如何學習
+
+- 評分（Loss Function）
+- 優化
+
+--- &vcenter .largecontent
+
+## 評分
+
+- 評量預測結果
+- 調整預測的方向
+- 常常牽涉到統計模型
+
+--- &vcenter .largecontent
+
+## 優化
+
+- 找出合理的方法讓預測越來越準
+- 常常牽涉到數值方法
+
+--- &vcenter .largecontent
+
+## 總結
+
+- 了解機器學習的目的與優點
+- 了解機器學習能解決的問題
+
+--- .dark .segue
+
+## 線性模型(迴歸分析)
+
+--- &vcenter .largecontent
+
 ## 統計模型
 
 - $Y$是我們感興趣的變數, $X$是可能跟$Y$相關的資料
@@ -270,7 +315,7 @@ sys_encode <- c("utf8", "utf8", "big5")[pmatch(sys_name, c("linux", "darwin", "w
 
 ## 有沒有$\varepsilon$的差別
 
-- $Y = f(X)$: 
+- $Y = f(X)$:
     - 只有描述我們對Y的期待值
     - 對於隨機性質沒有描述
 - $Y = f(X) + \varepsilon$
@@ -294,13 +339,13 @@ sys_encode <- c("utf8", "utf8", "big5")[pmatch(sys_name, c("linux", "darwin", "w
 - $(x_1, y_1), (x_2, y_2), ...$ ：已知$X$推測$Y$
 
 ```{r cars}
-g <- 
+g <-
   ggplot(cars, aes(x = speed, y = dist)) +
   geom_point()
 i <- 23
 g + annotate(
-  "text", label = sprintf("(list(x[%d],y[%d]))", i, i), 
-  x = cars$speed[i], y = cars$dist[i], vjust = -0.5, 
+  "text", label = sprintf("(list(x[%d],y[%d]))", i, i),
+  x = cars$speed[i], y = cars$dist[i], vjust = -0.5,
   parse = TRUE, size = 8)
 ```
 
@@ -312,22 +357,22 @@ g + annotate(
 
 ```{r cars-lm}
 m <- lm(dist ~ speed, cars)
-g <- 
+g <-
   ggplot(cars, aes(x = speed, y = dist)) +
   geom_point() +
   geom_smooth(method = lm, se = FALSE)
 i <- 23
-g + 
+g +
   annotate(
-    "text", label = sprintf("(list(x[%d],y[%d]))", i, i), 
-    x = cars$speed[i], y = cars$dist[i], vjust = -0.5, 
+    "text", label = sprintf("(list(x[%d],y[%d]))", i, i),
+    x = cars$speed[i], y = cars$dist[i], vjust = -0.5,
     parse = TRUE, size = 8
   ) +
   annotate(
     "segment", x = cars$speed[i], xend = cars$speed[i],
     y = cars$dist[i], yend = m$fitted.values[i]
   )
-  
+
 ```
 
 --- &vcenter .largecontent
@@ -338,20 +383,81 @@ g +
 
 ```{r cars-lm-se}
 m <- lm(dist ~ speed, cars)
-g <- 
+g <-
   ggplot(cars, aes(x = speed, y = dist)) +
   geom_point() +
   geom_smooth(method = lm, se = FALSE)
 .x <- seq(min(cars$speed), max(cars$speed), by = 0.01)
 m.s <- summary(m)
-.ymin <- 
+.ymin <-
   m.s$coefficients[1,1] + qnorm(0.025) * m.s$coefficients[1,2] +
   (m.s$coefficients[2,1] + qnorm(0.025) * m.s$coefficients[2,2]) * .x
-.ymax <- 
+.ymax <-
   m.s$coefficients[1,1] + qnorm(0.975) * m.s$coefficients[1,2] +
   (m.s$coefficients[2,1] + qnorm(0.975) * m.s$coefficients[2,2]) * .x
-g + 
+g +
   annotate("ribbon", x = .x, ymin = .ymin, ymax = .ymax, alpha = 0.3)
 ```
 
+--- &vcenter .largecontent
 
+## 線性模型
+
+- $X$ 不一定只有一個變數，可能有： $X_1, X_2, ..., X_p$
+- $Y = \beta_0 + \sum_{i=1}^p \beta_p X_p$
+- 線性模型是「可以」解釋的
+    - Dist = `r coef(m)[1]` + `r coef(m)[2]` $\times$ Speed + $\varepsilon$
+    - $\varepsilon \overset{i.i.d.}{\sim} N(0, `r summary(m)$sigma^2`)$
+
+--- &vcenter .largecontent
+
+## 線性模型
+
+- 線性模型是非常泛用的模型
+    - 彈性
+    - 解釋性
+    - 複雜度
+- 統計學家對線性模型的理解非常深入： 當 $\varepsilon \overset{i.i.d.}{\sim} N(0, \sigma^2)$
+    - 知道最好的估計方法：最小方差直線
+    - 知道$\varepsilon$對估計方法的影響
+
+--- &vcenter .largecontent
+
+## 線性模型的範例
+
+```{r m-summary, results = "asis"}
+stargazer(m, type = "html")
+```
+
+--- &vcenter .largecontent
+
+## 線性模型，不只是直線
+
+- 上述的最小方差直線，在 Speed = 0，預測的煞車距離為 -17.579 
+- 負的煞車距離不合理
+- $Y$ 都是正的，所以我們取log
+
+--- &vcenter .largecontent
+
+## 線性模型，可以處理非直線的模型
+
+- $log(Y) = \beta_0 + \beta_1 X$
+
+```{r cars-exp-lm}
+m <- lm(log(dist) ~ speed, cars)
+.x <- seq(min(cars$speed), max(cars$speed), 0.01)
+.y <- exp(coef(m)[1] + coef(m)[2] * .x)
+ggplot(cars, aes(x = speed, y = dist)) +
+  geom_point() +
+  geom_line(aes(x = x, y = y), data = data.frame(x = .x, y = .y))
+```
+
+--- &vcenter .largecontent
+
+## 線性模型也可以解決二元分類問題
+
+- $Y =$ 煞車距離超過50； $P(Y \text{ is TRUE}) = \frac{1}{1 + e^{\beta_0 + \beta_1 X}}$
+
+```{r cars-logistic}
+
+```
