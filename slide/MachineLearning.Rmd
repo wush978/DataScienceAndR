@@ -1,0 +1,357 @@
+---
+title       : "Machine Learning"
+author      : "Wush Wu"
+job         : 國立台灣大學
+framework   : io2012-wush
+highlighter : highlight.js
+hitheme     : zenburn
+widgets     : [mathjax]            # {mathjax, quiz, bootstrap}
+mode        : selfcontained # {standalone, draft}
+knit        : slidify::knit2slides
+--- .largecontent &vcenter
+
+```{r setup, include=FALSE, cache=FALSE}
+library(knitr)
+library(magrittr)
+library(data.table)
+library(dplyr)
+library(ggplot2)
+library(quantmod)
+library(jsonlite)
+library(binom)
+
+opts_chunk$set(echo = FALSE, cache=FALSE, comment="",
+               cache.path = "cache-MachineLearning/",
+               dev.args=list(bg="transparent"),
+               fig.path = "./assets/fig/rmachine-learning-",
+               fig.width = 10, fig.height = 6)
+fig <- function(path, size = 100) {
+  sprintf("<img src='assets/img/%s' style='max-width: %d%%;max-height: %d%%'></img>",
+          path, size, size)
+}
+fig2 <- function(path, size = 100) {
+  sprintf("<img src='assets/img/%s' style='width: %d%%'></img>",
+          path, size)
+}
+sys_name <- Sys.info()["sysname"] %>% tolower
+sys_encode <- c("utf8", "utf8", "big5")[pmatch(sys_name, c("linux", "darwin", "windows"))]
+```
+
+## 課程大綱
+
+- 機器學習簡介
+- 線性模型(迴歸分析)
+- Regularization與Elastic Net
+- Loss Function與Support Vector Machine
+- 分類樹
+- Bagging 與 Random Forest
+- Boosting 與 Gradient Boosted Decision Tree
+- Neuron Network 與 Deep Learning
+
+--- .dark .segue
+
+## 機器學習簡介
+
+--- &vcenter .largecontent
+
+## 什麼是學習
+
+- 字典定義：因為知識、教育、研究或經驗而改變行為
+- 機器學習：讓機器具備學習能力的技術
+
+--- &vcenter .largecontent
+
+## 人工智慧
+
+<center>`r fig("AI System.png")`</center>
+
+--- &vcenter .largecontent
+
+## 廣告播放的自動化系統
+
+- 訊號源：使用者的瀏覽特定的網站
+- 感知：使用者的特性、網站的特性
+- 模型：男生喜歡電玩相關廣告、女生喜歡化妝品相關廣告
+- 行為：猜測使用者的性別。如果可能是男生，就播放電玩相關廣告；如果可能是女生，就播放化妝品相關廣告
+
+--- &vcenter .largecontent
+
+## 機器學習
+
+<center>`r fig("Machine Learning.png")`</center>
+
+--- &vcenter .largecontent
+
+## 廣告播放的自動化學習系統
+
+- 訊號源：使用者的瀏覽特定的網站
+- 感知：使用者的特性、網站的特性
+- 模型：男生喜歡電玩相關廣告、女生喜歡化妝品相關廣告
+- 行為：猜測使用者的性別。如果可能是男生，就播放電玩相關廣告；如果可能是女生，就播放化妝品相關廣告
+- **學習**：依照播放的結果，調整電玩廣告和化妝品廣告的比例
+
+--- &vcenter .largecontent
+
+## 為什麼我們要讓機器去學習？
+
+- 機器學習不能解決所有的問題
+    - 問題必須要轉換成機器學習可以解決的問題
+- 機器學習系統需要成本做開發
+- 機器學習系統需要額外的維護成本（http://www.slideshare.net/WushWu/ss-55964136）
+- 機會成本：如果一開始能讓機器把任務做好，何必讓它花時間學習？
+
+--- &vcenter .largecontent
+
+## 實際的問題 $\Rightarrow$ 機器學習問題
+
+- 我們想要增加廣告的營收
+- 廣告的營收和點擊率相關
+- 在每次推播廣告給瀏覽者前，考慮「該瀏覽者點擊每種廣告的機率」
+- 預測瀏覽者點擊每種廣告的機率
+
+--- &vcenter .largecontent
+
+## 使用機器學習的好處
+
+--- &vcenter .largecontent
+
+## 人的主流意見可能出錯
+
+- 範例：廣告播放
+    - 我們以為女生不喜歡遊戲類廣告
+    - 有些手機遊戲是針對女生設計
+
+--- &vcenter .largecontent
+
+## 「模型」可能複雜到人無法處理
+
+- $Y = f(X)$ 的 $f$ 可能複雜到人無法一開始就設計出好的答案
+- 範例：廣告播放
+    - 瀏覽者有數十種標籤
+    - 有數百個網站與廣告
+
+--- &vcenter .largecontent
+
+## 環境的特性一直在改變
+
+- 人無法跟上環境的改變
+- 範例：廣告播放
+    - 簽約的網站與廣告會一直更換
+    - 瀏覽者的喜好也會一直更換
+
+--- &vcenter .largecontent
+
+## 我們該使用機器學習相關技術嗎？
+
+- 人可以做嗎？
+- 使用機器學習的成本 v.s. 使用人的成本
+- 範例：decaptcha
+
+--- &vcenter .largecontent
+
+## Captcha
+
+- 用於分辨人或電腦的問題
+
+<center>`r fig("recaptcha-example.gif")`</center>
+
+--- &vcenter .largecontent
+
+## Decaptcha
+
+- 想要用電腦做某些事情時，必須要讓電腦能通過Captcha
+- Decaptcha的方式：
+    - 影像辨識
+    - 群眾外包 <https://anti-captcha.com>
+
+--- &vcenter .largecontent
+
+## 你真的需要使用機器學習嗎？
+
+- 你的問題可以轉換成機器學習能解決的問題嗎？
+- 你的問題用人解決很昂貴，或是不可能嗎？
+- 你有維護機器學習解決方案的人嗎？
+
+--- &vcenter .largecontent
+
+## 機器學習解決的問題
+
+- 監督式學習：給定 $X$ ，預測 $Y$
+    - 分類： $Y$ 是類別型變數
+    - 迴歸： $Y$ 是解釋型變數
+- 非監督式學習：給 $X$，對 $X$ 分群
+
+--- &vcenter .largecontent
+
+## 分類問題：預測點擊行為
+
+- $Y$ ： 瀏覽者會不會點擊廣告
+
+--- &vcenter .largecontent
+
+## 回歸問題：預測股票價格
+
+- $Y$ ： 下一個單位時間時，特定股票的股價
+
+--- &vcenter .largecontent
+
+## 叢集問題：顧客分群
+
+- $Y$ ： 不存在
+- $X$ ： 每一筆數據都是顧客們的特徵
+
+--- &vcenter .largecontent
+
+## 機器學習技術較常用於預測
+
+- 分析目的：
+    - 預測型分析
+    - 解釋型分析
+
+--- &vcenter .largecontent
+
+## 預測型分析
+
+- 在事件發生之前，預測事件的結果
+    - 利用預測結果，決定動作
+
+--- &vcenter .largecontent
+
+## 股價
+
+- 預測未來股價的漲跌，決定行動
+    - 漲：買進
+    - 跌：賣出
+
+--- &vcenter .largecontent
+
+## 預測型分析的特性
+
+- 模型的準確度是主要目的
+- 不在乎模型的內容是否能帶來知識
+- 通常預測精準的模型，都會複雜到人類難以理解（黑盒子）
+
+<center>`r fig("blackbox.png")`</center>
+
+--- &vcenter .largecontent
+
+## 解釋型分析
+
+- 挖掘現象的因果關係
+
+--- &vcenter .largecontent
+
+## 公司的營收
+
+- 預測明年公司營收的準確度價值不高
+    - 9~10億 $\Rightarrow$ 9.9億~10.1億
+- 找出影響公司營收的原因價值很高
+
+--- &vcenter .largecontent
+
+## 解釋型分析的特性
+
+- 模型的合理性是主要目的
+    - 模型通常不準
+- 分析師必須要能夠透過模型尋找出價值
+    - 例：透過分析資安數據，發現特定作業系統比較脆弱，容易發生資安事件
+
+--- &vcenter .largecontent
+
+## 統計模型
+
+- $Y$是我們感興趣的變數, $X$是可能跟$Y$相關的資料
+    - 當$Y$未知時，$X$仍已知
+- $Y = f(X) + \varepsilon$
+    - $f(X)$描述我們理解的變化，使用的數學不牽涉到機率
+    - $\varepsilon$ 描述我們不能理解的變化，通常 $\varepsilon$ 是隨機變數，使用的數學需要機率
+
+--- &vcenter .largecontent
+
+## 有沒有$\varepsilon$的差別
+
+- $Y = f(X)$: 
+    - 只有描述我們對Y的期待值
+    - 對於隨機性質沒有描述
+- $Y = f(X) + \varepsilon$
+    - 我們會假設$\varepsilon$的機率性質
+    - 一旦取得$\varepsilon$的分佈，即可找出估計$f$的方式，以及該方式估計$f$的特性
+    - 分佈：機率密度函數、幾率質量函數或是一群有代表性的樣本
+
+--- &vcenter .largecontent
+
+## 線性模型
+
+- $Y$ 是煞車滑行的距離
+- $X$ 是車速
+- $Y = f(X) + \varepsilon$
+    - $f(X) = \beta_0 + \beta_1 X$
+
+--- &vcenter .largecontent
+
+## X-Y 散佈圖
+
+- $(x_1, y_1), (x_2, y_2), ...$ ：已知$X$推測$Y$
+
+```{r cars}
+g <- 
+  ggplot(cars, aes(x = speed, y = dist)) +
+  geom_point()
+i <- 23
+g + annotate(
+  "text", label = sprintf("(list(x[%d],y[%d]))", i, i), 
+  x = cars$speed[i], y = cars$dist[i], vjust = -0.5, 
+  parse = TRUE, size = 8)
+```
+
+--- &vcenter .largecontent
+
+## 最小方差直線
+
+- $Y = \beta_0 + \beta_1 X$
+
+```{r cars-lm}
+m <- lm(dist ~ speed, cars)
+g <- 
+  ggplot(cars, aes(x = speed, y = dist)) +
+  geom_point() +
+  geom_smooth(method = lm, se = FALSE)
+i <- 23
+g + 
+  annotate(
+    "text", label = sprintf("(list(x[%d],y[%d]))", i, i), 
+    x = cars$speed[i], y = cars$dist[i], vjust = -0.5, 
+    parse = TRUE, size = 8
+  ) +
+  annotate(
+    "segment", x = cars$speed[i], xend = cars$speed[i],
+    y = cars$dist[i], yend = m$fitted.values[i]
+  )
+  
+```
+
+--- &vcenter .largecontent
+
+## 最小方差直線的性質
+
+- $Y = \beta_0 + \beta_1 X + \varepsilon, \varepsilon \overset{i.i.d.}{\sim} N(0, \sigma^2)$
+
+```{r cars-lm-se}
+m <- lm(dist ~ speed, cars)
+g <- 
+  ggplot(cars, aes(x = speed, y = dist)) +
+  geom_point() +
+  geom_smooth(method = lm, se = FALSE)
+.x <- seq(min(cars$speed), max(cars$speed), by = 0.01)
+m.s <- summary(m)
+.ymin <- 
+  m.s$coefficients[1,1] + qnorm(0.025) * m.s$coefficients[1,2] +
+  (m.s$coefficients[2,1] + qnorm(0.025) * m.s$coefficients[2,2]) * .x
+.ymax <- 
+  m.s$coefficients[1,1] + qnorm(0.975) * m.s$coefficients[1,2] +
+  (m.s$coefficients[2,1] + qnorm(0.975) * m.s$coefficients[2,2]) * .x
+g + 
+  annotate("ribbon", x = .x, ymin = .ymin, ymax = .ymax, alpha = 0.3)
+```
+
+
