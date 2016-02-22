@@ -1,0 +1,1162 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Machine Learning</title>
+  <meta charset="utf-8">
+  <meta name="description" content="Machine Learning">
+  <meta name="author" content="Wush Wu">
+  <meta name="generator" content="slidify" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <link rel="stylesheet" href="libraries/frameworks/io2012-wush/css/default.css" media="all" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012-wush/css/phone.css" 
+    media="only screen and (max-device-width: 480px)" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012-wush/css/slidify.css" >
+  <link rel="stylesheet" href="libraries/highlighters/highlight.js/css/zenburn.css" />
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->  <link rel=stylesheet href="./assets/css/custom.css"></link>
+<link rel=stylesheet href="./assets/css/ribbons.css"></link>
+
+  
+  <!-- Grab CDN jQuery, fall back to local if offline -->
+  <script src="libraries/frameworks/io2012-wush/js/jquery-1.7.min.js"></script>
+  <!-- <script>window.jQuery || document.write('<script src="libraries/widgets/quiz/js/jquery.js"><\/script>')</script> -->
+  <script data-main="libraries/frameworks/io2012-wush/js/slides" 
+    src="libraries/frameworks/io2012-wush/js/require-1.0.8.min.js">
+  </script>
+  
+  
+
+</head>
+<body style="opacity: 0">
+  <slides class="layout-widescreen">
+    
+    <!-- LOGO SLIDE -->
+        <slide class="title-slide segue nobackground">
+  <hgroup class="auto-fadein">
+    <h1>Machine Learning</h1>
+    <h2></h2>
+    <p>Wush Wu<br/>國立台灣大學</p>
+  </hgroup>
+  <article></article>  
+</slide>
+    
+
+    <!-- SLIDES -->
+    <slide class="largecontent" id="slide-1" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>課程大綱</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>機器學習簡介</li>
+<li>線性模型(迴歸分析)</li>
+<li>Regularization與Elastic Net</li>
+<li>Loss Function與Support Vector Machine</li>
+<li>分類樹</li>
+<li>Bagging 與 Random Forest</li>
+<li>Boosting 與 Gradient Boosted Decision Tree</li>
+<li>Neuron Network 與 Deep Learning</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="dark segue" id="slide-2" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2>機器學習簡介</h2>
+  </hgroup>
+  <article data-timings="">
+    
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-3" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>什麼是學習</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>字典定義：因為知識、教育、研究或經驗而改變行為</li>
+<li>機器學習：讓機器具備學習能力的技術</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-4" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>人工智慧</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<p><center><img src='assets/img/AI System.png' style='max-width: 100%;max-height: 100%'></img></center></p>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-5" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>廣告播放的自動化系統</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>訊號源：使用者的瀏覽特定的網站</li>
+<li>感知：使用者的特性、網站的特性</li>
+<li>模型：男生喜歡電玩相關廣告、女生喜歡化妝品相關廣告</li>
+<li>行為：猜測使用者的性別。如果可能是男生，就播放電玩相關廣告；如果可能是女生，就播放化妝品相關廣告</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-6" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>機器學習</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<p><center><img src='assets/img/Machine Learning.png' style='max-width: 100%;max-height: 100%'></img></center></p>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-7" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>廣告播放的自動化學習系統</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>訊號源：使用者的瀏覽特定的網站</li>
+<li>感知：使用者的特性、網站的特性</li>
+<li>模型：男生喜歡電玩相關廣告、女生喜歡化妝品相關廣告</li>
+<li>行為：猜測使用者的性別。如果可能是男生，就播放電玩相關廣告；如果可能是女生，就播放化妝品相關廣告</li>
+<li><strong>學習</strong>：依照播放的結果，調整電玩廣告和化妝品廣告的比例</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-8" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>為什麼我們要讓機器去學習？</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>機器學習不能解決所有的問題
+
+<ul>
+<li>問題必須要轉換成機器學習可以解決的問題</li>
+</ul></li>
+<li>機器學習系統需要成本做開發</li>
+<li>機器學習系統需要額外的維護成本（<a href="http://www.slideshare.net/WushWu/ss-55964136%EF%BC%89">http://www.slideshare.net/WushWu/ss-55964136）</a></li>
+<li>機會成本：如果一開始能讓機器把任務做好，何必讓它花時間學習？</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-9" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>實際的問題 \(\Rightarrow\) 機器學習問題</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>我們想要增加廣告的營收</li>
+<li>廣告的營收和點擊率相關</li>
+<li>在每次推播廣告給瀏覽者前，考慮「該瀏覽者點擊每種廣告的機率」</li>
+<li>預測瀏覽者點擊每種廣告的機率</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-10" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>使用機器學習的好處</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-11" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>人的主流意見可能出錯</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>範例：廣告播放
+
+<ul>
+<li>我們以為女生不喜歡遊戲類廣告</li>
+<li>有些手機遊戲是針對女生設計</li>
+</ul></li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-12" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>「模型」可能複雜到人無法處理</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>\(Y = f(X)\) 的 \(f\) 可能複雜到人無法一開始就設計出好的答案</li>
+<li>範例：廣告播放
+
+<ul>
+<li>瀏覽者有數十種標籤</li>
+<li>有數百個網站與廣告</li>
+</ul></li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-13" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>環境的特性一直在改變</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>人無法跟上環境的改變</li>
+<li>範例：廣告播放
+
+<ul>
+<li>簽約的網站與廣告會一直更換</li>
+<li>瀏覽者的喜好也會一直更換</li>
+</ul></li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-14" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>我們該使用機器學習相關技術嗎？</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>人可以做嗎？</li>
+<li>使用機器學習的成本 v.s. 使用人的成本</li>
+<li>範例：decaptcha</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-15" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>Captcha</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>用於分辨人或電腦的問題</li>
+</ul>
+
+<p><center><img src='assets/img/recaptcha-example.gif' style='max-width: 100%;max-height: 100%'></img></center></p>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-16" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>Decaptcha</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>想要用電腦做某些事情時，必須要讓電腦能通過Captcha</li>
+<li>Decaptcha的方式：
+
+<ul>
+<li>影像辨識</li>
+<li>群眾外包 <a href="https://anti-captcha.com">https://anti-captcha.com</a></li>
+</ul></li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-17" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>你真的需要使用機器學習嗎？</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>你的問題可以轉換成機器學習能解決的問題嗎？</li>
+<li>你的問題用人解決很昂貴，或是不可能嗎？</li>
+<li>你有維護機器學習解決方案的人嗎？</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-18" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>機器學習解決的問題</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>監督式學習：給定 \(X\) ，預測 \(Y\)
+
+<ul>
+<li>分類： \(Y\) 是類別型變數</li>
+<li>迴歸： \(Y\) 是解釋型變數</li>
+</ul></li>
+<li>非監督式學習：給 $X$，對 \(X\) 分群</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-19" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>分類問題（\(Y\) 是類別型變數）</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>二元分類
+
+<ul>
+<li>點擊預測： \(Y =\) 使用者會不會點廣告</li>
+<li>股票的漲跌： \(Y =\) 下一個單位時間股價會往上走或往下走</li>
+</ul></li>
+<li>多元分類
+
+<ul>
+<li>手寫辨識： \(Y =\) 使用者所撰寫的字</li>
+<li>語音辨識： \(Y =\) 使用者所發出的聲音</li>
+</ul></li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-20" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>回歸問題（$Y$是連續型變數）</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>股價預測 ：\(Y =\) 下一個單位時間時，特定股票的股價</li>
+<li>物價預測 ：\(Y =\) 特定商品在下一個單位時間的價格</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-21" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>叢集問題（$Y$不存在）</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>顧客分群： \(X =\) 顧客的特徵</li>
+<li>廣告分群： \(X =\) 廣告的特徵</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-22" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>機器學習技術較常用應用於預測</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>鑑往知來</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-23" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>預測型分析</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>在事件發生之前，預測事件的結果
+
+<ul>
+<li>利用預測結果，決定動作</li>
+</ul></li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-24" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>股價</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>預測未來股價的漲跌，決定行動
+
+<ul>
+<li>漲：買進</li>
+<li>跌：賣出</li>
+</ul></li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-25" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>預測型分析的特性</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>模型的準確度是主要目的</li>
+<li>不在乎模型的內容是否能帶來知識</li>
+<li>通常預測精準的模型，都會複雜到人類難以理解（黑盒子）</li>
+</ul>
+
+<p><center><img src='assets/img/blackbox.png' style='max-width: 100%;max-height: 100%'></img></center></p>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-26" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>解釋型分析</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>挖掘現象的因果關係</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-27" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>公司的營收</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>預測明年公司營收的準確度價值不高
+
+<ul>
+<li>9~10億 \(\Rightarrow\) 9.9億~10.1億</li>
+</ul></li>
+<li>找出影響公司營收的原因價值很高</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-28" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>解釋型分析的特性</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>模型的合理性是主要目的
+
+<ul>
+<li>模型通常不準</li>
+</ul></li>
+<li>分析師必須要能夠透過模型尋找出價值
+
+<ul>
+<li>例：透過分析資安數據，發現特定作業系統比較脆弱，容易發生資安事件</li>
+</ul></li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-29" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>點擊率預測</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>評分： \(l(y, \hat{y})\)
+
+<ul>
+<li>點擊預測： \(l(y, \hat{y}) = \left\{\begin{array}{lc}  0 & \text{if } y = \hat{y} \\  1 & \text{if } y \neq \hat{y} \end{array}\right.\)</li>
+</ul></li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-30" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>機器如何學習</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>評分（Loss Function）</li>
+<li>優化</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-31" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>評分</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>評量預測結果</li>
+<li>調整預測的方向</li>
+<li>常常牽涉到統計模型</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-32" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>優化</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>找出合理的方法讓預測越來越準</li>
+<li>常常牽涉到數值方法</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-33" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>總結</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>了解機器學習的目的與優點</li>
+<li>了解機器學習能解決的問題</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="dark segue" id="slide-34" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2>線性模型(迴歸分析)</h2>
+  </hgroup>
+  <article data-timings="">
+    
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-35" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>統計模型</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>$Y$是我們感興趣的變數, $X$是可能跟$Y$相關的資料
+
+<ul>
+<li>當$Y$未知時，$X$仍已知</li>
+</ul></li>
+<li>\(Y = f(X) + \varepsilon\)
+
+<ul>
+<li>$f(X)$描述我們理解的變化，使用的數學不牽涉到機率</li>
+<li>\(\varepsilon\) 描述我們不能理解的變化，通常 \(\varepsilon\) 是隨機變數，使用的數學需要機率</li>
+</ul></li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-36" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>有沒有$\varepsilon$的差別</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>\(Y = f(X)\):
+
+<ul>
+<li>只有描述我們對Y的期待值</li>
+<li>對於隨機性質沒有描述</li>
+</ul></li>
+<li>\(Y = f(X) + \varepsilon\)
+
+<ul>
+<li>我們會假設$\varepsilon$的機率性質</li>
+<li>一旦取得$\varepsilon$的分佈，即可找出估計$f$的方式，以及該方式估計$f$的特性</li>
+<li>分佈：機率密度函數、幾率質量函數或是一群有代表性的樣本</li>
+</ul></li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-37" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>線性模型</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>\(Y\) 是煞車滑行的距離</li>
+<li>\(X\) 是車速</li>
+<li>\(Y = f(X) + \varepsilon\)
+
+<ul>
+<li>\(f(X) = \beta_0 + \beta_1 X\)</li>
+</ul></li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-38" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>X-Y 散佈圖</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>\((x_1, y_1), (x_2, y_2), ...\) ：已知$X$推測\(Y\)</li>
+</ul>
+
+<p><img src="./assets/fig/rmachine-learning-cars-1.png" alt="plot of chunk cars"></p>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-39" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>最小方差直線</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>\(Y = \beta_0 + \beta_1 X\)</li>
+</ul>
+
+<p><img src="./assets/fig/rmachine-learning-cars-lm-1.png" alt="plot of chunk cars-lm"></p>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-40" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>最小方差直線的性質</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>\(Y = \beta_0 + \beta_1 X + \varepsilon, \varepsilon \overset{i.i.d.}{\sim} N(0, \sigma^2)\)</li>
+</ul>
+
+<p><img src="./assets/fig/rmachine-learning-cars-lm-se-1.png" alt="plot of chunk cars-lm-se"></p>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-41" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>線性模型</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>\(X\) 不一定只有一個變數，可能有： \(X_1, X_2, ..., X_p\)</li>
+<li>\(Y = \beta_0 + \sum_{i=1}^p \beta_p X_p\)</li>
+<li>線性模型是「可以」解釋的
+
+<ul>
+<li>Dist = -17.5790949 + 3.9324088 \(\times\) Speed + \(\varepsilon\)</li>
+<li>\(\varepsilon \overset{i.i.d.}{\sim} N(0, 236.5316886)\)</li>
+</ul></li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-42" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>線性模型</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>線性模型是非常泛用的模型
+
+<ul>
+<li>具備有豐富的彈性</li>
+<li>具備有良好的解釋性</li>
+<li>可以透過「交互作用」產生複雜的模型</li>
+</ul></li>
+<li>統計學家對線性模型的理解非常深入： 當 \(\varepsilon \overset{i.i.d.}{\sim} N(0, \sigma^2)\)
+
+<ul>
+<li>知道最好的估計方法：最小方差直線</li>
+<li>知道$\varepsilon$對估計方法的影響</li>
+</ul></li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-43" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>線性模型的範例</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<table style="text-align:center"><tr><td colspan="2" style="border-bottom: 1px solid black"></td></tr><tr><td style="text-align:left"></td><td><em>Dependent variable:</em></td></tr>
+<tr><td></td><td colspan="1" style="border-bottom: 1px solid black"></td></tr>
+<tr><td style="text-align:left"></td><td>dist</td></tr>
+<tr><td colspan="2" style="border-bottom: 1px solid black"></td></tr><tr><td style="text-align:left">speed</td><td>3.932<sup>***</sup></td></tr>
+<tr><td style="text-align:left"></td><td>(0.416)</td></tr>
+<tr><td style="text-align:left"></td><td></td></tr>
+<tr><td style="text-align:left">Constant</td><td>-17.579<sup>**</sup></td></tr>
+<tr><td style="text-align:left"></td><td>(6.758)</td></tr>
+<tr><td style="text-align:left"></td><td></td></tr>
+<tr><td colspan="2" style="border-bottom: 1px solid black"></td></tr><tr><td style="text-align:left">Observations</td><td>50</td></tr>
+<tr><td style="text-align:left">R<sup>2</sup></td><td>0.651</td></tr>
+<tr><td style="text-align:left">Adjusted R<sup>2</sup></td><td>0.644</td></tr>
+<tr><td style="text-align:left">Residual Std. Error</td><td>15.380 (df = 48)</td></tr>
+<tr><td style="text-align:left">F Statistic</td><td>89.567<sup>***</sup> (df = 1; 48)</td></tr>
+<tr><td colspan="2" style="border-bottom: 1px solid black"></td></tr><tr><td style="text-align:left"><em>Note:</em></td><td style="text-align:right"><sup>*</sup>p<0.1; <sup>**</sup>p<0.05; <sup>***</sup>p<0.01</td></tr>
+</table>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-44" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>線性模型，不只是直線</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>上述的最小方差直線，在 Speed = 0，預測的煞車距離為 -17.579 </li>
+<li>負的煞車距離不合理</li>
+<li>\(Y\) 都是正的，所以我們取log</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-45" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>線性模型，可以處理非直線的模型</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>\(log(Y) = \beta_0 + \beta_1 X\)</li>
+</ul>
+
+<p><img src="./assets/fig/rmachine-learning-cars-exp-lm-1.png" alt="plot of chunk cars-exp-lm"></p>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-46" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>線性模型也可以解決二元分類問題</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>\(Y =\) 煞車距離超過50； \(P(Y \text{ is TRUE}) = \frac{1}{1 + e^{\beta_0 + \beta_1 X}}\)</li>
+</ul>
+
+<p><img src="./assets/fig/rmachine-learning-cars-logistic-1.png" alt="plot of chunk cars-logistic"></p>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-47" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>Logistic Regression</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>$\beta_0 + \beta_1 X$：線性</li>
+<li>$\frac{1}{1 + e<sup>{\beta_0</sup> + \beta_1 X}$：將實數線（ \((-\infty, \infty)\) ）轉換至 \((0, 1)\)</li>
+<li>\(\varepsilon\) 的地位由銅板機率（ Bernoulli ）取代</li>
+<li>常用於許多領域：罕見疾病分析、廣告點擊率分析...</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-48" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>線性模型還有許多變形</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>Poisson Regression：當資料為非負整數</li>
+<li>Isotonic regression：當資料嚴格遞增</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-49" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>練習</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>請同學完成： Optional-RMachineLearning-01-Linear-Model</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="dark segue" id="slide-50" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2>Regularization與Elastic Net</h2>
+  </hgroup>
+  <article data-timings="">
+    
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-51" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  
+</hgroup>
+<article class = 'flexbox vcenter'>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+    <slide class="backdrop"></slide>
+  </slides>
+  <div class="pagination pagination-small" id='io2012-ptoc' style="display:none;">
+    <ul>
+      <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=1 title='課程大綱'>
+         1
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=2 title='機器學習簡介'>
+         2
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=3 title='什麼是學習'>
+         3
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=4 title='人工智慧'>
+         4
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=5 title='廣告播放的自動化系統'>
+         5
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=6 title='機器學習'>
+         6
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=7 title='廣告播放的自動化學習系統'>
+         7
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=8 title='為什麼我們要讓機器去學習？'>
+         8
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=9 title='實際的問題 \(\Rightarrow\) 機器學習問題'>
+         9
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=10 title='使用機器學習的好處'>
+         10
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=11 title='人的主流意見可能出錯'>
+         11
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=12 title='「模型」可能複雜到人無法處理'>
+         12
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=13 title='環境的特性一直在改變'>
+         13
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=14 title='我們該使用機器學習相關技術嗎？'>
+         14
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=15 title='Captcha'>
+         15
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=16 title='Decaptcha'>
+         16
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=17 title='你真的需要使用機器學習嗎？'>
+         17
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=18 title='機器學習解決的問題'>
+         18
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=19 title='分類問題（\(Y\) 是類別型變數）'>
+         19
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=20 title='回歸問題（$Y$是連續型變數）'>
+         20
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=21 title='叢集問題（$Y$不存在）'>
+         21
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=22 title='機器學習技術較常用應用於預測'>
+         22
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=23 title='預測型分析'>
+         23
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=24 title='股價'>
+         24
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=25 title='預測型分析的特性'>
+         25
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=26 title='解釋型分析'>
+         26
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=27 title='公司的營收'>
+         27
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=28 title='解釋型分析的特性'>
+         28
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=29 title='點擊率預測'>
+         29
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=30 title='機器如何學習'>
+         30
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=31 title='評分'>
+         31
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=32 title='優化'>
+         32
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=33 title='總結'>
+         33
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=34 title='線性模型(迴歸分析)'>
+         34
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=35 title='統計模型'>
+         35
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=36 title='有沒有$\varepsilon$的差別'>
+         36
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=37 title='線性模型'>
+         37
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=38 title='X-Y 散佈圖'>
+         38
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=39 title='最小方差直線'>
+         39
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=40 title='最小方差直線的性質'>
+         40
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=41 title='線性模型'>
+         41
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=42 title='線性模型'>
+         42
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=43 title='線性模型的範例'>
+         43
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=44 title='線性模型，不只是直線'>
+         44
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=45 title='線性模型，可以處理非直線的模型'>
+         45
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=46 title='線性模型也可以解決二元分類問題'>
+         46
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=47 title='Logistic Regression'>
+         47
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=48 title='線性模型還有許多變形'>
+         48
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=49 title='練習'>
+         49
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=50 title='Regularization與Elastic Net'>
+         50
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=51 title='NA'>
+         51
+      </a>
+    </li>
+  </ul>
+  </div>  <!--[if IE]>
+    <script 
+      src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js">  
+    </script>
+    <script>CFInstall.check({mode: 'overlay'});</script>
+  <![endif]-->
+</body>
+  <!-- Load Javascripts for Widgets -->
+  
+  <!-- MathJax: Fall back to local if CDN offline but local image fonts are not supported (saves >100MB) -->
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        processEscapes: true
+      }
+    });
+  </script>
+  <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/2.0-latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  <!-- <script src="https://c328740.ssl.cf1.rackcdn.com/mathjax/2.0-latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script> -->
+  <script>window.MathJax || document.write('<script type="text/x-mathjax-config">MathJax.Hub.Config({"HTML-CSS":{imageFont:null}});<\/script><script src="libraries/widgets/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"><\/script>')
+</script>
+<!-- LOAD HIGHLIGHTER JS FILES -->
+  <script src="libraries/highlighters/highlight.js/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <!-- DONE LOADING HIGHLIGHTER JS FILES -->
+   
+  </html>

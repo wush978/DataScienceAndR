@@ -414,9 +414,9 @@ g +
 ## 線性模型
 
 - 線性模型是非常泛用的模型
-    - 彈性
-    - 解釋性
-    - 複雜度
+    - 具備有豐富的彈性
+    - 具備有良好的解釋性
+    - 可以透過「交互作用」產生複雜的模型
 - 統計學家對線性模型的理解非常深入： 當 $\varepsilon \overset{i.i.d.}{\sim} N(0, \sigma^2)$
     - 知道最好的估計方法：最小方差直線
     - 知道$\varepsilon$對估計方法的影響
@@ -459,5 +459,40 @@ ggplot(cars, aes(x = speed, y = dist)) +
 - $Y =$ 煞車距離超過50； $P(Y \text{ is TRUE}) = \frac{1}{1 + e^{\beta_0 + \beta_1 X}}$
 
 ```{r cars-logistic}
-
+cars2 <- cars %>%
+  mutate(y = dist > 50)
+m <- glm(y ~ speed, family = "binomial", data = cars2)
+.x <- seq(min(cars$speed), max(cars$speed), 0.01)
+.y <- coef(m)[1] + coef(m)[2] * .x
+ggplot() +
+  geom_point(aes(x = speed, y = probability), data = group_by(cars2, speed) %>% summarise(probability = mean(y))) +
+  geom_line(aes(x = x, y = y), data = data.frame(x = .x, y = 1 / (1 + exp(-.y))))
 ```
+
+--- &vcenter .largecontent
+
+## Logistic Regression
+
+- $\beta_0 + \beta_1 X$：線性
+- $\frac{1}{1 + e^{\beta_0 + \beta_1 X}$：將實數線（ $(-\infty, \infty)$ ）轉換至 $(0, 1)$
+- $\varepsilon$ 的地位由銅板機率（ Bernoulli ）取代
+- 常用於許多領域：罕見疾病分析、廣告點擊率分析...
+
+--- &vcenter .largecontent
+
+## 線性模型還有許多變形
+
+- Poisson Regression：當資料為非負整數
+- Isotonic regression：當資料嚴格遞增
+
+--- &vcenter .largecontent
+
+## 練習
+
+- 請同學完成： Optional-RMachineLearning-01-Linear-Model
+
+--- .dark .segue
+
+## Regularization與Elastic Net
+
+--- &vcenter .largecontent
