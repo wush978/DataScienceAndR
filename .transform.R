@@ -30,8 +30,13 @@ transform <- function() {
 
 transform_all <- function() {
   course_list <- dir(".", "lesson.yaml", recursive = TRUE)
-  lapply(course_list, function(path) {
-    swirlify::set_lesson(path, FALSE, TRUE)
-    suppressWarnings(transform())
+  origin_course <- getOption("swirlify_lesson_file_path")
+  tryCatch({
+    lapply(course_list, function(path) {
+      swirlify::set_lesson(path, FALSE, TRUE)
+      suppressWarnings(transform())
+    })
+  }, finally = {
+    set_lesson(origin_course)
   })
 }
