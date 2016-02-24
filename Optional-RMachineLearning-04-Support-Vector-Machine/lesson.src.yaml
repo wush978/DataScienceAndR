@@ -1,0 +1,80 @@
+- Class: meta
+  Course: DataScienceAndR
+  Lesson: Optional-RMachineLearning-04-Support-Vector-Machine
+  Author: Wush Wu
+  Type: Standard
+  Organization: Taiwan R User Group
+  Version: 2.3.1.2
+
+- Class: text
+  Output: |
+    這個單元，我們要介紹如何在R 使用SVM(Spport Vector Machine)。
+
+- Class: cmd_question
+  Output: |
+    在世界上，SVM(Support Vector Machine)最有名的實作之一，就是出自台灣大學資工系
+    林智仁老師實驗室的libsvm套件。R 的e1071套件則是libsvm的wrapper，讓我們可以
+    直接透過e1071讓libsvm的核心幫我們解出SVM的模型。請同學安裝這個套件。
+  CorrectAnswer: check_then_install("e1071", "1.6.7")
+  AnswerTests: test_package_version("e1071", "1.6.7")
+
+- Class: cmd_question
+  Output: |
+    請同學載入e1071套件
+  CorrectAnswer: library(e1071)
+  AnswerTests: test_search_path("e1071")
+
+- Class : cmd_question
+  Output: 請同學輸入：`vignette(package = "e1071")`檢查e1071上的vignette清單。
+
+- Class : cmd_question
+  Output: |
+    請同學輸入：`vignette("svmdoc", package = "e1071")`打開名稱為svmdoc的vignette。
+    這份文件很清楚的介紹了SVM 演算法、和e1071 相關的各種變形、原理，以及對應的參數。
+
+- Class : cmd_question
+  Output: 再來請同學輸入`?svm`打開svm 的說明文件。
+
+- Class : cmd_question
+  Output: 由於svm 有formula interface，所以我們可以簡單利用`g <- svm(Species ~ ., iris)`
+    馬上學出一個svm 的模型。
+
+- Class : cmd_question
+  Output: svm 在學習時，可以依據應用解決不同的問題。這取決於目標的型態。舉例來說，如果我們
+    使用`svm(Species ~ ., iris)`，這裡的預測目標就是`iris$Species`這個變數了。請問同學，
+    這個變數的型態（class）是什麼？
+  CorrectAnswer: class(iris$Species)
+  AnswerTests: omnitest(correctVal = class(iris$Species))
+
+- Class : text
+  Output: 由於預測的目標是一個類別變數，所以R 會自動使用classification的模式來解決問題。
+    svm 中支援的模式列在說明文件的Arguments 項目下的`type`參數之中。
+
+- Class : text
+  Output: 至於`kernel`參數則可以讓svm 學習出資料中非線性的模式。不同的kernel也可以透過不同
+    的額外參數來調整。所有的細節，都可以在`?svm`打開的說明文件中找到。
+
+- Class : mult_question
+  Output: 依照說明文件，`degree`參數是用於哪一種kernel？
+  AnswerChoices: linear;polynomial;radial basis;sigmoid
+  CorrectAnswer: polynomial
+  AnswerTests: omnitest(correctVal = "polynomial")
+
+- Class : cmd_question
+  Output: 預測也是很直接的使用`predict(g, iris)`就可以了，請同學試試看。
+
+- Class : cmd_question
+  Output: 由於e1071套件是使用S3物件導向的系統，所以我們可以利用`?predict.svm`打開
+    說明文件，查閱如何調整`predict`的輸出。請同學試試看。
+  CorrectAnswer: ?predict.svm
+  AnswerTests: any_of_exprs("?predict.svm", 'help(predict.svm)', 'help("predict.svm")')
+
+- Class : cmd_question
+  Output: 根據說明文件，如果我們想要的不只是預測的類別結果，而是決定類別的分數，可以透
+    過decision.values這個參數。請同學試試看：`predict(g, iris, decision.values = TRUE)`
+
+- Class: script
+  Output: |
+    最後我們請同學再拿mlbench套件的Ionosphere資料集做練習，挑戰更低的logloss。
+  Script: ml-04.R
+  AnswerTests: ml_04()

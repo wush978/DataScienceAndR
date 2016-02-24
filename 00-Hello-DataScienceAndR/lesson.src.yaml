@@ -22,5 +22,13 @@
   Script: test-script.R
   AnswerTests: check_version()
 
+- Class: cmd_question
+  Output: |
+    課程進行時，我們會請同學在R 的console（就是有`>`開頭的區塊）中輸入指令。
+    需要輸入的程式碼，我們會在兩邊用``來包覆。
+    舉例來說，請同學在console中輸入：`chat()`。同學必需要輸入一樣的指令才會
+    過關。而這個指令則能讓同學打開聊天室的網頁。
+  CorrectAnswer: chat()
+
 - Class: text
   Output: 測試已經完成，請同學回到選單選擇你想進行的課程。
