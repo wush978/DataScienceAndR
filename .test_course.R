@@ -54,8 +54,13 @@ test_lesson = function(lesson_dir){
           if (file.exists(question$correctScript)) {
             cat("Testing script...\n")
             file.copy(question$correctScript, e$script_temp_path <- file.path(tempdir(), question$Script), overwrite = TRUE)
-            source(question$correctScript, local = globalenv())
-            stopifnot(eval(parse(text = question$AnswerTests), envir = e))
+            tryCatch({
+              attach(e)
+              source(question$correctScript, local = globalenv())
+              stopifnot(eval(parse(text = question$AnswerTests), envir = e))
+            }, finally = {
+              detach(e)
+            })
           }
         }
       )
