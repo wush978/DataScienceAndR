@@ -1,0 +1,150 @@
+- Class: meta
+  Course: DataScienceAndR
+  Lesson: Optional-RMachineLearning-03-Regularization
+  Author: Wush Wu
+  Type: Standard
+  Organization: Taiwan R User Group
+  Version: 2.3.1.2
+- Class: text
+  Output: |
+    這個課程將跟同學介紹近代機器學習常用的一個技術。
+- Class: text
+  Output: |
+    在之前的課程，我們是選擇解釋變數的組合、交互作用等方式，來挑選出好的模型。
+- Class: text
+  Output: |
+    這堂課程介紹的作法，是一次放入所有可能的變數，然後透過修改「評分」項目，讓
+    演算法來自動找出應該要留在模型裡的變數。這種方法，專業術語叫做：Regularization。
+- Class: text
+  Output: |
+    R 的glmnet套件在線性模型上實作了Regularization的相關功能。這個套件的作者群，
+    也是機器學習領域中鼎鼎大名的學者。
+- Class: cmd_question
+  Output: |
+    請同學先安裝glmnet套件。
+  CorrectAnswer: check_then_install("glmnet", "2.0.3")
+  AnswerTests: test_package_version("glmnet", "2.0.3")
+  Hint: check_then_install("glmnet", "2.0.3")
+- Class: cmd_question
+  Output: |
+    接著請載入glmnet套件
+  CorrectAnswer: library(glmnet)
+  AnswerTests: test_search_path("glmnet")
+  Hint: library(glmnet)
+- Class: cmd_question
+  Output: |
+    摸索套件的第一步：找尋vignettes。請同學輸入：`vignette(package = "glmnet")`
+  CorrectAnswer: vignette(package = "glmnet")
+  AnswerTests: omnitest('vignette(package = "glmnet")')
+  Hint: vignette(package = "glmnet")
+- Class: cmd_question
+  Output: |
+    請同學輸入`vignette("glmnet_beta", package = "glmnet")`打開套件的簡介文件。
+  CorrectAnswer: vignette("glmnet_beta", package = "glmnet")
+  AnswerTests: omnitest('vignette("glmnet_beta", package = "glmnet")')
+  Hint: vignette("glmnet_beta", package = "glmnet")
+- Class: text
+  Output: |
+    由於閱讀這份說明文件，需要統計學的專業知識，所以我們就先暫停在這邊。有興趣的
+    同學可以再自行鑽研。
+- Class: cmd_question
+  Output: |
+    這裡我們先用cars這個資料集來介紹glmnet與regularization。請同學先輸入：
+    `m0 <- lm(Sepal.Length ~ ., iris)`這是第一個單元介紹的線性模型，透過這個指令，
+    我們可以取得最小方差直線。我們等等會拿這個模型與glmnet的結果做比較。
+  CorrectAnswer: m0 <- lm(Sepal.Length ~ ., iris)
+  AnswerTests: omnitest('m0 <- lm(Sepal.Length ~ ., iris)')
+  Hint: m0 <- lm(Sepal.Length ~ ., iris)
+- Class: cmd_question
+  Output: |
+    glmnet的參數並不接受formula，而是接受x(矩陣)與y(向量)。請同學先輸入：
+    `X <- model.matrix(Sepal.Length ~ ., iris)`建立一個矩陣好填入glmnet的x參數。
+    model.matrix是lm使用formula時，在背後產生線性代數矩陣的函數。
+  CorrectAnswer: X <- model.matrix(Sepal.Length ~ ., iris)
+  AnswerTests: omnitest('X <- model.matrix(Sepal.Length ~ ., iris)')
+  Hint: X <- model.matrix(Sepal.Length ~ ., iris)
+- Class: cmd_question
+  Output: |
+    接著，請同學輸入：`y <- iris$Sepal.Length`建立一個向量好填入glmnet的y參數。
+  CorrectAnswer: y <- iris$Sepal.Length
+  AnswerTests: omnitest('y <- iris$Sepal.Length')
+  Hint: y <- iris$Sepal.Length
+- Class: cmd_question
+  Output: |
+    我們先輸入：`m <- glmnet(X[,-1], y, lambda = 0)`
+    這裡使用X[,-1]是因為glmnet會自動加入Intercept，所以我們要把Intercept從X中移除
+    （Intercept是第一欄）。關於lambda，我們先賣個關子。
+  CorrectAnswer: m <- glmnet(X[,-1], y, lambda = 0)
+  AnswerTests: omnitest('m <- glmnet(X[,-1], y, lambda = 0)')
+  Hint: m <- glmnet(X[,-1], y, lambda = 0)
+- Class: cmd_question
+  Output: |
+    請同學輸入：`cbind(coef(m, s = 0), coef(m0))`比較一下glmnet學出來的模型與lm學出來的模型。
+    coef的s = 0參數等等會補充說明。
+  CorrectAnswer: cbind(coef(m, s = 0), coef(m0))
+  AnswerTests: omnitest('cbind(coef(m, s = 0), coef(m0))')
+  Hint: cbind(coef(m, s = 0), coef(m0))
+- Class: text
+  Output: |
+    我們應該看到非常接近的數字。這是因為兩者要解的目標函數是一樣的，但是glmnet是用數值解，而
+    lm是用理論直接計算，所以lm是比較準確的。
+- Class: cmd_question
+  Output: 接著，我們慢慢加大lambda參數。請同學出入：`m <- glmnet(X[,-1], y, lambda = seq(1, 0, by =
+    -0.1))`
+  CorrectAnswer: m <- glmnet(X[,-1], y, lambda = seq(1, 0, by = -0.1))
+  AnswerTests: omnitest('m <- glmnet(X[,-1], y, lambda = seq(1, 0, by = -0.1))')
+  Hint: m <- glmnet(X[,-1], y, lambda = seq(1, 0, by = -0.1))
+- Class: cmd_question
+  Output: |
+    請同學看看`m`的輸出結果。
+  CorrectAnswer: m
+  AnswerTests: omnitest('m')
+  Hint: m
+- Class: text
+  Output: |
+    事實上，glmnet剛剛在背後一口氣算了時一個模型，分別對應到11個lambda（即seq(1.0, 0.0, by = -0.1)）
+- Class: cmd_question
+  Output: |
+    我們可以運用`coef(m, s = 0.5)`來查詢當lambda = 0.5時，學出來的參數。請同學試試看
+  CorrectAnswer: coef(m, s = 0.5)
+  AnswerTests: omnitest('coef(m, s = 0.5)')
+  Hint: coef(m, s = 0.5)
+- Class: text
+  Output: |
+    同學應該可以注意到，除了Petal.Length之外，其他的參數學出來都是"."。這就是glmnet透過
+    regularization的技術，去挑選變數。挑選的結果，在lambda = 0.5之下，只有挑出Petal.Length而已，
+    其他的變數都是0。
+- Class: cmd_question
+  Output: |
+    接著請同學輸入：`coef(m, s = 0.1)`
+  CorrectAnswer: coef(m, s = 0.1)
+  AnswerTests: omnitest('coef(m, s = 0.1)')
+  Hint: coef(m, s = 0.1)
+- Class: text
+  Output: |
+    這次同學可以看到，當lambda是0.1時，glmnet挑出的變數是Sepal.Width與Petal.Length。
+- Class: text
+  Output: |
+    所以lambda到底是什麼呢？機器學習的原理，就是在訂定評分機制後，找到能夠最優化評分的參數。
+    而regularization，就是在原本的評分之外，加上對參數數值的懲罰。具體作法是當參數的值越大，評分
+    就會越低。而lambda就是控制懲罰強度的參數。
+- Class: text
+  Output: |
+    舉例來說，當lambda = 0的時候，代表線性模型的參數值的懲罰加權為0（也就是不懲罰），所以學習
+    出來的模型就等價於原本的線性模型。但是當lambda = 1時，參數值得懲罰讓機器學習最後把大部分
+    的參數刪除，只留下Petal.Length。這就是regularization。
+- Class: text
+  Output: |
+    glmnet所實作的regularization有兩種。一種是運用模型參數的絕對值的和做懲罰，這種又稱為L1-Regularization。
+    統計上的別名是Lasso。另一種是以模型參數的平方的和作為懲罰，這種稱為L2-Regularization，統計上又稱為Ridge
+    Regression。
+- Class: text
+  Output: |
+    glmnet中的參數alpha控制了L1和L2 Regularization的權重。當alpha = 0，就只剩下L2-Regularization；
+    當alpha = 1，就只剩下L1-Regularization。當alpha 介於0、1之間，兩者並存時，統計上稱作
+    elastic net。
+- Class: text
+  Output: |
+    類似glm，glmnet除了傳統的線性模型之外，也將類似的概念實作於廣義線性模型上。glmnet會偵測y的型態，
+    或是指定family後，就會以對應的廣義線性模型做處理。
+
