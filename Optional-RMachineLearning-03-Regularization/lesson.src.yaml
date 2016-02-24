@@ -163,7 +163,8 @@
 - Class: text
   Output: |
     類似glm，glmnet除了傳統的線性模型之外，也將類似的概念實作於廣義線性模型上。glmnet會偵測y的型態，
-    或是指定family後，就會以對應的廣義線性模型做處理。
+    或是指定family後，就會以對應的廣義線性模型做處理。我們直接在最後的關卡練習glmnet提供的logistic
+    regression。
 
 - Class: text
   Output: |
@@ -171,3 +172,8 @@
     傳統的統計方法找到好的值。所以一般都會用training dataset v.s. testing dataset的概念來解決。
     也就是說，看看不同lambda選出來的模型，在testing dataset上的表現優劣，來挑選好的lambda。
 
+- Class: script
+  Output: |
+    最後我們請同學用上一個單元的使用過得資料集合來作練習。
+  Script: ml-03.R
+  AnswerTests: ml_03()
