@@ -25,6 +25,7 @@ ml_04 <- function() {
     logloss <- function(y, p, tol = 1e-4) {
       # tol 的用途是避免對0取log所導致的數值問題
       p[p < tol] <- tol
+      p[p > 1 - tol] <- 1 - tol
       -sum(y * log(p) + (1 - y) * log(1-p))
     }
     stopifnot("svm" %in% class(answer_04))

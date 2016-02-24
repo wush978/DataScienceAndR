@@ -1,0 +1,238 @@
+- Class: meta
+  Course: DataScienceAndR
+  Lesson: Optional-RMachineLearning-05-Decision-Tree
+  Author: Wush Wu
+  Type: Standard
+  Organization: Taiwan R User Group
+  Version: 2.3.1.2
+- Class: cmd_question
+  Output: 我們第一個介紹的是Decision Tree。先請同學安裝套件rpart。
+  CorrectAnswer: check_then_install("rpart", "4.1.10")
+  AnswerTests: test_package_version("rpart", "4.1.10")
+  Hint: check_then_install("rpart", "4.1.10")
+- Class: cmd_question
+  Output: 接著，請載入套件rpart
+  CorrectAnswer: library(rpart)
+  AnswerTests: test_search_path("rpart")
+  Hint: library(rpart)
+- Class: cmd_question
+  Output: 在摸索一個套件時，我們可以找找看套件作者有沒有撰寫vignette。 請同學輸入：`vignette(package = "rpart")`
+  CorrectAnswer: vignette(package = "rpart")
+  AnswerTests: omnitest('vignette(package = "rpart")')
+  Hint: vignette(package = "rpart")
+- Class: text
+  Output: 由跳出的視窗，我們可以看到一個名為：`"longintro"`的文件名稱， 是一份介紹rpart的文件。請輸入`vignette("longintro",
+    package = "rpart")` 打開這份文件。
+  CorrectAnswer: vignette("longintro", package = "rpart")
+  AnswerTests: omnitest('vignette("longintro", package = "rpart")')
+- Class: text
+  Output: 有興趣的同學可以閱讀這份文件的前半段。我們則直接用範例來解說 rpart 的功能。
+- Class: cmd_question
+  Output: 請同學先輸入`data(stagec)`載入一個關於C 期前列腺癌的研究數據。 這比數據中，記錄著146 位病患的資訊。
+  CorrectAnswer: data(stagec)
+  AnswerTests: omnitest("data(stagec)")
+  Hint: data(stagec)
+- Class: cmd_question
+  Output: 請同學輸入：`cfit <- rpart(pgstat ~ age + eet + g2, data = stagec, method = "class")`。
+  CorrectAnswer: cfit <- rpart(pgstat ~ age + eet + g2, data = stagec, method = "class")
+  AnswerTests: omnitest('cfit <- rpart(pgstat ~ age + eet + g2, data = stagec, method
+    = "class")')
+  Hint: cfit <- rpart(pgstat ~ age + eet + g2, data = stagec, method = "class")
+- Class: cmd_question
+  Output: 這裡的函數`rpart`就是用於建立decision tree的函數。請同學打開`rpart`的說明頁面。
+  CorrectAnswer: ?rpart
+  AnswerTests: any_of_exprs("?rpart", "help('rpart')", "help(rpart)")
+  Hint: ?rpart
+- Class: mult_question
+  Output: 根據`rpart`的說明文件，我們剛剛輸入的： `cfit <- rpart(pgstat ~ age + eet + g2, data = stagec,
+    method = "class")`中 的`pgstat ~ age + eet + g2`是對應到`rpart` 函數的哪一個參數呢？
+  AnswerChoices: formula;data;weights;subset;na.action
+  CorrectAnswer: formula
+  AnswerTests: omnitest(correctVal="formula")
+  Hint: R 的函數參數，是先依照參數名稱，再依照剩下的順序來做辨識。
+- Class: text
+  Output: 上述輸入的formula參數：`pgstat ~ age + eet + g2`，描述的是在建構decision tree 時，變數之間的關係。pgstat是要被預測、被分類的變數名稱，age、eet和g2則是用來對
+    pgstat做預測的變數。
+- Class: mult_question
+  Output: 根據`rpart`的說明文件，我們剛剛輸入的： `cfit <- rpart(pgstat ~ age + eet + g2, data = stagec,
+    method = "class")`中 的`stagec`是對應到`rpart` 函數的哪一個參數呢？
+  AnswerChoices: formula;data;weights;subset;na.action
+  CorrectAnswer: data
+  AnswerTests: omnitest(correctVal="data")
+- Class: cmd_question
+  Output: 接著，請列出stagec的欄位名稱。
+  CorrectAnswer: colnames(stagec)
+  AnswerTests: omnitest(correctVal = colnames(stagec))
+  Hint: colnames(stagec)
+- Class: text
+  Output: 我們可以看到，剛剛formula中的變數名稱，都在stagec之中。
+- Class: mult_question
+  Output: rpart 這個函數有許多功能，使用者可以在method的參數指定要使用的功能。 請同學參考rpart 的說明文件中，關於method參數的說明。請問下列哪一個選項「不
+    是」rpart 的method參數的有效選項？
+  AnswerChoices: anova;poisson;class;exp;regression
+  CorrectAnswer: regression
+  AnswerTests: omnitest(correctVal = "regression")
+- Class: cmd_question
+  Output: 在關於method的說明文件中，仔細地解釋了rpart是如何依照formula 中選擇 的變數形態來智慧的選擇預設的method。請同學查詢stagec
+    的pgstat欄位的形態 為何。
+  CorrectAnswer: class(stagec$pgstat)
+  AnswerTests: omnitest(correctVal = class(stagec$pgstat))
+  Hint: class(stagec$pgstat)
+- Class: mult_question
+  Output: 依照rpart的說明文件和stagec$pgstat的型態，請問如果我們沒有指定method 的話，rpart會用哪一種method參數來運作？
+  AnswerChoices: anova;poisson;class;exp
+  CorrectAnswer: anova
+  AnswerTests: omnitest(correctVal = "anova")
+- Class: cmd_question
+  Output: 接著，請輸入`cfit`來看看rpart 的結果。
+  CorrectAnswer: cfit
+  AnswerTests: omnitest("cfit")
+  Hint: cfit
+- Class: mult_question
+  Output: R 會把從資料中學到的decision tree顯示到console 中。 前段的文字說明了每一行的資訊依序是：node), split, n,
+    loss, yval, (yprob) 而且最後標記有星號的就是decision tree的leaf node。 舉例來說，`1) root 146 54
+    0 (0.6301370 0.3698630)`代表這是第一個node， 他的切割規則是root，有146 個點，loss是54，deviance是0 。
+    請問同學，第二個node的loss是什麼？
+  AnswerChoices: g2< 13.2;80;18;0;0.775;0.225
+  CorrectAnswer: 18
+  AnswerTests: omnitest(correctVal = "18")
+- Class: cmd_question
+  Output: 這裡的loss代表的是錯誤的label的個數 ，俗稱0/1 loss。 在第一個node，也就是root之中，cfit對`stagec$pgstat`
+    的預測是0 。請同學計算`stagec$pgstat` 中非0 的病患總數。看看是不是和第一行，1) root 中顯示的loss相同。
+  CorrectAnswer: sum(stagec$pgstat != 0)
+  AnswerTests: omnitest(correctVal = sum(stagec$pgstat != 0))
+  Hint: sum(stagec$pgstat != 0)
+- Class: cmd_question
+  Output: 另外同學應該有注意到，node的編號並不是連續的。這是因為， 每個編號為x 的node，他的分支一定是編號2x和2x+1。請問同學，編號 7 的node是編號多少的node的分支？
+  AnswerChoices: 1;2;3;6
+  CorrectAnswer: 3
+  AnswerTests: omnitest(correctVal = "3")
+  Hint: 3 * 2 + 1 = 7
+- Class: cmd_question
+  Output: 接著，讓我們畫出cfit。這需要兩個指令，所以請同學先輸入： `plot(cfit)`
+  CorrectAnswer: plot(cfit)
+  AnswerTests: omnitest("plot(cfit)")
+  Hint: plot(cfit)
+- Class: cmd_question
+  Output: 再請同學輸入`text(cfit)`
+  CorrectAnswer: text(cfit)
+  AnswerTests: omnitest("text(cfit)")
+  Hint: text(cfit)
+- Class: cmd_question
+  Output: 我們可以發現，圖的上下維有一點被切掉。這可以透過`par`函數的 mar 參數做調整。但是其實已經有人發現這件事情，並且寫了一個叫做 rpart.plot的套件。請同學安裝這個套件
+  CorrectAnswer: check_then_install("rpart.plot", "1.5.3")
+  AnswerTests: test_package_version("rpart.plot", "1.5.3")
+  Hint: install.packages("rpart.plot")
+- Class: cmd_question
+  Output: 接著，請載入rpart.plot套件。
+  CorrectAnswer: library(rpart.plot)
+  AnswerTests: test_search_path("rpart.plot")
+  Hint: library(rpart.plot)
+- Class: cmd_question
+  Output: 我們直接輸入：`rpart.plot(cfit)`來看看畫圖的結果。
+  CorrectAnswer: rpart.plot(cfit)
+  AnswerTests: omnitest("rpart.plot(cfit)")
+  Hint: rpart.plot(cfit)
+- Class: text
+  Output: rpart.plot套件對於rpart的圖片輸出做過調整，所以就不會 出現圖形被截掉的狀態。
+- Class: text
+  Output: 接著讓我們來探索rpart 是如何產生cfit這棵樹。
+- Class: text
+  Output: rpart 其實有非常多的參數，並且各類參數的細節分佈在`rpart` 的參數parms和control中。
+- Class: text
+  Output: 在我們剛剛打開的vignette的Chapter 3.1 ，作者說明了如何建構一個decision tree。 裡面解釋了何謂prior 、loss和splitting
+    index。
+- Class: text
+  Output: rpart 的參數`parms` 裡面可以設定和method相關的參數。
+- Class: mult_question
+  Output: 請問同學，根據`rpart` 的說明文件（請參閱Arguments 底下的parms）， 當method為class 時（classification
+    splitting），預設的prior 為何？ 1)每種類別都相等的機率;2)和資料中各類別出現的頻率成正比的機率
+  AnswerChoices: 1;2
+  CorrectAnswer: 2
+  AnswerTests: omnitest(correctVal = "2")
+  Hint: 文件中說明了：The default priors are proportional to the data counts
+- Class: mult_question
+  Output: 請問同學，根據`rpart` 的說明文件（請參閱Arguments 底下的parms）， 當method為class 時（classification
+    splitting），預設的splitting index 為何？
+  AnswerChoices: gini;information
+  CorrectAnswer: gini
+  AnswerTests: omnitest(correctVal = "gini")
+- Class: cmd_question
+  Output: rpart 把和method無關的參數放到`control`底下，並且提供一個輔助函數`rpart.control` 來協助使用者在實作時也限制了每個split
+    時，該node的個數限制。請同學輸入`?rpart.control` 來看一下這些控制有哪些參數。
+  CorrectAnswer: ?rpart.control
+  AnswerTests: omnitest("?rpart.control")
+  Hint: ?rpart.control
+- Class: script
+  Output: 接著，我們來重現cfit的第一層結果。請同學閱讀檔案中的程式碼與註解後，輸入`submit()`。
+  Script: rpart_01.R
+  AnswerTests: rpart_01_test()
+- Class: cmd_question
+  Output: 請問同學，讓impurity改善最大的切點，是第幾個呢？同學可以用`which.max`函數作答。
+  CorrectAnswer: which.max(index)
+  AnswerTests: omnitest(correctVal = which.max(index))
+  Hint: which.max(index)
+- Class: cmd_question
+  Output: 對應的切點的值是多少呢？請利用上一題的答案。
+  CorrectAnswer: eval.x[which.max(index)]
+  AnswerTests: omnitest(correctVal = eval.x[which.max(index)])
+  Hint: eval.x[which.max(index)]
+- Class: cmd_question
+  Output: 上一題的答案和cfit的結果不一致。從前面cfit的輸出可以看到，rpart 的第一個切點是age >= 58.5。 這其實是受到`control`
+    這個參數的影響，所以rpart 不會切割出太小（包含太少資料點）的node。 請同學輸入：`rpart(pgstat ~ age, data = stagec,
+    method = "class", control = rpart.control(minsplit = 1))`
+  CorrectAnswer: rpart(pgstat ~ age, data = stagec, method = "class", control = rpart.control(minsplit
+    = 1))
+  AnswerTests: omnitest('rpart(pgstat ~ age, data = stagec, method = "class", control
+    = rpart.control(minsplit = 1))')
+  Hint: rpart(pgstat ~ age, data = stagec, method = "class", control = rpart.control(minsplit
+    = 1))
+- Class: text
+  Output: 同學是不是看到第一個切點變成我們之前算出來的50.5了？
+- Class: text
+  Output: rpart 在做分類時，是利用公式去計算各種切點的impurity的改善。 而這些切點的選擇也是有限制的（透過`rpart.control`）。使用者可以透過`control=rpart.control(minsplit
+    = 1)` 來對這些限制條件做修正。
+- Class: script
+  Output: Impurity的計算則可以透過parms 的設定來調整。請同學閱讀檔案中的程式碼與註解後，輸入`submit()`。
+  Script: rpart_02.R
+  AnswerTests: rpart_02_test()
+- Class: cmd_question
+  Output: 在改成用information index後，對應的切點的值是多少呢？
+  CorrectAnswer: eval.x[which.max(index)]
+  AnswerTests: omnitest(correctVal = eval.x[which.max(index)])
+  Hint: eval.x[which.max(index)]
+- Class: cmd_question
+  Output: 請同學輸入：`rpart(pgstat ~ age, data = stagec, method = "class", parms = list(split
+    = "information"), control = rpart.control(minsplit=1))`
+  CorrectAnswer: rpart(pgstat ~ age, data = stagec, method = "class", parms = list(split
+    = "information"), control = rpart.control(minsplit=1))
+  AnswerTests: omnitest('rpart(pgstat ~ age, data = stagec, method = "class", parms
+    = list(split = "information"), control = rpart.control(minsplit=1))')
+  Hint: rpart(pgstat ~ age, data = stagec, method = "class", parms = list(split =
+    "information"), control = rpart.control(minsplit=1))
+- Class: text
+  Output: 可以看到差不多的結果。
+- Class: script
+  Output: rpart 也可以讓我們自己定義分割的邏輯。這題會打開rpart 套件提供的範例給同學參考。 有興趣的同學可以仔細研究。讀完之後請輸入`submit()`
+  Script: rpart_03.R
+  AnswerTests: yes
+- Class: cmd_question
+  Output: 我們可以利用`predict`函數來使用學習好的cfit函數做預測。舉例來說，`predict(cfit, stagec)` 就可以用我們學到的模型回頭預測stagec的pgstat的值。請同學試試看。
+  CorrectAnswer: predict(cfit, stagec)
+  AnswerTests: omnitest("predict(cfit, stagec)")
+  Hint: predict(cfit, stagec)
+- Class: cmd_question
+  Output: 如果同學想要對rpart套件提供的預測函數`predict`有更多的了解可以輸入：`?predict.rpart` 注意歐，這裡我們使用的並不是`?predict`，因為這裡rpart
+    套件採用了R 的S3物件導向方法。由於 `class(cfit)`的輸出是`rpart`，所以`predict`函數最後會呼叫`predict.rpart`來對cfit做處理，
+    相關的說明文件也會放在`?predict.rpart`之中。
+  CorrectAnswer: ?predict.rpart
+  AnswerTests: omnitest("?predict.rpart")
+  Hint: ?predict.rpart
+- Class: text
+  Output: 以上就是對rpart 這個套件的介紹。
+- Class: script
+  Output: |
+    最後我們再次使用rpart來挑戰mlbench的Ionosphere資料
+  Script: ml-05.R
+  AnswerTests: ml_05()
+
