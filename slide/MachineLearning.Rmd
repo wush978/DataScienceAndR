@@ -1,0 +1,1315 @@
+---
+title       : "Machine Learning"
+author      : "Wush Wu"
+job         : 國立台灣大學
+framework   : io2012-wush
+highlighter : highlight.js
+hitheme     : zenburn
+widgets     : [mathjax]            # {mathjax, quiz, bootstrap}
+mode        : selfcontained # {standalone, draft}
+knit        : slidify::knit2slides
+--- .largecontent &vcenter
+
+```{r setup, include=FALSE, cache=FALSE}
+library(knitr)
+library(magrittr)
+library(data.table)
+library(dplyr)
+library(ggplot2)
+library(quantmod)
+library(jsonlite)
+library(binom)
+library(stargazer)
+library(neuralnet)
+library(rpart)
+library(xgboost)
+library(e1071)
+library(plotmo)
+library(rpart.plot)
+
+opts_chunk$set(echo = FALSE, cache=TRUE, comment="",
+               cache.path = "cache-MachineLearning/",
+               dev.args=list(bg="transparent"),
+               fig.path = "./assets/fig/rmachine-learning-",
+               fig.width = 10, fig.height = 6)
+fig <- function(path, size = 100) {
+  sprintf("<img src='assets/img/%s' style='max-width: %d%%;max-height: %d%%'></img>",
+          path, size, size)
+}
+fig2 <- function(path, size = 100) {
+  sprintf("<img src='assets/img/%s' style='width: %d%%'></img>",
+          path, size)
+}
+sys_name <- Sys.info()["sysname"] %>% tolower
+sys_encode <- c("utf8", "utf8", "big5")[pmatch(sys_name, c("linux", "darwin", "windows"))]
+```
+
+## 課程大綱
+
+- 機器學習簡介
+- 線性模型(迴歸分析)
+- Regularization
+- Support Vector Machine
+- 分類樹
+- Bagging 與 Random Forest
+- Boosting 與 Gradient Boosted Decision Tree
+- Neuron Network
+
+--- .dark .segue
+
+## 機器學習簡介
+
+--- &vcenter .largecontent
+
+## 什麼是學習
+
+- 字典定義：因為知識、教育、研究或經驗而改變行為
+- 機器學習：讓機器具備學習能力的技術
+
+--- &vcenter .largecontent
+
+## 人工智慧
+
+<center>`r fig("AI System.png")`</center>
+
+--- &vcenter .largecontent
+
+## 廣告播放的自動化系統
+
+- 訊號源：使用者的瀏覽特定的網站
+- 感知：使用者的特性、網站的特性
+- 模型：男生喜歡電玩相關廣告、女生喜歡化妝品相關廣告
+- 行為：猜測使用者的性別。如果可能是男生，就播放電玩相關廣告；如果可能是女生，就播放化妝品相關廣告
+
+--- &vcenter .largecontent
+
+## 機器學習
+
+<center>`r fig("Machine Learning.png")`</center>
+
+--- &vcenter .largecontent
+
+## 廣告播放的自動化學習系統
+
+- 訊號源：使用者的瀏覽特定的網站
+- 感知：使用者的特性、網站的特性
+- 模型：男生喜歡電玩相關廣告、女生喜歡化妝品相關廣告
+- 行為：猜測使用者的性別。如果可能是男生，就播放電玩相關廣告；如果可能是女生，就播放化妝品相關廣告
+- **學習**：依照播放的結果，調整電玩廣告和化妝品廣告的比例
+
+--- &vcenter .largecontent
+
+## 為什麼我們要讓機器去學習？
+
+- 機器學習不能解決所有的問題
+    - 問題必須要轉換成機器學習可以解決的問題
+- 機器學習系統需要成本做開發
+- 機器學習系統需要額外的維護成本（http://www.slideshare.net/WushWu/ss-55964136）
+- 機會成本：如果一開始能讓機器把任務做好，何必讓它花時間學習？
+
+--- &vcenter .largecontent
+
+## 實際的問題 $\Rightarrow$ 機器學習問題
+
+- 我們想要增加廣告的營收
+- 廣告的營收和點擊率相關
+- 在每次推播廣告給瀏覽者前，考慮「該瀏覽者點擊每種廣告的機率」
+- 預測瀏覽者點擊每種廣告的機率
+
+--- &vcenter .largecontent
+
+## 使用機器學習的好處
+
+--- &vcenter .largecontent
+
+## 人的主流意見可能出錯
+
+- 範例：廣告播放
+    - 我們以為女生不喜歡遊戲類廣告
+    - 有些手機遊戲是針對女生設計
+
+--- &vcenter .largecontent
+
+## 「模型」可能複雜到人無法處理
+
+- $Y = f(X)$ 的 $f$ 可能複雜到人無法一開始就設計出好的答案
+- 範例：廣告播放
+    - 瀏覽者有數十種標籤
+    - 有數百個網站與廣告
+
+--- &vcenter .largecontent
+
+## 環境的特性一直在改變
+
+- 人無法跟上環境的改變
+- 範例：廣告播放
+    - 簽約的網站與廣告會一直更換
+    - 瀏覽者的喜好也會一直更換
+
+--- &vcenter .largecontent
+
+## 我們該使用機器學習相關技術嗎？
+
+- 人可以做嗎？
+- 使用機器學習的成本 v.s. 使用人的成本
+- 範例：decaptcha
+
+--- &vcenter .largecontent
+
+## Captcha
+
+- 用於分辨人或電腦的問題
+
+<center>`r fig("recaptcha-example.gif")`</center>
+
+--- &vcenter .largecontent
+
+## Decaptcha
+
+- 想要用電腦做某些事情時，必須要讓電腦能通過Captcha
+- Decaptcha的方式：
+    - 影像辨識
+    - 群眾外包 <https://anti-captcha.com>
+
+--- &vcenter .largecontent
+
+## 你真的需要使用機器學習嗎？
+
+- 你的問題可以轉換成機器學習能解決的問題嗎？
+- 你的問題用人解決很昂貴，或是不可能嗎？
+- 你有維護機器學習解決方案的人嗎？
+
+--- &vcenter .largecontent
+
+## 機器學習領域常用名詞
+
+- $Y$：目標變數、應變變數、response
+- $X$：解釋變數、獨立變數、covariates
+
+--- &vcenter .largecontent
+
+## 機器學習解決的問題
+
+- 監督式學習：給定 $X$ ，預測 $Y$
+    - 分類： $Y$ 是類別型變數
+    - 迴歸： $Y$ 是解釋型變數
+- 非監督式學習：給 $X$，對 $X$ 分群
+
+--- &vcenter .largecontent
+
+## 分類問題（$Y$ 是類別型變數）
+
+- 二元分類
+    - 點擊預測： $Y =$ 使用者會不會點廣告
+    - 股票的漲跌： $Y =$ 下一個單位時間股價會往上走或往下走
+- 多元分類
+    - 手寫辨識： $Y =$ 使用者所撰寫的字
+    - 語音辨識： $Y =$ 使用者所發出的聲音
+
+--- &vcenter .largecontent
+
+## 回歸問題（$Y$是連續型變數）
+
+- 股價預測 ：$Y =$ 下一個單位時間時，特定股票的股價
+- 物價預測 ：$Y =$ 特定商品在下一個單位時間的價格
+
+--- &vcenter .largecontent
+
+## 叢集問題（$Y$不存在）
+
+- 顧客分群： $X =$ 顧客的特徵
+- 廣告分群： $X =$ 廣告的特徵
+
+--- &vcenter .largecontent
+
+## 機器學習技術較常用應用於預測
+
+- 鑑往知來
+
+--- &vcenter .largecontent
+
+## 預測型分析
+
+- 在事件發生之前，預測事件的結果
+    - 利用預測結果，決定動作
+
+--- &vcenter .largecontent
+
+## 股價
+
+- 預測未來股價的漲跌，決定行動
+    - 漲：買進
+    - 跌：賣出
+
+--- &vcenter .largecontent
+
+## 預測型分析的特性
+
+- 模型的準確度是主要目的
+- 不在乎模型的內容是否能帶來知識
+- 通常預測精準的模型，都會複雜到人類難以理解（黑盒子）
+
+<center>`r fig("blackbox.png")`</center>
+
+--- &vcenter .largecontent
+
+## 解釋型分析
+
+- 挖掘現象的因果關係
+
+--- &vcenter .largecontent
+
+## 公司的營收
+
+- 預測明年公司營收的準確度價值不高
+    - 9~10億 $\Rightarrow$ 9.9億~10.1億
+- 找出影響公司營收的原因價值很高
+
+--- &vcenter .largecontent
+
+## 解釋型分析的特性
+
+- 模型的合理性是主要目的
+    - 模型通常不準
+- 分析師必須要能夠透過模型尋找出價值
+    - 例：透過分析資安數據，發現特定作業系統比較脆弱，容易發生資安事件
+
+--- &vcenter .largecontent
+
+## 點擊率預測
+
+- 評分： $l(y, \hat{y})$
+    - 點擊預測： $l(y, \hat{y}) = \left\{\begin{array}{lc}  0 & \text{if } y = \hat{y} \\  1 & \text{if } y \neq \hat{y} \end{array}\right.$
+
+--- &vcenter .largecontent
+
+## 機器如何學習
+
+- 評分（Loss Function）
+- 優化
+
+--- &vcenter .largecontent
+
+## 評分
+
+- 評量預測結果
+- 調整預測的方向
+- 常常牽涉到統計模型
+
+--- &vcenter .largecontent
+
+## 優化
+
+- 找出合理的方法讓預測越來越準
+- 常常牽涉到數值方法
+
+--- &vcenter .largecontent
+
+## 總結
+
+- 了解機器學習的目的與優點
+- 了解機器學習能解決的問題
+
+--- .dark .segue
+
+## 線性模型(迴歸分析)
+
+--- &vcenter .largecontent
+
+## 統計模型
+
+- $Y$是我們感興趣的變數, $X$是可能跟$Y$相關的資料
+    - 當$Y$未知時，$X$仍已知
+- $Y = f(X) + \varepsilon$
+    - $f(X)$描述我們理解的變化，使用的數學不牽涉到機率
+    - $\varepsilon$ 描述我們不能理解的變化，通常 $\varepsilon$ 是隨機變數，使用的數學需要機率
+
+--- &vcenter .largecontent
+
+## 範例：轉換率預測
+
+- 收集的資料帶有：使用者資訊、商品資訊、網站資訊、有無點擊、有無放入購物車、有無轉換
+- 目標：預估轉換率
+- 有無點擊與有無放入購物車等資訊，能不能放入$X$中做學習？
+
+--- &vcenter .largecontent
+
+## 有沒有$\varepsilon$的差別
+
+- $Y = f(X)$:
+    - 只有描述我們對Y的期待值
+    - 對於隨機性質沒有描述
+- $Y = f(X) + \varepsilon$
+    - 我們會假設$\varepsilon$的機率性質
+    - 一旦取得$\varepsilon$的分佈，即可找出估計$f$的方式，以及該方式估計$f$的特性
+    - 分佈：機率密度函數、幾率質量函數或是一群有代表性的樣本
+
+--- &vcenter .largecontent
+
+## 統計與機器學習
+
+- 評分的定法
+
+--- &vcenter .largecontent
+
+## 線性模型
+
+- $Y$ 是煞車滑行的距離
+- $X$ 是車速
+- $Y = f(X) + \varepsilon$
+    - $f(X) = \beta_0 + \beta_1 X$
+
+--- &vcenter .largecontent
+
+## X-Y 散佈圖
+
+- $(x_1, y_1), (x_2, y_2), ...$ ：已知$X$推測$Y$
+
+```{r cars}
+g <-
+  ggplot(cars, aes(x = speed, y = dist)) +
+  geom_point()
+i <- 23
+g + annotate(
+  "text", label = sprintf("(list(x[%d],y[%d]))", i, i),
+  x = cars$speed[i], y = cars$dist[i], vjust = -0.5,
+  parse = TRUE, size = 8)
+```
+
+--- &vcenter .largecontent
+
+## 最小方差直線
+
+- $Y = \beta_0 + \beta_1 X$
+
+```{r cars-lm}
+m <- lm(dist ~ speed, cars)
+g <-
+  ggplot(cars, aes(x = speed, y = dist)) +
+  geom_point() +
+  geom_smooth(method = lm, se = FALSE)
+i <- 23
+g +
+  annotate(
+    "text", label = sprintf("(list(x[%d],y[%d]))", i, i),
+    x = cars$speed[i], y = cars$dist[i], vjust = -0.5,
+    parse = TRUE, size = 8
+  ) +
+  annotate(
+    "segment", x = cars$speed[i], xend = cars$speed[i],
+    y = cars$dist[i], yend = m$fitted.values[i]
+  )
+
+```
+
+--- &vcenter .largecontent
+
+## 最小方差直線的性質
+
+- $Y = \beta_0 + \beta_1 X + \varepsilon, \varepsilon \overset{i.i.d.}{\sim} N(0, \sigma^2)$
+
+```{r cars-lm-se}
+m <- lm(dist ~ speed, cars)
+g <-
+  ggplot(cars, aes(x = speed, y = dist)) +
+  geom_point() +
+  geom_smooth(method = lm, se = FALSE)
+.x <- seq(min(cars$speed), max(cars$speed), by = 0.01)
+m.s <- summary(m)
+.ymin <-
+  m.s$coefficients[1,1] + qnorm(0.025) * m.s$coefficients[1,2] +
+  (m.s$coefficients[2,1] + qnorm(0.025) * m.s$coefficients[2,2]) * .x
+.ymax <-
+  m.s$coefficients[1,1] + qnorm(0.975) * m.s$coefficients[1,2] +
+  (m.s$coefficients[2,1] + qnorm(0.975) * m.s$coefficients[2,2]) * .x
+g +
+  annotate("ribbon", x = .x, ymin = .ymin, ymax = .ymax, alpha = 0.3)
+```
+
+--- &vcenter .largecontent
+
+## 線性模型
+
+- $X$ 不一定只有一個變數，可能有： $X_1, X_2, ..., X_p$
+- $Y = \beta_0 + \sum_{i=1}^p \beta_p X_p$
+- 線性模型是「可以」解釋的
+    - Dist = `r coef(m)[1]` + `r coef(m)[2]` $\times$ Speed + $\varepsilon$
+    - $\varepsilon \overset{i.i.d.}{\sim} N(0, `r summary(m)$sigma^2`)$
+
+--- &vcenter .largecontent
+
+## 線性模型
+
+- 線性模型是非常泛用的模型
+    - 具備有豐富的彈性
+    - 具備有良好的解釋性
+    - 可以透過「交互作用」產生複雜的模型
+- 統計學家對線性模型的理解非常深入： 當 $\varepsilon \overset{i.i.d.}{\sim} N(0, \sigma^2)$
+    - 知道最好的估計方法：最小方差直線
+    - 知道$\varepsilon$對估計方法的影響
+
+--- &vcenter .largecontent
+
+## 線性模型的範例
+
+```{r m-summary, results = "asis"}
+stargazer(m, type = "html")
+```
+
+--- &vcenter .largecontent
+
+## 線性模型，不只是直線
+
+- 上述的最小方差直線，在 Speed = 0，預測的煞車距離為 -17.579 
+- 負的煞車距離不合理
+- $Y$ 都是正的，所以我們取log
+
+--- &vcenter .largecontent
+
+## 線性模型，可以處理非直線的模型
+
+- $log(Y) = \beta_0 + \beta_1 X$
+
+```{r cars-exp-lm}
+m <- lm(log(dist) ~ speed, cars)
+.x <- seq(min(cars$speed), max(cars$speed), 0.01)
+.y <- exp(coef(m)[1] + coef(m)[2] * .x)
+ggplot(cars, aes(x = speed, y = dist)) +
+  geom_point() +
+  geom_line(aes(x = x, y = y), data = data.frame(x = .x, y = .y))
+```
+
+--- &vcenter .largecontent
+
+## 線性模型也可以解決二元分類問題
+
+- $Y =$ 煞車距離超過50； $P(Y \text{ is TRUE}) = \frac{1}{1 + e^{\beta_0 + \beta_1 X}}$
+
+```{r cars-logistic}
+cars2 <- cars %>%
+  mutate(y = dist > 50)
+m <- glm(y ~ speed, family = "binomial", data = cars2)
+.x <- seq(min(cars$speed), max(cars$speed), 0.01)
+.y <- coef(m)[1] + coef(m)[2] * .x
+ggplot() +
+  geom_point(aes(x = speed, y = probability), data = group_by(cars2, speed) %>% summarise(probability = mean(y))) +
+  geom_line(aes(x = x, y = y), data = data.frame(x = .x, y = 1 / (1 + exp(-.y))))
+```
+
+--- &vcenter .largecontent
+
+## Logistic Regression
+
+- $\beta_0 + \beta_1 X$：線性
+- $\frac{1}{1 + e^{\beta_0 + \beta_1 X}}$ ：將實數線（ $(-\infty, \infty)$ ）轉換至 $(0, 1)$
+- $\varepsilon$ 的地位由銅板機率（ Bernoulli ）取代
+- 常用於許多領域：罕見疾病分析、廣告點擊率分析...
+
+--- &vcenter .largecontent
+
+## 線性模型還有許多變形
+
+- Poisson Regression：當資料為非負整數
+- Isotonic regression：當資料嚴格遞增
+
+--- &vcenter .largecontent
+
+## $X$ 的組合
+
+- 要建立好的線性模型，$X$的挑選是很重要的
+- $X$間的交互作用項與轉換是常用的技巧
+    - $X$設定很吃經驗、知識
+
+--- &vcenter .largecontent
+
+## 交互作用
+
+```{r iris-interaction}
+ggplot(iris, aes(x = Petal.Length, y = Sepal.Length, color = Species, fill = Species)) +
+  geom_point()
+```
+
+--- &vcenter .largecontent
+
+## 不考慮交互作用
+
+```{r iris-no-interaction}
+ggplot(iris, aes(x = Petal.Length, y = Sepal.Length)) +
+  geom_point(aes(color = Species, fill = Species)) +
+  geom_smooth(method = "lm", formula = y ~ x, se = FALSE)
+```
+
+--- &vcenter .largecontent
+
+## 考慮交互作用
+
+```{r iris-has-interaction}
+ggplot(iris, aes(x = Petal.Length, y = Sepal.Length, color = Species, fill = Species)) +
+  geom_point() +
+  geom_smooth(method = "lm", formula = y ~ x, se = FALSE)
+```
+
+--- &vcenter .largecontent
+
+## 交互作用的應用：廣告推薦
+
+- 推薦點擊率最高的廣告
+- 廣告點擊率 = 廣告 + 網站
+    - 所有網站上的廣告播出順序都一致
+- 廣告點擊率 = 廣告 * 網站
+    - 廣告的影響力會受到網站的影響
+    - 不同網站的廣告播出順序會不同
+
+--- &vcenter .largecontent
+
+## 多種類別的分類
+
+- 類別1 建立一個logistic regression model
+- 類別2 建立一個logistic regression model
+- ...
+- 類別K-1 建立一個logistic regression model
+- 類別 $k \neq K$ 的機率為 $\frac{e^{\beta_k^x}}{1 + \sum_{i=1}^{K-1} e^{\beta_i^x}}$
+- 類別 $K$ 的機率為 $\frac{1}{1 + \sum_{i=1}^{K-1} e^{\beta_i^x}}$
+
+--- &vcenter .largecontent
+
+## 多種類別的分類
+
+```{r plot.nn, echo = FALSE, cache = FALSE}
+# source: http://stackoverflow.com/a/11881985
+plot.nn <-
+function (x, rep = NULL, x.entry = NULL, x.out = NULL, radius = 0.15, 
+    arrow.length = 0.2, intercept = TRUE, intercept.factor = 0.4, 
+    information = TRUE, information.pos = 0.1, col.entry.synapse = "black", 
+    col.entry = "black", col.hidden = "black", col.hidden.synapse = "black", 
+    col.out = "black", col.out.synapse = "black", col.intercept = "blue", 
+    fontsize = 12, dimension = 6, show.weights = TRUE, file = NULL, 
+    ...) 
+{
+    net <- x
+    if (is.null(net$weights)) 
+        stop("weights were not calculated")
+    if (!is.null(file) && !is.character(file)) 
+        stop("'file' must be a string")
+    if (is.null(rep)) {
+        for (i in 1:length(net$weights)) {
+            if (!is.null(file)) 
+                file.rep <- paste(file, ".", i, sep = "")
+            else file.rep <- NULL
+            #dev.new()
+            plot.nn(net, rep = i, x.entry, x.out, radius, arrow.length, 
+                intercept, intercept.factor, information, information.pos, 
+                col.entry.synapse, col.entry, col.hidden, col.hidden.synapse, 
+                col.out, col.out.synapse, col.intercept, fontsize, 
+                dimension, show.weights, file.rep, ...)
+        }
+    }
+    else {
+        if (is.character(file) && file.exists(file)) 
+            stop(sprintf("%s already exists", sQuote(file)))
+        result.matrix <- t(net$result.matrix)
+        if (rep == "best") 
+            rep <- as.integer(which.min(result.matrix[, "error"]))
+        if (rep > length(net$weights)) 
+            stop("'rep' does not exist")
+        weights <- net$weights[[rep]]
+        if (is.null(x.entry)) 
+            x.entry <- 0.5 - (arrow.length/2) * length(weights)
+        if (is.null(x.out)) 
+            x.out <- 0.5 + (arrow.length/2) * length(weights)
+        width <- max(x.out - x.entry + 0.2, 0.8) * 8
+        radius <- radius/dimension
+        entry.label <- net$model.list$variables
+        out.label <- net$model.list$response
+        neuron.count <- array(0, length(weights) + 1)
+        neuron.count[1] <- nrow(weights[[1]]) - 1
+        neuron.count[2] <- ncol(weights[[1]])
+        x.position <- array(0, length(weights) + 1)
+        x.position[1] <- x.entry
+        x.position[length(weights) + 1] <- x.out
+        if (length(weights) > 1) 
+            for (i in 2:length(weights)) {
+                neuron.count[i + 1] <- ncol(weights[[i]])
+                x.position[i] <- x.entry + (i - 1) * (x.out - 
+                  x.entry)/length(weights)
+            }
+        y.step <- 1/(neuron.count + 1)
+        y.position <- array(0, length(weights) + 1)
+        y.intercept <- 1 - 2 * radius
+        information.pos <- min(min(y.step) - 0.1, 0.2)
+        if (length(entry.label) != neuron.count[1]) {
+            if (length(entry.label) < neuron.count[1]) {
+                tmp <- NULL
+                for (i in 1:(neuron.count[1] - length(entry.label))) {
+                  tmp <- c(tmp, "no name")
+                }
+                entry.label <- c(entry.label, tmp)
+            }
+        }
+        if (length(out.label) != neuron.count[length(neuron.count)]) {
+            if (length(out.label) < neuron.count[length(neuron.count)]) {
+                tmp <- NULL
+                for (i in 1:(neuron.count[length(neuron.count)] - 
+                  length(out.label))) {
+                  tmp <- c(tmp, "no name")
+                }
+                out.label <- c(out.label, tmp)
+            }
+        }
+        grid.newpage()
+        pushViewport(viewport(name = "plot.area", width = unit(dimension, 
+            "inches"), height = unit(dimension, "inches")))
+        for (k in 1:length(weights)) {
+            for (i in 1:neuron.count[k]) {
+                y.position[k] <- y.position[k] + y.step[k]
+                y.tmp <- 0
+                for (j in 1:neuron.count[k + 1]) {
+                  y.tmp <- y.tmp + y.step[k + 1]
+                  result <- calculate.delta(c(x.position[k], 
+                    x.position[k + 1]), c(y.position[k], y.tmp), 
+                    radius)
+                  x <- c(x.position[k], x.position[k + 1] - result[1])
+                  y <- c(y.position[k], y.tmp + result[2])
+                  grid.lines(x = x, y = y, arrow = arrow(length = unit(0.15, 
+                    "cm"), type = "closed"), gp = gpar(fill = col.hidden.synapse, 
+                    col = col.hidden.synapse, ...))
+                  if (show.weights) 
+                    draw.text(label = weights[[k]][neuron.count[k] - 
+                      i + 2, neuron.count[k + 1] - j + 1], x = c(x.position[k], 
+                      x.position[k + 1]), y = c(y.position[k], 
+                      y.tmp), xy.null = 1.25 * result, color = col.hidden.synapse, 
+                      fontsize = fontsize - 2, ...)
+                }
+                if (k == 1) {
+                  grid.lines(x = c((x.position[1] - arrow.length), 
+                    x.position[1] - radius), y = y.position[k], 
+                    arrow = arrow(length = unit(0.15, "cm"), 
+                      type = "closed"), gp = gpar(fill = col.entry.synapse, 
+                      col = col.entry.synapse, ...))
+                  draw.text(label = entry.label[(neuron.count[1] + 
+                    1) - i], x = c((x.position - arrow.length), 
+                    x.position[1] - radius), y = c(y.position[k], 
+                    y.position[k]), xy.null = c(0, 0), color = col.entry.synapse, 
+                    fontsize = fontsize, ...)
+                  grid.circle(x = x.position[k], y = y.position[k], 
+                    r = radius, gp = gpar(fill = "white", col = col.entry, 
+                      ...))
+                }
+                else {
+                  grid.circle(x = x.position[k], y = y.position[k], 
+                    r = radius, gp = gpar(fill = "white", col = col.hidden, 
+                      ...))
+                }
+            }
+        }
+        out <- length(neuron.count)
+        for (i in 1:neuron.count[out]) {
+            y.position[out] <- y.position[out] + y.step[out]
+            grid.lines(x = c(x.position[out] + radius, x.position[out] + 
+                arrow.length), y = y.position[out], arrow = arrow(length = unit(0.15, 
+                "cm"), type = "closed"), gp = gpar(fill = col.out.synapse, 
+                col = col.out.synapse, ...))
+            draw.text(label = out.label[(neuron.count[out] + 
+                1) - i], x = c((x.position[out] + radius), x.position[out] + 
+                arrow.length), y = c(y.position[out], y.position[out]), 
+                xy.null = c(0, 0), color = col.out.synapse, fontsize = fontsize, 
+                ...)
+            grid.circle(x = x.position[out], y = y.position[out], 
+                r = radius, gp = gpar(fill = "white", col = col.out, 
+                  ...))
+        }
+        if (intercept) {
+            for (k in 1:length(weights)) {
+                y.tmp <- 0
+                x.intercept <- (x.position[k + 1] - x.position[k]) * 
+                  intercept.factor + x.position[k]
+                for (i in 1:neuron.count[k + 1]) {
+                  y.tmp <- y.tmp + y.step[k + 1]
+                  result <- calculate.delta(c(x.intercept, x.position[k + 
+                    1]), c(y.intercept, y.tmp), radius)
+                  x <- c(x.intercept, x.position[k + 1] - result[1])
+                  y <- c(y.intercept, y.tmp + result[2])
+                  grid.lines(x = x, y = y, arrow = arrow(length = unit(0.15, 
+                    "cm"), type = "closed"), gp = gpar(fill = col.intercept, 
+                    col = col.intercept, ...))
+                  xy.null <- cbind(x.position[k + 1] - x.intercept - 
+                    2 * result[1], -(y.tmp - y.intercept + 2 * 
+                    result[2]))
+                  if (show.weights) 
+                    draw.text(label = weights[[k]][1, neuron.count[k + 
+                      1] - i + 1], x = c(x.intercept, x.position[k + 
+                      1]), y = c(y.intercept, y.tmp), xy.null = xy.null, 
+                      color = col.intercept, alignment = c("right", 
+                        "bottom"), fontsize = fontsize - 2, ...)
+                }
+                grid.circle(x = x.intercept, y = y.intercept, 
+                  r = radius, gp = gpar(fill = "white", col = col.intercept, 
+                    ...))
+                grid.text(1, x = x.intercept, y = y.intercept, 
+                  gp = gpar(col = col.intercept, ...))
+            }
+        }
+        if (information) 
+            grid.text(paste("Error: ", round(result.matrix[rep, 
+                "error"], 6), "   Steps: ", result.matrix[rep, 
+                "steps"], sep = ""), x = 0.5, y = information.pos, 
+                just = "bottom", gp = gpar(fontsize = fontsize + 
+                  2, ...))
+        popViewport()
+        if (!is.null(file)) {
+            weight.plot <- recordPlot()
+            save(weight.plot, file = file)
+        }
+    }
+}
+calculate.delta <-
+function (x, y, r) 
+{
+    delta.x <- x[2] - x[1]
+    delta.y <- y[2] - y[1]
+    x.null <- r/sqrt(delta.x^2 + delta.y^2) * delta.x
+    if (y[1] < y[2]) 
+        y.null <- -sqrt(r^2 - x.null^2)
+    else if (y[1] > y[2]) 
+        y.null <- sqrt(r^2 - x.null^2)
+    else y.null <- 0
+    c(x.null, y.null)
+}
+draw.text <-
+function (label, x, y, xy.null = c(0, 0), color, alignment = c("left", 
+    "bottom"), ...) 
+{
+    x.label <- x[1] + xy.null[1]
+    y.label <- y[1] - xy.null[2]
+    x.delta <- x[2] - x[1]
+    y.delta <- y[2] - y[1]
+    angle = atan(y.delta/x.delta) * (180/pi)
+    if (angle < 0) 
+        angle <- angle + 0
+    else if (angle > 0) 
+        angle <- angle - 0
+    if (is.numeric(label)) 
+        label <- round(label, 5)
+    pushViewport(viewport(x = x.label, y = y.label, width = 0, 
+        height = , angle = angle, name = "vp1", just = alignment))
+    grid.text(label, x = 0, y = unit(0.75, "mm"), just = alignment, 
+        gp = gpar(col = color, ...))
+    popViewport()
+}
+iris2 <- iris
+for(species in levels(iris$Species)) {
+  iris2[[species]] <- as.integer(iris$Species == species)
+}
+```
+
+```{r nn-hack, echo = FALSE, dependson="nn", cache = FALSE}
+plotmo.pairs.nn2 <- function(object, x, nresponse = 1, trace = 0, all2 = FALSE) {
+  plotmo:::plotmo.pairs.rpart(rpart(Species ~ Sepal.Length + Sepal.Width, iris), x)
+}
+predict.nn2 <- function(object, newdata=NULL, rep="mean", trace=FALSE, ...) {
+  result <- compute(object, newdata)$net.result
+  apply(result, 1, which.max)
+}
+```
+
+```{r logistic-multiclass-platmo}
+g <- neuralnet(setosa + versicolor + virginica ~ Sepal.Length + Sepal.Width, iris2,
+               hidden = c(), rep = 1, stepmax = 1e7)
+class(g) <- "nn2"
+plotmo(g, type = "class", type2 = "image", degree1 = FALSE,
+       pch.response = as.integer(iris$Species), ngrid2 = 100, 
+       col.response = c("#990000", "#009900", "#000099")[as.integer(iris$Species)],
+       image.col = c("#ffcccc", "#ccffcc", "#ccccff"))
+```
+
+--- &vcenter .largecontent
+
+## R 功能介紹：`lm`與`glm`
+
+- 請同學完成： `Optional-RMachineLearning-01-Linear-Model`
+- 請同學完成： `Optional-RMachineLearning-02-Generalized-Linear-Model`
+
+--- .dark .segue
+
+## Regularization
+
+--- &vcenter .largecontent
+
+## 還記得金門年齡預測的例子嗎？
+
+- 20名金門鄉鄉民樣本的平均年齡
+- 20名金門鄉鄉民樣本的平均年齡 * 0.99
+
+--- &vcenter .largecontent
+
+## 偏差與散佈程度
+
+- 我們可以讓預測的偏差變大，以換取更穩定的預測
+    - Shrinkage
+- 在做機器學習時很常使用的技巧
+
+--- &vcenter .largecontent
+
+## Regularization
+
+- 在迴歸的範例中，我們尋找的是最小方差直線
+    - 我們要找到參數$\beta_0, \beta_1, ...$ 來最小化:
+$$(y - \beta_0 - \beta_1 x_1 - \beta_2 x_2 - ...)^2$$
+- Regularization
+    - 我們要找到參數$\beta_0, \beta_1, ...$ 來最小化:
+$$(y - \beta_0 - \beta_1 x_1 - \beta_2 x_2 - ...)^2 + \left\Vert \beta_1 \right\Vert + \left\Vert \beta_2 \right\Vert + ...$$
+
+--- &vcenter .largecontent
+
+## Regularization是一種逼近
+
+- 選解釋變數是個$L_0$的問題
+- Regularization透過 $L_1$ 或 $L_2$ 來逼近選解釋變數的問題
+- $L_1$ 會讓不重要的解釋變數係數變成0
+
+<center>`r fig("Sparsityl1.png")`</center>
+
+--- &vcenter .largecontent
+
+## Elastic Net
+
+- 同時考慮 $L_1$ 與 $L_2$ Regularization
+
+<center>`r fig("Sparsityen.png")`</center>
+
+--- &vcenter .largecontent
+
+## Regularization 的特點
+
+- 大部分狀況，可以提昇模型的準確度
+    - 提昇模型的穩定性
+- $L_0$ Regularization 可以用於挑選重要的解釋變數
+- 資料需要標準化
+- 多了一個（或多個）需要調整的參數
+
+--- &vcenter .largecontent
+
+## R套件介紹： glmnet
+
+- 請同學完成 `Optional-RMachineLearning-03-Regularization`
+
+--- .dark .segue
+
+## Support Vector Machine
+
+--- &vcenter .largecontent
+
+## 空間移轉與次元刀
+
+<center>`r fig("Kernel_Machine.png")`</center>
+
+--- &vcenter .largecontent
+
+## 空間移轉與次元刀
+
+- 影片介紹：<https://youtu.be/3liCbRZPrZA>
+
+--- &vcenter .largecontent
+
+## 比較一般的線性模型與SVM Regression
+
+- 線性模型：
+
+$$l(y, f(x) = (y - f(x))^2$$
+
+- SVM：
+
+$$l(y, f(x)) = \left\{\begin{array}{lc} 0 & \text{ if } \left\lVert y - f(x) \right\rVert < \varepsilon \\ \left\lVert y - f(x) \right\rVert - \varepsilon & \text{ otherwise } \end{array}\right.$$
+
+--- &vcenter .largecontent
+
+## 比較一般的線性模型與SVM Regression
+
+```{r hinge-loss}
+l1 <- function(x) x^2
+l2 <- Vectorize(function(x) {
+  if (abs(x) > 0.5) {
+    abs(x) - 0.5
+  } else 0
+})
+curve(l1(x), -2, 2, lwd = 2, lty = 1)
+curve(l2(x), add = TRUE, lty = 2, lwd = 2)
+legend("top", c("Linear Regression", "SVM Regression"), lwd = 2, lty = 1:2)
+```
+
+--- &vcenter .largecontent
+
+## 比較一般的線性模型與SVM Regression
+
+```{r svm}
+g <- svm(Species ~ Sepal.Length + Sepal.Width, iris)
+```
+
+```{r plotmo-svm, echo = FALSE, dependson="svm"}
+plotmo.pairs.svm <- function(object, x, nresponse = 1, trace = 0, all2 = FALSE) {
+  plotmo:::plotmo.pairs.rpart(rpart(Species ~ Sepal.Length + Sepal.Width, iris), x)
+}
+plotmo(g, type = "class", type2 = "image", degree1 = FALSE,
+       pch.response = as.integer(iris$Species), ngrid2 = 100,
+       col.response = c("#990000", "#009900", "#000099")[as.integer(iris$Species)],
+       image.col = c("#ffcccc", "#ccffcc", "#ccccff"))
+```
+
+--- &vcenter .largecontent
+
+## R套件介紹：e1071
+
+- 請同學完成 `Optional-RMachineLearning-04-Support-Vector-Machine`
+
+--- .dark .segue
+
+## Decision Tree
+
+--- &vcenter .largecontent
+
+## Decision Tree
+
+```{r rpart}
+g <- rpart(Species ~ Sepal.Length + Sepal.Width, iris)
+rpart.plot(g, cex = 2)
+```
+
+--- &vcenter .largecontent
+
+## 如何長出一顆決策樹？
+
+- 一次一次長一個分支
+    - 計算分數，每次都挑讓分數變得最好的分支長法
+    - 當長不下去時，停止
+- <https://youtu.be/eKD5gxPPeY0?t=3m48s>
+
+--- &vcenter .largecontent
+
+## Decision Tree
+
+```{r rpart-plotmo, dependson="rpart"}
+plotmo(g, type = "class", type2 = "image", degree1 = FALSE,
+       pch.response = as.integer(iris$Species), ngrid2 = 100,
+       col.response = c("#990000", "#009900", "#000099")[as.integer(iris$Species)],
+       image.col = c("#ffcccc", "#ccffcc", "#ccccff"))
+```
+
+--- &vcenter .largecontent
+
+## R 套件介紹：rpart
+
+- 請同學完成 `Optional-RMachineLearning-05-Decision-Tree`
+
+--- .dark .segue
+
+## Bagging 與 Random Forest
+
+--- &vcenter .largecontent
+
+## Bagging: 眾人的智慧
+
+- 如果我們有很多「不太準的模型」，能不能讓它們一起工作，變得更準？
+- 一起工作的方法：
+    - 表決（分類問題）
+    - 取平均（迴歸問題
+
+--- &vcenter .largecontent
+
+## Random Forest
+
+- 每次隨機抽出部份的「解釋變數」（而不是資料）
+- 利用這些抽出的解釋變數長出一棵決策樹（不太準的模型）
+- 長出大量的決策樹後進行投票（眾人的智慧）
+
+---
+
+## Random Forest
+
+<br/>
+<br/>
+<br/>
+<br/>
+<center>`r fig("RF.jpg",60)`</center>
+
+<small><https://citizennet.com/blog/2012/11/10/random-forests-ensembles-and-performance-metrics/></small>
+
+--- &vcenter .largecontent
+
+## Random Forest
+
+- 非線性
+
+```{r xgboost-rf}
+iris.x <- model.matrix(~ Sepal.Length + Sepal.Width - 1, iris)
+g <- xgboost(data = iris.x, 
+             label = as.integer(iris$Species) - 1, max.depth = 3, 
+             num_parallel_tree = 100, subsample = 0.5, colsample_bytree =0.5, 
+             num_class = 3, nround = 1, params = list(objective = "multi:softprob"),
+             verbose = 0)
+```
+
+```{r plotmo-xgboost-rf, echo = FALSE, dependson="xgboost-rf"}
+g$x <- iris.x;g$y <- iris$Species
+predict.xgb.Booster <- function(object, ...) {
+  tmp <- as.list(...)
+  tmp <- do.call(cbind, tmp)
+  retval <- xgboost::predict(object, tmp)
+  retval <- matrix(retval, nrow(tmp), 3, byrow = TRUE)
+  retval <- factor(apply(retval, 1, which.max), levels = 1:3)
+  levels(retval) <- levels(iris$Species)
+  retval
+}
+plotmo.pairs.xgb.Booster <- function(object, x, nresponse = 1, trace = 0, all2 = FALSE) {
+  plotmo:::plotmo.pairs.rpart(rpart(Species ~ Sepal.Length + Sepal.Width, iris), x)
+}
+plotmo(g, type = "class", type2 = "image", degree1 = FALSE,
+       pch.response = as.integer(iris$Species), ngrid2 = 100,
+       col.response = c("#990000", "#009900", "#000099")[as.integer(iris$Species)],
+       image.col = c("#ffcccc", "#ccffcc", "#ccccff"))
+```
+
+--- &vcenter .largecontent
+
+## R套件：randomForest
+
+--- .dark .segue
+
+## Boosting 與 GDBT
+
+--- &vcenter .largecontent
+
+## Boosting
+
+- 從錯誤中學習：
+    1. 在training dataset上學習
+    2. 驗證學習的成果，挑出做的不好的題目
+    3. 重新學一遍，但是更針對原先做不好的題目
+- 將學習的軌跡加權後做整合
+- $$F_{m+1} = F_m + h$$
+
+--- &vcenter .largecontent
+
+## Boosting
+
+<center>`r fig("OurMethodv81.png")`</center>
+<small><http://mprg.jp/research/boostedrandomforest_e></small>
+
+--- &vcenter .largecontent
+
+## Gradient Boosting
+
+- 將模型視為是在training dataset所產生的space
+    - $(F(x_1), F(x_2), ...F(x_N))$
+
+<center>`r fig("350px-Gradient_descent.svg.png")`</center>
+
+--- &vcenter .largecontent
+
+## Gradient Boosting Decision Tree
+
+```{r xgboost-gdbt}
+iris.x <- model.matrix(~ Sepal.Length + Sepal.Width - 1, iris)
+g <- xgboost(data = iris.x, 
+             label = as.integer(iris$Species) - 1, max.depth = 3, 
+             num_parallel_tree = 100, num_class = 3, nround = 100, 
+             params = list(objective = "multi:softprob"),
+             verbose = 0)
+```
+
+```{r plotmo-xgboost-gdbt, echo = FALSE, dependson="xgboost-gdbt"}
+g$x <- iris.x;g$y <- iris$Species
+predict.xgb.Booster <- function(object, ...) {
+  tmp <- as.list(...)
+  tmp <- do.call(cbind, tmp)
+  retval <- xgboost::predict(object, tmp)
+  retval <- matrix(retval, nrow(tmp), 3, byrow = TRUE)
+  retval <- factor(apply(retval, 1, which.max), levels = 1:3)
+  levels(retval) <- levels(iris$Species)
+  retval
+}
+plotmo.pairs.xgb.Booster <- function(object, x, nresponse = 1, trace = 0, all2 = FALSE) {
+  plotmo:::plotmo.pairs.rpart(rpart(Species ~ Sepal.Length + Sepal.Width, iris), x)
+}
+plotmo(g, type = "class", type2 = "image", degree1 = FALSE,
+       pch.response = as.integer(iris$Species), ngrid2 = 100,
+       col.response = c("#990000", "#009900", "#000099")[as.integer(iris$Species)],
+       image.col = c("#ffcccc", "#ccffcc", "#ccccff"))
+```
+
+--- &vcenter .largecontent
+
+## R套件介紹：xgboost
+
+- 嶄露頭角： <https://www.kaggle.com/c/higgs-boson>
+- 冠軍： <https://www.kaggle.com/c/tradeshift-text-classification/forums/t/10901/solution-sharing>
+- 請同學完成： `Optional-RMachineLearning-06-Gradient-Boosted-Decision-Tree`
+
+--- .dark .segue
+
+## Neuron Network
+
+--- &vcenter .largecontent
+
+## Neuron
+
+<center>`r fig("400px-Neuron_Hand-tuned.svg.png")`</center>
+
+--- &vcenter .largecontent
+
+## Artificial Neuron
+
+<center>`r fig("800px-ArtificialNeuronModel_english.png")`</center>
+<small><http://www.durofy.com/machine-learning-introduction-to-the-artificial-neural-network/></small>
+
+--- &vcenter .largecontent
+
+## Neuron Network
+
+- 串聯許多神經元
+
+```{r nn, dependson="plot.nn"}
+iris2 <- iris
+for(species in levels(iris$Species)) {
+  iris2[[species]] <- as.integer(iris$Species == species)
+}
+g <- neuralnet(setosa + versicolor + virginica ~ Sepal.Length + Sepal.Width, iris2,
+               hidden = c(2,2), rep = 1, stepmax = 1e7)
+```
+
+```{r plot-nn, echo = FALSE, dependson="nn", fig.height = 8}
+plot(g)
+```
+
+![]("assets/fig/plot-nn.png")
+
+--- &vcenter .largecontent
+
+## Neuron Network
+
+```{r nn-plotmo, dependson="nn-hack"}
+class(g) <- "nn2"
+plotmo(g, type = "class", type2 = "image", degree1 = FALSE,
+       pch.response = as.integer(iris$Species), ngrid2 = 100, 
+       col.response = c("#990000", "#009900", "#000099")[as.integer(iris$Species)],
+       image.col = c("#ffcccc", "#ccffcc", "#ccccff"))
+```
+
+--- &vcenter .largecontent
+
+## Deep Learning
+
+- 簡單的看法： 深層的Neuron Network
+- 近年的發展： Autoencoder, word2vec, Restricted Boltzmann machine, Dropout, Convolution Neuron Network, ...
+
+--- &vcenter .largecontent
+
+## 語音辨識
+
+<center>`r fig("SpeechRecognition.png")`</center>
+<small>李宏毅老師, 機器學習及其深層與結構化, 課程投影片</small>
+
+--- &vcenter .largecontent
+
+## Autoencoder
+
+- 用途： 降維 $X$，找出潛在的結構（我們會在下一週討論到）
+
+<center>`r fig("Autoencoder_structure.png")`</center>
+
+--- &vcenter .largecontent
+
+## Word2vec （結構學習）
+
+- 輸入大量的文本，利用Neuron Network解決兩個問題：
+    - 用兩邊的字預測中間的字
+    - 用中間的字預測兩邊的字
+- 每個字可編碼成 $\mathbb{R}^d$ 的向量
+    - 字之間的距離可以看成同義字
+    - 巴黎 - 法國 + 義大利 = 羅馬
+- 語意搜尋功能的入門
+
+--- .dark .segue
+
+## Deep Learning 常見誤解
+
+--- &vcenter .largecontent
+
+## Deep Learning 比較好是因為它比較複雜?
+
+- 同樣的多的Neurons
+    - 1層
+    - 高層
+
+<center>`r fig("Selection_009.png",50)`</center>
+<small>李宏毅老師, 機器學習及其深層與結構化, 課程投影片</small>
+
+--- &vcenter .largecontent
+
+## Deep Learning 比較好是因為它比較複雜?
+
+<center>`r fig("layers.png")`</center>
+<small>李宏毅老師, 機器學習及其深層與結構化, 課程投影片</small>
+
+--- &vcenter .largecontent
+
+## Deep Learning 越多層就越好?
+
+<center>`r fig("more-layers.png")`</center>
+<small>李宏毅老師, 機器學習及其深層與結構化, 課程投影片</small>
+
+--- &vcenter .largecontent
+
+## Neuron Newtork 的實作
+
+- R 上目前做的比較好的，可能是 mxnet
+    - 目前還沒有Windows的版本
+- 請轉職Python
+
+--- .dark .segue
+
+## 機器模型與實務
+
+--- &vcenter .largecontent
+
+## 真實的資料是活的
+
+- Offline $\neq$ Online
+- 線下指標無法取代實際指標
+- 線下實驗 ==> 線上實驗 ==> 產品（系統化）
+
+--- &vcenter .largecontent
+
+## 不是無限制的追求準確度
+
+- 線性模型：準確度90% 一個工程師，4 hr / week
+- 深度學習：準確度99% 一個工程師團隊加上研究者 full-time
+
+--- &vcenter .largecontent
+
+## 實務的機器學習挑戰還有其他限制
+
+- 機器資源有限
+- 工程師的時間有限
+- 預測的時間有限
+- 模型的大小有限
+- 系統的維護有成本
+
+--- &vcenter .largecontent
+
+## 如何從實務問題變成機器學習問題
+
+- 機器學習問題：分類與迴歸
+- 實務問題：價值 <s>我要賺錢</s>
+
+--- &vcenter .largecontent
+
+## 決定實作機器學習之前
+
+- 重要的三個問題(Google)：
+    - 資料哪裡來？
+    - 資料怎麼處理？
+    - 資料怎麼變現？
+
+--- &vcenter .largecontent
+
+## Q&A

@@ -94,7 +94,7 @@ ps. 如果你之前有進行過swirl的課程，swirl會出現下圖的選項詢
 
 ## 課程筆記
 
-以下連結記載swirl中的課程內容(sha-hash: 6d1e098c 版本)
+以下連結記載swirl中的課程內容(sha-hash: 2d4d8bad 版本)
 
 - [00-Hello-DataScienceAndR](note/00-Hello-DataScienceAndR.html)
 - [01-RBasic-01-Introduction](note/01-RBasic-01-Introduction.html)
@@ -118,6 +118,13 @@ ps. 如果你之前有進行過swirl的課程，swirl會出現下圖的選項詢
 - [Optional-RDataMining-02-Classification](note/Optional-RDataMining-02-Classification.html)
 - [Optional-RDataMining-03-Association-Rule](note/Optional-RDataMining-03-Association-Rule.html)
 - [Optional-RDataMining-04-Text-Mining](note/Optional-RDataMining-04-Text-Mining.html)
+- [Optional-RMachineLearning-01-Linear-Model](note/Optional-RMachineLearning-01-Linear-Model.html)
+- [Optional-RMachineLearning-02-Generalized-Linear-Model](note/Optional-RMachineLearning-02-Generalized-Linear-Model.html)
+- [Optional-RMachineLearning-03-Regularization](note/Optional-RMachineLearning-03-Regularization.html)
+- [Optional-RMachineLearning-04-Support-Vector-Machine](note/Optional-RMachineLearning-04-Support-Vector-Machine.html)
+- [Optional-RMachineLearning-05-Decision-Tree](note/Optional-RMachineLearning-05-Decision-Tree.html)
+- [Optional-RMachineLearning-06-Gradient-Boosted-Decision-Tree](note/Optional-RMachineLearning-06-Gradient-Boosted-Decision-Tree.html)
+- [Optional-RMachineLearning-07-Challenge](note/Optional-RMachineLearning-07-Challenge.html)
 - [Optional-RProgramming-01-Loop-And-Condition](note/Optional-RProgramming-01-Loop-And-Condition.html)
 - [Optional-RProgramming-02-Function](note/Optional-RProgramming-02-Function.html)
 - [Optional-RStatistic-01-Descriptive-Statistics](note/Optional-RStatistic-01-Descriptive-Statistics.html)
@@ -136,6 +143,7 @@ ps. 如果你之前有進行過swirl的課程，swirl會出現下圖的選項詢
 - [RDataEngineer-Introduction](slide/RDataEngineer-Introduction.html)
 - [RVisualization-Introduction](slide/RVisualization-Introduction.html)
 - [Statistics](slide/Statistics.html)
+- [Machine Learning](slide/MachineLearning.html)
 
 ## License
 
