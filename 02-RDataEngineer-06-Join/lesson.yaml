@@ -1,0 +1,374 @@
+- Class: meta
+  Course: DataScienceAndR
+  Lesson: 02-RDataEngineer-06-Join
+  Author: Wush Wu and Cheng-Yu Lin
+  Type: Standard
+  Organization: Taiwan R User Group
+  Version: 2.3.1.1
+- Class: text
+  Output: 這門課程要介紹資料科學團隊在剛成立時，一定要經常使用的技術：資料比對。
+- Class: text
+  Output: 現代資料科學有很豐富的內涵。每天都有新的統計方法、新的演算法的發明，讓人類 在處理資料的能力上更進一步。
+- Class: text
+  Output: 但是在企業中，或是實際應用中，最重要的是「價值」，而不是「處理資料的手法」。
+- Class: text
+  Output: 而一種很重要的「價值」來自於，我們能夠完成過去辦不到的事情。資料科學也是如此。 我們在企業內，就是要能夠在「有限的資源中」做出「過去做不到的事情」。而一個資料科學團隊，
+    所擁有的最特別的資產，就是檢視各種不同資料源的能力。
+- Class: text
+  Output: |
+    當我們取得一個來源的資料之後，前面的課程協助我們從中萃取出有用的資訊（01~04）、並且能夠
+    轉換成結構化資料（05），而這個課程的目的是要讓大家可以將複數資料源的知識彙整起來。
+- Class: text
+  Output: 就我個人的經驗，這是資料科學團隊為企業帶來價值的捷徑。
+- Class: cmd_question
+  Output: 首先，請同學安裝套件dplyr。已經裝過得同學請輸入`skip()`略過
+  CorrectAnswer: check_then_install("dplyr", "0.4.3")
+  AnswerTests: test_package_version("dplyr", "0.4.3")
+  Hint: check_then_install("dplyr", "0.4.3")
+- Class: cmd_question
+  Output: 接著，請同學載入dplyr
+  CorrectAnswer: library(dplyr)
+  AnswerTests: test_search_path("dplyr")
+  Hint: library(dplyr)
+- Class: cmd_question
+  Output: 再來，請同學打開：`vignette("two-table", package = "dplyr")`
+  CorrectAnswer: vignette("two-table", package = "dplyr")
+  AnswerTests: omnitest('vignette("two-table", package = "dplyr")')
+  Hint: vignette("two-table", package = "dplyr")
+- Class: text
+  Output: |
+    這份文件很清楚的說明dplyr所提供的各種整合兩個data.frame的功能。
+    接下來的課程中，我們就依照這份文件的脈落，用肌肉記住它們。
+- Class: cmd_question
+  Output: |
+    請同學安裝nycflights13的資料。已經載入的同學可以輸入`skip()`
+  CorrectAnswer: check_then_install("nycflights13", "0.1")
+  AnswerTests: test_package_version("nycflights13", "0.1")
+  Hint: check_then_install("nycflights13", "0.1")
+- Class: cmd_question
+  Output: |
+    請同學載入套件：`nycflights13`
+  CorrectAnswer: library(nycflights13)
+  AnswerTests: test_search_path("nycflights13")
+  Hint: library(nycflights13)
+- Class: cmd_question
+  Output: |
+    nycflights13的`flights`，有航空公司的簡稱（在`carrier`欄位）。
+    而`airlines`中則有航空公司的全名。做上一課時，我們已經看過`flights`
+    的資料了。現在請同學輸入：`View(airlines)`看一下航空公司的資料。
+  CorrectAnswer: View(airlines)
+  AnswerTests: omnitest('View(airlines)')
+  Hint: View(airlines)
+- Class: cmd_question
+  Output: |
+    dplyr提供的`left_join`可以讓我們把航空公司的全名貼到`flights`資料上。
+    但是在貼資料的時候，我們一定要有一個依據。
+    我們先看一下`flights`的第一筆資料，請同學用`slice`作答。
+  CorrectAnswer: slice(flights, 1)
+  AnswerTests: val_is(slice(flights, 1))
+  Hint: slice(flights, 1)
+- Class: mult_question
+  Output: |
+    參考airlines的資料後，我們要貼哪一筆航空公司的全名到`flights`的第一筆資料呢？
+  AnswerChoices: United Air Lines Inc.(UA);American Airlines Inc.(AA);US Airways Inc.(US)
+  CorrectAnswer: United Air Lines Inc.(UA)
+  AnswerTests: omnitest(correctVal="United Air Lines Inc.(UA)")
+- Class: text
+  Output: |
+    在同學剛剛的思考過程中，應該是這樣的。`flights`的第一筆資料的航空公司簡稱是UA，而
+    United Air Lines Inc.的簡稱也是UA，所以我們把United Air Lines Inc.當成第一筆
+    資料的航空公司全名。
+- Class: cmd_question
+  Output: |
+    這樣的比對過程中，我們是透過航空公司簡稱（carrier欄位），當兩者相同的時候，才宣佈
+    比對成功，貼上資料。接下來，我們請同學打開`left_join`的說明文件。
+  CorrectAnswer: ?left_join
+  AnswerTests: any_of_exprs("?left_join", "help(left_join)", 'help("left_join")')
+  Hint: ?left_join
+- Class: mult_question
+  Output: |
+    請問以下哪一個「不是」`left_join`的參數呢？
+  AnswerChoices: x;y;by;copy;key
+  CorrectAnswer: key
+  AnswerTests: omnitest(correctVal = 'key')
+- Class: text
+  Output: |
+    我們來講解`left_join`的參數意義。`x`和`y`在這邊，扮演的角色就是兩個data.frame。
+    `x`是我們關心的、主要的data.frame，我們的目的是想把`y`的資料貼到`x`之上。所以
+    在剛剛航空公司名稱的範例中，`x`是`flights`，`y`是`airlines`。
+- Class: text
+  Output: |
+    `by`則代表「黏貼規則」的欄位。回憶一下航空公司的範例，我們是透過比對「航空公司簡稱（carrier）」
+    才能完成比對，所以`by`在這裡的值就是`"carrier"`，也就是欄位名稱。在慣例中，當我們提到：
+    依據「xxx」來比對`x`和`y`兩張表格的時候，通常我們就是指要作上述的動作，而「xxx」扮演的角色
+    就是航空公司簡稱所扮演的角色。
+- Class: script
+  Output: |
+    接著請同學從flights中「依序」選出`year:day, hour, origin, dest, tailnum, carrier`
+    等欄位，再抽出前100筆記資料，最後和`airlines`做`left_join`。
+  Script: RDataEngineer-06-01.R
+  AnswerTests: rdataengineer_06_01(answer01)
+- Class: cmd_question
+  Output: |
+    `weather`資料中也包含了天氣的資訊。所以我們可以依據時間和地點，把天氣的資料貼到`answer01`之上。
+    請同學輸入：`View(weather)`先看一下天氣資料
+  CorrectAnswer: View(weather)
+  AnswerTests: omnitest('View(weather)')
+  Hint: View(weather)
+- Class: cmd_question
+  Output: |
+    接著請同學輸入：`answer02 <- left_join(answer01, weather)`，請注意到我們沒有給任何
+    `by`的資訊。
+  CorrectAnswer: answer02 <- left_join(answer01, weather)
+  AnswerTests: omnitest('answer02 <- left_join(answer01, weather)')
+  Hint: answer02 <- left_join(answer01, weather)
+- Class: cmd_question
+  Output: |
+    請輸入`View(answer02)`，我們看一下`answer02`的資料，黏貼後的結果。
+  CorrectAnswer: View(answer02)
+  AnswerTests: omnitest('View(answer02)')
+  Hint: View(answer02)
+- Class: text
+  Output: |
+    剛剛我們為什麼省略`by`之後，`left_join`還是仍然正常運作呢？它是依據什麼欄位來比對資料的？
+- Class: cmd_question
+  Output: |
+    根據文件，在沒有給定`by`的狀況下，`left_join`會比對兩個data.frame的欄位名稱（`colnames`），
+    並且用重複的欄位名稱做比對的依據。請同學輸入：
+    `intersect(colnames(answer01), colnames(weather))`
+  CorrectAnswer: intersect(colnames(answer01), colnames(weather))
+  AnswerTests: omnitest('intersect(colnames(answer01), colnames(weather))')
+  Hint: intersect(colnames(answer01), colnames(weather))
+- Class: text
+  Output: |
+    螢幕上顯示的四個欄位：`"year"   "month"  "day" "hour" "origin"`就是`left_join`比對
+    `answer01`與`weather`的依據。這代表說，要這五個欄位全部都一模一樣，`left_join`才會
+    把對應的天氣資料黏貼到`answer01`上。
+    另外同學也可以體會，上一課所學的`select`搭配重新命名的機制在此是很有用的。
+- Class: text
+  Output: |
+    課程進行至今，我們開始會跳過一些字面意義上很簡單的函數，例如`intersect`。
+    同學可以自行打開說明文件查詢這些函數的用法。如果覺得太難需要說明，我也很歡迎
+    同學到<https://github.com/wush978/DataScienceAndR/issues>（輸入：
+    `issue()`）或是聊天室
+    <https://gitter.im/wush978/DataScienceAndR>（輸入：chat()）進行回報。
+- Class: text
+  Output: |
+    另外在剛剛的比對過程中，R 有發出警告：這是因為我們在比較一個字串向量與一個`factor`。
+    有走過RBasic系列的同學應該可以同意，這兩者的本質是非常類似的，所以`left_join`就會
+    自動把factor轉換成字串向量後再做比對。
+- Class: cmd_question
+  Output: |
+    接著，我們看一下`airports`這個資料集。請同學輸入：`View(airports)`，可以看到
+    裡面有不少關於機場的資訊（如：經緯度、簡稱等等）
+  CorrectAnswer: View(airports)
+  AnswerTests: omnitest('View(airports)')
+  Hint: View(airports)
+- Class: text
+  Output: |
+    這裡我們要比對的依據是地點，但是`flights`的資料裡面有兩個關於地點的欄位：`origin`與
+    `dest`。這兩個欄位都是記載著美國機場的代號。而`airports`資料中機場的代號是`faa`。
+    問題來了，請問我們應該要怎麼告訴`left_join`做比對呢？
+- Class: cmd_question
+  Output: |
+    我們可以透過`by`參數來指定比對的方法。`by`的參數除了是一般的字串向量外，也可以是
+    有名字的字串向量。舉例來說：`c("origin" = "faa")`就是一個有名字的字串向量。
+    請同學輸入：`c("origin" = "faa")`看看。
+  CorrectAnswer: c("origin" = "faa")
+  AnswerTests: omnitest('c("origin" = "faa")')
+  Hint: c("origin" = "faa")
+- Class: cmd_question
+  Output: |
+    接著，我們透過`left_join`來比對這兩筆資料。比對的依據分別是`answer02$origin`與`airports$faa`。
+    請同學試試看執行`answer03 <- left_join(answer02, airports, by = c("origin" = "faa"))`
+  CorrectAnswer: answer03 <- left_join(answer02, airports, by = c("origin" = "faa"))
+  AnswerTests: omnitest('answer03 <- left_join(answer02, airports, by = c("origin"
+    = "faa"))')
+  Hint: answer03 <- left_join(answer02, airports, by = c("origin" = "faa"))
+- Class: cmd_question
+  Output: |
+    現在我們輸入`View(answer03)`看看這個包含航班資訊、天氣資訊與出發機場的地理位置資訊的資料。
+  CorrectAnswer: View(answer03)
+  AnswerTests: omnitest('View(answer03)')
+  Hint: View(answer03)
+- Class: cmd_question
+  Output: |
+    最後，我們再把`answer03`與`airports`做一次整合，但是這次是比對`answer03$dest`與`airports$faa`
+    請同學寫寫看，並且把結果存到變數`answer04`
+  CorrectAnswer: answer04 <- left_join(answer03, airports, by = c("dest" = "faa"))
+  AnswerTests: val_is(left_join(answer03, airports, by = c("dest" = "faa")))
+  Hint: answer04 <- left_join(answer03, airports, by = c("dest" = "faa"))
+- Class: cmd_question
+  Output: |
+    請同學輸入`colnames(answer04)`看一下比對後的名稱
+  CorrectAnswer: colnames(answer04)
+  AnswerTests: omnitest('colnames(answer04)')
+  Hint: colnames(answer04)
+- Class: text
+  Output: |
+    在最後，是不是有看到lat.x或lat.y 這些欄位名稱呢？這是因為`answer03`和`airports`
+    比對時，`answer03$lat`與`airports$lat`撞名，而且也不在`by`之內，所以產生的資料
+    就會有兩種`lat`。`left_join`在這邊的處理方式，就在把來自參數`x`的`lat`標記做`lat.x`，
+    來自參數`y`（比對機場代碼後被貼上去的`lat`）則取名作`lat.y`
+- Class: script
+  Output: |
+    以上的內容，大致上把`left_join`的所有功能與應用上可能發生的狀況細解一遍。
+    接著我們來練習解決一個問題：起飛機場的風速對抵達時間的延遲是不是有影響。
+    請同學在完成之後存檔，並輸入`submit()`來檢查結果是否符合預期。
+    如果同學在檔案中看到亂碼，請使用Rstudio 左上角的File -> Reopen
+  Script: RDataEngineer-06-02.R
+  AnswerTests: rdataengineer_06_02(answer02.1, answer02.2, answer02.3)
+- Class: cmd_question
+  Output: 請同學看用`View(answer02.3)`，觀察我們在上一題得到的結果。
+  CorrectAnswer: View(answer02.3)
+  AnswerTests: omnitest('View(answer02.3)')
+  Hint: View(answer02.3)
+- Class: text
+  Output: |
+    這樣的數據顯示，當起飛機場的風速越大，飛機在降落時的延誤就越大。
+- Class: text
+  Output: 接著我們來講解dplyr提供的各種合併表格的方法。
+- Class: text
+  Output: 除了`left_join`之外，dplyr還提供了6 種join函數。而他們 的參數都非常類似：`x`、`y`和`by`，而且他們的用法都一模一樣，比對的
+    方法也一模一樣。他們的差異只在於：當比對結束之後，產生的data.frame中 到底要包含哪些資料呢？
+  AnswerTests: browseURL("http://www.google.com")
+- Class: cmd_question
+  Output: 為了等下的說明，我們仿照vignette，建立了兩個變數：`df1`與`df2`。 請同學輸入`View(df1)`來看看`df1`的資料。
+  CorrectAnswer: View(df1)
+  AnswerTests: omnitest('View(df1)')
+  Hint: View(df1)
+- Class: cmd_question
+  Output: |
+    請同學輸入`View(df2)`來看看`df2`的資料。
+  CorrectAnswer: View(df2)
+  AnswerTests: omnitest('View(df2)')
+  Hint: View(df2)
+- Class: text
+  Output: |
+    我們先拿`left_join`作解說。做完`left_join`之後，最後的data.frame，
+    就是`x`中所有的資料。而`y`的資料只有在和`x`比對成功之後，才會貼當輸出
+    的欄位中。否則就是NA。
+- Class: cmd_question
+  Output: |
+    請同學輸入：`wiki_join()`來打開這六種JOIN的圖示。
+  CorrectAnswer: wiki_join()
+  AnswerTests: omnitest('wiki_join()')
+  Hint: wiki_join()
+- Class: text
+  Output: |
+    `wiki_join()`中的第一張圖中淺藍色的部份，就代表最後輸出的`data.frame`
+    剛剛好就是原本`x`的資料。
+- Class: mult_question
+  Output: 請問同學，如果輸入：`left_join(df1, df2)`的話，`left_join` 會以什麼基準作比對呢？
+  AnswerChoices: x;y;a;b
+  CorrectAnswer: x
+  AnswerTests: omnitest(correctVal = "x")
+- Class: cmd_question
+  Output: 請同學輸入：`left_join(df1, df2)`
+  CorrectAnswer: left_join(df1, df2)
+  AnswerTests: omnitest('left_join(df1, df2)')
+  Hint: left_join(df1, df2)
+- Class: text
+  Output: |
+    我們會看到`df1`資料都有保留下來。（結果的`x`欄的值為`c(1,2)`）
+    而第二筆資料，因為對不到`y`的資料，所以`a`與`b`的欄位都是NA
+- Class: text
+  Output: |
+    `wiki_join()`中的第二張圖中淺藍色的部份，就代表`right_join`最後輸出
+    的`data.frame`，剛剛好就是原本`y`的資料。事實上，`right_join(x, y)`就
+    等價於`left_join(y, x)`，差別只在欄位排序的不同。
+- Class: cmd_question
+  Output: 請同學輸入：`right_join(df2, df1)`。請注意，我們這次是`x = df2`。
+  CorrectAnswer: right_join(df2, df1)
+  AnswerTests: omnitest('right_join(df2, df1)')
+  Hint: right_join(df2, df1)
+- Class: text
+  Output: |
+    和`left_join(df1, df2)`相比，`x`欄位的值一樣是`c(1,2)`，但是欄位順序不同了。
+- Class: text
+  Output: |
+    `wiki_join()`中的第三張圖中淺藍色的部份，就代表`inner_join`最後輸出
+    的`data.frame`，資料必須要同時存在於`x`和`y`之中。
+- Class: cmd_question
+  Output: 請同學輸入：`inner_join(df1, df2)`。
+  CorrectAnswer: inner_join(df1, df2)
+  AnswerTests: omnitest('inner_join(df1, df2)')
+  Hint: inner_join(df1, df2)
+- Class: text
+  Output: 結果的`x`欄位只剩下`1`的狀況了，`df1` 和 `df2`都有`x = 1`的資料。
+- Class: text
+  Output: |
+    接續著的`full_join`與`anti_join`為止，都是非常類似的。
+    我們練習一下，用肌肉作記憶。
+- Class: cmd_question
+  Output: 請同學輸入：`full_join(df1, df2)`。
+  CorrectAnswer: full_join(df1, df2)
+  AnswerTests: omnitest('full_join(df1, df2)')
+  Hint: full_join(df1, df2)
+- Class: text
+  Output: |
+    輸出的結果的`x`欄位為`c(1,2,3)`，是df1和df2的聯集。
+- Class: cmd_question
+  Output: 請同學輸入：`anti_join(df1, df2)`。
+  CorrectAnswer: anti_join(df1, df2)
+  AnswerTests: omnitest('anti_join(df1, df2)')
+  Hint: anti_join(df1, df2)
+- Class: text
+  Output: 結果只列出`df1`中和`df2`比對失敗的資料。這是目前為止 唯一欄位只剩下`x`的欄位的JOIN結果。
+- Class: text
+  Output: |
+    在講解`semi_join`之前，我們要先提醒同學一個狀況：當比對的欄位，
+    值不唯一的時候，JOIN要如何作操作呢？
+- Class: cmd_question
+  Output: |
+    舉例來說，我們已經建立了兩個data.frame: `df3`與`df4`。
+    他們的`x`欄位都有兩個1。請同學輸入`View(df3)`看看`df3`
+  CorrectAnswer: View(df3)
+  AnswerTests: omnitest('View(df3)')
+  Hint: View(df3)
+- Class: cmd_question
+  Output: 請同學輸入`View(df4)`看看`df4`
+  CorrectAnswer: View(df4)
+  AnswerTests: omnitest('View(df4)')
+  Hint: View(df4)
+- Class: cmd_question
+  Output: 接著，我們輸入`inner_join(df3, df4)`看看結果有多少列。
+  CorrectAnswer: inner_join(df3, df4)
+  AnswerTests: omnitest('inner_join(df3, df4)')
+  Hint: inner_join(df3, df4)
+- Class: text
+  Output: |
+    上述的這些`join`都會窮舉出所有可能排列組合。因為`df3`的`x`有
+    兩個1, `df4`的`x`有兩個1, 所以所有可能的排列組合有：2 * 2 = 4
+    因此`inner_join`就回傳4列。
+- Class: text
+  Output: |
+    最後一個`semi_join`非常類似`inner_join`，但是當比對的資料不是
+    唯一時，它不會窮舉所有的可能性，而只是把有比對成功的`x`的資料留下
+    來。
+- Class: cmd_question
+  Output: 請同學輸入：`semi_join(df3, df4)`看看結果。
+  CorrectAnswer: semi_join(df3, df4)
+  AnswerTests: omnitest('semi_join(df3, df4)')
+  Hint: semi_join(df3, df4)
+- Class: text
+  Output: 結果幾乎等價於`df3[1:2,]`，這是因為只有前兩列資料 有和`df4`比對成功。
+- Class: text
+  Output: |
+    這次的大魔王要延續RDataEngineer-05-Data-Manipulation最後所
+    使用的`cl_info`資料。
+- Class: text
+  Output: |
+    同時，我們也準備了從央行抓取的GDP資料。但是這份資料要請同學自己想辦法讀出來。
+- Class: text
+  Output: |
+    我們的目標，是要比對房貸餘額是否超過GDP的40%。這是一種拿來評估房地產是否會泡沫化
+    的指標。
+- Class: script
+  Output: |
+    就請同學多多加油了！利用從RBasic到RDataEngineer系列所學到的知識，完成這個挑戰。
+    請同學在完成之後存檔，並輸入`submit()`來檢查結果是否符合預期。
+    如果同學在檔案中看到亂碼，請使用Rstudio 左上角的File -> Reopen
+  Script: RDataEngineer-06-HW.R
+  AnswerTests: rdataengineer_06_hw(gdp, cl_info_year, answerHW)
+
