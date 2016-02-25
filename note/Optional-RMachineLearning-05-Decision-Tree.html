@@ -63,252 +63,491 @@ img {
 
 <div id="-1" class="section level2">
 <h2>關卡 1</h2>
-<p>在R中，我們操作的所有變數，都是一種R物件(Object)。這一堂課程中，就是要簡介R的物件結構。</p>
+<p>我們第一個介紹的是DecisionTree。先請同學安裝套件rpart。</p>
+<pre class="r"><code>check_then_install(&quot;rpart&quot;, &quot;4.1.10&quot;)</code></pre>
 </div>
 <div id="-2" class="section level2">
 <h2>關卡 2</h2>
-<p>在所有物件中，最基礎的「原子」物件，就是在上一堂課中介紹的各種向量。其他的物件都是有這些原子物件組合而成。</p>
+<p>接著，請載入套件rpart</p>
+<pre class="r"><code>library(rpart)</code></pre>
 </div>
 <div id="-3" class="section level2">
 <h2>關卡 3</h2>
-<p>這些向量物件有兩個很重要的屬性：<code>mode</code>和<code>length</code>。<code>mode</code>代表這個向量的值型態，總共有：<code>logical</code>、<code>integer</code>、<code>numeric</code>、<code>complex</code>、<code>character</code>和<code>raw</code>。<code>length</code>代表這個向量的值的個數。</p>
+<p>在摸索一個套件時，我們可以找找看套件作者有沒有撰寫vignette。請同學輸入：<code>vignette(package=&quot;rpart&quot;)</code></p>
+<pre class="r"><code>vignette(package = &quot;rpart&quot;)</code></pre>
 </div>
 <div id="-4" class="section level2">
 <h2>關卡 4</h2>
-<p>同學可以用<code>mode</code>和<code>length</code>這個函數來查詢一個向量的型態和長度。請同學試試看：<code>mode(x)</code></p>
-<pre class="r"><code>mode(x)</code></pre>
+<p>由跳出的視窗，我們可以看到一個名為：<code>&quot;longintro&quot;</code>的文件名稱，是一份介紹rpart的文件。請輸入<code>vignette(&quot;longintro&quot;,package=&quot;rpart&quot;)</code>打開這份文件。</p>
 </div>
 <div id="-5" class="section level2">
 <h2>關卡 5</h2>
-<p>請問x的型態是？</p>
-<p>numeric</p>
+<p>有興趣的同學可以閱讀這份文件的前半段。我們則直接用範例來解說rpart的功能。</p>
 </div>
 <div id="-6" class="section level2">
 <h2>關卡 6</h2>
-<p>接著，請試試看<code>length(x)</code></p>
-<pre class="r"><code>length(x)</code></pre>
+<p>請同學先輸入<code>data(stagec)</code>載入一個關於C期前列腺癌的研究數據。這比數據中，記錄著146位病患的資訊。</p>
+<pre class="r"><code>data(stagec)</code></pre>
 </div>
 <div id="-7" class="section level2">
 <h2>關卡 7</h2>
-<p>請問x的長度是？</p>
-<p>5</p>
+<p>請同學輸入：<code>cfit&lt;-rpart(pgstat~age+eet+g2,data=stagec,method=&quot;class&quot;)</code>。</p>
+<pre class="r"><code>cfit &lt;- rpart(pgstat ~ age + eet + g2, data = stagec, method = &quot;class&quot;)</code></pre>
 </div>
 <div id="-8" class="section level2">
 <h2>關卡 8</h2>
-<p>R也可以建立一種叫做<code>list</code>的向量，這是「R物件」的向量。換句話說，每一個值都是R物件，都有自己的<code>mode</code>、<code>length</code>等屬性。我們會在一些複雜的統計模型中，見到這樣的資料型態。舉例來說，在R中如果要建立一個迴歸模型，會使用：<code>g&lt;-lm(dist~speed,cars)</code>這樣的程式碼會利用車速當解釋變數、煞車距離當應變數，建立一個迴歸模型。這裡我們先不管<code>lm</code>怎麼用，而是要看看<code>g</code>這個物件的結構。同學只要掌握這個課程的內容，未來就可以輕鬆的探索各種機器學習或統計分析演算法的輸出結果。</p>
+<p>這裡的函數<code>rpart</code>就是用於建立decisiontree的函數。請同學打開<code>rpart</code>的說明頁面。</p>
+<pre class="r"><code>?rpart</code></pre>
 </div>
 <div id="-9" class="section level2">
 <h2>關卡 9</h2>
-<p>請同學檢查<code>g</code>的型態</p>
-<pre class="r"><code>mode(g)</code></pre>
+<p>根據<code>rpart</code>的說明文件，我們剛剛輸入的：<code>cfit&lt;-rpart(pgstat~age+eet+g2,data=stagec,method=&quot;class&quot;)</code>中的<code>pgstat~age+eet+g2</code>是對應到<code>rpart</code>函數的哪一個參數呢？</p>
+<p>formula</p>
 </div>
 <div id="-10" class="section level2">
 <h2>關卡 10</h2>
-<p>請同學檢查<code>g</code>的長度</p>
-<pre class="r"><code>length(g)</code></pre>
+<p>上述輸入的formula參數：<code>pgstat~age+eet+g2</code>，描述的是在建構decisiontree時，變數之間的關係。pgstat是要被預測、被分類的變數名稱，age、eet和g2則是用來對pgstat做預測的變數。</p>
 </div>
 <div id="-11" class="section level2">
 <h2>關卡 11</h2>
-<p>在上一個章節中，我們有介紹可以使用如<code>g[1:2]</code>的方式來拿出<code>g</code>的第一個到第二個值。而這樣的輸出結果，還是會和<code>g</code>有同樣的<code>mode</code>。這裡請同學看看<code>g[1:2]</code>的結果。</p>
-<pre class="r"><code>g[1:2]</code></pre>
+<p>根據<code>rpart</code>的說明文件，我們剛剛輸入的：<code>cfit&lt;-rpart(pgstat~age+eet+g2,data=stagec,method=&quot;class&quot;)</code>中的<code>stagec</code>是對應到<code>rpart</code>函數的哪一個參數呢？</p>
+<p>data</p>
 </div>
 <div id="-12" class="section level2">
 <h2>關卡 12</h2>
-<p>同學會在Rconsole看到一些數字與其妙的文字。在最上面的<code>$coefficients</code>，表示<code>g[1:2]</code>這個向量的第一個值（同時也是<code>g</code>的第一個值），是有名字的。他的名字是：<code>&quot;coefficients&quot;</code>。接著，由於<code>g[1:2]</code>的第一個值是一個有名字的numeric向量，所以R就把這個向量所有的名字和值一起顯示在console。也就是說，這個numeric向量的第一個值是-17.579095，而名字是<code>&quot;(Intercept)&quot;</code>。第二個值是3.932409，而名字是<code>&quot;speed&quot;</code>。</p>
+<p>接著，請列出stagec的欄位名稱。</p>
+<pre class="r"><code>colnames(stagec)</code></pre>
 </div>
 <div id="-13" class="section level2">
 <h2>關卡 13</h2>
-<p>接著，<code>$residuals</code>表示<code>g[1:2]</code>的第二個值也是有名字的，而且它的名字是<code>&quot;residuals&quot;</code>。由於這個值也是一個有名字的numeric向量，所以R就把值和名字同時顯示到console上。所以我們就可以知道，這個numeric向量的第一個值的名字是<code>&quot;1&quot;</code>，值是3.849460。以此類推。</p>
+<p>我們可以看到，剛剛formula中的變數名稱，都在stagec之中。</p>
 </div>
 <div id="-14" class="section level2">
 <h2>關卡 14</h2>
-<p>然而整個RConsole的顯示告訴我們<code>g[1:2]</code>仍然是一個list，因為R只有在顯示list的內容才會帶有<code>$coefficients</code>和<code>$residuals</code>這種標記。如果只是一個numeric向量，就不會顯示出<code>$coefficients</code>和<code>$residuals</code>。</p>
+<p>rpart這個函數有許多功能，使用者可以在method的參數指定要使用的功能。請同學參考rpart的說明文件中，關於method參數的說明。請問下列哪一個選項「不是」rpart的method參數的有效選項？</p>
+<p>regression</p>
 </div>
 <div id="-15" class="section level2">
 <h2>關卡 15</h2>
-<p>請同學輸入<code>list(1,a=2)</code>來看看R是如何顯示list，以及比較當值有附帶名字，或是沒有附帶名字時，輸出的不同。</p>
-<pre class="r"><code>list(1, a = 2)</code></pre>
+<p>在關於method的說明文件中，仔細地解釋了rpart是如何依照formula中選擇的變數形態來智慧的選擇預設的method。請同學查詢stagec的pgstat欄位的形態為何。</p>
+<pre class="r"><code>class(stagec$pgstat)</code></pre>
 </div>
 <div id="-16" class="section level2">
 <h2>關卡 16</h2>
-<p>在一開始，R顯示了<code>[[1]]</code>，然後才顯示一個值為1的numeric向量。開頭的<code>[[1]]</code>不只說明了這個物件是一個list，也說明接下來顯示的是第一個值的內容。</p>
+<p>依照rpart的說明文件和stagec$pgstat的型態，請問如果我們沒有指定method的話，rpart會用哪一種method參數來運作？</p>
+<p>anova</p>
 </div>
 <div id="-17" class="section level2">
 <h2>關卡 17</h2>
-<p>接著，R顯示了<code>$a</code>，後才顯示了一個值為2的numeric向量。開頭的<code>$a</code>因為位置在第二，所以代表這是這個list物件的第二個值。同時，這個值的名字是<code>&quot;a&quot;</code>。</p>
+<p>接著，請輸入<code>cfit</code>來看看rpart的結果。</p>
+<pre class="r"><code>cfit</code></pre>
 </div>
 <div id="-18" class="section level2">
 <h2>關卡 18</h2>
-<p>但是如果我們想拿出，<code>g</code>的第一個值，並且是這個物件的本身，而非被包在一個list中，我們需要用：<code>g[[1]]</code>。請同學試試看。</p>
-<pre class="r"><code>g[[1]]</code></pre>
+<p>R會把從資料中學到的decisiontree顯示到console中。前段的文字說明了每一行的資訊依序是：node),split,n,loss,yval,(yprob)而且最後標記有星號的就是decisiontree的leafnode。舉例來說，<code>1)root146540(0.63013700.3698630)</code>代表這是第一個node，他的切割規則是root，有146個點，loss是54，deviance是0。請問同學，第二個node的loss是什麼？</p>
+<p>18</p>
 </div>
 <div id="-19" class="section level2">
 <h2>關卡 19</h2>
-<p>請同學查詢<code>g[[1]]</code>的型態</p>
-<pre class="r"><code>mode(g[[1]])</code></pre>
+<p>這裡的loss代表的是錯誤的label的個數，俗稱0/1loss。在第一個node，也就是root之中，cfit對<code>stagec$pgstat</code>的預測是0。請同學計算<code>stagec$pgstat</code>中非0的病患總數。看看是不是和第一行，1)root中顯示的loss相同。</p>
+<pre class="r"><code>sum(stagec$pgstat != 0)</code></pre>
 </div>
 <div id="-20" class="section level2">
 <h2>關卡 20</h2>
-<p>請同學查詢<code>g[[1]]</code>的長度</p>
-<pre class="r"><code>length(g[[1]])</code></pre>
+<p>另外同學應該有注意到，node的編號並不是連續的。這是因為，每個編號為x的node，他的分支一定是編號2x和2x+1。請問同學，編號7的node是編號多少的node的分支？</p>
+<pre class="r"><code>3</code></pre>
 </div>
 <div id="-21" class="section level2">
 <h2>關卡 21</h2>
-<p>這裡再解釋一次<code>g[1]</code>和<code>g[[1]]</code>的差異。使用<code>g[1]</code>時，R取出向量的第一個元素，並且維持list的結構，所以<code>g[1]</code>的結果還仍是list。使用<code>g[[1]]</code>時，R會打破list的結構，再取出向量的第一個元素，所以<code>g[[1]]</code>的型態會是存放在list裡面的R物件的型態。所以在上述的例子中，<code>g[1]</code>的型態是list，而<code>g[[1]]</code>的型態就是numeric。這是因為g這個list的第一個存放的R物件是numeric向量。</p>
+<p>接著，讓我們畫出cfit。這需要兩個指令，所以請同學先輸入：<code>plot(cfit)</code></p>
+<pre class="r"><code>plot(cfit)</code></pre>
 </div>
 <div id="-22" class="section level2">
 <h2>關卡 22</h2>
-<p>一般來說，對R物件使用<code>[]</code>之後，會取得會和該物件相同的物件。舉例來說，<code>a[1]</code>的型態會和<code>a</code>一樣。而<code>[[]]</code>就沒有類似的特性了。</p>
+<p>再請同學輸入<code>text(cfit)</code></p>
+<pre class="r"><code>text(cfit)</code></pre>
 </div>
 <div id="-23" class="section level2">
 <h2>關卡 23</h2>
-<p>經過這些練習，相信同學也會理解list這個「R物件的向量」是什麼意思。list向量最有用的地方，在於它可以裝不同型態的值。以<code>g</code>為範例，雖然它大部分的值的型態都是numeric，但是有些物件的型態會是call和list。這讓R的開發者能更有彈性的建立一些複雜的模型。同時同學在學會list之後，也更有能力來了解各種R套件所建立的模型物件。</p>
+<p>我們可以發現，圖的上下維有一點被切掉。這可以透過<code>par</code>函數的mar參數做調整。但是其實已經有人發現這件事情，並且寫了一個叫做rpart.plot的套件。請同學安裝這個套件</p>
+<pre class="r"><code>check_then_install(&quot;rpart.plot&quot;, &quot;1.5.3&quot;)</code></pre>
 </div>
 <div id="-24" class="section level2">
 <h2>關卡 24</h2>
-<p>請同學檢查看看<code>g[[10]]</code>的型態</p>
-<pre class="r"><code>mode(g[[10]])</code></pre>
+<p>接著，請載入rpart.plot套件。</p>
+<pre class="r"><code>library(rpart.plot)</code></pre>
 </div>
 <div id="-25" class="section level2">
 <h2>關卡 25</h2>
-<p>這裡的<code>g[[10]]</code>其實是記載著產生g的程式碼。在R裡面，這樣的程式碼是存成call型態的物件。我們現在只要知道這是一種call就可以了。至於call是什麼東西，要等到同學需要開始深入的學習R的原始碼、運作機制時，才需要弄懂。我們現在只要知道，list可以裝所有R的物件就可以了。</p>
+<p>我們直接輸入：<code>rpart.plot(cfit)</code>來看看畫圖的結果。</p>
+<pre class="r"><code>rpart.plot(cfit)</code></pre>
 </div>
 <div id="-26" class="section level2">
 <h2>關卡 26</h2>
-<p>另一個我們需要知道的事情，就是可以為list命名。舉例來說，我們除了用<code>g[[1]]</code>來取得第一個值之外，也可以用<code>g[[&quot;coefficients&quot;]]</code>來取得第一個值。因為<code>g</code>這個向量是被命名的，而第一個名字就是<code>&quot;coefficients&quot;</code>。請同學試試看。</p>
-<pre class="r"><code>g[[&quot;coefficients&quot;]]</code></pre>
+<p>rpart.plot套件對於rpart的圖片輸出做過調整，所以就不會出現圖形被截掉的狀態。</p>
 </div>
 <div id="-27" class="section level2">
 <h2>關卡 27</h2>
-<p>適當的命名，可以讓程式碼更易讀。舉例來說，若我們知道<code>g</code>是一個迴歸模型，我們也知道迴歸模型通常就是一個參數向量，那我們就會預期：<code>g[[&quot;coefficients&quot;]]</code>就是這個迴歸模型的參數。（在統計學課本中，各種模型的參數通常稱作：“coefficients”。</p>
+<p>接著讓我們來探索rpart是如何產生cfit這棵樹。</p>
 </div>
 <div id="-28" class="section level2">
 <h2>關卡 28</h2>
-<p>我們可以更改一個向量的長度。舉例來說，現在x是一個長度是5、型態是numeric的向量。我們可以利用：<code>length(x)&lt;-10</code>把x的長度改成10。請同學試試看。</p>
-<pre class="r"><code>length(x) &lt;- 10</code></pre>
+<p>rpart其實有非常多的參數，並且各類參數的細節分佈在<code>rpart</code>的參數parms和control中。</p>
 </div>
 <div id="-29" class="section level2">
 <h2>關卡 29</h2>
-<p>現在我們可以來看看x的值。，請同學輸入：<code>x</code></p>
-<pre class="r"><code>x</code></pre>
+<p>在我們剛剛打開的vignette的Chapter3.1，作者說明了如何建構一個decisiontree。裡面解釋了何謂prior、loss和splittingindex。</p>
 </div>
 <div id="-30" class="section level2">
 <h2>關卡 30</h2>
-<p>我們也可以直接在x的指定位置塞入新的值，並且藉此增加x的長度。舉例來說：<code>x[7]&lt;-7</code>可以讓x的第7個位置的值變成7。請同學試試看。</p>
-<pre class="r"><code>x[7] &lt;- 7</code></pre>
+<p>rpart的參數<code>parms</code>裡面可以設定和method相關的參數。</p>
 </div>
 <div id="-31" class="section level2">
 <h2>關卡 31</h2>
-<p>現在我們可以來看看x的值。，請同學輸入：<code>x</code></p>
-<pre class="r"><code>x</code></pre>
+<p>請問同學，根據<code>rpart</code>的說明文件（請參閱Arguments底下的parms），當method為class時（classificationsplitting），預設的prior為何？1)每種類別都相等的機率;2)和資料中各類別出現的頻率成正比的機率</p>
+<p>2</p>
 </div>
 <div id="-32" class="section level2">
 <h2>關卡 32</h2>
-<p>由於x本來的長度就已經超過7所以並沒有延長。現在我們改程式試試看：<code>x[13]&lt;-13</code></p>
-<pre class="r"><code>x[13] &lt;- 13</code></pre>
+<p>請問同學，根據<code>rpart</code>的說明文件（請參閱Arguments底下的parms），當method為class時（classificationsplitting），預設的splittingindex為何？</p>
+<p>gini</p>
 </div>
 <div id="-33" class="section level2">
 <h2>關卡 33</h2>
-<p>現在我們可以來看看x的值。，請同學輸入：<code>x</code></p>
-<pre class="r"><code>x</code></pre>
+<p>rpart把和method無關的參數放到<code>control</code>底下，並且提供一個輔助函數<code>rpart.control</code>來協助使用者在實作時也限制了每個split時，該node的個數限制。請同學輸入<code>?rpart.control</code>來看一下這些控制有哪些參數。</p>
+<pre class="r"><code>?rpart.control</code></pre>
 </div>
 <div id="-34" class="section level2">
 <h2>關卡 34</h2>
-<p>如果我們要縮短x的長度，可以運用如：<code>x2&lt;-x[c(1,3,5,7,9,11,13)]</code>，這樣x2就是縮短的x。請同學試試看。</p>
-<pre class="r"><code>x2 &lt;- x[c(1,3,5,7,9,11,13)]</code></pre>
+<p>接著，我們來重現cfit的第一層結果。請同學閱讀檔案中的程式碼與註解後，輸入<code>submit()</code>。</p>
+<pre class="r"><code># R 中的型態很重要。類別的數據，調整成factor之後做運算會方便很多
+y &lt;- factor(stagec$pgstat)
+
+# n 是各種類別出現的次數
+n &lt;- table(y)
+
+# 預設的prior 是各種類別出現的比率
+prior &lt;- n / length(y)
+
+#'@title 這是Vignette中的P 函數的實作
+#'
+#'@param x factor vector.
+#'@return numeric value. 資料點屬於x 的機率
+P &lt;- function(x) {
+  x.tb &lt;- table(x)
+  sum(pi * (x.tb / n))
+}
+
+#'@title 這是gini index的計算
+#'
+#'@param p numeric value. 是某個類別的機率
+#'@return numeric value. 該類別的gini index
+gini &lt;- function(p) p * (1 - p)
+
+#'@title 這是使用gini index做切割準則時，I 函數的實作
+#'@param x factor vector.
+#'@return numeric value. x 的impurity
+I &lt;- function(x) {
+  x.tb &lt;- table(x)
+  # 各種類別的機率
+  category.prob &lt;- x.tb / length(x)
+  #' R 也是一種函數式語言，而sapply等函數能夠很方便的取代for 迴圈
+  #' 這個寫法等價於：
+  #' for(p in category.prob) gini(p)
+  #' 但是自動把輸出結果排列成一個向量
+  category.gini &lt;- sapply(category.prob, gini) 
+  sum(category.gini)
+}
+
+PI &lt;- function(x) P(x) * I(x)
+
+#'@title 給定一個切點之後，計算impurity降低的幅度
+impurity_variation_after_cut &lt;- function(cut) {
+  origin.impurity &lt;- I(y) * P(y)
+  # split 會依照第二個參數的值，將第一個參數分成若干個向量。
+  # split 的結果是一個list，而且每一個list element對應到第二個參數的一種類別
+  group &lt;- split(y, stagec$age &lt; cut)
+  # group 是一個長度為二的list
+  # 第一個element是所有stage$age &lt; cut為FALSE 的病患對應的pgstat
+  # 第二個element是所有stage$age &lt; cut為TRUE 的病患對應的pgstat
+
+  # 對各種切割後的node計算PI後加總
+  splitted.impurity &lt;- sum(sapply(group, PI))
+  origin.impurity - splitted.impurity
+}
+
+# 列舉所有可能的切點
+eval.x &lt;- seq(min(stagec$age) - 0.5, max(stagec$age) + 0.5, by = 1)
+
+# 算出每個切點，對應的impurity 的改善量
+index &lt;- sapply(eval.x, impurity_variation_after_cut)</code></pre>
 </div>
 <div id="-35" class="section level2">
 <h2>關卡 35</h2>
-<p>現在我們可以來看看x2的值。，請同學輸入：<code>x2</code></p>
-<pre class="r"><code>x2</code></pre>
+<p>請問同學，讓impurity改善最大的切點，是第幾個呢？同學可以用<code>which.max</code>函數作答。</p>
+<pre class="r"><code>which.max(index)</code></pre>
 </div>
 <div id="-36" class="section level2">
 <h2>關卡 36</h2>
-<p>x2只剩下原本在x奇數位置的值了。在整理資料時，我們常常需要這樣的技巧，來從資料中選出我們真正要分析的部份，並且將資料調整成我們需要的長度。</p>
+<p>對應的切點的值是多少呢？請利用上一題的答案。</p>
+<pre class="r"><code>eval.x[which.max(index)]</code></pre>
 </div>
 <div id="-37" class="section level2">
 <h2>關卡 37</h2>
-<p>所有的R物件，都有「屬性」(attributes)。我們可以用<code>attributes</code>這個函數來印出一個R物件的屬性。請同學試試看：<code>attributes(g)</code></p>
-<pre class="r"><code>attributes(g)</code></pre>
+<p>上一題的答案和cfit的結果不一致。從前面cfit的輸出可以看到，rpart的第一個切點是age&gt;=58.5。這其實是受到<code>control</code>這個參數的影響，所以rpart不會切割出太小（包含太少資料點）的node。請同學輸入：<code>rpart(pgstat~age,data=stagec,method=&quot;class&quot;,control=rpart.control(minsplit=1))</code></p>
+<pre class="r"><code>rpart(pgstat ~ age, data = stagec, method = &quot;class&quot;, control = rpart.control(minsplit = 1))</code></pre>
 </div>
 <div id="-38" class="section level2">
 <h2>關卡 38</h2>
-<p>請問同學，根據剛剛的輸出結果，<code>attributes(g)</code>的屬性應該是哪一種向量？</p>
-<p>list</p>
+<p>同學是不是看到第一個切點變成我們之前算出來的50.5了？</p>
 </div>
 <div id="-39" class="section level2">
 <h2>關卡 39</h2>
-<p>在下一個題目之前，我想請同學先輸入<code>names(g)</code>來查詢<code>g</code>的名字。並且和<code>attributes(g)</code>的結果做比對。</p>
-<pre class="r"><code>names(g)</code></pre>
+<p>rpart在做分類時，是利用公式去計算各種切點的impurity的改善。而這些切點的選擇也是有限制的（透過<code>rpart.control</code>）。使用者可以透過<code>control=rpart.control(minsplit=1)</code>來對這些限制條件做修正。</p>
 </div>
 <div id="-40" class="section level2">
 <h2>關卡 40</h2>
-<p>在剛剛<code>attributes(g)</code>的輸出中，同學應該會看到一個帶有名字的list。請同學記得，所有R物件的attributes都是帶有名字的list。</p>
+<p>Impurity的計算則可以透過parms的設定來調整。請同學閱讀檔案中的程式碼與註解後，輸入<code>submit()</code>。</p>
+<pre class="r"><code># R 中的型態很重要。類別的數據，調整成factor之後做運算會方便很多
+y &lt;- factor(stagec$pgstat)
+
+# n 是各種類別出現的次數
+n &lt;- table(y)
+
+# 預設的prior 是各種類別出現的比率
+prior &lt;- n / length(y)
+
+#'@title 這是Vignette中的P 函數的實作
+#'
+#'@param x factor vector.
+#'@return numeric value. 資料點屬於x 的機率
+P &lt;- function(x) {
+  x.tb &lt;- table(x)
+  sum(pi * (x.tb / n))
+}
+
+#'@title 這是information index的計算
+#'
+#'@param p numeric value. 是某個類別的機率
+#'@return numeric value. 該類別的information index
+information &lt;- function(p) {
+  if (p == 0) 0 else - p * log(p)
+}
+
+#'@title 這是使用information index做切割準則時，I 函數的實作
+#'@param x factor vector.
+#'@return numeric value. x 的impurity
+I &lt;- function(x) {
+  x.tb &lt;- table(x)
+  # 各種類別的機率
+  category.prob &lt;- x.tb / length(x)
+  #' R 也是一種函數式語言，而sapply等函數能夠很方便的取代for 迴圈
+  #' 這個寫法等價於：
+  #' for(p in category.prob) gini(p)
+  #' 但是自動把輸出結果排列成一個向量
+  category.information &lt;- sapply(category.prob, information) 
+  sum(category.information)
+}
+
+PI &lt;- function(x) P(x) * I(x)
+
+#'@title 給定一個切點之後，計算impurity降低的幅度
+impurity_variation_after_cut &lt;- function(cut) {
+  origin.impurity &lt;- I(y) * P(y)
+  # split 會依照第二個參數的值，將第一個參數分成若干個向量。
+  # split 的結果是一個list，而且每一個list element對應到第二個參數的一種類別
+  group &lt;- split(y, stagec$age &lt; cut)
+  # group 是一個長度為二的list
+  # 第一個element是所有stage$age &lt; cut為FALSE 的病患對應的pgstat
+  # 第二個element是所有stage$age &lt; cut為TRUE 的病患對應的pgstat
+
+  # 對各種切割後的node計算PI後加總
+  splitted.impurity &lt;- sum(sapply(group, PI))
+  origin.impurity - splitted.impurity
+}
+
+# 列舉所有可能的切點
+eval.x &lt;- seq(min(stagec$age) - 0.5, max(stagec$age) + 0.5, by = 1)
+
+# 算出每個切點，對應的impurity 的改善量
+index &lt;- sapply(eval.x, impurity_variation_after_cut)</code></pre>
 </div>
 <div id="-41" class="section level2">
 <h2>關卡 41</h2>
-<p>通常這個物件的名字，就是<code>attributes(g)</code>這個list中，名字為<code>&quot;names&quot;</code>的值。而且值一定要是character向量。在R中，我們可以用<code>attr(g,&quot;names&quot;)</code>來取得名字是“names”的屬性。請同學試試看。</p>
-<pre class="r"><code>attr(g, &quot;names&quot;)</code></pre>
+<p>在改成用informationindex後，對應的切點的值是多少呢？</p>
+<pre class="r"><code>eval.x[which.max(index)]</code></pre>
 </div>
 <div id="-42" class="section level2">
 <h2>關卡 42</h2>
-<p>上一題的輸出結果，就是g這個list的名字，也就是<code>names(g)</code>的結果。</p>
+<p>請同學輸入：<code>rpart(pgstat~age,data=stagec,method=&quot;class&quot;,parms=list(split=&quot;information&quot;),control=rpart.control(minsplit=1))</code></p>
+<pre class="r"><code>rpart(pgstat ~ age, data = stagec, method = &quot;class&quot;, parms = list(split = &quot;information&quot;), control = rpart.control(minsplit=1))</code></pre>
 </div>
 <div id="-43" class="section level2">
 <h2>關卡 43</h2>
-<p>讓我們回到<code>attributes(g)</code>的輸出。除了第一個值是名字為<code>&quot;names&quot;</code>的character向量之外，第二個值是一個名字是<code>&quot;class&quot;</code>的character向量。character向量的值是<code>&quot;lm&quot;</code>。請同學試試看：<code>attr(g,&quot;class&quot;)</code></p>
-<pre class="r"><code>attr(g, &quot;class&quot;)</code></pre>
+<p>可以看到差不多的結果。</p>
 </div>
 <div id="-44" class="section level2">
 <h2>關卡 44</h2>
-<p>了解像attributes這樣的功能，在探索一些複雜的R模型物件時，是非常好用的。我們在之後深入探討<code>matrix</code>、<code>data.frame</code>等進階物件的時候，也會需要了解attributes的相關的知識。現在，同學只要知道所有的R物件都有attributes就可以了。</p>
+<p>rpart也可以讓我們自己定義分割的邏輯。這題會打開rpart套件提供的範例給同學參考。有興趣的同學可以仔細研究。讀完之後請輸入<code>submit()</code></p>
+<pre class="r"><code># The following script is based on `mystate` dataset.
+mystate &lt;- data.frame(state.x77, region=state.region)
+colnames(mystate) &lt;- tolower(colnames(mystate))
+
+# The 'evaluation' function.  Called once per node.
+#  Produce a label (1 or more elements long) for labeling each node,
+#  and a deviance.  The latter is
+#   - of length 1
+#       - equal to 0 if the node is &quot;pure&quot; in some sense (unsplittable)
+#       - does not need to be a deviance: any measure that gets larger
+#            as the node is less acceptable is fine.
+#       - the measure underlies cost-complexity pruning, however
+temp1 &lt;- function(y, wt, parms) {
+    wmean &lt;- sum(y*wt)/sum(wt)
+    rss &lt;- sum(wt*(y-wmean)^2)
+    list(label= wmean, deviance=rss)
+    }
+
+# The split function, where most of the work occurs.
+#   Called once per split variable per node.
+# If continuous=T
+#   The actual x variable is ordered
+#   y is supplied in the sort order of x, with no missings,
+#   return two vectors of length (n-1):
+#      goodness = goodness of the split, larger numbers are better.
+#                 0 = couldn't find any worthwhile split
+#        the ith value of goodness evaluates splitting obs 1:i vs (i+1):n
+#      direction= -1 = send &quot;y&lt; cutpoint&quot; to the left side of the tree
+#                  1 = send &quot;y&lt; cutpoint&quot; to the right
+#         this is not a big deal, but making larger &quot;mean y's&quot; move towards
+#         the right of the tree, as we do here, seems to make it easier to
+#         read
+# If continuos=F, x is a set of integers defining the groups for an
+#   unordered predictor.  In this case:
+#       direction = a vector of length m= &quot;# groups&quot;.  It asserts that the
+#           best split can be found by lining the groups up in this order
+#           and going from left to right, so that only m-1 splits need to
+#           be evaluated rather than 2^(m-1)
+#       goodness = m-1 values, as before.
+#
+# The reason for returning a vector of goodness is that the C routine
+#   enforces the &quot;minbucket&quot; constraint. It selects the best return value
+#   that is not too close to an edge.
+temp2 &lt;- function(y, wt, x, parms, continuous) {
+    # Center y
+    n &lt;- length(y)
+    y &lt;- y- sum(y*wt)/sum(wt)
+
+    if (continuous) {
+    # continuous x variable
+    temp &lt;- cumsum(y*wt)[-n]
+
+    left.wt  &lt;- cumsum(wt)[-n]
+    right.wt &lt;- sum(wt) - left.wt
+    lmean &lt;- temp/left.wt
+    rmean &lt;- -temp/right.wt
+    goodness &lt;- (left.wt*lmean^2 + right.wt*rmean^2)/sum(wt*y^2)
+    list(goodness= goodness, direction=sign(lmean))
+    }
+    else {
+    # Categorical X variable
+    ux &lt;- sort(unique(x))
+    wtsum &lt;- tapply(wt, x, sum)
+    ysum  &lt;- tapply(y*wt, x, sum)
+    means &lt;- ysum/wtsum
+
+    # For anova splits, we can order the categories by their means
+    #  then use the same code as for a non-categorical
+    ord &lt;- order(means)
+    n &lt;- length(ord)
+    temp &lt;- cumsum(ysum[ord])[-n]
+    left.wt  &lt;- cumsum(wtsum[ord])[-n]
+    right.wt &lt;- sum(wt) - left.wt
+    lmean &lt;- temp/left.wt
+    rmean &lt;- -temp/right.wt
+    list(goodness= (left.wt*lmean^2 + right.wt*rmean^2)/sum(wt*y^2),
+         direction = ux[ord])
+    }
+    }
+
+# The init function:
+#   fix up y to deal with offsets
+#   return a dummy parms list
+#   numresp is the number of values produced by the eval routine's &quot;label&quot;
+#   numy is the number of columns for y
+#   summary is a function used to print one line in summary.rpart
+# In general, this function would also check for bad data, see rpart.poisson
+#   for instace.
+temp3 &lt;- function(y, offset, parms, wt) {
+    if (!is.null(offset)) y &lt;- y-offset
+    list(y=y, parms=0, numresp=1, numy=1,
+          summary= function(yval, dev, wt, ylevel, digits ) {
+          paste(&quot;  mean=&quot;, format(signif(yval, digits)),
+            &quot;, MSE=&quot; , format(signif(dev/wt, digits)),
+            sep='')
+         })
+    }
+
+
+alist &lt;- list(eval=temp1, split=temp2, init=temp3)
+
+fit1 &lt;- rpart(income ~population +illiteracy  + murder + hs.grad + region,
+         mystate, control=rpart.control(minsplit=10, xval=0),
+         method=alist)</code></pre>
 </div>
 <div id="-45" class="section level2">
 <h2>關卡 45</h2>
-<p>而名稱為“class”的屬性是非常重要的，因為它牽涉到R的物件導向設計。這部份請讓我們到更進階的章節再跟同學說明。</p>
+<p>我們可以利用<code>predict</code>函數來使用學習好的cfit函數做預測。舉例來說，<code>predict(cfit,stagec)</code>就可以用我們學到的模型回頭預測stagec的pgstat的值。請同學試試看。</p>
+<pre class="r"><code>predict(cfit, stagec)</code></pre>
 </div>
 <div id="-46" class="section level2">
 <h2>關卡 46</h2>
-<p>由於“names”和“class”這兩個屬性是如此的重要，所以在R中有設計了<code>class</code>和<code>names</code>這兩個函數，可以讓使用者很方便的來修改一個R物件的names和class。請同學試試看：<code>names(g)</code></p>
-<pre class="r"><code>names(g)</code></pre>
+<p>如果同學想要對rpart套件提供的預測函數<code>predict</code>有更多的了解可以輸入：<code>?predict.rpart</code>注意歐，這裡我們使用的並不是<code>?predict</code>，因為這裡rpart套件採用了R的S3物件導向方法。由於<code>class(cfit)</code>的輸出是<code>rpart</code>，所以<code>predict</code>函數最後會呼叫<code>predict.rpart</code>來對cfit做處理，相關的說明文件也會放在<code>?predict.rpart</code>之中。</p>
+<pre class="r"><code>?predict.rpart</code></pre>
 </div>
 <div id="-47" class="section level2">
 <h2>關卡 47</h2>
-<p>再請同學試試看：<code>class(g)</code></p>
-<pre class="r"><code>class(g)</code></pre>
+<p>以上就是對rpart這個套件的介紹。</p>
 </div>
 <div id="-48" class="section level2">
 <h2>關卡 48</h2>
-<p>這個課程簡介了R的物件系統。希望未來同學在接觸到沒學過得套件時，可以有系統得來摸索R套件的輸出。</p>
-</div>
-<div id="-49" class="section level2">
-<h2>關卡 49</h2>
-<p>最後我們請同學用這個課程所學的內容，處理一個PCA的結果。請同學在完成之後存檔，並輸入<code>submit()</code>來檢查結果是否符合預期。如果同學在檔案中看到亂碼，請使用Rstudio左上角的File-&gt;ReopenWithEncoding…-&gt;選取：UTF-8</p>
-<pre class="r"><code>#' 以下內容改自prcomp 的範例程式碼
-#' 
-#' PCA(Principle Components Analysis) 是一個資料分析時常用的技術，
-#' 它的原理會在後面的課程講解。
-#' 在R 中，我們可以利用prcomp這個指令對USArrests這筆資料進行PCA 的分析，
-#' R 會吐回一個計算後的物件給我們。
-pca &lt;- prcomp(USArrests, scale = TRUE)
+<p>最後我們再次使用rpart來挑戰mlbench的Ionosphere資料</p>
+<pre class="r"><code>check_then_install(&quot;mlbench&quot;, &quot;2.1.1&quot;)
+library(mlbench)
+# 方便起見，同學可以使用這個函數計算 Logarithmic Loss
+logloss &lt;- function(y, p, tol = 1e-4) {
+  # tol 的用途是避免對0取log所導致的數值問題
+  p[p &lt; tol] &lt;- tol
+  p[p &gt; 1 - tol] &lt;- 1-tol
+  -sum(y * log(p) + (1 - y) * log(1-p))
+}
 
-#' 請同學找出這個物件的名稱。你的答案只可能是：「character」、「numeric」或「list」
-answer1 &lt;- mode(pca)
+data(Ionosphere)
+test.i &lt;- c(4L, 6L, 9L, 13L, 14L, 22L, 31L, 33L, 50L, 52L, 61L, 63L, 68L, 
+            79L, 91L, 99L, 119L, 135L, 154L, 155L, 160L, 162L, 166L, 194L, 
+            200L, 219L, 233L, 236L, 237L, 242L, 244L, 248L, 250L, 257L, 261L, 
+            276L, 278L, 283L, 292L, 310L, 312L, 315L, 319L, 323L, 325L, 327L, 
+            335L, 337L, 338L, 344L)
+df.test &lt;- Ionosphere[test.i,-2] # remove V2
+train.i &lt;- setdiff(seq_len(nrow(Ionosphere)), test.i)
+df.train &lt;- Ionosphere[train.i,-2]
 
-#' 請同學找出`pca`這個向量的長度
-answer2 &lt;- length(pca)
+# 請利用rpart，從df.train上學出一個模型
+# 該模型在df.test上的logloss需要小於12
+answer_05 &lt;- local({
+  NULL
+  # 請調整以下的程式碼
+  rpart(Class ~ ., data = df.train, control = rpart.control(minsplit=50))
+})
 
-#' 請同學找出`pca`的名字
-answer3 &lt;- names(pca)
+stopifnot(class(answer_05) == c(&quot;rpart&quot;))
+if (interactive()) {
+  stopifnot(local({
+    p &lt;- predict(answer_05, df.test)[,&quot;good&quot;]
+    logloss(df.test$Class == &quot;good&quot;, p) &lt; 12
+  }))
+}
 
-#' `pca` 的元素中，有一個是各個principal components的standard deviations。
-#' 請同學參考`help(prcomp)`的說明，將各個principal components的standard deviations
-#' 的值取出，存到答案中。
-answer4 &lt;- pca$sdev
-
-#' `pca` 的元素中，有一個是做PCA的中心(center)。請同學參考`help(prcomp)`的說明，
-#' 把該元素取出，存到答案中。
-answer5 &lt;- pca$center</code></pre>
+# 完成後，請存檔後回到console輸入`submit()`</code></pre>
 </div>
 
 

@@ -63,252 +63,406 @@ img {
 
 <div id="-1" class="section level2">
 <h2>關卡 1</h2>
-<p>在R中，我們操作的所有變數，都是一種R物件(Object)。這一堂課程中，就是要簡介R的物件結構。</p>
+<p>這個課程跟同學介紹如何用R自資料中建立線性模型、學習參數與做預測和選模。</p>
 </div>
 <div id="-2" class="section level2">
 <h2>關卡 2</h2>
-<p>在所有物件中，最基礎的「原子」物件，就是在上一堂課中介紹的各種向量。其他的物件都是有這些原子物件組合而成。</p>
+<p>在R中要建立線性模型，首先要把資料給整理好。舉例來說，先把資料整理成data.frame是很常見的作法。</p>
 </div>
 <div id="-3" class="section level2">
 <h2>關卡 3</h2>
-<p>這些向量物件有兩個很重要的屬性：<code>mode</code>和<code>length</code>。<code>mode</code>代表這個向量的值型態，總共有：<code>logical</code>、<code>integer</code>、<code>numeric</code>、<code>complex</code>、<code>character</code>和<code>raw</code>。<code>length</code>代表這個向量的值的個數。</p>
+<p>舉例來說，請同學輸入：<code>cars</code>看一看這個車速與煞車距離的資料集。</p>
+<pre class="r"><code>cars</code></pre>
 </div>
 <div id="-4" class="section level2">
 <h2>關卡 4</h2>
-<p>同學可以用<code>mode</code>和<code>length</code>這個函數來查詢一個向量的型態和長度。請同學試試看：<code>mode(x)</code></p>
-<pre class="r"><code>mode(x)</code></pre>
+<p>我們想要研究車速（speed）與煞車後的滑行距離（dist）之間的關係。而這些資料，都已經放到cars資料集合之中了。</p>
 </div>
 <div id="-5" class="section level2">
 <h2>關卡 5</h2>
-<p>請問x的型態是？</p>
-<p>numeric</p>
+<p>cars的資料中，每一欄都代表一個面向的數據。舉例來說，第一欄位都是車速、第二欄位都是煞車的滑行距離。</p>
 </div>
 <div id="-6" class="section level2">
 <h2>關卡 6</h2>
-<p>接著，請試試看<code>length(x)</code></p>
-<pre class="r"><code>length(x)</code></pre>
+<p>cars的每一列，則代表一筆觀測資料。舉例來說，第一列的資料顯示，第一筆觀測數據，車速是4mph，而煞車後的滑行距離則是2ft。這些配對關係是很重要，第一列的車速就是配對到第一列的煞車滑行距離。</p>
 </div>
 <div id="-7" class="section level2">
 <h2>關卡 7</h2>
-<p>請問x的長度是？</p>
-<p>5</p>
+<p>在建立模型之前，建議先盡可能的看看資料的長相。請同學先輸入<code>skip()</code>自動檢查有無安裝ggplot2套件。</p>
+<pre class="r"><code>check_then_install(&quot;ggplot2&quot;, &quot;2.0.0&quot;)</code></pre>
 </div>
 <div id="-8" class="section level2">
 <h2>關卡 8</h2>
-<p>R也可以建立一種叫做<code>list</code>的向量，這是「R物件」的向量。換句話說，每一個值都是R物件，都有自己的<code>mode</code>、<code>length</code>等屬性。我們會在一些複雜的統計模型中，見到這樣的資料型態。舉例來說，在R中如果要建立一個迴歸模型，會使用：<code>g&lt;-lm(dist~speed,cars)</code>這樣的程式碼會利用車速當解釋變數、煞車距離當應變數，建立一個迴歸模型。這裡我們先不管<code>lm</code>怎麼用，而是要看看<code>g</code>這個物件的結構。同學只要掌握這個課程的內容，未來就可以輕鬆的探索各種機器學習或統計分析演算法的輸出結果。</p>
+<p>接著，請載入ggplot2套件</p>
+<pre class="r"><code>library(ggplot2)</code></pre>
 </div>
 <div id="-9" class="section level2">
 <h2>關卡 9</h2>
-<p>請同學檢查<code>g</code>的型態</p>
-<pre class="r"><code>mode(g)</code></pre>
+<p>請輸入：<code>g&lt;-ggplot(cars,aes(x=speed,y=dist))+geom_point()</code>來建立ggplot2的繪圖物件，並且把結果寫入到變數g</p>
+<pre class="r"><code>g &lt;- ggplot(cars, aes(x = speed, y = dist)) + geom_point()</code></pre>
 </div>
 <div id="-10" class="section level2">
 <h2>關卡 10</h2>
-<p>請同學檢查<code>g</code>的長度</p>
-<pre class="r"><code>length(g)</code></pre>
+<p>請輸入<code>print(g)</code>看看上一題答案的結果</p>
+<pre class="r"><code>print(g)</code></pre>
 </div>
 <div id="-11" class="section level2">
 <h2>關卡 11</h2>
-<p>在上一個章節中，我們有介紹可以使用如<code>g[1:2]</code>的方式來拿出<code>g</code>的第一個到第二個值。而這樣的輸出結果，還是會和<code>g</code>有同樣的<code>mode</code>。這裡請同學看看<code>g[1:2]</code>的結果。</p>
-<pre class="r"><code>g[1:2]</code></pre>
+<p>由於兩筆數據間有呈現線性關係的趨勢，所以用線性模型應該是合理的選擇。請同學輸入：<code>?lm</code>看看建立線性模型的說明文件</p>
+<pre class="r"><code>?lm</code></pre>
 </div>
 <div id="-12" class="section level2">
 <h2>關卡 12</h2>
-<p>同學會在Rconsole看到一些數字與其妙的文字。在最上面的<code>$coefficients</code>，表示<code>g[1:2]</code>這個向量的第一個值（同時也是<code>g</code>的第一個值），是有名字的。他的名字是：<code>&quot;coefficients&quot;</code>。接著，由於<code>g[1:2]</code>的第一個值是一個有名字的numeric向量，所以R就把這個向量所有的名字和值一起顯示在console。也就是說，這個numeric向量的第一個值是-17.579095，而名字是<code>&quot;(Intercept)&quot;</code>。第二個值是3.932409，而名字是<code>&quot;speed&quot;</code>。</p>
+<p><code>lm</code>的第一個參數是<code>formula</code>，是R中常常用來描述數據間關係的語法。<code>data</code>代表的是R要取得資料的data.frame。請同學輸入：<code>m&lt;-lm(dist~speed,cars)</code>，將<code>lm</code>的輸出寫入<code>m</code></p>
+<pre class="r"><code>m &lt;- lm(dist ~ speed, cars)</code></pre>
 </div>
 <div id="-13" class="section level2">
 <h2>關卡 13</h2>
-<p>接著，<code>$residuals</code>表示<code>g[1:2]</code>的第二個值也是有名字的，而且它的名字是<code>&quot;residuals&quot;</code>。由於這個值也是一個有名字的numeric向量，所以R就把值和名字同時顯示到console上。所以我們就可以知道，這個numeric向量的第一個值的名字是<code>&quot;1&quot;</code>，值是3.849460。以此類推。</p>
+<p>上一個答案中的<code>dist~speed</code>是R的formula物件。formula物件的目的是描述數據間的關係。<code>~</code>左方的名稱，是應變變數，也是我們感興趣的變數名稱；<code>~</code>右方的名稱，是獨立變數，我們將拿獨立變數來解釋應變變數的變化。</p>
 </div>
 <div id="-14" class="section level2">
 <h2>關卡 14</h2>
-<p>然而整個RConsole的顯示告訴我們<code>g[1:2]</code>仍然是一個list，因為R只有在顯示list的內容才會帶有<code>$coefficients</code>和<code>$residuals</code>這種標記。如果只是一個numeric向量，就不會顯示出<code>$coefficients</code>和<code>$residuals</code>。</p>
+<p>請同學輸入<code>m</code>看一看結果</p>
+<pre class="r"><code>m</code></pre>
 </div>
 <div id="-15" class="section level2">
 <h2>關卡 15</h2>
-<p>請同學輸入<code>list(1,a=2)</code>來看看R是如何顯示list，以及比較當值有附帶名字，或是沒有附帶名字時，輸出的不同。</p>
-<pre class="r"><code>list(1, a = 2)</code></pre>
+<p>請同學輸入<code>class(m)</code>看看<code>m</code>的型態</p>
+<pre class="r"><code>class(m)</code></pre>
 </div>
 <div id="-16" class="section level2">
 <h2>關卡 16</h2>
-<p>在一開始，R顯示了<code>[[1]]</code>，然後才顯示一個值為1的numeric向量。開頭的<code>[[1]]</code>不只說明了這個物件是一個list，也說明接下來顯示的是第一個值的內容。</p>
+<p>R中計算而得的數據模型，通常都會有自己的型態。例如<code>lm</code>產生的線性模型物件，型態就是：“lm”(linearmodel)。</p>
 </div>
 <div id="-17" class="section level2">
 <h2>關卡 17</h2>
-<p>接著，R顯示了<code>$a</code>，後才顯示了一個值為2的numeric向量。開頭的<code>$a</code>因為位置在第二，所以代表這是這個list物件的第二個值。同時，這個值的名字是<code>&quot;a&quot;</code>。</p>
+<p>請同學輸入：<code>mode(m)</code>，看看m真正的型態</p>
+<pre class="r"><code>mode(m)</code></pre>
 </div>
 <div id="-18" class="section level2">
 <h2>關卡 18</h2>
-<p>但是如果我們想拿出，<code>g</code>的第一個值，並且是這個物件的本身，而非被包在一個list中，我們需要用：<code>g[[1]]</code>。請同學試試看。</p>
-<pre class="r"><code>g[[1]]</code></pre>
+<p><code>lm</code>輸出的物件，本質上只是一個帶有名字的list。在說明文件中，副標題為Value段落，解釋了該list中每個元素的名字與意義。</p>
 </div>
 <div id="-19" class="section level2">
 <h2>關卡 19</h2>
-<p>請同學查詢<code>g[[1]]</code>的型態</p>
-<pre class="r"><code>mode(g[[1]])</code></pre>
+<p>請同學輸入：<code>coef(m)</code></p>
+<pre class="r"><code>coef(m)</code></pre>
 </div>
 <div id="-20" class="section level2">
 <h2>關卡 20</h2>
-<p>請同學查詢<code>g[[1]]</code>的長度</p>
-<pre class="r"><code>length(g[[1]])</code></pre>
+<p>線性模型所學到的參數，都紀錄在<code>coef(m)</code>的輸出中。我們可以看到一個帶有名字的數值向量（numericvector）。這裡的Intercept，代表的就是迴歸線的截距，也就是當車速為0時的煞車滑動距離。而speed，則代表speed變數的參數。也就是說，如果我們知道車速為x時，線性模型預測滑行的距離為：-17.58+3.93*x</p>
+<pre class="r"><code>coef(m)</code></pre>
 </div>
 <div id="-21" class="section level2">
 <h2>關卡 21</h2>
-<p>這裡再解釋一次<code>g[1]</code>和<code>g[[1]]</code>的差異。使用<code>g[1]</code>時，R取出向量的第一個元素，並且維持list的結構，所以<code>g[1]</code>的結果還仍是list。使用<code>g[[1]]</code>時，R會打破list的結構，再取出向量的第一個元素，所以<code>g[[1]]</code>的型態會是存放在list裡面的R物件的型態。所以在上述的例子中，<code>g[1]</code>的型態是list，而<code>g[[1]]</code>的型態就是numeric。這是因為g這個list的第一個存放的R物件是numeric向量。</p>
+<p>我們可以使用：<code>g+stat_smooth(method=&quot;lm&quot;,formula=y~x)</code>來畫出計算出的迴歸線。</p>
+<pre class="r"><code>g + stat_smooth(method = &quot;lm&quot;, formula = y ~ x)</code></pre>
 </div>
 <div id="-22" class="section level2">
 <h2>關卡 22</h2>
-<p>一般來說，對R物件使用<code>[]</code>之後，會取得會和該物件相同的物件。舉例來說，<code>a[1]</code>的型態會和<code>a</code>一樣。而<code>[[]]</code>就沒有類似的特性了。</p>
+<p>在<code>geom_smooth</code>中，method參數代表我們要建立模型的指令，也就是<code>lm</code>。只是這裡要給字串（要用雙引號包覆lm）。而<code>formula=y~x</code>代表這條線所描述的關係。圖形中的灰色區域，代表預測值的95%信賴區間。</p>
 </div>
 <div id="-23" class="section level2">
 <h2>關卡 23</h2>
-<p>經過這些練習，相信同學也會理解list這個「R物件的向量」是什麼意思。list向量最有用的地方，在於它可以裝不同型態的值。以<code>g</code>為範例，雖然它大部分的值的型態都是numeric，但是有些物件的型態會是call和list。這讓R的開發者能更有彈性的建立一些複雜的模型。同時同學在學會list之後，也更有能力來了解各種R套件所建立的模型物件。</p>
+<p><code>summary(m)</code>則鉅細靡遺的描述線性模型的性質。請同學試試看。</p>
+<pre class="r"><code>summary(m)</code></pre>
 </div>
 <div id="-24" class="section level2">
 <h2>關卡 24</h2>
-<p>請同學檢查看看<code>g[[10]]</code>的型態</p>
-<pre class="r"><code>mode(g[[10]])</code></pre>
+<p>Residuals區以敘述統計描述模型誤差的分佈。所謂的Residuals，就是在學習的資料（也就是<code>lm</code>的參數data所對應到的data.frame，例：cars）中，觀測值與預測值得差距。</p>
 </div>
 <div id="-25" class="section level2">
 <h2>關卡 25</h2>
-<p>這裡的<code>g[[10]]</code>其實是記載著產生g的程式碼。在R裡面，這樣的程式碼是存成call型態的物件。我們現在只要知道這是一種call就可以了。至於call是什麼東西，要等到同學需要開始深入的學習R的原始碼、運作機制時，才需要弄懂。我們現在只要知道，list可以裝所有R的物件就可以了。</p>
+<p>Coefficients則顯示的各參數檢定結果(虛無假設為對應的參數值為0)，星號表示顯著，即代表有明顯正顯示該參數不為0。</p>
 </div>
 <div id="-26" class="section level2">
 <h2>關卡 26</h2>
-<p>另一個我們需要知道的事情，就是可以為list命名。舉例來說，我們除了用<code>g[[1]]</code>來取得第一個值之外，也可以用<code>g[[&quot;coefficients&quot;]]</code>來取得第一個值。因為<code>g</code>這個向量是被命名的，而第一個名字就是<code>&quot;coefficients&quot;</code>。請同學試試看。</p>
-<pre class="r"><code>g[[&quot;coefficients&quot;]]</code></pre>
+<p>最下面則顯示各種重要的統計指標：ResidualStandarderror代表的是模型誤差的變異數；</p>
 </div>
 <div id="-27" class="section level2">
 <h2>關卡 27</h2>
-<p>適當的命名，可以讓程式碼更易讀。舉例來說，若我們知道<code>g</code>是一個迴歸模型，我們也知道迴歸模型通常就是一個參數向量，那我們就會預期：<code>g[[&quot;coefficients&quot;]]</code>就是這個迴歸模型的參數。（在統計學課本中，各種模型的參數通常稱作：“coefficients”。</p>
+<p>R-squared則類似相關係數的平方，描述資料接不接近線性模型。如果R-squared很靠近一，表示線性模型很接近資料；如果靠近0，則代表模型和資料不像。</p>
 </div>
 <div id="-28" class="section level2">
 <h2>關卡 28</h2>
-<p>我們可以更改一個向量的長度。舉例來說，現在x是一個長度是5、型態是numeric的向量。我們可以利用：<code>length(x)&lt;-10</code>把x的長度改成10。請同學試試看。</p>
-<pre class="r"><code>length(x) &lt;- 10</code></pre>
+<p>最後的F-statistic則用來檢定此模型和只有平均數的模型相比，是不是有明顯的差異。</p>
 </div>
 <div id="-29" class="section level2">
 <h2>關卡 29</h2>
-<p>現在我們可以來看看x的值。，請同學輸入：<code>x</code></p>
-<pre class="r"><code>x</code></pre>
+<p>接著我們講解如何使用模型來作預測。請同學輸入<code>?predict</code>看看predict函數的說明。</p>
+<pre class="r"><code>?predict</code></pre>
 </div>
 <div id="-30" class="section level2">
 <h2>關卡 30</h2>
-<p>我們也可以直接在x的指定位置塞入新的值，並且藉此增加x的長度。舉例來說：<code>x[7]&lt;-7</code>可以讓x的第7個位置的值變成7。請同學試試看。</p>
-<pre class="r"><code>x[7] &lt;- 7</code></pre>
+<p>R的<code>predict</code>是可用於各種模型的函數（在軟體工程中，又稱作「介面」）。除了線性模型以外的模型，也可能可以用<code>predict</code>函數來做預測。在Usage中，我們看到：<code>predict(object,...)</code>表示<code>predict</code>的第一個參數（名稱為object），一定是模型物件。舉例來說，我們手上的<code>m</code>物件就是代表線性模型，在使用<code>predict</code>函數時是第一個參數或名稱要為<code>object</code>。</p>
 </div>
 <div id="-31" class="section level2">
 <h2>關卡 31</h2>
-<p>現在我們可以來看看x的值。，請同學輸入：<code>x</code></p>
-<pre class="r"><code>x</code></pre>
+<p>如何查詢所有可以和<code>predict</code>搭配使用的模型呢？請輸入：<code>methods(predict)</code></p>
+<pre class="r"><code>methods(predict)</code></pre>
 </div>
 <div id="-32" class="section level2">
 <h2>關卡 32</h2>
-<p>由於x本來的長度就已經超過7所以並沒有延長。現在我們改程式試試看：<code>x[13]&lt;-13</code></p>
-<pre class="r"><code>x[13] &lt;- 13</code></pre>
+<p>同學有沒有看到<code>predict.lm</code>這個名稱顯示在螢幕上呢？還記得<code>class(m)</code>的結果是<code>lm</code>嗎？R在處理<code>predict(m,...)</code>這樣的語法時，因為<code>predict</code>是一個介面函數（在R中稱為GenericFunction），所以R會自動轉換成呼叫：<code>predict.lm(m,...)</code>，把第一個參數的型態（這裡是:<code>lm</code>）接到<code>predict</code>之後。這種把型態接到GenericFunction的名稱之後的作法，在R中稱為S3物件導向。</p>
 </div>
 <div id="-33" class="section level2">
 <h2>關卡 33</h2>
-<p>現在我們可以來看看x的值。，請同學輸入：<code>x</code></p>
-<pre class="r"><code>x</code></pre>
+<p>既然我們知道<code>predict(m,...)</code>實際上是<code>predict.lm(m,...)</code>。要查詢我們目前可用的參數就需要輸入：<code>?predict.lm</code>。請同學試試看。</p>
+<pre class="r"><code>?predict.lm</code></pre>
 </div>
 <div id="-34" class="section level2">
 <h2>關卡 34</h2>
-<p>如果我們要縮短x的長度，可以運用如：<code>x2&lt;-x[c(1,3,5,7,9,11,13)]</code>，這樣x2就是縮短的x。請同學試試看。</p>
-<pre class="r"><code>x2 &lt;- x[c(1,3,5,7,9,11,13)]</code></pre>
+<p>同學這次可以看到許多可以設定的參數了。我們只針對最重要的<code>newdata</code>做說明。這裡的<code>newdata</code>如果不給的話，<code>predict.lm</code>會拿<code>m</code>裡面剛剛學習用的資料（也就是cars，之後我們稱之為「trainingdataset」，因為這個資料是用於做訓練的）</p>
 </div>
 <div id="-35" class="section level2">
 <h2>關卡 35</h2>
-<p>現在我們可以來看看x2的值。，請同學輸入：<code>x2</code></p>
-<pre class="r"><code>x2</code></pre>
+<p>如果我們要預測車速為20時滑行距離為多少時，就需要利用<code>data.frame</code>指令來建立暫時的data.frame物件，告訴R我們想預測的情境是車速20。</p>
 </div>
 <div id="-36" class="section level2">
 <h2>關卡 36</h2>
-<p>x2只剩下原本在x奇數位置的值了。在整理資料時，我們常常需要這樣的技巧，來從資料中選出我們真正要分析的部份，並且將資料調整成我們需要的長度。</p>
+<p>接著，同學如果要預測車速為20時，煞車滑行距離為多少時，可以輸入：<code>predict(m,data.frame(speed=20))</code></p>
+<pre class="r"><code>predict(m, data.frame(speed = 20))</code></pre>
 </div>
 <div id="-37" class="section level2">
 <h2>關卡 37</h2>
-<p>所有的R物件，都有「屬性」(attributes)。我們可以用<code>attributes</code>這個函數來印出一個R物件的屬性。請同學試試看：<code>attributes(g)</code></p>
-<pre class="r"><code>attributes(g)</code></pre>
+<p><code>predict.lm</code>也可以輸出其他資訊，例如預測的標準差。有興趣的同學可以細讀Arguments段落與Value段落。</p>
 </div>
 <div id="-38" class="section level2">
 <h2>關卡 38</h2>
-<p>請問同學，根據剛剛的輸出結果，<code>attributes(g)</code>的屬性應該是哪一種向量？</p>
-<p>list</p>
+<p>R也可以輸出預測的信賴區間。請同學輸入：<code>predict(m,data.frame(speed=20),interval=&quot;predict&quot;)</code>標準差的信心水準則是透過參數<code>level</code>控制。</p>
+<pre class="r"><code>predict(m, data.frame(speed = 20), interval = &quot;predict&quot;)</code></pre>
 </div>
 <div id="-39" class="section level2">
 <h2>關卡 39</h2>
-<p>在下一個題目之前，我想請同學先輸入<code>names(g)</code>來查詢<code>g</code>的名字。並且和<code>attributes(g)</code>的結果做比對。</p>
-<pre class="r"><code>names(g)</code></pre>
+<p>請問同學，不設定<code>level</code>參數時，上一題答案所計算的信心水準是多少？</p>
+<p>0.95</p>
 </div>
 <div id="-40" class="section level2">
 <h2>關卡 40</h2>
-<p>在剛剛<code>attributes(g)</code>的輸出中，同學應該會看到一個帶有名字的list。請同學記得，所有R物件的attributes都是帶有名字的list。</p>
+<p>我們上面介紹了如何用R的<code>lm</code>來建立線性模型，與運用<code>predict</code>來計算預測結果。接著我們來介紹調校模型與選擇模型的方法。</p>
 </div>
 <div id="-41" class="section level2">
 <h2>關卡 41</h2>
-<p>通常這個物件的名字，就是<code>attributes(g)</code>這個list中，名字為<code>&quot;names&quot;</code>的值。而且值一定要是character向量。在R中，我們可以用<code>attr(g,&quot;names&quot;)</code>來取得名字是“names”的屬性。請同學試試看。</p>
-<pre class="r"><code>attr(g, &quot;names&quot;)</code></pre>
+<p>我們要練習的資料集是iris，請同學輸入適當的指令從套件載入該資料集。</p>
+<pre class="r"><code>data(iris)</code></pre>
 </div>
 <div id="-42" class="section level2">
 <h2>關卡 42</h2>
-<p>上一題的輸出結果，就是g這個list的名字，也就是<code>names(g)</code>的結果。</p>
+<p>請同學輸入<code>?iris</code>看看資料的背景</p>
+<pre class="r"><code>?iris</code></pre>
 </div>
 <div id="-43" class="section level2">
 <h2>關卡 43</h2>
-<p>讓我們回到<code>attributes(g)</code>的輸出。除了第一個值是名字為<code>&quot;names&quot;</code>的character向量之外，第二個值是一個名字是<code>&quot;class&quot;</code>的character向量。character向量的值是<code>&quot;lm&quot;</code>。請同學試試看：<code>attr(g,&quot;class&quot;)</code></p>
-<pre class="r"><code>attr(g, &quot;class&quot;)</code></pre>
+<p>我們要利用iris中的其他資料，來預測Sepal.Length欄位的值</p>
 </div>
 <div id="-44" class="section level2">
 <h2>關卡 44</h2>
-<p>了解像attributes這樣的功能，在探索一些複雜的R模型物件時，是非常好用的。我們在之後深入探討<code>matrix</code>、<code>data.frame</code>等進階物件的時候，也會需要了解attributes的相關的知識。現在，同學只要知道所有的R物件都有attributes就可以了。</p>
+<p>iris是一個data.frame。請同學輸入：<code>sapply(iris,class)</code>看一看每個欄位的型態</p>
+<pre class="r"><code>sapply(iris, class)</code></pre>
 </div>
 <div id="-45" class="section level2">
 <h2>關卡 45</h2>
-<p>而名稱為“class”的屬性是非常重要的，因為它牽涉到R的物件導向設計。這部份請讓我們到更進階的章節再跟同學說明。</p>
+<p>請問唯一屬於類別型變數的欄位名稱是？請輸入字串</p>
+<p>Species</p>
 </div>
 <div id="-46" class="section level2">
 <h2>關卡 46</h2>
-<p>由於“names”和“class”這兩個屬性是如此的重要，所以在R中有設計了<code>class</code>和<code>names</code>這兩個函數，可以讓使用者很方便的來修改一個R物件的names和class。請同學試試看：<code>names(g)</code></p>
-<pre class="r"><code>names(g)</code></pre>
+<p>因為Sepal.Length是數值型變數，所以我們可以使用<code>lm</code>做學習。</p>
 </div>
 <div id="-47" class="section level2">
 <h2>關卡 47</h2>
-<p>再請同學試試看：<code>class(g)</code></p>
-<pre class="r"><code>class(g)</code></pre>
+<p>使用formula時，如果輸入：<code>xxx~.</code>就代表xxx是目標變數，而其他欄位通通都當成解釋變數。請同學輸入：<code>m.iris1&lt;-lm(Sepal.Length~.,iris)</code></p>
+<pre class="r"><code>m.iris1 &lt;- lm(Sepal.Length ~ ., iris)</code></pre>
 </div>
 <div id="-48" class="section level2">
 <h2>關卡 48</h2>
-<p>這個課程簡介了R的物件系統。希望未來同學在接觸到沒學過得套件時，可以有系統得來摸索R套件的輸出。</p>
+<p>請用<code>coef(m.iris1)</code>列出所有學到的模型參數。</p>
+<pre class="r"><code>coef(m.iris1)</code></pre>
 </div>
 <div id="-49" class="section level2">
 <h2>關卡 49</h2>
-<p>最後我們請同學用這個課程所學的內容，處理一個PCA的結果。請同學在完成之後存檔，並輸入<code>submit()</code>來檢查結果是否符合預期。如果同學在檔案中看到亂碼，請使用Rstudio左上角的File-&gt;ReopenWithEncoding…-&gt;選取：UTF-8</p>
-<pre class="r"><code>#' 以下內容改自prcomp 的範例程式碼
-#' 
-#' PCA(Principle Components Analysis) 是一個資料分析時常用的技術，
-#' 它的原理會在後面的課程講解。
-#' 在R 中，我們可以利用prcomp這個指令對USArrests這筆資料進行PCA 的分析，
-#' R 會吐回一個計算後的物件給我們。
-pca &lt;- prcomp(USArrests, scale = TRUE)
+<p>我們想要比較<code>coef(m.iris1)</code>是不是大部分都屬於iris的欄位名稱。請同學先輸入：<code>tmp1&lt;-names(coef(m.iris1))</code></p>
+<pre class="r"><code>tmp1 &lt;- names(coef(m.iris1))</code></pre>
+</div>
+<div id="-50" class="section level2">
+<h2>關卡 50</h2>
+<p>接著請同學輸入：<code>tmp2&lt;-colnames(iris)</code>取得iris的欄位名稱。</p>
+<pre class="r"><code>tmp2 &lt;- colnames(iris)</code></pre>
+</div>
+<div id="-51" class="section level2">
+<h2>關卡 51</h2>
+<p>最後我們運用<code>setdiff</code>（集合的減法）來找出<code>tmp1</code>中不屬於<code>tmp2</code>的元素。請同學輸入：<code>setdiff(tmp1,tmp2)</code></p>
+<pre class="r"><code>setdiff(tmp1, tmp2)</code></pre>
+</div>
+<div id="-52" class="section level2">
+<h2>關卡 52</h2>
+<p>除了(Intercept)之外，同學應該還會看到Speciesversicolor與Speciesvirginica。這是因為Species是類別型變數，所以R把欄位名稱與類別名稱接在一起當成參數名稱。另外考量到解釋性，Speciessetosa（欄位名稱+第一個類別名稱）會被移除，只留下剩下的兩個類別。</p>
+</div>
+<div id="-53" class="section level2">
+<h2>關卡 53</h2>
+<p>線性模型處理類別型變數的概念，很接近「分組取平均」。</p>
+</div>
+<div id="-54" class="section level2">
+<h2>關卡 54</h2>
+<p>我們請同學複習一下dplyr的group_by與summarise。</p>
+<pre class="r"><code>check_then_install(&quot;dplyr&quot;, &quot;0.4.3&quot;)
 
-#' 請同學找出這個物件的名稱。你的答案只可能是：「character」、「numeric」或「list」
-answer1 &lt;- mode(pca)
+# 請計算出iris的三種花的種類，所帶有的平均Sepal.Length
+answer_01 &lt;- local({
+  data(iris)
+  group_by(iris, Species) %&gt;%
+    summarise(mean(Sepal.Length))
+})
 
-#' 請同學找出`pca`這個向量的長度
-answer2 &lt;- length(pca)
+stopifnot(is.data.frame(answer_01))
+stopifnot(colnames(answer_01) == c(&quot;Species&quot;, &quot;mean(Sepal.Length)&quot;))
+stopifnot(sum(answer_01[[2]]) == 17.53)
 
-#' 請同學找出`pca`的名字
-answer3 &lt;- names(pca)
+# 完成後，請同學存檔並回到console輸入：`submit()`</code></pre>
+</div>
+<div id="-55" class="section level2">
+<h2>關卡 55</h2>
+<p>為了方便比較，請同學輸入：<code>answer_01</code>把上一題的答案輸出到console上</p>
+<pre class="r"><code>answer_01</code></pre>
+</div>
+<div id="-56" class="section level2">
+<h2>關卡 56</h2>
+<p>接著請同學輸入：<code>lm(Sepal.Length~Species,iris)</code>，看看學習出來的結果。</p>
+<pre class="r"><code>lm(Sepal.Length ~ Species, iris)</code></pre>
+</div>
+<div id="-57" class="section level2">
+<h2>關卡 57</h2>
+<p>模型中的參數(Intercept)，其實就是setosa中Sepal.Length的平均值；模型中的參數Speciesversicolor則是versicolor與setosa的Sepal.Length的平均值得差；Speciesvirginica同理。</p>
+</div>
+<div id="-58" class="section level2">
+<h2>關卡 58</h2>
+<p>我們也可以透過適當的設定formula來讓模型更複雜。請同學輸入：<code>m.iris2&lt;-lm(Sepal.Length~.^2,iris)</code>這種作法除了考量到各種欄位對Sepal.Length的個別影響之外，欄位的影響力也會受到其它欄位的影響。</p>
+<pre class="r"><code>m.iris2 &lt;- lm(Sepal.Length ~ .^2, iris)</code></pre>
+</div>
+<div id="-59" class="section level2">
+<h2>關卡 59</h2>
+<p>請同學輸入<code>m.iris2</code>看看這個模型的參數</p>
+<pre class="r"><code>m.iris2</code></pre>
+</div>
+<div id="-60" class="section level2">
+<h2>關卡 60</h2>
+<p>除了原本在m.iris1看到的參數之外，還多了許多中間有<code>:</code>的參數。舉例來說，Sepal.Width:Petal.Width代表的是Sepal.Width與Petal.Width對Sepal.Length（目標變數）的影響力，會受到彼此的影響。Sepal.Width:Petal.Width這個參數，在統計上稱為：Sepal.Width與Petal.Width的「交互作用」。或是「二次交互作用項」。因為這類的交互作用，是可以擴充到三、甚至四個變數的狀況。</p>
+</div>
+<div id="-61" class="section level2">
+<h2>關卡 61</h2>
+<p>在formula中的<code>Sepal.Length~.^2</code>中，<code>.</code>就代表除了Sepal.Length之外所有在iris中的欄位。而<code>^2</code>則代表所有這些欄位之間的兩兩組合（二次交互作用項），都要放到模型之中。同理，<code>^3</code>就代表所有的三次交互作用項。我們也可以手動指定要放入模型的交互作用，例如：<code>Sepal.Length~.+Sepal.Width:Petal.Width</code>就代表除了<code>m.iris1</code>的參數之外，我們只增加了<code>Sepal.Width:Petal.Width</code>這一個二次交互作用項。</p>
+</div>
+<div id="-62" class="section level2">
+<h2>關卡 62</h2>
+<p>我們可以一直放高次的交互作用到模型之中，讓模型變得非常複雜。結果導致我們能夠計算出很多個模型，但是哪一個才是「最好用」的模型呢？</p>
+</div>
+<div id="-63" class="section level2">
+<h2>關卡 63</h2>
+<p>我們可以用指令<code>residuals(m.iris1)</code>來看到「實際的Sepal.Length」與「m.iris1預測的Sepal.Length」的差距。這些在trainingdataset上看到的模型與實際觀測值之間的差距，稱為residuals。請同學試試看這個指令</p>
+<pre class="r"><code>residuals(m.iris1)</code></pre>
+</div>
+<div id="-64" class="section level2">
+<h2>關卡 64</h2>
+<p>透過比較residuals的大小，我們可以知道模型在trainingdataset描述Sepal.Length的變化上，做的好不好。請輸入：<code>sum(residuals(m.iris1)^2)</code>，計算residuals的平方和</p>
+<pre class="r"><code>sum(residuals(m.iris1)^2)</code></pre>
+</div>
+<div id="-65" class="section level2">
+<h2>關卡 65</h2>
+<p>請輸入：<code>sum(residuals(m.iris2)^2)</code>，計算第二個模型的residuals的平方和</p>
+<pre class="r"><code>sum(residuals(m.iris2)^2)</code></pre>
+</div>
+<div id="-66" class="section level2">
+<h2>關卡 66</h2>
+<p>請問哪一個模型的residuals的平方和比較小？描述trainingdataset的變化描述的比較好？</p>
+<p>m.iris2</p>
+</div>
+<div id="-67" class="section level2">
+<h2>關卡 67</h2>
+<p>事實上，模型越複雜，trainingdataset上的Residuals的平方和就越小。</p>
+</div>
+<div id="-68" class="section level2">
+<h2>關卡 68</h2>
+<p>請同學計算一個有所有三次交互作用項的模型，residuals的平方和為多少。同學可以藉此機會確認，這個模型的residual的平方和，會小於<code>m.iris2</code>的residuals的平方和。</p>
+<pre class="r"><code># 請同學計算一個有所有三次交互作用項的模型
+# Residuals的平方和為多少。
+answer_02 &lt;- local({
+  m.iris3 &lt;- lm(Sepal.Length ~ .^3, iris) # 請修改這段程式碼
+  sum(residuals(m.iris3)^2)
+})
 
-#' `pca` 的元素中，有一個是各個principal components的standard deviations。
-#' 請同學參考`help(prcomp)`的說明，將各個principal components的standard deviations
-#' 的值取出，存到答案中。
-answer4 &lt;- pca$sdev
+stopifnot(class(answer_02) == &quot;numeric&quot;)
+stopifnot(length(answer_02) == 1)
 
-#' `pca` 的元素中，有一個是做PCA的中心(center)。請同學參考`help(prcomp)`的說明，
-#' 把該元素取出，存到答案中。
-answer5 &lt;- pca$center</code></pre>
+# 完成後，請同學存檔並回到console輸入：`submit()`
+</code></pre>
+</div>
+<div id="-69" class="section level2">
+<h2>關卡 69</h2>
+<p>事實上，透過residuals的平方和，我們可以計算出RSquared。RSquared是很多統計學課程中會提到的「描述線性模型表現」的指標（我們略過嚴謹的數學定義）。數學上可以證明，RSquared的值會介於0與1之間。0代表模型完全沒有解釋到目標變數在trainingdataset上的變化；1代表模型100%解釋了目標變數在trainingdataset的行為（同時也代表residuals都是0）。RSquared等價於「相關係數的平方」。請同學輸入<code>summary(m.iris2)</code>，這個詳細的表格會回報模型的RSquared。</p>
+<pre class="r"><code>summary(m.iris2)</code></pre>
+</div>
+<div id="-70" class="section level2">
+<h2>關卡 70</h2>
+<p>在RBasic中有介紹如何取出RSquared的值，所以我們就不再贅述了。</p>
+</div>
+<div id="-71" class="section level2">
+<h2>關卡 71</h2>
+<p>實務上，RSquared並不代表模型比較「好用」（例如：預測的比較準）。模型在trainingdataset上的表現，「不代表」模型在trainingdataset以外的資料上會表現的比較好。透過方法挑選出在trainingdataset以外的資料上比較好的模型，稱為「選模」。</p>
+</div>
+<div id="-72" class="section level2">
+<h2>關卡 72</h2>
+<p>統計學提供了一些統計指標，在只使用trainingdataset的狀況下，去預測模型在在trainingdataset以外的資料上的表現。R則有提供相關的實作，甚至連選模的過程都實作了。同學可以試試看：<code>m.iris&lt;-step(m.iris2,steps=1)</code></p>
+<pre class="r"><code>m.iris &lt;- step(m.iris2, steps = 1)</code></pre>
+</div>
+<div id="-73" class="section level2">
+<h2>關卡 73</h2>
+<p>R會去計算AIC(TheAkaikeinformationcriterion)來評估模型在testingdataset的好壞。AIC越小，模型就越好。接著R會嘗試去拿掉一個欄位、交互作用項或是新增一個欄位、交互作用項，看看模型的AIC會不會提昇。我們可以看到，當拿掉：<code>Sepal.Width:Species</code>時，AIC會變低（原本的AIC，即是<none>所對應的那一列），而且是這一系列嘗試中，AIC最低的。所以R就會將<code>m.iris2</code>的解釋變數組合，從「所有的二次交互作用」(<code>.^2</code>)變成「所有的二次交互作用扣除Sepal.Width:Species」(<code>.^2-Sepal.Width:Species</code>)。</p>
+</div>
+<div id="-74" class="section level2">
+<h2>關卡 74</h2>
+<p><code>m.iris&lt;-step(m.iris2)</code>則會一直重複上述的動作，直到模型的AIC不會變得更低。並把結果的模型輸出（寫入變數m.iris）。請同學試試看。</p>
+<pre class="r"><code>m.iris &lt;- step(m.iris2)</code></pre>
+</div>
+<div id="-75" class="section level2">
+<h2>關卡 75</h2>
+<p>最後我們請同學利用另一個資料做練習。</p>
+<pre class="r"><code>check_then_install(&quot;mlbench&quot;, &quot;2.1.1&quot;) # 請同學安裝套件mlbench，版本為2.1.1或更新
+library(mlbench)
+data(BostonHousing)
+
+# 同學應該先看看資料。請輸入：
+
+# ?BostonHousing # 了解資料的背景
+# sapply(BostonHousing, class) # 看看每欄的型態
+# summary(BostonHousing) # 看看數字分佈
+# nrow(BostonHousing) # 看看資料個數
+
+answer_03_01 &lt;- &quot;medv&quot;
+
+# 第一回合：請同學做出一個R Squared超過0.9的模型
+answer_03_02 &lt;- local({
+  lm(medv ~ .^2, BostonHousing)  
+})
+stopifnot(class(answer_03_02) == &quot;lm&quot;)
+stopifnot(summary(answer_03_02)$r.squared &gt; 0.9)
+
+# 第二回合：請同學做出一個AIC低於1089的模型
+answer_03_03 &lt;- local({
+  step(answer_03_02, trace = 0)
+})
+stopifnot(class(answer_03_03) == &quot;lm&quot;)
+stopifnot(extractAIC(answer_03_03)[2] &lt; 1089)
+
+# 第三回合：請同學做出一個AIC低於-520模型
+# (本題為挑戰題，submit後不檢查) 
+answer_03_04 &lt;- local({
+  b.breaks &lt;- c(-Inf, quantile(BostonHousing$b))
+  df &lt;- 
+    BostonHousing %&gt;% 
+    mutate(b.cut = cut(b, breaks = b.breaks))
+  answer_03_04 &lt;- 
+    lm(formula = medv ~ .^3, data = df)
+})</code></pre>
 </div>
 
 
