@@ -18,7 +18,7 @@ test_lesson = function(lesson_dir){
   lesson = yaml.load_file(paste0(lesson_dir,"/lesson.yaml"))
   stopifnot(lesson[[1]]$Lesson == lesson_dir)
   
-  for(R_file in c("/customTests.R", "/../.initCourse.R", "/initLesson.R")){
+  for(R_file in c("/../.initCourse.R", "/initLesson.R", "/customTests.R")){
     R_file_path = paste0(lesson_dir, R_file)
     if(file.exists(R_file_path)) source(R_file_path,local = e)
   }
@@ -54,8 +54,13 @@ test_lesson = function(lesson_dir){
           if (file.exists(question$correctScript)) {
             cat("Testing script...\n")
             file.copy(question$correctScript, e$script_temp_path <- file.path(tempdir(), question$Script), overwrite = TRUE)
-            source(question$correctScript, local = globalenv())
-            stopifnot(eval(parse(text = question$AnswerTests), envir = e))
+            tryCatch({
+              attach(e)
+              source(question$correctScript, local = globalenv())
+              stopifnot(eval(parse(text = question$AnswerTests), envir = e))
+            }, finally = {
+              detach(e)
+            })
           }
         }
       )

@@ -1,0 +1,430 @@
+- Class: meta
+  Course: DataScienceAndR
+  Lesson: Optional-RMachineLearning-01-Linear-Model
+  Author: Wush Wu
+  Type: Standard
+  Organization: Taiwan R User Group
+  Version: 2.3.1.2
+- Class: text
+  Output: |
+    這個課程跟同學介紹如何用R自資料中建立線性模型、學習參數與做預測和選模。
+- Class: text
+  Output: |
+    在R中要建立線性模型，首先要把資料給整理好。舉例來說，先把資料整理成data.frame是很常見的作法。
+- Class: cmd_question
+  Output: |
+    舉例來說，請同學輸入：`cars`看一看這個車速與煞車距離的資料集。
+  CorrectAnswer: cars
+  AnswerTests: omnitest('cars')
+  Hint: cars
+- Class: text
+  Output: |
+    我們想要研究車速（speed）與煞車後的滑行距離（dist）之間的關係。而這些資料，
+    都已經放到cars資料集合之中了。
+- Class: text
+  Output: |
+    cars的資料中，每一欄都代表一個面向的數據。舉例來說，第一欄位都是車速、 第二欄位都是煞車
+    的滑行距離。
+- Class: text
+  Output: |
+    cars的每一列，則代表一筆觀測資料。舉例來說，第一列的資料顯示，第一筆觀測數據，車速是4 mph，
+    而煞車後的滑行距離則是2 ft。這些配對關係是很重要，第一列的車速就是配對到第一列的煞車滑行距離。
+- Class: cmd_question
+  Output: |
+    在建立模型之前，建議先盡可能的看看資料的長相。請同學先輸入`skip()`
+    自動檢查有無安裝ggplot2套件。
+  CorrectAnswer: check_then_install("ggplot2", "2.0.0")
+  AnswerTests: test_package_version("ggplot2", "2.0.0")
+  Hint: check_then_install("ggplot2", "2.0.0")
+- Class: cmd_question
+  Output: 接著，請載入ggplot2套件
+  CorrectAnswer: library(ggplot2)
+  AnswerTests: test_search_path("ggplot2")
+  Hint: library(ggplot2)
+- Class: cmd_question
+  Output: |
+    請輸入：`g <- ggplot(cars, aes(x = speed, y = dist)) + geom_point()`來建立
+    ggplot2的繪圖物件，並且把結果寫入到變數g
+  CorrectAnswer: g <- ggplot(cars, aes(x = speed, y = dist)) + geom_point()
+  AnswerTests: omnitest('g <- ggplot(cars, aes(x = speed, y = dist)) + geom_point()')
+  Hint: g <- ggplot(cars, aes(x = speed, y = dist)) + geom_point()
+- Class: cmd_question
+  Output: |
+    請輸入`print(g)`看看上一題答案的結果
+  CorrectAnswer: print(g)
+  AnswerTests: omnitest('print(g)')
+  Hint: print(g)
+- Class: cmd_question
+  Output: |
+    由於兩筆數據間有呈現線性關係的趨勢，所以用線性模型應該是合理的選擇。
+    請同學輸入：`?lm`看看建立線性模型的說明文件
+  CorrectAnswer: ?lm
+  AnswerTests: omnitest('?lm')
+  Hint: ?lm
+- Class: cmd_question
+  Output: |
+    `lm`的第一個參數是`formula`，是R 中常常用來描述數據間關係的語法。
+    `data`代表的是R 要取得資料的data.frame。請同學輸入：
+    `m <- lm(dist ~ speed, cars)`，將`lm`的輸出寫入`m`
+  CorrectAnswer: m <- lm(dist ~ speed, cars)
+  AnswerTests: omnitest('m <- lm(dist ~ speed, cars)')
+  Hint: m <- lm(dist ~ speed, cars)
+- Class: text
+  Output: |
+    上一個答案中的`dist ~ speed`是R 的formula物件。formula物件的目的
+    是描述數據間的關係。`~`左方的名稱，是應變變數，也是我們感興趣的
+    變數名稱；`~`右方的名稱，是獨立變數，我們將拿獨立變數來解釋應變變數
+    的變化。
+- Class: cmd_question
+  Output: |
+    請同學輸入`m`看一看結果
+  CorrectAnswer: m
+  AnswerTests: omnitest('m')
+  Hint: m
+- Class: cmd_question
+  Output: |
+    請同學輸入`class(m)`看看`m`的型態
+  CorrectAnswer: class(m)
+  AnswerTests: omnitest('class(m)')
+  Hint: class(m)
+- Class: text
+  Output: |
+    R 中計算而得的數據模型，通常都會有自己的型態。例如`lm`產生的線性模型物件，
+    型態就是："lm"(linear model)。
+- Class: cmd_question
+  Output: |
+    請同學輸入：`mode(m)`，看看m真正的型態
+  CorrectAnswer: mode(m)
+  AnswerTests: omnitest('mode(m)')
+  Hint: mode(m)
+- Class: text
+  Output: |
+    `lm`輸出的物件，本質上只是一個帶有名字的list。在說明文件中，副標題為Value段落，
+    解釋了該list中每個元素的名字與意義。
+- Class: cmd_question
+  Output: 請同學輸入：`coef(m)`
+  CorrectAnswer: coef(m)
+  AnswerTests: omnitest('coef(m)')
+  Hint: coef(m)
+- Class: cmd_question
+  Output: |
+    線性模型所學到的參數，都紀錄在`coef(m)`的輸出中。我們可以看到一個帶有名字的
+    數值向量（numeric vector）。這裡的Intercept，代表的就是迴歸線的截距，也就是
+    當車速為0 時的煞車滑動距離。而speed，則代表speed變數的參數。也就是說，如果
+    我們知道車速為x 時，線性模型預測滑行的距離為： -17.58 + 3.93 * x
+  CorrectAnswer: coef(m)
+  AnswerTests: omnitest('coef(m)')
+  Hint: coef(m)
+- Class: cmd_question
+  Output: |
+    我們可以使用：`g + stat_smooth(method = "lm", formula = y ~ x)`來畫出計算出的
+    迴歸線。
+  CorrectAnswer: g + stat_smooth(method = "lm", formula = y ~ x)
+  AnswerTests: omnitest('g + stat_smooth(method = "lm", formula = y ~ x)')
+  Hint: g + stat_smooth(method = "lm", formula = y ~ x)
+- Class: text
+  Output: |
+    在`geom_smooth`中，method參數代表我們要建立模型的指令，也就是`lm`。只是這裡要給字串
+    （要用雙引號包覆lm）。而`formula = y ~ x`代表這條線所描述的關係。圖形中的灰色區域，
+    代表預測值的95%信賴區間。
+- Class: cmd_question
+  Output: |
+    `summary(m)`則鉅細靡遺的描述線性模型的性質。請同學試試看。
+  CorrectAnswer: summary(m)
+  AnswerTests: omnitest('summary(m)')
+  Hint: summary(m)
+- Class: text
+  Output: |
+    Residuals區以敘述統計描述模型誤差的分佈。所謂的Residuals，就是在學習的資料（也就是`lm`的參數
+    data所對應到的data.frame，例：cars）中，觀測值與預測值得差距。
+- Class: text
+  Output: |
+    Coefficients則顯示的各參數檢定結果(虛無假設為對應的參數值為0)，星號表示顯著，即代表有明顯正顯示該參數不為0。
+- Class: text
+  Output: |
+    最下面則顯示各種重要的統計指標：Residual Standard error代表的是模型誤差的變異數；
+- Class: text
+  Output: |
+    R-squared 則類似相關係數的平方，描述資料接不接近線性模型。如果R-squared 很靠近一，表示
+    線性模型很接近資料；如果靠近0，則代表模型和資料不像。
+- Class: text
+  Output: |
+    最後的F-statistic則用來檢定此模型和只有平均數的模型相比，是不是有明顯的差異。
+- Class: cmd_question
+  Output: |
+    接著我們講解如何使用模型來作預測。請同學輸入`?predict`看看predict函數的說明。
+  CorrectAnswer: ?predict
+  AnswerTests: omnitest('?predict')
+  Hint: ?predict
+- Class: text
+  Output: |
+    R的`predict`是可用於各種模型的函數（在軟體工程中，又稱作「介面」）。除了線性模型
+    以外的模型，也可能可以用`predict`函數來做預測。在Usage中，我們看到：`predict(object, ...)`
+    表示`predict`的第一個參數（名稱為object），一定是模型物件。舉例來說，我們手上的
+    `m`物件就是代表線性模型，在使用`predict`函數時是第一個參數或名稱要為`object`。
+- Class: cmd_question
+  Output: |
+    如何查詢所有可以和`predict`搭配使用的模型呢？請輸入：`methods(predict)`
+  CorrectAnswer: methods(predict)
+  AnswerTests: omnitest('methods(predict)')
+  Hint: methods(predict)
+- Class: text
+  Output: |
+    同學有沒有看到`predict.lm`這個名稱顯示在螢幕上呢？還記得`class(m)`的結果是`lm`嗎？
+    R在處理`predict(m, ...)`這樣的語法時，因為`predict`是一個介面函數（在R中稱為
+    Generic Function），所以R 會自動轉換成呼叫：`predict.lm(m, ...)`，把第一個參數的
+    型態（這裡是:`lm`）接到`predict`之後。這種把型態接到Generic Function的名稱之後的
+    作法，在R中稱為S3物件導向。
+- Class: cmd_question
+  Output: |
+    既然我們知道`predict(m, ...)`實際上是`predict.lm(m, ...)`。
+    要查詢我們目前可用的參數就需要輸入：`?predict.lm`。請同學試試看。
+  CorrectAnswer: ?predict.lm
+  AnswerTests: omnitest('?predict.lm')
+  Hint: ?predict.lm
+- Class: text
+  Output: |
+    同學這次可以看到許多可以設定的參數了。我們只針對最重要的`newdata`做說明。
+    這裡的`newdata`如果不給的話，`predict.lm`會拿`m`裡面剛剛學習用的資料（也就是
+    cars，之後我們稱之為「training dataset」，因為這個資料是用於做訓練的）
+- Class: text
+  Output: |
+    如果我們要預測車速為20時滑行距離為多少時，就需要利用`data.frame`指令來建立
+    暫時的data.frame物件，告訴R 我們想預測的情境是車速20。
+- Class: cmd_question
+  Output: |
+    接著，同學如果要預測車速為20時，煞車滑行距離為多少時，
+    可以輸入：`predict(m, data.frame(speed = 20))`
+  CorrectAnswer: predict(m, data.frame(speed = 20))
+  AnswerTests: omnitest('predict(m, data.frame(speed = 20))')
+  Hint: predict(m, data.frame(speed = 20))
+- Class: text
+  Output: |
+    `predict.lm`也可以輸出其他資訊，例如預測的標準差。有興趣的同學可以細讀Arguments段落
+    與Value段落。
+- Class: cmd_question
+  Output: |
+    R 也可以輸出預測的信賴區間。請同學輸入：`predict(m, data.frame(speed = 20), interval = "predict")`
+    標準差的信心水準則是透過參數`level`控制。
+  CorrectAnswer: predict(m, data.frame(speed = 20), interval = "predict")
+  AnswerTests: omnitest('predict(m, data.frame(speed = 20), interval = "predict")')
+  Hint: predict(m, data.frame(speed = 20), interval = "predict")
+- Class: mult_question
+  Output: |
+    請問同學，不設定`level`參數時，上一題答案所計算的信心水準是多少？
+  AnswerChoices: 0.9;0.95;0.99
+  CorrectAnswer: '0.95'
+  AnswerTests: omnitest(correctVal = "0.95")
+- Class: text
+  Output: |
+    我們上面介紹了如何用R的`lm`來建立線性模型，與運用`predict`來計算預測結果。
+    接著我們來介紹調校模型與選擇模型的方法。
+- Class: cmd_question
+  Output: |
+    我們要練習的資料集是iris，請同學輸入適當的指令從套件載入該資料集。
+  CorrectAnswer: data(iris)
+  AnswerTests: omnitest('data(iris)')
+  Hint: data(iris)
+- Class: cmd_question
+  Output: |
+    請同學輸入`?iris`看看資料的背景
+  CorrectAnswer: ?iris
+  AnswerTests: omnitest('?iris')
+  Hint: ?iris
+- Class: text
+  Output: |
+    我們要利用iris中的其他資料，來預測Sepal.Length欄位的值
+- Class: cmd_question
+  Output: |
+    iris是一個data.frame。請同學輸入：`sapply(iris, class)`看一看每個欄位的型態
+  CorrectAnswer: sapply(iris, class)
+  AnswerTests: omnitest('sapply(iris, class)')
+  Hint: sapply(iris, class)
+- Class: mult_question
+  Output: |
+    請問唯一屬於類別型變數的欄位名稱是？請輸入字串
+  AnswerChoices: Sepal.Length;Sepal.Width;Petal.Length;Petal.Width;Species
+  CorrectAnswer: Species
+  AnswerTests: omnitest(correctVal = "Species")
+- Class: text
+  Output: |
+    因為Sepal.Length是數值型變數，所以我們可以使用`lm`做學習。
+- Class: cmd_question
+  Output: |
+    使用formula時，如果輸入： `xxx ~ .`就代表xxx是目標變數，而其他欄位通通都當成解釋變數。
+    請同學輸入：`m.iris1 <- lm(Sepal.Length ~ ., iris)`
+  CorrectAnswer: m.iris1 <- lm(Sepal.Length ~ ., iris)
+  AnswerTests: omnitest('m.iris1 <- lm(Sepal.Length ~ ., iris)')
+  Hint: m.iris1 <- lm(Sepal.Length ~ ., iris)
+- Class: cmd_question
+  Output: |
+    請用`coef(m.iris1)`列出所有學到的模型參數。
+  CorrectAnswer: coef(m.iris1)
+  AnswerTests: omnitest('coef(m.iris1)')
+  Hint: coef(m.iris1)
+- Class: cmd_question
+  Output: |
+    我們想要比較`coef(m.iris1)`是不是大部分都屬於iris的欄位名稱。
+    請同學先輸入：`tmp1 <- names(coef(m.iris1))`
+  CorrectAnswer: tmp1 <- names(coef(m.iris1))
+  AnswerTests: omnitest('tmp1 <- names(coef(m.iris1))')
+  Hint: tmp1 <- names(coef(m.iris1))
+- Class: cmd_question
+  Output: |
+    接著請同學輸入：`tmp2 <- colnames(iris)`取得iris的欄位名稱。
+  CorrectAnswer: tmp2 <- colnames(iris)
+  AnswerTests: omnitest('tmp2 <- colnames(iris)')
+  Hint: tmp2 <- colnames(iris)
+- Class: cmd_question
+  Output: |
+    最後我們運用`setdiff`（集合的減法）來找出`tmp1`中不屬於`tmp2`的元素。請同學輸入：
+    `setdiff(tmp1, tmp2)`
+  CorrectAnswer: setdiff(tmp1, tmp2)
+  AnswerTests: omnitest('setdiff(tmp1, tmp2)')
+  Hint: setdiff(tmp1, tmp2)
+- Class: text
+  Output: |
+    除了(Intercept)之外，同學應該還會看到Speciesversicolor與Speciesvirginica。
+    這是因為Species是類別型變數，所以R 把欄位名稱與類別名稱接在一起當成參數名稱。
+    另外考量到解釋性，Speciessetosa（欄位名稱+第一個類別名稱）會被移除，只留下
+    剩下的兩個類別。
+- Class: text
+  Output: |
+    線性模型處理類別型變數的概念，很接近「分組取平均」。
+- Class: script
+  Output: |
+    我們請同學複習一下dplyr的group_by與summarise。
+  Script: ml-01-01.R
+  AnswerTests: ml_01_01()
+- Class: cmd_question
+  Output: |
+    為了方便比較，請同學輸入：`answer_01`把上一題的答案輸出到console上
+  CorrectAnswer: answer_01
+  AnswerTests: omnitest('answer_01')
+  Hint: answer_01
+- Class: cmd_question
+  Output: |
+    接著請同學輸入：`lm(Sepal.Length ~ Species, iris)`，看看學習出來的結果。
+  CorrectAnswer: lm(Sepal.Length ~ Species, iris)
+  AnswerTests: omnitest('lm(Sepal.Length ~ Species, iris)')
+  Hint: lm(Sepal.Length ~ Species, iris)
+- Class: text
+  Output: |
+    模型中的參數(Intercept)，其實就是setosa中Sepal.Length的平均值；
+    模型中的參數Speciesversicolor則是versicolor與setosa的Sepal.Length的平均值得差；
+    Speciesvirginica同理。
+- Class: cmd_question
+  Output: |
+    我們也可以透過適當的設定formula來讓模型更複雜。請同學輸入：
+    `m.iris2 <- lm(Sepal.Length ~ .^2, iris)`這種作法除了考量到各種欄位
+    對Sepal.Length的個別影響之外，欄位的影響力也會受到其它欄位的影響。
+  CorrectAnswer: m.iris2 <- lm(Sepal.Length ~ .^2, iris)
+  AnswerTests: omnitest('m.iris2 <- lm(Sepal.Length ~ .^2, iris)')
+  Hint: m.iris2 <- lm(Sepal.Length ~ .^2, iris)
+- Class: cmd_question
+  Output: |
+    請同學輸入`m.iris2`看看這個模型的參數
+  CorrectAnswer: m.iris2
+  AnswerTests: omnitest('m.iris2')
+  Hint: m.iris2
+- Class: text
+  Output: |
+    除了原本在m.iris1看到的參數之外，還多了許多中間有`:`的參數。舉例來說，Sepal.Width:Petal.Width
+    代表的是Sepal.Width與Petal.Width對Sepal.Length（目標變數）的影響力，會受到彼此的影響。
+    Sepal.Width:Petal.Width 這個參數，在統計上稱為：Sepal.Width與Petal.Width的「交互作用」。或是
+    「二次交互作用項」。因為這類的交互作用，是可以擴充到三、甚至四個變數的狀況。
+- Class: text
+  Output: |
+    在formula中的`Sepal.Length ~ .^2`中，`.`就代表除了Sepal.Length之外所有在iris中的欄位。而`^2`
+    則代表所有這些欄位之間的兩兩組合（二次交互作用項），都要放到模型之中。同理，`^3`就代表所有的
+    三次交互作用項。我們也可以手動指定要放入模型的交互作用，
+    例如：`Sepal.Length ~ . + Sepal.Width:Petal.Width`就代表除了`m.iris1`的參數之外，我們只增加了
+    `Sepal.Width:Petal.Width`這一個二次交互作用項。
+- Class: text
+  Output: |
+    我們可以一直放高次的交互作用到模型之中，讓模型變得非常複雜。
+    結果導致我們能夠計算出很多個模型，但是哪一個才是「最好用」的模型呢？
+- Class: cmd_question
+  Output: |
+    我們可以用指令`residuals(m.iris1)`來看到「實際的Sepal.Length」與「m.iris1預測的Sepal.Length」
+    的差距。這些在training dataset上看到的模型與實際觀測值之間的差距，稱為residuals。
+    請同學試試看這個指令
+  CorrectAnswer: residuals(m.iris1)
+  AnswerTests: omnitest('residuals(m.iris1)')
+  Hint: residuals(m.iris1)
+- Class: cmd_question
+  Output: |
+    透過比較residuals的大小，我們可以知道模型在training dataset描述Sepal.Length的變化上，做的好不好。
+    請輸入：`sum(residuals(m.iris1)^2)`，計算residuals的平方和
+  CorrectAnswer: sum(residuals(m.iris1)^2)
+  AnswerTests: omnitest('sum(residuals(m.iris1)^2)')
+  Hint: sum(residuals(m.iris1)^2)
+- Class: cmd_question
+  Output: |
+    請輸入：`sum(residuals(m.iris2)^2)`，計算第二個模型的residuals的平方和
+  CorrectAnswer: sum(residuals(m.iris2)^2)
+  AnswerTests: omnitest('sum(residuals(m.iris2)^2)')
+  Hint: sum(residuals(m.iris2)^2)
+- Class: mult_question
+  Output: |
+    請問哪一個模型的residuals的平方和比較小？描述training dataset的變化描述的比較好？
+  AnswerChoices: m.iris1;m.iris2
+  CorrectAnswer: m.iris2
+  AnswerTests: omnitest(correctVal = "m.iris2")
+- Class: text
+  Output: |
+    事實上，模型越複雜，training dataset上的Residuals的平方和就越小。
+- Class: script
+  Output: |
+    請同學計算一個有所有三次交互作用項的模型，residuals的平方和為多少。同學可以
+    藉此機會確認，這個模型的residual的平方和，會小於`m.iris2`的residuals的平方和。
+  Script: ml-01-02.R
+  AnswerTests: ml_01_02()
+- Class: cmd_question
+  Output: |
+    事實上，透過residuals的平方和，我們可以計算出R Squared。R Squared是很多統計學課程中
+    會提到的「描述線性模型表現」的指標（我們略過嚴謹的數學定義）。數學上可以證明，R Squared
+    的值會介於0與1之間。0代表模型完全沒有解釋到目標變數在training dataset上的變化；1代表模型
+    100%解釋了目標變數在training dataset的行為（同時也代表residuals都是0）。R Squared等價於
+    「相關係數的平方」。請同學輸入`summary(m.iris2)`，這個詳細的表格會回報模型的R Squared。
+  CorrectAnswer: summary(m.iris2)
+  AnswerTests: omnitest('summary(m.iris2)')
+  Hint: summary(m.iris2)
+- Class: text
+  Output: |
+    在R Basic中有介紹如何取出R Squared的值，所以我們就不再贅述了。
+- Class: text
+  Output: |
+    實務上，R Squared並不代表模型比較「好用」（例如：預測的比較準）。
+    模型在training dataset上的表現，「不代表」模型在training dataset以外的資料上
+    會表現的比較好。
+    透過方法挑選出在training dataset以外的資料上比較好的模型，稱為「選模」。
+- Class: cmd_question
+  Output: |
+    統計學提供了一些統計指標，在只使用training dataset的狀況下，去預測模型在
+    在training dataset以外的資料上的表現。R 則有提供相關的實作，甚至連選模的
+    過程都實作了。同學可以試試看：`m.iris <- step(m.iris2, steps = 1)`
+  CorrectAnswer: m.iris <- step(m.iris2, steps = 1)
+  AnswerTests: omnitest('m.iris <- step(m.iris2, steps = 1)')
+  Hint: m.iris <- step(m.iris2, steps = 1)
+- Class: text
+  Output: |
+    R 會去計算AIC(The Akaike information criterion)來評估模型在testing dataset的好壞。
+    AIC越小，模型就越好。接著R 會嘗試去拿掉一個欄位、 交互作用項或是新增一個欄位、交互作用項，
+    看看模型的AIC會不會提昇。我們可以看到，當拿掉：`Sepal.Width:Species`時，AIC會變低（原本的AIC，
+    即是<none>所對應的那一列），而且是這一系列嘗試中，AIC最低的。所以R 就會將`m.iris2`的解釋變數
+    組合，從「所有的二次交互作用」(`.^2`)變成「所有的二次交互作用扣除Sepal.Width:Species」
+    (`.^2 - Sepal.Width:Species`)。
+- Class: cmd_question
+  Output: |
+    `m.iris <- step(m.iris2)`則會一直重複上述的動作，直到模型的AIC不會變得更低。並把結果的模型
+    輸出（寫入變數m.iris）。請同學試試看。
+  CorrectAnswer: m.iris <- step(m.iris2)
+  AnswerTests: omnitest('m.iris <- step(m.iris2)')
+  Hint: m.iris <- step(m.iris2)
+- Class: script
+  Output: |
+    最後我們請同學利用另一個資料做練習。
+  Script: ml-01-03.R
+  AnswerTests: ml_01_03()
+
