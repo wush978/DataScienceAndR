@@ -24,8 +24,10 @@ library(neuralnet)
 library(rpart)
 library(xgboost)
 library(e1071)
+library(plotmo)
+library(rpart.plot)
 
-opts_chunk$set(echo = FALSE, cache=FALSE, comment="",
+opts_chunk$set(echo = FALSE, cache=TRUE, comment="",
                cache.path = "cache-MachineLearning/",
                dev.args=list(bg="transparent"),
                fig.path = "./assets/fig/rmachine-learning-",
@@ -46,12 +48,12 @@ sys_encode <- c("utf8", "utf8", "big5")[pmatch(sys_name, c("linux", "darwin", "w
 
 - 機器學習簡介
 - 線性模型(迴歸分析)
-- Regularization與Elastic Net
-- Loss Function與Support Vector Machine
+- Regularization
+- Support Vector Machine
 - 分類樹
 - Bagging 與 Random Forest
 - Boosting 與 Gradient Boosted Decision Tree
-- Neuron Network 與 Deep Learning
+- Neuron Network
 
 --- .dark .segue
 
@@ -562,7 +564,18 @@ ggplot(iris, aes(x = Petal.Length, y = Sepal.Length, color = Species, fill = Spe
 
 ## 多種類別的分類
 
-```{r plot.nn, echo = FALSE}
+- 類別1 建立一個logistic regression model
+- 類別2 建立一個logistic regression model
+- ...
+- 類別K-1 建立一個logistic regression model
+- 類別 $k \neq K$ 的機率為 $\frac{e^{\beta_k^x}}{1 + \sum_{i=1}^{K-1} e^{\beta_i^x}}$
+- 類別 $K$ 的機率為 $\frac{1}{1 + \sum_{i=1}^{K-1} e^{\beta_i^x}}$
+
+--- &vcenter .largecontent
+
+## 多種類別的分類
+
+```{r plot.nn, echo = FALSE, cache = FALSE}
 # source: http://stackoverflow.com/a/11881985
 plot.nn <-
 function (x, rep = NULL, x.entry = NULL, x.out = NULL, radius = 0.15, 
@@ -789,7 +802,7 @@ for(species in levels(iris$Species)) {
 }
 ```
 
-```{r nn-hack, echo = FALSE, dependson="nn"}
+```{r nn-hack, echo = FALSE, dependson="nn", cache = FALSE}
 plotmo.pairs.nn2 <- function(object, x, nresponse = 1, trace = 0, all2 = FALSE) {
   plotmo:::plotmo.pairs.rpart(rpart(Species ~ Sepal.Length + Sepal.Width, iris), x)
 }
@@ -811,127 +824,128 @@ plotmo(g, type = "class", type2 = "image", degree1 = FALSE,
 
 --- &vcenter .largecontent
 
-## 練習
+## R 功能介紹：`lm`與`glm`
 
-- 請同學完成： Optional-RMachineLearning-01-Linear-Model
-- 請同學完成： Optional-RMachineLearning-02-Generalized-Linear-Model
+- 請同學完成： `Optional-RMachineLearning-01-Linear-Model`
+- 請同學完成： `Optional-RMachineLearning-02-Generalized-Linear-Model`
 
 --- .dark .segue
 
-## Regularization與Elastic Net
+## Regularization
 
 --- &vcenter .largecontent
 
---- &vcenter .largecontent
+## 還記得金門年齡預測的例子嗎？
 
-## Decision Tree
-
-```{r rpart}
-library(rpart)
-g <- rpart(Species ~ Sepal.Length + Sepal.Width, iris)
-library(rpart.plot)
-rpart.plot(g)
-```
+- 20名金門鄉鄉民樣本的平均年齡
+- 20名金門鄉鄉民樣本的平均年齡 * 0.99
 
 --- &vcenter .largecontent
 
-## Decision Tree
+## 偏差與散佈程度
 
-```{r rpart-plotmo, dependson="rpart"}
-suppressPackageStartupMessages(library(plotmo))
-plotmo(g, type = "class", type2 = "image", degree1 = FALSE,
-       pch.response = as.integer(iris$Species), ngrid2 = 100,
-       col.response = c("#990000", "#009900", "#000099")[as.integer(iris$Species)],
-       image.col = c("#ffcccc", "#ccffcc", "#ccccff"))
-```
+- 我們可以讓預測的偏差變大，以換取更穩定的預測
+    - Shrinkage
+- 在做機器學習時很常使用的技巧
 
 --- &vcenter .largecontent
 
-## Random Forest
+## Regularization
 
-```{r xgboost-rf}
-suppressPackageStartupMessages(library(xgboost))
-iris.x <- model.matrix(~ Sepal.Length + Sepal.Width - 1, iris)
-g <- xgboost(data = iris.x, 
-             label = as.integer(iris$Species) - 1, max.depth = 3, 
-             num_parallel_tree = 100, subsample = 0.5, colsample_bytree =0.5, 
-             num_class = 3, nround = 1, params = list(objective = "multi:softprob"))
-```
-
-```{r plotmo-xgboost-rf, echo = FALSE, dependson="xgboost-rf"}
-suppressPackageStartupMessages({
-  library(plotmo)
-  library(rpart)
-})
-g$x <- iris.x;g$y <- iris$Species
-predict.xgb.Booster <- function(object, ...) {
-  tmp <- as.list(...)
-  tmp <- do.call(cbind, tmp)
-  retval <- xgboost::predict(object, tmp)
-  retval <- matrix(retval, nrow(tmp), 3, byrow = TRUE)
-  retval <- factor(apply(retval, 1, which.max), levels = 1:3)
-  levels(retval) <- levels(iris$Species)
-  retval
-}
-plotmo.pairs.xgb.Booster <- function(object, x, nresponse = 1, trace = 0, all2 = FALSE) {
-  plotmo:::plotmo.pairs.rpart(rpart(Species ~ Sepal.Length + Sepal.Width, iris), x)
-}
-plotmo(g, type = "class", type2 = "image", degree1 = FALSE,
-       pch.response = as.integer(iris$Species), ngrid2 = 100,
-       col.response = c("#990000", "#009900", "#000099")[as.integer(iris$Species)],
-       image.col = c("#ffcccc", "#ccffcc", "#ccccff"))
-```
+- 在迴歸的範例中，我們尋找的是最小方差直線
+    - 我們要找到參數$\beta_0, \beta_1, ...$ 來最小化:
+$$(y - \beta_0 - \beta_1 x_1 - \beta_2 x_2 - ...)^2$$
+- Regularization
+    - 我們要找到參數$\beta_0, \beta_1, ...$ 來最小化:
+$$(y - \beta_0 - \beta_1 x_1 - \beta_2 x_2 - ...)^2 + \left\Vert \beta_1 \right\Vert + \left\Vert \beta_2 \right\Vert + ...$$
 
 --- &vcenter .largecontent
 
-## Gradient Boosting Decision Tree
+## Regularization是一種逼近
 
-```{r xgboost-gdbt}
-suppressPackageStartupMessages(library(xgboost))
-iris.x <- model.matrix(~ Sepal.Length + Sepal.Width - 1, iris)
-g <- xgboost(data = iris.x, 
-             label = as.integer(iris$Species) - 1, max.depth = 3, 
-             num_parallel_tree = 100, num_class = 3, nround = 100, 
-             params = list(objective = "multi:softprob"))
-```
+- 選解釋變數是個$L_0$的問題
+- Regularization透過 $L_1$ 或 $L_2$ 來逼近選解釋變數的問題
+- $L_1$ 會讓不重要的解釋變數係數變成0
 
-```{r plotmo-xgboost-gdbt, echo = FALSE, dependson="xgboost-gdbt"}
-suppressPackageStartupMessages({
-  library(plotmo)
-  library(rpart)
-})
-g$x <- iris.x;g$y <- iris$Species
-predict.xgb.Booster <- function(object, ...) {
-  tmp <- as.list(...)
-  tmp <- do.call(cbind, tmp)
-  retval <- xgboost::predict(object, tmp)
-  retval <- matrix(retval, nrow(tmp), 3, byrow = TRUE)
-  retval <- factor(apply(retval, 1, which.max), levels = 1:3)
-  levels(retval) <- levels(iris$Species)
-  retval
-}
-plotmo.pairs.xgb.Booster <- function(object, x, nresponse = 1, trace = 0, all2 = FALSE) {
-  plotmo:::plotmo.pairs.rpart(rpart(Species ~ Sepal.Length + Sepal.Width, iris), x)
-}
-plotmo(g, type = "class", type2 = "image", degree1 = FALSE,
-       pch.response = as.integer(iris$Species), ngrid2 = 100,
-       col.response = c("#990000", "#009900", "#000099")[as.integer(iris$Species)],
-       image.col = c("#ffcccc", "#ccffcc", "#ccccff"))
-```
+<center>`r fig("Sparsityl1.png")`</center>
 
 --- &vcenter .largecontent
+
+## Elastic Net
+
+- 同時考慮 $L_1$ 與 $L_2$ Regularization
+
+<center>`r fig("Sparsityen.png")`</center>
+
+--- &vcenter .largecontent
+
+## Regularization 的特點
+
+- 大部分狀況，可以提昇模型的準確度
+    - 提昇模型的穩定性
+- $L_0$ Regularization 可以用於挑選重要的解釋變數
+- 資料需要標準化
+- 多了一個（或多個）需要調整的參數
+
+--- &vcenter .largecontent
+
+## R套件介紹： glmnet
+
+- 請同學完成 `Optional-RMachineLearning-03-Regularization`
+
+--- .dark .segue
 
 ## Support Vector Machine
 
+--- &vcenter .largecontent
+
+## 空間移轉與次元刀
+
+<center>`r fig("Kernel_Machine.png")`</center>
+
+--- &vcenter .largecontent
+
+## 空間移轉與次元刀
+
+- 影片介紹：<https://youtu.be/3liCbRZPrZA>
+
+--- &vcenter .largecontent
+
+## 比較一般的線性模型與SVM Regression
+
+- 線性模型：
+
+$$l(y, f(x) = (y - f(x))^2$$
+
+- SVM：
+
+$$l(y, f(x)) = \left\{\begin{array}{lc} 0 & \text{ if } \left\lVert y - f(x) \right\rVert < \varepsilon \\ \left\lVert y - f(x) \right\rVert - \varepsilon & \text{ otherwise } \end{array}\right.$$
+
+--- &vcenter .largecontent
+
+## 比較一般的線性模型與SVM Regression
+
+```{r hinge-loss}
+l1 <- function(x) x^2
+l2 <- Vectorize(function(x) {
+  if (abs(x) > 0.5) {
+    abs(x) - 0.5
+  } else 0
+})
+curve(l1(x), -2, 2, lwd = 2, lty = 1)
+curve(l2(x), add = TRUE, lty = 2, lwd = 2)
+legend("top", c("Linear Regression", "SVM Regression"), lwd = 2, lty = 1:2)
+```
+
+--- &vcenter .largecontent
+
+## 比較一般的線性模型與SVM Regression
+
 ```{r svm}
-suppressPackageStartupMessages(library(e1071))
 g <- svm(Species ~ Sepal.Length + Sepal.Width, iris)
 ```
 
 ```{r plotmo-svm, echo = FALSE, dependson="svm"}
-library(e1071)
-library(plotmo)
-library(rpart)
 plotmo.pairs.svm <- function(object, x, nresponse = 1, trace = 0, all2 = FALSE) {
   plotmo:::plotmo.pairs.rpart(rpart(Species ~ Sepal.Length + Sepal.Width, iris), x)
 }
@@ -943,16 +957,226 @@ plotmo(g, type = "class", type2 = "image", degree1 = FALSE,
 
 --- &vcenter .largecontent
 
+## R套件介紹：e1071
+
+- 請同學完成 `Optional-RMachineLearning-04-Support-Vector-Machine`
+
+--- .dark .segue
+
+## Decision Tree
+
+--- &vcenter .largecontent
+
+## Decision Tree
+
+```{r rpart}
+g <- rpart(Species ~ Sepal.Length + Sepal.Width, iris)
+rpart.plot(g, cex = 2)
+```
+
+--- &vcenter .largecontent
+
+## 如何長出一顆決策樹？
+
+- 一次一次長一個分支
+    - 計算分數，每次都挑讓分數變得最好的分支長法
+    - 當長不下去時，停止
+- <https://youtu.be/eKD5gxPPeY0?t=3m48s>
+
+--- &vcenter .largecontent
+
+## Decision Tree
+
+```{r rpart-plotmo, dependson="rpart"}
+plotmo(g, type = "class", type2 = "image", degree1 = FALSE,
+       pch.response = as.integer(iris$Species), ngrid2 = 100,
+       col.response = c("#990000", "#009900", "#000099")[as.integer(iris$Species)],
+       image.col = c("#ffcccc", "#ccffcc", "#ccccff"))
+```
+
+--- &vcenter .largecontent
+
+## R 套件介紹：rpart
+
+- 請同學完成 `Optional-RMachineLearning-05-Decision-Tree`
+
+--- .dark .segue
+
+## Bagging 與 Random Forest
+
+--- &vcenter .largecontent
+
+## Bagging: 眾人的智慧
+
+- 如果我們有很多「不太準的模型」，能不能讓它們一起工作，變得更準？
+- 一起工作的方法：
+    - 表決（分類問題）
+    - 取平均（迴歸問題
+
+--- &vcenter .largecontent
+
+## Random Forest
+
+- 每次隨機抽出部份的「解釋變數」（而不是資料）
+- 利用這些抽出的解釋變數長出一棵決策樹（不太準的模型）
+- 長出大量的決策樹後進行投票（眾人的智慧）
+
+---
+
+## Random Forest
+
+<br/>
+<br/>
+<br/>
+<br/>
+<center>`r fig("RF.jpg",60)`</center>
+
+<small><https://citizennet.com/blog/2012/11/10/random-forests-ensembles-and-performance-metrics/></small>
+
+--- &vcenter .largecontent
+
+## Random Forest
+
+- 非線性
+
+```{r xgboost-rf}
+iris.x <- model.matrix(~ Sepal.Length + Sepal.Width - 1, iris)
+g <- xgboost(data = iris.x, 
+             label = as.integer(iris$Species) - 1, max.depth = 3, 
+             num_parallel_tree = 100, subsample = 0.5, colsample_bytree =0.5, 
+             num_class = 3, nround = 1, params = list(objective = "multi:softprob"),
+             verbose = 0)
+```
+
+```{r plotmo-xgboost-rf, echo = FALSE, dependson="xgboost-rf"}
+g$x <- iris.x;g$y <- iris$Species
+predict.xgb.Booster <- function(object, ...) {
+  tmp <- as.list(...)
+  tmp <- do.call(cbind, tmp)
+  retval <- xgboost::predict(object, tmp)
+  retval <- matrix(retval, nrow(tmp), 3, byrow = TRUE)
+  retval <- factor(apply(retval, 1, which.max), levels = 1:3)
+  levels(retval) <- levels(iris$Species)
+  retval
+}
+plotmo.pairs.xgb.Booster <- function(object, x, nresponse = 1, trace = 0, all2 = FALSE) {
+  plotmo:::plotmo.pairs.rpart(rpart(Species ~ Sepal.Length + Sepal.Width, iris), x)
+}
+plotmo(g, type = "class", type2 = "image", degree1 = FALSE,
+       pch.response = as.integer(iris$Species), ngrid2 = 100,
+       col.response = c("#990000", "#009900", "#000099")[as.integer(iris$Species)],
+       image.col = c("#ffcccc", "#ccffcc", "#ccccff"))
+```
+
+--- &vcenter .largecontent
+
+## R套件：randomForest
+
+--- .dark .segue
+
+## Boosting 與 GDBT
+
+--- &vcenter .largecontent
+
+## Boosting
+
+- 從錯誤中學習：
+    1. 在training dataset上學習
+    2. 驗證學習的成果，挑出做的不好的題目
+    3. 重新學一遍，但是更針對原先做不好的題目
+- 將學習的軌跡加權後做整合
+- $$F_{m+1} = F_m + h$$
+
+--- &vcenter .largecontent
+
+## Boosting
+
+<center>`r fig("OurMethodv81.png")`</center>
+<small><http://mprg.jp/research/boostedrandomforest_e></small>
+
+--- &vcenter .largecontent
+
+## Gradient Boosting
+
+- 將模型視為是在training dataset所產生的space
+    - $(F(x_1), F(x_2), ...F(x_N))$
+
+<center>`r fig("350px-Gradient_descent.svg.png")`</center>
+
+--- &vcenter .largecontent
+
+## Gradient Boosting Decision Tree
+
+```{r xgboost-gdbt}
+iris.x <- model.matrix(~ Sepal.Length + Sepal.Width - 1, iris)
+g <- xgboost(data = iris.x, 
+             label = as.integer(iris$Species) - 1, max.depth = 3, 
+             num_parallel_tree = 100, num_class = 3, nround = 100, 
+             params = list(objective = "multi:softprob"),
+             verbose = 0)
+```
+
+```{r plotmo-xgboost-gdbt, echo = FALSE, dependson="xgboost-gdbt"}
+g$x <- iris.x;g$y <- iris$Species
+predict.xgb.Booster <- function(object, ...) {
+  tmp <- as.list(...)
+  tmp <- do.call(cbind, tmp)
+  retval <- xgboost::predict(object, tmp)
+  retval <- matrix(retval, nrow(tmp), 3, byrow = TRUE)
+  retval <- factor(apply(retval, 1, which.max), levels = 1:3)
+  levels(retval) <- levels(iris$Species)
+  retval
+}
+plotmo.pairs.xgb.Booster <- function(object, x, nresponse = 1, trace = 0, all2 = FALSE) {
+  plotmo:::plotmo.pairs.rpart(rpart(Species ~ Sepal.Length + Sepal.Width, iris), x)
+}
+plotmo(g, type = "class", type2 = "image", degree1 = FALSE,
+       pch.response = as.integer(iris$Species), ngrid2 = 100,
+       col.response = c("#990000", "#009900", "#000099")[as.integer(iris$Species)],
+       image.col = c("#ffcccc", "#ccffcc", "#ccccff"))
+```
+
+--- &vcenter .largecontent
+
+## R套件介紹：xgboost
+
+- 嶄露頭角： <https://www.kaggle.com/c/higgs-boson>
+- 冠軍： <https://www.kaggle.com/c/tradeshift-text-classification/forums/t/10901/solution-sharing>
+- 請同學完成： `Optional-RMachineLearning-06-Gradient-Boosted-Decision-Tree`
+
+--- .dark .segue
+
 ## Neuron Network
 
+--- &vcenter .largecontent
+
+## Neuron
+
+<center>`r fig("400px-Neuron_Hand-tuned.svg.png")`</center>
+
+--- &vcenter .largecontent
+
+## Artificial Neuron
+
+<center>`r fig("800px-ArtificialNeuronModel_english.png")`</center>
+<small><http://www.durofy.com/machine-learning-introduction-to-the-artificial-neural-network/></small>
+
+--- &vcenter .largecontent
+
+## Neuron Network
+
+- 串聯許多神經元
+
 ```{r nn, dependson="plot.nn"}
-suppressPackageStartupMessages(library(neuralnet))
+iris2 <- iris
+for(species in levels(iris$Species)) {
+  iris2[[species]] <- as.integer(iris$Species == species)
+}
 g <- neuralnet(setosa + versicolor + virginica ~ Sepal.Length + Sepal.Width, iris2,
                hidden = c(2,2), rep = 1, stepmax = 1e7)
 ```
 
 ```{r plot-nn, echo = FALSE, dependson="nn", fig.height = 8}
-class(g) <- "nn2"
 plot(g)
 ```
 
@@ -963,11 +1187,129 @@ plot(g)
 ## Neuron Network
 
 ```{r nn-plotmo, dependson="nn-hack"}
-suppressPackageStartupMessages(library(plotmo))
+class(g) <- "nn2"
 plotmo(g, type = "class", type2 = "image", degree1 = FALSE,
        pch.response = as.integer(iris$Species), ngrid2 = 100, 
        col.response = c("#990000", "#009900", "#000099")[as.integer(iris$Species)],
        image.col = c("#ffcccc", "#ccffcc", "#ccccff"))
 ```
 
+--- &vcenter .largecontent
 
+## Deep Learning
+
+- 簡單的看法： 深層的Neuron Network
+- 近年的發展： Autoencoder, word2vec, Restricted Boltzmann machine, Dropout, Convolution Neuron Network, ...
+
+--- &vcenter .largecontent
+
+## 語音辨識
+
+<center>`r fig("SpeechRecognition.png")`</center>
+<small>李宏毅老師, 機器學習及其深層與結構化, 課程投影片</small>
+
+--- &vcenter .largecontent
+
+## Autoencoder
+
+- 用途： 降維 $X$，找出潛在的結構（我們會在下一週討論到）
+
+<center>`r fig("Autoencoder_structure.png")`</center>
+
+--- &vcenter .largecontent
+
+## Word2vec （結構學習）
+
+- 輸入大量的文本，利用Neuron Network解決兩個問題：
+    - 用兩邊的字預測中間的字
+    - 用中間的字預測兩邊的字
+- 每個字可編碼成 $\mathbb{R}^d$ 的向量
+    - 字之間的距離可以看成同義字
+    - 巴黎 - 法國 + 義大利 = 羅馬
+- 語意搜尋功能的入門
+
+--- .dark .segue
+
+## Deep Learning 常見誤解
+
+--- &vcenter .largecontent
+
+## Deep Learning 比較好是因為它比較複雜?
+
+- 同樣的多的Neurons
+    - 1層
+    - 高層
+
+<center>`r fig("Selection_009.png",50)`</center>
+<small>李宏毅老師, 機器學習及其深層與結構化, 課程投影片</small>
+
+--- &vcenter .largecontent
+
+## Deep Learning 比較好是因為它比較複雜?
+
+<center>`r fig("layers.png")`</center>
+<small>李宏毅老師, 機器學習及其深層與結構化, 課程投影片</small>
+
+--- &vcenter .largecontent
+
+## Deep Learning 越多層就越好?
+
+<center>`r fig("more-layers.png")`</center>
+<small>李宏毅老師, 機器學習及其深層與結構化, 課程投影片</small>
+
+--- &vcenter .largecontent
+
+## Neuron Newtork 的實作
+
+- R 上目前做的比較好的，可能是 mxnet
+    - 目前還沒有Windows的版本
+- 請轉職Python
+
+--- .dark .segue
+
+## 機器模型與實務
+
+--- &vcenter .largecontent
+
+## 真實的資料是活的
+
+- Offline $\neq$ Online
+- 線下指標無法取代實際指標
+- 線下實驗 ==> 線上實驗 ==> 產品（系統化）
+
+--- &vcenter .largecontent
+
+## 不是無限制的追求準確度
+
+- 線性模型：準確度90% 一個工程師，4 hr / week
+- 深度學習：準確度99% 一個工程師團隊加上研究者 full-time
+
+--- &vcenter .largecontent
+
+## 實務的機器學習挑戰還有其他限制
+
+- 機器資源有限
+- 工程師的時間有限
+- 預測的時間有限
+- 模型的大小有限
+- 系統的維護有成本
+
+--- &vcenter .largecontent
+
+## 如何從實務問題變成機器學習問題
+
+- 機器學習問題：分類與迴歸
+- 實務問題：價值 <s>我要賺錢</s>
+
+--- &vcenter .largecontent
+
+## 決定實作機器學習之前
+
+- 重要的三個問題(Google)：
+    - 資料哪裡來？
+    - 資料怎麼處理？
+    - 資料怎麼變現？
+
+--- &vcenter .largecontent
+
+## Q&A
