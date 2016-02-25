@@ -1,0 +1,128 @@
+- Class: meta
+  Course: DataScienceAndR
+  Lesson: Optional-RMachineLearning-06-Gradient-Boosted-Decision-Tree
+  Author: Wush Wu
+  Type: Standard
+  Organization: Taiwan R User Group
+  Version: 2.3.1.2
+- Class: text
+  Output: Boosting 是一個利用較簡單的模型（例如：decision tree），重複學習很多次 來加強學習效果的機器學習演算法。Gradient
+    Boosting 則是Friedman et al. (1999) 在更進一步把Boosting 的概念擴展到function space上的最佳化問題。把這個概念
+    和decision tree結合，就是近年來在機器學習競賽上火熱的GDBT演算法。
+- Class: text
+  Output: R 有一個很優秀的GDBT實作的套件：gbm。但是近年來又竄起一個在多個機器學 習競賽拿到冠軍的實作套件：xgboost。
+- Class: cmd_question
+  Output: 請同學安裝xgboost套件。
+  CorrectAnswer: check_then_install("xgboost", "0.4.2")
+  AnswerTests: test_package_version("xgboost", "0.4.2")
+  Hint: install.packages("xgboost")
+- Class: cmd_question
+  Output: 請同學載入xgboost套件
+  CorrectAnswer: library(xgboost)
+  AnswerTests: test_search_path("xgboost")
+  Hint: library(xgboost)
+- Class: cmd_question
+  Output: 請同學找找看xgboost 的vignette。
+  CorrectAnswer: vignette(package = "xgboost")
+  AnswerTests: omnitest('vignette(package = "xgboost")')
+  Hint: vignette(package = "xgboost")
+- Class: cmd_question
+  Output: 請同學打開名為"xgboost"的vignette
+  CorrectAnswer: vignette("xgboost", package = "xgboost")
+  AnswerTests: omnitest('vignette("xgboost", package = "xgboost")')
+  Hint: vignette("xgboost", package = "xgboost")
+- Class: cmd_question
+  Output: xgboost 的使用非常簡單。請同學從xgboost套件先載入範例的資料集：`agaricus.train`。 請輸入：`data(agaricus.train,
+    package = "xgboost")`
+  CorrectAnswer: data(agaricus.train, package = "xgboost")
+  AnswerTests: omnitest('data(agaricus.train, package = "xgboost")')
+  Hint: data(agaricus.train, package = "xgboost")
+- Class: cmd_question
+  Output: 讓我們利用xgboost學一個GDBT模型。請同學輸入： `bst <- xgboost(data = agaricus.train$data,
+    label = agaricus.train$label, objective = "binary:logistic", nrounds = 10)`
+  CorrectAnswer: bst <- xgboost(data = agaricus.train$data, label = agaricus.train$label,
+    objective = "binary:logistic", nrounds = 10)
+  AnswerTests: omnitest('bst <- xgboost(data = agaricus.train$data, label = agaricus.train$label,
+    objective = "binary:logistic", nrounds = 10)')
+  Hint: bst <- xgboost(data = agaricus.train$data, label = agaricus.train$label, objective
+    = "binary:logistic", nrounds = 10)
+- Class: cmd_question
+  Output: 如果要對xgboost的GDBT學習方法做調整，例如調整樹的深度、Boosting的次數、在函數空間上的learning rate， 請同學參考`?xgboost`的文件。讓我們輸入`?xgboost`一起看看說明文件。
+  CorrectAnswer: ?xgboost
+  AnswerTests: omnitest("?xgboost")
+  Hint: ?xgboost
+- Class: mult_question
+  Output: 請問同學，這些Boosting的迭代的最大次數，要用哪一個`xgboost`的參數調整呢？
+  AnswerChoices: nrounds;params;verbose;data;label;missing
+  CorrectAnswer: nrounds
+  AnswerTests: omnitest(correctVal = "nrounds")
+- Class: mult_question
+  Output: 請問同學，樹的深度，要用哪一個`xgboost`的參數調整呢？
+  AnswerChoices: nrounds;params;verbose;data;label;missing
+  CorrectAnswer: params
+  AnswerTests: omnitest(correctVal = "params")
+- Class: mult_question
+  Output: 更進一步，這個params參數應該要用什麼型態傳給它呢？（請回憶rpart的經驗）
+  AnswerChoices: character;list;numeric
+  CorrectAnswer: list
+  AnswerTests: omnitest(correctVal="list")
+- Class: text
+  Output: 至於在函數空間上的learning rate，是`params`底下的`eta`。
+- Class: text
+  Output: 一般來說，最後模型的準確度可以透過`nrounds`和`params`底下的`eta`、`max.depth`來控制。 `nrounds`越大，學的越慢，也越準。但是當太大的時候，模型會學過頭（overfit），導致結果變差。
+    `eta`越小，學到最好的模型通常就需要越多的`nrounds`，但是因為每次調整的幅度比較小，所以考量 （overfit）的效應後，得到的最好模型，也會比較好。`max.depth`越大，每次學的時間就比較長，
+    而且比較可以抓到變數之間的交互作用。以上是我對xgboost 的理解。
+- Class: cmd_question
+  Output: 接著讓我們載入測試的資料集。請同學輸入：`data(agaricus.test, package = "xgboost")`
+  CorrectAnswer: data(agaricus.test, package = "xgboost")
+  AnswerTests: omnitest('data(agaricus.test, package = "xgboost")')
+  Hint: data(agaricus.test, package = "xgboost")
+- Class: cmd_question
+  Output: 讓我們利用bst 對`agricus.test`做預測。請同學輸入：`predict(bst, agaricus.test$data)`。
+  CorrectAnswer: predict(bst, agaricus.test$data)
+  AnswerTests: omnitest('predict(bst, agaricus.test$data)')
+  Hint: predict(bst, agaricus.test$data)
+- Class: text
+  Output: 如果同學想要查詢更多`predict`的參數呢？由於xgboost套件使用的是R 的S4物件導向系統， 所以要查詢的話需要使用以下的方式。
+- Class: cmd_question
+  Output: 請同學先輸入`showMethods(predict)`
+  CorrectAnswer: showMethods(predict)
+  AnswerTests: omnitest("showMethods(predict)")
+  Hint: showMethods(predict)
+- Class: text
+  Output: 同學是不是看到R 列出一連串有Function有object的文字呢？我們從下往上看。 `object="xgb.Booster.handle"`代表當predict的第一個參數，或是名稱為object的參數
+    的型態（class）如果為`"xgb.Booster.handle"`時，會有一個針對這樣型態的函數來處理。
+- Class: cmd_question
+  Output: 接著請同學輸入：`getMethod(predict, "xgb.Booster.handle")`
+  CorrectAnswer: getMethod(predict, "xgb.Booster.handle")
+  AnswerTests: omnitest('getMethod(predict, "xgb.Booster.handle")')
+  Hint: getMethod(predict, "xgb.Booster.handle")
+- Class: text
+  Output: 運用這種方式，R 就可以把predict遇到`"xgb.Booster.handle"`物件時會執行的 動作展現給我們看了。
+- Class: cmd_question
+  Output: 但是直接看說明文件可能是更方便的。請同學輸入：`?predict`
+  CorrectAnswer: ?predict
+  AnswerTests: omnitest("?predict")
+  Hint: ?predict
+- Class: cmd_question
+  Output: 同學應該會看到R 對`predict`的說明文件，但是幫助不大，因為我們想要看的 是針對xgboost的GDBT模型做預測時的使用說明文件。這個文件的左上角：`predict
+    {stats}` 告訴我們，這是stats這個基本套件底下的predict的說明文件。 如果我們想要看針對xgboost的GDBT模型的predict說明文件，要輸入：
+    `help("predict,xgb.Booster-method")`。請同學先試試看。
+  CorrectAnswer: help("predict,xgb.Booster-method")
+  AnswerTests: omnitest('help("predict,xgb.Booster-method")')
+  Hint: help("predict,xgb.Booster-method")
+- Class: text
+  Output: 這裡是因為xgboost採用的是R 的S4 系統，所以查閱`predict`需要這麼饒口。 而且和`rpart`套件使用的S3系統也不同。
+- Class: cmd_question
+  Output: 一般來說，我們可以利用`library(help=xgboost)`來打開所有xgboost套件作者 有撰寫的說明文件內容。我也是用這個方式才知道上一題的答案的。請同學試試看。
+  CorrectAnswer: library(help=xgboost)
+  AnswerTests: omnitest("library(help=xgboost)")
+  Hint: library(help=xgboost)
+- Class: text
+  Output: 我們對xgboost的介紹就到這邊了。
+- Class: script
+  Output: |
+    最後我們使用xgboost來再次挑戰mlbench的Ionosphere資料
+  Script: ml-06.R
+  AnswerTests: ml_06()
+
