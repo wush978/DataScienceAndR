@@ -181,7 +181,7 @@
     也就是說，看看不同lambda選出來的模型，在testing dataset上的表現優劣，來挑選好的lambda。
 - Class: script
   Output: |
-    最後我們請同學用上一個單元的使用過得資料集合來作練習。
+    最後我們請同學用上一個單元的使用過得資料集來作練習。
   Script: ml-03.R
   AnswerTests: ml_03()
 
