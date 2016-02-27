@@ -51,7 +51,7 @@
 
 - Class: cmd_question
   Output: |
-    這裡我們先用cars這個資料集來介紹glmnet與regularization。請同學先輸入：
+    這裡我們先用iris這個資料集來介紹glmnet與regularization。請同學先輸入：
     `m0 <- lm(Sepal.Length ~ ., iris)`這是第一個單元介紹的線性模型，透過這個指令，
     我們可以取得最小方差直線。我們等等會拿這個模型與glmnet的結果做比較。
 
