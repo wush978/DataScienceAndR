@@ -7,7 +7,7 @@ logloss <- function(y, p, tol = 1e-4) {
   -sum(y * log(p) + (1 - y) * log(1-p))
 }
 
-# 請找出一個在df.test上的logloss小於26的模型
+# 請找出一個在df.test上的logloss小於24.5的模型
 answer_02 <- local({
   NULL
   # 請填寫你的程式碼

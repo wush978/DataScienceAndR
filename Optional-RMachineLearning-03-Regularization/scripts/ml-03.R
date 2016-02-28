@@ -20,19 +20,17 @@ df.train <- Ionosphere[train.i,-2]
 
 # 上一個單元，我們請同學找到df.test上的logloss小於26的模型
 # 我們想要讓同學透過glmnet找到更好的模型
-# X 是等等要放到glmnet的x參數的值
+# X.train 是等等要放到glmnet的x參數的值
 X.train <- model.matrix(Class ~ ., df.train)[,-1]
-X.test <- model.matrix(Class ~ ., df.test)[,-1]
-# y 是等等要放到glmnet的y參數的值
+# y.train 是等等要放到glmnet的y參數的值
 y.train <- df.train$Class
-y.test <- df.test$Class
 # 請同學透過找到適當的lambda、alplha組合
 # 利用glmnet在df.train上學出一個模型，
 # 它在df.test上logloss小於8
 answer_03 <- local({
   NULL
   # 你的最終物件應該要由以下的程式碼產生：
-  # glmnet(x = X, y = y, lambda = ?, alpha = ?, family = "binomial")
+  # glmnet(x = X.train, y = y.train, lambda = ?, alpha = ?, family = "binomial")
 })
 stopifnot(class(answer_03) == c("lognet", "glmnet"))
 stopifnot(length(answer_03$lambda) == 1) # 你的答案應該要指定lambda
