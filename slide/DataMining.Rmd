@@ -1,0 +1,460 @@
+---
+title       : "Data Mining"
+author      : "Wush Wu"
+job         : 國立台灣大學
+framework   : io2012-wush
+highlighter : highlight.js
+hitheme     : zenburn
+widgets     : [mathjax]            # {mathjax, quiz, bootstrap}
+mode        : selfcontained # {standalone, draft}
+knit        : slidify::knit2slides
+--- .largecontent &vcenter
+
+```{r setup, include=FALSE, cache=FALSE}
+library(knitr)
+library(magrittr)
+library(data.table)
+library(dplyr)
+library(ggplot2)
+library(quantmod)
+library(jsonlite)
+library(arules)
+library(animation)
+library(FNN)
+library(magrittr)
+library(plotrix)
+library(fpc)
+
+opts_chunk$set(echo = FALSE, cache=TRUE, comment="",
+               cache.path = "cache-DataMining/",
+               dev.args=list(bg="transparent"),
+               fig.path = "./assets/fig/rdata-mining-",
+               fig.width = 10, fig.height = 6)
+bg <- function(path) sprintf("bg:url(assets/img/%s)", path)
+fig <- function(path, size = 100) {
+  sprintf("<img src='assets/img/%s' style='max-width: %d%%;max-height: %d%%'></img>",
+          path, size, size)
+}
+fig2 <- function(path, size = 100) {
+  sprintf("<img src='assets/img/%s' style='width: %d%%'></img>",
+          path, size)
+}
+sys_name <- Sys.info()["sysname"] %>% tolower
+sys_encode <- c("utf8", "utf8", "big5")[pmatch(sys_name, c("linux", "darwin", "windows"))]
+```
+
+## 課程大綱
+
+- 什麼是Data Mining
+- Frequency Pattern Mining
+- Similarity and Distance
+- Clustering
+- Text Mining
+
+--- .dark .segue
+
+## 什麼是Data Mining
+
+--- &fullimg `r bg("myn8a.jpg")`
+
+Source: <http://gold.sarwatch.org/reports/gold-mining-orientale-province>
+
+--- &fullimg bg:url(assets/img/dm.gif)
+
+Source: <http://www.laits.utexas.edu/~anorman/BUS.FOR/course.mat/Alex>
+
+--- &vcenter .largecontent
+
+## Data Mining v.s. Machine Learning v.s. Statistics
+
+- Data Mining: Find the value from the data 
+- Machine Learning: Learn the pattern from the data
+- Statistics: Making inference based on assumptions
+
+--- .dark .segue
+
+## Frequency Pattern Mining
+
+--- &vcenter .largecontent
+
+## 歸納
+
+- 交易紀錄
+    - \{milk, bread\}
+    - \{butter\}
+    - \{beer, diapers\}
+    - \{milk, bread, butter\}
+    - \{bread\}
+- 規則
+    - milk ==> bread
+
+--- &vcenter .largecontent
+
+## Frequency Pattern Mining
+
+- Transaction(交易紀錄)
+    - 一名顧客所購買的物品清單：\{milk, bread\}
+- Item
+    - 可購買的物品：milk、break、beer...
+- Rule
+    - 物品之間的關聯：$X$ ==> $Y$（$X$, $Y$又被稱為itemset）
+    - $X$(LHS itemset) 和 $Y$(RHS itemset) 不能包含相同的物品
+    - $X$ => $Y$ 代表當 $X$ 出現在一個transaction時，$Y$也會出現
+    - 例： milk ==> bread
+
+--- &fullimg `r bg("k20026336.jpg")`
+
+<http://www.fotosearch.hk/CSP517/k20026336/>
+
+--- &fullimg `r bg("Visitor-Profile.png")`
+
+<http://piwik.org/docs/real-time/>
+
+--- &fullimg `r bg("MONK.png")`
+
+<http://www.gosugamers.net/hearthstone/news/27121-all-decklists-from-seatstory-cup>
+
+--- &vcenter .largecontent
+
+## Mining by Computer
+
+- 規則成立的門檻
+    - 交易紀錄
+        - \{milk, bread\}
+        - \{butter\}
+        - \{beer, diapers\}
+        - \{milk, bread, butter\}
+        - \{bread\}
+    - 規則
+        - milk ==> bread (100%, 2/5)
+        - beer ==> diapers (100%, 1/5)
+        - milk, bread ==> butter (50%, 2/5)
+
+--- &vcenter .largecontent
+
+## Support
+
+- 給定 itemset $X$, 有多少個比率的Transaction包含 $X$ 稱為 $Supp(X)$
+- 交易紀錄
+    - \{milk, bread\}
+    - \{beer, diapers\}
+    - \{milk, bread, butter\}
+    - \{bread\}
+- $Supp(\{\text{milk}\}) = \frac{2}{4}$ 
+- $Supp(\{\text{milk, bread}\}) = \frac{2}{4}$
+
+--- &vcenter .largecontent
+
+## Confidence
+
+- 給定 rule $X \Rightarrow Y$, $Conf(X \Rightarrow Y) = \frac{Supp(X \cup Y)}{Supp(X)}$
+- 交易紀錄
+    - \{milk, bread\}
+    - \{milk\}
+    - \{milk, bread, butter\}
+    - \{butter\}
+- $Conf(\{\text{bread => milk}\}) = \frac{2}{2}$ 
+- $Conf(\{\text{milk => bread}\}) = \frac{2}{3}$
+
+--- &vcenter .largecontent
+
+## Frequency Pattern Mining
+
+- 規則的Confidence要明顯 => 準
+- 規則的Support要高 => 有影響
+
+--- &vcenter .largecontent
+
+## $Supp$ 和 $Conf$ 的不足
+
+- 交易紀錄
+    - \{milk, bread\}
+    - \{milk\}
+    - \{milk, bread, butter\}
+    - \{bread\}
+- milk => bread: 
+    - $Supp(milk) = 75\%$, $Conf(milk \Rightarrow bread) = 67\%$
+- $Supp(bread) = 75\%$: 所以要促銷麵包的時候，需要推廣牛奶嗎？
+
+--- &vcenter .largecontent
+
+## Lift
+
+- $Lift(X \Rightarrow Y) = \frac{Supp(X \cup Y)}{Supp(X) \times Supp(Y)}$
+- 交易紀錄
+    - \{milk, bread\}
+    - \{milk\}
+    - \{milk, bread, butter\}
+    - \{bread\}
+- $Lift(milk \Rightarrow bread) = \frac{\frac{2}{4}}{\frac{3}{4} \times \frac{3}{4}} = \frac{8}{9}$
+
+--- &vcenter .largecontent
+
+## Frequency Pattern Mining
+
+- 規則的Confidence要明顯 => 準
+- 規則的Support要高 => 有影響
+- 規則的Lift要高 => 與背景比較
+
+--- &vcenter .largecontent
+
+## 練習
+
+- 請完成RDataMining-01-Association-Rule
+
+--- .dark .segue
+
+## Clustering and Similarity
+
+--- &fullimg `r bg("main-qimg-d9f961a492f073fbfed7202ef5badf17.gif")`
+
+<http://qr.ae/RU5Xx6>
+
+--- &vcenter .largecontent
+
+## 叢集分析
+
+- 物以類聚
+- 近朱者赤、近墨者黑
+- 叢集分析的基礎：資料之間的距離、資料之間的相似度
+
+--- &fullimg `r bg("1341639767-4160490196.jpg")`
+
+<http://unafang.pixnet.net/album/photo/35371216-%E9%81%A0%E8%B7%9D%E9%9B%A2%E6%88%80%E6%84%9B>
+
+--- &fullimg `r bg("evolutionary_tree.jpg")`
+
+<http://www.bio.miami.edu/dana/160/160S13_5.html>
+
+--- &fullimg `r bg("euclid3.gif")`
+
+<https://hlab.stanford.edu/brian/euclidean_distance_in.html>
+
+--- .dark .segue
+
+## 如何定義距離？
+
+--- &vcenter .largecontent
+
+## 二元類別型變數
+
+- $p = (1, 0, 0, 0, 0)$, q = (1, 1, 0, 1, 0)$
+    - $M_{11} = 1, M_{00} = 2$
+    - $M_{10} = 0, M_{01} = 2$
+- Simple Matching Coefficient(SMC): $\frac{M_{11} + M_{00}}{M_{01} + M_{10} + M_{11} + M_{00}}$
+- Jaccard Index: $\frac{M_{11}}{M_{01} + M_{10} + M_{11}}$
+
+--- &vcenter .largecontent
+
+## 類別型變數 ==> Simple Matching Coefficient
+
+- 使用者A：年齡：中年、職業：公務員、教育：大學、婚姻：未婚
+- 使用者B：年齡：高齡、職業：自由業、教育：大學、婚姻：已婚
+- SMC： $\frac{相同的屬性個數}{常數} \propto 相同的屬性個數$
+
+--- &vcenter .largecontent
+
+## 標籤 ==> Jaccard Index
+
+- 使用者A : \{男性、單身、電玩、上班族\}
+- 使用者B : \{男性、旅遊、電玩、學生\}
+- Jaccard Index: $\frac{\left| A \cap B \right|}{\left| A \cup B \right|}$
+    - J(使用者A, 使用者B) ： $\frac{2}{6}$
+
+--- &fullimg `r bg("709544_0.jpg")`
+
+<http://www.twwiki.com/wiki/%E6%8B%9B%E6%A8%99>
+
+--- &vcenter .largecontent
+
+## 數值型變數：Cosine Similarity
+
+- $X_1, X_2 \in \mathbb{R}^d$
+- Cosine Similarity： $\frac {X_1 \cdot X_2}{\left\lVert X_1 \right\rVert \left\lVert X_2 \right\rVert}$
+- `r fig("unit_circle.gif")`
+    - <small style="font-size: 50%"><https://www.math.hmc.edu/calculus/tutorials/reviewtriglogexp/></small>
+
+--- &vcenter .largecontent
+
+## 數值型變數：Correlation
+
+- $X_1, X_2 \in \mathbb{R}^d$
+- Let $X_1' = \frac{X_1 - mean(X_1)}{sd(X_1)}$, $X_2' = \frac{X_2 - mean(X_2)}{sd(X_2)}$, Correlation: $X_1' \cdot X_2'$
+- `r fig("correlation.jpeg")`
+    - <small style="font-size: 50%"><https://www.biomedware.com/files/documentation/spacestat/interface/Views/Correlation_Coefficients.htm></small>
+
+--- &vcenter .largecontent
+
+## 數值型變數： $L_p$距離
+
+- $X_1 = (x_{1,1}, x_{1, 2}, ..., x_{1, d})  \in \mathbb{R}^d$
+- $X_2 = (x_{2, 1}, x_{2, 2}, ..., x_{2, d}) \in \mathbb{R}^d$
+- $L_p(X_1, X_2) = \left( \sum_{k = 1}^d {\left| x_{1, k} - x_{2, k} \right|^p} \right)^{1/p}$
+
+--- &twocol 
+
+## 數值型變數： $L_p$距離
+
+*** =left
+
+`r fig("140px-Vector_norms.svg.png")`
+
+*** =right
+
+`r fig("400px-Superellipse_rounded_diamond.svg.png")`
+
+--- &vcenter .largecontent
+
+## 如何挑選Similarity
+
+- 視目標與應用而定
+- 利用相似度解釋資料（主觀）
+
+--- .dark .segue
+
+## Hierarchical Clustering
+
+--- &vcenter .largecontent
+
+## Dendrogram
+
+- 決定資料點之間的距離
+    - 將相鄰的資料點合併成一個Cluster
+- 決定資料點與Cluster之間的距離
+- 決定Cluster與Cluster之間的距離
+- 由近到遠依序合併資料點與Clusters...
+
+--- &vcenter .largecontent
+
+## Dendrogram
+
+```{r dendrogram}
+iris2 <- iris[c(1:10, 51:60, 101:110),1:4]
+d <- dist(iris2)
+cl <- hclust(d)
+plot(cl)
+```
+
+--- &vcenter .largecontent
+
+## Hierarchical Clustering
+
+```{r hclust}
+iris2 <- iris[c(1:10, 51:60, 101:110),1:4]
+d <- dist(iris2)
+cl <- hclust(d)
+plot(cl)
+```
+
+
+--- .dark .segue
+
+## Center-based Clustering
+
+```{r kmeans, results="hide", warning=FALSE, cache = TRUE}
+suppressMessages(
+  saveGIF({
+    x <- model.matrix(Species ~ Sepal.Length + Sepal.Width - 1, iris)
+    centers <- 3
+    d <- dist(x)
+    gr.center <- sample(seq_len(nrow(x)), centers, FALSE)
+    gr <- sample(seq_len(centers), nrow(x), TRUE)
+    x.center <- x[gr.center,]
+    dst <- matrix(nrow = nrow(x), ncol = centers)
+    j <- 1
+    pch <- as.integer(iris$Species)
+    col <- 1:3
+    is.continue <- TRUE
+    while(is.continue) {
+      dev.hold()
+      plot(x, pch = pch, col = col[gr], main = "k-means")
+      points(x.center, pch = 16, col = 1:3,
+             cex = 3, lwd = 2)
+      ani.pause()
+      knn <- get.knnx(x.center, x, k = 1)
+      gr.last <- gr
+      gr <- as.vector(knn$nn.index)
+      if (isTRUE(all.equal(gr, gr.last))) is.continue <- FALSE
+      x.center <- split(seq_len(nrow(x)), gr) %>%
+        lapply(function(k) {
+          apply(x[k,], 2, mean)
+        }) %>%
+        do.call(what = rbind)
+    }
+  }, movie.name = "kmeans.gif"))
+if (file.exists("assets/img/kmeans.gif")) file.remove("assets/img/kmeans.gif")
+file.rename("kmeans.gif", "assets/img/kmeans.gif")
+```
+
+--- &vcenter .largecontent
+
+## K-Means Clustering
+
+- 資料間的距離
+- 中心點的個數(與起始值)
+
+--- &fullimg `r bg("kmeans.gif")`
+
+--- .dark .segue
+
+## Density-based Clustering
+
+```{r fpc, results="hide", warning=FALSE, cache = TRUE}
+suppressMessages(
+  saveGIF({
+    x <- model.matrix(Species ~ Sepal.Length + Sepal.Width - 1, iris)
+    d <- as.matrix(dist(x))
+    g <- dbscan(x, 0.2)
+    cl <- integer(nrow(iris))
+    i.all <- seq_len(nrow(iris))
+    i.next <- c()
+    i.done <- c()
+    get_next_i <- function(i.next, i.done) {
+      cat(sprintf("i.next: %s i.done: %s \n", paste(i.next, collapse = ","), paste(i.done, collapse = ",")))
+      if (length(i.next) == 0) setdiff(i.all, i.done) %>% head(1) else i.next[1]
+    }
+    i <- get_next_i(i.next, i.done)
+    while(length(i) == 1) {
+      if (length(targets <- which(d[i,] < g$eps)) >= g$MinPts) {
+        if (cl[i] != 0 & all(cl[targets] == cl[i])) {
+        } else {
+          dev.hold()
+          plot(x[,1], x[,2], pch = pch, col = cl + 1, main = "dbscan", type = "p")
+          ani.pause()
+          dev.hold()
+          plot(x[,1], x[,2], pch = pch, col = cl + 1, main = "dbscan", type = "p")
+          draw.circle(x[i,1], x[i,2], radius = g$eps, col = rgb(0.5, 0.5, 0.5, 0.5), lty = 2)
+          ani.pause()
+        }
+        if (cl[i] == 0) cl[i] <- max(cl) + 1
+        if (cl[i] == 4) stop("")
+        cl[targets] <- cl[i]
+        i.done <- append(i.done, i)
+        i.next <- union(i.next, targets) %>% setdiff(i.done)
+        i <- get_next_i(i.next, i.done)
+        i.next <- setdiff(i.next, i)
+      } else {
+        i.done <- append(i.done, i)
+        i <- get_next_i(i.next, i.done)
+        i.next <- setdiff(i.next, i)
+      }
+    }
+  }, movie.name = "fpc.gif"))
+if (file.exists("assets/img/fpc.gif")) file.remove("assets/img/fpc.gif")
+file.rename("fpc.gif", "assets/img/fpc.gif")
+```
+
+--- &vcenter .largecontent
+
+## DBSCAN
+
+- 資料間的距離
+- Reachability distance（判斷有沒有連接）
+- Reachability minimum number of points （判斷是不是雜訊）
+
+--- &fullimg `r bg("fpc.gif")`
+
+--- &vcenter .largecontent
+
+## Q&A
+
