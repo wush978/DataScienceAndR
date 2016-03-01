@@ -102,9 +102,9 @@ Source: <http://www.laits.utexas.edu/~anorman/BUS.FOR/course.mat/Alex>
     - $X$ => $Y$ 代表當 $X$ 出現在一個transaction時，$Y$也會出現
     - 例： milk ==> bread
 
---- &fullimg `r bg("k20026336.jpg")`
+--- &fullimg `r bg("what-is-big-data-19-638.jpg")`
 
-<http://www.fotosearch.hk/CSP517/k20026336/>
+<http://cloud-network-master.blogspot.tw/2013/07/bigdata.html>
 
 --- &fullimg `r bg("Visitor-Profile.png")`
 
