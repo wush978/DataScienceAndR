@@ -1,0 +1,1568 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Data Mining</title>
+  <meta charset="utf-8">
+  <meta name="description" content="Data Mining">
+  <meta name="author" content="Wush Wu">
+  <meta name="generator" content="slidify" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <link rel="stylesheet" href="libraries/frameworks/io2012-wush/css/default.css" media="all" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012-wush/css/phone.css" 
+    media="only screen and (max-device-width: 480px)" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012-wush/css/slidify.css" >
+  <link rel="stylesheet" href="libraries/highlighters/highlight.js/css/zenburn.css" />
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->  <link rel=stylesheet href="./assets/css/custom.css"></link>
+<link rel=stylesheet href="./assets/css/ribbons.css"></link>
+
+  
+  <!-- Grab CDN jQuery, fall back to local if offline -->
+  <script src="libraries/frameworks/io2012-wush/js/jquery-1.7.min.js"></script>
+  <!-- <script>window.jQuery || document.write('<script src="libraries/widgets/quiz/js/jquery.js"><\/script>')</script> -->
+  <script data-main="libraries/frameworks/io2012-wush/js/slides" 
+    src="libraries/frameworks/io2012-wush/js/require-1.0.8.min.js">
+  </script>
+  
+  
+
+</head>
+<body style="opacity: 0">
+  <slides class="layout-widescreen">
+    
+    <!-- LOGO SLIDE -->
+        <slide class="title-slide segue nobackground">
+  <hgroup class="auto-fadein">
+    <h1>Data Mining</h1>
+    <h2></h2>
+    <p>Wush Wu<br/>國立台灣大學</p>
+  </hgroup>
+  <article></article>  
+</slide>
+    
+
+    <!-- SLIDES -->
+    <slide class="largecontent" id="slide-1" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>課程大綱</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>什麼是Data Mining</li>
+<li>Frequency Pattern Mining</li>
+<li>Similarity and Distance</li>
+<li>Clustering</li>
+<li>Text Mining</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="dark segue" id="slide-2" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2>什麼是Data Mining</h2>
+  </hgroup>
+  <article data-timings="">
+    
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="" id="slide-3" style="background:url(assets/img/myn8a.jpg); background-size: 100% 100%;">
+  <article data-timings="" style="display: table;">
+    <div style="display: table-cell;vertical-align: bottom;">
+      <p>Source: <a href="http://gold.sarwatch.org/reports/gold-mining-orientale-province">http://gold.sarwatch.org/reports/gold-mining-orientale-province</a></p>
+
+    </div>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="" id="slide-4" style="background:url(assets/img/dm.gif); background-size: 100% 100%;">
+  <article data-timings="" style="display: table;">
+    <div style="display: table-cell;vertical-align: bottom;">
+      <p>Source: <a href="http://www.laits.utexas.edu/%7Eanorman/BUS.FOR/course.mat/Alex">http://www.laits.utexas.edu/~anorman/BUS.FOR/course.mat/Alex</a></p>
+
+    </div>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-5" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>Data Mining v.s. Machine Learning v.s. Statistics</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>Data Mining: Find the value from the data </li>
+<li>Machine Learning: Learn the pattern from the data</li>
+<li>Statistics: Making inference based on assumptions</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="dark segue" id="slide-6" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2>Frequency Pattern Mining</h2>
+  </hgroup>
+  <article data-timings="">
+    
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-7" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>歸納</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>交易紀錄
+
+<ul>
+<li>{milk, bread}</li>
+<li>{butter}</li>
+<li>{beer, diapers}</li>
+<li>{milk, bread, butter}</li>
+<li>{bread}</li>
+</ul></li>
+<li>規則
+
+<ul>
+<li>milk ==&gt; bread</li>
+</ul></li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-8" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>Frequency Pattern Mining</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>Transaction(交易紀錄)
+
+<ul>
+<li>一名顧客所購買的物品清單：{milk, bread}</li>
+</ul></li>
+<li>Item
+
+<ul>
+<li>可購買的物品：milk、break、beer...</li>
+</ul></li>
+<li>Rule
+
+<ul>
+<li>物品之間的關聯：\(X\) ==&gt; $Y$（\(X\), $Y$又被稱為itemset）</li>
+<li>\(X\)(LHS itemset) 和 \(Y\)(RHS itemset) 不能包含相同的物品</li>
+<li>\(X\) =&gt; \(Y\) 代表當 \(X\) 出現在一個transaction時，$Y$也會出現</li>
+<li>例： milk ==&gt; bread</li>
+</ul></li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="" id="slide-9" style="background:url(assets/img/what-is-big-data-19-638.jpg); background-size: 100% 100%;">
+  <article data-timings="" style="display: table;">
+    <div style="display: table-cell;vertical-align: bottom;">
+      <p><a href="http://cloud-network-master.blogspot.tw/2013/07/bigdata.html">http://cloud-network-master.blogspot.tw/2013/07/bigdata.html</a></p>
+
+    </div>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="" id="slide-10" style="background:url(assets/img/Visitor-Profile.png); background-size: 100% 100%;">
+  <article data-timings="" style="display: table;">
+    <div style="display: table-cell;vertical-align: bottom;">
+      <p><a href="http://piwik.org/docs/real-time/">http://piwik.org/docs/real-time/</a></p>
+
+    </div>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="" id="slide-11" style="background:url(assets/img/MONK.png); background-size: 100% 100%;">
+  <article data-timings="" style="display: table;">
+    <div style="display: table-cell;vertical-align: bottom;">
+      <p><a href="http://www.gosugamers.net/hearthstone/news/27121-all-decklists-from-seatstory-cup">http://www.gosugamers.net/hearthstone/news/27121-all-decklists-from-seatstory-cup</a></p>
+
+    </div>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-12" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>Mining by Computer</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>規則成立的門檻
+
+<ul>
+<li>交易紀錄
+
+<ul>
+<li>{milk, bread}</li>
+<li>{butter}</li>
+<li>{beer, diapers}</li>
+<li>{milk, bread, butter}</li>
+<li>{bread}</li>
+</ul></li>
+<li>規則
+
+<ul>
+<li>milk ==&gt; bread (100%, 2/5)</li>
+<li>beer ==&gt; diapers (100%, 1/5)</li>
+<li>milk, bread ==&gt; butter (50%, 2/5)</li>
+</ul></li>
+</ul></li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-13" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>Support</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>給定 itemset \(X\), 有多少個比率的Transaction包含 \(X\) 稱為 \(Supp(X)\)</li>
+<li>交易紀錄
+
+<ul>
+<li>{milk, bread}</li>
+<li>{beer, diapers}</li>
+<li>{milk, bread, butter}</li>
+<li>{bread}</li>
+</ul></li>
+<li>\(Supp(\{\text{milk}\}) = \frac{2}{4}\) </li>
+<li>\(Supp(\{\text{milk, bread}\}) = \frac{2}{4}\)</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-14" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>Confidence</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>給定 rule \(X \Rightarrow Y\), \(Conf(X \Rightarrow Y) = \frac{Supp(X \cup Y)}{Supp(X)}\)</li>
+<li>交易紀錄
+
+<ul>
+<li>{milk, bread}</li>
+<li>{milk}</li>
+<li>{milk, bread, butter}</li>
+<li>{butter}</li>
+</ul></li>
+<li>\(Conf(\{\text{bread => milk}\}) = \frac{2}{2}\) </li>
+<li>\(Conf(\{\text{milk => bread}\}) = \frac{2}{3}\)</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-15" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>Frequency Pattern Mining</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>規則的Confidence要明顯 =&gt; 準</li>
+<li>規則的Support要高 =&gt; 有影響</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-16" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>\(Supp\) 和 \(Conf\) 的不足</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>交易紀錄
+
+<ul>
+<li>{milk, bread}</li>
+<li>{milk}</li>
+<li>{milk, bread, butter}</li>
+<li>{bread}</li>
+</ul></li>
+<li>milk =&gt; bread: 
+
+<ul>
+<li>\(Supp(milk) = 75\%\), \(Conf(milk \Rightarrow bread) = 67\%\)</li>
+</ul></li>
+<li>\(Supp(bread) = 75\%\): 所以要促銷麵包的時候，需要推廣牛奶嗎？</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-17" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>Lift</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>\(Lift(X \Rightarrow Y) = \frac{Supp(X \cup Y)}{Supp(X) \times Supp(Y)}\)</li>
+<li>交易紀錄
+
+<ul>
+<li>{milk, bread}</li>
+<li>{milk}</li>
+<li>{milk, bread, butter}</li>
+<li>{bread}</li>
+</ul></li>
+<li>\(Lift(milk \Rightarrow bread) = \frac{\frac{2}{4}}{\frac{3}{4} \times \frac{3}{4}} = \frac{8}{9}\)</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-18" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>Frequency Pattern Mining</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>規則的Confidence要明顯 =&gt; 準</li>
+<li>規則的Support要高 =&gt; 有影響</li>
+<li>規則的Lift要高 =&gt; 與背景比較</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-19" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>練習</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>請完成RDataMining-01-Association-Rule</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="dark segue" id="slide-20" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2>Clustering and Similarity</h2>
+  </hgroup>
+  <article data-timings="">
+    
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="" id="slide-21" style="background:url(assets/img/main-qimg-d9f961a492f073fbfed7202ef5badf17.gif); background-size: 100% 100%;">
+  <article data-timings="" style="display: table;">
+    <div style="display: table-cell;vertical-align: bottom;">
+      <p><a href="http://qr.ae/RU5Xx6">http://qr.ae/RU5Xx6</a></p>
+
+    </div>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-22" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>叢集分析</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>物以類聚</li>
+<li>近朱者赤、近墨者黑</li>
+<li>叢集分析的基礎：資料之間的距離、資料之間的相似度</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="" id="slide-23" style="background:url(assets/img/1341639767-4160490196.jpg); background-size: 100% 100%;">
+  <article data-timings="" style="display: table;">
+    <div style="display: table-cell;vertical-align: bottom;">
+      <p><a href="http://unafang.pixnet.net/album/photo/35371216-%E9%81%A0%E8%B7%9D%E9%9B%A2%E6%88%80%E6%84%9B">http://unafang.pixnet.net/album/photo/35371216-%E9%81%A0%E8%B7%9D%E9%9B%A2%E6%88%80%E6%84%9B</a></p>
+
+    </div>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="" id="slide-24" style="background:url(assets/img/evolutionary_tree.jpg); background-size: 100% 100%;">
+  <article data-timings="" style="display: table;">
+    <div style="display: table-cell;vertical-align: bottom;">
+      <p><a href="http://www.bio.miami.edu/dana/160/160S13_5.html">http://www.bio.miami.edu/dana/160/160S13_5.html</a></p>
+
+    </div>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="" id="slide-25" style="background:url(assets/img/euclid3.gif); background-size: 100% 100%;">
+  <article data-timings="" style="display: table;">
+    <div style="display: table-cell;vertical-align: bottom;">
+      <p><a href="https://hlab.stanford.edu/brian/euclidean_distance_in.html">https://hlab.stanford.edu/brian/euclidean_distance_in.html</a></p>
+
+    </div>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="dark segue" id="slide-26" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2>如何定義距離？</h2>
+  </hgroup>
+  <article data-timings="">
+    
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-27" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>二元類別型變數</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>\(p = (1, 0, 0, 0, 0)\), q = (1, 1, 0, 1, 0)$
+
+<ul>
+<li>\(M_{11} = 1, M_{00} = 2\)</li>
+<li>\(M_{10} = 0, M_{01} = 2\)</li>
+</ul></li>
+<li>Simple Matching Coefficient(SMC): \(\frac{M_{11} + M_{00}}{M_{01} + M_{10} + M_{11} + M_{00}}\)</li>
+<li>Jaccard Index: \(\frac{M_{11}}{M_{01} + M_{10} + M_{11}}\)</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-28" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>類別型變數 ==&gt; Simple Matching Coefficient</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>使用者A：年齡：中年、職業：公務員、教育：大學、婚姻：未婚</li>
+<li>使用者B：年齡：高齡、職業：自由業、教育：大學、婚姻：已婚</li>
+<li>SMC： \(\frac{相同的屬性個數}{常數} \propto 相同的屬性個數\)</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-29" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>標籤 ==&gt; Jaccard Index</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>使用者A : {男性、單身、電玩、上班族}</li>
+<li>使用者B : {男性、旅遊、電玩、學生}</li>
+<li>Jaccard Index: \(\frac{\left| A \cap B \right|}{\left| A \cup B \right|}\)
+
+<ul>
+<li>J(使用者A, 使用者B) ： \(\frac{2}{6}\)</li>
+</ul></li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="" id="slide-30" style="background:url(assets/img/709544_0.jpg); background-size: 100% 100%;">
+  <article data-timings="" style="display: table;">
+    <div style="display: table-cell;vertical-align: bottom;">
+      <p><a href="http://www.twwiki.com/wiki/%E6%8B%9B%E6%A8%99">http://www.twwiki.com/wiki/%E6%8B%9B%E6%A8%99</a></p>
+
+    </div>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-31" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>數值型變數：Cosine Similarity</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>\(X_1, X_2 \in \mathbb{R}^d\)</li>
+<li>Cosine Similarity： \(\frac {X_1 \cdot X_2}{\left\lVert X_1 \right\rVert \left\lVert X_2 \right\rVert}\)</li>
+<li><img src='assets/img/unit_circle.gif' style='max-width: 100%;max-height: 100%'></img>
+
+<ul>
+<li><small style="font-size: 50%"><a href="https://www.math.hmc.edu/calculus/tutorials/reviewtriglogexp/">https://www.math.hmc.edu/calculus/tutorials/reviewtriglogexp/</a></small></li>
+</ul></li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-32" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>數值型變數：Correlation</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>\(X_1, X_2 \in \mathbb{R}^d\)</li>
+<li>Let \(X_1' = \frac{X_1 - mean(X_1)}{sd(X_1)}\), \(X_2' = \frac{X_2 - mean(X_2)}{sd(X_2)}\), Correlation: \(X_1' \cdot X_2'\)</li>
+<li><img src='assets/img/correlation.jpeg' style='max-width: 100%;max-height: 100%'></img>
+
+<ul>
+<li><small style="font-size: 50%"><a href="https://www.biomedware.com/files/documentation/spacestat/interface/Views/Correlation_Coefficients.htm">https://www.biomedware.com/files/documentation/spacestat/interface/Views/Correlation_Coefficients.htm</a></small></li>
+</ul></li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-33" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>數值型變數： $L_p$距離</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>\(X_1 = (x_{1,1}, x_{1, 2}, ..., x_{1, d})  \in \mathbb{R}^d\)</li>
+<li>\(X_2 = (x_{2, 1}, x_{2, 2}, ..., x_{2, d}) \in \mathbb{R}^d\)</li>
+<li>\(L_p(X_1, X_2) = \left( \sum_{k = 1}^d {\left| x_{1, k} - x_{2, k} \right|^p} \right)^{1/p}\)</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="" id="slide-34" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2>數值型變數： $L_p$距離</h2>
+  </hgroup>
+  <article data-timings="">
+    
+<div style='float:left;width:48%;' class='centered'>
+  <p><img src='assets/img/140px-Vector_norms.svg.png' style='max-width: 100%;max-height: 100%'></img></p>
+
+</div>
+<div style='float:right;width:48%;' class='centered'>
+  <p><img src='assets/img/400px-Superellipse_rounded_diamond.svg.png' style='max-width: 100%;max-height: 100%'></img></p>
+
+</div>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-35" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>如何挑選Similarity</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>視目標與應用而定</li>
+<li>利用相似度解釋資料（主觀）</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="dark segue" id="slide-36" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2>Hierarchical Clustering</h2>
+  </hgroup>
+  <article data-timings="">
+    
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-37" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>Dendrogram</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>決定資料點之間的距離
+
+<ul>
+<li>將相鄰的資料點合併成一個Cluster</li>
+</ul></li>
+<li>決定資料點與Cluster之間的距離</li>
+<li>決定Cluster與Cluster之間的距離</li>
+<li>由近到遠依序合併資料點與Clusters...</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-38" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>Dendrogram</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<p><img src="./assets/fig/rdata-mining-dendrogram-1.png" alt="plot of chunk dendrogram"></p>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="" id="slide-39" style="background:url(assets/img/hclust.gif); background-size: 100% 100%;">
+  <article data-timings="" style="display: table;">
+    <div style="display: table-cell;vertical-align: bottom;">
+      
+    </div>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-40" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>Hierarchical Clustering</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>給定Dendrogram, 如果要找出k個Cluster，就使用當全部資料被分成k個Cluster的瞬間當成結果</li>
+</ul>
+
+<p><img src="./assets/fig/rdata-mining-dendrogram2-1.png" alt="plot of chunk dendrogram2"></p>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="dark segue" id="slide-41" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2>Center-based Clustering</h2>
+  </hgroup>
+  <article data-timings="">
+    
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-42" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>K-Means Clustering</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>資料間的距離</li>
+<li>中心點的個數(與起始值)</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="" id="slide-43" style="background:url(assets/img/kmeans.gif); background-size: 100% 100%;">
+  <article data-timings="" style="display: table;">
+    <div style="display: table-cell;vertical-align: bottom;">
+      
+    </div>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="dark segue" id="slide-44" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2>Density-based Clustering</h2>
+  </hgroup>
+  <article data-timings="">
+    
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-45" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>DBSCAN</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>資料間的距離</li>
+<li>Reachability distance（判斷有沒有連接）</li>
+<li>Reachability minimum number of points （判斷是不是雜訊）</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="" id="slide-46" style="background:url(assets/img/fpc.gif); background-size: 100% 100%;">
+  <article data-timings="" style="display: table;">
+    <div style="display: table-cell;vertical-align: bottom;">
+      
+    </div>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-47" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>分群總結</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>分群就是:
+
+<ul>
+<li>定義資料間的距離（Similarity）</li>
+<li>套用分群演算法</li>
+</ul></li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-48" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>分群比較</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<p><img src="./assets/fig/rdata-mining-compare-clustering-1.png" alt="plot of chunk compare-clustering"></p>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-49" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>練習</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>請完成RDataMining-02-Clustering</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="dark segue" id="slide-50" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2>Similarity and Classification</h2>
+  </hgroup>
+  <article data-timings="">
+    
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-51" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>Classification</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>Training Datset:
+
+<ul>
+<li>每個資料點均有： 屬性 \(X\), 標籤（類別型變數） \(Y\)</li>
+</ul></li>
+<li>Testing Dataset: 
+
+<ul>
+<li>在僅觀察到 \(X\) 的狀態下去預測 \(Y\)</li>
+</ul></li>
+<li>Logistic Regression / SVM / Decision Tree / Gradient Boosted Decision Tree...</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-52" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>Nearest-Neighborhood</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>給一筆Testing data，找與它最近的Training data（鄰居）</li>
+<li>用鄰居的類別猜測Testing data的類別</li>
+</ul>
+
+<p><img src="./assets/fig/rdata-mining-knn-1.png" alt="plot of chunk knn"></p>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-53" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>K Nearest-Neighborhood (k-NN)</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>給一筆Testing data，找與它最近的前K個 Training data（鄰居）</li>
+<li>用鄰居的類別中，出現次數最多的類別猜測Testing data的類別</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="" id="slide-54" style="background:url(assets/img/279px-KnnClassification.png); background-size: 100% 100%;">
+  <article data-timings="" style="display: table;">
+    <div style="display: table-cell;vertical-align: bottom;">
+      
+    </div>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-55" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>k-NN 常用於評量Similarity</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>k-NN 沒有太多的假設
+
+<ul>
+<li>物以類聚</li>
+<li>Similarity</li>
+</ul></li>
+<li>k-NN 的效果和Similarity 的挑選很關鍵</li>
+<li><a href="http://www.cs.ucr.edu/%7Eeamonn/time_series_data/">http://www.cs.ucr.edu/~eamonn/time_series_data/</a></li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-56" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>練習</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>請完成RDataMining-03-Classification</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="dark segue" id="slide-57" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2>Text Mining</h2>
+  </hgroup>
+  <article data-timings="">
+    
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-58" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>文字資料範例：ptt 笨版文章</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<pre><code>作者frank9712520 (YFChen)看板StupidClown標題[健忘] 手機不見了...(代PO)時間Wed Dec 23 02:29:15 2015
+以下是朋友要求代PO的...
+
+剛剛手上拿著手機在回人FB訊息回到一半，突然被我媽叫離開原本的位置，我媽找完我沒
+事後就忘記手機放在哪裡了
+
+用我媽的手機打過去，打通了，沒鈴聲，我關了靜音...
+
+還很興奮地跑到電腦前要用Google Device 放鈴聲找，結果他要我輸入密碼
+
+這兩個多月來當兵每次休假就叫我換密碼，在加上與世隔絕了36天，根本不記得密碼了，
+按忘記密碼，可是經過一連串驗證他要寄認證信到我的備用信箱(yahoo的) 但是到我發完
+文已經過了快一個小時還時沒收到信...
+乾........................
+
+
+距離上次變更密碼...54天前（因為帳號久未活動，所以要求更改密碼）
+http://i.imgur.com/2u4GMKb.jpg
+
+啊就是手機不見才要登入啊...結果現在又要傳訊息到手機
+</code></pre>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-59" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>文字資料的特色</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>容易獲取、俯拾即是</li>
+<li>非結構化、長短不一、沒有明顯規律
+
+<ul>
+<li>挖掘規律是個挑戰</li>
+<li>由各種字彙組成</li>
+<li>常用的資料分析技術不容易套用在文字資料上</li>
+<li>整理資料的挑戰較高</li>
+</ul></li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-60" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>文字資料的結構化</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>找出方法將非結構化的文章轉變成結構化的資料</li>
+<li>後續可針對各種應用問題，與其他ML或DM方法結合</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-61" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>文字資料的清理</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>移除不必要的字元，如空白、標點符號</li>
+<li>統一大小寫</li>
+<li>斷詞
+
+<ul>
+<li>英文資料使用空白做切割</li>
+<li>中文資料可以使用Open Source斷詞引擎搭配詞庫
+
+<ul>
+<li><a href="https://www.moedict.tw/about.html">g0v 萌典</a></li>
+</ul></li>
+</ul></li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-62" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>Term Document Matrix (TDM)</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>將文字資料在斷詞後，轉換為結構化資料的方式</li>
+<li>以文章為單位
+
+<ul>
+<li>每篇文章是一筆資料</li>
+</ul></li>
+<li>將文章中包含的詞彙當成屬性
+
+<ul>
+<li>運用大量布林屬性來標註文章中有沒有包含特定的詞彙</li>
+</ul></li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-63" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>Feature Hashing</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>一種加速TDM處理效能的技巧
+
+<ul>
+<li>TDM 需要建立：  字彙 ==&gt; 屬性位置 的對應表</li>
+<li>Feature Hashing 運用Hashing Algorithm來做對應</li>
+</ul></li>
+<li>喪失對屬性的解釋力</li>
+<li><img src='assets/img/300px-Hash_table_4_1_1_0_0_1_0_LL.png' style='max-width: 100%;max-height: 100%'></img></li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-64" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>範例：Large Movie Review Dataset</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>50000 條關於電影的評論，來源： <a href="http://www.imdb.com">IMDB</a></li>
+<li>一個電影最多不超過 30 reviews</li>
+<li>將評論標記為「正面」與「負面」
+
+<ul>
+<li>正負面是依據使用者的評分決定：分數小於等於4時是負面，其餘的是正面（滿分十分）</li>
+<li>50% 正面的評論，50% 負面的評論</li>
+</ul></li>
+<li>這個資料可以自<a href="https://www.kaggle.com/c/word2vec-nlp-tutorial">Kaggle</a>上下載</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-65" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>TDM</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li><img src='assets/img/TDM.png' style='max-width: 100%;max-height: 100%'></img></li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-66" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>Sentiment Analysis via R, FeatureHashing and XGBoost</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>文章網址：<a href="https://cran.r-project.org/web/packages/FeatureHashing/vignettes/SentimentAnalysis.html">https://cran.r-project.org/web/packages/FeatureHashing/vignettes/SentimentAnalysis.html</a></li>
+<li>運用文章中介紹的技巧搭配Machine Learning套件，即可達到Benchmark的準確度</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-67" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>n-gram</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>TDM 是標記字彙有無在文章之中</li>
+<li>n-gram 是將相鄰的n個字彙視為一個字彙</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-68" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>n-gram 範例</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li><code>剛剛手上拿著手機在回人FB訊息回到一半，突然被我媽叫離開原本的位置，我媽找完我沒事後就忘記手機放在哪裡了</code></li>
+<li>斷詞：<code>剛剛  手上  拿  著  手機  在  回人  FB  訊息  回到  一半  突然  被  我媽  叫  離開  原本  的  位置  我媽  找  完  我  沒事  後  就  忘記  手機  放在  哪裡  了</code></li>
+<li>TDM: </li>
+</ul>
+
+<table><thead>
+<tr>
+<th align="right">剛剛</th>
+<th align="right">手上</th>
+<th align="right">拿</th>
+<th align="right">著</th>
+<th align="right">手機</th>
+<th align="right">在</th>
+<th align="right">回人</th>
+<th align="right">FB</th>
+</tr>
+</thead><tbody>
+<tr>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1</td>
+</tr>
+</tbody></table>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-69" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>n-gram 範例</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>斷詞：<code>剛剛  手上  拿  著  手機  在  回人  FB  訊息  回到  一半  突然  被  我媽  叫  離開  原本  的  位置  我媽  找  完  我  沒事  後  就  忘記  手機  放在  哪裡  了</code></li>
+<li>2-gram： <code>剛剛+手上  手上+拿  拿+著  著+手機  手機+在  在+回人  回人+FB  FB+訊息  訊息+回到  回到+一半  一半+突然  突然+被  被+我媽  我媽+叫  叫+離開  離開+原本  原本+的  的+位置  位置+我媽  我媽+找  找+完  完+我  我+沒事  沒事+後  後+就  就+忘記  忘記+手機  手機+放在  放在+哪裡  哪裡+了</code></li>
+<li>TDM: </li>
+</ul>
+
+<table><thead>
+<tr>
+<th align="right">剛剛+手上</th>
+<th align="right">手上+拿</th>
+<th align="right">拿+著</th>
+<th align="right">著+手機</th>
+<th align="right">手機+在</th>
+<th align="right">在+回人</th>
+<th align="right">回人+FB</th>
+<th align="right">FB+訊息</th>
+</tr>
+</thead><tbody>
+<tr>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1</td>
+</tr>
+</tbody></table>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-70" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>練習</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>請完成RDataMining-04-Text-Mining</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-71" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>Q&amp;A</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+    <slide class="backdrop"></slide>
+  </slides>
+  <div class="pagination pagination-small" id='io2012-ptoc' style="display:none;">
+    <ul>
+      <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=1 title='課程大綱'>
+         1
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=2 title='什麼是Data Mining'>
+         2
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=3 title='NA'>
+         3
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=4 title='NA'>
+         4
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=5 title='Data Mining v.s. Machine Learning v.s. Statistics'>
+         5
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=6 title='Frequency Pattern Mining'>
+         6
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=7 title='歸納'>
+         7
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=8 title='Frequency Pattern Mining'>
+         8
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=9 title='NA'>
+         9
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=10 title='NA'>
+         10
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=11 title='NA'>
+         11
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=12 title='Mining by Computer'>
+         12
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=13 title='Support'>
+         13
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=14 title='Confidence'>
+         14
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=15 title='Frequency Pattern Mining'>
+         15
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=16 title='\(Supp\) 和 \(Conf\) 的不足'>
+         16
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=17 title='Lift'>
+         17
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=18 title='Frequency Pattern Mining'>
+         18
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=19 title='練習'>
+         19
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=20 title='Clustering and Similarity'>
+         20
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=21 title='NA'>
+         21
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=22 title='叢集分析'>
+         22
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=23 title='NA'>
+         23
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=24 title='NA'>
+         24
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=25 title='NA'>
+         25
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=26 title='如何定義距離？'>
+         26
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=27 title='二元類別型變數'>
+         27
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=28 title='類別型變數 ==&gt; Simple Matching Coefficient'>
+         28
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=29 title='標籤 ==&gt; Jaccard Index'>
+         29
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=30 title='NA'>
+         30
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=31 title='數值型變數：Cosine Similarity'>
+         31
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=32 title='數值型變數：Correlation'>
+         32
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=33 title='數值型變數： $L_p$距離'>
+         33
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=34 title='數值型變數： $L_p$距離'>
+         34
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=35 title='如何挑選Similarity'>
+         35
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=36 title='Hierarchical Clustering'>
+         36
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=37 title='Dendrogram'>
+         37
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=38 title='Dendrogram'>
+         38
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=39 title='NA'>
+         39
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=40 title='Hierarchical Clustering'>
+         40
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=41 title='Center-based Clustering'>
+         41
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=42 title='K-Means Clustering'>
+         42
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=43 title='NA'>
+         43
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=44 title='Density-based Clustering'>
+         44
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=45 title='DBSCAN'>
+         45
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=46 title='NA'>
+         46
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=47 title='分群總結'>
+         47
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=48 title='分群比較'>
+         48
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=49 title='練習'>
+         49
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=50 title='Similarity and Classification'>
+         50
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=51 title='Classification'>
+         51
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=52 title='Nearest-Neighborhood'>
+         52
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=53 title='K Nearest-Neighborhood (k-NN)'>
+         53
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=54 title='NA'>
+         54
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=55 title='k-NN 常用於評量Similarity'>
+         55
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=56 title='練習'>
+         56
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=57 title='Text Mining'>
+         57
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=58 title='文字資料範例：ptt 笨版文章'>
+         58
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=59 title='文字資料的特色'>
+         59
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=60 title='文字資料的結構化'>
+         60
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=61 title='文字資料的清理'>
+         61
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=62 title='Term Document Matrix (TDM)'>
+         62
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=63 title='Feature Hashing'>
+         63
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=64 title='範例：Large Movie Review Dataset'>
+         64
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=65 title='TDM'>
+         65
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=66 title='Sentiment Analysis via R, FeatureHashing and XGBoost'>
+         66
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=67 title='n-gram'>
+         67
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=68 title='n-gram 範例'>
+         68
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=69 title='n-gram 範例'>
+         69
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=70 title='練習'>
+         70
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=71 title='Q&amp;A'>
+         71
+      </a>
+    </li>
+  </ul>
+  </div>  <!--[if IE]>
+    <script 
+      src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js">  
+    </script>
+    <script>CFInstall.check({mode: 'overlay'});</script>
+  <![endif]-->
+</body>
+  <!-- Load Javascripts for Widgets -->
+  
+  <!-- MathJax: Fall back to local if CDN offline but local image fonts are not supported (saves >100MB) -->
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        processEscapes: true
+      }
+    });
+  </script>
+  <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/2.0-latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  <!-- <script src="https://c328740.ssl.cf1.rackcdn.com/mathjax/2.0-latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script> -->
+  <script>window.MathJax || document.write('<script type="text/x-mathjax-config">MathJax.Hub.Config({"HTML-CSS":{imageFont:null}});<\/script><script src="libraries/widgets/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"><\/script>')
+</script>
+<!-- LOAD HIGHLIGHTER JS FILES -->
+  <script src="libraries/highlighters/highlight.js/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <!-- DONE LOADING HIGHLIGHTER JS FILES -->
+   
+  </html>
