@@ -10,6 +10,13 @@ install:
   ps: Bootstrap
 
 # Adapt as necessary starting from here
+environment:
+  matrix:
+  - R_VERSION: release
+    R_ARCH: x64
+    CRAN: http://cran.rstudio.com
+
+build_script:
 
 build_script:
   - Rscript -e "source('http://wush978.github.io/DataScienceAndR/init.R')"
@@ -19,6 +26,3 @@ test_script:
 
 on_failure:
   - travis-tool.sh dump_logs
-
-environment:
-  R_VERSION: stable
