@@ -41,13 +41,10 @@ rpart_01_test <- function() {
   index.ref <- local({
     # R 中的型態很重要。類別的數據，調整成factor之後做運算會方便很多
     y <- factor(stagec$pgstat)
-    
     # n 是各種類別出現的次數
     n <- table(y)
-    
     # 預設的prior 是各種類別出現的比率
     prior <- n / length(y)
-    
     #'@title 這是Vignette中的P 函數的實作
     #'
     #'@param x factor vector.
@@ -56,13 +53,11 @@ rpart_01_test <- function() {
       x.tb <- table(x)
       sum(pi * (x.tb / n))
     }
-    
     #'@title 這是gini index的計算
     #'
     #'@param p numeric value. 是某個類別的機率
     #'@return numeric value. 該類別的gini index
     gini <- function(p) p * (1 - p)
-    
     #'@title 這是使用gini index做切割準則時，I 函數的實作
     #'@param x factor vector.
     #'@return numeric value. x 的impurity
@@ -74,12 +69,10 @@ rpart_01_test <- function() {
       #' 這個寫法等價於：
       #' for(p in category.prob) gini(p)
       #' 但是自動把輸出結果排列成一個向量
-      category.gini <- sapply(category.prob, gini) 
+      category.gini <- sapply(category.prob, gini)
       sum(category.gini)
     }
-    
     PI <- function(x) P(x) * I(x)
-    
     #'@title 給定一個切點之後，計算impurity降低的幅度
     impurity_variation_after_cut <- function(cut) {
       origin.impurity <- I(y) * P(y)
@@ -89,15 +82,12 @@ rpart_01_test <- function() {
       # group 是一個長度為二的list
       # 第一個element是所有stage$age < cut為FALSE 的病患對應的pgstat
       # 第二個element是所有stage$age < cut為TRUE 的病患對應的pgstat
-    
       # 對各種切割後的node計算PI後加總
       splitted.impurity <- sum(sapply(group, PI))
       origin.impurity - splitted.impurity
     }
-    
     # 列舉所有可能的切點
     eval.x <- seq(min(stagec$age) - 0.5, max(stagec$age) + 0.5, by = 1)
-    
     # 算出每個切點，對應的impurity 的改善量
     sapply(eval.x, impurity_variation_after_cut)
   })
@@ -124,13 +114,10 @@ rpart_02_test <- function() {
   index.ref <- local({
     # R 中的型態很重要。類別的數據，調整成factor之後做運算會方便很多
     y <- factor(stagec$pgstat)
-    
     # n 是各種類別出現的次數
     n <- table(y)
-    
     # 預設的prior 是各種類別出現的比率
     prior <- n / length(y)
-    
     #'@title 這是Vignette中的P 函數的實作
     #'
     #'@param x factor vector.
@@ -139,7 +126,6 @@ rpart_02_test <- function() {
       x.tb <- table(x)
       sum(pi * (x.tb / n))
     }
-    
     #'@title 這是gini index的計算
     #'
     #'@param p numeric value. 是某個類別的機率
@@ -148,7 +134,6 @@ rpart_02_test <- function() {
       if (p == 0) 0 else - p * log(p)
     }
 
-    
     #'@title 這是使用gini index做切割準則時，I 函數的實作
     #'@param x factor vector.
     #'@return numeric value. x 的impurity
@@ -160,12 +145,10 @@ rpart_02_test <- function() {
       #' 這個寫法等價於：
       #' for(p in category.prob) gini(p)
       #' 但是自動把輸出結果排列成一個向量
-      category.gini <- sapply(category.prob, information) 
+      category.gini <- sapply(category.prob, information)
       sum(category.gini)
     }
-    
     PI <- function(x) P(x) * I(x)
-    
     #'@title 給定一個切點之後，計算impurity降低的幅度
     impurity_variation_after_cut <- function(cut) {
       origin.impurity <- I(y) * P(y)
@@ -175,15 +158,12 @@ rpart_02_test <- function() {
       # group 是一個長度為二的list
       # 第一個element是所有stage$age < cut為FALSE 的病患對應的pgstat
       # 第二個element是所有stage$age < cut為TRUE 的病患對應的pgstat
-    
       # 對各種切割後的node計算PI後加總
       splitted.impurity <- sum(sapply(group, PI))
       origin.impurity - splitted.impurity
     }
-    
     # 列舉所有可能的切點
     eval.x <- seq(min(stagec$age) - 0.5, max(stagec$age) + 0.5, by = 1)
-    
     # 算出每個切點，對應的impurity 的改善量
     sapply(eval.x, impurity_variation_after_cut)
   })
@@ -209,13 +189,11 @@ rdatamining_02_test <- function() {
   check_then_install("glmnet", "2.0.2")
   source_result <- source_by_l10n_info(e$script_temp_path)
   if (class(source_result)[1] == "try-error") return(FALSE)
-  name.list <- c("v1.dt2", "v2.dt2", "p.dt2", 
-                 "v1.bst2", "v2.bst2", "p.svm2", 
+  name.list <- c("v1.dt2", "v2.dt2", "p.dt2",
+                 "v1.bst2", "v2.bst2", "p.svm2",
                  "v1.svm2", "v2.svm2", "p.svm2",
                  "best.model", "index.group")
-  
   name.reference <- readRDS(file.path(e$path, "RDataMining-02-HW2.Rds"))
-  
   name.reference$v1.dt2 <- local({
     g.dt2 <- rpart(lettr ~ ., LetterRecognition.train, control = rpart.control(cp = 1e-4))
     predict(g.dt2, LetterRecognition.tune, type = "class")
