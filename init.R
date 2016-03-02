@@ -1,9 +1,8 @@
 suppressWarnings({
   options(install.packages.check.source = "no", "install.packages.compile.from.source" = "no")
   repos <- "http://wush978.github.io/R"
-  pkgs.info <- available.packages(contriburl = contrib.url(repos, "source"))
+  pkgs.info <- available.packages(contriburl = contrib.url(repos))
   pkgs <- tools:::.extract_dependency_package_names(pkgs.info["swirl","Imports"])
-  cat(sprintf("pkgType: %s \n", getOption("pkgType")))
   invisible(lapply(pkgs, function(pkg) {
     if (!require(pkg, character.only = TRUE)) {
       utils::install.packages(pkg, repos = repos)
