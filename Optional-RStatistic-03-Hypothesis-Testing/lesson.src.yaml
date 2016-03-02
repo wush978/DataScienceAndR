@@ -32,7 +32,9 @@
   Output: |
     請同學用`X.sample`估計丟十次銅板出現十次正面的機率
   CorrectAnswer: mean(X.sample == 10)
-  AnswerTests: omnitest(correctVal = mean(X.sample == 10))
+  AnswerTests: |
+    test_all(stop_if_not(is.numeric), val_has_length(1), 
+      omnitest(correctVal = mean(X.sample == 10)))
 
 - Class: text
   Output: |
