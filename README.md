@@ -94,7 +94,7 @@ ps. 如果你之前有進行過swirl的課程，swirl會出現下圖的選項詢
 
 ## 課程筆記
 
-以下連結記載swirl中的課程內容(sha-hash: 2d4d8bad 版本)
+以下連結記載swirl中的課程內容(sha-hash: 7590b580 版本)
 
 - [00-Hello-DataScienceAndR](note/00-Hello-DataScienceAndR.html)
 - [01-RBasic-01-Introduction](note/01-RBasic-01-Introduction.html)
@@ -114,9 +114,9 @@ ps. 如果你之前有進行過swirl的課程，swirl會出現下圖的選項詢
 - [03-RVisualization-02-Multiple-Variables-Visualization](note/03-RVisualization-02-Multiple-Variables-Visualization.html)
 - [03-RVisualization-03-ggplot2](note/03-RVisualization-03-ggplot2.html)
 - [03-RVisualization-04-Javascript-And-Maps](note/03-RVisualization-04-Javascript-And-Maps.html)
-- [Optional-RDataMining-01-Clustering](note/Optional-RDataMining-01-Clustering.html)
-- [Optional-RDataMining-02-Classification](note/Optional-RDataMining-02-Classification.html)
-- [Optional-RDataMining-03-Association-Rule](note/Optional-RDataMining-03-Association-Rule.html)
+- [Optional-RDataMining-01-Association-Rule](note/Optional-RDataMining-01-Association-Rule.html)
+- [Optional-RDataMining-02-Clustering](note/Optional-RDataMining-02-Clustering.html)
+- [Optional-RDataMining-03-Classification](note/Optional-RDataMining-03-Classification.html)
 - [Optional-RDataMining-04-Text-Mining](note/Optional-RDataMining-04-Text-Mining.html)
 - [Optional-RMachineLearning-01-Linear-Model](note/Optional-RMachineLearning-01-Linear-Model.html)
 - [Optional-RMachineLearning-02-Generalized-Linear-Model](note/Optional-RMachineLearning-02-Generalized-Linear-Model.html)
@@ -144,6 +144,7 @@ ps. 如果你之前有進行過swirl的課程，swirl會出現下圖的選項詢
 - [RVisualization-Introduction](slide/RVisualization-Introduction.html)
 - [Statistics](slide/Statistics.html)
 - [Machine Learning](slide/MachineLearning.html)
+- [Data Mining](slide/DataMining.html)
 
 ## License
 
