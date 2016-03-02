@@ -80,15 +80,19 @@
 
 - Class: cmd_question
   Output: |
-    請利用`X.sample`計算「X的值和40.45的差距超過20.44」的機率
+    請利用`X.sample`計算「X的值和40.45的差距超過20.44」的機率。
   CorrectAnswer: mean(abs(X.sample - 40.45) > 20.44)
-  AnswerTests: omnitest(correctVal = mean(abs(X.sample - 40.45) > 20.44))
+  AnswerTests: |
+    test_all(stop_if_not(is.numeric), val_has_length(1),
+      omnitest(correctVal = mean(abs(X.sample - 40.45) > 20.44)))
 
 - Class: cmd_question
   Output: |
     請利用`X.sample`計算「X的值超過60.89」的機率
   CorrectAnswer: mean(X.sample > 60.89)
-  AnswerTests: omnitest(correctVal = mean(X.sample > 60.89))
+  AnswerTests: |
+    test_all(stop_if_not(is.numeric), val_has_length(1), 
+      omnitest(correctVal = mean(X.sample > 60.89)))
 
 - Class: mult_question
   Output: |
