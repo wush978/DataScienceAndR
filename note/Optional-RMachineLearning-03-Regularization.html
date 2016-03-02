@@ -103,7 +103,7 @@ img {
 </div>
 <div id="-10" class="section level2">
 <h2>關卡 10</h2>
-<p>這裡我們先用cars這個資料集來介紹glmnet與regularization。請同學先輸入：<code>m0&lt;-lm(Sepal.Length~.,iris)</code>這是第一個單元介紹的線性模型，透過這個指令，我們可以取得最小方差直線。我們等等會拿這個模型與glmnet的結果做比較。</p>
+<p>這裡我們先用iris這個資料集來介紹glmnet與regularization。請同學先輸入：<code>m0&lt;-lm(Sepal.Length~.,iris)</code>這是第一個單元介紹的線性模型，透過這個指令，我們可以取得最小方差直線。我們等等會拿這個模型與glmnet的結果做比較。</p>
 <pre class="r"><code>m0 &lt;- lm(Sepal.Length ~ ., iris)</code></pre>
 </div>
 <div id="-11" class="section level2">
@@ -210,7 +210,7 @@ img {
 </div>
 <div id="-34" class="section level2">
 <h2>關卡 34</h2>
-<p>最後我們請同學用上一個單元的使用過得資料集合來作練習。</p>
+<p>最後我們請同學用上一個單元的使用過得資料集來作練習。</p>
 <pre class="r"><code>check_then_install(&quot;mlbench&quot;, &quot;2.1.1&quot;)
 library(mlbench)
 # 方便起見，同學可以使用這個函數計算 Logarithmic Loss
@@ -233,19 +233,17 @@ df.train &lt;- Ionosphere[train.i,-2]
 
 # 上一個單元，我們請同學找到df.test上的logloss小於26的模型
 # 我們想要讓同學透過glmnet找到更好的模型
-# X 是等等要放到glmnet的x參數的值
+# X.train 是等等要放到glmnet的x參數的值
 X.train &lt;- model.matrix(Class ~ ., df.train)[,-1]
-X.test &lt;- model.matrix(Class ~ ., df.test)[,-1]
-# y 是等等要放到glmnet的y參數的值
+# y.train 是等等要放到glmnet的y參數的值
 y.train &lt;- df.train$Class
-y.test &lt;- df.test$Class
 # 請同學透過找到適當的lambda、alplha組合
 # 利用glmnet在df.train上學出一個模型，
 # 它在df.test上logloss小於8
 answer_03 &lt;- local({
   NULL
   # 你的最終物件應該要由以下的程式碼產生：
-  # glmnet(x = X, y = y, lambda = ?, alpha = ?, family = &quot;binomial&quot;)
+  # glmnet(x = X.train, y = y.train, lambda = ?, alpha = ?, family = &quot;binomial&quot;)
   glmnet(x = X.train, y = y.train, lambda = 0.00514326, alpha = 1, family = &quot;binomial&quot;)
 })
 stopifnot(class(answer_03) == c(&quot;lognet&quot;, &quot;glmnet&quot;))

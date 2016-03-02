@@ -135,30 +135,38 @@ stopifnot(length(X.sample) == 10000)</code></pre>
 </div>
 <div id="-15" class="section level2">
 <h2>關卡 15</h2>
-<p>請同學用<code>X.sample</code>來估計X.sample與mu的距離小於8.8的機率</p>
-<pre class="r"><code>mean(abs(X.sample - mu) &lt; 8.8)</code></pre>
+<p>這裡除了寫程式去數個數之外，還有一個很方便的寫法。如果我們輸入<code>abs(X.sample-mu)&lt;4.4</code>，就可以取得一個布林向量。其中TRUE是代表符合條件：「與mu的距離小於4.4」的元素，FALSE代表不符合的元素。</p>
 </div>
 <div id="-16" class="section level2">
 <h2>關卡 16</h2>
-<p>請同學用<code>X.sample</code>來估計X.sample與mu的距離小於13.2的機率</p>
-<pre class="r"><code>mean(abs(X.sample - mu) &lt; 13.2)</code></pre>
+<p>如果我們將布林向量輸入mean的第一個參數，就可以取得發生TRUE的比率。這是因為mean(x)=sum(x)/length(x)，而當x是布林向量時，x就會被轉換成由1與0構成的數值向量。TRUE變成1,FALSE變成0。此時sum(x)就變成TRUE的個數，所以sum(x)/length(x)就變成TRUE發生的比率。</p>
 </div>
 <div id="-17" class="section level2">
 <h2>關卡 17</h2>
-<p>以下的問題對應到投影片的練習四之四</p>
+<p>請同學用<code>X.sample</code>來估計X.sample與mu的距離小於8.8的機率</p>
+<pre class="r"><code>mean(abs(X.sample - mu) &lt; 8.8)</code></pre>
 </div>
 <div id="-18" class="section level2">
 <h2>關卡 18</h2>
-<p>X表示抽出某位金門縣縣民的年齡。請問X可能的值為何？答案請由小到大排列</p>
-<pre class="r"><code>unique(population.Kinmen)</code></pre>
+<p>請同學用<code>X.sample</code>來估計X.sample與mu的距離小於13.2的機率</p>
+<pre class="r"><code>mean(abs(X.sample - mu) &lt; 13.2)</code></pre>
 </div>
 <div id="-19" class="section level2">
 <h2>關卡 19</h2>
-<p>g表示四捨五入至十位數。請問g(X)可能的值為何？答案請由小到大排列</p>
-<pre class="r"><code>unique(round(0:100, -2))</code></pre>
+<p>以下的問題對應到投影片的練習四之四</p>
 </div>
 <div id="-20" class="section level2">
 <h2>關卡 20</h2>
+<p>X表示抽出某位金門縣縣民的年齡。請問X可能的值為何？答案請由小到大排列</p>
+<pre class="r"><code>unique(population.Kinmen)</code></pre>
+</div>
+<div id="-21" class="section level2">
+<h2>關卡 21</h2>
+<p>g表示四捨五入至十位數。請問g(X)可能的值為何？答案請由小到大排列</p>
+<pre class="r"><code>unique(round(0:100, -2))</code></pre>
+</div>
+<div id="-22" class="section level2">
+<h2>關卡 22</h2>
 <p>這題是為了習題四之五的計算做準備。</p>
 <pre class="r"><code># 給定20個金門縣縣民樣本
 #   - $X1$代表樣本的年齡平均數
@@ -190,67 +198,67 @@ stopifnot(length(X3.sample) == 10000)
 # 完成後，請存檔並回到console輸入`submit()`
 </code></pre>
 </div>
-<div id="-21" class="section level2">
-<h2>關卡 21</h2>
+<div id="-23" class="section level2">
+<h2>關卡 23</h2>
 <p>請同學利用X1.sample估計X1和mu(全金門縣縣民的平均年齡)的偏差</p>
 <pre class="r"><code>mean(X1.sample - mu)</code></pre>
 </div>
-<div id="-22" class="section level2">
-<h2>關卡 22</h2>
+<div id="-24" class="section level2">
+<h2>關卡 24</h2>
 <p>請同學利用X1.sample估計X1的變異數</p>
 <pre class="r"><code>var(X1.sample)</code></pre>
 </div>
-<div id="-23" class="section level2">
-<h2>關卡 23</h2>
+<div id="-25" class="section level2">
+<h2>關卡 25</h2>
 <p>請同學利用X2.sample估計X2和mu(全金門縣縣民的平均年齡)的偏差</p>
 <pre class="r"><code>mean(X2.sample - mu)</code></pre>
 </div>
-<div id="-24" class="section level2">
-<h2>關卡 24</h2>
+<div id="-26" class="section level2">
+<h2>關卡 26</h2>
 <p>請同學利用X2.sample估計X2的變異數</p>
 <pre class="r"><code>var(X2.sample)</code></pre>
 </div>
-<div id="-25" class="section level2">
-<h2>關卡 25</h2>
+<div id="-27" class="section level2">
+<h2>關卡 27</h2>
 <p>請同學利用X3.sample估計X3和mu(全金門縣縣民的平均年齡)的偏差</p>
 <pre class="r"><code>mean(X3.sample - mu)</code></pre>
 </div>
-<div id="-26" class="section level2">
-<h2>關卡 26</h2>
+<div id="-28" class="section level2">
+<h2>關卡 28</h2>
 <p>請同學利用X3.sample估計X3的變異數</p>
 <pre class="r"><code>var(X3.sample)</code></pre>
 </div>
-<div id="-27" class="section level2">
-<h2>關卡 27</h2>
+<div id="-29" class="section level2">
+<h2>關卡 29</h2>
 <p>請問同學，哪一個方法的偏差最接近0？請輸入字串“X1”,“X2”或“X3”作答</p>
 <pre class="r"><code>c(&quot;X1&quot;, &quot;X2&quot;, &quot;X3&quot;)[which.min(abs(c(mean(X1.sample), mean(X2.sample), mean(X3.sample)) - mu))]</code></pre>
 </div>
-<div id="-28" class="section level2">
-<h2>關卡 28</h2>
+<div id="-30" class="section level2">
+<h2>關卡 30</h2>
 <p>請問同學，哪一個方法的變異數最小？請輸入字串“X1”,“X2”或“X3”作答</p>
 <pre class="r"><code>c(&quot;X1&quot;, &quot;X2&quot;, &quot;X3&quot;)[which.min(c(var(X1.sample), var(X2.sample), var(X3.sample)))]</code></pre>
 </div>
-<div id="-29" class="section level2">
-<h2>關卡 29</h2>
-<p>許多研究者會使用MeanSquaredError(MSE)來比較方法的準確度。理論可以證明：MSE是「偏差的平方」加上「變異數」，可以同時量化偏差和變異數。</p>
-</div>
-<div id="-30" class="section level2">
-<h2>關卡 30</h2>
-<p>請同學用X1.sample估計X1的MSE</p>
-<pre class="r"><code>mean(X1.sample - mu)^2 + var(X1.sample)</code></pre>
-</div>
 <div id="-31" class="section level2">
 <h2>關卡 31</h2>
-<p>請同學用X2.sample估計X2的MSE</p>
-<pre class="r"><code>mean(X2.sample - mu)^2 + var(X2.sample)</code></pre>
+<p>許多研究者會使用MeanSquaredError(MSE)來比較方法的準確度。理論可以證明：MSE是「偏差的平方」加上「變異數」，可以同時量化偏差和變異數。</p>
 </div>
 <div id="-32" class="section level2">
 <h2>關卡 32</h2>
-<p>請同學用X3.sample估計X3的MSE</p>
-<pre class="r"><code>mean(X3.sample - mu)^2 + var(X3.sample)</code></pre>
+<p>請同學用X1.sample估計X1的MSE</p>
+<pre class="r"><code>mean(X1.sample - mu)^2 + var(X1.sample)</code></pre>
 </div>
 <div id="-33" class="section level2">
 <h2>關卡 33</h2>
+<p>請同學用X2.sample估計X2的MSE</p>
+<pre class="r"><code>mean(X2.sample - mu)^2 + var(X2.sample)</code></pre>
+</div>
+<div id="-34" class="section level2">
+<h2>關卡 34</h2>
+<p>請同學用X3.sample估計X3的MSE</p>
+<pre class="r"><code>mean(X3.sample - mu)^2 + var(X3.sample)</code></pre>
+</div>
+<div id="-35" class="section level2">
+<h2>關卡 35</h2>
 <p>請問同學，哪一個方法的MSE最小？請輸入字串“X1”,“X2”或“X3”作答</p>
 <pre class="r"><code>c(&quot;X1&quot;, &quot;X2&quot;, &quot;X3&quot;)[which.min(c(
   mean(X1.sample - mu)^2 + var(X1.sample),
@@ -259,8 +267,8 @@ stopifnot(length(X3.sample) == 10000)
   ))]
 </code></pre>
 </div>
-<div id="-34" class="section level2">
-<h2>關卡 34</h2>
+<div id="-36" class="section level2">
+<h2>關卡 36</h2>
 <p>這題是為了習題四之六的計算做準備。</p>
 <pre class="r"><code># 給定20個金門縣縣民樣本
 # - $X1$代表20名金門縣縣民的樣本平均數
@@ -291,38 +299,38 @@ stopifnot(length(X3.sample) == 10000)
 # 完成後，請存檔並回到console輸入`submit()`
 </code></pre>
 </div>
-<div id="-35" class="section level2">
-<h2>關卡 35</h2>
+<div id="-37" class="section level2">
+<h2>關卡 37</h2>
 <p>請同學利用X1.sample估計X1的變異數</p>
 <pre class="r"><code>var(X1.sample)</code></pre>
 </div>
-<div id="-36" class="section level2">
-<h2>關卡 36</h2>
+<div id="-38" class="section level2">
+<h2>關卡 38</h2>
 <p>請同學利用X2.sample估計X2和mu(全金門縣縣民的平均年齡)的偏差</p>
 <pre class="r"><code>mean(X2.sample - mu)</code></pre>
 </div>
-<div id="-37" class="section level2">
-<h2>關卡 37</h2>
+<div id="-39" class="section level2">
+<h2>關卡 39</h2>
 <p>請同學利用X2.sample估計X2的變異數</p>
 <pre class="r"><code>var(X2.sample)</code></pre>
 </div>
-<div id="-38" class="section level2">
-<h2>關卡 38</h2>
+<div id="-40" class="section level2">
+<h2>關卡 40</h2>
 <p>請同學利用X3.sample估計X3和mu(全金門縣縣民的平均年齡)的偏差</p>
 <pre class="r"><code>mean(X3.sample - mu)</code></pre>
 </div>
-<div id="-39" class="section level2">
-<h2>關卡 39</h2>
+<div id="-41" class="section level2">
+<h2>關卡 41</h2>
 <p>請同學利用X3.sample估計X3的變異數</p>
 <pre class="r"><code>var(X3.sample)</code></pre>
 </div>
-<div id="-40" class="section level2">
-<h2>關卡 40</h2>
+<div id="-42" class="section level2">
+<h2>關卡 42</h2>
 <p>請問同學，哪一個方法的偏差最接近0？請輸入字串“X1”,“X2”或“X3”作答</p>
 <pre class="r"><code>c(&quot;X1&quot;, &quot;X2&quot;, &quot;X3&quot;)[which.min(abs(c(mean(X1.sample), mean(X2.sample), mean(X3.sample)) - mu))]</code></pre>
 </div>
-<div id="-41" class="section level2">
-<h2>關卡 41</h2>
+<div id="-43" class="section level2">
+<h2>關卡 43</h2>
 <p>請問同學，哪一個方法的變異數最小？請輸入字串“X1”,“X2”或“X3”作答</p>
 <pre class="r"><code>c(&quot;X1&quot;, &quot;X2&quot;, &quot;X3&quot;)[which.min(c(var(X1.sample), var(X2.sample), var(X3.sample)))]</code></pre>
 </div>

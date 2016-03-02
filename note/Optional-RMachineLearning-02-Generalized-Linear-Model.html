@@ -277,14 +277,14 @@ logloss &lt;- function(y, p, tol = 1e-4) {
   -sum(y * log(p) + (1 - y) * log(1-p))
 }
 
-# 請找出一個在df.test上的logloss小於26的模型
+# 請找出一個在df.test上的logloss小於24.5的模型
 answer_02 &lt;- local({
   NULL
   # 請填寫你的程式碼
   step(m1, trace = 0)
 })
 stopifnot(class(answer_02) == c(&quot;glm&quot;, &quot;lm&quot;))
-stopifnot(logloss(df.test$Class == &quot;good&quot;, predict(answer_02, df.test, type = &quot;response&quot;)) &lt; 26)</code></pre>
+stopifnot(logloss(df.test$Class == &quot;good&quot;, predict(answer_02, df.test, type = &quot;response&quot;)) &lt; 24.5)</code></pre>
 </div>
 
 
