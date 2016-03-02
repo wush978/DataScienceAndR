@@ -17,24 +17,22 @@ script_test_prefix <- function(n = 2) {
   if (class(source_result)[1] == "try-error") stop(sprintf("Syntax error: %s", conditionMessage(attr(source_result, "condition"))))
   e
 }
-
-ml_02 <- function() {
+dm_03_01 <- function() {
   tryCatch({
     e <- script_test_prefix()
-    answer_02 <- get("answer_02", envir = globalenv())
-    logloss <- function(y, p, tol = 1e-4) {
-      # tol 的用途是避免對0取log所導致的數值問題
-      p[p < tol] <- tol
-      p[p > 1 - tol] <- 1 - tol
-      -sum(y * log(p) + (1 - y) * log(1-p))
-    }
-    stopifnot(class(answer_02) == c("glm", "lm"))
-    stopifnot(isTRUE(all.equal(answer_02$model[,attr(answer_02$terms, "response")], df.train$Class)))
-    stopifnot(logloss(df.test$Class == "good", predict(answer_02, df.test, type = "response")) < 24.5)
+    d <- get("d", envir = globalenv())
+    m <- as.matrix(d)
+    stopifnot(dim(m) == c(351, 351))
+    i <- seq_len(301)
+    j <- 301 + seq_len(50)
+    m2 <- m[i,j]
+    i.1nn <- apply(m2, 2, which.min)
+    y.train <- get("y.train", envir = globalenv())
+    y.test <- get("y.test", envir = globalenv())
+    stopifnot(mean(y.train[i.1nn] == y.test) > 0.95)
     TRUE
   }, error = function(e) {
     message(conditionMessage(e))
     FALSE
   })
 }
-

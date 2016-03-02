@@ -7,12 +7,12 @@ logloss <- function(y, p, tol = 1e-4) {
   -sum(y * log(p) + (1 - y) * log(1-p))
 }
 
-# 請找出一個在df.test上的logloss小於26的模型
+# 請找出一個在df.test上的logloss小於24.5的模型
 answer_02 <- local({
   NULL
   # 請填寫你的程式碼
 })
 stopifnot(class(answer_02) == c("glm", "lm"))
-stopifnot(logloss(df.test$Class == "good", predict(answer_02, df.test, type = "response")) < 26)
+stopifnot(logloss(df.test$Class == "good", predict(answer_02, df.test, type = "response")) < 24.5)
 
 # 完成後請存檔並回到console輸入`submit()`
