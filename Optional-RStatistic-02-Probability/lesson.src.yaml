@@ -82,6 +82,20 @@
   CorrectAnswer: mean(abs(X.sample - mu) < 4.4)
   AnswerTests: omnitest(correctVal = mean(abs(X.sample - mu) < 4.4))
 
+- Class: text
+  Output: |
+    這裡除了寫程式去數個數之外，還有一個很方便的寫法。如果我們
+    輸入`abs(X.sample - mu) < 4.4`，就可以取得一個布林向量。
+    其中TRUE是代表符合條件：「與mu的距離小於4.4」的元素，
+    FALSE代表不符合的元素。
+
+- Class: text
+  Output: |
+    如果我們將布林向量輸入mean的第一個參數，就可以取得發生TRUE的比率。
+    這是因為mean(x) = sum(x) / length(x)，而當x是布林向量時，x就會
+    被轉換成由1與0構成的數值向量。TRUE變成1, FALSE變成0。此時sum(x)
+    就變成TRUE的個數，所以sum(x) / length(x)就變成TRUE發生的比率。
+
 - Class: cmd_question
   Output: |
     請同學用`X.sample`來估計X.sample與mu的距離小於8.8的機率
