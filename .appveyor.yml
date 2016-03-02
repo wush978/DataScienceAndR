@@ -17,8 +17,6 @@ environment:
     CRAN: http://cran.rstudio.com
 
 build_script:
-
-build_script:
   - Rscript -e "source('http://wush978.github.io/DataScienceAndR/init.R')"
 
 test_script:
