@@ -30,7 +30,7 @@ ml_02 <- function() {
     }
     stopifnot(class(answer_02) == c("glm", "lm"))
     stopifnot(isTRUE(all.equal(answer_02$model[,attr(answer_02$terms, "response")], df.train$Class)))
-    stopifnot(logloss(df.test$Class == "good", predict(answer_02, df.test, type = "response")) < 26)
+    stopifnot(logloss(df.test$Class == "good", predict(answer_02, df.test, type = "response")) < 24.5)
     TRUE
   }, error = function(e) {
     message(conditionMessage(e))
