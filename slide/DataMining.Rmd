@@ -49,6 +49,7 @@ sys_encode <- c("utf8", "utf8", "big5")[pmatch(sys_name, c("linux", "darwin", "w
 - Frequency Pattern Mining
 - Similarity and Distance
 - Clustering
+- Classification
 - Text Mining
 
 --- .dark .segue
