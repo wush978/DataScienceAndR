@@ -1,0 +1,814 @@
+---
+title       : "Data Mining"
+author      : "Wush Wu"
+job         : 國立台灣大學
+framework   : io2012-wush
+highlighter : highlight.js
+hitheme     : zenburn
+widgets     : [mathjax]            # {mathjax, quiz, bootstrap}
+mode        : selfcontained # {standalone, draft}
+knit        : slidify::knit2slides
+--- .largecontent &vcenter
+
+```{r setup, include=FALSE, cache=FALSE}
+library(knitr)
+library(magrittr)
+library(data.table)
+library(dplyr)
+library(ggplot2)
+library(quantmod)
+library(jsonlite)
+library(arules)
+library(animation)
+library(FNN)
+library(magrittr)
+library(plotrix)
+library(fpc)
+
+opts_chunk$set(echo = FALSE, cache=TRUE, comment="",
+               cache.path = "cache-DataMining/",
+               dev.args=list(bg="transparent"),
+               fig.path = "./assets/fig/rdata-mining-",
+               fig.width = 10, fig.height = 6)
+bg <- function(path) sprintf("bg:url(assets/img/%s)", path)
+fig <- function(path, size = 100) {
+  sprintf("<img src='assets/img/%s' style='max-width: %d%%;max-height: %d%%'></img>",
+          path, size, size)
+}
+fig2 <- function(path, size = 100) {
+  sprintf("<img src='assets/img/%s' style='width: %d%%'></img>",
+          path, size)
+}
+sys_name <- Sys.info()["sysname"] %>% tolower
+sys_encode <- c("utf8", "utf8", "big5")[pmatch(sys_name, c("linux", "darwin", "windows"))]
+```
+
+## 課程大綱
+
+- 什麼是Data Mining
+- Frequency Pattern Mining
+- Similarity and Distance
+- Clustering
+- Classification
+- Text Mining
+
+--- .dark .segue
+
+## 什麼是Data Mining
+
+--- &fullimg `r bg("myn8a.jpg")`
+
+Source: <http://gold.sarwatch.org/reports/gold-mining-orientale-province>
+
+--- &fullimg bg:url(assets/img/dm.gif)
+
+Source: <http://www.laits.utexas.edu/~anorman/BUS.FOR/course.mat/Alex>
+
+--- &vcenter .largecontent
+
+## Data Mining v.s. Machine Learning v.s. Statistics
+
+- Data Mining: Find the value from the data 
+- Machine Learning: Learn the pattern from the data
+- Statistics: Making inference based on assumptions
+
+--- .dark .segue
+
+## Frequency Pattern Mining
+
+--- &vcenter .largecontent
+
+## 歸納
+
+- 交易紀錄
+    - \{milk, bread\}
+    - \{butter\}
+    - \{beer, diapers\}
+    - \{milk, bread, butter\}
+    - \{bread\}
+- 規則
+    - milk ==> bread
+
+--- &vcenter .largecontent
+
+## Frequency Pattern Mining
+
+- Transaction(交易紀錄)
+    - 一名顧客所購買的物品清單：\{milk, bread\}
+- Item
+    - 可購買的物品：milk、break、beer...
+- Rule
+    - 物品之間的關聯：$X$ ==> $Y$（$X$, $Y$又被稱為itemset）
+    - $X$(LHS itemset) 和 $Y$(RHS itemset) 不能包含相同的物品
+    - $X$ => $Y$ 代表當 $X$ 出現在一個transaction時，$Y$也會出現
+    - 例： milk ==> bread
+
+--- &fullimg `r bg("what-is-big-data-19-638.jpg")`
+
+<http://cloud-network-master.blogspot.tw/2013/07/bigdata.html>
+
+--- &fullimg `r bg("Visitor-Profile.png")`
+
+<http://piwik.org/docs/real-time/>
+
+--- &fullimg `r bg("MONK.png")`
+
+<http://www.gosugamers.net/hearthstone/news/27121-all-decklists-from-seatstory-cup>
+
+--- &vcenter .largecontent
+
+## Mining by Computer
+
+- 規則成立的門檻
+    - 交易紀錄
+        - \{milk, bread\}
+        - \{butter\}
+        - \{beer, diapers\}
+        - \{milk, bread, butter\}
+        - \{bread\}
+    - 規則
+        - milk ==> bread (100%, 2/5)
+        - beer ==> diapers (100%, 1/5)
+        - milk, bread ==> butter (50%, 2/5)
+
+--- &vcenter .largecontent
+
+## Support
+
+- 給定 itemset $X$, 有多少個比率的Transaction包含 $X$ 稱為 $Supp(X)$
+- 交易紀錄
+    - \{milk, bread\}
+    - \{beer, diapers\}
+    - \{milk, bread, butter\}
+    - \{bread\}
+- $Supp(\{\text{milk}\}) = \frac{2}{4}$ 
+- $Supp(\{\text{milk, bread}\}) = \frac{2}{4}$
+
+--- &vcenter .largecontent
+
+## Confidence
+
+- 給定 rule $X \Rightarrow Y$, $Conf(X \Rightarrow Y) = \frac{Supp(X \cup Y)}{Supp(X)}$
+- 交易紀錄
+    - \{milk, bread\}
+    - \{milk\}
+    - \{milk, bread, butter\}
+    - \{butter\}
+- $Conf(\{\text{bread => milk}\}) = \frac{2}{2}$ 
+- $Conf(\{\text{milk => bread}\}) = \frac{2}{3}$
+
+--- &vcenter .largecontent
+
+## Frequency Pattern Mining
+
+- 規則的Confidence要明顯 => 準
+- 規則的Support要高 => 有影響
+
+--- &vcenter .largecontent
+
+## $Supp$ 和 $Conf$ 的不足
+
+- 交易紀錄
+    - \{milk, bread\}
+    - \{milk\}
+    - \{milk, bread, butter\}
+    - \{bread\}
+- milk => bread: 
+    - $Supp(milk) = 75\%$, $Conf(milk \Rightarrow bread) = 67\%$
+- $Supp(bread) = 75\%$: 所以要促銷麵包的時候，需要推廣牛奶嗎？
+
+--- &vcenter .largecontent
+
+## Lift
+
+- $Lift(X \Rightarrow Y) = \frac{Supp(X \cup Y)}{Supp(X) \times Supp(Y)}$
+- 交易紀錄
+    - \{milk, bread\}
+    - \{milk\}
+    - \{milk, bread, butter\}
+    - \{bread\}
+- $Lift(milk \Rightarrow bread) = \frac{\frac{2}{4}}{\frac{3}{4} \times \frac{3}{4}} = \frac{8}{9}$
+
+--- &vcenter .largecontent
+
+## Frequency Pattern Mining
+
+- 規則的Confidence要明顯 => 準
+- 規則的Support要高 => 有影響
+- 規則的Lift要高 => 與背景比較
+
+--- &vcenter .largecontent
+
+## 練習
+
+- 請完成RDataMining-01-Association-Rule
+
+--- .dark .segue
+
+## Clustering and Similarity
+
+--- &fullimg `r bg("main-qimg-d9f961a492f073fbfed7202ef5badf17.gif")`
+
+<http://qr.ae/RU5Xx6>
+
+--- &vcenter .largecontent
+
+## 叢集分析
+
+- 物以類聚
+- 近朱者赤、近墨者黑
+- 叢集分析的基礎：資料之間的距離、資料之間的相似度
+
+--- &fullimg `r bg("1341639767-4160490196.jpg")`
+
+<http://unafang.pixnet.net/album/photo/35371216-%E9%81%A0%E8%B7%9D%E9%9B%A2%E6%88%80%E6%84%9B>
+
+--- &fullimg `r bg("evolutionary_tree.jpg")`
+
+<http://www.bio.miami.edu/dana/160/160S13_5.html>
+
+--- &fullimg `r bg("euclid3.gif")`
+
+<https://hlab.stanford.edu/brian/euclidean_distance_in.html>
+
+--- .dark .segue
+
+## 如何定義距離？
+
+--- &vcenter .largecontent
+
+## 二元類別型變數
+
+- $p = (1, 0, 0, 0, 0)$, q = (1, 1, 0, 1, 0)$
+    - $M_{11} = 1, M_{00} = 2$
+    - $M_{10} = 0, M_{01} = 2$
+- Simple Matching Coefficient(SMC): $\frac{M_{11} + M_{00}}{M_{01} + M_{10} + M_{11} + M_{00}}$
+- Jaccard Index: $\frac{M_{11}}{M_{01} + M_{10} + M_{11}}$
+
+--- &vcenter .largecontent
+
+## 類別型變數 ==> Simple Matching Coefficient
+
+- 使用者A：年齡：中年、職業：公務員、教育：大學、婚姻：未婚
+- 使用者B：年齡：高齡、職業：自由業、教育：大學、婚姻：已婚
+- SMC： $\frac{相同的屬性個數}{常數} \propto 相同的屬性個數$
+
+--- &vcenter .largecontent
+
+## 標籤 ==> Jaccard Index
+
+- 使用者A : \{男性、單身、電玩、上班族\}
+- 使用者B : \{男性、旅遊、電玩、學生\}
+- Jaccard Index: $\frac{\left| A \cap B \right|}{\left| A \cup B \right|}$
+    - J(使用者A, 使用者B) ： $\frac{2}{6}$
+
+--- &fullimg `r bg("709544_0.jpg")`
+
+<http://www.twwiki.com/wiki/%E6%8B%9B%E6%A8%99>
+
+--- &vcenter .largecontent
+
+## 數值型變數：Cosine Similarity
+
+- $X_1, X_2 \in \mathbb{R}^d$
+- Cosine Similarity： $\frac {X_1 \cdot X_2}{\left\lVert X_1 \right\rVert \left\lVert X_2 \right\rVert}$
+- `r fig("unit_circle.gif")`
+    - <small style="font-size: 50%"><https://www.math.hmc.edu/calculus/tutorials/reviewtriglogexp/></small>
+
+--- &vcenter .largecontent
+
+## 數值型變數：Correlation
+
+- $X_1, X_2 \in \mathbb{R}^d$
+- Let $X_1' = \frac{X_1 - mean(X_1)}{sd(X_1)}$, $X_2' = \frac{X_2 - mean(X_2)}{sd(X_2)}$, Correlation: $X_1' \cdot X_2'$
+- `r fig("correlation.jpeg")`
+    - <small style="font-size: 50%"><https://www.biomedware.com/files/documentation/spacestat/interface/Views/Correlation_Coefficients.htm></small>
+
+--- &vcenter .largecontent
+
+## 數值型變數： $L_p$距離
+
+- $X_1 = (x_{1,1}, x_{1, 2}, ..., x_{1, d})  \in \mathbb{R}^d$
+- $X_2 = (x_{2, 1}, x_{2, 2}, ..., x_{2, d}) \in \mathbb{R}^d$
+- $L_p(X_1, X_2) = \left( \sum_{k = 1}^d {\left| x_{1, k} - x_{2, k} \right|^p} \right)^{1/p}$
+
+--- &twocol 
+
+## 數值型變數： $L_p$距離
+
+*** =left
+
+`r fig("140px-Vector_norms.svg.png")`
+
+*** =right
+
+`r fig("400px-Superellipse_rounded_diamond.svg.png")`
+
+--- &vcenter .largecontent
+
+## 如何挑選Similarity
+
+- 視目標與應用而定
+- 利用相似度解釋資料（主觀）
+
+--- .dark .segue
+
+## Hierarchical Clustering
+
+--- &vcenter .largecontent
+
+## Dendrogram
+
+- 決定資料點之間的距離
+    - 將相鄰的資料點合併成一個Cluster
+- 決定資料點與Cluster之間的距離
+- 決定Cluster與Cluster之間的距離
+- 由近到遠依序合併資料點與Clusters...
+
+--- &vcenter .largecontent
+
+## Dendrogram
+
+```{r dendrogram}
+iris2 <- iris[c(1:4, 51:54, 101:104),1:2]
+d <- dist(iris2)
+cl <- hclust(d)
+plot(cl)
+```
+
+```{r hclust, results = "hide", warning = FALSE, cache = TRUE}
+gif.name <- "hclust.gif"
+suppressMessages(
+  saveGIF({
+    m <- cl$merge
+    d.m <- as.matrix(dist(iris2))
+    row_group <- list()
+    draw_group <- function(node, col, df = iris2) {
+      node.m <- apply(df[node,], 2, mean)
+      points(Sepal.Width ~ Sepal.Length, df[node,], col = col)
+      points(node.m[1], node.m[2], col = col, pch = 16)
+    }
+    draw_line <- function(node, col, df = iris2) {
+      lines(df[node,1], df[node,2], lty = 2, col = col, lwd = 3)
+    }
+    col.set <- rainbow(11)
+    dev.hold()
+    plot(Sepal.Width ~ Sepal.Length, iris2, pch = 16)
+    node.closest <- local({
+      diag(d.m) <- Inf
+      which(d.m == min(d.m), arr.ind = TRUE)[1,]
+    }) %>%
+      draw_line(col = col.set[2])
+    ani.pause()
+    for(i in 1:11) {
+      lhs <- m[i,1]
+      rhs <- m[i,2]
+      lnode <- if (lhs < 0) -lhs else {
+        tmp <- row_group[[lhs]]
+        row_group[[lhs]] <- integer(0)
+        tmp
+      }
+      rnode <- if (rhs < 0) -rhs else {
+        tmp <- row_group[[rhs]]
+        row_group[[rhs]] <- integer(0)
+        tmp
+      }
+      node <- c(lnode, rnode)
+      row_group[[i]] <- node
+      bnode <- setdiff(1:12, Reduce(union, row_group[1:i]))
+      dev.hold()
+      plot(Sepal.Width ~ Sepal.Length, iris2, type = "n")
+      points(Sepal.Width ~ Sepal.Length, iris2[bnode,], pch = 16)
+      lapply(seq_len(i-1), function(j) {
+        if (length(j) > 0) draw_group(row_group[[j]], col.set[j])
+      }) %>% 
+        invisible()
+      draw_group(node, col = col.set[i])
+      ani.pause()
+      if (i < 11) {
+        dev.hold()
+        plot(Sepal.Width ~ Sepal.Length, iris2, type = "n")
+        points(Sepal.Width ~ Sepal.Length, iris2[bnode,], pch = 16)
+        lapply(seq_len(i), function(j) {
+          if (length(j) > 0) draw_group(row_group[[j]], col.set[j])
+        }) %>% 
+          invisible()
+        local({
+          d.m <- 
+            (df <- rbind(
+              iris2[bnode,],
+              Filter(function(x) length(row_group[[x]]) > 0, seq_len(i)) %>%
+                (function(df, i) df[i])(df = row_group) %>%
+              lapply(function(j) {
+                iris2[j,] %>% apply(2, mean)
+              }) %>% do.call(what = rbind))) %>%
+            dist() %>%
+            as.matrix()
+          diag(d.m) <- Inf
+          which(d.m == min(d.m), arr.ind = TRUE)[1,] %>%
+            draw_line(col = col.set[i], df = df)
+        }) 
+        ani.pause()
+      }
+    }
+  }, movie.name = gif.name))
+if (file.exists(file.path("assets", "img", gif.name))) file.remove(file.path("assets", "img", gif.name))
+file.rename(gif.name, file.path("assets", "img", gif.name))
+```
+
+--- &fullimg `r bg("hclust.gif")`
+
+--- &vcenter .largecontent
+
+## Hierarchical Clustering
+
+- 給定Dendrogram, 如果要找出k個Cluster，就使用當全部資料被分成k個Cluster的瞬間當成結果
+
+```{r dendrogram2}
+iris2 <- iris[c(1:4, 51:54, 101:104),1:2]
+d <- dist(iris2)
+cl <- hclust(d)
+plot(cl)
+abline(h = tail(cl$height, 3)[1] + 0.05, lty = 2)
+text(5, tail(cl$height, 3)[1] + 0.15, "k = 3")
+```
+
+--- .dark .segue
+
+## Center-based Clustering
+
+```{r kmeans, results="hide", warning=FALSE, cache = TRUE}
+suppressMessages(
+  saveGIF({
+    x <- model.matrix(Species ~ Sepal.Length + Sepal.Width - 1, iris)
+    centers <- 3
+    d <- dist(x)
+    gr.center <- sample(seq_len(nrow(x)), centers, FALSE)
+    gr <- sample(seq_len(centers), nrow(x), TRUE)
+    x.center <- x[gr.center,]
+    dst <- matrix(nrow = nrow(x), ncol = centers)
+    j <- 1
+    pch <- as.integer(iris$Species)
+    col <- 1:3
+    is.continue <- TRUE
+    while(is.continue) {
+      dev.hold()
+      plot(x, pch = pch, col = col[gr], main = "k-means")
+      points(x.center, pch = 16, col = 1:3,
+             cex = 3, lwd = 2)
+      ani.pause()
+      knn <- get.knnx(x.center, x, k = 1)
+      gr.last <- gr
+      gr <- as.vector(knn$nn.index)
+      if (isTRUE(all.equal(gr, gr.last))) is.continue <- FALSE
+      x.center <- split(seq_len(nrow(x)), gr) %>%
+        lapply(function(k) {
+          apply(x[k,], 2, mean)
+        }) %>%
+        do.call(what = rbind)
+    }
+  }, movie.name = "kmeans.gif"))
+if (file.exists("assets/img/kmeans.gif")) file.remove("assets/img/kmeans.gif")
+file.rename("kmeans.gif", "assets/img/kmeans.gif")
+```
+
+--- &vcenter .largecontent
+
+## K-Means Clustering
+
+- 資料間的距離
+- 中心點的個數(與起始值)
+
+--- &fullimg `r bg("kmeans.gif")`
+
+--- .dark .segue
+
+## Density-based Clustering
+
+```{r fpc, results="hide", warning=FALSE, cache = TRUE}
+suppressMessages(
+  saveGIF({
+    x <- model.matrix(Species ~ Sepal.Length + Sepal.Width - 1, iris)
+    d <- as.matrix(dist(x))
+    g <- dbscan(x, 0.2)
+    cl <- integer(nrow(iris))
+    i.all <- seq_len(nrow(iris))
+    i.next <- c()
+    i.done <- c()
+    get_next_i <- function(i.next, i.done) {
+      cat(sprintf("i.next: %s i.done: %s \n", paste(i.next, collapse = ","), paste(i.done, collapse = ",")))
+      if (length(i.next) == 0) setdiff(i.all, i.done) %>% head(1) else i.next[1]
+    }
+    i <- get_next_i(i.next, i.done)
+    while(length(i) == 1) {
+      if (length(targets <- which(d[i,] < g$eps)) >= g$MinPts) {
+        if (cl[i] != 0 & all(cl[targets] == cl[i])) {
+        } else {
+          dev.hold()
+          plot(x[,1], x[,2], pch = pch, col = cl + 1, main = "dbscan", type = "p")
+          ani.pause()
+          dev.hold()
+          plot(x[,1], x[,2], pch = pch, col = cl + 1, main = "dbscan", type = "p")
+          draw.circle(x[i,1], x[i,2], radius = g$eps, col = rgb(0.5, 0.5, 0.5, 0.5), lty = 2)
+          ani.pause()
+        }
+        if (cl[i] == 0) cl[i] <- max(cl) + 1
+        if (cl[i] == 4) stop("")
+        cl[targets] <- cl[i]
+        i.done <- append(i.done, i)
+        i.next <- union(i.next, targets) %>% setdiff(i.done)
+        i <- get_next_i(i.next, i.done)
+        i.next <- setdiff(i.next, i)
+      } else {
+        i.done <- append(i.done, i)
+        i <- get_next_i(i.next, i.done)
+        i.next <- setdiff(i.next, i)
+      }
+    }
+  }, movie.name = "fpc.gif"))
+if (file.exists("assets/img/fpc.gif")) file.remove("assets/img/fpc.gif")
+file.rename("fpc.gif", "assets/img/fpc.gif")
+```
+
+--- &vcenter .largecontent
+
+## DBSCAN
+
+- 資料間的距離
+- Reachability distance（判斷有沒有連接）
+- Reachability minimum number of points （判斷是不是雜訊）
+
+--- &fullimg `r bg("fpc.gif")`
+
+--- &vcenter .largecontent
+
+## 分群總結
+
+- 分群就是:
+    - 定義資料間的距離（Similarity）
+    - 套用分群演算法
+
+--- &vcenter .largecontent
+
+## 分群比較
+
+```{r compare-clustering, fig.width = 14, fig.height = 7, cache = TRUE}
+op <- par(mar = rep(0, 4))
+layout(matrix(1:9, ncol = 3))
+plot2 <- function(x, col) {
+  plot(x, col = col, type = "p", xaxt = "n", yaxt = "n")
+}
+plot3 <- function(text) {
+  plot(1, 1, type = "n", xaxt = "n", yaxt = "n")
+  text(1, 1, text, cex = 2.5)
+}
+x1 <- local({
+  n <- 500
+  retval1 <- 
+    runif(n, 0, 2*pi) %>%
+    Map(f = function(x) c(sin(x), cos(x))) %>%
+    do.call(what = rbind) 
+  retval1 <- retval1 + rnorm(2 * n, 0, 0.1)
+  retval2 <- 
+    runif(n, 0, 2*pi) %>%
+    Map(f = function(x) 2 * c(sin(x), cos(x))) %>%
+    do.call(what = rbind) 
+  retval2 <- retval2 + rnorm(2 * n, 0, 0.1)
+  rbind(retval1, retval2)
+})
+# x1.col <- rep(1:2, each = nrow(x1) / 2)
+# plot2(x1, col = x1.col)
+x2 <- local({
+  rbind(
+    matrix(rnorm(200, 0, 0.1), ncol = 2),
+    matrix(rnorm(200, 1, 0.1), ncol = 2),
+    matrix(rnorm(200, 2, 0.1), ncol = 2)
+  )
+})
+# x2.col <- rep(1:3, each = 100)
+# plot2(x2, col = x2.col)
+
+plot3("Hierarchical Clustering")
+cl.h1 <- hclust(dist(x1))
+plot2(x1, col = cutree(cl.h1, 2))
+cl.h2 <- hclust(dist(x2))
+plot2(x2, col = cutree(cl.h2, 3))
+
+plot3("Center-based Clustering")
+cl.k1 <- kmeans(x1, centers = 2)
+plot2(x1, col = cl.k1$cluster)
+points(cl.k1$centers, pch = 17, col = 1:2, cex = 4)
+cl.k2 <- kmeans(x2, centers = 3)
+plot2(x2, col = cl.k2$cluster)
+points(cl.k2$centers, pch = 17, col = 1:3, cex = 4)
+
+plot3("Density-based Clustering")
+cl.d1 <- dbscan(x1, 0.3, MinPts = 3)
+plot2(x1, col = cl.d1$cluster)
+cl.d2 <- dbscan(x2, 0.3)
+plot2(x2, col = cl.d2$cluster)
+invisible(dev.off())
+par(op)
+```
+
+--- &vcenter .largecontent
+
+## 練習
+
+- 請完成RDataMining-02-Clustering
+
+--- .dark .segue
+
+## Similarity and Classification
+
+--- &vcenter .largecontent
+
+## Classification
+
+- Training Datset:
+    - 每個資料點均有： 屬性 $X$, 標籤（類別型變數） $Y$
+- Testing Dataset: 
+    - 在僅觀察到 $X$ 的狀態下去預測 $Y$
+- Logistic Regression / SVM / Decision Tree / Gradient Boosted Decision Tree...
+
+--- &vcenter .largecontent
+
+## Nearest-Neighborhood
+
+- 給一筆Testing data，找與它最近的Training data（鄰居）
+- 用鄰居的類別猜測Testing data的類別
+
+```{r knn}
+set.seed(1)
+.i <- sample(seq_len(150), 100) %>% sort()
+iris.train <- iris[.i,]
+iris.test <- iris[setdiff(1:150, .i),]
+plot(Sepal.Width ~ Sepal.Length, iris, type = "n")
+points(Sepal.Width ~ Sepal.Length, iris.train, pch = as.integer(iris.train$Species))
+points(Sepal.Width ~ Sepal.Length, iris.test[1,], pch = 16, cex = 2, col = 2)
+points(Sepal.Width ~ Sepal.Length, iris.test[19,], pch = 16, cex = 2, col = 2)
+points(Sepal.Width ~ Sepal.Length, iris.test[50,], pch = 16, cex = 2, col = 2)
+```
+
+--- &vcenter .largecontent
+
+## K Nearest-Neighborhood (k-NN)
+
+- 給一筆Testing data，找與它最近的前K個 Training data（鄰居）
+- 用鄰居的類別中，出現次數最多的類別猜測Testing data的類別
+
+--- &fullimg `r bg("279px-KnnClassification.png")`
+
+--- &vcenter .largecontent
+
+## k-NN 常用於評量Similarity
+
+- k-NN 沒有太多的假設
+    - 物以類聚
+    - Similarity
+- k-NN 的效果和Similarity 的挑選很關鍵
+- <http://www.cs.ucr.edu/~eamonn/time_series_data/>
+
+--- &vcenter .largecontent
+
+## 練習
+
+- 請完成RDataMining-03-Classification
+
+--- .dark .segue
+
+## Text Mining
+
+--- &vcenter .largecontent
+
+## 文字資料範例：ptt 笨版文章
+
+```{r stupid-example}
+dir("ptt-StupidClown/", ".*txt$", full.names = TRUE)[5] %>%
+  readLines() %>%
+  head(20) %>%
+  cat(sep = "\n")
+```
+
+--- &vcenter .largecontent
+
+## 文字資料的特色
+
+- 容易獲取、俯拾即是
+- 非結構化、長短不一、沒有明顯規律
+    - 挖掘規律是個挑戰
+    - 由各種字彙組成
+    - 常用的資料分析技術不容易套用在文字資料上
+    - 整理資料的挑戰較高
+
+--- &vcenter .largecontent
+
+## 文字資料的結構化
+
+- 找出方法將非結構化的文章轉變成結構化的資料
+- 後續可針對各種應用問題，與其他ML或DM方法結合
+
+--- &vcenter .largecontent
+
+## 文字資料的清理
+
+- 移除不必要的字元，如空白、標點符號
+- 統一大小寫
+- 斷詞
+    - 英文資料使用空白做切割
+    - 中文資料可以使用Open Source斷詞引擎搭配詞庫
+        - [g0v 萌典](https://www.moedict.tw/about.html)
+
+--- &vcenter .largecontent
+
+## Term Document Matrix (TDM)
+
+- 將文字資料在斷詞後，轉換為結構化資料的方式
+- 以文章為單位
+    - 每篇文章是一筆資料
+- 將文章中包含的詞彙當成屬性
+    - 運用大量布林屬性來標註文章中有沒有包含特定的詞彙
+
+--- &vcenter .largecontent
+
+## Feature Hashing
+
+- 一種加速TDM處理效能的技巧
+    - TDM 需要建立：  字彙 ==> 屬性位置 的對應表
+    - Feature Hashing 運用Hashing Algorithm來做對應
+- 喪失對屬性的解釋力
+- `r fig("300px-Hash_table_4_1_1_0_0_1_0_LL.png")`
+
+--- &vcenter .largecontent
+
+## 範例：Large Movie Review Dataset
+
+- 50000 條關於電影的評論，來源： [IMDB](http://www.imdb.com)
+- 一個電影最多不超過 30 reviews
+- 將評論標記為「正面」與「負面」
+    - 正負面是依據使用者的評分決定：分數小於等於4時是負面，其餘的是正面（滿分十分）
+    - 50% 正面的評論，50% 負面的評論
+- 這個資料可以自[Kaggle](https://www.kaggle.com/c/word2vec-nlp-tutorial)上下載
+
+--- &vcenter .largecontent
+
+## TDM
+
+- `r fig("TDM.png")`
+
+--- &vcenter .largecontent
+
+## Sentiment Analysis via R, FeatureHashing and XGBoost
+
+- 文章網址：<https://cran.r-project.org/web/packages/FeatureHashing/vignettes/SentimentAnalysis.html>
+- 運用文章中介紹的技巧搭配Machine Learning套件，即可達到Benchmark的準確度
+
+--- &vcenter .largecontent
+
+## n-gram
+
+- TDM 是標記字彙有無在文章之中
+- n-gram 是將相鄰的n個字彙視為一個字彙
+
+--- &vcenter .largecontent
+
+## n-gram 範例
+
+- `剛剛手上拿著手機在回人FB訊息回到一半，突然被我媽叫離開原本的位置，我媽找完我沒事後就忘記手機放在哪裡了`
+- 斷詞：`剛剛  手上  拿  著  手機  在  回人  FB  訊息  回到  一半  突然  被  我媽  叫  離開  原本  的  位置  我媽  找  完  我  沒事  後  就  忘記  手機  放在  哪裡  了`
+- TDM: 
+
+```{r n-gram-exp1}
+x <- strsplit("剛剛  手上  拿  著  手機  在  回人  FB  訊息  回到  一半  突然  被  我媽  叫  離開  原本  的  位置  我媽  找  完  我  沒事  後  就  忘記  手機  放在  哪裡  了", "  ")[[1]]
+df <- matrix(1, ncol = 8)
+colnames(df) <- head(x, 8)
+kable(df)
+```
+
+--- &vcenter .largecontent
+
+## n-gram 範例
+
+- 斷詞：`剛剛  手上  拿  著  手機  在  回人  FB  訊息  回到  一半  突然  被  我媽  叫  離開  原本  的  位置  我媽  找  完  我  沒事  後  就  忘記  手機  放在  哪裡  了`
+- 2-gram： `剛剛+手上  手上+拿  拿+著  著+手機  手機+在  在+回人  回人+FB  FB+訊息  訊息+回到  回到+一半  一半+突然  突然+被  被+我媽  我媽+叫  叫+離開  離開+原本  原本+的  的+位置  位置+我媽  我媽+找  找+完  完+我  我+沒事  沒事+後  後+就  就+忘記  忘記+手機  手機+放在  放在+哪裡  哪裡+了`
+- TDM: 
+
+```{r n-gram-exp2}
+x2 <- 
+  cbind(head(x, -1), tail(x, -1)) %>% 
+  apply(1, function(x) paste(x, collapse = "+"))
+df <- matrix(1, ncol = 8)
+colnames(df) <- head(x2, 8)
+kable(df)
+```
+
+--- &vcenter .largecontent
+
+## 練習
+
+- 請完成RDataMining-04-Text-Mining
+
+--- &vcenter .largecontent
+
+## Q&A
+

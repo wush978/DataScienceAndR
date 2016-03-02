@@ -1,4 +1,4 @@
-library(XML)
+library(xml2)
 library(RCurl)
 library(httr)
 
@@ -27,6 +27,7 @@ data <- unlist(data)
 
 get_doc <- function(article_url){
   name <- strsplit(article_url, '/')[[1]][4]
+  if (!dir.exists("ptt-StupidClown")) dir.create("ptt-StupidClown")
   dst <- file.path("ptt-StupidClown", gsub('html', 'txt', name))
   is.done <- file.exists(dst)
   if (is.done) {
@@ -37,8 +38,9 @@ get_doc <- function(article_url){
     Sys.sleep(0.1)
     stop_for_status(response)
     doc <- content(response, "parsed")
-    main.content <- xpathSApply(doc, "//div[@id='main-content']", xmlValue)
-    write(main.content, dst)
+    xml_find_all(doc, "//div[@id='main-content']") %>%
+      sapply(xml_text) %>%
+      write(file = dst)
   }
 }
 
@@ -65,7 +67,7 @@ d.corpus <- tm_map(d.corpus, content_transformer(function(word) {
 d.corpus <- tm_map(d.corpus, content_transformer(function(x) {
   cutter <= x
 }))
-myStopWords <- c(stopwordsCN(), "編輯", "時間", "標題", "發信", "實業", "作者")
+myStopWords <- c(stopwordsCN(), "編輯", "??????", "�?�?", "??�信", "實業", "�????")
 d.corpus <- tm_map(d.corpus, removeWords, myStopWords)
 tdm <- TermDocumentMatrix(d.corpus, control = list(wordLengths = c(2, Inf)))
 inspect(tdm[1:10, 1:2])
@@ -78,4 +80,4 @@ wordcloud(d$word, d$freq, min.freq = 10, random.order = F, ordered.colors = F,
 d.dtm <- DocumentTermMatrix(d.corpus, control = list(wordLengths = c(2, Inf)))
 inspect(d.dtm[1:10, 1:2])
 findFreqTerms(d.dtm, 30)
-findAssocs(d.dtm, "同學", 0.5)
+findAssocs(d.dtm, "???�?", 0.5)
