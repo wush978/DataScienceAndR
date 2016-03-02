@@ -19,3 +19,7 @@ test_script:
 
 on_failure:
   - travis-tool.sh dump_logs
+
+environment:
+  global:
+    R_VERSION: stable
