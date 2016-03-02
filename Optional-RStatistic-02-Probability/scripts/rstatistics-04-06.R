@@ -16,7 +16,7 @@ stopifnot(class(X2.sample) == "numeric")
 stopifnot(length(X2.sample) == 10000)
 
 X3.sample <- sapply(1:10000, function(i) {
-  # R從population.Kinmen中抽出20個樣本
+  # R從population.Kinmen中抽出100個樣本
   x <- sample(x = population.Kinmen, size = <請填寫你的程式碼>)
   # 請計算樣本的平均數
 })

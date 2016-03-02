@@ -14,4 +14,4 @@ answer_02 <- local({
   step(m1, trace = 0)
 })
 stopifnot(class(answer_02) == c("glm", "lm"))
-stopifnot(logloss(df.test$Class == "good", predict(answer_02, df.test, type = "response")) < 26)
+stopifnot(logloss(df.test$Class == "good", predict(answer_02, df.test, type = "response")) < 24.5)

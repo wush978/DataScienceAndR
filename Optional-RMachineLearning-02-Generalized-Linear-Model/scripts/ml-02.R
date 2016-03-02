@@ -13,6 +13,6 @@ answer_02 <- local({
   # 請填寫你的程式碼
 })
 stopifnot(class(answer_02) == c("glm", "lm"))
-stopifnot(logloss(df.test$Class == "good", predict(answer_02, df.test, type = "response")) < 26)
+stopifnot(logloss(df.test$Class == "good", predict(answer_02, df.test, type = "response")) < 24.5)
 
 # 完成後請存檔並回到console輸入`submit()`
