@@ -86,6 +86,17 @@ assign("val_is", function(value) {
   })
 }, envir = globalenv())
 
+assign("stop_if_not", function(f) {
+  tryCatch({
+    e <- get("e", parent.frame())
+    result <- f(e$val)
+    isTRUE(result)
+  }, error = function(e) {
+    message(conditionMessage(e))
+    FALSE
+  })
+}, envir = globalenv())
+
 assign("test_all", function(...) {
   tryCatch({
     e <- get("e", parent.frame())

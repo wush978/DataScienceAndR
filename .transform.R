@@ -34,6 +34,7 @@ transform_all <- function() {
   tryCatch({
     lapply(course_list, function(path) {
       swirlify::set_lesson(path, FALSE, TRUE)
+      cat(sprintf("%s\n", path))
       suppressWarnings(transform())
     })
   }, finally = {
