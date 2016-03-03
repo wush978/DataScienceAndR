@@ -51,8 +51,8 @@
 - Class : cmd_question
   Output: 請同學輸入：`?"transactions-class"`來打開transactions的說明文件。這裡因為文字中包含
     `-`這個符號，所以要用雙引號。
-  CorrectAnswer: ?"trandactions-class"
-  AnswerTests: omnitest('?"trandactions-class"')
+  CorrectAnswer: ?"transactions-class"
+  AnswerTests: omnitest('?"transactions-class"')
 
 - Class : mult_question
   Output: 請問transactions物件預設「不能」從哪些物件轉換而來？請參考Details章節作答。
