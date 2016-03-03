@@ -110,11 +110,6 @@
     根據說明文件，我們只要輸入：`knn(X.train, X.test, y.train, k = 1)`
     即可取得1NN的計算結果。請同學試試看。
 
-- Class: cmd_question
-  Output: |
-    根據說明文件，我們只要輸入：`knn(X.train, X.test, y.train, k = 1)`
-    即可取得1NN的計算結果。請同學試試看。
-
 - Class: text
   Output: |
     以上就是在R 中計算kNN演算法的方式。
