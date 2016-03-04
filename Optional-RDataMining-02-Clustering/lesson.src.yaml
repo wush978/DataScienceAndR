@@ -173,12 +173,12 @@
   CorrectAnswer: cl4$cluster
   AnswerTests: omnitest("cl4$cluster")
 
-- Class : text
+- Class : mult_question
   Output: 除了數字1, 2, 和3 之外，同學還會看到數字0 。在dbscan的輸出中，0 的意義是？
-    1) 一種cluster 2) 雜訊。請同學依照說明文件中的解釋作答。
-  AnswerChoices: 1;2
-  CorrectAnswer: 2
-  AnswerTests: omnitest(correctVal = "2")
+    A) 一種cluster B) 雜訊。請同學依照說明文件中的解釋作答。
+  AnswerChoices: A;B
+  CorrectAnswer: B
+  AnswerTests: omnitest(correctVal = "B")
 
 - Class : script
   Output: 我們對分群演算法的使用就介紹就到這了。最後請同學完成一個練習，
