@@ -94,7 +94,7 @@ ps. 如果你之前有進行過swirl的課程，swirl會出現下圖的選項詢
 
 ## 課程筆記
 
-以下連結記載swirl中的課程內容(sha-hash: 1d9d0855 版本)
+以下連結記載swirl中的課程內容(sha-hash: 50dc3725 版本)
 
 - [00-Hello-DataScienceAndR](note/00-Hello-DataScienceAndR.html)
 - [01-RBasic-01-Introduction](note/01-RBasic-01-Introduction.html)
@@ -114,24 +114,8 @@ ps. 如果你之前有進行過swirl的課程，swirl會出現下圖的選項詢
 - [03-RVisualization-02-Multiple-Variables-Visualization](note/03-RVisualization-02-Multiple-Variables-Visualization.html)
 - [03-RVisualization-03-ggplot2](note/03-RVisualization-03-ggplot2.html)
 - [03-RVisualization-04-Javascript-And-Maps](note/03-RVisualization-04-Javascript-And-Maps.html)
-- [Optional-RDataMining-01-Association-Rule](note/Optional-RDataMining-01-Association-Rule.html)
-- [Optional-RDataMining-02-Clustering](note/Optional-RDataMining-02-Clustering.html)
-- [Optional-RDataMining-03-Classification](note/Optional-RDataMining-03-Classification.html)
-- [Optional-RDataMining-04-Text-Mining](note/Optional-RDataMining-04-Text-Mining.html)
-- [Optional-RMachineLearning-01-Linear-Model](note/Optional-RMachineLearning-01-Linear-Model.html)
-- [Optional-RMachineLearning-02-Generalized-Linear-Model](note/Optional-RMachineLearning-02-Generalized-Linear-Model.html)
-- [Optional-RMachineLearning-03-Regularization](note/Optional-RMachineLearning-03-Regularization.html)
-- [Optional-RMachineLearning-04-Support-Vector-Machine](note/Optional-RMachineLearning-04-Support-Vector-Machine.html)
-- [Optional-RMachineLearning-05-Decision-Tree](note/Optional-RMachineLearning-05-Decision-Tree.html)
-- [Optional-RMachineLearning-06-Gradient-Boosted-Decision-Tree](note/Optional-RMachineLearning-06-Gradient-Boosted-Decision-Tree.html)
-- [Optional-RMachineLearning-07-Challenge](note/Optional-RMachineLearning-07-Challenge.html)
 - [Optional-RProgramming-01-Loop-And-Condition](note/Optional-RProgramming-01-Loop-And-Condition.html)
 - [Optional-RProgramming-02-Function](note/Optional-RProgramming-02-Function.html)
-- [Optional-RStatistic-01-Descriptive-Statistics](note/Optional-RStatistic-01-Descriptive-Statistics.html)
-- [Optional-RStatistic-02-Probability](note/Optional-RStatistic-02-Probability.html)
-- [Optional-RStatistic-03-Hypothesis-Testing](note/Optional-RStatistic-03-Hypothesis-Testing.html)
-- [Optional-RStatistic-04-Confidence-Interval](note/Optional-RStatistic-04-Confidence-Interval.html)
-- [Optional-RStatistic-05-Statistical-Modeling](note/Optional-RStatistic-05-Statistical-Modeling.html)
 - [Project-ROpenData-DataTaipei](note/Project-ROpenData-DataTaipei.html)
 
 ## 課程投影片
