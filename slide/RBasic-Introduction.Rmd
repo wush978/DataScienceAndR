@@ -44,7 +44,7 @@ sessionInfo() %>% capture.output %>% cat(file = "sessionInfo.log", sep = "\n")
 
 --- &vcenter .largecontent
 
-## 講師自介：吳齊軒 Wush Wu
+## Wush Wu
 
 - 學經歷
     - 國立台灣大學電機工程學研究所博士生

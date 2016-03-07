@@ -94,7 +94,7 @@ ps. 如果你之前有進行過swirl的課程，swirl會出現下圖的選項詢
 
 ## 課程筆記
 
-以下連結記載swirl中的課程內容(sha-hash: 50dc3725 版本)
+以下連結記載swirl中的課程內容(sha-hash: e78c8306 版本)
 
 - [00-Hello-DataScienceAndR](note/00-Hello-DataScienceAndR.html)
 - [01-RBasic-01-Introduction](note/01-RBasic-01-Introduction.html)
@@ -126,9 +126,6 @@ ps. 如果你之前有進行過swirl的課程，swirl會出現下圖的選項詢
 - [RBasic-DataStructure](slide/RBasic-DataStructure.html)
 - [RDataEngineer-Introduction](slide/RDataEngineer-Introduction.html)
 - [RVisualization-Introduction](slide/RVisualization-Introduction.html)
-- [Statistics](slide/Statistics.html)
-- [Machine Learning](slide/MachineLearning.html)
-- [Data Mining](slide/DataMining.html)
 
 ## License
 

@@ -106,9 +106,6 @@ ps. 如果你之前有進行過swirl的課程，swirl會出現下圖的選項詢
 - [RBasic-DataStructure](slide/RBasic-DataStructure.html)
 - [RDataEngineer-Introduction](slide/RDataEngineer-Introduction.html)
 - [RVisualization-Introduction](slide/RVisualization-Introduction.html)
-- [Statistics](slide/Statistics.html)
-- [Machine Learning](slide/MachineLearning.html)
-- [Data Mining](slide/DataMining.html)
 
 ## License
 
