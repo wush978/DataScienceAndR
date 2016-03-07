@@ -34,9 +34,14 @@
     變數已經受到污染，導致連`skip()`都無法過關時，請同學輸入：`swirl()`
     進行接關，甚至是重新開啟R 後載入swirl套件後輸入`swirl()`接關。如果
     仍然無法排除，請求助。
-- Class: cmd_question 請同學在console中輸入：`chat()`。同學必需要輸入一樣的指令才會 過關。這個指令則能讓同學打開聊天室的網頁。只要註冊github帳戶
+- Class: cmd_question
+  Output: |
+    請同學在console中輸入：`chat()`。同學必需要輸入一樣的指令才會
+    過關。這個指令則能讓同學打開聊天室的網頁。只要註冊github帳戶
     （<https://github.com/join>）之後，就可以在這個聊天室之中求救。
   CorrectAnswer: chat()
+  AnswerTests: omnitest('chat()')
+  Hint: chat()
 - Class: script
   Output: |
     請同學確認，Rstudio是否有打開一個名稱為「test-script.R」的檔案，
