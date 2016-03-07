@@ -41,6 +41,7 @@
     仍然無法排除，請求助。
 
 - Class: cmd_question
+  Output: |
     請同學在console中輸入：`chat()`。同學必需要輸入一樣的指令才會
     過關。這個指令則能讓同學打開聊天室的網頁。只要註冊github帳戶
     （<https://github.com/join>）之後，就可以在這個聊天室之中求救。
