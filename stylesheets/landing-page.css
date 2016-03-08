@@ -31,7 +31,7 @@ h6 {
     padding-bottom: 50px;
     text-align: center;
     color: #f8f8f8;
-    background: url(http://i.imgur.com/C6qXFek.jpg) no-repeat center center;
+    background: url(../img/intro-bg.jpg) no-repeat center center;
     background-size: cover;
 }
 
@@ -112,8 +112,8 @@ h6 {
 .banner {
     padding: 100px 0;
     color: #f8f8f8;
-    background-color: black;
-    background-size: 100% 100%;
+    background: url(../img/banner-bg.jpg) no-repeat center center;
+    background-size: cover;
 }
 
 .banner h2 {
