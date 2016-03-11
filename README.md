@@ -8,9 +8,35 @@
 <script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 <script src="http://momentjs.com/downloads/moment-with-locales.min.js" async defer></script>
 
+<script>
+window.onload =function(){
+  $.ajax({
+    url:"http://api2.datascienceandr.org:3000/api/getManyRecords",
+    type:"POST",
+    data:{num:5},
+    dataType:"json",
+    success: function(data){
+      console.log(data);
+      data.forEach(function(record){
+        m = moment(record.created_at);
+        $("#records").append(
+          "<li>" + record.user_id + " 正在學習 " + record.course + " ( " + m.fromNow() + " ) </li>"
+          );
+      })
+    }
+  });
+}
+</script>
+
 測試結果： Linux ![](https://travis-ci.org/wush978/DataScienceAndR.svg?branch=course) Windows [![Build status](https://ci.appveyor.com/api/projects/status/tej2qnpdxwy2r5lp/branch/course?svg=true)](https://ci.appveyor.com/project/wush978/datascienceandr/branch/course)
 
 聊天室： [![Gitter](https://badges.gitter.im/wush978/DataScienceAndR.svg)](https://gitter.im/wush978/DataScienceAndR?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+
+## 用過的人都說好棒棒
+
+<ul id="records">
+
+</ul>
 
 ## 簡介
 
