@@ -1,5 +1,13 @@
 <!-- title: R 語言翻轉教室 -->
 
+<script>
+  ((window.gitter = {}).chat = {}).options = {
+    room: 'wush978/DataScienceAndR'
+  };
+</script>
+<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
+<script src="http://momentjs.com/downloads/moment-with-locales.min.js" async defer></script>
+
 測試結果： Linux ![](https://travis-ci.org/wush978/DataScienceAndR.svg?branch=course) Windows [![Build status](https://ci.appveyor.com/api/projects/status/tej2qnpdxwy2r5lp/branch/course?svg=true)](https://ci.appveyor.com/project/wush978/datascienceandr/branch/course)
 
 聊天室： [![Gitter](https://badges.gitter.im/wush978/DataScienceAndR.svg)](https://gitter.im/wush978/DataScienceAndR?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
