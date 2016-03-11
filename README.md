@@ -20,9 +20,12 @@ function showRegistrationRecords(){
       console.log(data);
       data.forEach(function(record){
         m = moment(record.created_at);
-        $("#records").append(
-          "<li>" + record.user_id + " 正在學習 " + record.course + " ( " + m.fromNow() + " ) </li>"
-          );
+        if (record.type == 0) {
+          li = "<li>" + record.user_id  + "在" + m.fromNow() + "進入了" + record.course  + "</li>"
+        } else {
+          li = "<li>" + record.user_id  + "在" + m.fromNow() + "完成了" + record.course  + "</li>"
+        }
+        $("#records").append(li);
       });
     }
   });
@@ -30,7 +33,8 @@ function showRegistrationRecords(){
 }
 
 window.onload =function(){
-  window.setInterval(showRegistrationRecords, 5000);
+  moment.locale("zh-tw");
+  showRegistrationRecords();
 }
 </script>
 
