@@ -1,0 +1,201 @@
+id,sex,race,ses,schtyp,prog,read,write,math,science,socst
+70,male,White,1,public,general,57,52,41,47,57
+121,female,White,2,public,vocational,68,59,53,63,61
+86,male,White,3,public,general,44,33,54,58,31
+141,male,White,3,public,vocational,63,44,47,53,56
+172,male,White,2,public,academic,47,52,57,53,61
+113,male,White,2,public,academic,44,52,51,63,61
+50,male,African American,2,public,general,50,59,42,53,61
+11,male,Hispanic,2,public,academic,34,46,45,39,36
+84,male,White,2,public,general,63,57,54,58,51
+48,male,African American,2,public,academic,57,-99,52,50,51
+75,male,White,2,public,vocational,60,46,51,53,61
+60,male,White,2,public,academic,57,65,51,63,61
+95,male,White,3,public,academic,73,60,71,61,71
+104,male,White,3,public,academic,54,63,57,55,46
+38,male,African American,1,public,academic,45,57,50,31,56
+115,male,White,1,public,general,42,49,43,50,56
+76,male,White,3,public,academic,47,52,51,50,56
+195,male,White,2,private,general,57,57,60,58,56
+114,male,White,3,public,academic,68,65,62,55,61
+85,male,White,2,public,general,55,39,57,53,46
+167,male,White,2,public,general,63,-99,35,66,41
+143,male,White,2,public,vocational,63,63,75,72,66
+41,male,African American,2,public,academic,50,40,45,55,56
+20,male,Hispanic,3,public,academic,60,52,57,61,61
+12,male,Hispanic,2,public,vocational,37,44,45,39,46
+53,male,African American,2,public,vocational,34,37,46,39,31
+154,male,White,3,public,academic,65,65,66,61,66
+178,male,White,2,private,vocational,47,57,57,58,46
+196,male,White,3,private,academic,44,38,49,39,46
+29,male,Asian,1,public,general,52,44,49,55,41
+126,male,White,2,public,general,42,31,57,47,51
+103,male,White,3,public,academic,76,52,64,64,61
+192,male,White,3,private,academic,65,67,63,66,71
+150,male,White,2,public,vocational,42,41,57,72,31
+199,male,White,3,private,academic,52,59,50,61,61
+144,male,White,3,public,general,60,65,58,61,66
+200,male,White,2,private,academic,68,54,75,66,66
+80,male,White,3,public,academic,65,62,68,66,66
+16,male,Hispanic,1,public,vocational,47,31,44,36,36
+153,male,White,2,public,vocational,39,31,40,39,51
+176,male,White,2,private,academic,47,47,41,42,51
+177,male,White,2,private,academic,55,59,62,58,51
+168,male,White,2,public,academic,52,54,57,55,51
+40,male,African American,1,public,general,42,41,43,50,41
+62,male,White,3,public,general,65,65,48,63,66
+169,male,White,1,public,general,55,59,63,69,46
+49,male,African American,3,public,vocational,50,40,39,49,47
+136,male,White,2,public,academic,65,59,70,63,51
+189,male,White,2,private,academic,47,59,63,53,46
+7,male,Hispanic,2,public,academic,57,54,59,47,51
+27,male,Asian,2,public,academic,53,61,61,57,56
+128,male,White,3,public,academic,39,33,38,47,41
+21,male,Hispanic,2,public,general,44,44,61,50,46
+183,male,White,2,private,academic,63,59,49,55,71
+132,male,White,2,public,academic,73,62,73,69,66
+15,male,Hispanic,3,public,vocational,39,39,44,26,42
+67,male,White,1,public,vocational,37,37,42,33,32
+22,male,Hispanic,2,public,vocational,42,39,39,56,46
+185,male,White,2,private,academic,63,57,55,58,41
+9,male,Hispanic,2,public,vocational,48,49,52,44,51
+181,male,White,2,private,academic,50,46,45,58,61
+170,male,White,3,public,academic,47,62,61,69,66
+134,male,White,1,public,general,44,44,39,34,46
+108,male,White,2,public,general,34,-99,41,36,36
+197,male,White,3,private,academic,50,42,50,36,61
+140,male,White,2,public,vocational,44,41,40,50,26
+171,male,White,2,public,academic,60,54,60,55,66
+107,male,White,1,public,vocational,47,39,47,42,26
+81,male,White,1,public,academic,63,43,59,65,44
+18,male,Hispanic,2,public,vocational,50,33,49,44,36
+155,male,White,2,public,general,44,44,46,39,51
+97,male,White,3,public,academic,60,54,58,58,61
+68,male,White,2,public,academic,73,67,71,63,66
+157,male,White,2,public,general,68,59,58,74,66
+56,male,White,2,public,vocational,55,45,46,58,51
+5,male,Hispanic,1,public,academic,47,40,43,45,31
+159,male,White,3,public,academic,55,61,54,49,61
+123,male,White,3,public,general,68,59,56,63,66
+164,male,White,2,public,vocational,31,36,46,39,46
+14,male,Hispanic,3,public,academic,47,-99,54,42,56
+127,male,White,3,public,academic,63,59,57,55,56
+165,male,White,1,public,vocational,36,49,54,61,36
+174,male,White,2,private,academic,68,59,71,66,56
+3,male,Hispanic,1,public,academic,63,65,48,63,56
+58,male,White,2,public,vocational,55,41,40,44,41
+146,male,White,3,public,academic,55,62,64,63,66
+102,male,White,3,public,academic,52,41,51,53,56
+117,male,White,3,public,vocational,34,49,39,42,56
+133,male,White,2,public,vocational,50,31,40,34,31
+94,male,White,3,public,academic,55,49,61,61,56
+24,male,Asian,2,public,academic,52,62,66,47,46
+149,male,White,1,public,general,63,49,49,66,46
+82,female,White,3,public,academic,68,62,65,69,61
+8,female,Hispanic,1,public,academic,39,44,52,44,48
+129,female,White,1,public,general,44,44,46,47,51
+173,female,White,1,public,general,50,62,61,63,51
+57,female,White,2,public,academic,71,65,72,66,56
+100,female,White,3,public,academic,63,65,71,69,71
+1,female,Hispanic,1,public,vocational,34,44,40,39,41
+194,female,White,3,private,academic,63,63,69,61,61
+88,female,White,3,public,academic,68,-99,64,69,66
+99,female,White,3,public,general,47,59,56,66,61
+47,female,African American,1,public,academic,47,46,49,33,41
+120,female,White,3,public,academic,63,52,54,50,51
+166,female,White,2,public,academic,52,59,53,61,51
+65,female,White,2,public,academic,55,54,66,42,56
+101,female,White,3,public,academic,60,62,67,50,56
+89,female,White,1,public,vocational,35,35,40,51,33
+54,female,African American,1,private,general,47,54,46,50,56
+180,female,White,3,private,academic,71,65,69,58,71
+162,female,White,2,public,vocational,57,52,40,61,56
+4,female,Hispanic,1,public,academic,44,50,41,39,51
+131,female,White,3,public,academic,65,59,57,46,66
+125,female,White,1,public,academic,68,65,58,59,56
+34,female,Hispanic,3,private,academic,73,61,57,55,66
+106,female,White,2,public,vocational,36,44,37,42,41
+130,female,White,3,public,general,43,54,55,55,46
+93,female,White,3,public,academic,73,-99,62,58,66
+163,female,White,1,public,academic,52,57,64,58,56
+37,female,African American,1,public,vocational,41,47,40,39,51
+35,female,Hispanic,1,private,general,60,-99,50,50,51
+87,female,White,2,public,general,50,52,46,50,56
+73,female,White,2,public,academic,50,52,53,39,56
+151,female,White,2,public,vocational,47,46,52,48,46
+44,female,African American,1,public,vocational,47,62,45,34,46
+152,female,White,3,public,academic,55,57,56,58,61
+105,female,White,2,public,academic,50,41,45,44,56
+28,female,Asian,2,public,general,39,53,54,50,41
+91,female,White,3,public,vocational,50,49,56,47,46
+45,female,African American,1,public,vocational,34,35,41,29,26
+116,female,White,2,public,academic,57,59,54,50,56
+33,female,Asian,1,public,academic,57,65,72,54,56
+66,female,White,2,public,vocational,68,-99,56,50,51
+72,female,White,2,public,vocational,42,54,47,47,46
+77,female,White,1,public,academic,61,59,49,44,66
+61,female,White,3,public,academic,76,-99,60,67,66
+190,female,White,2,private,academic,47,59,54,58,46
+42,female,African American,2,public,vocational,46,52,55,44,56
+2,female,Hispanic,2,public,vocational,39,41,33,42,41
+55,female,African American,2,private,academic,52,49,49,44,61
+19,female,Hispanic,1,public,general,28,46,43,44,51
+90,female,White,3,public,academic,42,54,50,50,52
+142,female,White,2,public,vocational,47,42,52,39,51
+17,female,Hispanic,2,public,academic,47,-99,48,44,41
+122,female,White,2,public,academic,52,59,58,53,66
+191,female,White,3,private,academic,47,52,43,48,61
+83,female,White,2,public,vocational,50,62,41,55,31
+182,female,White,2,private,academic,44,52,43,44,51
+6,female,Hispanic,1,public,academic,47,41,46,40,41
+46,female,African American,1,public,academic,45,55,44,34,41
+43,female,African American,1,public,academic,47,37,43,42,46
+96,female,White,3,public,academic,65,54,61,58,56
+138,female,White,2,public,vocational,43,57,40,50,51
+10,female,Hispanic,2,public,general,47,54,49,53,61
+71,female,White,2,public,general,57,62,56,58,66
+139,female,White,2,public,academic,68,59,61,55,71
+110,female,White,2,public,vocational,52,55,50,54,61
+148,female,White,2,public,vocational,42,57,51,47,61
+109,female,White,2,public,general,42,39,42,42,41
+39,female,African American,3,public,academic,66,67,67,61,66
+147,female,White,1,public,academic,47,62,53,53,61
+74,female,White,2,public,academic,57,50,50,51,58
+198,female,White,3,private,academic,47,61,51,63,31
+161,female,White,1,public,academic,57,62,72,61,61
+112,female,White,2,public,academic,52,59,48,55,61
+69,female,White,1,public,vocational,44,44,40,40,31
+156,female,White,2,public,academic,50,59,53,61,61
+111,female,White,1,public,general,39,54,39,47,36
+186,female,White,2,private,academic,57,62,63,55,41
+98,female,White,1,public,vocational,57,60,51,53,37
+119,female,White,1,public,general,42,57,45,50,43
+13,female,Hispanic,2,public,vocational,47,46,39,47,61
+51,female,African American,3,public,general,42,36,42,31,39
+26,female,Asian,3,public,academic,60,59,62,61,51
+36,female,African American,1,public,general,44,49,44,35,51
+135,female,White,1,public,academic,63,60,65,54,66
+59,female,White,2,public,academic,65,67,63,55,71
+78,female,White,2,public,academic,39,54,54,53,41
+64,female,White,3,public,vocational,50,52,45,58,36
+63,female,White,1,public,general,52,65,60,56,51
+79,female,White,2,public,academic,60,62,49,50,51
+193,female,White,2,private,academic,44,49,48,39,51
+92,female,White,3,public,general,52,67,57,63,61
+160,female,White,2,public,academic,55,65,55,50,61
+32,female,Asian,3,public,vocational,50,67,66,66,56
+23,female,Asian,1,public,academic,65,65,64,58,71
+158,female,White,2,public,general,52,54,55,53,51
+25,female,Asian,2,public,general,47,44,42,42,36
+188,female,White,3,private,academic,63,62,56,55,61
+52,female,African American,1,public,academic,50,46,53,53,66
+124,female,White,1,public,vocational,42,54,41,42,41
+175,female,White,3,private,general,36,57,42,50,41
+184,female,White,2,private,vocational,50,52,53,55,56
+30,female,Asian,3,public,academic,41,59,42,34,51
+179,female,White,2,private,academic,47,65,60,50,56
+31,female,Asian,2,private,general,55,59,52,42,56
+145,female,White,2,public,vocational,42,46,38,36,46
+187,female,White,2,private,general,57,41,57,55,52
+118,female,White,2,public,general,55,62,58,58,61
+137,female,White,3,public,academic,63,65,65,53,61
