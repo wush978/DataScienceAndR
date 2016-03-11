@@ -17,6 +17,13 @@ assign("check_then_install",
        },
        envir = globalenv())
 
+assign("check_then_install_github", 
+       function(pkg_name, pkg_version, ...) {
+         if (!require(pkg_name, character.only = TRUE)) devtools::install_github(...) else {
+         if (packageVersion(pkg_name) < package_version(pkg_version)) devtools::install_github(...)
+         }
+       })
+
 assign(".read.table.big5",
        function(file, header = FALSE, sep = "", ...) {
          info <- l10n_info()
