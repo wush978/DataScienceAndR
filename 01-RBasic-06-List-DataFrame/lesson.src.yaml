@@ -130,9 +130,18 @@
   AnswerTests: omnitest(correctVal = 'a[["id"]]')
   Hint: 提醒同學，`a` 是透過`data.frame(class = "NTU", id = 1:10,scores = matrix(c(80:99),nrow=10,ncol=2 ) )`建立的。
 
-- Class : cmd_question
-  Output: 除了list的語法之外，我們也可以使用類似matrix的語法。舉例來說，我們可以用`a[,1]`選取第一欄。
-    請同學試試看。
+- Class : text
+  Output: 除了list的語法之外，我們也可以使用類似matrix的語法。
+
+- Class: text
+  Output: |
+    舉例來說，`nrow(a)`可以列出a 所包含的列數、`ncol(a)`可以
+    列出a 所包含的欄數、`dim(a)`可以一次列出兩者。這些都和
+    matrix非常類似。
+
+- Class: cmd_question
+  Output: |
+    資料的選取也很類似。我們可以用`a[,1]`選取第一欄。請同學試試看。
 
 - Class : mult_question
   Output: 根據螢幕上的輸出，請問同學`a[,1]`的類別是什麼呢？
@@ -142,7 +151,14 @@
   Hint: 這裡`a[,1]`的效果和`a[[1]]`是一樣的。
 
 - Class : cmd_question
-  Output: 同理，我們也可以用`a[1,2]`來取出第1 列、第2 欄的資料。請同學試試看。
+  Output: |
+    同理，我們也可以用`a[1,2]`來取出第1 列、第2 欄的資料。
+    請同學試試看。
+
+- Class: cmd_question
+  Output: |
+    `colnames(a)`則可以取出a 的欄位名稱。請同學試試看。名稱也可
+    以用於接下來的資料選取中。
 
 - Class : cmd_question
   Output: 欄位的方向，也可以用名字代替。舉例來說，`a[2,"id"]`可以選到第二列第二欄，因為`a[2,]`代表第二列，
@@ -178,7 +194,9 @@
   AnswerTests: omnitest('a[1:2, "id", drop = FALSE]')
 
 - Class : text
-  Output: 從R 顯示在console的輸出結果，同學應該會同意這是一個data.frame。在R 中，console會根據不同的`class`
+  Output: |
+    從R 顯示在console的輸出結果，同學應該會同意這是一個data.frame。
+    在R 中，console會根據不同的`class`
     而用不同的方式呈現輸出結果。
 
 - Class : text

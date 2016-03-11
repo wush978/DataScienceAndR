@@ -2,34 +2,34 @@
 data(CO2)
 
 #' 請問CO2 有多少列？
-answer1 <- <你的程式碼>
+answer1 <- NULL #請將NULL替換成你的程式碼
 
-#' 請問CO2 有多少行(column)？
-answer2 <- <你的程式碼> 
+#' 請問CO2 有多少欄(column)？
+answer2 <- NULL #請將NULL替換成你的程式碼
 
-#' 請問CO2 的各行的名稱為何？
-answer3 <- <你的程式碼>
+#' 請問CO2 的各欄的名稱為何？
+answer3 <- NULL #請將NULL替換成你的程式碼
 
 #' 請問uptake這欄的平均值為多少？
-answer4 <- <你的程式碼>
+answer4 <- NULL #請將NULL替換成你的程式碼
 
 #' CO2 共有很多很多列（answer3）
 #' 請從CO2 中挑出一些列，滿足以下的條件：
-#' 這些列的uptake直，超過全部CO2的uptake值
-#' （`mean(CO2$uptake)`）
+#' 這些列的uptake直，超過全部CO2"平均"的uptake值
+#' （`answer4`）
 #' 
 #'   你可以先取出uptake的向量、接著拿該向量和平均值做比較、把結果的logical vector丟到`[]`的第一個參數
-answer5 <- <你的程式碼>
+answer5 <- NULL #請將NULL替換成你的程式碼
 
 #' 請問Type有多少種類別？
 #' ps. answer6 應該是一個整數
-answer6 <- <你的程式碼>
+answer6 <- NULL #請將NULL替換成你的程式碼
 
 #' 請問當類別為Quebec時，uptake的平均值為多少？
-answer7 <- <你的程式碼>
+answer7 <- NULL #請將NULL替換成你的程式碼
 
 #' 請問當類別為Mississippi時，uptake的平均值為多少？
-answer8 <- <你的程式碼>
+answer8 <- NULL #請將NULL替換成你的程式碼
 
 #' 我們可以利用`model.matrix`來建立一個矩陣。舉例來說：
 #' `model.matrix(~ Type + Treatment + conc, CO2)`可以
@@ -38,14 +38,14 @@ answer8 <- <你的程式碼>
 X <- model.matrix(~ Type + Treatment + conc, CO2)
 
 #' 請取出uptake的值放入y 之中
-y <- <你的程式碼>
+y <- NULL #請將NULL替換成你的程式碼
 
 #' 請利用<https://en.wikipedia.org/wiki/Ordinary_least_squares#Estimation>的公式，利用迴歸的演算法，
 #' 找出beta.hat讓 X %*% beta.hat 很靠近 y
-beta.hat <- <你的程式碼>
+beta.hat <- NULL #請將NULL替換成你的程式碼
 
 #' 請計算X %*% beta.hat 和 y 的correlation（提示：用函數`cor`）
-answer11 <- <你的程式碼>
+answer11 <- NULL #請將NULL替換成你的程式碼
 
 #' answer11 的平方，就是迴歸分析時常提到的：R-squared。
 #' 很多分析師會用這個數據來判斷這個模型好不好。
@@ -60,5 +60,5 @@ g.s <- summary(g)
 #' mode(g.s)顯示它是一個list。
 #' 請找出一個名字，answer12，讓g.s[[answer12]]就是R-squared
 #' 你可以參考help(summary.lm)裡面的說明。
-answer12 <- <你的程式碼>
+answer12 <- NULL #請將NULL替換成你的程式碼
 
