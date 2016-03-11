@@ -8,65 +8,71 @@ stopifnot(argv %in% c("commit", "push"))
 
 test_lesson = function(lesson_dir){
   print(paste("####Begin testing", lesson_dir))
-  .e <- environment(swirl:::any_of_exprs)
-  attach(.e)
-  on.exit(detach(.e))
-  e = new.env()
-  e$path <- lesson_dir
-  e$lesPath <- lesson_dir
-  # Since the initLesson might change working directory, load lesson yaml first before that happens.
-  lesson = yaml.load_file(paste0(lesson_dir,"/lesson.yaml"))
-  stopifnot(lesson[[1]]$Lesson == lesson_dir)
-  
-  for(R_file in c("/../.initCourse.R", "/initLesson.R", "/customTests.R")){
-    R_file_path = paste0(lesson_dir, R_file)
-    if(file.exists(R_file_path)) source(R_file_path,local = e)
-  }
-  
-  for(.i in seq_along(lesson)) {
-    question <- lesson[[.i]]
-    if(question$Class %in% c("cmd_question", "mult_question", "script")) {
-      cat(sprintf("(%d) > %s\n", .i, question$CorrectAnswer))
-      switch(question$Class, 
-        "cmd_question" = {
-          suppressWarnings({
-            e$val <- eval(parse(text=question$CorrectAnswer), envir = e)
-            e$expr <- parse(text = question$CorrectAnswer)[[1]]
-            tryCatch({
-              attach(e)
-              stopifnot(eval(parse(text=question$AnswerTests), envir = e))
-            }, finally = {
-              detach(e)
+  .ls <- ls(envir = globalenv(), all.names = TRUE)
+  tryCatch({
+    .e <- environment(swirl:::any_of_exprs)
+    attach(.e)
+    e = new.env()
+    e$path <- lesson_dir
+    e$lesPath <- lesson_dir
+    # Since the initLesson might change working directory, load lesson yaml first before that happens.
+    lesson = yaml.load_file(paste0(lesson_dir,"/lesson.yaml"))
+    stopifnot(lesson[[1]]$Lesson == lesson_dir)
+    
+    for(R_file in c("/../.initCourse.R", "/initLesson.R", "/customTests.R")){
+      R_file_path = paste0(lesson_dir, R_file)
+      if(file.exists(R_file_path)) source(R_file_path,local = e)
+    }
+    
+    for(.i in seq_along(lesson)) {
+      question <- lesson[[.i]]
+      if(question$Class %in% c("cmd_question", "mult_question", "script")) {
+        cat(sprintf("(%d) > %s\n", .i, question$CorrectAnswer))
+        switch(question$Class, 
+          "cmd_question" = {
+            suppressWarnings({
+              e$val <- eval(parse(text=question$CorrectAnswer), envir = e)
+              e$expr <- parse(text = question$CorrectAnswer)[[1]]
+              tryCatch({
+                attach(e)
+                stopifnot(eval(parse(text=question$AnswerTests), envir = e))
+              }, finally = {
+                detach(e)
+              })
             })
-          })
-          if (grepl("correctVal", question$AnswerTests) && grepl("omnitest", question$AnswerTests)) {
-            # Test if correctVal only compare with character or numeric vector of length 1
-            stopifnot(is.character(e$val) || is.numeric(e$val))
-            if (mode(e$val) == "numeric") stopifnot(length(e$val) == 1)
+            if (grepl("correctVal", question$AnswerTests) && grepl("omnitest", question$AnswerTests)) {
+              # Test if correctVal only compare with character or numeric vector of length 1
+              stopifnot(is.character(e$val) || is.numeric(e$val))
+              if (mode(e$val) == "numeric") stopifnot(length(e$val) == 1)
+            }
+          },
+          "mult_question" = {
+            e$val <- as.character(question$CorrectAnswer)
+            stopifnot(eval(parse(text = question$AnswerTests), envir = e))
+          },
+          "script" = {
+            question$correctScript <- file.path(lesson_dir, "scripts", paste(tools::file_path_sans_ext(question$Script), "-correct.R", sep = ""))
+            if (file.exists(question$correctScript)) {
+              cat("Testing script...\n")
+              file.copy(question$correctScript, e$script_temp_path <- file.path(tempdir(), question$Script), overwrite = TRUE)
+              tryCatch({
+                attach(e)
+                source(question$correctScript, local = globalenv())
+                stopifnot(eval(parse(text = question$AnswerTests), envir = e))
+              }, finally = {
+                detach(e)
+              })
+            }
           }
-        },
-        "mult_question" = {
-          e$val <- as.character(question$CorrectAnswer)
-          stopifnot(eval(parse(text = question$AnswerTests), envir = e))
-        },
-        "script" = {
-          question$correctScript <- file.path(lesson_dir, "scripts", paste(tools::file_path_sans_ext(question$Script), "-correct.R", sep = ""))
-          if (file.exists(question$correctScript)) {
-            cat("Testing script...\n")
-            file.copy(question$correctScript, e$script_temp_path <- file.path(tempdir(), question$Script), overwrite = TRUE)
-            tryCatch({
-              attach(e)
-              source(question$correctScript, local = globalenv())
-              stopifnot(eval(parse(text = question$AnswerTests), envir = e))
-            }, finally = {
-              detach(e)
-            })
-          }
-        }
-      )
-    } 
-  }
-  
+        )
+      } 
+    }
+  }, finally = {
+    detach(.e)
+    .ls2 <- ls(envir = globalenv(), all.names = TRUE)
+    rm(list = setdiff(.ls2, .ls), envir = globalenv())
+    gc()
+  })
   print(paste("-----Testing", lesson_dir, "Done"))
 }
 
