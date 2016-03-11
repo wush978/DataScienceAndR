@@ -35,7 +35,8 @@
 <script src="http://momentjs.com/downloads/moment-with-locales.min.js" async defer></script>
 
 <script>
-window.onload =function(){
+function showRegistrationRecords(){
+  $("#records").empty();
   $.ajax({
     url:"http://api2.datascienceandr.org:3000/api/getManyRecords",
     type:"POST",
@@ -48,9 +49,14 @@ window.onload =function(){
         $("#records").append(
           "<li>" + record.user_id + " 正在學習 " + record.course + " ( " + m.fromNow() + " ) </li>"
           );
-      })
+      });
     }
   });
+
+}
+
+window.onload =function(){
+  window.setInterval(showRegistrationRecords, 5000);
 }
 </script>
 
@@ -60,9 +66,7 @@ window.onload =function(){
 
 <h2 id="1">1. 用過的人都說好棒棒</h2>
 
-<ul id="records">
-
-</ul>
+<div class="well" style="height: 7em;"><ul id="records"></ul></div>
 
 <h2 id="2">2. 簡介</h2>
 
