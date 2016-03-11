@@ -11,27 +11,10 @@
 # can be used for for the purpose, but it also re-evaluates the
 # expression which the user entered, so care must be taken.
 
-test_package_version <- function(pkg_name, pkg_version) {
-  e <- get("e", parent.frame())
-  tryCatch(
-    packageVersion(pkg_name) >= package_version(pkg_version),
-    error = function(e) FALSE)
-}
-
-test_search_path <- function(pkg_name) {
-  tryCatch(
-    length(grep(sprintf("/%s$", pkg_name), searchpaths())) > 0,
-    error = function(e) FALSE)
-}
-
 test_var_value <- function(var_name, expected_value) {
   e <- get("e", parent.frame())
   var <- get(var_name, globalenv())
   isTRUE(all.equal(var, expected_value))
-}
-
-.get_path <- function(fname) {
-  file.path(find.package("swirl", quiet = TRUE), sprintf("Courses/DataScienceAndR/RExample-Power-GDP/%s", fname))
 }
 
 test_generator <- function(user_name, rds_path) {
