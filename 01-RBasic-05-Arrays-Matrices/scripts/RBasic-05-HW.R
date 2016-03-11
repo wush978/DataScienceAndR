@@ -6,19 +6,31 @@ beta <- c(0.5, -1, 4.3)
 #' 我們稱`X[,1]`為x1, `X[,2]`為x2, `X[,3]`為x3
 #' 向量y 的值是 x1 * beta[1] + x2 * beta[2] + x3 * beta[3]
 #' 請用矩陣乘法`%*%`算出向量y
-#' ps. class(y) 應該要是 "matrix"
 #'     dim(y) 應該是 c(10, 1)
-y <- <填寫你的程式碼>
+y <- NULL # 請將NULL替換成你的程式碼
+
+#' 這段敘述協助同學在`submit()`之前先檢查答案的型態對不對
+#' 同學可以在`submit()`之前先跑跑看
+stopifnot(class(y) == "numeric") 
 
 #' epsilon 是一個隨機產生的雜訊向量
 epsilon <- c(-1.24462014500259, 0.146172987456978, 1.56426869006839, -0.856920339050681, 
     -1.15277300953772, 0.717919832604741, -0.270623615316431, -1.66281578024014, 
     -1.15557078461633, -0.730253254897595)
+
 #' 我們讓y 參雜了雜訊
 y <- y + epsilon
+
 #' 假設我們只有看到X和y ，看不到epsilon和beta。根據X 和y ，要如何找出beta?
-#' 這是一個標準的迴歸分析問題。
-#' 請參考<https://en.wikipedia.org/wiki/Ordinary_least_squares#Estimation>裡的公式，
+#' 
+#' 這是一個標準的迴歸分析問題:
+#' 
+#' 在握有X 和Y 等資料的時候，尋找茲料之間的線性關係（即beta）
+#' 
+#' 例如，尋找車速與煞車滑行距離之間的關係
+#' 
+#' 請參考<https://en.wikipedia.org/wiki/Ordinary_least_squares#Estimation>裡的公式：
+#' $(X^T X)^{-1} X^T y$（方程式的圖片版： <http://i.imgur.com/Aykv7W3.png>）
 #' 利用這章學到的矩陣乘法，與線性代數函式，算出beta的估計值
 #' 
 #' 你可以寫很多行的程式碼，但是請把結果存到beta.hat這個變數之中
@@ -26,6 +38,6 @@ y <- y + epsilon
 #'     dim(beta.hat) 應該是 c(3, 1)
 #'     rownames(beta.hat) 應該是 c("x1", "x2", "x3")
 
-beta.hat <- <你的程式碼>
+beta.hat <- NULL # 請將NULL替換成你的程式碼
 
 #' 同學可以比較一下beta.hat和beta，體驗看看迴歸分析的方法，是不是真的有道理。
