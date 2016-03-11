@@ -1,0 +1,11 @@
+power,gdp
+A,A
+B,B
+C,C
+D,D+E
+E,F
+F,G+I
+G,H+J
+H,K+L
+I+J,M+N+P+Q+R+S
+K,O
