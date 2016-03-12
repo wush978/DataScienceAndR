@@ -114,7 +114,7 @@ window.onload =function(){
 或是依照以下的動作快速設定學習環境：
 
 1. 安裝R
-2. 安裝Rstudio(Windows 使用者請安裝Rstudio或自備編輯UTF-8 編碼的程式碼，OS X 與Linux使用者可依據自己喜好決定是否使用Rstudio)
+2. 安裝Rstudio(Windows 使用者請安裝Rstudio或自備能夠編輯UTF-8 編碼的編輯器，OS X 與Linux使用者可依據自己喜好決定是否使用Rstudio)
 3. 打開R ，執行：`source("http://wush978.github.io/R/init-swirl.R")`
 4. 輸入`library(swirl);swirl()`後即進入教學環境。
 5. 進入00-Hello-DataScienceAndR課程檢查你的電腦能不能執行本教材的所有功能，並瞭解本教材所提供的功能。
