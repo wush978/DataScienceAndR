@@ -63,139 +63,407 @@ img {
 
 <div id="-1" class="section level2">
 <h2>關卡 1</h2>
-<p>這門課程要讓大家透過互動式的內容，上手R語言。</p>
+<p>近年來，能源議題是個和大家息息相關的問題。而透過政府的公開資料，我們是有能力從這些資料更深入的了解能源議題。又由於能源議題往往和經濟議題息息相關，所以我們希望能夠好好的整理台灣各行業的耗電量，以及各行業所貢獻的GDP。藉由整理出來的結果，來協助我們更深入的思考台灣的能源相關議題。</p>
 </div>
 <div id="-2" class="section level2">
 <h2>關卡 2</h2>
-<p>這份文件中的格式採用和Markdown相容的語法。為了讓大家快速上手，這裡先說明一些常見的Markdown語法所有的程式碼，都會用`<code>來包覆。例如：當swirl提示要各位輸入：</code>sessionInfo()`就代表各位同學要在console輸入：sessionInfo()</p>
+<p>這次練習中，用電的資料來源是取自：<a href="http://data.gov.tw/node/6064" class="uri">http://data.gov.tw/node/6064</a>。我目前將2015-09-26時下載後的檔案解壓縮，並且把要用到的「歷年行業別.txt」搬到課程目錄之下。由於中文檔名在跨平台上不方便，所以更改名稱為power.txt。</p>
 </div>
 <div id="-3" class="section level2">
 <h2>關卡 3</h2>
-<p>所有的超連結，都會用&lt;&gt;來包覆。例如：<a href="https://www.google.com" class="uri">https://www.google.com</a>代表要請大家打開https://www.google.com</p>
+<p>由於網路在傳輸課程資料時，可能會出錯，所以我們可以先用R的內建功能檢查power.txt的內容是不是在安裝過程中毀損。請同學輸入：<code>tools::md5sum(power_path)</code>。完成後課程會在背景自動比對結果。</p>
+<pre class="r"><code>tools::md5sum(power_path)</code></pre>
 </div>
 <div id="-4" class="section level2">
 <h2>關卡 4</h2>
-<p>本文的內容都取自於<code>help.start()</code>中的AnIntroductiontoR。</p>
+<p>這裡的<code>::</code>代表說，<code>md5sum</code>這個函數是來自<code>tools</code>這個套件。這是近代R語言新增的一種類似namespace的功能，是個很大的進步。</p>
 </div>
 <div id="-5" class="section level2">
 <h2>關卡 5</h2>
-<p>那我們就開始吧！</p>
+<p>各行業的GDP資料則下載自<a href="http://statdb.dgbas.gov.tw/pxweb/dialog/statfile9L.asp" class="uri">http://statdb.dgbas.gov.tw/pxweb/dialog/statfile9L.asp</a>。檔案路徑已經放入<code>gdp_path</code>之中。請同學再次利用<code>tools::md5sum(gdp_path)</code>來檢查檔案內容。</p>
+<pre class="r"><code>tools::md5sum(gdp_path)</code></pre>
 </div>
 <div id="-6" class="section level2">
 <h2>關卡 6</h2>
-<p>我們跳過介紹R語言的部分，直接學習操作R的部分。在R中，是可以隨時獲得一個函數的細節說明。舉例來說，如果我們要查詢<code>solve</code>這個函數的詳細說明，就輸入：<code>help(solve)</code>。另一種比較簡單的方式是：<code>?solve</code></p>
+<p>首先，就讓我們把資料載入到R之中吧！首先我們來一起處理電力資料。一般來說，在讀中文資料之前，我們要先了解資料的編碼。由於官方文件上並沒有編碼的資訊，所以在實務上只能一個個嘗試。通常政府的官方資料如果沒有特別註明，建議就是從BIG-5開始嘗試。請同學試試看：<code>readLines(file(power_path,encoding=&quot;BIG-5&quot;),n=10)</code>這裡的<code>file</code>是R建立一個檔案連結的方式。file的第一個參數是檔案的路徑，<code>encoding</code>則代表這個檔案內容的編碼。<code>readLines</code>則是輸出一個字串向量，而這個向量是從檔案中一行一行的把內容讀出來的。也就是說，檔案裡面的每一行會變成一個向量中的字串。參數<code>n=10</code>則代表我們只讀最前面的10行。這是實務上的一個好習慣：先看一看檔案的一開始。</p>
+<pre class="r"><code>readLines(file(power_path, encoding = &quot;BIG-5&quot;), n = 10)</code></pre>
 </div>
 <div id="-7" class="section level2">
 <h2>關卡 7</h2>
-<p>現在請各位同學查詢<code>chol2inv</code>的說明。</p>
-<pre class="r"><code>help(chol2inv)</code></pre>
+<p>如果成功看到中文字，就是猜對Encoding了。</p>
 </div>
 <div id="-8" class="section level2">
 <h2>關卡 8</h2>
-<p>在R中，每一段指令都是一個expression。舉例來說，剛剛我們輸入的：<code>help(chol2inv)</code>就是一個有效的expression。</p>
+<p>接下來，從螢幕上我們可以看到，這個檔案的分隔符號會是應該是<code>&quot;;\t&quot;</code>，（還滿少見的）。另外在中間有部分資料的分隔符號只有<code>&quot;\t&quot;</code>。可惜R的能接受的分隔符號，通常只能是一個字元。資料不大，所以我們可以自己切資料吧！首先，請同學用readLines把所有資料讀出來，並且將資料都存到<code>power</code>這個變數。</p>
+<pre class="r"><code>power &lt;- readLines(file(power_path, encoding = &quot;BIG-5&quot;))</code></pre>
 </div>
 <div id="-9" class="section level2">
 <h2>關卡 9</h2>
-<p>而<code>help(chol2inv</code>少了一個<code>)</code>是無效的expression，需要完整的輸入help(chol2inv)</p>
+<p>其實這樣混亂、不好整理的資料，是我們在處理實際資料時常常遇到的狀況。而且我們也常常犯錯，導致要重頭開始重新整理。</p>
 </div>
 <div id="-10" class="section level2">
 <h2>關卡 10</h2>
-<p>通常每一個給R的指令，不是一個expression，就是一個assignment</p>
+<p>在R中，我們可以使用<code>strsplit</code>來切割字串。<code>strsplit</code>的參數x是要被切割的字串，split是定位分割點的字串。請同學呼叫<code>strsplit</code>來用<code>&quot;;?\t&quot;</code>切割<code>power</code>，並且將結果儲存到<code>power.split</code>中。<code>&quot;;?\t&quot;</code>在這邊代表，這個分號<code>;</code>是可有可無的。這是為了讓R能夠同時處理分隔符號為<code>&quot;;\t&quot;</code>或<code>&quot;\t&quot;</code>的狀況。</p>
+<pre class="r"><code>power.split &lt;- strsplit(power, &quot;;?\t&quot;)</code></pre>
 </div>
 <div id="-11" class="section level2">
 <h2>關卡 11</h2>
-<p>舉例來說，<code>a&lt;-1</code>就是一個assigment的動作。請各位同學在console輸入<code>a&lt;-1</code></p>
-<pre class="r"><code>a &lt;- 1</code></pre>
+<p>使用<code>do.call</code>可以讓我們把<code>power.split</code>組裝成一個charactermatrix。請同學輸入：<code>power.mat&lt;-do.call(rbind,power.split)</code>。<code>power.split</code>是一個R物件向量，而rbind是吃一個任意參數的函數，並且把每個參數當成一個row，組裝出一個matrix。<code>do.call</code>會把在這裡的功能，就等價於：<code>rbind(power.split[[1]],power.split[[2]],...)</code>把<code>power.split</code>拆解後，全部當成參數丟到rbind去做組裝。</p>
+<pre class="r"><code>power.mat &lt;- do.call(rbind, power.split)</code></pre>
 </div>
 <div id="-12" class="section level2">
 <h2>關卡 12</h2>
-<p>通常R在收到一個expression之後，它會做出以下的動作：</p>
+<p>我們差不多把電力資料整理的差不多了，只剩下最後一步：把<code>power.mat</code>轉換成一個data.frame，並且讓各個column擁有正確的形態。但是這最後一步卻有許多小步驟。首先，我們把<code>power.mat</code>用<code>data.frame</code>轉換成<code>power.df</code>這裡要注意的是，<code>data.frame</code>在轉換的時候，這裡有下參數：<code>stringsAsFactors=FALSE</code>，否則欄位會被轉換成factor，在做後續字串處理時，有時候會出錯。</p>
+<pre class="r"><code>power.df &lt;- data.frame(power.mat, stringsAsFactors = FALSE)</code></pre>
 </div>
 <div id="-13" class="section level2">
 <h2>關卡 13</h2>
-<p>R會evaluate這個expression，然後把結果顯示到螢幕上。舉例來說，請同學輸入：<code>a+1</code></p>
-<pre class="r"><code>a + 1</code></pre>
+<p>然後，我們設定<code>power.df</code>的欄位名稱（colnames）依序為：<code>c(&quot;id&quot;,&quot;name&quot;,&quot;year&quot;,&quot;power&quot;)</code>請同學使用：<code>colnames(power.df)&lt;-</code>的語法來指定power.df的colnames。</p>
+<pre class="r"><code>colnames(power.df) &lt;- c(&quot;id&quot;, &quot;name&quot;, &quot;year&quot;, &quot;power&quot;)</code></pre>
 </div>
 <div id="-14" class="section level2">
 <h2>關卡 14</h2>
-<p>R在收到<code>a+1</code>這個expression之後，會進行計算，查到a的值是1，再和1做相加，最後把2顯示到螢幕上。</p>
+<p>接下來，我們設定讓power.df的name欄位是<code>factor</code>。請使用<code>factor</code>這個函數。</p>
+<pre class="r"><code>power.df$name &lt;- factor(power.df$name)</code></pre>
 </div>
 <div id="-15" class="section level2">
 <h2>關卡 15</h2>
-<p>現在，請各位同學讓<code>a</code>的值變成2。</p>
-<pre class="r"><code>a &lt;- 2</code></pre>
+<p>接下來，我們設定讓power.df的year欄位是<code>integer</code>。請使用<code>as.integer</code>這個函數。</p>
+<pre class="r"><code>power.df$year &lt;- as.integer(power.df$year)</code></pre>
 </div>
 <div id="-16" class="section level2">
 <h2>關卡 16</h2>
-<p>有沒有注意到，R並沒有在螢幕上顯示任何東西呢？</p>
+<p>接下來，我們設定讓power.df的power欄位是<code>numeric</code>。請使用<code>as.numeric</code>這個函數。</p>
+<pre class="r"><code>power.df$power &lt;- as.numeric(power.df$power)</code></pre>
 </div>
 <div id="-17" class="section level2">
 <h2>關卡 17</h2>
-<p>這裡測試一下同學懂不懂assignment的意思。請問現在如果我們在R的console中輸入<code>a-1</code>，會顯示什麼呢？</p>
-<p>1</p>
+<p>大功造成了，請輸入<code>head(power.df)</code>來檢視一下我們整理好的data.frame物件。同時我們也會再檢驗一次power.df看看是否正確。</p>
+<pre class="r"><code>head(power.df)</code></pre>
 </div>
 <div id="-18" class="section level2">
 <h2>關卡 18</h2>
-<p>相信大家到這邊，對於expression和assignment有一些初步的認識。未來我們就是要寫大量的expression和assignment，來利用R達成複雜的任務。</p>
+<p>由於我們在抓資料的分割點時，很有可能會抓錯。所以保險起見，在這個時間點我們要檢查資料是否有清理乾淨。在R中，如果中間資料有任何錯誤的話，常常會有NA產生。所以一個方法就是用<code>is.na</code>檢查<code>power.df</code>的四個欄位中間有沒有NA。<code>all</code>這個函數，則可以檢查一個邏輯向量的所有的值是否為TRUE。請同學組合<code>is.na</code>和<code>all</code>來檢查<code>power.df</code>的欄位是否包含NA。</p>
+<pre class="r"><code>all(!is.na(power.df))</code></pre>
 </div>
 <div id="-19" class="section level2">
 <h2>關卡 19</h2>
-<p>我們可以把多個expression用<code>{</code>和<code>}</code>包覆起來，變成一個大的expression。</p>
+<p>接下來，我們來運用dplyr和ggplot2這兩個套件將power.df的資料繪製成圖表。請先安裝dplyr套件。</p>
+<pre class="r"><code>check_then_install(&quot;dplyr&quot;, &quot;0.4.3&quot;)</code></pre>
 </div>
 <div id="-20" class="section level2">
 <h2>關卡 20</h2>
-<p>我們也可以在程式碼中插入註解：<code>#</code>。所有在#之後的輸入，R都會略過。</p>
+<p>請再安裝ggplot2套件</p>
+<pre class="r"><code>check_then_install(&quot;ggplot2&quot;, &quot;1.0.1&quot;)</code></pre>
 </div>
 <div id="-21" class="section level2">
 <h2>關卡 21</h2>
-<p>如果有一個expression還沒有完成，（可能是少了<code>)</code>或<code>}</code>），那R會在console的開頭用<code>+</code>來提示你。</p>
+<p>使用套件的起手式：載入dplyr</p>
+<pre class="r"><code>library(dplyr)</code></pre>
 </div>
 <div id="-22" class="section level2">
 <h2>關卡 22</h2>
-<p>我們也可以用上下的按鍵來快速瀏覽輸入過的expression。</p>
+<p>這裡的<code>id</code>欄位，是中華民國行業標準分類的代碼。這個代碼的最大類，都是用英文字母標示的。所以我們就用regularexpression來找出所有英文開頭的<code>id</code>。<code>grepl(&quot;^[A-Z]&quot;,input)</code>會判斷input這個字串向量的值，是不是符合字母開頭。如果是的話，就傳TRUE，否則就是FALSE。和dplyr套件的<code>filter</code>搭配使用，我們就可以快速取得所有大類的資料。請同學將這樣的資料存到<code>power.target</code>這個變數之中。</p>
+<pre class="r"><code>power.target &lt;- filter(power.df, grepl(&quot;^[A-Z]&quot;, id))</code></pre>
 </div>
 <div id="-23" class="section level2">
 <h2>關卡 23</h2>
-<p>要把指令輸入到R，也不一定要在console上一個字一個字的打。我們可以透過<code>source</code>指令，來載入一個撰寫R指令的文件，並且執行文件中的expressions。</p>
+<p>filter不只可以幫我們挑出主要的行業類別，還可以挑選年度。所以我們可以繪製每年度，主要行業別的用電比較。首先，我們先整理出91年度的主要類別，並且存放到<code>power.target</code>之中。</p>
+<pre class="r"><code>power.target &lt;- filter(power.df, grepl(&quot;^[A-Z]&quot;, id), year == 91)</code></pre>
 </div>
 <div id="-24" class="section level2">
 <h2>關卡 24</h2>
-<p>請各位同學看一下<code>source</code>的說明。輸入之後，使用R一般界面的同學會看到跳出的說明視窗，內容則是R對<code>source</code>的官方說明。。使用Rstudio的同學則請檢查右下角的視窗是否有切換至<code>source</code>的官方說明。</p>
-<pre class="r"><code>help(source)</code></pre>
+<p>我們可以利用power.target來繪製一個barchart來呈現各種行業別的用電量。首先，還是要先載入ggplot2。</p>
+<pre class="r"><code>library(ggplot2)</code></pre>
 </div>
 <div id="-25" class="section level2">
 <h2>關卡 25</h2>
-<p>在各位同學安裝swirl的過程中，我們可能已經用過<code>source</code>來執行講師預先寫好的expressions來設定環境了。</p>
+<p>我們先建立ggplot2的底圖物件。這裡我們會用到<code>aes</code>這個函數，來辨識在<code>power.target</code>的欄位，哪一欄要放到x軸，哪一欄，要放到y軸。x軸的通常放的是分類，而y放的是我們想要觀測的數據的值。請同學修改以下的指令，將ggplot2的底圖物件寫入變數<code>g</code>。指令是：<code>g&lt;-ggplot(power.target,aes(x=&lt;欄位名稱1&gt;,y=&lt;欄位名稱2&gt;))</code></p>
+<pre class="r"><code>g &lt;- ggplot(power.target, aes(x = name, y = power))</code></pre>
 </div>
 <div id="-26" class="section level2">
 <h2>關卡 26</h2>
-<p>剛剛我們也有跟各位同學介紹過assignment。在R裡面，這些我們存放資料的東西，例如剛剛的<code>a</code>，都叫做object。object可以是一個變數，也可以是一連串的數字，文字，甚至是函數，以及更複雜的東西。</p>
+<p>建立底圖之後，我們就要選用適當的圖形工具來適當的呈現我們要看的工具。這裡我們來用<code>geom_bar</code>來呈現我們要資料。大家可以試試看：<code>g+geom_bar(stat=&quot;identity&quot;)</code></p>
+<pre class="r"><code>g + geom_bar(stat = &quot;identity&quot;)</code></pre>
 </div>
 <div id="-27" class="section level2">
 <h2>關卡 27</h2>
-<p>在R中，我們可以利用<code>objects()</code>或<code>ls()</code>來列出所有目前存在的object的名字。請同學嘗輸入<code>objects()</code>或<code>ls()</code></p>
-<pre class="r"><code>objects()</code></pre>
+<p>有些使用者可能會無法在圖上顯示中文。這可能是字形的問題。如果是蘋果牌的使用者，可以更改預設的字形來顯示中文：<code>theme_set(theme_gray(base_family=&quot;STKaiti&quot;))</code></p>
 </div>
 <div id="-28" class="section level2">
 <h2>關卡 28</h2>
-<p>我們可以刪除已經存在的物件。舉例來說，如果我們要刪除<code>a</code>，就只要輸入：<code>rm(a)</code>。請同學試試看：</p>
-<pre class="r"><code>rm(a)</code></pre>
+<p>另外我們也會發現整個x軸容納不下我們的說明文字。這時候可以透過設定<code>xlab</code>的字體方向，來解決這個問題：<code>theme(axis.text.x=element_text(angle=90))</code>請注意，ggplot2在設定類型時，是直接透過在程式碼的最後用<code>+</code>來加上<code>theme(...)</code>來作處理的。我建議各位同學先使用上下鍵盤，找出剛剛繪圖的指令，然後在最後加上：<code>+theme(axis.text.x=element_text(angle=90))</code></p>
+<pre class="r"><code>g + geom_bar(stat = &quot;identity&quot;) + theme(axis.text.x = element_text(angle = 90))</code></pre>
 </div>
 <div id="-29" class="section level2">
 <h2>關卡 29</h2>
-<p>所有的R物件都可以儲存到硬碟中，讓你之後可以從硬碟讀出資料繼續做分析。每次退出R的時候，你都有機會把所有的物件存到一個叫做.RData的檔案之中。之後，只要在相同的目錄打開R，這些資料就會自動進入R，讓你接關。</p>
+<p>從圖上顯示，我們可以注意到在民國91年的時候，在各行業中，製造業還是消耗了最多的電力。</p>
 </div>
 <div id="-30" class="section level2">
 <h2>關卡 30</h2>
-<p>所以R官方建議使用者在不同的分析專案時，在不同的目錄底下跑R。因為我們常常在分析的時候，建立一些名叫<code>x</code>或<code>y</code>的變數。在相同的案子中，<code>x</code>和<code>y</code>可能是很明顯的。但是當我們同時做很多分析時，就容易搞不清楚<code>x</code>是哪一個分析案子的<code>x</code>。</p>
+<p>在ggplot2，我們可以把barchart更改成piechart。請同學試試看：<code>ggplot(power.target,aes(x=&quot;&quot;,y=power,fill=name))+geom_bar(stat=&quot;identity&quot;)+coord_polar(theta=&quot;y&quot;)</code>如果同學覺得這個指令很冗長的話，可以輸入<code>skip()</code>來跳過。</p>
+<pre class="r"><code>ggplot(power.target, aes(x = &quot;&quot;, y = power, fill = name)) + geom_bar(stat = &quot;identity&quot;) + coord_polar(theta = &quot;y&quot;)</code></pre>
 </div>
 <div id="-31" class="section level2">
 <h2>關卡 31</h2>
-<p>使用Rstudio的同學可以在課程結束後，摸索右上角的專案設定。Rstudio會將專案指定到特定的目錄，而不同目錄的R就會有不同的.RData暫存檔案，讓同學不會混用到不同專案的變數。</p>
+<p>事實上ggplot2對piechart的支援並不好，而這是有理由的。有興趣的同學可以讀一讀<a href="http://www.r-chart.com/2010/07/pie-charts-in-ggplot2.html" class="uri">http://www.r-chart.com/2010/07/pie-charts-in-ggplot2.html</a>裡面提到一些統計學家對piechart的批評。</p>
 </div>
 <div id="-32" class="section level2">
 <h2>關卡 32</h2>
-<p>第一章的內容就到此結束了。</p>
+<p>而根據這個piechart，我們至少可以了解在民國91年製造業消耗了我們超過一半的電力。</p>
+</div>
+<div id="-33" class="section level2">
+<h2>關卡 33</h2>
+<p>一個我們也許會感興趣的問題是：我們的GDP是不是大部份也來自於製造業呢？</p>
+</div>
+<div id="-34" class="section level2">
+<h2>關卡 34</h2>
+<p>接著，我們來整理GDP的資料…</p>
+</div>
+<div id="-35" class="section level2">
+<h2>關卡 35</h2>
+<p>透過一樣的要領，我們應該先用<code>readLines</code>先看看<code>gdp_path</code>的資料內容。請同學檢視<code>gdp_path</code>這個檔案的前20行。</p>
+<pre class="r"><code>readLines(file(gdp_path, encoding = &quot;BIG-5&quot;), n = 20)</code></pre>
+</div>
+<div id="-36" class="section level2">
+<h2>關卡 36</h2>
+<p>一些不熟悉R的同學可能會被<code>\&quot;</code>這個符號給搞混了。由於<code>&quot;</code>在R中是代表字串的開始和結束，所以R會在顯示字串時，在<code>&quot;</code>之前加註<code>\</code>，所以一個<code>\&quot;</code>實際上就是一個<code>&quot;</code></p>
+</div>
+<div id="-37" class="section level2">
+<h2>關卡 37</h2>
+<p>另一個避免<code>\&quot;</code>干擾的方式，是使用<code>cat</code>這函數。請同學試試看：<code>cat(readLines(file(gdp_path,encoding=&quot;BIG-5&quot;),n=20),sep=&quot;\n&quot;)</code></p>
+<pre class="r"><code>cat(readLines(file(gdp_path, encoding = &quot;BIG-5&quot;), n = 20), sep = &quot;\n&quot;)</code></pre>
+</div>
+<div id="-38" class="section level2">
+<h2>關卡 38</h2>
+<p>上一個問題的答案，其實牽涉到了三層函數：</p>
+</div>
+<div id="-39" class="section level2">
+<h2>關卡 39</h2>
+<p>我們先呼叫<code>file(gdp_path,encoding=&quot;BIG-5&quot;)</code>建立一個connection。connection是R處理檔案的專業術語，如果比較不熟悉程式設計的同學，就先把connection當成檔案的代理就好。</p>
+</div>
+<div id="-40" class="section level2">
+<h2>關卡 40</h2>
+<p>接著，我們使用<code>readLines</code>處理<code>file</code>回傳的物件。這是第二層。這裡我們指定參數<code>n=20</code>，代表我們要從connection的最前面讀取前20行。</p>
+</div>
+<div id="-41" class="section level2">
+<h2>關卡 41</h2>
+<p>最後，我們把<code>readLines</code>回傳的20個字串交給<code>cat</code>作處理。<code>cat</code>會直接把字串內容印到R的console上，而且我們指定每一個字串之間要插入一個斷行。</p>
+</div>
+<div id="-42" class="section level2">
+<h2>關卡 42</h2>
+<p>這樣一層一層疊上去的寫法，很容易讓程式變的很複雜。StefanMiltonBache推出了一個R套件很好地解決了這個問題：<code>magrittr</code>。我們在安裝<code>dplyr</code>之後，應該已經安裝了這個套件了。因此，請同學直接輸入：<code>library(magrittr)</code></p>
+<pre class="r"><code>library(magrittr)</code></pre>
+</div>
+<div id="-43" class="section level2">
+<h2>關卡 43</h2>
+<p>回顧一下我們剛剛做的事情：把<code>file(gdp_path,encodoing=&quot;BIG-5&quot;)</code>得到的物件給<code>readLines(...,n=20)</code>再把得到的物件給<code>cat(...,sep=&quot;\n&quot;)</code>。這裡的<code>...</code>就代表從上一個函數得到的物件。使用<code>magrittr</code>後，我們的寫法就變成：<code>file(gdp_path,encoding=&quot;BIG-5&quot;)%&gt;%readLines(n=20)%&gt;%cat(sep=&quot;\n&quot;)</code>請同學試試看</p>
+<pre class="r"><code>file(gdp_path, encoding = &quot;BIG-5&quot;) %&gt;% readLines(n = 20) %&gt;% cat(sep = &quot;\n&quot;)</code></pre>
+</div>
+<div id="-44" class="section level2">
+<h2>關卡 44</h2>
+<p>在實務上，我們會在<code>%&gt;%</code>後斷行，增加程式的可讀性。</p>
+</div>
+<div id="-45" class="section level2">
+<h2>關卡 45</h2>
+<p>回歸正傳，我們第一個要看的，是檔案中的分隔符號是什麼。大家在看過檔案內容之後，應該會同意：分隔符號是<code>,</code>另外大家也會注意到這個檔案中，字串的內容的前後會加上<code>&quot;</code>。另外每一列的欄位數目也不一致，所以不能簡單用<code>read.csv</code>解決。因為資料量不大，我們還是全部用<code>readLines</code>讀進來後再用<code>strsplit</code>自己切吧！</p>
+</div>
+<div id="-46" class="section level2">
+<h2>關卡 46</h2>
+<p>和剛剛的電力資料一樣，請讓我們先用<code>readLines</code>把資料全部載入並且存到<code>gdp</code>這個變數之中。</p>
+<pre class="r"><code>gdp &lt;- file(gdp_path, encoding = &quot;BIG-5&quot;) %&gt;% readLines()</code></pre>
+</div>
+<div id="-47" class="section level2">
+<h2>關卡 47</h2>
+<p>接著，我們利用<code>strsplit</code>，用<code>&quot;,&quot;</code>當分隔符號，將讀入的gdp資料切成list。請將結果存到<code>gdp.split</code></p>
+<pre class="r"><code>gdp.split &lt;- strsplit(gdp, &quot;,&quot;)</code></pre>
+</div>
+<div id="-48" class="section level2">
+<h2>關卡 48</h2>
+<p>仔細一點的話，我們能注意到，年份的資料在切割後，長度都是1。所以讓我們選取<code>gdp.split</code>這個list中，<code>length</code>為1的值。這部分，可以利用<code>sapply</code>這個函數來查詢。請同學試試看：<code>(sapply(gdp.split,length)==1)%&gt;%which</code>這裡的<code>sapply(gdp.split,lenght)</code>相當於建立一個向量，並且讓第一個值為<code>length(gdp.split[[1]])</code>，第二個值為<code>length(gdp.split[[2]])</code>，以此類推。</p>
+<pre class="r"><code>(sapply(gdp.split, length) == 1) %&gt;% which</code></pre>
+</div>
+<div id="-49" class="section level2">
+<h2>關卡 49</h2>
+<p>我們可以看一下，這些長度為一的行的內容：請同學輸入：<code>gdp.split[(sapply(gdp.split,length)==1)%&gt;%which]</code></p>
+<pre class="r"><code>gdp.split[(sapply(gdp.split, length) == 1) %&gt;% which]</code></pre>
+</div>
+<div id="-50" class="section level2">
+<h2>關卡 50</h2>
+<p>我們可以看到，只有前7個index是真的代表年份。最後幾個index其實只有指到這個檔案的一些說明。所以我們利用<code>head</code>這個函數，拿出前7個index，並存到：<code>year.index</code>之中。請同學輸入：<code>year.index&lt;-(sapply(gdp.split,length)==1)%&gt;%which%&gt;%head(7)</code></p>
+<pre class="r"><code>year.index &lt;- (sapply(gdp.split, length) == 1) %&gt;% which %&gt;% head(7)</code></pre>
+</div>
+<div id="-51" class="section level2">
+<h2>關卡 51</h2>
+<p>接著我們可以利用for迴圈來切出這份資料。這部分請同學參考路徑在<code>gdp_df_path</code>的這個檔案，修改它，讓我們能得到<code>gdp_df</code>這個整理乾淨過後的data.frame。你可以利用<code>browseURL(gdp_df_path)</code>來打開參考檔案。把檔案的內容複製到gdp_df.R之中，並且再完成之後，輸入：<code>submit()</code></p>
+<pre class="r"><code># 開始的index
+year.index.start &lt;- year.index
+# 結束的index
+## 我們拿下一個開始的index - 1 當成現在結尾的index
+year.index.end &lt;- c(tail(year.index, -1), length(gdp.split))
+# 開始撰寫for迴圈
+## 我們先建立每一年份整理出來的gdp 資料
+## 這些資料會被放到gdp.df.components之中
+gdp.df.components &lt;- list()
+# 請填寫正確的for 迴圈的範圍
+for(i in 1:7) {
+  # 針對特定年份做處理的程式碼
+  ## 開始的index
+  start &lt;- year.index.start[i]
+  ## 結束的index
+  end &lt;- year.index.end[i]
+  ## 年份的資料在第一筆
+  year &lt;- gdp.split[[start]] %&gt;%
+    ## 將 &quot;2007&quot; ==&gt; 2007，將&quot;用空白替換掉
+    gsub(pattern = '&quot;', replacement = '')
+  ## 只抽出這次要處理的資料
+  target &lt;- gdp.split[start:end]
+  ## 挑出長度是3 的，做rbind
+  target.mat &lt;- do.call(rbind, 
+                        target[sapply(target, length) == 3])
+  ## 原本的第一行是空白，我們改成放年份
+  target.mat[,1] &lt;- year
+  ## 處理第二行中的&quot;
+  target.mat[,2] &lt;- gsub('&quot;', '', target.mat[,2])
+  ## 將這輪處理的資料，放到gdp.df.components
+  gdp.df.components[[i]] &lt;- target.mat
+}
+gdp.df &lt;- do.call(rbind, gdp.df.components) %&gt;% 
+  ## 我們先不把資料轉成factor
+  data.frame(stringsAsFactors = FALSE)
+colnames(gdp.df) &lt;- c(&quot;year&quot;, &quot;name&quot;, &quot;gdp&quot;)
+## 把year 轉成integer
+gdp.df$year &lt;- as.integer(gdp.df$year)
+## 把name 轉成character
+gdp.df$name &lt;- as.character(gdp.df$name)
+## 把gdp 轉成numeric
+gdp.df$gdp &lt;- as.numeric(gdp.df$gdp)
+gdp.df &lt;- filter(gdp.df, !is.na(gdp))</code></pre>
+</div>
+<div id="-52" class="section level2">
+<h2>關卡 52</h2>
+<p>接下來我們比對兩者的資料，好計算使用能源的效率。但是，這不容易…比對資料最重要的，是兩者的一致性。</p>
+</div>
+<div id="-53" class="section level2">
+<h2>關卡 53</h2>
+<p>我們先看看gdp.df資料中的行業別。請同學輸入：<code>unique(gdp.df$name)</code></p>
+<pre class="r"><code>unique(gdp.df$name)</code></pre>
+</div>
+<div id="-54" class="section level2">
+<h2>關卡 54</h2>
+<p>再來看看power.df資料中的行業別。請同學輸入：<code>unique(power.df$id)</code></p>
+<pre class="r"><code>unique(power.df$id)</code></pre>
+</div>
+<div id="-55" class="section level2">
+<h2>關卡 55</h2>
+<p>這裡的資料，一邊是英文+中文，一邊是數字或英文。所以我們先把目標放在英文上就好了。</p>
+</div>
+<div id="-56" class="section level2">
+<h2>關卡 56</h2>
+<p>請同學輸入：<code>gdp.df%&lt;&gt;%mutate(id=strsplit(name,&quot;.&quot;,fixed=TRUE)%&gt;%sapply(&quot;[&quot;,1))</code>這裡的%&lt;&gt;%表示R會把gdp.df放到mutate的第一個參數，然後把輸出結果回存到變數gdp.df。這裡的動作是用“.”來切割gdp.df$name，然後將“.”之前的結果放到欄位id</p>
+<pre class="r"><code>gdp.df %&lt;&gt;% mutate(id = strsplit(name, &quot;.&quot;, fixed = TRUE) %&gt;% sapply(&quot;[&quot;, 1))</code></pre>
+</div>
+<div id="-57" class="section level2">
+<h2>關卡 57</h2>
+<p>我們輸入：<code>unique(gdp.df$id)</code>看看整理後的結果。</p>
+<pre class="r"><code>unique(gdp.df$id)</code></pre>
+</div>
+<div id="-58" class="section level2">
+<h2>關卡 58</h2>
+<p>中間混雜了一些中英文，並且有些是子類別。例如：JA、JB喊JC就是J的子類別。</p>
+</div>
+<div id="-59" class="section level2">
+<h2>關卡 59</h2>
+<p>請輸入：<code>gdp.df2&lt;-filter(gdp.df,nchar(id)==1)</code>來只挑出那些id為單一文字的資料</p>
+<pre class="r"><code>gdp.df2 &lt;- filter(gdp.df, nchar(id) == 1)</code></pre>
+</div>
+<div id="-60" class="section level2">
+<h2>關卡 60</h2>
+<p>我們輸入：<code>unique(gdp.df2$id)</code>看看整理後的結果，是不是全英文</p>
+<pre class="r"><code>unique(gdp.df2$id)</code></pre>
+</div>
+<div id="-61" class="section level2">
+<h2>關卡 61</h2>
+<p>接著我們把目標轉到power.df。請同學利用上述所學，挑選出id欄位為英文的data.frame，將year轉為西元，並將結果存到<code>power.df2</code>中。</p>
+<pre class="r"><code>#' 提示：
+#' 我會用到filter + grepl, 來挑出英文的id
+#'    ps. &quot;^[A-Z]&quot; 代表要尋找英文大寫字母開頭的字串
+#' mutate 來將年度從民國變成西元
+#' 最後用 mutate + gsub 把 id 中的&quot;.&quot;給去除
+
+power.df2 &lt;- 
+  filter(power.df, grepl(&quot;^[A-Z]&quot;, id)) %&gt;%
+  mutate(year = year + 1911, id = gsub(&quot;.&quot;, &quot;&quot;, id, fixed = TRUE))
+
+stopifnot(nrow(power.df2) == 204)
+stopifnot(sum(power.df2$year) == 409224)</code></pre>
+</div>
+<div id="-62" class="section level2">
+<h2>關卡 62</h2>
+<p>接下來，就可以用id與year來比對資料了…嗎？</p>
+</div>
+<div id="-63" class="section level2">
+<h2>關卡 63</h2>
+<p>請同學輸入：<code>distinct(power.df2,id,name)</code>再檢查一下用電量資料裡的id所代表的意義</p>
+<pre class="r"><code>distinct(power.df2, id, name)</code></pre>
+</div>
+<div id="-64" class="section level2">
+<h2>關卡 64</h2>
+<p>再請同學輸入：<code>distinct(gdp.df2,id,name)</code>再檢查一下國民生產毛額的資料裡的id所代表的意義</p>
+<pre class="r"><code>distinct(gdp.df2, id, name)</code></pre>
+</div>
+<div id="-65" class="section level2">
+<h2>關卡 65</h2>
+<p>同學有沒有注意到，兩者的K，代表的意義不一致？</p>
+</div>
+<div id="-66" class="section level2">
+<h2>關卡 66</h2>
+<p>這裡我們幫同學簡略地整理一個對應表，放在變數：<code>translation</code>，請同學看一看。這是一個多對多的對應關係。有些行業別我們不知道如何對應，等等就先略過。</p>
+<pre class="r"><code>translation</code></pre>
+</div>
+<div id="-67" class="section level2">
+<h2>關卡 67</h2>
+<p>我們要先把translation展開。利用translation做一個對應表。請同學手動建立一個文字向量：名字就剛好是<code>c(&quot;A&quot;,&quot;B&quot;,&quot;C&quot;,&quot;D&quot;,&quot;E&quot;,&quot;F&quot;,&quot;G&quot;,&quot;H&quot;,&quot;I&quot;,&quot;J&quot;,&quot;K&quot;)</code>代表power.df2中的id；值是則是c(1,2,3,…)，代表該值出現在translation中的位置。最後將結果存到變數：<code>translation.power</code></p>
+<pre class="r"><code>translation.power &lt;- local({
+  retval &lt;- c(1, 2, 3, 4, 5, 6, 7, 8, 9, 9, 10)
+  names(retval) &lt;- c(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;, &quot;D&quot;, &quot;E&quot;, &quot;F&quot;, &quot;G&quot;, &quot;H&quot;, &quot;I&quot;, &quot;J&quot;, &quot;K&quot;)
+  retval
+})
+</code></pre>
+</div>
+<div id="-68" class="section level2">
+<h2>關卡 68</h2>
+<p>請用同樣的要領建立變數：<code>translation.gdp</code></p>
+<pre class="r"><code>translation.gdp &lt;- local({
+  translation.gdp &lt;- c(1, 2, 3, 4, 4, 5, 6, 7, 6, 7, 8, 8, 9, 9, 10, 9, 9, 9, 9)
+  names(translation.gdp) &lt;- head(LETTERS, length(translation.gdp))
+  translation.gdp
+})
+</code></pre>
+</div>
+<div id="-69" class="section level2">
+<h2>關卡 69</h2>
+<p>接著，透過translation，我們就可以將兩邊的資料比對成一個data.frame。請同學挑戰看看。</p>
+<pre class="r"><code>power.df3 &lt;-
+  power.df2 %&gt;%
+  mutate(id2 = translation.gdp[id]) %&gt;%
+  filter(!is.na(id2)) %&gt;%
+  group_by(year, id2) %&gt;%
+  summarise(power = sum(power), name = paste(name, collapse = &quot;,&quot;))
+
+gdp.df3 &lt;- 
+  gdp.df2 %&gt;%
+  mutate(id2 = translation.gdp[id]) %&gt;%
+  group_by(year, id2) %&gt;%
+  summarise(gdp = sum(gdp))
+
+power.gdp &lt;- inner_join(power.df3, gdp.df3, c(&quot;year&quot;, &quot;id2&quot;)) %&gt;%
+  mutate(eff = gdp / power) %&gt;%
+  as.data.frame()</code></pre>
+</div>
+<div id="-70" class="section level2">
+<h2>關卡 70</h2>
+<p>恭喜同學完成比對各行業的用電資料與貢獻的國民生產毛額。我們接下來嘗試利用<code>power.gdp</code>來建立一些圖表看看資料說說故事。</p>
 </div>
 
 

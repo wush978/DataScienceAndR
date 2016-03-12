@@ -32,19 +32,15 @@ function showRegistrationRecords(){
 
 }
 
+
 window.onload =function(){
   moment.locale("zh-tw");
   showRegistrationRecords();
 }
 </script>
 
+
 測試結果： Linux ![](https://travis-ci.org/wush978/DataScienceAndR.svg?branch=course) Windows [![Build status](https://ci.appveyor.com/api/projects/status/tej2qnpdxwy2r5lp/branch/course?svg=true)](https://ci.appveyor.com/project/wush978/datascienceandr/branch/course)
-
-聊天室： [![Gitter](https://badges.gitter.im/wush978/DataScienceAndR.svg)](https://gitter.im/wush978/DataScienceAndR?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
-
-## 用過的人都說好棒棒
-
-<div class="well" style="height: 7em;"><ul id="records"></ul></div>
 
 ## 簡介
 
@@ -57,6 +53,10 @@ window.onload =function(){
 5. **互動**。我們基於R Community貢獻的R 語言套件swirl 所撰寫的互動式學習環境，可以讓同學以最貼近實際使用R 的狀況來學R
 6. **教材設計**。每個單元的開始，我們設計大量的操作讓同學是透過用**肌肉**來記憶R 的指令。並且在單元的最後都擁有來自實務且具有挑戰性的關卡。
 7. **自由**。老師們可以很方便與自由地將本教材整合至您的教案之中。您可以將本教材當成同學學習R語言的補充教材，讓同學透過本教材學習如何處理政府的開放資料集。本教材不會涉獵過多的專業分析技術，而是把這些內容留給專業的老師們。有興趣合作的老師歡迎來信：[wush@datascienceandr.org](mailto:wush@datascienceandr.org)
+
+## 即時動態
+
+<div class="well" style="height: 7em;"><ul id="records"></ul></div>
 
 ## 線上體驗區（需參加實體課程）
 
@@ -136,7 +136,7 @@ ps. 如果你之前有進行過swirl的課程，swirl會出現下圖的選項詢
 
 ## 課程筆記
 
-以下連結記載swirl中的課程內容(sha-hash: e78c8306 版本)
+以下連結記載swirl中的課程內容(sha-hash: 3ee15b83 版本)
 
 - [00-Hello-DataScienceAndR](note/00-Hello-DataScienceAndR.html)
 - [01-RBasic-01-Introduction](note/01-RBasic-01-Introduction.html)
@@ -159,6 +159,7 @@ ps. 如果你之前有進行過swirl的課程，swirl會出現下圖的選項詢
 - [Optional-RProgramming-01-Loop-And-Condition](note/Optional-RProgramming-01-Loop-And-Condition.html)
 - [Optional-RProgramming-02-Function](note/Optional-RProgramming-02-Function.html)
 - [Project-ROpenData-DataTaipei](note/Project-ROpenData-DataTaipei.html)
+- [Project-ROpenData-Power-GDP](note/Project-ROpenData-Power-GDP.html)
 
 ## 課程投影片
 

@@ -1,8 +1,46 @@
 <!-- title: R 語言翻轉教室 -->
 
-測試結果： Linux ![](https://travis-ci.org/wush978/DataScienceAndR.svg?branch=course) Windows [![Build status](https://ci.appveyor.com/api/projects/status/tej2qnpdxwy2r5lp/branch/course?svg=true)](https://ci.appveyor.com/project/wush978/datascienceandr/branch/course)
+<script>
+  ((window.gitter = {}).chat = {}).options = {
+    room: 'wush978/DataScienceAndR'
+  };
+</script>
+<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
+<script src="http://momentjs.com/downloads/moment-with-locales.min.js" async defer></script>
 
-聊天室： [![Gitter](https://badges.gitter.im/wush978/DataScienceAndR.svg)](https://gitter.im/wush978/DataScienceAndR?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+<script>
+function showRegistrationRecords(){
+  $("#records").empty();
+  $.ajax({
+    url:"http://api.datascienceandr.org:3000/api/getManyRecords",
+    type:"POST",
+    data:{num:5},
+    dataType:"json",
+    success: function(data){
+      console.log(data);
+      data.forEach(function(record){
+        m = moment(record.created_at);
+        if (record.type == 0) {
+          li = "<li>" + record.user_id  + "在" + m.fromNow() + "進入了" + record.course  + "</li>"
+        } else {
+          li = "<li>" + record.user_id  + "在" + m.fromNow() + "完成了" + record.course  + "</li>"
+        }
+        $("#records").append(li);
+      });
+    }
+  });
+
+}
+
+
+window.onload =function(){
+  moment.locale("zh-tw");
+  showRegistrationRecords();
+}
+</script>
+
+
+測試結果： Linux ![](https://travis-ci.org/wush978/DataScienceAndR.svg?branch=course) Windows [![Build status](https://ci.appveyor.com/api/projects/status/tej2qnpdxwy2r5lp/branch/course?svg=true)](https://ci.appveyor.com/project/wush978/datascienceandr/branch/course)
 
 ## 簡介
 
@@ -15,6 +53,10 @@
 5. **互動**。我們基於R Community貢獻的R 語言套件swirl 所撰寫的互動式學習環境，可以讓同學以最貼近實際使用R 的狀況來學R
 6. **教材設計**。每個單元的開始，我們設計大量的操作讓同學是透過用**肌肉**來記憶R 的指令。並且在單元的最後都擁有來自實務且具有挑戰性的關卡。
 7. **自由**。老師們可以很方便與自由地將本教材整合至您的教案之中。您可以將本教材當成同學學習R語言的補充教材，讓同學透過本教材學習如何處理政府的開放資料集。本教材不會涉獵過多的專業分析技術，而是把這些內容留給專業的老師們。有興趣合作的老師歡迎來信：[wush@datascienceandr.org](mailto:wush@datascienceandr.org)
+
+## 即時動態
+
+<div class="well" style="height: 7em;"><ul id="records"></ul></div>
 
 ## 線上體驗區（需參加實體課程）
 

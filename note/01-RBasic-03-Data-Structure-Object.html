@@ -284,30 +284,16 @@ img {
 <div id="-49" class="section level2">
 <h2>關卡 49</h2>
 <p>最後我們請同學用這個課程所學的內容，處理一個PCA的結果。請同學在完成之後存檔，並輸入<code>submit()</code>來檢查結果是否符合預期。如果同學在檔案中看到亂碼，請使用Rstudio左上角的File-&gt;ReopenWithEncoding…-&gt;選取：UTF-8</p>
-<pre class="r"><code>#' 以下內容改自prcomp 的範例程式碼
-#' 
-#' PCA(Principle Components Analysis) 是一個資料分析時常用的技術，
-#' 它的原理會在後面的課程講解。
-#' 在R 中，我們可以利用prcomp這個指令對USArrests這筆資料進行PCA 的分析，
-#' R 會吐回一個計算後的物件給我們。
-pca &lt;- prcomp(USArrests, scale = TRUE)
+<pre class="r"><code>pca &lt;- prcomp(USArrests, scale = TRUE)
 
-#' 請同學找出這個物件的名稱。你的答案只可能是：「character」、「numeric」或「list」
 answer1 &lt;- mode(pca)
 
-#' 請同學找出`pca`這個向量的長度
 answer2 &lt;- length(pca)
 
-#' 請同學找出`pca`的名字
 answer3 &lt;- names(pca)
 
-#' `pca` 的元素中，有一個是各個principal components的standard deviations。
-#' 請同學參考`help(prcomp)`的說明，將各個principal components的standard deviations
-#' 的值取出，存到答案中。
 answer4 &lt;- pca$sdev
 
-#' `pca` 的元素中，有一個是做PCA的中心(center)。請同學參考`help(prcomp)`的說明，
-#' 把該元素取出，存到答案中。
 answer5 &lt;- pca$center</code></pre>
 </div>
 

@@ -173,58 +173,71 @@ img {
 </div>
 <div id="-26" class="section level2">
 <h2>關卡 26</h2>
-<p>除了list的語法之外，我們也可以使用類似matrix的語法。舉例來說，我們可以用<code>a[,1]</code>選取第一欄。請同學試試看。</p>
-<pre class="r"><code>a[,1]</code></pre>
+<p>除了list的語法之外，我們也可以使用類似matrix的語法。</p>
 </div>
 <div id="-27" class="section level2">
 <h2>關卡 27</h2>
-<p>根據螢幕上的輸出，請問同學<code>a[,1]</code>的類別是什麼呢？</p>
-<p>factor</p>
+<p>舉例來說，<code>nrow(a)</code>可以列出a所包含的列數、<code>ncol(a)</code>可以列出a所包含的欄數、<code>dim(a)</code>可以一次列出兩者。這些都和matrix非常類似。</p>
 </div>
 <div id="-28" class="section level2">
 <h2>關卡 28</h2>
-<p>同理，我們也可以用<code>a[1,2]</code>來取出第1列、第2欄的資料。請同學試試看。</p>
-<pre class="r"><code>a[1,2]</code></pre>
+<p>資料的選取也很類似。我們可以用<code>a[,1]</code>選取第一欄。請同學試試看。</p>
+<pre class="r"><code>a[,1]</code></pre>
 </div>
 <div id="-29" class="section level2">
 <h2>關卡 29</h2>
-<p>欄位的方向，也可以用名字代替。舉例來說，<code>a[2,&quot;id&quot;]</code>可以選到第二列第二欄，因為<code>a[2,]</code>代表第二列，<code>a[,&quot;id&quot;]</code>會選到名稱為<code>&quot;id&quot;</code>的第二欄。而兩者的交集，就是第2列第2欄。請同學試試看。</p>
-<pre class="r"><code>a[2,&quot;id&quot;]</code></pre>
+<p>根據螢幕上的輸出，請問同學<code>a[,1]</code>的類別是什麼呢？</p>
+<p>factor</p>
 </div>
 <div id="-30" class="section level2">
 <h2>關卡 30</h2>
-<p>中括號<code>[]</code>也可以一次選取多列多欄。舉例來說，<code>a[1:2,&quot;id&quot;]</code>可以一次選取<code>a$id</code>底下的第一到第二的值。請問同學，下面哪一種語法「不能」得到一樣的結果？</p>
-<p>a[1:2][“id”]</p>
+<p>同理，我們也可以用<code>a[1,2]</code>來取出第1列、第2欄的資料。請同學試試看。</p>
+<pre class="r"><code>a[1,2]</code></pre>
 </div>
 <div id="-31" class="section level2">
 <h2>關卡 31</h2>
-<p>另一個用法是：<code>a[1:2,1:2]</code>，可以選出前兩列和前兩欄。請同學試試看。</p>
-<pre class="r"><code>a[1:2,1:2]</code></pre>
+<p><code>colnames(a)</code>則可以取出a的欄位名稱。請同學試試看。名稱也可以用於接下來的資料選取中。</p>
+<pre class="r"><code>colnames(a)</code></pre>
 </div>
 <div id="-32" class="section level2">
 <h2>關卡 32</h2>
-<p>請問同學，能不能用<code>class</code>查看<code>a[1:2,1:2]</code>的型態呢？</p>
-<pre class="r"><code>class(a[1:2,1:2])</code></pre>
+<p>欄位的方向，也可以用名字代替。舉例來說，<code>a[2,&quot;id&quot;]</code>可以選到第二列第二欄，因為<code>a[2,]</code>代表第二列，<code>a[,&quot;id&quot;]</code>會選到名稱為<code>&quot;id&quot;</code>的第二欄。而兩者的交集，就是第2列第2欄。請同學試試看。</p>
+<pre class="r"><code>a[2,&quot;id&quot;]</code></pre>
 </div>
 <div id="-33" class="section level2">
 <h2>關卡 33</h2>
-<p>有沒有注意到，在輸入<code>a[1:2,&quot;id&quot;]</code>的時候R會輸出一個向量，但是輸入<code>a[1:2,1:2]</code>的時候R反而會給一個data.frame呢？其實這樣不一致的行為，在未來同學如果寫一些複雜的資料整理時，會帶來困擾的。</p>
+<p>中括號<code>[]</code>也可以一次選取多列多欄。舉例來說，<code>a[1:2,&quot;id&quot;]</code>可以一次選取<code>a$id</code>底下的第一到第二的值。請問同學，下面哪一種語法「不能」得到一樣的結果？</p>
+<p>a[1:2][“id”]</p>
 </div>
 <div id="-34" class="section level2">
 <h2>關卡 34</h2>
-<p>其實<code>[]</code>中括號這個函數，有一個參數叫做：<code>drop</code>，而且預設為<code>TRUE</code>。當我們使用<code>[]</code>取得結果的時候，如果有一個方向可以縮減維度（例如只有一個欄位的表格），R就會自動把表格的結構破壞，回傳一個向量。請同學試試看：<code>a[1:2,&quot;id&quot;,drop=FALSE]</code></p>
-<pre class="r"><code>a[1:2, &quot;id&quot;, drop = FALSE]</code></pre>
+<p>另一個用法是：<code>a[1:2,1:2]</code>，可以選出前兩列和前兩欄。請同學試試看。</p>
+<pre class="r"><code>a[1:2,1:2]</code></pre>
 </div>
 <div id="-35" class="section level2">
 <h2>關卡 35</h2>
-<p>從R顯示在console的輸出結果，同學應該會同意這是一個data.frame。在R中，console會根據不同的<code>class</code>而用不同的方式呈現輸出結果。</p>
+<p>請問同學，能不能用<code>class</code>查看<code>a[1:2,1:2]</code>的型態呢？</p>
+<pre class="r"><code>class(a[1:2,1:2])</code></pre>
 </div>
 <div id="-36" class="section level2">
 <h2>關卡 36</h2>
-<p>那我們對於list和data.frame的介紹就到這了。data.frame是處理資料和跑各種進階演算法時，非常常用到的結構。所以請同學務必要熟悉各種data.frame的操作，才能順利的整理收集的資料，並且在資料上跑其他的演算法。</p>
+<p>有沒有注意到，在輸入<code>a[1:2,&quot;id&quot;]</code>的時候R會輸出一個向量，但是輸入<code>a[1:2,1:2]</code>的時候R反而會給一個data.frame呢？其實這樣不一致的行為，在未來同學如果寫一些複雜的資料整理時，會帶來困擾的。</p>
 </div>
 <div id="-37" class="section level2">
 <h2>關卡 37</h2>
+<p>其實<code>[]</code>中括號這個函數，有一個參數叫做：<code>drop</code>，而且預設為<code>TRUE</code>。當我們使用<code>[]</code>取得結果的時候，如果有一個方向可以縮減維度（例如只有一個欄位的表格），R就會自動把表格的結構破壞，回傳一個向量。請同學試試看：<code>a[1:2,&quot;id&quot;,drop=FALSE]</code></p>
+<pre class="r"><code>a[1:2, &quot;id&quot;, drop = FALSE]</code></pre>
+</div>
+<div id="-38" class="section level2">
+<h2>關卡 38</h2>
+<p>從R顯示在console的輸出結果，同學應該會同意這是一個data.frame。在R中，console會根據不同的<code>class</code>而用不同的方式呈現輸出結果。</p>
+</div>
+<div id="-39" class="section level2">
+<h2>關卡 39</h2>
+<p>那我們對於list和data.frame的介紹就到這了。data.frame是處理資料和跑各種進階演算法時，非常常用到的結構。所以請同學務必要熟悉各種data.frame的操作，才能順利的整理收集的資料，並且在資料上跑其他的演算法。</p>
+</div>
+<div id="-40" class="section level2">
+<h2>關卡 40</h2>
 <p>接著，請同學依照這個課程所學到的技巧，做一個簡單的練習。請同學在完成之後存檔，並輸入<code>submit()</code>來檢查結果是否符合預期。如果同學在檔案中看到亂碼，請使用Rstudio左上角的File-&gt;ReopenWithEncoding…-&gt;選取：UTF-8</p>
 <pre class="r"><code>#' 這裡我們使用CO2這個資料集請同學做練習
 data(CO2)
