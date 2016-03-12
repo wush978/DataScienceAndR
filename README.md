@@ -9,28 +9,51 @@
 <script src="http://momentjs.com/downloads/moment-with-locales.min.js" async defer></script>
 
 <script>
-function showRegistrationRecords(){
-  $("#records").empty();
-  $.ajax({
-    url:"http://api2.datascienceandr.org:3000/api/getManyRecords",
-    type:"POST",
-    data:{num:5},
-    dataType:"json",
-    success: function(data){
-      console.log(data);
-      data.forEach(function(record){
-        m = moment(record.created_at);
-        if (record.type == 0) {
-          li = "<li>" + record.user_id  + "在" + m.fromNow() + "進入了" + record.course  + "</li>"
-        } else {
-          li = "<li>" + record.user_id  + "在" + m.fromNow() + "完成了" + record.course  + "</li>"
-        }
-        $("#records").append(li);
-      });
-    }
-  });
 
+function showRegistrationRecords() {
+  $("#records").empty();
+  var url1 = "http://api.datascienceandr.org:3000/api/getManyRecords";
+  var url2 = "http://api2.datascienceandr.org:3000/api/getManyRecords";
+  var used_records = [];
+  function successOperation(data) {
+    data.forEach(function(record) {
+      used_records.push(record);
+    });
+  }
+  function getManyRecordsOperation(url, completeOperation) {
+    return function(jqXHR, status) {
+      $.ajax({
+        url:url,
+        type:"POST",
+        data:{num:5},
+        dataType:"json",
+        success: successOperation,
+        complete: completeOperation
+      });
+    };
+  }
+  var operation = getManyRecordsOperation(url1, getManyRecordsOperation(url2, function() {
+    used_records.sort(function(r1, r2) {
+      if (r1.created_at < r2.created_at)
+        return 1;
+      else if (r1.created_at > r2.created_at)
+        return -1;
+      else
+        return 0;
+    });
+    used_records.forEach(function(record) {
+      m = moment(record.created_at);
+      if (record.type == 0) {
+        li = "<li>" + record.user_id  + "在" + m.fromNow() + "進入了" + record.course  + "</li>"
+      } else {
+        li = "<li>" + record.user_id  + "在" + m.fromNow() + "完成了" + record.course  + "</li>"
+      }
+      $("#records").append(li);
+    });
+  }));
+  operation();
 }
+
 
 
 window.onload =function(){
@@ -56,7 +79,7 @@ window.onload =function(){
 
 ## 即時動態
 
-<div class="well" style="height: 7em;"><ul id="records"></ul></div>
+<div class="well" style="height: 14em;"><ul id="records"></ul></div>
 
 ## 線上體驗區（需參加實體課程）
 
