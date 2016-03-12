@@ -84,6 +84,22 @@ function showRegistrationRecords() {
 
 window.onload =function(){
   moment.locale("zh-tw");
+  moment.updateLocale("zh-tw", {
+    relativeTime : {
+      future : '%s內',
+      past : '%s前',
+      s : '幾秒',
+      m : '1分鐘',
+      mm : '%d分鐘',
+      h : '1小時',
+      hh : '%d小時',
+      d : '1天',
+      dd : '%d天',
+      M : '1個月',
+      MM : '%d個月',
+      y : '1年',
+      yy : '%d年'
+    }});
   showRegistrationRecords();
 }
 </script>
