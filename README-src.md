@@ -1,4 +1,5 @@
 <!-- title: R 語言翻轉教室 -->
+<!-- subtitle: 預定於四月正式發布 -->
 
 <script>
   ((window.gitter = {}).chat = {}).options = {
