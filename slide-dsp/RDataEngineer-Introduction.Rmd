@@ -1,8 +1,8 @@
 ---
 title       : R語言與資料處理
-subtitle    : 智庫驅動
+subtitle    : Johnson Hsieh (智庫驅動)
 job         : 
-author      : Wush Wu, HJ, Hsu, Johnson Hsieh
+author      : Power by Wush Wu and HJ Hsu
 framework   : io2012-dsp
 highlighter : highlight.js
 hitheme     : zenburn
