@@ -1,9 +1,0 @@
-base
-knitr
-RColorBrewer
-ggplot2
-xtable
-magrittr
-data.table
-broom
-dplyr

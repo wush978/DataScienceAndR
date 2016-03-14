@@ -418,13 +418,15 @@ pre > code {
   font-size: 250%;
 } 
 
+
 .title-slide hgroup > h2 {
   color: #535E43 ;  /* ; #EF5150 */
-  font-size: 200%;
+  font-size: 100%;
 }
 
 .title-slide hgroup > p {
   color: #535E43 ;  /* ; #EF5150 */
-  font-size: 125%;
-  margin-top: 5pt;
+  font-size: 20px;
+  margin-top: 5px !important;
+  
 }

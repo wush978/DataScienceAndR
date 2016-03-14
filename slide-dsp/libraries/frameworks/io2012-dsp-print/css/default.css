@@ -543,6 +543,7 @@ ul ul {
 }
 
 /* line 373, ../scss/default.scss */
+/*
 pre {
   font-family: 'Inconsolata', 'Courier New', monospace;
   font-size: 18px;
@@ -557,6 +558,33 @@ pre {
   -moz-box-sizing: border-box;
   box-sizing: border-box;
   overflow: hidden;
+}
+*/
+
+
+pre {
+    font-family: "Source Code Pro","Courier New",monospace;
+    font-size: 20px;
+    line-height: 28px;
+    letter-spacing: -1px;
+    margin-bottom: 12px;
+    width: 98%;
+    left: 0px;
+    position: relative;
+    box-sizing: border-box;
+    padding: 5px 10px 5px 5px;
+    white-space: pre-wrap;
+    white-space: -moz-pre-wrap;
+    white-space: -pre-wrap;
+    white-space: -o-pre-wrap;
+    word-wrap: break-word;
+    margin: 5px 10px 5px 0px;
+    
+    white-space: pre-wrap; /* css-3 */
+    white-space: -moz-pre-wrap; /* Mozilla, since 1999 */
+    white-space: -pre-wrap; /* Opera 4-6 */
+    white-space: -o-pre-wrap; /* Opera 7 */
+    word-wrap: break-word; /* Internet Explorer 5.5+ */
 }
 /* line 387, ../scss/default.scss */
 pre[data-lang]:after {
