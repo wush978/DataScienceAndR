@@ -270,7 +270,8 @@ Year,Make,Model,
 
 - 有規範的標籤
 - HTML用於撰寫網頁、XML用於傳輸資料
-```
+
+<pre><code>
 &lt;html&gt;
 
 &lt;head&gt;
@@ -288,7 +289,8 @@ Year,Make,Model,
 &lt;/body&gt;
 
 &lt;/html&gt;
-```
+</code></pre>
+
 <small>出自：<http://www.w3school.com.cn/tags/tag_pre.asp></small>
 
 --- .largecontent
