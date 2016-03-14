@@ -1,0 +1,29 @@
+img.fit100 {
+  max-width:100%;
+  max-height:100%;
+}
+
+slides slide.largecontent h3 {
+  font-size: 40px;
+  font-style: normal;
+  line-height: 1.1em;
+}
+
+slides slide.largecontent li {
+  font-size: 36px;
+  font-style: normal;
+  line-height: 1.1em;
+}
+
+slides > slide:not(.nobackground):after {
+  font-size: 12pt;
+  content: attr(data-slide-num) "/" attr(data-total-slides);
+  position: absolute;
+  top: 20px;
+  right: 60px;
+  line-height: 1.9;
+}
+
+pre > code {
+  text-align: left;  
+}

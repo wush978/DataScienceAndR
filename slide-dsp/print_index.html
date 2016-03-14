@@ -1,0 +1,2313 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>ETL with R</title>
+  <meta charset="utf-8">
+  <meta name="description" content="ETL with R">
+  <meta name="author" content="Rafe Liu (rafe@dsp.im)">
+  <meta name="generator" content="slidify" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <link rel="stylesheet" href="libraries/frameworks/io2012-dsp/css/default.css" media="all" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012-dsp/css/phone.css" 
+    media="only screen and (max-device-width: 480px)" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012-dsp/css/slidify.css" >
+  <link rel="stylesheet" href="libraries/highlighters/highlight.js/css/tomorrow.css" />
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->  <link rel=stylesheet href="./assets/css/ribbons.css"></link>
+
+  
+  <!-- Grab CDN jQuery, fall back to local if offline -->
+  <script src="libraries/frameworks/io2012-dsp/js/jquery-1.7.min.js"></script>
+  <!-- <script>window.jQuery || document.write('<script src="libraries/widgets/quiz/js/jquery.js"><\/script>')</script> -->
+  <script data-main="libraries/frameworks/io2012-dsp/js/slides" 
+    src="libraries/frameworks/io2012-dsp/js/require-1.0.8.min.js">
+  </script>
+  
+  
+
+</head>
+<body style="opacity: 0">
+  <slides class="layout-widescreen">
+    
+    <!-- LOGO SLIDE -->
+        <slide class="title-slide segue nobackground">
+  <hgroup class="auto-fadein">
+    <h1>ETL with R</h1>
+    <h2>智庫驅動</h2>
+    <p>Rafe Liu (rafe@dsp.im)<br/></p>
+  </hgroup>
+  <article></article>  
+</slide>
+    
+
+    <!-- SLIDES -->
+    <slide class="" id="slide-1" style="background-image: url('libraries/frameworks/io2012-dsp/images/dsp-page-white1100.jpg'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2>Data Manipulation</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>Read/Write/Opendata</li>
+<li>ETL: Extraction/Transform/Load</li>
+<li>需要的套件</li>
+</ul>
+
+<pre><code class="r">    library(dplyr)
+    library(data.table)
+    library(reshape2)
+    library(ggplot2)
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="light segue" id="slide-2" style="background-image: url('libraries/frameworks/io2012-dsp/images/dsp-page-white1100.jpg'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2>TIPs</h2>
+  </hgroup>
+  <article data-timings="">
+    
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-3" style="background-image: url('libraries/frameworks/io2012-dsp/images/dsp-page-white1100.jpg'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2>HELP</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>help(topic, package = ..) 是很棒的學習資源</li>
+<li>? 　　　一個問號讓我們更謙卑</li>
+<li>??　　　兩個問號讓我們探索世界</li>
+</ul>
+
+<h2>MORE TIPS</h2>
+
+<ul>
+<li><code>#</code> 筆記法</li>
+<li><code>getwd()</code>, <code>setwd()</code></li>
+<li>Run current line/selection
+
+<ul>
+<li>Ctrl+Enter, Ctrl+r</li>
+<li>Command+Enter</li>
+</ul></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-4" style="background-image: url('libraries/frameworks/io2012-dsp/images/dsp-page-white1100.jpg'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <article data-timings="">
+    <p><img src='img/tabs.jpg' height=645 align='center' style='margin-top: -38px;'></img></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="light segue" id="slide-5" style="background-image: url('libraries/frameworks/io2012-dsp/images/dsp-page-white1100.jpg'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2>Read/Write</h2>
+  </hgroup>
+  <article data-timings="">
+    
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-6" style="background-image: url('libraries/frameworks/io2012-dsp/images/dsp-page-white1100.jpg'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2>讀檔之前，先觀察檔案</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>編碼通常都是 <code>UTF8</code> 或 <code>BIG5</code>
+
+<ul>
+<li>Linux, Darwin: &quot;UTF-8&quot;</li>
+<li>Windows: &quot;BIG-5&quot;</li>
+</ul></li>
+<li>library function
+
+<ul>
+<li>依照不同檔案格式選擇</li>
+<li><code>readLines</code>, <code>read.csv</code>....</li>
+</ul></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-7" style="background-image: url('libraries/frameworks/io2012-dsp/images/dsp-page-white1100.jpg'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2>Concept</h2>
+  </hgroup>
+  <article data-timings="">
+    <pre><code class="r">raw &lt;- readLines(&#39;檔案路徑&#39;, encoding = &quot;BIG-5&quot;)
+</code></pre>
+
+<p><br></p>
+
+<h2>Tips: 轉換編碼並存檔</h2>
+
+<pre><code class="r"># 從big5轉utf8
+raw2 &lt;- iconv(raw, from = &quot;BIG-5&quot;, to = &quot;UTF-8&quot;)
+
+# 存檔囉～～
+write.csv(file = &quot;ubikeweatherutf8.csv&quot;, x = raw2, fileEncoding = &quot;UTF-8&quot;)
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-8" style="background-image: url('libraries/frameworks/io2012-dsp/images/dsp-page-white1100.jpg'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2>Exercise:</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><a href="">ubike x weather 資料檔</a></li>
+</ul>
+
+<pre><code class="r"># 必先確認 Working Directory!
+# getwd(), setwd()
+
+# read.csv
+ubike &lt;- read.csv(&quot;./data/ubikeweatherutf8.csv&quot;,
+          colClasses = c(&quot;factor&quot;,&quot;integer&quot;,&quot;integer&quot;,&quot;factor&quot;,&quot;factor&quot;,
+                         &quot;numeric&quot;,&quot;numeric&quot;,&quot;integer&quot;,&quot;numeric&quot;,&quot;integer&quot;,
+                         &quot;integer&quot;,&quot;numeric&quot;,&quot;numeric&quot;, &quot;integer&quot;,&quot;integer&quot;,
+                         &quot;numeric&quot;,&quot;numeric&quot;,&quot;numeric&quot;, &quot;numeric&quot;,&quot;numeric&quot;,
+                         &quot;numeric&quot;, &quot;numeric&quot;,&quot;numeric&quot;), fileEncoding = &#39;utf8&#39;)
+
+# 以 colClasses 控制每個欄位的 class，這可使讀檔加速
+# 以 fileEncoding 定義檔案編碼
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-9" style="background-image: url('libraries/frameworks/io2012-dsp/images/dsp-page-white1100.jpg'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2>大「數據」(檔)的處理方式</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>fread 是 data.table 裡的 function</li>
+<li>加快讀取速度 (真的很快！)</li>
+</ul>
+
+<pre><code class="r">library(data.table)
+ubike &lt;- fread(&quot;./data/ubike-weather-utf8.csv&quot;,
+               data.table = FALSE, 
+               colClasses = c(&quot;factor&quot;,&quot;integer&quot;,&quot;integer&quot;,&quot;factor&quot;,&quot;factor&quot;,
+                              &quot;numeric&quot;,&quot;numeric&quot;,&quot;integer&quot;,&quot;numeric&quot;,&quot;integer&quot;,
+                              &quot;integer&quot;,&quot;numeric&quot;,&quot;numeric&quot;,&quot;integer&quot;,&quot;integer&quot;,
+                              &quot;numeric&quot;,&quot;numeric&quot;,&quot;numeric&quot;,&quot;numeric&quot;,&quot;numeric&quot;,
+                              &quot;numeric&quot;, &quot;numeric&quot;,&quot;numeric&quot;))
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-10" style="background-image: url('libraries/frameworks/io2012-dsp/images/dsp-page-white1100.jpg'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2>把欄位換成中文</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><code>CAUTION!</code></li>
+</ul>
+
+<pre><code class="r">colnames(ubike) &lt;- c(&quot;日期&quot;,&quot;時間&quot;,&quot;場站代號&quot;,&quot;場站區域&quot;,&quot;場站名稱&quot;,
+                     &quot;經度&quot;,&quot;緯度&quot;,&quot;總停車格&quot;,&quot;平均車輛數&quot;,&quot;最大車輛數&quot;,
+                     &quot;最小車輛數&quot;,&quot;車輛數標準差&quot;,&quot;平均空位數&quot;,&quot;最大空位數&quot;,&quot;最小空位數&quot;,
+                     &quot;空位數標準差&quot;,&quot;氣溫&quot;,&quot;最高溫&quot;,&quot;最低溫&quot;,&quot;溼度&quot;,
+                     &quot;氣壓&quot;,&quot;最大風速&quot;,&quot;降雨量&quot;)
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-11" style="background-image: url('libraries/frameworks/io2012-dsp/images/dsp-page-white1100.jpg'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2>欄位中文英文對照表</h2>
+  </hgroup>
+  <article data-timings="">
+    <table><thead>
+<tr>
+<th align="left">X1</th>
+<th align="left">X2</th>
+<th align="left">X3</th>
+<th align="left">X4</th>
+</tr>
+</thead><tbody>
+<tr>
+<td align="left">日期</td>
+<td align="left">date</td>
+<td align="left">車輛數標準差</td>
+<td align="left">std.sbi</td>
+</tr>
+<tr>
+<td align="left">時間</td>
+<td align="left">hour</td>
+<td align="left">平均空位數</td>
+<td align="left">avg.bemp</td>
+</tr>
+<tr>
+<td align="left">場站代號</td>
+<td align="left">sno</td>
+<td align="left">最大空位數</td>
+<td align="left">max.bemp</td>
+</tr>
+<tr>
+<td align="left">場站區域</td>
+<td align="left">sarea</td>
+<td align="left">最小空位數</td>
+<td align="left">min.bemp</td>
+</tr>
+<tr>
+<td align="left">場站名稱</td>
+<td align="left">sna</td>
+<td align="left">空位數標準差</td>
+<td align="left">std.bemp</td>
+</tr>
+<tr>
+<td align="left">經度</td>
+<td align="left">lat</td>
+<td align="left">氣溫</td>
+<td align="left">temp</td>
+</tr>
+<tr>
+<td align="left">緯度</td>
+<td align="left">lng</td>
+<td align="left">最高溫</td>
+<td align="left">max.temp</td>
+</tr>
+<tr>
+<td align="left">總停車格</td>
+<td align="left">tot</td>
+<td align="left">最低溫</td>
+<td align="left">min.temp</td>
+</tr>
+<tr>
+<td align="left">平均車輛數</td>
+<td align="left">avg.sbi</td>
+<td align="left">溼度</td>
+<td align="left">humidity</td>
+</tr>
+<tr>
+<td align="left">最大車輛數</td>
+<td align="left">max.sbi</td>
+<td align="left">氣壓</td>
+<td align="left">pressure</td>
+</tr>
+<tr>
+<td align="left">最小車輛數</td>
+<td align="left">min.sbi</td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+</tbody></table>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-12" style="background-image: url('libraries/frameworks/io2012-dsp/images/dsp-page-white1100.jpg'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2>取值- 座標</h2>
+  </hgroup>
+  <article data-timings="">
+    <pre><code class="r"># structure, summary of ubike dataset
+str(ubike)
+
+# head可以取出前幾列
+head(ubike)
+
+# tail可以取最後幾列
+tail(ubike)
+
+# 利用座標來取值，第一個數表示列位，第二個數表示欄位
+ubike[3,2]
+
+# 可一次選擇多列多欄
+ubike[c(3:4), c(2:5,7)]
+
+# 加上負號可剔除列位欄位
+ubike[c(3:4), -c(6:21)]
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-13" style="background-image: url('libraries/frameworks/io2012-dsp/images/dsp-page-white1100.jpg'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2>取值- 指定欄位</h2>
+  </hgroup>
+  <article data-timings="">
+    <pre><code class="r">ubike[,4]
+
+ubike[,&quot;sna&quot;]
+
+ubike[[&quot;sna&quot;]]
+
+ubike$場站名稱
+</code></pre>
+
+<p><br></p>
+
+<h3>Quiz: 以下顯示？</h3>
+
+<pre><code class="r">ubike[ubike$sna%in% c(&quot;台北市災害應變中心&quot;, &quot;世貿三館&quot;), ]
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="light segue" id="slide-14" style="background-image: url('libraries/frameworks/io2012-dsp/images/dsp-page-white1100.jpg'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2>dplyr</h2>
+  </hgroup>
+  <article data-timings="">
+    
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-15" style="background-image: url('libraries/frameworks/io2012-dsp/images/dsp-page-white1100.jpg'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2>magrittr</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>壓縮的程式碼不好讀</li>
+<li>展開的程式碼會產生很多暫存變數</li>
+<li>套件 <code>magrittr</code> 解決了這個問題</li>
+<li>Pipeline style</li>
+</ul>
+
+<pre><code class="r"># OLD school
+ans1 &lt;- ubike$sna
+ans1.1 &lt;- unique(ans1) # unique可列出所有不重複的項目
+print(head(ans1.1, n = 10))
+
+# pipeline
+library(magrittr)
+ubike$sna %&gt;%
+  unique() %&gt;% head(n = 10) %&gt;%
+  print()
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-16" style="background-image: url('libraries/frameworks/io2012-dsp/images/dsp-page-white1100.jpg'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <article data-timings="">
+    <p><img src='img/pipeline.jpg' height=645 align='center' style='margin-top: -38px;'></img></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-17" style="background-image: url('libraries/frameworks/io2012-dsp/images/dsp-page-white1100.jpg'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2>dplyr</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>讓 R 使用者可以用更有彈性的方式來處理資料</li>
+<li>整合 <code>magrittr</code> pipeline</li>
+<li>針對 <code>data.frame</code> 做設計（名稱中的<code>d</code>）</li>
+<li>設計理念
+
+<ul>
+<li>Step by step</li>
+<li>處理速度直覺又快</li>
+<li>支援異質資料源（<code>data.frame</code> 或資料庫中的表格）</li>
+<li>結合資料整理工具優點（ex. Excel, SQL）</li>
+</ul></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-18" style="background-image: url('libraries/frameworks/io2012-dsp/images/dsp-page-white1100.jpg'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2>學習 dplyr 的官方方式：<code>vignette</code></h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>更詳細的 dplyr 介紹可以閱讀 dplyr 的小論文</li>
+<li>R 的開發者會針對一個主題撰寫小論文做介紹</li>
+</ul>
+
+<pre><code class="r">vignette(all = TRUE, package = &quot;dplyr&quot;)
+
+vignette(&quot;introduction&quot;, package = &quot;dplyr&quot;)
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-19" style="background-image: url('libraries/frameworks/io2012-dsp/images/dsp-page-white1100.jpg'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2>dplyr 簡介</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><code>filter</code> 對列做篩選</li>
+<li><code>select</code> 對欄做篩選</li>
+<li><code>mutate</code> 更改欄或新增欄</li>
+<li><code>arrange</code> 排列</li>
+<li><code>group_by</code>+<code>summarise</code> 依照類別處理</li>
+<li>合併欄位</li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-20" style="background-image: url('libraries/frameworks/io2012-dsp/images/dsp-page-white1100.jpg'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2>情境</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>小明想在永和找到新房子，希望以後上下班都靠 ubike 通勤，希望早上可以輕鬆租到車，下班後也可以輕鬆還車。</p>
+
+<ul>
+<li>請幫他找出中和區早上七點腳踏車最多的場站。</li>
+<li>比較 <code>mutate()</code> 與 <code>summarise()</code> 之不同</li>
+</ul>
+
+<pre><code class="r">library(dplyr)
+head(ubike)
+
+select(ubike, hour, sarea, sna, avg.sbi) %&gt;%
+  filter(sarea == &#39;中和區&#39; &amp; hour == 7) %&gt;%
+  mutate(avg.sbi = floor(avg.sbi)) 
+
+select(ubike, hour, sarea, sna, avg.sbi) %&gt;%
+  filter(sarea == &#39;中和區&#39; &amp; hour == 7) %&gt;%
+  group_by(hour, sarea, sna) %&gt;%
+  summarise(avg = mean(avg.sbi) %&gt;% round()) %&gt;%
+  arrange(avg %&gt;% desc())
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-21" style="background-image: url('libraries/frameworks/io2012-dsp/images/dsp-page-white1100.jpg'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2>select</h2>
+  </hgroup>
+  <article data-timings="">
+    <p><img src='img/select1.png' height=300 align='center'></img><img src='img/select2.png' height=300 align='center'></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-22" style="background-image: url('libraries/frameworks/io2012-dsp/images/dsp-page-white1100.jpg'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2>select</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>「選擇」時間、場站區域、場站名稱、平均車輛數</li>
+</ul>
+
+<table><thead>
+<tr>
+<th align="right">hour</th>
+<th align="left">sarea</th>
+<th align="left">sna</th>
+<th align="right">avg.sbi</th>
+</tr>
+</thead><tbody>
+<tr>
+<td align="right">15</td>
+<td align="left">大安區</td>
+<td align="left">捷運國父紀念館站(2號出口)</td>
+<td align="right">24.000</td>
+</tr>
+<tr>
+<td align="right">15</td>
+<td align="left">信義區</td>
+<td align="left">台北市政府</td>
+<td align="right">10.333</td>
+</tr>
+<tr>
+<td align="right">15</td>
+<td align="left">信義區</td>
+<td align="left">市民廣場</td>
+<td align="right">39.333</td>
+</tr>
+<tr>
+<td align="right">15</td>
+<td align="left">信義區</td>
+<td align="left">興雅國中</td>
+<td align="right">34.167</td>
+</tr>
+<tr>
+<td align="right">15</td>
+<td align="left">信義區</td>
+<td align="left">世貿二館</td>
+<td align="right">31.333</td>
+</tr>
+<tr>
+<td align="right">15</td>
+<td align="left">信義區</td>
+<td align="left">信義廣場(台北101)</td>
+<td align="right">23.571</td>
+</tr>
+</tbody></table>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-23" style="background-image: url('libraries/frameworks/io2012-dsp/images/dsp-page-white1100.jpg'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2>filter</h2>
+  </hgroup>
+  <article data-timings="">
+    <p><img src='img/filter1.png' width=300 align='center'></img><img src='img/filter2.png' width=300 align='center'></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-24" style="background-image: url('libraries/frameworks/io2012-dsp/images/dsp-page-white1100.jpg'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2>filter</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>「篩選」出中和區的資料</li>
+</ul>
+
+<pre><code class="r">select(ubike, hour, sarea, sna, avg.sbi) %&gt;%
+  filter(sarea == &#39;中和區&#39; &amp; hour == 7)
+</code></pre>
+
+<table><thead>
+<tr>
+<th align="right">hour</th>
+<th align="left">sarea</th>
+<th align="left">sna</th>
+<th align="right">avg.sbi</th>
+</tr>
+</thead><tbody>
+<tr>
+<td align="right">7</td>
+<td align="left">中和區</td>
+<td align="left">秀山國小</td>
+<td align="right">0.000</td>
+</tr>
+<tr>
+<td align="right">7</td>
+<td align="left">中和區</td>
+<td align="left">捷運永安市場站</td>
+<td align="right">1.733</td>
+</tr>
+<tr>
+<td align="right">7</td>
+<td align="left">中和區</td>
+<td align="left">中和公園</td>
+<td align="right">0.267</td>
+</tr>
+<tr>
+<td align="right">7</td>
+<td align="left">中和區</td>
+<td align="left">秀山國小</td>
+<td align="right">33.800</td>
+</tr>
+<tr>
+<td align="right">7</td>
+<td align="left">中和區</td>
+<td align="left">捷運永安市場站</td>
+<td align="right">6.467</td>
+</tr>
+<tr>
+<td align="right">7</td>
+<td align="left">中和區</td>
+<td align="left">中和公園</td>
+<td align="right">4.600</td>
+</tr>
+<tr>
+<td align="right">7</td>
+<td align="left">中和區</td>
+<td align="left">秀山國小</td>
+<td align="right">37.400</td>
+</tr>
+<tr>
+<td align="right">7</td>
+<td align="left">中和區</td>
+<td align="left">捷運永安市場站</td>
+<td align="right">12.867</td>
+</tr>
+<tr>
+<td align="right">7</td>
+<td align="left">中和區</td>
+<td align="left">中和公園</td>
+<td align="right">1.467</td>
+</tr>
+<tr>
+<td align="right">7</td>
+<td align="left">中和區</td>
+<td align="left">秀山國小</td>
+<td align="right">31.867</td>
+</tr>
+<tr>
+<td align="right">7</td>
+<td align="left">中和區</td>
+<td align="left">捷運永安市場站</td>
+<td align="right">19.267</td>
+</tr>
+<tr>
+<td align="right">7</td>
+<td align="left">中和區</td>
+<td align="left">中和公園</td>
+<td align="right">29.067</td>
+</tr>
+<tr>
+<td align="right">7</td>
+<td align="left">中和區</td>
+<td align="left">捷運永安市場站</td>
+<td align="right">13.600</td>
+</tr>
+<tr>
+<td align="right">7</td>
+<td align="left">中和區</td>
+<td align="left">中和公園</td>
+<td align="right">6.133</td>
+</tr>
+<tr>
+<td align="right">7</td>
+<td align="left">中和區</td>
+<td align="left">秀山國小</td>
+<td align="right">38.600</td>
+</tr>
+<tr>
+<td align="right">7</td>
+<td align="left">中和區</td>
+<td align="left">秀山國小</td>
+<td align="right">33.000</td>
+</tr>
+<tr>
+<td align="right">7</td>
+<td align="left">中和區</td>
+<td align="left">捷運永安市場站</td>
+<td align="right">1.600</td>
+</tr>
+<tr>
+<td align="right">7</td>
+<td align="left">中和區</td>
+<td align="left">中和公園</td>
+<td align="right">9.200</td>
+</tr>
+</tbody></table>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-25" style="background-image: url('libraries/frameworks/io2012-dsp/images/dsp-page-white1100.jpg'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2>mutate</h2>
+  </hgroup>
+  <article data-timings="">
+    <p><img src='img/origin.png' width=300 align='center'></img><img src='img/mutate.png' width=300 align='center'></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-26" style="background-image: url('libraries/frameworks/io2012-dsp/images/dsp-page-white1100.jpg'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2>mutate</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>「變化」新增欄位以計算有車率</li>
+</ul>
+
+<pre><code class="r">select(ubike, hour, sarea, sna, avg.sbi) %&gt;%
+  filter(sarea == &#39;中和區&#39; &amp; hour == 7) %&gt;%
+  mutate(avg.sbi = floor(avg.sbi)) 
+</code></pre>
+
+<table><thead>
+<tr>
+<th align="right">hour</th>
+<th align="left">sarea</th>
+<th align="left">sna</th>
+<th align="right">avg.sbi</th>
+</tr>
+</thead><tbody>
+<tr>
+<td align="right">7</td>
+<td align="left">中和區</td>
+<td align="left">秀山國小</td>
+<td align="right">0</td>
+</tr>
+<tr>
+<td align="right">7</td>
+<td align="left">中和區</td>
+<td align="left">捷運永安市場站</td>
+<td align="right">1</td>
+</tr>
+<tr>
+<td align="right">7</td>
+<td align="left">中和區</td>
+<td align="left">中和公園</td>
+<td align="right">0</td>
+</tr>
+<tr>
+<td align="right">7</td>
+<td align="left">中和區</td>
+<td align="left">秀山國小</td>
+<td align="right">33</td>
+</tr>
+<tr>
+<td align="right">7</td>
+<td align="left">中和區</td>
+<td align="left">捷運永安市場站</td>
+<td align="right">6</td>
+</tr>
+<tr>
+<td align="right">7</td>
+<td align="left">中和區</td>
+<td align="left">中和公園</td>
+<td align="right">4</td>
+</tr>
+<tr>
+<td align="right">7</td>
+<td align="left">中和區</td>
+<td align="left">秀山國小</td>
+<td align="right">37</td>
+</tr>
+<tr>
+<td align="right">7</td>
+<td align="left">中和區</td>
+<td align="left">捷運永安市場站</td>
+<td align="right">12</td>
+</tr>
+<tr>
+<td align="right">7</td>
+<td align="left">中和區</td>
+<td align="left">中和公園</td>
+<td align="right">1</td>
+</tr>
+<tr>
+<td align="right">7</td>
+<td align="left">中和區</td>
+<td align="left">秀山國小</td>
+<td align="right">31</td>
+</tr>
+<tr>
+<td align="right">7</td>
+<td align="left">中和區</td>
+<td align="left">捷運永安市場站</td>
+<td align="right">19</td>
+</tr>
+<tr>
+<td align="right">7</td>
+<td align="left">中和區</td>
+<td align="left">中和公園</td>
+<td align="right">29</td>
+</tr>
+<tr>
+<td align="right">7</td>
+<td align="left">中和區</td>
+<td align="left">捷運永安市場站</td>
+<td align="right">13</td>
+</tr>
+<tr>
+<td align="right">7</td>
+<td align="left">中和區</td>
+<td align="left">中和公園</td>
+<td align="right">6</td>
+</tr>
+<tr>
+<td align="right">7</td>
+<td align="left">中和區</td>
+<td align="left">秀山國小</td>
+<td align="right">38</td>
+</tr>
+<tr>
+<td align="right">7</td>
+<td align="left">中和區</td>
+<td align="left">秀山國小</td>
+<td align="right">33</td>
+</tr>
+<tr>
+<td align="right">7</td>
+<td align="left">中和區</td>
+<td align="left">捷運永安市場站</td>
+<td align="right">1</td>
+</tr>
+<tr>
+<td align="right">7</td>
+<td align="left">中和區</td>
+<td align="left">中和公園</td>
+<td align="right">9</td>
+</tr>
+</tbody></table>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-27" style="background-image: url('libraries/frameworks/io2012-dsp/images/dsp-page-white1100.jpg'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2>group_by</h2>
+  </hgroup>
+  <article data-timings="">
+    <p><img src='img/origin.png' width=300 align='center'></img><img src='img/group_by.png' width=300 align='center'></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-28" style="background-image: url('libraries/frameworks/io2012-dsp/images/dsp-page-white1100.jpg'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2>group_by</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>將資料依照某變數組成「群組」</li>
+</ul>
+
+<pre><code class="r">select(ubike, hour, sarea, sna, avg.sbi) %&gt;%
+  filter(sarea == &#39;中和區&#39; &amp; hour == 7) %&gt;%
+  group_by(hour, sarea, sna)
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-29" style="background-image: url('libraries/frameworks/io2012-dsp/images/dsp-page-white1100.jpg'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2>summarise</h2>
+  </hgroup>
+  <article data-timings="">
+    <p><img src='img/origin.png' width=300 align='center'></img><img src='img/group_by.png' width=300 align='center'></img><img src='img/summarise.png' width=300 align='center'></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-30" style="background-image: url('libraries/frameworks/io2012-dsp/images/dsp-page-white1100.jpg'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2>summarise</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>針對各組進行計算</li>
+</ul>
+
+<pre><code class="r">select(ubike, hour, sarea, sna, avg.sbi) %&gt;%
+  filter(sarea == &#39;中和區&#39; &amp; hour == 7) %&gt;%
+  group_by(hour, sarea, sna) %&gt;%
+  summarise(avg = mean(avg.sbi) %&gt;% round()) 
+</code></pre>
+
+<table><thead>
+<tr>
+<th align="right">hour</th>
+<th align="left">sarea</th>
+<th align="left">sna</th>
+<th align="right">avg</th>
+</tr>
+</thead><tbody>
+<tr>
+<td align="right">7</td>
+<td align="left">中和區</td>
+<td align="left">捷運永安市場站</td>
+<td align="right">9</td>
+</tr>
+<tr>
+<td align="right">7</td>
+<td align="left">中和區</td>
+<td align="left">秀山國小</td>
+<td align="right">29</td>
+</tr>
+<tr>
+<td align="right">7</td>
+<td align="left">中和區</td>
+<td align="left">中和公園</td>
+<td align="right">8</td>
+</tr>
+</tbody></table>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-31" style="background-image: url('libraries/frameworks/io2012-dsp/images/dsp-page-white1100.jpg'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2>arrange</h2>
+  </hgroup>
+  <article data-timings="">
+    <p><img src='img/arrange.png' height=300 align='center'></img><img src='img/arranged.png' height=300 align='center'></img></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-32" style="background-image: url('libraries/frameworks/io2012-dsp/images/dsp-page-white1100.jpg'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2>arrange</h2>
+  </hgroup>
+  <article data-timings="">
+    <pre><code class="r">select(ubike, hour, sarea, sna, avg.sbi) %&gt;%
+  filter(sarea == &#39;中和區&#39; &amp; hour == 7) %&gt;%
+  group_by(hour, sarea, sna) %&gt;%
+  summarise(avg = mean(avg.sbi) %&gt;% round()) %&gt;%
+  arrange(avg %&gt;% desc())
+</code></pre>
+
+<table><thead>
+<tr>
+<th align="right">hour</th>
+<th align="left">sarea</th>
+<th align="left">sna</th>
+<th align="right">avg</th>
+</tr>
+</thead><tbody>
+<tr>
+<td align="right">7</td>
+<td align="left">中和區</td>
+<td align="left">秀山國小</td>
+<td align="right">29</td>
+</tr>
+<tr>
+<td align="right">7</td>
+<td align="left">中和區</td>
+<td align="left">捷運永安市場站</td>
+<td align="right">9</td>
+</tr>
+<tr>
+<td align="right">7</td>
+<td align="left">中和區</td>
+<td align="left">中和公園</td>
+<td align="right">8</td>
+</tr>
+</tbody></table>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-33" style="background-image: url('libraries/frameworks/io2012-dsp/images/dsp-page-white1100.jpg'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2>練習一下</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>小明發現住信義區的話，八點騎腳踏車就可以準時上班，還可以順便吃早餐，請幫忙找出信義區各車站八點車子最多的站</p>
+
+<table><thead>
+<tr>
+<th align="right">hour</th>
+<th align="left">sarea</th>
+<th align="left">sna</th>
+<th align="right">avg</th>
+</tr>
+</thead><tbody>
+<tr>
+<td align="right">8</td>
+<td align="left">信義區</td>
+<td align="left">捷運市政府站(3號出口)</td>
+<td align="right">98</td>
+</tr>
+<tr>
+<td align="right">8</td>
+<td align="left">信義區</td>
+<td align="left">福德公園</td>
+<td align="right">31</td>
+</tr>
+<tr>
+<td align="right">8</td>
+<td align="left">信義區</td>
+<td align="left">興雅國中</td>
+<td align="right">31</td>
+</tr>
+<tr>
+<td align="right">8</td>
+<td align="left">信義區</td>
+<td align="left">台北市災害應變中心</td>
+<td align="right">30</td>
+</tr>
+<tr>
+<td align="right">8</td>
+<td align="left">信義區</td>
+<td align="left">世貿二館</td>
+<td align="right">29</td>
+</tr>
+<tr>
+<td align="right">8</td>
+<td align="left">信義區</td>
+<td align="left">世貿三館</td>
+<td align="right">29</td>
+</tr>
+<tr>
+<td align="right">8</td>
+<td align="left">信義區</td>
+<td align="left">吳興公車總站</td>
+<td align="right">29</td>
+</tr>
+<tr>
+<td align="right">8</td>
+<td align="left">信義區</td>
+<td align="left">三張犁</td>
+<td align="right">27</td>
+</tr>
+<tr>
+<td align="right">8</td>
+<td align="left">信義區</td>
+<td align="left">松山家商</td>
+<td align="right">26</td>
+</tr>
+<tr>
+<td align="right">8</td>
+<td align="left">信義區</td>
+<td align="left">市民廣場</td>
+<td align="right">24</td>
+</tr>
+<tr>
+<td align="right">8</td>
+<td align="left">信義區</td>
+<td align="left">信義廣場(台北101)</td>
+<td align="right">23</td>
+</tr>
+<tr>
+<td align="right">8</td>
+<td align="left">信義區</td>
+<td align="left">捷運象山站</td>
+<td align="right">22</td>
+</tr>
+<tr>
+<td align="right">8</td>
+<td align="left">信義區</td>
+<td align="left">松德站</td>
+<td align="right">21</td>
+</tr>
+<tr>
+<td align="right">8</td>
+<td align="left">信義區</td>
+<td align="left">松德公園</td>
+<td align="right">20</td>
+</tr>
+<tr>
+<td align="right">8</td>
+<td align="left">信義區</td>
+<td align="left">台北市政府</td>
+<td align="right">16</td>
+</tr>
+<tr>
+<td align="right">8</td>
+<td align="left">信義區</td>
+<td align="left">捷運台北101/世貿站</td>
+<td align="right">15</td>
+</tr>
+<tr>
+<td align="right">8</td>
+<td align="left">信義區</td>
+<td align="left">五常公園</td>
+<td align="right">15</td>
+</tr>
+<tr>
+<td align="right">8</td>
+<td align="left">信義區</td>
+<td align="left">臺北醫學大學</td>
+<td align="right">14</td>
+</tr>
+<tr>
+<td align="right">8</td>
+<td align="left">信義區</td>
+<td align="left">仁愛逸仙路口</td>
+<td align="right">13</td>
+</tr>
+<tr>
+<td align="right">8</td>
+<td align="left">信義區</td>
+<td align="left">中強公園</td>
+<td align="right">10</td>
+</tr>
+<tr>
+<td align="right">8</td>
+<td align="left">信義區</td>
+<td align="left">捷運永春站(2號出口)</td>
+<td align="right">8</td>
+</tr>
+<tr>
+<td align="right">8</td>
+<td align="left">信義區</td>
+<td align="left">永吉松信路口</td>
+<td align="right">8</td>
+</tr>
+<tr>
+<td align="right">8</td>
+<td align="left">信義區</td>
+<td align="left">基隆光復路口</td>
+<td align="right">5</td>
+</tr>
+</tbody></table>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-34" style="background-image: url('libraries/frameworks/io2012-dsp/images/dsp-page-white1100.jpg'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2>練習一下</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>小明喜歡玩遙控飛機，在中和希望找一個下午三點風比較小的地點吧</p>
+
+<table><thead>
+<tr>
+<th align="left">sna</th>
+<th align="right">avg_anemo</th>
+</tr>
+</thead><tbody>
+<tr>
+<td align="left">白雲國小</td>
+<td align="right">2.094692</td>
+</tr>
+<tr>
+<td align="left">汐止區公所</td>
+<td align="right">2.281363</td>
+</tr>
+<tr>
+<td align="left">汐科火車站(北)</td>
+<td align="right">2.283358</td>
+</tr>
+<tr>
+<td align="left">汐止火車站</td>
+<td align="right">2.393386</td>
+</tr>
+<tr>
+<td align="left">國泰綜合醫院</td>
+<td align="right">2.472844</td>
+</tr>
+<tr>
+<td align="left">樟樹國小</td>
+<td align="right">2.509820</td>
+</tr>
+<tr>
+<td align="left">金龍國小</td>
+<td align="right">2.718062</td>
+</tr>
+<tr>
+<td align="left">金龍公園</td>
+<td align="right">NaN</td>
+</tr>
+<tr>
+<td align="left">文化白雲公園</td>
+<td align="right">NaN</td>
+</tr>
+</tbody></table>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-35" style="background-image: url('libraries/frameworks/io2012-dsp/images/dsp-page-white1100.jpg'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2>bind</h2>
+  </hgroup>
+  <article data-timings="">
+    <pre><code>bind_rows(a,b)
+bind_cols(a,b)
+</code></pre>
+
+<p><img src='img/bind3.png' height=300 align='center'></img></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-36" style="background-image: url('libraries/frameworks/io2012-dsp/images/dsp-page-white1100.jpg'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2>bind</h2>
+  </hgroup>
+  <article data-timings="">
+    
+<div style='float:left;width:48%;' class='centered'>
+  <pre><code>bind_rows(a,b)
+</code></pre>
+
+<p><img src='img/bind_rows.png' height=400 align='center'></img></p>
+
+</div>
+<div style='float:right;width:48%;' class='centered'>
+  <pre><code>bind_cols(a,b)
+</code></pre>
+
+<p><img src='img/bind_col.png' height=300 align='center'></img></p>
+
+</div>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-37" style="background-image: url('libraries/frameworks/io2012-dsp/images/dsp-page-white1100.jpg'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2>bind_rows</h2>
+  </hgroup>
+  <article data-timings="">
+    <pre><code class="r">V1 &lt;- data.frame(&#39;x1&#39; = c(&quot;a&quot;, &quot;b&quot;), &#39;x2&#39; = c(1, 2), stringsAsFactors = F)
+V2 &lt;- data.frame(&#39;x1&#39; = c(&quot;c&quot;, &quot;d&quot;), &#39;x2&#39; = c(3, 4), stringsAsFactors = F)
+bind_rows(V1, V2)
+</code></pre>
+
+<pre><code>## Source: local data frame [4 x 2]
+## 
+##      x1    x2
+##   (chr) (dbl)
+## 1     a     1
+## 2     b     2
+## 3     c     3
+## 4     d     4
+</code></pre>
+
+<pre><code class="r"># rbind(V1, V2)
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-38" style="background-image: url('libraries/frameworks/io2012-dsp/images/dsp-page-white1100.jpg'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2>bind_cols</h2>
+  </hgroup>
+  <article data-timings="">
+    <pre><code class="r">bind_cols(V1, V2)
+</code></pre>
+
+<pre><code>## Source: local data frame [2 x 4]
+## 
+##      x1    x2    x1    x2
+##   (chr) (dbl) (chr) (dbl)
+## 1     a     1     c     3
+## 2     b     2     d     4
+</code></pre>
+
+<pre><code class="r"># cbind(V1, V2)
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-39" style="background-image: url('libraries/frameworks/io2012-dsp/images/dsp-page-white1100.jpg'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2>join</h2>
+  </hgroup>
+  <article data-timings="">
+    <pre><code>left_join(a,b,by=X1)
+right_join(a,b,by=X1)
+inner_join(a,b,by=X1)
+full_join(a,by=X1)
+</code></pre>
+
+<p><img src='img/join1.png' height=300 align='center'></img><img src='img/join2.png' height=300 align='center'></img></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-40" style="background-image: url('libraries/frameworks/io2012-dsp/images/dsp-page-white1100.jpg'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2>left_join</h2>
+  </hgroup>
+  <article data-timings="">
+    <pre><code>left_join(a,b,by=X1)
+</code></pre>
+
+<p><img src='img/join1.png' height=300 align='center'></img><img src='img/join2.png' height=300 align='center'></img><img src='img/left_join.png' height=300 align='center'></img></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-41" style="background-image: url('libraries/frameworks/io2012-dsp/images/dsp-page-white1100.jpg'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2>right_join</h2>
+  </hgroup>
+  <article data-timings="">
+    <pre><code>right_join(a,b,by=X1)
+</code></pre>
+
+<p><img src='img/join1.png' height=300 align='center'></img><img src='img/join2.png' height=300 align='center'></img><img src='img/right_join.png' height=300 align='center'></img></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-42" style="background-image: url('libraries/frameworks/io2012-dsp/images/dsp-page-white1100.jpg'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2>inner_join</h2>
+  </hgroup>
+  <article data-timings="">
+    <pre><code>inner_join(a,b,by=X1)
+</code></pre>
+
+<p><img src='img/join1.png' height=300 align='center'></img><img src='img/join2.png' height=300 align='center'></img><img src='img/inner_join.png' width=250 align='center'></img></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-43" style="background-image: url('libraries/frameworks/io2012-dsp/images/dsp-page-white1100.jpg'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2>full_join</h2>
+  </hgroup>
+  <article data-timings="">
+    <pre><code>full_join(a,b,by=X1)
+</code></pre>
+
+<p><img src='img/join1.png' height=300 align='center'></img><img src='img/join2.png' height=300 align='center'></img><img src='img/full_join.png' height=300 align='center'></img></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-44" style="background-image: url('libraries/frameworks/io2012-dsp/images/dsp-page-white1100.jpg'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2>練習一下</h2>
+  </hgroup>
+  <article data-timings="">
+    <pre><code class="r">V1 &lt;- data.frame(&#39;x1&#39; = c(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;), &#39;x2&#39; = c(11, 12, 13), stringsAsFactors = F)
+V2 &lt;- data.frame(&#39;x1&#39; = c(&quot;a&quot;, &quot;b&quot;, &quot;d&quot;), &#39;x3&#39; = c(21, 22, 23), stringsAsFactors = F)
+left_join(V1, V2)
+</code></pre>
+
+<pre><code>## Joining by: &quot;x1&quot;
+</code></pre>
+
+<pre><code>##   x1 x2 x3
+## 1  a 11 21
+## 2  b 12 22
+## 3  c 13 NA
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-45" style="background-image: url('libraries/frameworks/io2012-dsp/images/dsp-page-white1100.jpg'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2>交集</h2>
+  </hgroup>
+  <article data-timings="">
+    <pre><code>intersect(a,b)
+</code></pre>
+
+<p><img src='img/join1.png' height=300 align='center'></img><img src='img/join3.png' height=300 align='center'></img><img src='img/intersect.png' width=250 align='center'></img></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-46" style="background-image: url('libraries/frameworks/io2012-dsp/images/dsp-page-white1100.jpg'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2>聯集</h2>
+  </hgroup>
+  <article data-timings="">
+    <pre><code>union(a,b)
+</code></pre>
+
+<p><img src='img/join1.png' height=300 align='center'></img><img src='img/join3.png' height=300 align='center'></img><img src='img/union.png' height=300 align='center'></img></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-47" style="background-image: url('libraries/frameworks/io2012-dsp/images/dsp-page-white1100.jpg'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2>差集</h2>
+  </hgroup>
+  <article data-timings="">
+    <pre><code>setdiff(a,b)
+</code></pre>
+
+<p><img src='img/join1.png' height=300 align='center'></img><img src='img/join3.png' height=300 align='center'></img><img src='img/setdiff.png' width=250 align='center'></img></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="light segue" id="slide-48" style="background-image: url('libraries/frameworks/io2012-dsp/images/dsp-page-white1100.jpg'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2>reshape2</h2>
+  </hgroup>
+  <article data-timings="">
+    
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-49" style="background-image: url('libraries/frameworks/io2012-dsp/images/dsp-page-white1100.jpg'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2>reshape2</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>melt
+
+<ul>
+<li>wide format -&gt; long format</li>
+</ul></li>
+<li>cast<br>
+
+<ul>
+<li>long format -&gt; wide format</li>
+<li><code>dcast</code> for data.frame</li>
+<li><code>acast</code> for vector, matrix and array</li>
+</ul></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-50" style="background-image: url('libraries/frameworks/io2012-dsp/images/dsp-page-white1100.jpg'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2>melt</h2>
+  </hgroup>
+  <article data-timings="">
+    <pre><code class="r">data(&quot;WorldPhones&quot;)
+WP &lt;- as.data.frame(WorldPhones)
+WP$year &lt;- rownames(WP)  
+WP.melt &lt;- melt(WP, id.var = &#39;year&#39;)
+</code></pre>
+
+<table><thead>
+<tr>
+<th align="left"></th>
+<th align="right">N.Amer</th>
+<th align="right">Europe</th>
+<th align="right">Asia</th>
+<th align="right">S.Amer</th>
+<th align="right">Oceania</th>
+<th align="right">Africa</th>
+<th align="right">Mid.Amer</th>
+<th align="left">year</th>
+</tr>
+</thead><tbody>
+<tr>
+<td align="left">1951</td>
+<td align="right">45939</td>
+<td align="right">21574</td>
+<td align="right">2876</td>
+<td align="right">1815</td>
+<td align="right">1646</td>
+<td align="right">89</td>
+<td align="right">555</td>
+<td align="left">1951</td>
+</tr>
+<tr>
+<td align="left">1956</td>
+<td align="right">60423</td>
+<td align="right">29990</td>
+<td align="right">4708</td>
+<td align="right">2568</td>
+<td align="right">2366</td>
+<td align="right">1411</td>
+<td align="right">733</td>
+<td align="left">1956</td>
+</tr>
+<tr>
+<td align="left">1957</td>
+<td align="right">64721</td>
+<td align="right">32510</td>
+<td align="right">5230</td>
+<td align="right">2695</td>
+<td align="right">2526</td>
+<td align="right">1546</td>
+<td align="right">773</td>
+<td align="left">1957</td>
+</tr>
+<tr>
+<td align="left">1958</td>
+<td align="right">68484</td>
+<td align="right">35218</td>
+<td align="right">6662</td>
+<td align="right">2845</td>
+<td align="right">2691</td>
+<td align="right">1663</td>
+<td align="right">836</td>
+<td align="left">1958</td>
+</tr>
+<tr>
+<td align="left">1959</td>
+<td align="right">71799</td>
+<td align="right">37598</td>
+<td align="right">6856</td>
+<td align="right">3000</td>
+<td align="right">2868</td>
+<td align="right">1769</td>
+<td align="right">911</td>
+<td align="left">1959</td>
+</tr>
+<tr>
+<td align="left">1960</td>
+<td align="right">76036</td>
+<td align="right">40341</td>
+<td align="right">8220</td>
+<td align="right">3145</td>
+<td align="right">3054</td>
+<td align="right">1905</td>
+<td align="right">1008</td>
+<td align="left">1960</td>
+</tr>
+</tbody></table>
+
+<table><thead>
+<tr>
+<th align="left">year</th>
+<th align="left">variable</th>
+<th align="right">value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td align="left">1951</td>
+<td align="left">N.Amer</td>
+<td align="right">45939</td>
+</tr>
+<tr>
+<td align="left">1956</td>
+<td align="left">N.Amer</td>
+<td align="right">60423</td>
+</tr>
+<tr>
+<td align="left">1957</td>
+<td align="left">N.Amer</td>
+<td align="right">64721</td>
+</tr>
+<tr>
+<td align="left">1958</td>
+<td align="left">N.Amer</td>
+<td align="right">68484</td>
+</tr>
+<tr>
+<td align="left">1959</td>
+<td align="left">N.Amer</td>
+<td align="right">71799</td>
+</tr>
+<tr>
+<td align="left">1960</td>
+<td align="left">N.Amer</td>
+<td align="right">76036</td>
+</tr>
+</tbody></table>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-51" style="background-image: url('libraries/frameworks/io2012-dsp/images/dsp-page-white1100.jpg'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2>cast</h2>
+  </hgroup>
+  <article data-timings="">
+    <pre><code class="r">WP.cast &lt;- dcast(WP.melt, year ~ variable, value.var=&quot;value&quot;) 
+</code></pre>
+
+<table><thead>
+<tr>
+<th align="left">year</th>
+<th align="right">N.Amer</th>
+<th align="right">Europe</th>
+<th align="right">Asia</th>
+<th align="right">S.Amer</th>
+<th align="right">Oceania</th>
+<th align="right">Africa</th>
+<th align="right">Mid.Amer</th>
+</tr>
+</thead><tbody>
+<tr>
+<td align="left">1951</td>
+<td align="right">45939</td>
+<td align="right">21574</td>
+<td align="right">2876</td>
+<td align="right">1815</td>
+<td align="right">1646</td>
+<td align="right">89</td>
+<td align="right">555</td>
+</tr>
+<tr>
+<td align="left">1956</td>
+<td align="right">60423</td>
+<td align="right">29990</td>
+<td align="right">4708</td>
+<td align="right">2568</td>
+<td align="right">2366</td>
+<td align="right">1411</td>
+<td align="right">733</td>
+</tr>
+<tr>
+<td align="left">1957</td>
+<td align="right">64721</td>
+<td align="right">32510</td>
+<td align="right">5230</td>
+<td align="right">2695</td>
+<td align="right">2526</td>
+<td align="right">1546</td>
+<td align="right">773</td>
+</tr>
+<tr>
+<td align="left">1958</td>
+<td align="right">68484</td>
+<td align="right">35218</td>
+<td align="right">6662</td>
+<td align="right">2845</td>
+<td align="right">2691</td>
+<td align="right">1663</td>
+<td align="right">836</td>
+</tr>
+<tr>
+<td align="left">1959</td>
+<td align="right">71799</td>
+<td align="right">37598</td>
+<td align="right">6856</td>
+<td align="right">3000</td>
+<td align="right">2868</td>
+<td align="right">1769</td>
+<td align="right">911</td>
+</tr>
+<tr>
+<td align="left">1960</td>
+<td align="right">76036</td>
+<td align="right">40341</td>
+<td align="right">8220</td>
+<td align="right">3145</td>
+<td align="right">3054</td>
+<td align="right">1905</td>
+<td align="right">1008</td>
+</tr>
+<tr>
+<td align="left">1961</td>
+<td align="right">79831</td>
+<td align="right">43173</td>
+<td align="right">9053</td>
+<td align="right">3338</td>
+<td align="right">3224</td>
+<td align="right">2005</td>
+<td align="right">1076</td>
+</tr>
+</tbody></table>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-52" style="background-image: url('libraries/frameworks/io2012-dsp/images/dsp-page-white1100.jpg'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2>練習一下</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>小明想知道信義區的腳踏車站晴天和雨天的使用率有何差別
+提示：</p>
+
+<ul>
+<li><code>filter</code>、<code>mutate</code>、<code>select</code>、<code>group_by</code>、<code>summarise</code></li>
+<li><code>dcast</code></li>
+<li><code>arrange</code></li>
+</ul>
+
+<table><thead>
+<tr>
+<th align="left">sna</th>
+<th align="right">晴天</th>
+<th align="right">雨天</th>
+</tr>
+</thead><tbody>
+<tr>
+<td align="left">永吉松信路口</td>
+<td align="right">0.8720583</td>
+<td align="right">0.4744500</td>
+</tr>
+<tr>
+<td align="left">信義廣場(台北101)</td>
+<td align="right">0.7952094</td>
+<td align="right">0.5329188</td>
+</tr>
+<tr>
+<td align="left">捷運永春站(2號出口)</td>
+<td align="right">0.7888917</td>
+<td align="right">0.4466667</td>
+</tr>
+<tr>
+<td align="left">市民廣場</td>
+<td align="right">0.7369417</td>
+<td align="right">0.3238917</td>
+</tr>
+<tr>
+<td align="left">捷運台北101/世貿站</td>
+<td align="right">0.7294856</td>
+<td align="right">0.6448654</td>
+</tr>
+<tr>
+<td align="left">基隆光復路口</td>
+<td align="right">0.7277750</td>
+<td align="right">0.7589000</td>
+</tr>
+<tr>
+<td align="left">仁愛逸仙路口</td>
+<td align="right">0.6532895</td>
+<td align="right">0.5921053</td>
+</tr>
+<tr>
+<td align="left">三張犁</td>
+<td align="right">0.6409129</td>
+<td align="right">0.4242424</td>
+</tr>
+<tr>
+<td align="left">五常公園</td>
+<td align="right">0.6233278</td>
+<td align="right">0.3536944</td>
+</tr>
+<tr>
+<td align="left">中強公園</td>
+<td align="right">0.6216667</td>
+<td align="right">0.7833333</td>
+</tr>
+</tbody></table>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="light segue" id="slide-53" style="background-image: url('libraries/frameworks/io2012-dsp/images/dsp-page-white1100.jpg'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2>data.gov</h2>
+  </hgroup>
+  <article data-timings="">
+    
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-54" style="background-image: url('libraries/frameworks/io2012-dsp/images/dsp-page-white1100.jpg'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <article data-timings="">
+    <p><img src='img/gov01.jpg' height=645 align='center' style='margin-top: -38px;'></img></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-55" style="background-image: url('libraries/frameworks/io2012-dsp/images/dsp-page-white1100.jpg'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2>結構化資料統計</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>CSV(35.03%)、XML(33.36%)、JSON(7.66%)，佔全部開放資料 76%（2015/12/18 統計）</li>
+</ul>
+
+<table><thead>
+<tr>
+<th align="center">STR</th>
+<th align="left">CLASS</th>
+<th align="left">TYPE.MAIN</th>
+<th align="right">COUNT</th>
+<th align="right">PERC</th>
+</tr>
+</thead><tbody>
+<tr>
+<td align="center">YES</td>
+<td align="left">Sheets</td>
+<td align="left">CSV</td>
+<td align="right">7224</td>
+<td align="right">35.03 %</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="left"></td>
+<td align="left">XML</td>
+<td align="right">6879</td>
+<td align="right">33.36 %</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="left"></td>
+<td align="left">JSON</td>
+<td align="right">1579</td>
+<td align="right">7.66 %</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="left"></td>
+<td align="left">RSS</td>
+<td align="right">113</td>
+<td align="right">0.55 %</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="left">MAPs</td>
+<td align="left">KML</td>
+<td align="right">51</td>
+<td align="right">0.25 %</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="left"></td>
+<td align="left">WMS</td>
+<td align="right">31</td>
+<td align="right">0.15 %</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="left"></td>
+<td align="left">SHP</td>
+<td align="right">82</td>
+<td align="right">0.4 %</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="left"></td>
+<td align="left">KMZ</td>
+<td align="right">9</td>
+<td align="right">0.04 %</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="left"></td>
+<td align="left">WMTS</td>
+<td align="right">7</td>
+<td align="right">0.03 %</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="left">WebPage</td>
+<td align="left">WebPage</td>
+<td align="right">2</td>
+<td align="right">0.01 %</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="left">API</td>
+<td align="left">ASMX</td>
+<td align="right">1</td>
+<td align="right">0 %</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="left"></td>
+<td align="left">DEMDSM</td>
+<td align="right">1</td>
+<td align="right">0 %</td>
+</tr>
+</tbody></table>
+
+<div style="padding-top: 25px; text-align: center;"><a href="http://www.idealyzt.com/100-opendata-types/" target="_blank">質與量 – 100 種開放資料格式</a>｜<a href="http://www.idealyzt.com/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8-r-%E5%8F%96%E5%BE%97%E9%96%8B%E6%94%BE%E8%B3%87%E6%96%99/" target="_blank">使用 R 讀取開放資料 (CSV, XML, JSON)</a></div>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-56" style="background-image: url('libraries/frameworks/io2012-dsp/images/dsp-page-white1100.jpg'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <article data-timings="">
+    <p><img src='img/gov02_JSON.jpg' height=645 align='center' style='margin-top: -38px;'></img></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-57" style="background-image: url('libraries/frameworks/io2012-dsp/images/dsp-page-white1100.jpg'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <article data-timings="">
+    <p><img src='img/gov03_XML.jpg' height=645 align='center' style='margin-top: -38px;'></img></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-58" style="background-image: url('libraries/frameworks/io2012-dsp/images/dsp-page-white1100.jpg'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <article data-timings="">
+    <p><a href="http://data.gov.tw/node/6074">空氣品質即時污染指標</a></p>
+
+<pre><code class="r"># (1) .csv
+url &lt;- &quot;http://data.gov.tw/iisi/logaccess/165?dataUrl=http://opendata.epa.gov.tw/ws/Data/AQX/?format=csv&amp;ndctype=CSV&amp;ndcnid=6074&quot;
+y &lt;- read.csv(url, sep = &quot;,&quot;, stringsAsFactors = F, header = T)
+
+# (2) json files
+library(jsonlite)
+url &lt;- &#39;http://data.gov.tw/iisi/logaccess/166?dataUrl=http://opendata.epa.gov.tw/ws/Data/AQX/?format=json&amp;ndctype=JSON&amp;ndcnid=6074&#39;
+y &lt;- fromJSON(url, flatten = TRUE)
+y &lt;- as.data.frame(y$Records)
+
+# (3) XML 
+library(XML)
+url &lt;- &#39;http://data.gov.tw/iisi/logaccess/167?dataUrl=http://opendata.epa.gov.tw/ws/Data/AQX/?format=xml&amp;ndctype=XML&amp;ndcnid=6074&#39;
+x &lt;- xmlParse(url) # 以 xmlParse 解析 XML 檔案
+xmlfiles &lt;- xmlRoot(x) # 將 root 設定到 content 層級（一個偷吃步的做法）
+y &lt;- xmlToDataFrame(xmlfiles) # 轉換成 dataframe
+
+# 將整理完成的檔案存成 CSV
+write.csv(file = &#39;open.csv&#39;, y, fileEncoding = &#39;big5&#39;)
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="light segue" id="slide-59" style="background-image: url('libraries/frameworks/io2012-dsp/images/dsp-page-white1100.jpg'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2>Team Project</h2>
+  </hgroup>
+  <article data-timings="">
+    
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+    <slide class="backdrop"></slide>
+  </slides>
+  <div class="pagination pagination-small" id='io2012-ptoc' style="display:none;">
+    <ul>
+      <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=1 title='Data Manipulation'>
+         1
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=2 title='TIPs'>
+         2
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=3 title='HELP'>
+         3
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=4 title='NA'>
+         4
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=5 title='Read/Write'>
+         5
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=6 title='讀檔之前，先觀察檔案'>
+         6
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=7 title='Concept'>
+         7
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=8 title='Exercise:'>
+         8
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=9 title='大「數據」(檔)的處理方式'>
+         9
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=10 title='把欄位換成中文'>
+         10
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=11 title='欄位中文英文對照表'>
+         11
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=12 title='取值- 座標'>
+         12
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=13 title='取值- 指定欄位'>
+         13
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=14 title='dplyr'>
+         14
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=15 title='magrittr'>
+         15
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=16 title='NA'>
+         16
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=17 title='dplyr'>
+         17
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=18 title='學習 dplyr 的官方方式：<code>vignette</code>'>
+         18
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=19 title='dplyr 簡介'>
+         19
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=20 title='情境'>
+         20
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=21 title='select'>
+         21
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=22 title='select'>
+         22
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=23 title='filter'>
+         23
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=24 title='filter'>
+         24
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=25 title='mutate'>
+         25
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=26 title='mutate'>
+         26
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=27 title='group_by'>
+         27
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=28 title='group_by'>
+         28
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=29 title='summarise'>
+         29
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=30 title='summarise'>
+         30
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=31 title='arrange'>
+         31
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=32 title='arrange'>
+         32
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=33 title='練習一下'>
+         33
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=34 title='練習一下'>
+         34
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=35 title='bind'>
+         35
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=36 title='bind'>
+         36
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=37 title='bind_rows'>
+         37
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=38 title='bind_cols'>
+         38
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=39 title='join'>
+         39
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=40 title='left_join'>
+         40
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=41 title='right_join'>
+         41
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=42 title='inner_join'>
+         42
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=43 title='full_join'>
+         43
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=44 title='練習一下'>
+         44
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=45 title='交集'>
+         45
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=46 title='聯集'>
+         46
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=47 title='差集'>
+         47
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=48 title='reshape2'>
+         48
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=49 title='reshape2'>
+         49
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=50 title='melt'>
+         50
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=51 title='cast'>
+         51
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=52 title='練習一下'>
+         52
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=53 title='data.gov'>
+         53
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=54 title='NA'>
+         54
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=55 title='結構化資料統計'>
+         55
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=56 title='NA'>
+         56
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=57 title='NA'>
+         57
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=58 title='NA'>
+         58
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=59 title='Team Project'>
+         59
+      </a>
+    </li>
+  </ul>
+  </div>  <!--[if IE]>
+    <script 
+      src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js">  
+    </script>
+    <script>CFInstall.check({mode: 'overlay'});</script>
+  <![endif]-->
+</body>
+  <!-- Load Javascripts for Widgets -->
+  
+  <!-- MathJax: Fall back to local if CDN offline but local image fonts are not supported (saves >100MB) -->
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        processEscapes: true
+      }
+    });
+  </script>
+  <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/2.0-latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  <!-- <script src="https://c328740.ssl.cf1.rackcdn.com/mathjax/2.0-latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script> -->
+  <script>window.MathJax || document.write('<script type="text/x-mathjax-config">MathJax.Hub.Config({"HTML-CSS":{imageFont:null}});<\/script><script src="libraries/widgets/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"><\/script>')
+</script>
+<!-- LOAD HIGHLIGHTER JS FILES -->
+  <script src="libraries/highlighters/highlight.js/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <!-- DONE LOADING HIGHLIGHTER JS FILES -->
+   
+  </html>
