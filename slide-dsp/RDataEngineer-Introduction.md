@@ -1,6 +1,6 @@
 ---
 title       : R語言與資料處理
-subtitle    : Johnson Hsieh (智庫驅動)
+subtitle    : Johnson Hsieh (johnson@dsp.im)
 job         : 
 author      : Power by Wush Wu and HJ Hsu
 framework   : io2012-dsp
@@ -362,16 +362,6 @@ methods("dbConnect")
 see '?methods' for accessing help and source code
 ```
 
---- .largecontent
-
-## Transaction
-
-- 保證一件工作：
-    - 未執行
-    - 已完成
-- 範例：
-    - 複製到暫存檔案
-    - 重新命名
 
 --- &vcenter .largecontent
 ## Let’s do it
