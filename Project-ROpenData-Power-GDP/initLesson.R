@@ -19,3 +19,4 @@ assign("gdp_df_path",
        .get_path("gdp_df_tutorial.R"),
        envir = globalenv())
 
+assign(".delim", ";?\t", envir = globalenv())
