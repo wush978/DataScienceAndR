@@ -241,11 +241,11 @@ slides > slide {
   font-family: 'Open Sans', Arial, sans-serif;
   font-size: 26px;
   color: #797979;
-  width: 900px;
+  width: 940px;
   height: 700px;
   margin-left: -450px;
   margin-top: -350px;
-  padding: 40px 60px;
+  padding: 40px 40px;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   -ms-border-radius: 5px;
@@ -296,6 +296,15 @@ slides > slide.far-next {
 slides > slide.dark {
   background: #515151 !important;
 }
+
+slides > slide.light {
+  background: #FFF !important;
+}
+
+slides > slide.light h2 {
+  color: #515151 !important;
+}
+
 /* line 171, ../scss/default.scss */
 slides > slide:not(.nobackground):before {
   font-size: 12pt;
@@ -493,7 +502,8 @@ ul {
 }
 /* line 336, ../scss/default.scss */
 ul li {
-  margin-bottom: 0.5em;
+  margin-bottom: 0em;
+  padding-left: 1em;
 }
 /* line 339, ../scss/default.scss */
 ul li ul {
@@ -533,19 +543,27 @@ ul ul {
 
 /* line 373, ../scss/default.scss */
 pre {
-  font-family: 'Inconsolata', 'Courier New', monospace;
+  font-family: "Source Code Pro","Courier New",monospace;
   font-size: 20px;
   line-height: 28px;
-  padding: 10px 0 10px 60px;
   letter-spacing: -1px;
-  margin-bottom: 0px;
-  width: 106%;
-  left: -60px;
+  margin-bottom: 12px;
+  width: 98%;
+  left: 0px;
   position: relative;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
   box-sizing: border-box;
-  /*overflow: hidden;*/
+  padding: 5px 10px 5px 5px;
+  white-space: pre-wrap;
+  white-space: -moz-pre-wrap;
+  white-space: -pre-wrap;
+  white-space: -o-pre-wrap;
+  word-wrap: break-word;
+  margin: 5px 10px 5px 0px;
+  white-space: pre-wrap; /* css-3 */
+  white-space: -moz-pre-wrap; /* Mozilla, since 1999 */
+  white-space: -pre-wrap; /* Opera 4-6 */
+  white-space: -o-pre-wrap; /* Opera 7 */
+  word-wrap: break-word; /* Internet Explorer 5.5+ */
 }
 /* line 387, ../scss/default.scss */
 pre[data-lang]:after {
@@ -739,6 +757,9 @@ table {
   border-collapse: initial;
   border-spacing: 2px;
   border-bottom: 1px solid #797979;
+  font-size: 20px !important;
+  line-height: 24px !important;
+  margin-top:15px !important;
 }
 /* line 515, ../scss/default.scss */
 table tr > td:first-child, table th {
@@ -1500,4 +1521,8 @@ aside.gdbar img {
   pre, code {
     font-family: monospace !important;
   }
+}
+
+.title-slide hgroup > p {
+  margin-top: 20px !important;
 }

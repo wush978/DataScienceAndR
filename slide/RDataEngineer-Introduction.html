@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>R 與資料處理</title>
+  <title>R語言與資料處理</title>
   <meta charset="utf-8">
-  <meta name="description" content="R 與資料處理">
-  <meta name="author" content="Wush Wu">
+  <meta name="description" content="R語言與資料處理">
+  <meta name="author" content="Wush Wu, HJ Hsu and Johnson Hsieh">
   <meta name="generator" content="slidify" />
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta http-equiv="X-UA-Compatible" content="chrome=1">
@@ -33,9 +33,9 @@
     <!-- LOGO SLIDE -->
         <slide class="title-slide segue nobackground">
   <hgroup class="auto-fadein">
-    <h1>R 與資料處理</h1>
+    <h1>R語言與資料處理</h1>
     <h2></h2>
-    <p>Wush Wu<br/>國立台灣大學</p>
+    <p>Wush Wu, HJ Hsu and Johnson Hsieh<br/></p>
   </hgroup>
   <article></article>  
 </slide>
@@ -44,99 +44,51 @@
     <!-- SLIDES -->
     <slide class="largecontent" id="slide-1" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
 <hgroup>
-  <h2>課程內容</h2>
+  <h2>環境與課程安裝程序</h2>
 </hgroup>
 <article class = 'flexbox vcenter'>
 <ul>
-<li>資料科學的Hello World</li>
-<li>R 的資料處理技術與今日課程介紹</li>
-<li>關於swirl</li>
+<li>請參照R語言翻轉教室 <a href="http://www.datascienceandr.org">http://www.datascienceandr.org</a> </li>
+<li>或者舉手發問請講師與助教幫忙處理</li>
+<li>關於R語言翻轉教室與swirl</li>
 </ul>
 
 </article>
 <!-- Presenter Notes -->
 </slide>
-<slide class="dark segue" id="slide-2" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+<slide class="" id="slide-2" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
   <hgroup>
-    <h2>資料科學的Hello World</h2>
+    <h2>關於swirl</h2>
   </hgroup>
   <article data-timings="">
-    
+    <ul>
+<li>使用自己電腦的同學，請依照課程網頁更新教材
+<img src='assets/img/Selection_008.png' style='width: 100%'></img></li>
+</ul>
+
+<p>打開R ，執行<code>source(&quot;http://wush978.github.io/R/init-swirl.R&quot;)</code></p>
+
+<p>輸入<code>library(swirl);swirl()</code>後即進入教學環境</p>
+
   </article>
   <!-- Presenter Notes -->
 </slide>
-<slide class="largecontent" id="slide-3" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
-<hgroup>
-  <h2>Dashboard是團隊的第一步</h2>
-</hgroup>
-<article class = 'flexbox vcenter'>
-<p><center><img src="http://i.imgur.com/Lf5Q79U.png" style="max-width: 50%;max-height: 50%" /></center></p>
+<slide class="largecontent" id="slide-3" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2>關於swirl</h2>
+  </hgroup>
+  <article data-timings="">
+    <h3>這次新增了以下指令：</h3>
 
-</article>
-<!-- Presenter Notes -->
-</slide>
-<slide class="largecontent" id="slide-4" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
-<hgroup>
-  <h2>檢驗資料的品質</h2>
-</hgroup>
-<article class = 'flexbox vcenter'>
 <ul>
-<li>乾淨</li>
-<li>正確</li>
+<li><code>chat()</code> 可以打開聊天室</li>
+<li><code>issue()</code> 可以打開issues</li>
 </ul>
 
-</article>
-<!-- Presenter Notes -->
+  </article>
+  <!-- Presenter Notes -->
 </slide>
-<slide class="largecontent" id="slide-5" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
-<hgroup>
-  <h2>檢驗對資料的想法</h2>
-</hgroup>
-<article class = 'flexbox vcenter'>
-<ul>
-<li>設計問題</li>
-<li>設計KPI</li>
-</ul>
-
-</article>
-<!-- Presenter Notes -->
-</slide>
-<slide class="largecontent" id="slide-6" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
-<hgroup>
-  <h2>一個資料源，一個Dashboard</h2>
-</hgroup>
-<article class = 'flexbox vcenter'>
-<ul>
-<li>價值會隨著資料源的多元而增加</li>
-</ul>
-
-</article>
-<!-- Presenter Notes -->
-</slide>
-<slide class="largecontent" id="slide-7" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
-<hgroup>
-  <h2>Dashboard 能快速建立信任感</h2>
-</hgroup>
-<article class = 'flexbox vcenter'>
-<ul>
-<li>資料科學團隊是成本單位</li>
-<li>資料科學團隊需要其他團隊的合作</li>
-</ul>
-
-</article>
-<!-- Presenter Notes -->
-</slide>
-<slide class="largecontent" id="slide-8" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
-<hgroup>
-  <h2><a href="http://www.meetup.com/Taiwan-R/events/221493175/">R 社群活動：Cyber Security</a></h2>
-</hgroup>
-<article class = 'flexbox vcenter'>
-<p><a href="https://www.youtube.com/watch?v=YYgOQJuZi18"><img src="http://img.youtube.com/vi/YYgOQJuZi18/sddefault.jpg" alt=""></a></p>
-
-</article>
-<!-- Presenter Notes -->
-</slide>
-<slide class="dark segue" id="slide-9" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+<slide class="dark segue" id="slide-4" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
   <hgroup>
     <h2>R 的資料處理技術</h2>
   </hgroup>
@@ -145,80 +97,70 @@
   </article>
   <!-- Presenter Notes -->
 </slide>
-<slide class="largecontent" id="slide-10" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
-<hgroup>
-  <h2>R 是一套完整的資料科學解決方案</h2>
-</hgroup>
-<article class = 'flexbox vcenter'>
-<ul>
-<li>資料的收集</li>
-<li>資料的處理</li>
-<li>資料的視覺化</li>
-</ul>
-
-</article>
-<!-- Presenter Notes -->
-</slide>
-<slide class="largecontent" id="slide-11" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
-<hgroup>
-  <h2>讀取資料</h2>
-</hgroup>
-<article class = 'flexbox vcenter'>
-<ul>
-<li>RBasic-07-Loading-Data</li>
-<li>RDataEngineer-01-Parsing</li>
-<li>RDataEngineer-02-XML</li>
-<li>RDataEngineer-03-JSON</li>
-<li>RDataEngineer-04-Database</li>
-</ul>
-
-</article>
-<!-- Presenter Notes -->
-</slide>
-<slide class="largecontent" id="slide-12" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
-<hgroup>
-  <h2>處理資料</h2>
-</hgroup>
-<article class = 'flexbox vcenter'>
-<ul>
-<li>RDataEngineer-05-Data-Manipulation</li>
-<li>RDataEngineer-06-Join</li>
-</ul>
-
-</article>
-<!-- Presenter Notes -->
-</slide>
-<slide class="largecontent" id="slide-13" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+<slide class="largecontent" id="slide-5" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
   <hgroup>
-    <h2>關於swirl</h2>
+    <h2>R 是一套完整的資料科學解決方案</h2>
   </hgroup>
   <article data-timings="">
     <ul>
-<li>使用自己電腦的同學，請依照課程網頁更新教材
--<img src='assets/img/Selection_008.png' style='width: 100%'></img></li>
+<li><strong>資料存讀取</strong></li>
+<li><strong>資料處理</strong></li>
+<li>資料分析 (Statistics, MLDM)</li>
+<li>資料視覺化</li>
+<li>資料儀表盤</li>
+<li>Presentation and storytelling</li>
 </ul>
 
   </article>
   <!-- Presenter Notes -->
 </slide>
-<slide class="largecontent" id="slide-14" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
-<hgroup>
-  <h2>關於swirl</h2>
-</hgroup>
-<article class = 'flexbox vcenter'>
-<ul>
-<li>這次新增了以下指令：
+<slide class="" id="slide-6" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2>R語言的資料讀取/處理技術</h2>
+  </hgroup>
+  <article data-timings="">
+    <div style="float:left;width:48%;" class="">
+  <h3>讀取儲存於磁碟的資料</h3>
 
 <ul>
-<li><code>chat()</code>可以打開聊天室</li>
-<li><code>issue()</code>可以打開issues</li>
-</ul></li>
+<li><code>RBasic-07-Loading-Data</code></li>
 </ul>
 
-</article>
-<!-- Presenter Notes -->
+<h3>讀取來自不同資料源與格式的資料</h3>
+
+<ul>
+<li><code>RDataEngineer-02-XML</code></li>
+<li><code>RDataEngineer-03-JSON</code></li>
+<li><code>RDataEngineer-04-Database</code></li>
+</ul>
+
+</div>
+
+<div style="float:right;width:48%;" class="">
+  <h3>處理非結構化資料</h3>
+
+<ul>
+<li><code>RDataEngineer-01-Parsing</code></li>
+</ul>
+
+<h3>處理與進一步整理結構化資料的技術</h3>
+
+<ul>
+<li><code>RDataEngineer-05-Data-Manipulation</code></li>
+</ul>
+
+<h3>將不同的表格資料融合運用</h3>
+
+<ul>
+<li><code>RDataEngineer-06-Join</code></li>
+</ul>
+
+</div>
+
+  </article>
+  <!-- Presenter Notes -->
 </slide>
-<slide class="dark segue" id="slide-15" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+<slide class="dark segue" id="slide-7" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
   <hgroup>
     <h2>RBasic-07-Loading-Data</h2>
   </hgroup>
@@ -227,106 +169,108 @@
   </article>
   <!-- Presenter Notes -->
 </slide>
-<slide class="largecontent" id="slide-16" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
-<hgroup>
-  <h2>R 預設的讀取資料技術</h2>
-</hgroup>
-<article class = 'flexbox vcenter'>
-<ul>
-<li>套件中的資料</li>
-<li>CSV(comma-separated values)</li>
-<li>中文編碼</li>
-</ul>
-
-</article>
-<!-- Presenter Notes -->
-</slide>
-<slide class="largecontent" id="slide-17" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
-<hgroup>
-  <h2>CSV(comma-separated values)</h2>
-</hgroup>
-<article class = 'flexbox vcenter'>
-<pre><code>Year,Make,Model
-1997,Ford,E350
-2000,Mercury,Cougar
-</code></pre>
-
-</article>
-<!-- Presenter Notes -->
-</slide>
-<slide class="largecontent" id="slide-18" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
-<hgroup>
-  <h2>CSV(comma-separated values)</h2>
-</hgroup>
-<article class = 'flexbox vcenter'>
-<ul>
-<li>分隔符號：單一字符</li>
-<li>Hive的CSV：
+<slide class="largecontent" id="slide-8" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2>R 預設的讀取資料技術</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>套件中的資料</p>
 
 <ul>
-<li>欄位的分隔符號（Field）</li>
-<li>集合的分隔符號（Collection）</li>
-<li>Map key的分隔符號</li>
+<li>預設的資料集，如 <code>iris</code></li>
+<li>載入套件帶來的資料集，如 <code>data(spider, package = &quot;iNEXT&quot;)</code></li>
 </ul></li>
+<li><p>CSV (comma-separated values)</p>
+
+<ul>
+<li>以逗號區隔的結構化資料 (structured data)</li>
+<li>每一列都有同樣多的資料欄</li>
+</ul></li>
+<li><p>TSV (Tab Separated Values)</p></li>
+<li><p>中文編碼</p></li>
 </ul>
 
-</article>
-<!-- Presenter Notes -->
+  </article>
+  <!-- Presenter Notes -->
 </slide>
-<slide class="dark segue" id="slide-19" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+<slide class="largecontent" id="slide-9" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2>CSV 的眉眉角角</h2>
+  </hgroup>
+  <article data-timings="">
+    <pre><code>
+Year,Make,Model, 
+1997,Ford,E350 
+2000,Mercury,Cougar
+
+"1997","Ford","E350" 
+
+1997,Ford,E350,"super, luxurious truck" 
+
+1997,Ford,E350,"super, ""luxurious"" truck" 
+
+1997, Ford, E350 
+
+1997,Ford,E350,4.9
+</code>
+</pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="" id="slide-10" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
   <hgroup>
     <h2>字符編碼（Encoding）</h2>
   </hgroup>
   <article data-timings="">
-    
-  </article>
-  <!-- Presenter Notes -->
-</slide>
-<slide class="largecontent" id="slide-20" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
-<hgroup>
-  <h2>Hex和Binary</h2>
-</hgroup>
-<article class = 'flexbox vcenter'>
-<ul>
-<li>Hex Code (16進位)
+    <ul>
+<li><p>人類習慣的是 10 進位 (Decimal)    </p>
 
 <ul>
-<li>位元組(byte)是目前電腦處理記憶體的基本單位。一個位元組有8個位元(bit)。
-
-<ul>
-<li>00000001, 00110101</li>
+<li>0, 1, 2, 3, …, 10, …, 15, 16, …, 175</li>
 </ul></li>
-<li>用兩個hex code來代表一個位元組
+<li><p>電腦用的是 2 進位 (Binary)    </p>
+
+<ul>
+<li>0, 1, 10, 11, …, 1010, …, 1111, 10000, …, 10101111</li>
+</ul></li>
+<li><p>16 進位 (Hexadecimal, Hex)     </p>
+
+<ul>
+<li>0, 1, 2, 3, …, A, …, F, 10, …, AF </li>
+</ul></li>
+<li><p>1 Byte (位元組) = 8 bit (位元) 是目前電腦計算記憶體的基本單位</p></li>
+<li><p>1 Byte 可以表達 0 – 255 的值，正好可以用兩個 Hex Code 表達 (16 = 24)    </p>
 
 <ul>
 <li>00000001 ==&gt; 0000,0001 ==&gt; 01</li>
 <li>00110101 ==&gt; 0011,0101 ==&gt; 35</li>
 </ul></li>
-</ul></li>
 </ul>
 
-</article>
-<!-- Presenter Notes -->
+  </article>
+  <!-- Presenter Notes -->
 </slide>
-<slide class="largecontent" id="slide-21" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
-<hgroup>
-  <h2>範例：文字的&quot;0&quot;與數字的0L</h2>
-</hgroup>
-<article class = 'flexbox vcenter'>
-<ul>
+<slide class="largecontent" id="slide-11" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2>範例：文字的&quot;0&quot;與數字的0L</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
 <li>整數0L的記憶體，寫成hex code是 00 00 00 00 (佔有四個位元組)</li>
 <li>文字&quot;0&quot;的記憶體，寫成hex code是 30 (佔有一個位元組)</li>
 </ul>
 
-</article>
-<!-- Presenter Notes -->
+  </article>
+  <!-- Presenter Notes -->
 </slide>
-<slide class="largecontent" id="slide-22" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
-<hgroup>
-  <h2>編碼(Encoding)</h2>
-</hgroup>
-<article class = 'flexbox vcenter'>
-<ul>
+<slide class="largecontent" id="slide-12" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2>編碼(Encoding)</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
 <li>把位元組的組合轉換成文字的規則</li>
 <li>ASCII
 
@@ -335,47 +279,79 @@
 </ul></li>
 </ul>
 
-</article>
-<!-- Presenter Notes -->
+  </article>
+  <!-- Presenter Notes -->
 </slide>
-<slide class="largecontent" id="slide-23" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
-<hgroup>
-  <h2>中文編碼</h2>
-</hgroup>
-<article class = 'flexbox vcenter'>
-<ul>
-<li>UTF-8
+<slide class="largecontent" id="slide-13" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2>中文編碼</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>UTF-8    </p>
 
 <ul>
 <li>E4 B8 AD =&gt; &quot;中&quot;</li>
 <li>E6 96 87 =&gt; &quot;文&quot;</li>
 </ul></li>
-<li>BIG5
+<li><p>BIG5    </p>
 
 <ul>
 <li>A4 A4 =&gt; &quot;中&quot;</li>
 <li>A4 E5 =&gt; &quot;文&quot;</li>
 </ul></li>
+<li><p>以 UTF-8 編碼寫成的 「中文」二字，在電腦看來是    </p>
+
+<ul>
+<li>E4 B8 AD E6 96 87</li>
+</ul></li>
+<li><p>若是以 BIG5 編碼讀入，會變成 「銝剜  」</p></li>
+<li><p>讀取中文檔案時，必須先確定編碼，否則無法正確讀取</p></li>
 </ul>
 
-</article>
-<!-- Presenter Notes -->
+  </article>
+  <!-- Presenter Notes -->
 </slide>
-<slide class="largecontent" id="slide-24" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<slide class="largecontent" id="slide-14" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2>編碼101</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p><code>iconv</code>    </p>
+
+<ul>
+<li>R 環境中轉換字元的函式，請以 <code>?iconv</code> 閱讀其說明文件</li>
+</ul></li>
+<li><p><code>Encoding</code>, <code>fileEncoding</code>    </p>
+
+<ul>
+<li>R 環境中用來讀取資料的函式常見的參數，用來設定來源資料的編碼型態</li>
+</ul></li>
+<li><p><code>Sys.getlocale()</code>, <code>Sys.setlocale(locale = &quot;cht&quot;)</code>    </p>
+
+<ul>
+<li>R 環境用來設定語境的環境變數，可以減少部分編碼帶來的困擾</li>
+</ul></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-15" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
 <hgroup>
-  <h2>編碼101</h2>
+  <h2>Let’s do it</h2>
 </hgroup>
 <article class = 'flexbox vcenter'>
 <ul>
-<li><code>iconv</code></li>
-<li><code>Encoding</code></li>
-<li><code>Sys.getlocale()</code>, <code>Sys.setlocale(locale = &quot;cht&quot;)</code></li>
+<li>實際利用 R 讀取中文編碼的檔案</li>
+<li>請同學們完成 <code>RBasic-07-Loading-Data</code></li>
 </ul>
 
 </article>
 <!-- Presenter Notes -->
 </slide>
-<slide class="dark segue" id="slide-25" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+<slide class="dark segue" id="slide-16" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
   <hgroup>
     <h2>RDataEngineer-01-Parsing</h2>
   </hgroup>
@@ -384,55 +360,79 @@
   </article>
   <!-- Presenter Notes -->
 </slide>
-<slide class="largecontent" id="slide-26" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
-<hgroup>
-  <h2>非結構化的資料</h2>
-</hgroup>
-<article class = 'flexbox vcenter'>
-<ul>
-<li>請問電腦如何知道以下資訊的意義？
-
-<ul>
-<li>64.242.88.10 - - [07/Mar/2004:16:05:49 -0800] &quot;GET /twiki/bin/edit/Main/Double_bounce_sender?topicparent=Main.ConfigurationVariables HTTP/1.1&quot; 401 12846</li>
-<li>64.242.88.10 - - [07/Mar/2004:16:06:51 -0800] &quot;GET /twiki/bin/rdiff/TWiki/NewUserTemplate?rev1=1.3&amp;rev2=1.2 HTTP/1.1&quot; 200 4523</li>
-</ul></li>
+<slide class="" id="slide-17" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2>非結構化的資料</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>請問電腦如何知道以下資訊的意義？</li>
 </ul>
 
-</article>
-<!-- Presenter Notes -->
+<pre><code>
+64.242.88.10 - - [07/Mar/2004:16:05:49 -0800] "GET /twiki/bin/edit/Main/Double_bounce_sender?topicparent=Main.ConfigurationVariables HTTP/1.1" 401 12846
+
+64.242.88.10 - - [07/Mar/2004:16:06:51 -0800] "GET /twiki/bin/rdiff/TWiki/NewUserTemplate?rev1=1.3&rev2=1.2 HTTP/1.1" 200 4523
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
 </slide>
-<slide class="largecontent" id="slide-27" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
-<hgroup>
-  <h2>什麼是Parsing?</h2>
-</hgroup>
-<article class = 'flexbox vcenter'>
-<ul>
+<slide class="largecontent" id="slide-18" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2>什麼是Parsing?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
 <li>根據Domain Knowledge，告訴電腦資料的規則
 
 <ul>
-<li>位置</li>
-<li>分隔符號</li>
-<li><em>Regular Expression</em></li>
+<li>位置，如經緯度 121<strong>E</strong>25<strong>N</strong></li>
+<li>分隔符號，如逗號、分號、冒號等</li>
+<li><em>Regular Expression</em> 正規表示式
+
+<ul>
+<li>身分證字號的正規表示式: 
+
+<ul>
+<li><code>^[A-Z]{1}[1-2]{1}[0-9]{8}$</code></li>
 </ul></li>
+</ul></li>
+</ul></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-19" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>Let’s do it</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>實際利用 R 處理非結構化的資料</li>
+<li>請同學們完成 <code>RDataEngineer-01-Parsing</code></li>
 </ul>
 
 </article>
 <!-- Presenter Notes -->
 </slide>
-<slide class="dark segue" id="slide-28" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+<slide class="dark segue" id="slide-20" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
   <hgroup>
-    <h2>RDataEngineer-02-XML</h2>
+    <h2>讀取格式迥異的資料 (02-04)</h2>
   </hgroup>
   <article data-timings="">
     
   </article>
   <!-- Presenter Notes -->
 </slide>
-<slide class="largecontent" id="slide-29" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
-<hgroup>
-  <h2>XML(eXtensible Markup Language)</h2>
-</hgroup>
-<article class = 'flexbox vcenter'>
+<slide class="largecontent" id="slide-21" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2>RDataEngineer-02-XML</h2>
+  </hgroup>
+  <article data-timings="">
+    <h3>XML(eXtensible Markup Language)</h3>
+
 <ul>
 <li>讓電腦能理解資料意義的資料格式
 
@@ -454,28 +454,50 @@
 
 <p><small>出自：<a href="https://zh.wikipedia.org/wiki/XML#.E4.BE.8B">https://zh.wikipedia.org/wiki/XML#.E4.BE.8B</a></small></p>
 
-</article>
-<!-- Presenter Notes -->
+  </article>
+  <!-- Presenter Notes -->
 </slide>
-<slide class="largecontent" id="slide-30" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
-<hgroup>
-  <h2>HTML</h2>
-</hgroup>
-<article class = 'flexbox vcenter'>
-<ul>
+<slide class="largecontent" id="slide-22" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2>HTML (HyperText Markup Language)</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
 <li>有規範的標籤</li>
 <li>HTML用於撰寫網頁、XML用於傳輸資料</li>
 </ul>
 
-</article>
-<!-- Presenter Notes -->
+<pre><code>
+&lt;html&gt;
+
+&lt;head&gt;
+  &lt;script type=&quot;text/javascript&quot; src=&quot;loadxmldoc.js&quot;&gt;
+&lt;/script&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+
+  &lt;script type=&quot;text/javascript&quot;&gt;
+    xmlDoc=<a href="dom_loadxmldoc.asp">loadXMLDoc</a>(&quot;books.xml&quot;);
+    document.write(&quot;xmlDoc is loaded, ready for use&quot;);
+  &lt;/script&gt;
+
+&lt;/body&gt;
+
+&lt;/html&gt;
+</code></pre>
+
+<p><small>出自：<a href="http://www.w3school.com.cn/tags/tag_pre.asp">http://www.w3school.com.cn/tags/tag_pre.asp</a></small></p>
+
+  </article>
+  <!-- Presenter Notes -->
 </slide>
-<slide class="largecontent" id="slide-31" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
-<hgroup>
-  <h2>XPath(XML Path Language)</h2>
-</hgroup>
-<article class = 'flexbox vcenter'>
-<pre><code>&lt;A&gt;
+<slide class="largecontent" id="slide-23" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2>XPath(XML Path Language)</h2>
+  </hgroup>
+  <article data-timings="">
+    <pre><code>&lt;A&gt;
   &lt;B&gt;
     &lt;C/&gt;
   &lt;/B&gt;
@@ -487,23 +509,16 @@
 <li><code>//B</code></li>
 </ul>
 
-</article>
-<!-- Presenter Notes -->
+  </article>
+  <!-- Presenter Notes -->
 </slide>
-<slide class="dark segue" id="slide-32" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+<slide class="largecontent" id="slide-24" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
   <hgroup>
     <h2>RDataEngineer-03-JSON</h2>
   </hgroup>
   <article data-timings="">
-    
-  </article>
-  <!-- Presenter Notes -->
-</slide>
-<slide class="largecontent" id="slide-33" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
-<hgroup>
-  <h2>JSON(JavaScript Object Notation)</h2>
-</hgroup>
-<article class = 'flexbox vcenter'>
+    <h3>JSON (JavaScript Object Notation)</h3>
+
 <pre><code>{
      &quot;firstName&quot;: &quot;John&quot;,
      &quot;lastName&quot;: &quot;Smith&quot;,
@@ -512,91 +527,80 @@
  }
 </code></pre>
 
-</article>
-<!-- Presenter Notes -->
+  </article>
+  <!-- Presenter Notes -->
 </slide>
-<slide class="largecontent" id="slide-34" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
-<hgroup>
-  <h2>JSON(JavaScript Object Notation)</h2>
-</hgroup>
-<article class = 'flexbox vcenter'>
-<ul>
+<slide class="largecontent" id="slide-25" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2>JSON (JavaScript Object Notation)</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
 <li>字串：<code>&quot;firstName&quot;</code>, <code>&quot;John&quot;</code></li>
 <li>數字： <code>25</code></li>
 <li>陣列： <code>[1, 2, &quot;3&quot;]</code></li>
 <li>物件： <code>{ &quot;a&quot; : 1, &quot;b&quot; : &quot;string&quot;, &quot;c&quot; : { &quot;c1&quot; : 1 } }</code></li>
 </ul>
 
-</article>
-<!-- Presenter Notes -->
-</slide>
-<slide class="dark segue" id="slide-35" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
-  <hgroup>
-    <h2>RDataEngineer-04-Database</h2>
-  </hgroup>
-  <article data-timings="">
-    
   </article>
   <!-- Presenter Notes -->
 </slide>
-<slide class="largecontent" id="slide-36" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
-<hgroup>
-  <h2>結構化資料</h2>
-</hgroup>
-<article class = 'flexbox vcenter'>
-<ul>
+<slide class="largecontent" id="slide-26" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2>結構化資料</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
 <li>非結構化資料：純文字</li>
 <li>半結構化資料：CSV、XML、JSON</li>
 <li>結構化資料：關聯式資料庫（<code>data.frame</code>）</li>
 </ul>
 
-</article>
-<!-- Presenter Notes -->
+  </article>
+  <!-- Presenter Notes -->
 </slide>
-<slide class="largecontent" id="slide-37" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
-<hgroup>
-  <h2>R 的物件導向系統</h2>
-</hgroup>
-<article class = 'flexbox vcenter'>
-<pre><code class="r">library(RSQLite)
+<slide class="largecontent" id="slide-27" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2>R 的物件導向系統</h2>
+  </hgroup>
+  <article data-timings="">
+    <pre><code class="r">library(RSQLite)
 </code></pre>
 
-<pre><code>Error in library(RSQLite): there is no package called &#39;RSQLite&#39;
+<pre><code>Loading required package: DBI
+</code></pre>
+
+<pre><code>Loading required package: methods
 </code></pre>
 
 <pre><code class="r">methods(&quot;dbConnect&quot;)
 </code></pre>
 
-<pre><code>Error in .S3methods(generic.function, class, parent.frame()): no function &#39;dbConnect&#39; is visible
+<pre><code>[1] dbConnect,SQLiteConnection-method dbConnect,SQLiteDriver-method    
+see &#39;?methods&#39; for accessing help and source code
 </code></pre>
 
-</article>
-<!-- Presenter Notes -->
+  </article>
+  <!-- Presenter Notes -->
 </slide>
-<slide class="largecontent" id="slide-38" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<slide class="largecontent" id="slide-28" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
 <hgroup>
-  <h2>Transaction</h2>
+  <h2>Let’s do it</h2>
 </hgroup>
 <article class = 'flexbox vcenter'>
-<ul>
-<li>保證一件工作：
+<p>實際利用 R 來讀取來自不同型態資料源的資料
+請同學們完成 </p>
 
 <ul>
-<li>未執行</li>
-<li>已完成</li>
-</ul></li>
-<li>範例：
-
-<ul>
-<li>複製到暫存檔案</li>
-<li>重新命名</li>
-</ul></li>
+<li><code>RDataEngineer-02-XML</code></li>
+<li><code>RDataEngineer-03-JSON</code></li>
+<li><code>RDataEngineer-04-Database</code></li>
 </ul>
 
 </article>
 <!-- Presenter Notes -->
 </slide>
-<slide class="dark segue" id="slide-39" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+<slide class="dark segue" id="slide-29" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
   <hgroup>
     <h2>RDataEngineer-05-Data-Manipulation</h2>
   </hgroup>
@@ -605,7 +609,7 @@
   </article>
   <!-- Presenter Notes -->
 </slide>
-<slide class="largecontent" id="slide-40" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<slide class="largecontent" id="slide-30" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
 <hgroup>
   <h2>R 的結構化資料來源</h2>
 </hgroup>
@@ -618,7 +622,7 @@
 </article>
 <!-- Presenter Notes -->
 </slide>
-<slide class="largecontent" id="slide-41" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<slide class="largecontent" id="slide-31" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
 <hgroup>
   <h2>Grouped Operation</h2>
 </hgroup>
@@ -639,7 +643,7 @@
 </article>
 <!-- Presenter Notes -->
 </slide>
-<slide class="largecontent" id="slide-42" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<slide class="largecontent" id="slide-32" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
 <hgroup>
   <h2>Grouped Operation</h2>
 </hgroup>
@@ -666,7 +670,7 @@
 </article>
 <!-- Presenter Notes -->
 </slide>
-<slide class="largecontent" id="slide-43" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<slide class="largecontent" id="slide-33" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
 <hgroup>
   <h2>程式碼的壓縮</h2>
 </hgroup>
@@ -679,7 +683,7 @@ x3 &lt;- summarise(x2, ...)
 </article>
 <!-- Presenter Notes -->
 </slide>
-<slide class="largecontent" id="slide-44" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<slide class="largecontent" id="slide-34" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
 <hgroup>
   <h2>程式碼的壓縮</h2>
 </hgroup>
@@ -695,7 +699,7 @@ x3 &lt;- summarise(x2, ...)
 </article>
 <!-- Presenter Notes -->
 </slide>
-<slide class="largecontent" id="slide-45" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<slide class="largecontent" id="slide-35" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
 <hgroup>
   <h2>程式碼的壓縮</h2>
 </hgroup>
@@ -706,7 +710,7 @@ x3 &lt;- summarise(x2, ...)
 </article>
 <!-- Presenter Notes -->
 </slide>
-<slide class="largecontent" id="slide-46" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<slide class="largecontent" id="slide-36" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
 <hgroup>
   <h2>Pipeline Operator</h2>
 </hgroup>
@@ -722,7 +726,7 @@ x3 &lt;- summarise(x2, ...)
 </article>
 <!-- Presenter Notes -->
 </slide>
-<slide class="largecontent" id="slide-47" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<slide class="largecontent" id="slide-37" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
 <hgroup>
   <h2>Pipeline Operator</h2>
 </hgroup>
@@ -739,7 +743,7 @@ x3 &lt;- summarise(x2, ...)
 </article>
 <!-- Presenter Notes -->
 </slide>
-<slide class="segue dark" id="slide-48" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+<slide class="segue dark" id="slide-38" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
   <hgroup>
     <h2>RDataEngineer-06-Join</h2>
   </hgroup>
@@ -748,7 +752,7 @@ x3 &lt;- summarise(x2, ...)
   </article>
   <!-- Presenter Notes -->
 </slide>
-<slide class="largecontent" id="slide-49" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<slide class="largecontent" id="slide-39" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
 <hgroup>
   <h2>多資料源能激盪出更高的價值</h2>
 </hgroup>
@@ -762,7 +766,7 @@ x3 &lt;- summarise(x2, ...)
 </article>
 <!-- Presenter Notes -->
 </slide>
-<slide class="largecontent" id="slide-50" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<slide class="largecontent" id="slide-40" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
 <hgroup>
   <h2><code>left_join</code></h2>
 </hgroup>
@@ -772,7 +776,7 @@ x3 &lt;- summarise(x2, ...)
 </article>
 <!-- Presenter Notes -->
 </slide>
-<slide class="largecontent" id="slide-51" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<slide class="largecontent" id="slide-41" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
 <hgroup>
   <h2><code>right_join</code></h2>
 </hgroup>
@@ -782,7 +786,7 @@ x3 &lt;- summarise(x2, ...)
 </article>
 <!-- Presenter Notes -->
 </slide>
-<slide class="largecontent" id="slide-52" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<slide class="largecontent" id="slide-42" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
 <hgroup>
   <h2><code>inner_join</code></h2>
 </hgroup>
@@ -792,7 +796,7 @@ x3 &lt;- summarise(x2, ...)
 </article>
 <!-- Presenter Notes -->
 </slide>
-<slide class="largecontent" id="slide-53" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<slide class="largecontent" id="slide-43" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
 <hgroup>
   <h2><code>full_join</code></h2>
 </hgroup>
@@ -802,7 +806,7 @@ x3 &lt;- summarise(x2, ...)
 </article>
 <!-- Presenter Notes -->
 </slide>
-<slide class="largecontent" id="slide-54" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<slide class="largecontent" id="slide-44" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
 <hgroup>
   <h2><code>anti_join</code></h2>
 </hgroup>
@@ -812,7 +816,7 @@ x3 &lt;- summarise(x2, ...)
 </article>
 <!-- Presenter Notes -->
 </slide>
-<slide class="largecontent" id="slide-55" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<slide class="largecontent" id="slide-45" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
 <hgroup>
   <h2><code>semi_join</code></h2>
 </hgroup>
@@ -822,7 +826,7 @@ x3 &lt;- summarise(x2, ...)
 </article>
 <!-- Presenter Notes -->
 </slide>
-<slide class="segue dark" id="slide-56" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+<slide class="segue dark" id="slide-46" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
   <hgroup>
     <h2>結束之後...</h2>
   </hgroup>
@@ -831,7 +835,7 @@ x3 &lt;- summarise(x2, ...)
   </article>
   <!-- Presenter Notes -->
 </slide>
-<slide class="largecontent" id="slide-57" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<slide class="largecontent" id="slide-47" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
 <hgroup>
   <h2>你已經是一個初階的資料科學家</h2>
 </hgroup>
@@ -854,344 +858,284 @@ x3 &lt;- summarise(x2, ...)
     <ul>
       <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=1 title='課程內容'>
+        data-slide=1 title='環境與課程安裝程序'>
          1
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=2 title='資料科學的Hello World'>
+        data-slide=2 title='關於swirl'>
          2
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=3 title='Dashboard是團隊的第一步'>
+        data-slide=3 title='關於swirl'>
          3
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=4 title='檢驗資料的品質'>
+        data-slide=4 title='R 的資料處理技術'>
          4
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=5 title='檢驗對資料的想法'>
+        data-slide=5 title='R 是一套完整的資料科學解決方案'>
          5
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=6 title='一個資料源，一個Dashboard'>
+        data-slide=6 title='R語言的資料讀取/處理技術'>
          6
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=7 title='Dashboard 能快速建立信任感'>
+        data-slide=7 title='RBasic-07-Loading-Data'>
          7
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=8 title='<a href="http://www.meetup.com/Taiwan-R/events/221493175/">R 社群活動：Cyber Security</a>'>
+        data-slide=8 title='R 預設的讀取資料技術'>
          8
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=9 title='R 的資料處理技術'>
+        data-slide=9 title='CSV 的眉眉角角'>
          9
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=10 title='R 是一套完整的資料科學解決方案'>
+        data-slide=10 title='字符編碼（Encoding）'>
          10
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=11 title='讀取資料'>
+        data-slide=11 title='範例：文字的&quot;0&quot;與數字的0L'>
          11
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=12 title='處理資料'>
+        data-slide=12 title='編碼(Encoding)'>
          12
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=13 title='關於swirl'>
+        data-slide=13 title='中文編碼'>
          13
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=14 title='關於swirl'>
+        data-slide=14 title='編碼101'>
          14
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=15 title='RBasic-07-Loading-Data'>
+        data-slide=15 title='Let’s do it'>
          15
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=16 title='R 預設的讀取資料技術'>
+        data-slide=16 title='RDataEngineer-01-Parsing'>
          16
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=17 title='CSV(comma-separated values)'>
+        data-slide=17 title='非結構化的資料'>
          17
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=18 title='CSV(comma-separated values)'>
+        data-slide=18 title='什麼是Parsing?'>
          18
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=19 title='字符編碼（Encoding）'>
+        data-slide=19 title='Let’s do it'>
          19
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=20 title='Hex和Binary'>
+        data-slide=20 title='讀取格式迥異的資料 (02-04)'>
          20
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=21 title='範例：文字的&quot;0&quot;與數字的0L'>
+        data-slide=21 title='RDataEngineer-02-XML'>
          21
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=22 title='編碼(Encoding)'>
+        data-slide=22 title='HTML (HyperText Markup Language)'>
          22
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=23 title='中文編碼'>
+        data-slide=23 title='XPath(XML Path Language)'>
          23
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=24 title='編碼101'>
+        data-slide=24 title='RDataEngineer-03-JSON'>
          24
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=25 title='RDataEngineer-01-Parsing'>
+        data-slide=25 title='JSON (JavaScript Object Notation)'>
          25
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=26 title='非結構化的資料'>
+        data-slide=26 title='結構化資料'>
          26
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=27 title='什麼是Parsing?'>
+        data-slide=27 title='R 的物件導向系統'>
          27
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=28 title='RDataEngineer-02-XML'>
+        data-slide=28 title='Let’s do it'>
          28
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=29 title='XML(eXtensible Markup Language)'>
+        data-slide=29 title='RDataEngineer-05-Data-Manipulation'>
          29
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=30 title='HTML'>
+        data-slide=30 title='R 的結構化資料來源'>
          30
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=31 title='XPath(XML Path Language)'>
+        data-slide=31 title='Grouped Operation'>
          31
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=32 title='RDataEngineer-03-JSON'>
+        data-slide=32 title='Grouped Operation'>
          32
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=33 title='JSON(JavaScript Object Notation)'>
+        data-slide=33 title='程式碼的壓縮'>
          33
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=34 title='JSON(JavaScript Object Notation)'>
+        data-slide=34 title='程式碼的壓縮'>
          34
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=35 title='RDataEngineer-04-Database'>
+        data-slide=35 title='程式碼的壓縮'>
          35
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=36 title='結構化資料'>
+        data-slide=36 title='Pipeline Operator'>
          36
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=37 title='R 的物件導向系統'>
+        data-slide=37 title='Pipeline Operator'>
          37
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=38 title='Transaction'>
+        data-slide=38 title='RDataEngineer-06-Join'>
          38
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=39 title='RDataEngineer-05-Data-Manipulation'>
+        data-slide=39 title='多資料源能激盪出更高的價值'>
          39
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=40 title='R 的結構化資料來源'>
+        data-slide=40 title='<code>left_join</code>'>
          40
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=41 title='Grouped Operation'>
+        data-slide=41 title='<code>right_join</code>'>
          41
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=42 title='Grouped Operation'>
+        data-slide=42 title='<code>inner_join</code>'>
          42
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=43 title='程式碼的壓縮'>
+        data-slide=43 title='<code>full_join</code>'>
          43
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=44 title='程式碼的壓縮'>
+        data-slide=44 title='<code>anti_join</code>'>
          44
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=45 title='程式碼的壓縮'>
+        data-slide=45 title='<code>semi_join</code>'>
          45
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=46 title='Pipeline Operator'>
+        data-slide=46 title='結束之後...'>
          46
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=47 title='Pipeline Operator'>
+        data-slide=47 title='你已經是一個初階的資料科學家'>
          47
-      </a>
-    </li>
-    <li>
-      <a href="#" target="_self" rel='tooltip' 
-        data-slide=48 title='RDataEngineer-06-Join'>
-         48
-      </a>
-    </li>
-    <li>
-      <a href="#" target="_self" rel='tooltip' 
-        data-slide=49 title='多資料源能激盪出更高的價值'>
-         49
-      </a>
-    </li>
-    <li>
-      <a href="#" target="_self" rel='tooltip' 
-        data-slide=50 title='<code>left_join</code>'>
-         50
-      </a>
-    </li>
-    <li>
-      <a href="#" target="_self" rel='tooltip' 
-        data-slide=51 title='<code>right_join</code>'>
-         51
-      </a>
-    </li>
-    <li>
-      <a href="#" target="_self" rel='tooltip' 
-        data-slide=52 title='<code>inner_join</code>'>
-         52
-      </a>
-    </li>
-    <li>
-      <a href="#" target="_self" rel='tooltip' 
-        data-slide=53 title='<code>full_join</code>'>
-         53
-      </a>
-    </li>
-    <li>
-      <a href="#" target="_self" rel='tooltip' 
-        data-slide=54 title='<code>anti_join</code>'>
-         54
-      </a>
-    </li>
-    <li>
-      <a href="#" target="_self" rel='tooltip' 
-        data-slide=55 title='<code>semi_join</code>'>
-         55
-      </a>
-    </li>
-    <li>
-      <a href="#" target="_self" rel='tooltip' 
-        data-slide=56 title='結束之後...'>
-         56
-      </a>
-    </li>
-    <li>
-      <a href="#" target="_self" rel='tooltip' 
-        data-slide=57 title='你已經是一個初階的資料科學家'>
-         57
       </a>
     </li>
   </ul>

@@ -371,15 +371,21 @@ img.fit100 {
 }
 
 slides slide.largecontent h3 {
-  font-size: 40px;
+  font-size: 36px;
   font-style: normal;
   line-height: 1.1em;
 }
 
 slides slide.largecontent li {
-  font-size: 36px;
+  font-size: 30px;
   font-style: normal;
-  line-height: 1.1em;
+  line-height: 1.5em;
+}
+
+slides slide.largecontent p {
+  font-size: 30px;
+  font-style: normal;
+  line-height: 1.5em;
 }
 
 slides > slide:not(.nobackground):after {
@@ -405,17 +411,27 @@ pre > code {
 
 .title-slide hgroup {
   position:relative; 
-  top: 50%; 
-  left: 50%; 
+  top: 25%; 
+  left: 25%; 
 }
 
-.title-slide hgroup > h1{
+.title-slide hgroup > h1 {
  font-family: 'Oswald', 'Helvetica', sanserif; 
 }
 
-.title-slide hgroup > h1, 
+.title-slide hgroup > h1 {
+  color: #535E43 ;  /* ; #EF5150 */
+  font-size: 250%;
+} 
+
 .title-slide hgroup > h2 {
   color: #535E43 ;  /* ; #EF5150 */
-  font-size: 150%;
+  font-size: 100%;
+}
+
+.title-slide hgroup > p {
+  color: #535E43 ;  /* ; #EF5150 */
+  font-size: 20px;
+  margin-top: 5px !important;
 }
 
