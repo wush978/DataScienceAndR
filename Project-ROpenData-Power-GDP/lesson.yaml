@@ -47,7 +47,8 @@
   Output: 在R 中，我們可以使用`strsplit`來切割字串。 `strsplit`的參數x 是要被切割的字串，split是定位分割點的字串。 請同學呼叫`strsplit`來用`";?\t"`切割`power`，並且將結果儲存到
     `power.split`中。 `";?\t"`在這邊代表，這個分號`;`是可有可無的。這是為了讓R 能夠 同時處理分隔符號為`";\t"`或`"\t"`的狀況。
   CorrectAnswer: power.split <- strsplit(power, ";?\t")
-  AnswerTests: check_val("power.split", strsplit(power, ";?\t"))
+  AnswerTests: |
+    check_val("power.split", strsplit(power, .delim))
   Hint: power.split <- strsplit(power, ";?\t")
 - Class: cmd_question
   Output: 使用`do.call`可以讓我們把`power.split`組裝成一個character matrix。 請同學輸入：`power.mat <-
