@@ -347,7 +347,7 @@
   AnswerTests: omnitest('dbListTables(db)')
   Hint: dbListTables(db)
 - Class: text
-  Output: 之後，就算我們斷線從連，CO2也不會回來了。
+  Output: 之後，就算我們斷線重連，CO2也不會回來了。
 - Class: text
   Output: |
     總而言之，當我們開始`dbBegin(db)`之後，所有的變更，都要等到我們執行`dbCommit(db)`才會生效。

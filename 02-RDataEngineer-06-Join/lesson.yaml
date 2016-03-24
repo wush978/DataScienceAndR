@@ -259,7 +259,7 @@
     `wiki_join()`中的第一張圖中淺藍色的部份，就代表最後輸出的`data.frame`
     剛剛好就是原本`x`的資料。
 - Class: mult_question
-  Output: 請問同學，如果輸入：`left_join(df1, df2)`的話，`left_join` 會以什麼基準作比對呢？
+  Output: 請問同學，如果輸入：`left_join(df1, df2)`的話，`left_join` 會以哪一個欄位名稱為基準作比對呢？（df1和df2共有的名稱）
   AnswerChoices: x;y;a;b
   CorrectAnswer: x
   AnswerTests: omnitest(correctVal = "x")
@@ -271,7 +271,7 @@
 - Class: text
   Output: |
     我們會看到`df1`資料都有保留下來。（結果的`x`欄的值為`c(1,2)`）
-    而第二筆資料，因為對不到`y`的資料，所以`a`與`b`的欄位都是NA
+    而結果的第二筆資料，因為df2中沒有`x = 2`的資料，所以`a`與`b`的欄位都是NA
 - Class: text
   Output: |
     `wiki_join()`中的第二張圖中淺藍色的部份，就代表`right_join`最後輸出

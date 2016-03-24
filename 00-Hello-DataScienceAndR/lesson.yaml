@@ -53,6 +53,10 @@
   AnswerTests: check_version()
 - Class: text
   Output: |
+    提醒同學，未來進行課程時，編輯的文件都會在重新啟動R之後消失。同學如果有需要，
+    請自行留存副本。官方網站：<http://www.datascienceandr.org>中也有參考答案。
+- Class: text
+  Output: |
     剛剛同學輸入的`skip()`與`submit()`都是swirl的指令。接著我們介紹：`play()`。
     同學如果在課程進行中，想要自由摸索的話，可以輸入`play()`來暫時中止swirl。
     需要回到課程的話，就輸入：`nxt()`。
