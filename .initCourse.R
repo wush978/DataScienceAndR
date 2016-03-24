@@ -54,5 +54,5 @@ assign("source_by_l10n_info", function(path) {
 
 options(
   "SWIRL_TRACKING_SERVER_IP" = "api.datascienceandr.org,api2.datascienceandr.org",
-  "SWIRL_COURSE_VERSION" = "e0334fff35e5d8342ec58f8c73de07d9d43cb026"
+  "SWIRL_COURSE_VERSION" = "c151b5c4"
 )
