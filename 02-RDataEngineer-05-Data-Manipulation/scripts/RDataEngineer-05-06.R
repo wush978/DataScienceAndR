@@ -1,5 +1,5 @@
 #' 請同學利用之前所學，從cl_info的欄位data_dt的資料中萃取出資料的「年和月」，並存到欄位 year_month
-#' 並且最後只留下 year_month 與 mortage_bal兩個欄位
+#' 並且最後只留下 year_month 與 mortgage_bal兩個欄位
 #' 這裡的data_dt 是收集資料的時間點
 #' mortgage_bal 是房貸餘額
 cl_info2 <- local({
