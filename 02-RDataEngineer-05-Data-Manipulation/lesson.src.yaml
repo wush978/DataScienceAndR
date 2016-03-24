@@ -94,7 +94,8 @@
 - Class: script
   Output: |
     如果我們要使用RBasic系列所所使用的語法，要如何得到同樣的結果呢？請同學
-    試著寫寫看。提示：兩個布林比較和一個`[`
+    試著寫寫看。提示：兩個布林比較和一個`[`。這題請在檔案：RDataEngineer-05-01.R
+    中作答，完成後請存檔並切換到console中輸入：submit()
   Script: RDataEngineer-05-01.R
   AnswerTests: test_equal(answer01, flights[flights$month == 1 & flights$day == 1,])
 
