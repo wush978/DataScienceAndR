@@ -127,6 +127,10 @@
   CorrectAnswer: filter(flights, month == 1, day == 2)
   AnswerTests: val_is(filter(flights, month == 1, day == 2))
 
+- Class: text
+  Output: |
+    filter也會自動過濾掉結果為 NA 的條件。在下一個題目，同學可以趁機摸索看看。
+
 - Class: script
   Output: |
     請問同學，在2013年的紐約，共有多少班次的飛機起飛有延誤？(`dep_delay > 0`)
