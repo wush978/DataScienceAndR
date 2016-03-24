@@ -12,10 +12,14 @@ install:
 # Adapt as necessary starting from here
 
 build_script:
-  - Rscript -e "install.packages(c('swirl'), repos = c('http://wush978.github.io/R', 'http://cran.r-project.org'))"
+  - Rscript -e "install.packages(c('stringr','testthat','httr','yaml','RCurl','digest','tools','rappdirs'), repos = 'http://wush978.github.io/R')"
+  - Rscript -e "install.packages(c('swirl'), repos = c('http://wush978.github.io/R'))"
 
 test_script:
   - Rscript .test_course.R push
 
 on_failure:
   - travis-tool.sh dump_logs
+
+environment:
+  R_VERSION: release

@@ -15,7 +15,7 @@ answer4 <- NULL #請將NULL替換成你的程式碼
 
 #' CO2 共有很多很多列（answer3）
 #' 請從CO2 中挑出一些列，滿足以下的條件：
-#' 這些列的uptake直，超過全部CO2"平均"的uptake值
+#' 這些列的uptake值，超過全部CO2"平均"的uptake值
 #' （`answer4`）
 #' 
 #'   你可以先取出uptake的向量、接著拿該向量和平均值做比較、把結果的logical vector丟到`[]`的第一個參數
