@@ -291,7 +291,7 @@
 
 - Class: mult_question
   Output: 請問同學，如果輸入：`left_join(df1, df2)`的話，`left_join`
-    會以什麼基準作比對呢？
+    會以哪一個欄位名稱為基準作比對呢？（df1和df2共有的名稱）
   AnswerChoices: x;y;a;b
   CorrectAnswer: "x"
   AnswerTests: omnitest(correctVal = "x")
