@@ -531,4 +531,19 @@ DataScienceAndR/
 
 --- &vcenter .largecontent
 
+## Tests
+
+- `omnitest`
+- `any_of_exprs`
+- My implementations: 
+    - <https://github.com/wush978/swirl/blob/master/R/answerTests3.R>
+
+--- &vcenter .largecontent
+
+## Installation
+
+<https://github.com/wush978/R/blob/gh-pages/init-swirl.R>
+
+--- &vcenter .largecontent
+
 ## Q&A
