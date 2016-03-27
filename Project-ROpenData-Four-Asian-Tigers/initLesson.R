@@ -4,7 +4,7 @@
 # throughout the lesson.
 
 #setwd("./")
-assign("RawData_KR",.get_path("./aha/Korea/data.csv"))
+assign("RawData_KR",.get_path("./aha/Korea/data.csv"),envir = globalenv())
 #assign("RawData_USA",get_path("./aha/USA/data.csv"),envir = gobalenv())
 #assign("RawData_Taiwan",get_path("./aha/Taiwan.csv"),envir = gobalenv())
 #assign("RawData_HK",get_path("./aha/HK/data.csv"),envir = gobalenv())
