@@ -25,7 +25,7 @@
   Hint: 如果輸出結果不是`"d38cb9e3530432181ead18a421b2725e"`，代表檔案 已經毀損，請移除課程（`uninstall_all_courses`）後重新安裝課程。
 
 - Class: text
-  Output: 這裡的`::`代表說，`md5sum`這個函數是來自`tools`這個套件。 這是近代R 語言新增的一種類似namespace的功能，是個很大的進步。
+  Output: 這裡的`::`代表說，`md5sum`這個函數是來自`tools`這個套件。 這是近代R 語言新增的一種類似namespace的功能，是個很大的進步。(by wush)
 
 
 - Class: cmd_question
