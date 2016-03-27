@@ -25,5 +25,13 @@
     這是個測試3
     
 - Class: cmd_question
-  Output: 這是個測試`a <- iris`    
+  Output: 這是個測試`a <- iris` 
   
+- Class: text
+  Output: |
+    這還是個測試
+    
+- Class: text
+  Output: |
+    這還是個測試 
+    
