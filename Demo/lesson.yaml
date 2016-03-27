@@ -1,7 +1,15 @@
 - Class: meta
-  Course: .
+  Course: DataScienceAndR
   Lesson: Demo
   Author: your name goes here
   Type: Standard
   Organization: your organization's name goes here
   Version: 2.4.0
+
+- Class: text
+  Output: |
+    測試
+    
+- Class: cmd_question
+  Output: |
+    請同學玩玩看｀a <- iris｀
