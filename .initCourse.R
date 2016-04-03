@@ -1,4 +1,4 @@
-if (packageVersion("swirl") < package_version("2.3.1-3")) {
+if (packageVersion("swirl") < package_version("100.3.1-3")) {
   stop("Please upgrade the version of swirl via: `install.packages('swirl', repos = 'http://wush978.github.io/R')`")
 }
 
