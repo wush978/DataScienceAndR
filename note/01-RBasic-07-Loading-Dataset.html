@@ -230,13 +230,11 @@ img {
 <h2>關卡 38</h2>
 <p>接著我們開始來講解<code>read.table</code>這個讀取CSV格式檔案最泛用的指令。</p>
 </div>
-
 <div id="-39" class="section level2">
 <h2>關卡 39</h2>
 <p>在R中，<code>read.table</code>的第一個參數和readLines的第一個參數一樣，代表要開啟的檔案。如果我們不在乎檔案的編碼，可以直接輸入檔案的路徑。以下哪一個是正確的路徑？</p>
 <p>lvr_land.path</p>
 </div>
-
 <div id="-40" class="section level2">
 <h2>關卡 40</h2>
 <p>請同學特別注意<code>read.table</code>的參數fileEncoding的用法，這個參數雖然可以解碼，但只能用在file參數為字串的case。因此file參數若為file函數所建立的connection，就會出錯。因為<code>file(lvr_land.path)</code>會產生一個connection，因此不能使用<code>read.table(file(lvr_land.path), fileEncoding = "BIG-5")</code>這種方式來解碼。</p>
@@ -246,7 +244,6 @@ img {
 <p>請同學使用<code>read.table(lvr_land.path, fileEncoding = "BIG-5")</code>這種方式來解碼。</p>
 <pre class="r"><code>read.table(lvr_land.path, fileEncoding = &quot;BIG-5&quot;)</code></pre>
 </div>
-
 <div id="-42" class="section level2">
 <h2>關卡 42</h2>
 <p>可惜我們需要設定編碼。（註：在中文版windows上預設會使用BIG5編碼，所以可以直接如上題輸入<code>lvr_land.path</code>。第二個重要的參數，是<code>header</code>。<code>header=TRUE</code>代表檔案的第一行是欄位名稱，而不是資料。<code>header=FALSE</code>代表檔案的第一行就是資料。剛剛我們看到檔案的前五行的內容是：<code>[1]&quot;鄉鎮市區,交易標的,...&quot;[2]&quot;文山區,房地(土地+建物)...&quot;</code>。請問同學，<code>header</code>的參數應該要給哪一個呢？</p>
