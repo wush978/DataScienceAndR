@@ -237,67 +237,76 @@ img {
 </div>
 <div id="-40" class="section level2">
 <h2>關卡 40</h2>
-<p>可惜我們需要設定編碼。（註：在中文版windows上預設會使用BIG5編碼，所以可以直接如上題輸入<code>lvr_land.path</code>。第二個重要的參數，是<code>header</code>。<code>header=TRUE</code>代表檔案的第一行是欄位名稱，而不是資料。<code>header=FALSE</code>代表檔案的第一行就是資料。剛剛我們看到檔案的前五行的內容是：<code>[1]&quot;鄉鎮市區,交易標的,...&quot;[2]&quot;文山區,房地(土地+建物)...&quot;</code>。請問同學，<code>header</code>的參數應該要給哪一個呢？</p>
-<p>TRUE</p>
+<p>請同學特別注意<code>read.table</code>的參數fileEncoding的用法，這個參數雖然可以解碼，但只能用在file參數為字串的case。因此file參數若為file函數所建立的connection，就會出錯。因為<code>file(lvr_land.path)</code>會產生一個connection，因此不能使用<code>read.table(file(lvr_land.path), fileEncoding = &quot;BIG-5&quot;)</code>這種方式來解碼。</p>
 </div>
 <div id="-41" class="section level2">
 <h2>關卡 41</h2>
-<p>第三個重要的參數是<code>sep</code>，這代表各行欄位間的分隔符號。根據之前我們看到的前五行的資料：`[1]“鄉鎮市區,交易標的,土地區段位置…,土地移轉總面積…”[2]“文山區,房地(土地+建物),臺北市文山區…,43.44…”[3]“中正區,房地(土地+建物),臺北市中正區…,40.19…”。請問同學，這份檔案個欄位的分隔符號是什麼呢？</p>
-<p>,</p>
+<p>請同學使用<code>read.table(lvr_land.path, fileEncoding = "BIG-5")</code>這種方式來解碼。</p>
+<pre class="r"><code>read.table(lvr_land.path, fileEncoding = &quot;BIG-5&quot;)</code></pre>
 </div>
 <div id="-42" class="section level2">
 <h2>關卡 42</h2>
-<p>依照以上問答題的答案，請同學利用<code>read.table</code>，用BIG5編碼讀取<code>lvr_land.path</code>，並且把輸出存到變數<code>lvr_land</code></p>
-<pre class="r"><code>lvr_land &lt;- read.table(file(lvr_land.path, encoding = &quot;BIG5&quot;), header = TRUE, sep = &quot;,&quot;)</code></pre>
+<p>可惜我們需要設定編碼。（註：在中文版windows上預設會使用BIG5編碼，所以可以直接如上題輸入<code>lvr_land.path</code>。第二個重要的參數，是<code>header</code>。<code>header=TRUE</code>代表檔案的第一行是欄位名稱，而不是資料。<code>header=FALSE</code>代表檔案的第一行就是資料。剛剛我們看到檔案的前五行的內容是：<code>[1]&quot;鄉鎮市區,交易標的,...&quot;[2]&quot;文山區,房地(土地+建物)...&quot;</code>。請問同學，<code>header</code>的參數應該要給哪一個呢？</p>
+<p>TRUE</p>
 </div>
 <div id="-43" class="section level2">
 <h2>關卡 43</h2>
-<p>如果我們要直接從<code>lvr_land.txt</code>的內容取出表格，一種方法是直接把<code>lvr_land.txt</code>寫成一個檔案，再用<code>read.table</code>讀取。另外一種方法，是把<code>lvr_land.txt</code>視為一個類似檔案的物件，也就是connection。</p>
+<p>第三個重要的參數是<code>sep</code>，這代表各行欄位間的分隔符號。根據之前我們看到的前五行的資料：`[1]“鄉鎮市區,交易標的,土地區段位置…,土地移轉總面積…”[2]“文山區,房地(土地+建物),臺北市文山區…,43.44…”[3]“中正區,房地(土地+建物),臺北市中正區…,40.19…”。請問同學，這份檔案個欄位的分隔符號是什麼呢？</p>
+<p>,</p>
 </div>
 <div id="-44" class="section level2">
 <h2>關卡 44</h2>
-<p>在windows上，有一個很不方便的地方，是接下來的作法和Windows的語系有關。如果同學的Windows的語系有支援多位元組字串（例如中文、日文等語系），那語法需要調整。</p>
+<p>依照以上問答題的答案，請同學利用<code>read.table</code>，用BIG5編碼讀取<code>lvr_land.path</code>，並且把輸出存到變數<code>lvr_land</code></p>
+<pre class="r"><code>lvr_land &lt;- read.table(file(lvr_land.path, encoding = &quot;BIG5&quot;), header = TRUE, sep = &quot;,&quot;)</code></pre>
 </div>
 <div id="-45" class="section level2">
 <h2>關卡 45</h2>
-<p>我們可以用<code>l10n_info()</code>來查詢作業系統對於各種Encoding的支援狀況。<code>l10n_info()</code>會回報系統對是否有支援UTF-8（UTF-8欄位），或是多位元組字串（MBCS欄位）。請同學試試看輸入：<code>l10n_info()</code></p>
-<pre class="r"><code>l10n_info()</code></pre>
+<p>如果我們要直接從<code>lvr_land.txt</code>的內容取出表格，一種方法是直接把<code>lvr_land.txt</code>寫成一個檔案，再用<code>read.table</code>讀取。另外一種方法，是把<code>lvr_land.txt</code>視為一個類似檔案的物件，也就是connection。</p>
 </div>
 <div id="-46" class="section level2">
 <h2>關卡 46</h2>
-<p>根據經驗，如果<code>l10n_info()</code>的輸出中，MBCS為TRUE且UTF-8為FALSE，則要使用：<code>textConnection(lvr_land.txt)</code>來從<code>lvr_land.txt</code>建立一個connection。除此之外，則使用<code>textConnection(lvr_land.txt,encoding=&quot;UTF-8&quot;)</code>即可。請同學依據上一題的結果，在MBCS為TRUE且UTF-8為FALSE時執行：<code>read.table(textConnection(lvr_land.txt),header=TRUE,sep=&quot;,&quot;)</code>否則，執行：<code>read.table(textConnection(lvr_land.txt,encoding=&quot;UTF-8&quot;),header=TRUE,sep=&quot;,&quot;)</code></p>
-<pre class="r"><code>read.table(get_text_connection_by_l10n_info(lvr_land.txt), header = TRUE, sep = &quot;,&quot;)</code></pre>
+<p>在windows上，有一個很不方便的地方，是接下來的作法和Windows的語系有關。如果同學的Windows的語系有支援多位元組字串（例如中文、日文等語系），那語法需要調整。</p>
 </div>
 <div id="-47" class="section level2">
 <h2>關卡 47</h2>
-<p>以上提供數種在R中處理中文資料的方法給同學參考。</p>
+<p>我們可以用<code>l10n_info()</code>來查詢作業系統對於各種Encoding的支援狀況。<code>l10n_info()</code>會回報系統對是否有支援UTF-8（UTF-8欄位），或是多位元組字串（MBCS欄位）。請同學試試看輸入：<code>l10n_info()</code></p>
+<pre class="r"><code>l10n_info()</code></pre>
 </div>
 <div id="-48" class="section level2">
 <h2>關卡 48</h2>
-<p>事實上，如果同學自行下載原本的檔案來處理，上述的流程還是會出錯的。那是因為在第21行，資料的最後一欄的內容包含：<code>,</code>這個符號，導致欄位判斷出錯。</p>
+<p>根據經驗，如果<code>l10n_info()</code>的輸出中，MBCS為TRUE且UTF-8為FALSE，則要使用：<code>textConnection(lvr_land.txt)</code>來從<code>lvr_land.txt</code>建立一個connection。除此之外，則使用<code>textConnection(lvr_land.txt,encoding=&quot;UTF-8&quot;)</code>即可。請同學依據上一題的結果，在MBCS為TRUE且UTF-8為FALSE時執行：<code>read.table(textConnection(lvr_land.txt),header=TRUE,sep=&quot;,&quot;)</code>否則，執行：<code>read.table(textConnection(lvr_land.txt,encoding=&quot;UTF-8&quot;),header=TRUE,sep=&quot;,&quot;)</code></p>
+<pre class="r"><code>read.table(get_text_connection_by_l10n_info(lvr_land.txt), header = TRUE, sep = &quot;,&quot;)</code></pre>
 </div>
 <div id="-49" class="section level2">
 <h2>關卡 49</h2>
-<p>遇到這種狀況，最好的方式是自己用如notepad++或是其他的編輯器，自行編輯原始的檔案資料（依照錯誤訊息，移除多餘的,），再用R讀取。由於這樣的動作超過這個課程系統的內容，所以我們就不帶著同學做操作了。</p>
+<p>以上提供數種在R中處理中文資料的方法給同學參考。</p>
 </div>
 <div id="-50" class="section level2">
 <h2>關卡 50</h2>
-<p>另外一種方式，是透過<code>readLines</code>來讀取資料，再用R的其他函數自行把讀入的字串轉換為data.frame。這部分很難歸納，會隨著資料的乾淨程度而有所不同。同學可以再閱讀本課程中的，一些實際分析OpenData的範例，就可以學到一些技巧。或是繼續學習R的字串處理函數與套件。</p>
+<p>事實上，如果同學自行下載原本的檔案來處理，上述的流程還是會出錯的。那是因為在第21行，資料的最後一欄的內容包含：<code>,</code>這個符號，導致欄位判斷出錯。</p>
 </div>
 <div id="-51" class="section level2">
-<h2>關卡 51</h2>
-<p>我們在這門課程中簡單展示了如何從套件中載入資料，以及如何從檔案中讀取CSV的資料。</p>
+<h2>關卡 41</h2>
+<p>遇到這種狀況，最好的方式是自己用如notepad++或是其他的編輯器，自行編輯原始的檔案資料（依照錯誤訊息，移除多餘的,），再用R讀取。由於這樣的動作超過這個課程系統的內容，所以我們就不帶著同學做操作了。</p>
 </div>
 <div id="-52" class="section level2">
 <h2>關卡 52</h2>
-<p>如果要使用R讀取XML的資料，可以使用套件XML。如果要讀取JSON，可以使用rjsonlite。只要資料格式是公開格式，我們很容易找到R的套件來讀取該資料格式。這就是R是OpenSource的威力！</p>
+<p>另外一種方式，是透過<code>readLines</code>來讀取資料，再用R的其他函數自行把讀入的字串轉換為data.frame。這部分很難歸納，會隨著資料的乾淨程度而有所不同。同學可以再閱讀本課程中的，一些實際分析OpenData的範例，就可以學到一些技巧。或是繼續學習R的字串處理函數與套件。</p>
 </div>
 <div id="-53" class="section level2">
 <h2>關卡 53</h2>
-<p>受限於課程內容，所以我們這裡只講讀取CSV的方式。這應該是最泛用的內容了。未來有時間，會再找社群的其他大大合作開寫其他和讀資料相關的課程。同學如果很期待看到處理某些形態資料的課程，歡迎到<a href="https://github.com/wush978/DataScienceAndR/issues" class="uri">https://github.com/wush978/DataScienceAndR/issues</a>許願。</p>
+<p>我們在這門課程中簡單展示了如何從套件中載入資料，以及如何從檔案中讀取CSV的資料。</p>
 </div>
 <div id="-54" class="section level2">
 <h2>關卡 54</h2>
+<p>如果要使用R讀取XML的資料，可以使用套件XML。如果要讀取JSON，可以使用rjsonlite。只要資料格式是公開格式，我們很容易找到R的套件來讀取該資料格式。這就是R是OpenSource的威力！</p>
+</div>
+<div id="-55" class="section level2">
+<h2>關卡 55</h2>
+<p>受限於課程內容，所以我們這裡只講讀取CSV的方式。這應該是最泛用的內容了。未來有時間，會再找社群的其他大大合作開寫其他和讀資料相關的課程。同學如果很期待看到處理某些形態資料的課程，歡迎到<a href="https://github.com/wush978/DataScienceAndR/issues" class="uri">https://github.com/wush978/DataScienceAndR/issues</a>許願。</p>
+</div>
+<div id="-56" class="section level2">
+<h2>關卡 56</h2>
 <p>最後，還是要請同學利用這次所學的內容，做一個小練習。請同學在完成之後存檔，並輸入<code>submit()</code>來檢查結果是否符合預期。如果同學在檔案中看到亂碼，請使用Rstudio左上角的File-&gt;ReopenWithEncoding…-&gt;選取：UTF-8</p>
 <pre class="r"><code>#' 請同學用這章節所學的技巧，讀取`orglist.path`的檔案
 #' 資料來源：&lt;http://data.gov.tw/node/7307&gt;
