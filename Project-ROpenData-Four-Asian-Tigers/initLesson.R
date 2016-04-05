@@ -11,3 +11,6 @@ assign("RawData_HK",.get_path("./aha/HK/data.csv"),envir = globalenv())
 assign("RawData_Sigapore",.get_path("./aha/Singapore/data.csv"),envir = globalenv())
 assign("RawData_Japan",.get_path("./aha/Japan/data.csv"),envir = globalenv())
 assign("RawData_China",.get_path("./aha/China/data.csv"),envir = globalenv())
+
+assign("install_dplyr",check_then_install("dplyr","0.4.3"),envir = globalenv())
+assign("install_ggplot2r",check_then_install("ggplot2","2.1.0"),envir = globalenv())

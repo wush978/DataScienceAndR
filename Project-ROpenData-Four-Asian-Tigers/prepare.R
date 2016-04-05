@@ -5,9 +5,10 @@ library(devtools)
 library(swirlify)
 #new_lesson("Demo",".")
 #set_lesson("Demo/lesson.yaml")
-setwd("./DataScienceAndR/Project-ROpenData-Four-Asian-Tigers/lesson.yaml")
+#setwd("./DataScienceAndR/Project-ROpenData-Four-Asian-Tigers/")
+setwd("/Volumes/AhaStorage/A_Project/24_Swirl/DataScienceAndR/Project-ROpenData-Four-Asian-Tigers/")
 #可以協助編寫使用
-source("./DataScienceAndR/.transform.R")
+source("../.transform.R")
 testit()
 #Rscript .test_course.R push full test
 #Rscript .test_course.R commit partial test

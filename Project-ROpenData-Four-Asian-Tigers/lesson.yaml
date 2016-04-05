@@ -47,5 +47,3 @@
 - Class: text
   Output: 第一步，我們要先讀入所有的資料，先針對中國，美國，日本，新加坡，香港，南韓，除了台灣，因為台灣資料不是直接從WorldBank得到，另外處理
 
-- Class: text
-  Output: 
