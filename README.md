@@ -92,7 +92,7 @@ window.onload =function(){
 4. **套件的使用與探索**。R 的一大優勢就是蓬勃的套件系統。雖然教材中無法介紹所有的套件，但是會教同學如何探索一個第一次接觸的R 套件。
 5. **互動**。我們基於R Community貢獻的R 語言套件swirl 所撰寫的互動式學習環境，可以讓同學以最貼近實際使用R 的狀況來學R
 6. **教材設計**。每個單元的開始，我們設計大量的操作讓同學是透過用**肌肉**來記憶R 的指令。並且在單元的最後都擁有來自實務且具有挑戰性的關卡。
-7. **自由**。老師們可以很方便與自由地將本教材整合至您的教案之中。您可以將本教材當成同學學習R語言的補充教材，讓同學透過本教材學習如何處理政府的開放資料集。本教材不會涉獵過多的專業分析技術，而是把這些內容留給專業的老師們。有興趣合作的老師歡迎來信：[wush@datascienceandr.org](mailto:wush@datascienceandr.org)
+7. **自由**。老師們可以很方便與自由地將本教材整合至您的教案之中。有興趣的老師請參考：[教師專區](teacher.html)
 
 ## 即時動態
 
@@ -176,7 +176,7 @@ ps. 如果你之前有進行過swirl的課程，swirl會出現下圖的選項詢
 
 ## 課程筆記
 
-以下連結記載swirl中的課程內容(sha-hash: e5562e77 版本)
+以下連結記載swirl中的課程內容(sha-hash: 3be0fb9b 版本)
 
 - [00-Hello-DataScienceAndR](note/00-Hello-DataScienceAndR.html)
 - [01-RBasic-01-Introduction](note/01-RBasic-01-Introduction.html)
@@ -198,7 +198,6 @@ ps. 如果你之前有進行過swirl的課程，swirl會出現下圖的選項詢
 - [03-RVisualization-04-Javascript-And-Maps](note/03-RVisualization-04-Javascript-And-Maps.html)
 - [Optional-RProgramming-01-Loop-And-Condition](note/Optional-RProgramming-01-Loop-And-Condition.html)
 - [Optional-RProgramming-02-Function](note/Optional-RProgramming-02-Function.html)
-- [Project-ROpenData-DataTaipei](note/Project-ROpenData-DataTaipei.html)
 - [Project-ROpenData-Power-GDP](note/Project-ROpenData-Power-GDP.html)
 
 ## 課程投影片
