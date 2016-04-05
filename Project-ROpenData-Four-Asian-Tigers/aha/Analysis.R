@@ -11,9 +11,9 @@ library(dplyr);
 library(ggplot2);
 
 #設定工作目錄
-mainDir = '/Users/aha/Desktop/github/Four-Asian-Tigers/';
-#setwd('/Volumes/AhaStorage/A_Project/23_R_SWIRL/');
-setwd(mainDir);
+#mainDir = '/Users/aha/Desktop/github/Four-Asian-Tigers/';
+setwd('/Volumes/AhaStorage/A_Project/23_R_SWIRL/');
+#setwd(mainDir);
 
 #準備工作
 subDir = "./img";

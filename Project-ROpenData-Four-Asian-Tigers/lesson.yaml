@@ -47,3 +47,23 @@
 - Class: text
   Output: 第一步，我們要先讀入所有的資料，先針對中國，美國，日本，新加坡，香港，南韓，除了台灣，因為台灣資料不是直接從WorldBank得到，另外處理
 
+- Class: cmd_question
+  Output: 在世界銀行中的資料都是UTF8, 透過網站上的說明，我們知道這些檔案都是csv檔案,所以可以直接將這些檔案透過read.csv()讀入，
+    裡面帶入的參數主要可以很簡單使用file由於檔案都已經下載好了，這些檔案路徑可以直接透過Data_KR,RawData_US讀到資料內，
+    請就先創造Data_KR是來自讀入`RawData_KR`(這個就是檔案路徑)的資料吧．我們會發現直接讀入會讓他無法直接使用read.csv,也因此建議把前三行給去除掉
+    可以透過skip=3的方法去除前三行，同時為了方便後面處理一致，可以先讓所有欄位都採用文字stringsAsFactors=F,
+    在參數的順序上可以依序從file,skip,stringsAsFactors, 順序不一定要一樣，只是練習的時候透過這樣的順序過關
+  CorrectAnswer: Data_KR = read.csv(file=RawData_KR,skip=3,stringsAsFactors=F)
+  AnswerTests: omnitest('Data_KR = read.csv(file=RawData_KR,skip=3,stringsAsFactors=F)')
+  Hint: Data_KR = read.csv(file=RawData_KR,skip=3,stringsAsFactors=F)
+
+- Class: text
+  Output: 恭喜你讀入這個檔案，但其實後面還有陸陸續續的其他國家的檔案要讀入，可以繼續將每個國家都讀入．讓我們依序把這些讀入吧
+  
+- Class: cmd_question
+  Output: 第二個是美國，檔案路徑在RawData_USA,請放到變數Data_USA
+  CorrectAnswer: Data_USA = read.csv(file=RawData_USA,skip=3,stringsAsFactors=F)
+  AnswerTests: omnitest('Data_USA = read.csv(file=RawData_USA,skip=3,stringsAsFactors=F)')
+  Hint: Data_USA = read.csv(file=RawData_USA,skip=3,stringsAsFactors=F)
+
+
