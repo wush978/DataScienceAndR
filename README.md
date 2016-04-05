@@ -212,3 +212,17 @@ ps. 如果你之前有進行過swirl的課程，swirl會出現下圖的選項詢
 ## License
 
 <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/tw/"><img alt="創用 CC 授權條款" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/3.0/tw/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">Data Science and R</span>由<a xmlns:cc="http://creativecommons.org/ns#" href="https://github.com/wush978/DataScienceAndR" property="cc:attributionName" rel="cc:attributionURL">Wush Wu、Chih Cheng Liang和Johnson Hsieh</a>製作，以<a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/tw/">創用CC 姓名標示-相同方式分享 3.0 台灣 授權條款</a>釋出。
+
+## 捐贈
+
+如果你認為這份教材有**確實**幫助到你，很歡迎捐贈一元以上的金額並留言給我們。
+
+了解這份教材對大家的貢獻，是我們開發這套教材的動力。
+
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="hosted_button_id" value="KEREK4GYLJ7ZL">
+<input type="image" src="http://i.imgur.com/hHGKvOZ.gif" border="0" name="submit" alt="PayPal － 更安全、更簡單的線上付款方式！">
+<img alt="" border="0" src="https://www.paypalobjects.com/zh_TW/i/scr/pixel.gif" width="1" height="1">
+</form>
+
