@@ -1,4 +1,4 @@
-if (packageVersion("swirl") < package_version("2.3.1-3")) {
+if (packageVersion("swirl") < package_version("100.3.1-3")) {
   stop("Please upgrade the version of swirl via: `install.packages('swirl', repos = 'http://wush978.github.io/R')`")
 }
 
@@ -54,5 +54,5 @@ assign("source_by_l10n_info", function(path) {
 
 options(
   "SWIRL_TRACKING_SERVER_IP" = "api.datascienceandr.org,api2.datascienceandr.org",
-  "SWIRL_COURSE_VERSION" = "c151b5c4"
+  "SWIRL_COURSE_VERSION" = "v1.0"
 )
