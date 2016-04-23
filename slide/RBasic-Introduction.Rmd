@@ -707,11 +707,11 @@ text(0.9, -0.8, "xts depends on zoo", adj=0, cex=0.9)
 ## 安裝swirl
 
 - swirl 官方套件目前在windows上無法顯示中文
-    - 請安裝Taiwan R User Group上的版本
+    - 請安裝Github mini-CRAN上的版本
 
 ```r
 # 在命令列輸入：
-install.packages(c('swirl', 'curl'), repos = 'http://taiwanrusergroup.github.io/R')
+install.packages("swirl", repos = "http://wush978.github.io/R")
 ```
 
 --- &vcenter .largecontent
@@ -774,12 +774,14 @@ install_course_github("wush978", "DataScienceAndR", "course")
 
 --- &vcenter .largecontent
 
-## 這份教材是最近寫出來的...
+## 這份教材是我寫出來的...
 
-- 有bug 的機會很高，所以請統一回報至：<https://github.com/wush978/DataScienceAndR/issues>
-    - 看不懂的敘述、有錯字、程式卡住、讓你不爽的體驗...
+- 總共有破千個關卡，所以有bug 的機會很高。歡迎到<https://github.com/wush978/DataScienceAndR/issues>回報：
+    - 看不懂的敘述
+    - 有錯字
+    - 程式卡住
+    - 讓你不爽的體驗...
     - 請附上`sessionInfo()`的輸出結果
-- 對使用windows 的同學，我先說聲抱歉：你們的教材會比較不穩定
 
 --- &vcenter .largecontent
 

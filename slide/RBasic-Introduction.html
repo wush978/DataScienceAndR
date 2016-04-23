@@ -252,7 +252,7 @@
     Shapiro-Wilk normality test
 
 data:  x
-W = 0.936, p-value = 0.0001108
+W = 0.94465, p-value = 0.0003746
 </code></pre>
 
 </article>
@@ -298,7 +298,7 @@ legend(&quot;topright&quot;, c(&quot;x1&quot;, &quot;x2&quot;), lty = 1, col = 1
     Two-sample Kolmogorov-Smirnov test
 
 data:  x1 and x2
-D = 0.24, p-value = 0.1124
+D = 0.18, p-value = 0.3959
 alternative hypothesis: two-sided
 </code></pre>
 
@@ -967,22 +967,22 @@ head(Teams[,c(&quot;yearID&quot;, &quot;name&quot;, &quot;Rank&quot;, &quot;W&qu
 <li>前十名的R 套件有一半是Hadley寫的</li>
 </ul>
 
-<!-- html table generated in R 3.2.3 by xtable 1.8-0 package -->
+<!-- html table generated in R 3.2.3 by xtable 1.8-2 package -->
 
-<!-- Mon Mar  7 11:25:02 2016 -->
+<!-- Sat Apr 23 08:53:23 2016 -->
 
 <table border=1>
 <tr> <th>  </th> <th> package </th> <th> downloads </th>  </tr>
-  <tr> <td align="right"> 1 </td> <td> Rcpp </td> <td> 264091 </td> </tr>
-  <tr> <td align="right"> 2 </td> <td> ggplot2 </td> <td> 260823 </td> </tr>
-  <tr> <td align="right"> 3 </td> <td> digest </td> <td> 232034 </td> </tr>
-  <tr> <td align="right"> 4 </td> <td> stringi </td> <td> 207804 </td> </tr>
-  <tr> <td align="right"> 5 </td> <td> stringr </td> <td> 204669 </td> </tr>
-  <tr> <td align="right"> 6 </td> <td> plyr </td> <td> 201598 </td> </tr>
-  <tr> <td align="right"> 7 </td> <td> scales </td> <td> 200798 </td> </tr>
-  <tr> <td align="right"> 8 </td> <td> munsell </td> <td> 194471 </td> </tr>
-  <tr> <td align="right"> 9 </td> <td> reshape2 </td> <td> 179277 </td> </tr>
-  <tr> <td align="right"> 10 </td> <td> colorspace </td> <td> 169031 </td> </tr>
+  <tr> <td align="right"> 1 </td> <td> Rcpp </td> <td> 264380 </td> </tr>
+  <tr> <td align="right"> 2 </td> <td> RcppArmadillo </td> <td> 239923 </td> </tr>
+  <tr> <td align="right"> 3 </td> <td> ggplot2 </td> <td> 219014 </td> </tr>
+  <tr> <td align="right"> 4 </td> <td> digest </td> <td> 179757 </td> </tr>
+  <tr> <td align="right"> 5 </td> <td> stringr </td> <td> 170273 </td> </tr>
+  <tr> <td align="right"> 6 </td> <td> stringi </td> <td> 170007 </td> </tr>
+  <tr> <td align="right"> 7 </td> <td> plyr </td> <td> 169217 </td> </tr>
+  <tr> <td align="right"> 8 </td> <td> scales </td> <td> 166519 </td> </tr>
+  <tr> <td align="right"> 9 </td> <td> magrittr </td> <td> 158518 </td> </tr>
+  <tr> <td align="right"> 10 </td> <td> gtable </td> <td> 149022 </td> </tr>
    </table>
 
 </article>
@@ -1208,12 +1208,12 @@ head(Teams[,c(&quot;yearID&quot;, &quot;name&quot;, &quot;Rank&quot;, &quot;W&qu
 <li>swirl 官方套件目前在windows上無法顯示中文
 
 <ul>
-<li>請安裝Taiwan R User Group上的版本</li>
+<li>請安裝Github mini-CRAN上的版本</li>
 </ul></li>
 </ul>
 
 <pre><code class="r"># 在命令列輸入：
-install.packages(c(&#39;swirl&#39;, &#39;curl&#39;), repos = &#39;http://taiwanrusergroup.github.io/R&#39;)
+install.packages(&quot;swirl&quot;, repos = &quot;http://wush978.github.io/R&quot;)
 </code></pre>
 
 </article>
@@ -1315,17 +1315,19 @@ library(curl)
 </slide>
 <slide class="largecontent" id="slide-73" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
 <hgroup>
-  <h2>這份教材是最近寫出來的...</h2>
+  <h2>這份教材是我寫出來的...</h2>
 </hgroup>
 <article class = 'flexbox vcenter'>
 <ul>
-<li>有bug 的機會很高，所以請統一回報至：<a href="https://github.com/wush978/DataScienceAndR/issues">https://github.com/wush978/DataScienceAndR/issues</a>
+<li>總共有破千個關卡，所以有bug 的機會很高。歡迎到<a href="https://github.com/wush978/DataScienceAndR/issues">https://github.com/wush978/DataScienceAndR/issues</a>回報：
 
 <ul>
-<li>看不懂的敘述、有錯字、程式卡住、讓你不爽的體驗...</li>
+<li>看不懂的敘述</li>
+<li>有錯字</li>
+<li>程式卡住</li>
+<li>讓你不爽的體驗...</li>
 <li>請附上<code>sessionInfo()</code>的輸出結果</li>
 </ul></li>
-<li>對使用windows 的同學，我先說聲抱歉：你們的教材會比較不穩定</li>
 </ul>
 
 </article>
@@ -1793,7 +1795,7 @@ library(curl)
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=73 title='這份教材是最近寫出來的...'>
+        data-slide=73 title='這份教材是我寫出來的...'>
          73
       </a>
     </li>
