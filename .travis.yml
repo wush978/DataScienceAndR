@@ -14,7 +14,7 @@ before_install:
   - ./travis-tool.sh bootstrap
 
 install:
-  - sudo apt-get install -y libcurl4-openssl-dev
+  - sudo apt-get install -y libcurl4-openssl-dev libssl-dev libxml2-dev
   - Rscript -e "source('http://wush978.github.io/R/init-swirl.R')"
 
 notifications:
