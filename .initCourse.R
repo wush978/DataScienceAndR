@@ -11,8 +11,8 @@ assign(".get_path",
 
 assign("check_then_install",
        function(pkg_name, pkg_version) {
-         if (!suppressWarnings(suppressMessages(require(pkg_name, character.only = TRUE)))) utils::install.packages(pkg_name, repos = "http://cran.r-project.org") else {
-           if (packageVersion(pkg_name) < package_version(pkg_version)) utils::install.packages(pkg_name, repos = "http://cran.r-project.org")
+         if (!suppressWarnings(suppressMessages(require(pkg_name, character.only = TRUE)))) utils::install.packages(pkg_name) else {
+           if (packageVersion(pkg_name) < package_version(pkg_version)) utils::install.packages(pkg_name)
          }
        },
        envir = globalenv())
@@ -54,5 +54,6 @@ assign("source_by_l10n_info", function(path) {
 
 options(
   "SWIRL_TRACKING_SERVER_IP" = "api.datascienceandr.org,api2.datascienceandr.org",
-  "SWIRL_COURSE_VERSION" = "v1.0"
+  "SWIRL_COURSE_VERSION" = "v1.0",
+  "repos" = c("http://wush978.github.io/R", "CRAN"="http://mran.revolutionanalytics.com/snapshot/2016-04-01")
 )
