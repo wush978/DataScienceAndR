@@ -252,7 +252,7 @@
     Shapiro-Wilk normality test
 
 data:  x
-W = 0.94465, p-value = 0.0003746
+W = 0.95456, p-value = 0.001678
 </code></pre>
 
 </article>
@@ -298,7 +298,7 @@ legend(&quot;topright&quot;, c(&quot;x1&quot;, &quot;x2&quot;), lty = 1, col = 1
     Two-sample Kolmogorov-Smirnov test
 
 data:  x1 and x2
-D = 0.18, p-value = 0.3959
+D = 0.24, p-value = 0.1124
 alternative hypothesis: two-sided
 </code></pre>
 
@@ -326,59 +326,6 @@ alternative hypothesis: two-sided
 </hgroup>
 <article class = 'flexbox vcenter'>
 <ul>
-<li>統計檢定的概念：
-
-<ul>
-<li>如果方法A 的轉換率和方法B 相同，都是\(3/5000\)</li>
-<li>那在10000個點擊裡面，發生10個購買或以上的機率是多少？</li>
-</ul></li>
-<li>R 非常適合撰寫這類機率性質的模擬：</li>
-</ul>
-
-<pre><code class="r"># 假設方法A 真正的轉換率和就是 3 / 5000
-p &lt;- 3/5000
-# 我們可以模擬1000次在10000個點擊下，方法A 的轉換數
-plot(density(x &lt;- rbinom(1000, 10000, p)))
-</code></pre>
-
-</article>
-<!-- Presenter Notes -->
-</slide>
-<slide class="largecontent" id="slide-22" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
-<hgroup>
-  <h2>範例 - A/B 方法比較（常見於電子商務）</h2>
-</hgroup>
-<article class = 'flexbox vcenter'>
-<ul>
-<li>結果示意圖</li>
-</ul>
-
-<p><img src="./assets/fig/rbasic-introduction-conversion-1.png" alt="plot of chunk conversion"></p>
-
-</article>
-<!-- Presenter Notes -->
-</slide>
-<slide class="largecontent" id="slide-23" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
-<hgroup>
-  <h2>範例 - A/B 方法比較（常見於電子商務）</h2>
-</hgroup>
-<article class = 'flexbox vcenter'>
-<ul>
-<li>精確的模擬結果：<code>mean(x &gt; 10)</code></li>
-</ul>
-
-<pre><code>[1] 0.05
-</code></pre>
-
-</article>
-<!-- Presenter Notes -->
-</slide>
-<slide class="largecontent" id="slide-24" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
-<hgroup>
-  <h2>範例 - A/B 方法比較（常見於電子商務）</h2>
-</hgroup>
-<article class = 'flexbox vcenter'>
-<ul>
 <li>想看信賴區間？透過套件，立馬取得結果：</li>
 </ul>
 
@@ -394,7 +341,7 @@ binom.confint(c(10, 3), c(10000, 5000), methods = &quot;exact&quot;)
 </article>
 <!-- Presenter Notes -->
 </slide>
-<slide class="largecontent" id="slide-25" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<slide class="largecontent" id="slide-22" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
 <hgroup>
   <h2>範例 - A/B 方法比較（常見於電子商務）</h2>
 </hgroup>
@@ -409,7 +356,7 @@ binom.confint(c(10, 3), c(10000, 5000), methods = &quot;exact&quot;)
 </article>
 <!-- Presenter Notes -->
 </slide>
-<slide class="dark segue" id="slide-26" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+<slide class="dark segue" id="slide-23" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
   <hgroup>
     <h2>來自R 社群的貢獻</h2>
   </hgroup>
@@ -418,7 +365,7 @@ binom.confint(c(10, 3), c(10000, 5000), methods = &quot;exact&quot;)
   </article>
   <!-- Presenter Notes -->
 </slide>
-<slide class="largecontent" id="slide-27" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<slide class="largecontent" id="slide-24" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
 <hgroup>
   <h2>範例 - 相關性</h2>
 </hgroup>
@@ -434,7 +381,7 @@ binom.confint(c(10, 3), c(10000, 5000), methods = &quot;exact&quot;)
 </article>
 <!-- Presenter Notes -->
 </slide>
-<slide class="largecontent" id="slide-28" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<slide class="largecontent" id="slide-25" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
 <hgroup>
   <h2>範例 - 相關性</h2>
 </hgroup>
@@ -448,7 +395,7 @@ chart.Correlation(iris[-5], bg=iris$Species, pch=21)
 </article>
 <!-- Presenter Notes -->
 </slide>
-<slide class="largecontent" id="slide-29" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<slide class="largecontent" id="slide-26" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
 <hgroup>
   <h2>範例 - 相關性</h2>
 </hgroup>
@@ -463,7 +410,21 @@ heatmap(Ca,               symm = TRUE, margins = c(6,6))
 </article>
 <!-- Presenter Notes -->
 </slide>
-<slide class="largecontent" id="slide-30" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<slide class="largecontent" id="slide-27" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>範例 - 相關性</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<pre><code class="r">library(corrplot)
+corrplot(Ca)
+</code></pre>
+
+<p><img src="./assets/fig/rbasic-introduction-corrplot-1.png" alt="plot of chunk corrplot"></p>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-28" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
 <hgroup>
   <h2>範例 - 相關性</h2>
 </hgroup>
@@ -479,7 +440,7 @@ heatmap(Ca,               symm = TRUE, margins = c(6,6))
 </article>
 <!-- Presenter Notes -->
 </slide>
-<slide class="largecontent" id="slide-31" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<slide class="largecontent" id="slide-29" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
 <hgroup>
   <h2>範例 - 相關性</h2>
 </hgroup>
@@ -493,7 +454,7 @@ chart.ACFplus(edhec[,1,drop=FALSE])
 </article>
 <!-- Presenter Notes -->
 </slide>
-<slide class="largecontent" id="slide-32" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+<slide class="largecontent" id="slide-30" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
   <hgroup>
     <h2>範例 - 經濟學人風格的視覺化</h2>
   </hgroup>
@@ -505,7 +466,7 @@ chart.ACFplus(edhec[,1,drop=FALSE])
   </article>
   <!-- Presenter Notes -->
 </slide>
-<slide class="segue dark" id="slide-33" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+<slide class="segue dark" id="slide-31" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
   <hgroup>
     <h2>近代R 的演變</h2>
   </hgroup>
@@ -514,7 +475,7 @@ chart.ACFplus(edhec[,1,drop=FALSE])
   </article>
   <!-- Presenter Notes -->
 </slide>
-<slide class="largecontent" id="slide-34" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<slide class="largecontent" id="slide-32" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
 <hgroup>
   <h2>R 近年的進展</h2>
 </hgroup>
@@ -540,7 +501,7 @@ chart.ACFplus(edhec[,1,drop=FALSE])
 </article>
 <!-- Presenter Notes -->
 </slide>
-<slide class="largecontent" id="slide-35" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<slide class="largecontent" id="slide-33" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
 <hgroup>
   <h2>收集數據</h2>
 </hgroup>
@@ -552,7 +513,7 @@ chart.ACFplus(edhec[,1,drop=FALSE])
 </article>
 <!-- Presenter Notes -->
 </slide>
-<slide class="largecontent" id="slide-36" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<slide class="largecontent" id="slide-34" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
 <hgroup>
   <h2>和各種資料相關服務的串接</h2>
 </hgroup>
@@ -572,7 +533,7 @@ chart.ACFplus(edhec[,1,drop=FALSE])
 </article>
 <!-- Presenter Notes -->
 </slide>
-<slide class="largecontent" id="slide-37" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<slide class="largecontent" id="slide-35" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
 <hgroup>
   <h2>特定領域 -- 股票分析</h2>
 </hgroup>
@@ -600,7 +561,7 @@ head(TWII)
 <td align="right">7843.60</td>
 <td align="right">7920.80</td>
 <td align="right">5710600</td>
-<td align="right">7920.788</td>
+<td align="right">7920.777</td>
 </tr>
 <tr>
 <td align="right">7954.96</td>
@@ -608,7 +569,7 @@ head(TWII)
 <td align="right">7917.30</td>
 <td align="right">7917.30</td>
 <td align="right">5951400</td>
-<td align="right">7917.288</td>
+<td align="right">7917.277</td>
 </tr>
 <tr>
 <td align="right">7929.89</td>
@@ -616,7 +577,7 @@ head(TWII)
 <td align="right">7901.24</td>
 <td align="right">7934.51</td>
 <td align="right">5717400</td>
-<td align="right">7934.498</td>
+<td align="right">7934.487</td>
 </tr>
 <tr>
 <td align="right">7940.20</td>
@@ -624,7 +585,7 @@ head(TWII)
 <td align="right">7821.71</td>
 <td align="right">7835.57</td>
 <td align="right">5181400</td>
-<td align="right">7835.558</td>
+<td align="right">7835.547</td>
 </tr>
 <tr>
 <td align="right">7778.57</td>
@@ -632,7 +593,7 @@ head(TWII)
 <td align="right">7736.11</td>
 <td align="right">7736.71</td>
 <td align="right">4292400</td>
-<td align="right">7736.698</td>
+<td align="right">7736.688</td>
 </tr>
 <tr>
 <td align="right">7778.38</td>
@@ -640,14 +601,14 @@ head(TWII)
 <td align="right">7778.38</td>
 <td align="right">7790.01</td>
 <td align="right">4516000</td>
-<td align="right">7789.998</td>
+<td align="right">7789.987</td>
 </tr>
 </tbody></table>
 
 </article>
 <!-- Presenter Notes -->
 </slide>
-<slide class="largecontent" id="slide-38" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<slide class="largecontent" id="slide-36" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
 <hgroup>
   <h2>特定領域 - 股票分析</h2>
 </hgroup>
@@ -660,7 +621,7 @@ head(TWII)
 </article>
 <!-- Presenter Notes -->
 </slide>
-<slide class="largecontent" id="slide-39" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<slide class="largecontent" id="slide-37" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
 <hgroup>
   <h2>特定領域 - 棒球分析</h2>
 </hgroup>
@@ -739,7 +700,7 @@ head(Teams[,c(&quot;yearID&quot;, &quot;name&quot;, &quot;Rank&quot;, &quot;W&qu
 </article>
 <!-- Presenter Notes -->
 </slide>
-<slide class="largecontent" id="slide-40" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+<slide class="largecontent" id="slide-38" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
   <hgroup>
     <h2>特定領域 - 大聯盟歷年得分</h2>
   </hgroup>
@@ -751,7 +712,7 @@ head(Teams[,c(&quot;yearID&quot;, &quot;name&quot;, &quot;Rank&quot;, &quot;W&qu
   </article>
   <!-- Presenter Notes -->
 </slide>
-<slide class="largecontent" id="slide-41" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<slide class="largecontent" id="slide-39" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
 <hgroup>
   <h2>特定領域 - 王建民歷年成績</h2>
 </hgroup>
@@ -812,7 +773,7 @@ head(Teams[,c(&quot;yearID&quot;, &quot;name&quot;, &quot;Rank&quot;, &quot;W&qu
 </article>
 <!-- Presenter Notes -->
 </slide>
-<slide class="largecontent" id="slide-42" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<slide class="largecontent" id="slide-40" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
 <hgroup>
   <h2>特定領域 - 文字探勘</h2>
 </hgroup>
@@ -830,7 +791,7 @@ head(Teams[,c(&quot;yearID&quot;, &quot;name&quot;, &quot;Rank&quot;, &quot;W&qu
 </article>
 <!-- Presenter Notes -->
 </slide>
-<slide class="largecontent" id="slide-43" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<slide class="largecontent" id="slide-41" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
 <hgroup>
   <h2>特定領域 - 資料收集</h2>
 </hgroup>
@@ -853,7 +814,7 @@ head(Teams[,c(&quot;yearID&quot;, &quot;name&quot;, &quot;Rank&quot;, &quot;W&qu
 </article>
 <!-- Presenter Notes -->
 </slide>
-<slide class="largecontent" id="slide-44" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<slide class="largecontent" id="slide-42" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
 <hgroup>
   <h2>特定領域 - 斷詞</h2>
 </hgroup>
@@ -878,7 +839,7 @@ head(Teams[,c(&quot;yearID&quot;, &quot;name&quot;, &quot;Rank&quot;, &quot;W&qu
 </article>
 <!-- Presenter Notes -->
 </slide>
-<slide class="largecontent" id="slide-45" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<slide class="largecontent" id="slide-43" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
 <hgroup>
   <h2>特定領域 - 文字雲</h2>
 </hgroup>
@@ -888,7 +849,7 @@ head(Teams[,c(&quot;yearID&quot;, &quot;name&quot;, &quot;Rank&quot;, &quot;W&qu
 </article>
 <!-- Presenter Notes -->
 </slide>
-<slide class="largecontent" id="slide-46" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<slide class="largecontent" id="slide-44" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
 <hgroup>
   <h2>特定領域：互動式網頁服務</h2>
 </hgroup>
@@ -905,7 +866,7 @@ head(Teams[,c(&quot;yearID&quot;, &quot;name&quot;, &quot;Rank&quot;, &quot;W&qu
 </article>
 <!-- Presenter Notes -->
 </slide>
-<slide class="largecontent" id="slide-47" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<slide class="largecontent" id="slide-45" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
 <hgroup>
   <h2>特定領域：API Server</h2>
 </hgroup>
@@ -922,7 +883,7 @@ head(Teams[,c(&quot;yearID&quot;, &quot;name&quot;, &quot;Rank&quot;, &quot;W&qu
 </article>
 <!-- Presenter Notes -->
 </slide>
-<slide class="largecontent" id="slide-48" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<slide class="largecontent" id="slide-46" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
 <hgroup>
   <h2>大規模的數據分析</h2>
 </hgroup>
@@ -941,7 +902,7 @@ head(Teams[,c(&quot;yearID&quot;, &quot;name&quot;, &quot;Rank&quot;, &quot;W&qu
 </article>
 <!-- Presenter Notes -->
 </slide>
-<slide class="largecontent" id="slide-49" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<slide class="largecontent" id="slide-47" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
 <hgroup>
   <h2>R 的Community</h2>
 </hgroup>
@@ -958,7 +919,7 @@ head(Teams[,c(&quot;yearID&quot;, &quot;name&quot;, &quot;Rank&quot;, &quot;W&qu
 </article>
 <!-- Presenter Notes -->
 </slide>
-<slide class="largecontent" id="slide-50" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<slide class="largecontent" id="slide-48" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
 <hgroup>
   <h2>Hadley近年來對R 的影響</h2>
 </hgroup>
@@ -967,28 +928,28 @@ head(Teams[,c(&quot;yearID&quot;, &quot;name&quot;, &quot;Rank&quot;, &quot;W&qu
 <li>前十名的R 套件有一半是Hadley寫的</li>
 </ul>
 
-<!-- html table generated in R 3.2.3 by xtable 1.8-2 package -->
+<!-- html table generated in R 3.2.3 by xtable 1.8-0 package -->
 
-<!-- Sat Apr 23 08:53:23 2016 -->
+<!-- Sun Jul  3 22:16:01 2016 -->
 
 <table border=1>
 <tr> <th>  </th> <th> package </th> <th> downloads </th>  </tr>
-  <tr> <td align="right"> 1 </td> <td> Rcpp </td> <td> 264380 </td> </tr>
-  <tr> <td align="right"> 2 </td> <td> RcppArmadillo </td> <td> 239923 </td> </tr>
-  <tr> <td align="right"> 3 </td> <td> ggplot2 </td> <td> 219014 </td> </tr>
-  <tr> <td align="right"> 4 </td> <td> digest </td> <td> 179757 </td> </tr>
-  <tr> <td align="right"> 5 </td> <td> stringr </td> <td> 170273 </td> </tr>
-  <tr> <td align="right"> 6 </td> <td> stringi </td> <td> 170007 </td> </tr>
-  <tr> <td align="right"> 7 </td> <td> plyr </td> <td> 169217 </td> </tr>
-  <tr> <td align="right"> 8 </td> <td> scales </td> <td> 166519 </td> </tr>
-  <tr> <td align="right"> 9 </td> <td> magrittr </td> <td> 158518 </td> </tr>
-  <tr> <td align="right"> 10 </td> <td> gtable </td> <td> 149022 </td> </tr>
+  <tr> <td align="right"> 1 </td> <td> Rcpp </td> <td> 242827 </td> </tr>
+  <tr> <td align="right"> 2 </td> <td> plyr </td> <td> 239754 </td> </tr>
+  <tr> <td align="right"> 3 </td> <td> stringi </td> <td> 222842 </td> </tr>
+  <tr> <td align="right"> 4 </td> <td> ggplot2 </td> <td> 220219 </td> </tr>
+  <tr> <td align="right"> 5 </td> <td> digest </td> <td> 187899 </td> </tr>
+  <tr> <td align="right"> 6 </td> <td> stringr </td> <td> 187732 </td> </tr>
+  <tr> <td align="right"> 7 </td> <td> magrittr </td> <td> 177837 </td> </tr>
+  <tr> <td align="right"> 8 </td> <td> scales </td> <td> 171909 </td> </tr>
+  <tr> <td align="right"> 9 </td> <td> jsonlite </td> <td> 169593 </td> </tr>
+  <tr> <td align="right"> 10 </td> <td> RColorBrewer </td> <td> 169315 </td> </tr>
    </table>
 
 </article>
 <!-- Presenter Notes -->
 </slide>
-<slide class="largecontent" id="slide-51" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<slide class="largecontent" id="slide-49" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
 <hgroup>
   <h2>台灣的本土R 社群</h2>
 </hgroup>
@@ -1006,7 +967,32 @@ head(Teams[,c(&quot;yearID&quot;, &quot;name&quot;, &quot;Rank&quot;, &quot;W&qu
 </article>
 <!-- Presenter Notes -->
 </slide>
-<slide class="dark segue" id="slide-52" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+<slide class="largecontent" id="slide-50" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>R 的特色與優勢</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>悠久的統計分析歷史
+
+<ul>
+<li>豐富的統計檢定實作</li>
+<li>豐富的統計模型實作</li>
+<li>優秀的結構化資料API(Data.Frame)</li>
+</ul></li>
+<li>廣大的使用人口
+
+<ul>
+<li>套件成長速度飛快</li>
+<li>雨後春筍般的非結構化與半結構化資料處理套件</li>
+<li>各種Open Source教材與學習資源</li>
+</ul></li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="dark segue" id="slide-51" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
   <hgroup>
     <h2>安裝R 與Rstudio</h2>
   </hgroup>
@@ -1015,7 +1001,7 @@ head(Teams[,c(&quot;yearID&quot;, &quot;name&quot;, &quot;Rank&quot;, &quot;W&qu
   </article>
   <!-- Presenter Notes -->
 </slide>
-<slide class="largecontent" id="slide-53" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<slide class="largecontent" id="slide-52" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
 <hgroup>
   <h2>R 的環境設定</h2>
 </hgroup>
@@ -1028,7 +1014,7 @@ head(Teams[,c(&quot;yearID&quot;, &quot;name&quot;, &quot;Rank&quot;, &quot;W&qu
 </article>
 <!-- Presenter Notes -->
 </slide>
-<slide class="largecontent" id="slide-54" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<slide class="largecontent" id="slide-53" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
 <hgroup>
   <h2>安裝R</h2>
 </hgroup>
@@ -1045,7 +1031,7 @@ head(Teams[,c(&quot;yearID&quot;, &quot;name&quot;, &quot;Rank&quot;, &quot;W&qu
 </article>
 <!-- Presenter Notes -->
 </slide>
-<slide class="largecontent" id="slide-55" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<slide class="largecontent" id="slide-54" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
 <hgroup>
   <h2>安裝R</h2>
 </hgroup>
@@ -1062,7 +1048,7 @@ head(Teams[,c(&quot;yearID&quot;, &quot;name&quot;, &quot;Rank&quot;, &quot;W&qu
 </article>
 <!-- Presenter Notes -->
 </slide>
-<slide class="largecontent" id="slide-56" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<slide class="largecontent" id="slide-55" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
 <hgroup>
   <h2>安裝R</h2>
 </hgroup>
@@ -1078,7 +1064,7 @@ head(Teams[,c(&quot;yearID&quot;, &quot;name&quot;, &quot;Rank&quot;, &quot;W&qu
 </article>
 <!-- Presenter Notes -->
 </slide>
-<slide class="largecontent" id="slide-57" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<slide class="largecontent" id="slide-56" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
 <hgroup>
   <h2>安裝Rstudio</h2>
 </hgroup>
@@ -1095,7 +1081,7 @@ head(Teams[,c(&quot;yearID&quot;, &quot;name&quot;, &quot;Rank&quot;, &quot;W&qu
 </article>
 <!-- Presenter Notes -->
 </slide>
-<slide class="largecontent" id="slide-58" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<slide class="largecontent" id="slide-57" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
 <hgroup>
   <h2>Rstudio 環境說明</h2>
 </hgroup>
@@ -1110,7 +1096,7 @@ head(Teams[,c(&quot;yearID&quot;, &quot;name&quot;, &quot;Rank&quot;, &quot;W&qu
 </article>
 <!-- Presenter Notes -->
 </slide>
-<slide class="largecontent" id="slide-59" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<slide class="largecontent" id="slide-58" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
 <hgroup>
   <h2>熟悉RStudio的 命令列 界面</h2>
 </hgroup>
@@ -1128,7 +1114,7 @@ head(Teams[,c(&quot;yearID&quot;, &quot;name&quot;, &quot;Rank&quot;, &quot;W&qu
 </article>
 <!-- Presenter Notes -->
 </slide>
-<slide class="largecontent" id="slide-60" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<slide class="largecontent" id="slide-59" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
 <hgroup>
   <h2>熟悉RStudio的 程式碼編輯 界面</h2>
 </hgroup>
@@ -1143,7 +1129,7 @@ head(Teams[,c(&quot;yearID&quot;, &quot;name&quot;, &quot;Rank&quot;, &quot;W&qu
 </article>
 <!-- Presenter Notes -->
 </slide>
-<slide class="largecontent" id="slide-61" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<slide class="largecontent" id="slide-60" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
 <hgroup>
   <h2>熟悉RStudio的其他頁面</h2>
 </hgroup>
@@ -1155,7 +1141,7 @@ head(Teams[,c(&quot;yearID&quot;, &quot;name&quot;, &quot;Rank&quot;, &quot;W&qu
 </article>
 <!-- Presenter Notes -->
 </slide>
-<slide class="dark segue" id="slide-62" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+<slide class="dark segue" id="slide-61" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
   <hgroup>
     <h2>R 的套件系統</h2>
   </hgroup>
@@ -1164,7 +1150,7 @@ head(Teams[,c(&quot;yearID&quot;, &quot;name&quot;, &quot;Rank&quot;, &quot;W&qu
   </article>
   <!-- Presenter Notes -->
 </slide>
-<slide class="largecontent" id="slide-63" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<slide class="largecontent" id="slide-62" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
 <hgroup>
   <h2>R 的套件系統</h2>
 </hgroup>
@@ -1176,7 +1162,7 @@ head(Teams[,c(&quot;yearID&quot;, &quot;name&quot;, &quot;Rank&quot;, &quot;W&qu
 </article>
 <!-- Presenter Notes -->
 </slide>
-<slide class="largecontent" id="slide-64" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<slide class="largecontent" id="slide-63" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
 <hgroup>
   <h2>安裝R 的套件</h2>
 </hgroup>
@@ -1190,7 +1176,7 @@ head(Teams[,c(&quot;yearID&quot;, &quot;name&quot;, &quot;Rank&quot;, &quot;W&qu
 </article>
 <!-- Presenter Notes -->
 </slide>
-<slide class="dark segue" id="slide-65" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+<slide class="dark segue" id="slide-64" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
   <hgroup>
     <h2>利用swirl 快速學習R 語言</h2>
   </hgroup>
@@ -1199,7 +1185,7 @@ head(Teams[,c(&quot;yearID&quot;, &quot;name&quot;, &quot;Rank&quot;, &quot;W&qu
   </article>
   <!-- Presenter Notes -->
 </slide>
-<slide class="largecontent" id="slide-66" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<slide class="largecontent" id="slide-65" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
 <hgroup>
   <h2>安裝swirl</h2>
 </hgroup>
@@ -1219,7 +1205,7 @@ install.packages(&quot;swirl&quot;, repos = &quot;http://wush978.github.io/R&quo
 </article>
 <!-- Presenter Notes -->
 </slide>
-<slide class="largecontent" id="slide-67" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<slide class="largecontent" id="slide-66" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
 <hgroup>
   <h2>載入swirl</h2>
 </hgroup>
@@ -1231,7 +1217,7 @@ library(curl)
 </article>
 <!-- Presenter Notes -->
 </slide>
-<slide class="largecontent" id="slide-68" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<slide class="largecontent" id="slide-67" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
 <hgroup>
   <h2>進入swirl 界面</h2>
 </hgroup>
@@ -1247,7 +1233,7 @@ library(curl)
 </article>
 <!-- Presenter Notes -->
 </slide>
-<slide class="largecontent" id="slide-69" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<slide class="largecontent" id="slide-68" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
 <hgroup>
   <h2>手動安裝swirl 課程</h2>
 </hgroup>
@@ -1268,7 +1254,7 @@ library(curl)
 </article>
 <!-- Presenter Notes -->
 </slide>
-<slide class="largecontent" id="slide-70" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<slide class="largecontent" id="slide-69" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
 <hgroup>
   <h2>再次進入swirl，並進入DataScienceAndR</h2>
 </hgroup>
@@ -1280,7 +1266,7 @@ library(curl)
 </article>
 <!-- Presenter Notes -->
 </slide>
-<slide class="largecontent" id="slide-71" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<slide class="largecontent" id="slide-70" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
 <hgroup>
   <h2>swirl 疑難排解</h2>
 </hgroup>
@@ -1294,7 +1280,7 @@ library(curl)
 </article>
 <!-- Presenter Notes -->
 </slide>
-<slide class="largecontent" id="slide-72" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<slide class="largecontent" id="slide-71" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
 <hgroup>
   <h2>作業說明</h2>
 </hgroup>
@@ -1313,7 +1299,7 @@ library(curl)
 </article>
 <!-- Presenter Notes -->
 </slide>
-<slide class="largecontent" id="slide-73" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<slide class="largecontent" id="slide-72" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
 <hgroup>
   <h2>這份教材是我寫出來的...</h2>
 </hgroup>
@@ -1333,7 +1319,7 @@ library(curl)
 </article>
 <!-- Presenter Notes -->
 </slide>
-<slide class="largecontent" id="slide-74" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<slide class="largecontent" id="slide-73" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
 <hgroup>
   <h2>Q&amp;A</h2>
 </hgroup>
@@ -1342,7 +1328,7 @@ library(curl)
 </article>
 <!-- Presenter Notes -->
 </slide>
-<slide class="largecontent" id="slide-75" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<slide class="largecontent" id="slide-74" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
 <hgroup>
   <h2>R vs Python</h2>
 </hgroup>
@@ -1495,25 +1481,25 @@ library(curl)
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=23 title='範例 - A/B 方法比較（常見於電子商務）'>
+        data-slide=23 title='來自R 社群的貢獻'>
          23
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=24 title='範例 - A/B 方法比較（常見於電子商務）'>
+        data-slide=24 title='範例 - 相關性'>
          24
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=25 title='範例 - A/B 方法比較（常見於電子商務）'>
+        data-slide=25 title='範例 - 相關性'>
          25
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=26 title='來自R 社群的貢獻'>
+        data-slide=26 title='範例 - 相關性'>
          26
       </a>
     </li>
@@ -1537,145 +1523,145 @@ library(curl)
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=30 title='範例 - 相關性'>
+        data-slide=30 title='範例 - 經濟學人風格的視覺化'>
          30
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=31 title='範例 - 相關性'>
+        data-slide=31 title='近代R 的演變'>
          31
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=32 title='範例 - 經濟學人風格的視覺化'>
+        data-slide=32 title='R 近年的進展'>
          32
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=33 title='近代R 的演變'>
+        data-slide=33 title='收集數據'>
          33
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=34 title='R 近年的進展'>
+        data-slide=34 title='和各種資料相關服務的串接'>
          34
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=35 title='收集數據'>
+        data-slide=35 title='特定領域 -- 股票分析'>
          35
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=36 title='和各種資料相關服務的串接'>
+        data-slide=36 title='特定領域 - 股票分析'>
          36
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=37 title='特定領域 -- 股票分析'>
+        data-slide=37 title='特定領域 - 棒球分析'>
          37
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=38 title='特定領域 - 股票分析'>
+        data-slide=38 title='特定領域 - 大聯盟歷年得分'>
          38
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=39 title='特定領域 - 棒球分析'>
+        data-slide=39 title='特定領域 - 王建民歷年成績'>
          39
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=40 title='特定領域 - 大聯盟歷年得分'>
+        data-slide=40 title='特定領域 - 文字探勘'>
          40
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=41 title='特定領域 - 王建民歷年成績'>
+        data-slide=41 title='特定領域 - 資料收集'>
          41
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=42 title='特定領域 - 文字探勘'>
+        data-slide=42 title='特定領域 - 斷詞'>
          42
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=43 title='特定領域 - 資料收集'>
+        data-slide=43 title='特定領域 - 文字雲'>
          43
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=44 title='特定領域 - 斷詞'>
+        data-slide=44 title='特定領域：互動式網頁服務'>
          44
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=45 title='特定領域 - 文字雲'>
+        data-slide=45 title='特定領域：API Server'>
          45
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=46 title='特定領域：互動式網頁服務'>
+        data-slide=46 title='大規模的數據分析'>
          46
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=47 title='特定領域：API Server'>
+        data-slide=47 title='R 的Community'>
          47
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=48 title='大規模的數據分析'>
+        data-slide=48 title='Hadley近年來對R 的影響'>
          48
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=49 title='R 的Community'>
+        data-slide=49 title='台灣的本土R 社群'>
          49
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=50 title='Hadley近年來對R 的影響'>
+        data-slide=50 title='R 的特色與優勢'>
          50
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=51 title='台灣的本土R 社群'>
+        data-slide=51 title='安裝R 與Rstudio'>
          51
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=52 title='安裝R 與Rstudio'>
+        data-slide=52 title='R 的環境設定'>
          52
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=53 title='R 的環境設定'>
+        data-slide=53 title='安裝R'>
          53
       </a>
     </li>
@@ -1693,37 +1679,37 @@ library(curl)
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=56 title='安裝R'>
+        data-slide=56 title='安裝Rstudio'>
          56
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=57 title='安裝Rstudio'>
+        data-slide=57 title='Rstudio 環境說明'>
          57
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=58 title='Rstudio 環境說明'>
+        data-slide=58 title='熟悉RStudio的 命令列 界面'>
          58
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=59 title='熟悉RStudio的 命令列 界面'>
+        data-slide=59 title='熟悉RStudio的 程式碼編輯 界面'>
          59
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=60 title='熟悉RStudio的 程式碼編輯 界面'>
+        data-slide=60 title='熟悉RStudio的其他頁面'>
          60
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=61 title='熟悉RStudio的其他頁面'>
+        data-slide=61 title='R 的套件系統'>
          61
       </a>
     </li>
@@ -1735,80 +1721,74 @@ library(curl)
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=63 title='R 的套件系統'>
+        data-slide=63 title='安裝R 的套件'>
          63
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=64 title='安裝R 的套件'>
+        data-slide=64 title='利用swirl 快速學習R 語言'>
          64
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=65 title='利用swirl 快速學習R 語言'>
+        data-slide=65 title='安裝swirl'>
          65
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=66 title='安裝swirl'>
+        data-slide=66 title='載入swirl'>
          66
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=67 title='載入swirl'>
+        data-slide=67 title='進入swirl 界面'>
          67
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=68 title='進入swirl 界面'>
+        data-slide=68 title='手動安裝swirl 課程'>
          68
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=69 title='手動安裝swirl 課程'>
+        data-slide=69 title='再次進入swirl，並進入DataScienceAndR'>
          69
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=70 title='再次進入swirl，並進入DataScienceAndR'>
+        data-slide=70 title='swirl 疑難排解'>
          70
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=71 title='swirl 疑難排解'>
+        data-slide=71 title='作業說明'>
          71
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=72 title='作業說明'>
+        data-slide=72 title='這份教材是我寫出來的...'>
          72
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=73 title='這份教材是我寫出來的...'>
+        data-slide=73 title='Q&amp;A'>
          73
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=74 title='Q&amp;A'>
+        data-slide=74 title='R vs Python'>
          74
-      </a>
-    </li>
-    <li>
-      <a href="#" target="_self" rel='tooltip' 
-        data-slide=75 title='R vs Python'>
-         75
       </a>
     </li>
   </ul>
