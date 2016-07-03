@@ -24,6 +24,7 @@ library(wordcloud)
 library(RColorBrewer)
 library(miniCRAN)
 library(igraph)
+library(corrplot)
 
 opts_chunk$set(echo = FALSE, cache=FALSE, comment="", 
                cache.path = "cache-RBasic-Introduction/", 
@@ -218,44 +219,6 @@ ks.test(x1, x2)
 
 ## 範例 - A/B 方法比較（常見於電子商務）
 
-- 統計檢定的概念：
-    - 如果方法A 的轉換率和方法B 相同，都是$3/5000$
-    - 那在10000個點擊裡面，發生10個購買或以上的機率是多少？
-- R 非常適合撰寫這類機率性質的模擬：
-
-```r
-# 假設方法A 真正的轉換率和就是 3 / 5000
-p <- 3/5000
-# 我們可以模擬1000次在10000個點擊下，方法A 的轉換數
-plot(density(x <- rbinom(1000, 10000, p)))
-```
-
---- &vcenter .largecontent
-
-## 範例 - A/B 方法比較（常見於電子商務）
-
-- 結果示意圖
-
-```{r conversion, echo = FALSE}
-p <- 3/5000
-plot(density(x <- rbinom(1000, 10000, p)))
-```
-
---- &vcenter .largecontent
-
-## 範例 - A/B 方法比較（常見於電子商務）
-
-- 精確的模擬結果：`mean(x > 10)`
-
-```{r conversion2, echo = FALSE, dependson="conversion"}
-# 估計超過我們觀測值的機率
-mean(x > 10)
-```
-
---- &vcenter .largecontent
-
-## 範例 - A/B 方法比較（常見於電子商務）
-
 - 想看信賴區間？透過套件，立馬取得結果：
 
 ```{r ci, echo = TRUE}
@@ -300,6 +263,15 @@ chart.Correlation(iris[-5], bg=iris$Species, pch=21)
 round(Ca <- cor(attitude), 2)
 symnum(Ca) # simple graphic
 heatmap(Ca,               symm = TRUE, margins = c(6,6))
+```
+
+--- &vcenter .largecontent
+
+## 範例 - 相關性
+
+```{r corrplot, results = "hide", echo = TRUE}
+library(corrplot)
+corrplot(Ca)
 ```
 
 --- &vcenter .largecontent
@@ -573,6 +545,19 @@ print.xtable(xtable(result$downloads), type = "html")
     - [Taiwan R User Group](http://www.meetup.com/Taiwan-R)
     - [ptt R_Language](https://www.ptt.cc/bbs/R_Language/index.html)
     - [台灣R 使用者論壇](https://groups.google.com/forum/#!forum/taiwanruser)
+
+--- &vcenter .largecontent
+
+## R 的特色與優勢
+
+- 悠久的統計分析歷史
+    - 豐富的統計檢定實作
+    - 豐富的統計模型實作
+    - 優秀的結構化資料API(Data.Frame)
+- 廣大的使用人口
+    - 套件成長速度飛快
+    - 雨後春筍般的非結構化與半結構化資料處理套件
+    - 各種Open Source教材與學習資源
 
 --- .dark .segue
 
