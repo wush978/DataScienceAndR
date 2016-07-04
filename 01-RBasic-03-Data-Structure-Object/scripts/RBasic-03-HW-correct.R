@@ -6,20 +6,21 @@
 #' R 會吐回一個計算後的物件給我們。
 pca <- prcomp(USArrests, scale = TRUE)
 
-#' 請同學找出這個物件的名稱。你的答案只可能是：「character」、「numeric」或「list」
+#' 請同學找出pca的「型態」。你的答案只可能是：「"character"」、「"numeric"」或「"list"」
 answer1 <- mode(pca)
 
-#' 請同學找出`pca`這個向量的長度
+#' 請同學將pca的長度寫入變數answer2
 answer2 <- length(pca)
 
-#' 請同學找出`pca`的名字
+#' 請同學將pca的名字寫入變數answer3
 answer3 <- names(pca)
 
-#' `pca` 的元素中，有一個是各個principal components的standard deviations。
-#' 請同學參考`help(prcomp)`的說明，將各個principal components的standard deviations
-#' 的值取出，存到答案中。
+#' pca 的元素中，有一個是各個principal components的standard deviations。
+#' 請同學參考help(prcomp)的說明的Value章節
+#' 將各個principal components的standard deviations
+#' 寫入變數answer4
 answer4 <- pca$sdev
 
-#' `pca` 的元素中，有一個是做PCA的中心(center)。請同學參考`help(prcomp)`的說明，
-#' 把該元素取出，存到答案中。
+#' pca 的元素中，有一個是PCA的中心(center)。請同學參考help(prcomp)的說明，
+#' 將該元素寫入變數answer5
 answer5 <- pca$center

@@ -118,7 +118,7 @@
 - Class: cmd_question
   Output: 請同學輸入指令檢查`doc1`的型態。
   CorrectAnswer: class(doc1)
-  AnswerTests: omnitest(correctVal = class(doc1))
+  AnswerTests: swirl:::val_is(class(doc1))
 
 - Class: text
   Output: 目前xml2中的物件，大致上可以分成三種：xml_document、xml_node和xml_nodeset

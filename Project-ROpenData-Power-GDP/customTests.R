@@ -10,14 +10,3 @@
 # variables when appropriate. The answer test, creates_new_var()
 # can be used for for the purpose, but it also re-evaluates the
 # expression which the user entered, so care must be taken.
-
-check_version <- function() {
-  rv <- package_version(paste(R.Version()$major, R.Version()$minor, sep = "."))
-  if (rv < package_version("3.2.3")) {
-    message(sprintf(readRDS(.get_path("pattern.Rds")), rv, "3.2.3"))
-  }
-  if (packageVersion("swirl") < package_version("2.3.1.4")) {
-    message(readRDS(.get_path("swirl_msg.Rds")))
-    FALSE
-  } else TRUE
-}

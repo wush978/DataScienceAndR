@@ -402,7 +402,7 @@
   AnswerTests: omnitest('dbListTables(db)')
 
 - Class: text
-  Output: 之後，就算我們斷線從連，CO2也不會回來了。
+  Output: 之後，就算我們斷線重連，CO2也不會回來了。
 
 - Class: text
   Output: |

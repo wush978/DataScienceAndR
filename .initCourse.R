@@ -1,3 +1,7 @@
+if (packageVersion("swirl") < package_version("100.3.1-3")) {
+  stop("Please upgrade the version of swirl via: `install.packages('swirl', repos = 'http://wush978.github.io/R')`")
+}
+
 assign(".get_path",
        function(fname) {
          path <- file.path(lesPath, fname)
@@ -7,28 +11,18 @@ assign(".get_path",
 
 assign("check_then_install",
        function(pkg_name, pkg_version) {
-         if (!suppressWarnings(suppressMessages(require(pkg_name, character.only = TRUE)))) utils::install.packages(pkg_name, repos = "http://cran.r-project.org") else {
-           if (packageVersion(pkg_name) < package_version(pkg_version)) utils::install.packages(pkg_name, repos = "http://cran.r-project.org")
+         if (!suppressWarnings(suppressMessages(require(pkg_name, character.only = TRUE)))) utils::install.packages(pkg_name) else {
+           if (packageVersion(pkg_name) < package_version(pkg_version)) utils::install.packages(pkg_name)
          }
        },
        envir = globalenv())
 
-assign("test_package_version",
-       function(pkg_name, pkg_version) {
-         e <- get("e", parent.frame())
-         tryCatch(
-           packageVersion(pkg_name) >= package_version(pkg_version),
-           error = function(e) FALSE)
-       },
-       envir = globalenv())
-
-assign("test_search_path",
-       function(pkg_name) {
-         tryCatch(
-           length(grep(sprintf("/%s$", pkg_name), searchpaths())) > 0,
-           error = function(e) FALSE)
-       },
-       envir = globalenv())
+assign("check_then_install_github", 
+       function(pkg_name, pkg_version, ...) {
+         if (!require(pkg_name, character.only = TRUE)) devtools::install_github(...) else {
+         if (packageVersion(pkg_name) < package_version(pkg_version)) devtools::install_github(...)
+         }
+       })
 
 assign(".read.table.big5",
        function(file, header = FALSE, sep = "", ...) {
@@ -58,48 +52,8 @@ assign("source_by_l10n_info", function(path) {
   }
 }, envir = globalenv())
 
-assign("check_val", function(name, value) {
-  e <- get("e", parent.frame())
-  tryCatch({
-    result <- all.equal(get(name, e), value)
-    if (!isTRUE(result)) {
-      message(result)
-      FALSE
-    } else TRUE
-  }, error = function(e) {
-    message(conditionMessage(e))
-    FALSE
-  })
-}, envir = globalenv())
-
-assign("val_is", function(value) {
-  tryCatch({
-    e <- get("e", parent.frame())
-    result <- all.equal(e$val, value)
-    if (!isTRUE(result)) {
-      message(result)
-      FALSE
-    } else TRUE
-  }, error = function(e) {
-    message(conditionMessage(e))
-    FALSE
-  })
-}, envir = globalenv())
-
-assign("test_all", function(...) {
-  tryCatch({
-    e <- get("e", parent.frame())
-    calls <- tail(as.list(match.call()), -1)
-    for(i in seq_along(calls)) {
-      if (!eval(calls[[i]])) stop("")
-    }
-    TRUE
-  }, error = function(e) {
-    FALSE
-  })
-})
-
 options(
-  "SWIRL_TRACKING_SERVER_IP" = "api.datascienceandr.org",
-  "SWIRL_COURSE_VERSION" = "e0334fff35e5d8342ec58f8c73de07d9d43cb026"
+  "SWIRL_TRACKING_SERVER_IP" = "api.datascienceandr.org,api2.datascienceandr.org",
+  "SWIRL_COURSE_VERSION" = "v1.0",
+  "repos" = c("http://wush978.github.io/R", "CRAN"="http://mran.revolutionanalytics.com/snapshot/2016-04-01")
 )
