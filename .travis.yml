@@ -1,6 +1,7 @@
 language: c
 
 sudo: true
+dist: trusty
 
 script: 
   - Rscript .test_course.R push
