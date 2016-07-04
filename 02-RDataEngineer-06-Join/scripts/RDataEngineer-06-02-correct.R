@@ -11,7 +11,7 @@ answer02.1 <- local({
     filter(!is.na(wind_speed), !is.na(arr_delay))
 })
 
-stopifnot(nrow(answer02.1) == 116774)
+stopifnot(nrow(answer02.1) == switch(packageVersion("nycflights13"), "0.1" = 116774, "0.2.0" = 326116, stop("Invalid nycflights13 version")))
 stopifnot(sum(is.na(answer02.1$wind_speed)) == 0)
 stopifnot(sum(is.nan(answer02.1$wind_speed)) == 0)
 stopifnot(sum(is.na(answer02.1$arr_delay)) == 0)
@@ -31,19 +31,18 @@ stopifnot(answer02.2[1] == 0)
 stopifnot(answer02.2[5] == max(answer02.2))
 
 # 最後，我們利用`cut`與`answer02.2`對原始的wind_speed做分類。
-# 介於 -Inf至answer02.2[1]的風速，會被歸類為等級1
-# 介於 answer02.2[1]至answer02.2[2]的風速，會被歸類為等級2
-# 介於 answer02.2[2]至answer02.2[3]的風速，會被歸類為等級3
-# 介於 answer02.2[3]至answer02.2[4]的風速，會被歸類為等級4
-# 介於 answer02.2[4]至answer02.2[5]的風速，會被歸類為等級5
+# 介於 answer02.2[1]至answer02.2[2]的風速，會被歸類為等級1
+# 介於 answer02.2[2]至answer02.2[3]的風速，會被歸類為等級2
+# 介於 answer02.2[3]至answer02.2[4]的風速，會被歸類為等級3
+# 介於 answer02.2[4]至answer02.2[5]的風速，會被歸類為等級4
 # 接著，我們計算arr_delay在每一種分類中的平均數
 answer02.3 <- local({
-  mutate(answer02.1, wind_speed = cut(wind_speed, breaks = c(-Inf, answer02.2))) %>%
+  mutate(answer02.1, wind_speed = cut(wind_speed, breaks = c(answer02.2[1]-1e-5, tail(answer02.2, -1)))) %>%
     group_by(wind_speed) %>%
     summarise(mean(arr_delay))
 })
-stopifnot(nrow(answer02.3) == 5)
+stopifnot(nrow(answer02.3) == 4)
 stopifnot(colnames(answer02.3) == c("wind_speed", "mean(arr_delay)"))
-stopifnot(answer02.3[[2]] > 4)
+if (packageVersion("nycflights13") != "0.2.0") stopifnot(answer02.3[[2]] > 4)
 stopifnot(answer02.3[[2]] < 16)
 # 請同學完成後回到console輸入`submit()`做檢查
