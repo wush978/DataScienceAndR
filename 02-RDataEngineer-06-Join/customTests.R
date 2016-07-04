@@ -54,7 +54,7 @@ rdataengineer_06_02 <- function(answer02.1, answer02.2, answer02.3) {
     return(FALSE)
   }
   answer02.3.ref <- local({
-    mutate(answer02.1.ref, wind_speed = cut(wind_speed, breaks = c(-Inf, answer02.2.ref))) %>%
+    mutate(answer02.1.ref, wind_speed = cut(wind_speed, breaks = c(answer02.2.ref[1] - 1e-5, tail(answer02.2.ref, -1)))) %>%
       group_by(wind_speed) %>%
       summarise(mean(arr_delay))
   })
