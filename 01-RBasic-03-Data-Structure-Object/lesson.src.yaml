@@ -69,7 +69,7 @@
   AnswerTests: omnitest('g[1:2]', g[1:2])
 
 - Class : text
-  Output: 同學會在R console看到一些數字與其妙的文字。在最上面的`$coefficients`，表示
+  Output: 同學會在R console看到一些數字與奇妙的文字。在最上面的`$coefficients`，表示
     `g[1:2]`這個向量的第一個值（同時也是`g`的第一個值），是有名字的。他的名字是：`"coefficients"`。
     接著，由於`g[1:2]`的第一個值是一個有名字的numeric 向量，所以R 就把這個向量所有的名字和值
     一起顯示在console。也就是說，這個numeric 向量的第一個值是-17.579095，而名字是`"(Intercept)"`。

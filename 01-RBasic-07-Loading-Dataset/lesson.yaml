@@ -164,9 +164,9 @@
   CorrectAnswer: lvr_land.path
   AnswerTests: omnitest(correctVal = 'lvr_land.path')
   Hint: 在R 中，`lvr_land.path`代表一個變數，但是`"lvr_land.path"`代表一個字串。
-- Class : cmd_question
-  Output: 請同學特別注意`read.table`的參數fileEncoding的用法，這個參數雖然可以解碼，但只能
-    用在file參數為字串的case。請同學試試看`read.table(lvr_land.path, fileEncoding = "BIG-5")`。
+- Class: cmd_question
+  Output: 請同學特別注意`read.table`的參數fileEncoding的用法，這個參數雖然可以解碼，但只能 用在file參數為字串的case。請同學試試看`read.table(lvr_land.path,
+    fileEncoding = "BIG-5")`。
   CorrectAnswer: read.table(lvr_land.path, fileEncoding = "BIG-5")
   AnswerTests: any_of_exprs('read.table(lvr_land.path, fileEncoding = "BIG-5")')
   Hint: read.table(lvr_land.path, fileEncoding = "BIG-5")
