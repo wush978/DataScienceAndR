@@ -8,11 +8,12 @@ hitheme     : zenburn
 widgets     : []            # {mathjax, quiz, bootstrap}
 mode        : selfcontained # {standalone, draft}
 knit        : slidify::knit2slides
---- &vcenter .largecontent
+--- .dark .segue
 
 ```{r setup, include=FALSE, cache=FALSE}
 library(knitr)
 library(magrittr)
+library(RSQLite)
 opts_chunk$set(echo = FALSE, cache=FALSE, comment="", 
                cache.path = "cache-RBasic-Introduction/", 
                dev.args=list(bg="transparent"),
@@ -22,18 +23,11 @@ fig <- function(path, size = 100) {
           path, size, size)
 }
 bg <- function(path) sprintf("bg:url(assets/img/%s)", path)
+used_record <- local({
+  db <- dbConnect(dbDriver("SQLite"), "dsr-hash.db")
+  dbReadTable(db, "used_record")
+})
 ```
-
-## Wush Wu
-
-- R 相關經歷
-  - 2014與2015年資料科學愛好者年會，R 課程總召
-  - Taiwan R User Group 共同創辦人
-- R 相關著作：
-  - 作者：FeatureHashing, Rcereal
-  - 貢獻者：digest, ckanr, swirlify, ...
-
---- .dark .segue
 
 ## R 是什麼？
 
