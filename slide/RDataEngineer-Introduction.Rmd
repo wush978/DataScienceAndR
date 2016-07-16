@@ -28,16 +28,74 @@ fig2 <- function(path, size = 100) {
   sprintf("<img src='assets/img/%s' style='width: %d%%'></img>",
           path, size)
 }
+bg <- function(path) sprintf("bg:url(assets/img/%s)", path)
 sys_name <- Sys.info()["sysname"] %>% tolower
 sys_encode <- c("utf8", "utf8", "big5")[pmatch(sys_name, c("linux", "darwin", "windows"))]
 sessionInfo() %>% capture.output %>% cat(file = "sessionInfo.log", sep = "\n")
 ```
 
+--- .dark .segue
+
+## 資料科學的Hello World
+
+--- &vcenter .largecontent
+
+## Dashboard是團隊的第一步
+
+<center><img src="http://i.imgur.com/Lf5Q79U.png" style="max-width: 100%;max-height: 100%" /></center>
+
+--- &fullimg `r bg("12613244714_d0dd1f4dc2_o.jpg")`
+
+<https://flic.kr/p/kdAbds>
+
+*** =notes
+
+資料的品質
+
+--- &fullimg `r bg("21842381502_c7ffb3e55b_o.jpg")`
+
+<https://flic.kr/p/zh8V3w>
+
+*** =notes
+
+資料的KPI是否正確
+
+--- &vcenter .largecontent
+
+## 一個資料源，一個Dashboard
+
+- 價值會隨著資料源的多元而增加
+
+--- &vcenter .largecontent
+
+## Dashboard 能快速建立互信
+
+- 資料科學團隊是成本單位
+- 資料科學團隊需要其他團隊的合作
+
+--- &vcenter .largecontent
+
+## [R 社群活動：Cyber Security](http://www.meetup.com/Taiwan-R/events/221493175/)
+
+[![](http://img.youtube.com/vi/YYgOQJuZi18/sddefault.jpg)](https://www.youtube.com/watch?v=YYgOQJuZi18)
+
+--- &vcenter .largecontent
+
+## 如何用R 建立簡易地製作Dashboard?
+
+1. 整理資料 - 02-RDataEngineer-...
+2. 視覺化 - 03-RVisualization-...
+    - R 套件[googlesheets](https://github.com/jennybc/googlesheets) + Google Drive ([Demo](https://goo.gl/44Bx4u))
+3. 將上述工作自動化
+    - [五分鐘建立R的命令列應用程式](https://youtu.be/A1IIcZW5UrI) + 搭配作業系統的定期排程
+    - [Rstudio有開發相關功能](http://www.r-bloggers.com/new-rstudio-add-in-to-schedule-r-scripts/)
+
+--- &vcenter .largecontent
+
 ## 環境與課程安裝程序
 - 請參照R語言翻轉教室 <http://www.datascienceandr.org> 
 - 或者舉手發問請講師與助教幫忙處理
 - 關於R語言翻轉教室與swirl
-
 
 ---
 
