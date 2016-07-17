@@ -1,7 +1,7 @@
 ---
-title       : "R 語言翻轉教室"
+title       : "漫談 R 的學習挑戰與 R 語言翻轉教室"
 author      : "Wush Wu"
-job         : 國立台灣大學
+job         : Taiwan R User Group
 framework   : io2012-wush
 highlighter : highlight.js
 hitheme     : zenburn
@@ -14,6 +14,10 @@ knit        : slidify::knit2slides
 library(knitr)
 library(magrittr)
 library(RSQLite)
+library(quantmod)
+library(dplyr)
+library(ggplot2)
+library(ggthemes)
 opts_chunk$set(echo = FALSE, cache=FALSE, comment="", 
                cache.path = "cache-RBasic-Introduction/", 
                dev.args=list(bg="transparent"),
@@ -61,13 +65,91 @@ used_record <- local({
 - R 有很多的進階數據分析工具
 - R 是完整的資料科學解決方案
 
---- &fullimg `r bg("dm.gif")`
+--- &fullimg `r bg("dm_process.gif")`
 
-<http://www.laits.utexas.edu/~anorman/BUS.FOR/course.mat/Alex>
+<https://docs.oracle.com/cd/B28359_01/datamine.111/b28129/process.htm>
 
 --- .dark .segue
 
-## 學R 的挑戰
+## R 與實際資料科學的應用
+
+--- &fullimg `r bg("cooperation.jpg")`
+
+<http://globalebc.mx/cooperation-program>
+
+--- &fullimg `r bg("dm_process.gif")`
+
+<https://docs.oracle.com/cd/B28359_01/datamine.111/b28129/process.htm>
+
+--- &fullimg `r bg("t134_3ca_lg.jpg")`
+
+<http://img.diynetwork.com/DIY/2003/09/18/t134_3ca_med.jpg>
+
+--- &fullimg `r bg("Rstudio-pkg.png")`
+
+<http://www.youtube.com/watch?v=OCQU6M4pPiw>
+
+--- &vcenter .largecontent
+
+## 資料的收集
+
+- Data Package：[Lahman](https://cran.r-project.org/web/packages/Lahman/index.html)
+- R 可以寫爬蟲([httr](https://cran.r-project.org/web/packages/httr/index.html)、 [rvest](https://cran.r-project.org/web/packages/rvest/index.html))
+- R 可以寫API Package
+    - [Best Practices for Writing an API Package](https://cran.r-project.org/web/packages/httr/vignettes/api-packages.html)
+    - 範例：[quantmod](https://cran.r-project.org/web/packages/quantmod/index.html)、[twitteR](https://cran.r-project.org/web/packages/twitteR/index.html)
+
+--- &fullimg `r bg("Best-Practices-R-API.png")`
+
+--- &vcenter .largecontent
+
+```r
+library(quantmod)
+getSymbols("^TWII")
+head(TWII)
+```
+
+```{r TWII, echo = FALSE, results='asis', warning=FALSE}
+suppressPackageStartupMessages(library(quantmod))
+options("getSymbols.warning4.0"=FALSE)
+suppressWarnings(getSymbols("^TWII", warnings = FALSE))
+kable(head(TWII))
+```
+
+--- &vcenter .largecontent
+
+## 資料的處理、分析: [AirbnB uses R to scale data science](http://blog.revolutionanalytics.com/2016/04/airbnb-uses-r.html)
+
+- 開發Rbnb 套件
+- 使用者：Airbnb's engineering, data science, analytics and user experience teams
+- 功能：從Hadoop / SQL中撈取資料到R、處理Missing Data、計算常用的敘述統計、資料整合
+- 結果：
+    - 500+ 研究報告
+    - [How Airbnb uses Machine Learning to Detect Host Preferences](https://medium.com/airbnb-engineering/how-airbnb-uses-machine-learning-to-detect-host-preferences-18ce07150fa3#.7gfmip45e)
+    - [How well does NPS predict rebooking?](https://medium.com/airbnb-engineering/how-well-does-nps-predict-rebooking-9c84641a79a7#.l9ows3e6y)
+
+--- &vcenter .largecontent
+
+## 溝通、報表
+
+- Reproducible Research
+    - R Markdown
+    - Jupyter ir-kernel
+
+--- &fullimg `r bg("Rmarkdown.png")`
+
+--- &fullimg `r bg("jupyter-irkernel.png")`
+
+--- &vcenter .largecontent
+
+## 整個團隊都用R
+
+- 共同的工作內容可以包裝成R 套件來共同使用
+- 實驗的可重複性
+
+--- .dark .segue
+
+## 學R 與推廣R 的挑戰
 
 --- &fullimg `r bg("steep-learning-curve.jpg")`
 
@@ -80,7 +162,7 @@ used_record <- local({
 - 沒有GUI （吃英文打字）
 - R 的官方文件對新手不友善
     - R 的內建說明(help)不是針對非程式設計師
-- 函數的名稱沒有一致的pattern
+- 函數的名稱不一致
 - 同樣的事情可以用太多種方法達成
 - 資料結構複雜
 - 物件導向複雜
@@ -91,22 +173,31 @@ used_record <- local({
 
 - 學R 的同學通常都不具備程式背景
     - R 不是針對程式設計師所設計
-- 學校中學R 的心態
+- 同學學R 的心態
     - 資料才是主角
     - R 的角色只是工具，深入學R 的報酬很低
 
 --- &vcenter .largecontent
 
-## 直接教應用的挑戰
+## R 為什麼難學？（目的的層面）
 
-- 如何讓學生瞭解背後的原理
-    - 不懂原理的學生，碰到野生的資料馬上掛掉
+- 一個初學者要能善用R ，需要：
+    - 理解人和程式的溝通方法
+    - 理解數據分析的方法
+    - 理解R 處理資料的方法
 
 --- &vcenter .largecontent
 
-## 直接教程式的困難：
+## 直接教應用的挑戰
 
-- 程式是工具，人很難持續去學一個「現在沒有在用」的工具
+- 如何讓同學瞭解背後的原理
+    - 不懂原理的學生，碰到沒教的資料就馬上掛掉
+
+--- &vcenter .largecontent
+
+## 直接教語法的困難：
+
+- 程式是工具，同學很難持續去學一個「現在沒有在用」的工具
     - 背誦指令很困難、很無聊
 - 教學形式很挑戰：
     - 演講：聽過就忘了
@@ -116,9 +207,9 @@ used_record <- local({
 
 --- &vcenter .largecontent
 
-## 網路上的問題範例
+## 上有政策，下有對策
 
-- ptt R_Language版
+- [ptt R_Language版](https://www.ptt.cc/bbs/R_Language/index.html)
 - `r fig("ptt-R_Language.png")`
 
 --- &vcenter .largecontent
@@ -140,7 +231,7 @@ used_record <- local({
 
 --- &vcenter .largecontent
 
-## 編碼問題
+## [編碼問題](https://www.ptt.cc/bbs/R_Language/M.1445436879.A.B61.html)
 
 ```
 [問題敘述]:
@@ -152,34 +243,6 @@ Oracle資料庫(編碼為big5)中所撈取的資料有中文內容，皆會變�
 [程式範例]:
 
 con <- odbcConnect(dsn, uid = "", pwd = "", DBMSencoding="big5")
-```
-
-<https://www.ptt.cc/bbs/R_Language/M.1445436879.A.B61.html>
-
---- &vcenter .largecontent
-
-## [五個用R 處理大資料的方法](https://www.ptt.cc/bbs/R_Language/M.1385992673.A.3BA.html)
-
-```
-[重點摘要]:
-
-1. 怎樣的資料算大？
-
-Hadley Wickham: 當處理資料的時間超過開發程式的時間
-
-Jan Wijffels:
-
-- < 10^6, R 可以容易的處理
-- 10^6 ~ 10^9: 花點心思可以用R 處理
-- > 10^9: Map Reduce, R + Hadoop
-
-2. 如何處理大資料:
-
-- 抽樣
-- 擴充硬體 (64-bit R 最多可以吃 8TB的RAM)
-- 在硬碟上處理 (請參考套件ff和ffbase)
-- 和C++ 或java整合 (請參考套件Rcpp或rJava)
-- 更強大的interpreter (請參考pqR, Renjin, TERR和Oracle R)
 ```
 
 --- &vcenter .largecontent
@@ -201,7 +264,7 @@ Jan Wijffels:
 
 --- &vcenter .largecontent
 
-## 應用問題
+## [應用問題](https://www.ptt.cc/bbs/R_Language/M.1394021853.A.52F.html)
 
 ```
 [問題敘述]:
@@ -220,31 +283,56 @@ Jan Wijffels:
 或是有沒有程式套件可用~
 ```
 
-<https://www.ptt.cc/bbs/R_Language/M.1394021853.A.52F.html>
+--- &vcenter .largecontent
+
+## [應用問題：21點](https://www.ptt.cc/bbs/R_Language/M.1445866999.A.D0B.html)
+
+```
+程式諮詢
+(做21點的遊戲)
+
+[軟體熟悉度]:
+新手
+
+[問題敘述]:
+電腦對電腦玩，目前卡在
+
+sample(52)
+cards<-sample(52)
+num<-cards%%13
+num
+
+(52\13的餘數分配數字)
+要怎麼分配花色跟數字
+其實可以說根本還沒開始
+有人可以指點方向嗎?
+謝謝
+```
+
+--- &fullimg `r bg("21point-answer.png")`
+
+--- &fullimg `r bg("21point-teacher.png")`
 
 --- &vcenter .largecontent
 
 ## 這些知識重要嗎？
 
-- 沒用到的同學，很難有共鳴
+- 沒遇到問題時，很難有共鳴
 - 遇到問題時，書到用時方恨少
-
---- &fullimg `r bg("ladder-of-abstraction.jpg")`
-
-<http://catalog.flatworldknowledge.com/bookhub/reader/8027?e=jones_1.0-ch03_s03>
+- 讀萬卷書不如行萬里路
 
 --- &vcenter .largecontent
 
-## 教學上的挑戰
+## 教學上的其他挑戰
 
-- 零碎、無系統
+- R 處理資料時的所需知識很零碎、無系統
 - 學生的程度差異很大
     - 沒背景的學生，光學語法就忙不過來
     - 有背景的學生，會想聽很多深入的知識
 
 --- .dark .segue
 
-## 我的解決方案
+## R 語言翻轉教室
 
 --- &fullimg `r bg("learn-by-doing.jpg")`
 
@@ -254,7 +342,9 @@ Jan Wijffels:
 
 ## 在R 學R
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/Zo9oz2oNl4I" frameborder="0" allowfullscreen></iframe>
+- [![](http://img.youtube.com/vi/fcd6zSk0yd8/0.jpg)](https://youtu.be/fcd6zSk0yd8)
+- 請看Live Demo: [線上體驗](http://server.datascienceandr.org:28787)
+    - 可來信 wush@datascienceandr.org 申請帳密碼（為期一週）
 
 --- &vcenter .largecontent
 
@@ -329,6 +419,15 @@ pirate_info <- readLines(file(pirate_path, encoding = <請填寫正確的encodin
 
 --- &vcenter .largecontent
 
+## 限制
+
+- 教材沒辦法很好的教授「人與程式的溝通邏輯」
+    - 但是是很好的練習
+- 教材不教資料分析的方法、統計
+- 教材只專注於：「R 處理資料的方法和知識」
+
+--- &vcenter .largecontent
+
 ## 課程內容：
 
 - 00-Hello-DataScienceAndR
@@ -384,45 +483,154 @@ pirate_info <- readLines(file(pirate_path, encoding = <請填寫正確的encodin
 - 資料科學團隊的Hello World
 - 分析技術的專業，不適合在翻轉教室
 
---- &fullimg `r bg("dashboard.png")`
-
 --- &vcenter .largecontent
 
 ## 自由
 
 - <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/tw/"><img alt="創用 CC 授權條款" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/3.0/tw/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">
-- 整套教材由Wush Wu、Chih Cheng Liang和Johnson Hsieh製作，以創用CC 姓名標示-相同方式分享 3.0 台灣 授權條款釋出
-- 協同工作
+- 整套教材由Wush Wu、Chih Cheng Liang、Cheng-Yu Lin和Johnson Hsieh製作，以及其他的[貢獻群](https://github.com/wush978/DataScienceAndR/wiki/%E6%84%9F%E8%AC%9D%E6%B8%85%E5%96%AE)，以創用CC 姓名標示-相同方式分享 3.0 台灣 授權條款釋出
 
 --- &fullimg `r bg("github-issue.png")`
 
+--- &vcenter .largecontent
 
+```{r dsr-summary}
+used_record <- used_record[grepl("DataScienceAndR", used_record$course),]
+class(used_record$created_at) <- class(Sys.time())
+enter <- sum(used_record$type == 0)
+finish <- sum(used_record$type == 1)
+```
+
+## 使用統計
+
+- 時間範圍：`r sprintf("從%s起至%s", format(min(used_record$created_at), "%Y-%m-%d"), format(max(used_record$created_at), "%Y-%m-%d"))`
+- 使用者人數估計：`r length(unique(used_record$user_id))`
+- 使用者進入課程的次數：`r enter`
+- 使用者完成課程的次數：`r finish`
+
+--- &vcenter .largecontent
+
+## 各單元的難度
+
+```{r dsr-pass-rate, fig.width = 10, fig.height = 8}
+
+suppressWarnings(suppressWarnings({
+  record.group <- lapply(lesson.group <- c("RBasic", "RDataEngineer", "RVisualization"), function(pattern) {
+    used_record[grepl(pattern, used_record$lesson),]
+  })
+  lapply(record.group, function(x) {
+    group_by(x, user_id, lesson) %>%
+      do(pass = {
+        enter <- any(.$type == 0)
+        finish <- any(.$type == 1)
+        if (enter) finish else NA
+      }) %>%
+      mutate(pass = unlist(pass)) %>%
+      group_by() %>%
+      summarise(pass.rate = mean(pass, na.rm = TRUE))
+  }) %>%
+    do.call(what = rbind) %>%
+    mutate(lesson.group = lesson.group) %>%
+    ggplot(aes(x = lesson.group, y = pass.rate, fill = lesson.group)) +
+    geom_bar(stat = "identity") +
+    theme_fivethirtyeight(24)
+}))
+```
+
+--- &vcenter .largecontent
+
+## 使用者的學習深度
+
+```{r user-enter-rate, fig.width = 10, fig.height = 8}
+suppressWarnings(suppressWarnings({
+  used_record %>%
+    filter(type == 0) %>%
+    group_by(user_id, lesson) %>%
+    summarise(count = 1) %>%
+    group_by(user_id) %>%
+    summarise(count = sum(count)) %>%
+    mutate(count = cut(count, breaks = c(0:20, Inf))) %>%
+    mutate(count = c(paste(1:20), "20+")[as.integer(count)]) %>%
+    mutate(count = factor(count, levels = c(paste(1:20), "20+"))) %>%
+    group_by(count) %>%
+    summarise(users = length(user_id)) %>%
+    as.data.frame() %>%
+    ggplot(aes(x = count, y = users)) +
+    geom_bar(stat = "identity", position = "dodge") +
+    theme_fivethirtyeight(25)
+}))
+```
+
+--- &vcenter .largecontent
+
+## R語言翻轉教室要學多久？
+
+```{r learning-time, fig.width = 10, fig.height = 8}
+suppressWarnings(suppressWarnings({
+  record.group <- lapply(lesson.group <- c("RBasic", "RDataEngineer", "RVisualization"), function(pattern) {
+    used_record[grepl(pattern, used_record$lesson),]
+  })
+  group.duration <- lapply(record.group, function(x) {
+    tmp <- 
+      group_by(x, user_id, lesson) %>%
+      do(duration = {
+        time <- .$created_at
+        type <- .$type
+        status <- -1
+        status.time <- -1
+        retval <- c()
+        for(i in seq_along(type)) {
+          if (type[i] == 0) {
+            if (status == 0) {
+              next
+            } else {
+              status <- 0
+              status.time <- time[i]
+            }
+          } else {
+            if (status == 0) {
+              retval <- append(retval, as.numeric(difftime(time[i], status.time, units = "secs")))
+              status <- 1
+            }
+          }
+        }
+        retval
+      })
+    retval <- unlist(tmp$duration)
+    retval <- retval[retval > 0]
+    retval <- retval[!retval %in% boxplot.stats(retval)$out]
+    retval
+  })
+  plot.env <- new.env()
+  plot.env$i <- 0
+  plot.env$cex <- 2
+  plot(1, 1, type = "n", xlim = c(0, 30000), ylim = c(0, 2.525e-4), ylab = "", xlab = "Times", xaxt = "n", yaxt = "n", bty = "n", cex = plot.env$cex)
+  abline(h = 0)
+  axis(1, 3600 * (0:8), sprintf("%d hr", 0:8), cex = plot.env$cex)
+  lapply(group.duration, density) %>%
+    lapply(function(x) {
+      lines(x, col = (plot.env$i <- plot.env$i + 1), lwd = 3)
+    })
+  legend("topright", lesson.group, lwd = 3, col = 1:3, lty = 1, cex = plot.env$cex - 0.5)
+}))
+```
 
 --- &vcenter .largecontent
 
 ## 翻轉教室
 
 - 老師們可以自由的在課程中嵌入「R 語言翻轉教室」
-    - 我們不收費（但接受捐獻）
     - 再散布時需要採用相同授權模式
 - 我們建置[tracking server](http://wush978.github.io/DataScienceAndR/#2)
     - 老師們若將翻轉教室當作作業，我們可以協助追蹤同學是否有完成
-    - 細節歡迎再討論
 
---- &vcenter .largecontent
+--- &fullimg `r bg("dsr-tracking-hw.png")`
 
-## Q&A
+--- &fullimg `r bg("gitter-snapshot.png")`
 
-- [![Gitter](https://badges.gitter.im/wush978/DataScienceAndR.svg)](https://gitter.im/wush978/DataScienceAndR?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+--- &fullimg `r bg("bigstock-Questions-and-Answers-Q-and-48848522-900x550.jpg")`
 
---- &vcenter .largecontent
-
-## R vs Python
-
-- [Choosing R or Python for data analysis? An infographic](http://blog.datacamp.com/r-or-python-for-data-analysis/)
-- [Pros and Cons of R vs Python Sci-kit learn](https://www.kaggle.com/forums/f/208/getting-started/t/5243/pros-and-cons-of-r-vs-python-sci-kit-learn)
-- [Which is better for data analysis: R or Python?](https://www.quora.com/Which-is-better-for-data-analysis-R-or-Python)
-- [How to Choose Between Learning Python or R First](http://blog.udacity.com/2015/01/python-vs-r-learn-first.html)
+<http://www.effectivephilanthropy.org/qa-improving-application-and-reporting-processes/>
 
 --- .dark .segue
 
@@ -438,8 +646,6 @@ pirate_info <- readLines(file(pirate_path, encoding = <請填寫正確的encodin
     - 檢查
 - 翻轉教室用的swirl不一樣：
     - <https://github.com/swirldev/swirl/compare/master...wush978:master>
-
---- &vcenter .largecontent
 
 ## `lesson.yaml`
 
@@ -541,3 +747,13 @@ DataScienceAndR/
 --- &vcenter .largecontent
 
 ## Q&A
+
+--- &vcenter .largecontent
+
+## R vs Python
+
+- [Choosing R or Python for data analysis? An infographic](http://blog.datacamp.com/r-or-python-for-data-analysis/)
+- [Pros and Cons of R vs Python Sci-kit learn](https://www.kaggle.com/forums/f/208/getting-started/t/5243/pros-and-cons-of-r-vs-python-sci-kit-learn)
+- [Which is better for data analysis: R or Python?](https://www.quora.com/Which-is-better-for-data-analysis-R-or-Python)
+- [How to Choose Between Learning Python or R First](http://blog.udacity.com/2015/01/python-vs-r-learn-first.html)
+
