@@ -39,27 +39,25 @@
 
 function showRegistrationRecords() {
   $("#records").empty();
-  var url1 = "http://api.datascienceandr.org:3000/api/getManyRecords";
-  var url2 = "http://api2.datascienceandr.org:3000/api/getManyRecords";
+  var urls = ["http://api.datascienceandr.org/api/getManyRecords","http://api2.datascienceandr.org/api/getManyRecords"];
+  var url1, url2;
+  if (Math.random() < 0.5) {
+    url1 = urls[0];
+    url2 = urls[1];
+  } else {
+    url1 = urls[1];
+    url2 = urls[0];
+  }
   var used_records = [];
+  var is_done = false;
   function successOperation(data) {
     data.forEach(function(record) {
       used_records.push(record);
     });
+    is_done = true;
   }
-  function getManyRecordsOperation(url, completeOperation) {
-    return function(jqXHR, status) {
-      $.ajax({
-        url:url,
-        type:"POST",
-        data:{num:5},
-        dataType:"json",
-        success: successOperation,
-        complete: completeOperation
-      });
-    };
-  }
-  var operation = getManyRecordsOperation(url1, getManyRecordsOperation(url2, function() {
+  var renderOperation = function() {
+    if (!is_done) return;
     used_records.sort(function(r1, r2) {
       if (r1.created_at < r2.created_at)
         return 1;
@@ -77,11 +75,24 @@ function showRegistrationRecords() {
       }
       $("#records").append(li);
     });
-  }));
+  };
+  function getManyRecordsOperation(url, errorOperation) {
+    return function(jqXHR, status) {
+      $.ajax({
+        url:url,
+        type:"POST",
+        data:{num:10},
+        dataType:"json",
+        success: successOperation,
+        complete: renderOperation,
+        error: errorOperation,
+        timeout: 5000
+      });
+    };
+  }
+  var operation = getManyRecordsOperation(url1, getManyRecordsOperation(url2, function() {}));
   operation();
-}
-
-
+};
 
 window.onload =function(){
   moment.locale("zh-tw");

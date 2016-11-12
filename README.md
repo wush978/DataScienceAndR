@@ -13,27 +13,25 @@
 
 function showRegistrationRecords() {
   $("#records").empty();
-  var url1 = "http://api.datascienceandr.org:3000/api/getManyRecords";
-  var url2 = "http://api2.datascienceandr.org:3000/api/getManyRecords";
+  var urls = ["http://api.datascienceandr.org/api/getManyRecords","http://api2.datascienceandr.org/api/getManyRecords"];
+  var url1, url2;
+  if (Math.random() < 0.5) {
+    url1 = urls[0];
+    url2 = urls[1];
+  } else {
+    url1 = urls[1];
+    url2 = urls[0];
+  }
   var used_records = [];
+  var is_done = false;
   function successOperation(data) {
     data.forEach(function(record) {
       used_records.push(record);
     });
+    is_done = true;
   }
-  function getManyRecordsOperation(url, completeOperation) {
-    return function(jqXHR, status) {
-      $.ajax({
-        url:url,
-        type:"POST",
-        data:{num:5},
-        dataType:"json",
-        success: successOperation,
-        complete: completeOperation
-      });
-    };
-  }
-  var operation = getManyRecordsOperation(url1, getManyRecordsOperation(url2, function() {
+  var renderOperation = function() {
+    if (!is_done) return;
     used_records.sort(function(r1, r2) {
       if (r1.created_at < r2.created_at)
         return 1;
@@ -51,11 +49,24 @@ function showRegistrationRecords() {
       }
       $("#records").append(li);
     });
-  }));
+  };
+  function getManyRecordsOperation(url, errorOperation) {
+    return function(jqXHR, status) {
+      $.ajax({
+        url:url,
+        type:"POST",
+        data:{num:10},
+        dataType:"json",
+        success: successOperation,
+        complete: renderOperation,
+        error: errorOperation,
+        timeout: 5000
+      });
+    };
+  }
+  var operation = getManyRecordsOperation(url1, getManyRecordsOperation(url2, function() {}));
   operation();
-}
-
-
+};
 
 window.onload =function(){
   moment.locale("zh-tw");
@@ -239,4 +250,3 @@ ps. 如果你之前有進行過swirl的課程，swirl會出現下圖的選項詢
 <input type="image" src="http://i.imgur.com/hHGKvOZ.gif" border="0" name="submit" alt="PayPal － 更安全、更簡單的線上付款方式！">
 <img alt="" border="0" src="https://www.paypalobjects.com/zh_TW/i/scr/pixel.gif" width="1" height="1">
 </form>
-
