@@ -31,6 +31,7 @@ used_record <- local({
   db <- dbConnect(dbDriver("SQLite"), "dsr-hash.db")
   dbReadTable(db, "used_record")
 })
+imdb <- read.delim("labeledTrainData.tsv", quote = "", as.is = T)
 ```
 
 ## R 是什麼？
@@ -391,10 +392,6 @@ pirate_info <- readLines(file(pirate_path, encoding = <請填寫正確的encodin
 
 --- &fullimg `r bg("gitter-snapshot.png")`
 
---- .dark .segue
-
-## 使用統計
-
 --- &vcenter .largecontent
 
 ```{r dsr-summary}
@@ -520,8 +517,503 @@ suppressWarnings(suppressWarnings({
 
 --- .dark .segue
 
-## 機器學習
+## 從翻轉教室到機器學習
 
 --- &vcenter .largecontent
 
-##
+## 我與機器學習的關係
+
+- 台大電機所博士候選人，研究領域為網路廣告推薦系統
+    - 廣告的價值預測
+    - 廣告的排程
+    - 網路使用者的資訊挖掘
+- Taiwan R User Group 共同創辦人
+
+--- &vcenter .largecontent
+
+## 翻轉教室中的知識
+
+- 處理資料的技術
+    - 收集資料
+    - 清理資料
+    - 整合資料
+    - 觀察資料
+- 不涉及進階分析方法的使用
+
+--- &vcenter .largecontent
+
+## 專精機器學習需要哪些知識？
+
+- 機器學習
+    - 外功
+        - 整理資料與轉換資料格式
+        - 操作機器學習套件
+        - 評量模型的好壞
+    - 內功
+        - 訊息理論、線性代數、數理統計、最佳化、線性模型
+- 特定領域
+    - 影像辨識、語音分析、文字探勘...
+
+--- &vcenter .largecontent
+
+## 例子一：從文字來猜測這是正面或負面影評
+
+```{r}
+cat(imdb$review[10])
+```
+
+*** =pnotes
+
+這是正面影評
+
+--- &vcenter .largecontent
+
+## 例子一：從文字來猜測這是正面或負面影評
+
+```{r}
+cat(imdb$review[24])
+```
+
+*** =pnotes
+
+這是負面影評
+
+--- &vcenter .largecontent
+
+## 例子一：五分鐘就可以重現的預測模型
+
+[Sentiment Analysis via R, FeatureHashing and XGBoost](https://cran.r-project.org/web/packages/FeatureHashing/vignettes/SentimentAnalysis.html)
+
+- 特徵抽取
+- 分類樹
+    - 函數空間
+    - 訊息理論
+    - 最佳化
+    - [Jerome H. Friedman (2001). Greedy function approximation: A gradient boosting machine. Ann. Statist.](https://projecteuclid.org/euclid.aos/1013203451)
+
+--- &vcenter .largecontent
+
+## 例子二：挖掘政府採購資料
+
+- 中華民國政府電子採購網
+- 經濟部商業司
+
+--- &fullimg `r bg("tw_tender.png")`
+
+--- &fullimg `r bg("tw_company.png")`
+
+--- &vcenter .largecontent
+
+## 例子二：挖掘政府採購資料
+
+- [臺灣菸酒股份有限公司烏日啤酒廠，二氧化碳150,000公斤](http://web.pcc.gov.tw/tps/main/pms/tps/atm/atmAwardAction.do?newEdit=false&searchMode=common&method=inquiryForPublic&pkAtmMain=51082148&tenderCaseNo=102-3000-2-035)
+- 投標廠商一：長泰氣體股份有限公司，董監事名單：余宗德,洪百芬,黃春潭,陳春銘,蔡長祥,黃添旺,洪至信,洪榮三
+- 投標廠商二：台興炭酸股份有限公司，董監事名單：洪至信,黃春潭,蔡長祥,陳春銘,洪百芬,余宗德,黃添旺,洪榮三
+
+限制聲明：董監事名單相同不代表圍標
+
+--- &vcenter .largecontent
+
+## 例子二：所用的技術
+
+- 資料整理、資料詮釋
+- 分群演算法
+- R
+
+--- &vcenter .largecontent
+
+## 例子三：網路廣告
+
+<br/>
+<br/>
+<br/>
+<br/>
+`r fig("John_Wanamaker.png", 75)`
+
+--- &fullimg `r bg("online_advertising.png")`
+
+--- &fullimg `r bg("RTB.png")`
+
+--- &vcenter .largecontent
+
+## 例子三：Criteo Display Advertising Challenge
+
+- <https://www.kaggle.com/c/criteo-display-ad-challenge>
+- 利用過去的瀏覽紀錄預測未來使用者點擊廣告的機率
+
+--- &vcenter .largecontent
+
+## 例子三：所運用的知識
+
+- [3 Idiots' Solution & LIBFFM](https://www.kaggle.com/c/criteo-display-ad-challenge/forums/t/10555/3-idiots-solution-libffm)
+- 在分析的過程，前面提到的技術全部都有用
+- [Steffen Rendle (2012).  Factorization Machines with libFM. ACM Trans. Intell. Syst. Technol.](http://dl.acm.org/citation.cfm?doid=2168752.2168771)
+
+--- &vcenter .largecontent
+
+## 如何精通機器學習？
+
+- 網路上已不乏良好的學習資源
+- 任重而道遠，我們要擁有強烈的學習動機
+- 建議的學習方式：
+    - 修課
+    - 參加社群交流，獲取新知，重現技術
+    - 參加各式數據預測競賽
+
+--- &vcenter .largecontent
+
+## 例子：
+
+- 攻讀清大統計所碩士班
+- 謝老師開讀書會讀：[The Elements of Statistical Learning](http://statweb.stanford.edu/~tibs/ElemStatLearn/)
+- 參加社群：<https://www.meetup.com/Taiwan-R/>
+- 認識現在的Officer：嘉葳
+- 嘉葳推薦了一篇文章：<https://yanpanlau.github.io/2016/10/11/Torcs-Keras.html>
+- 發現新的實用工具：keras與Reinforcement Learning等相關學習資源
+
+--- &vcenter .largecontent
+
+## 例子：
+
+- 學會寫程式，勝任軟體工程師的工作
+- 工作之餘，參與數據預測相關競賽
+- 對機器學習產生興趣，收看線上課程：[機器學習基石](https://www.youtube.com/playlist?list=PLXVfgk9fNX2I7tB6oIINGBmW50rrmFTqf)
+- 一邊修課，一邊應用機器學習方法
+
+--- &vcenter .largecontent
+
+## 機器學習一定要會內功嘛？
+
+```
+[問題類型]: 程式諮詢(我想用R 做某件事情，但是我不知道要怎麼用R 寫出來) [軟體熟悉度]: 
+
+入門(寫過其他程式，只是對語法不熟悉) [問題敘述]:
+
+1.在使用sparse.model.matrix時，第一行會產生1這個intercept，如果是用xgboost， 
+似乎都會寫成~.-1，把intercept移除，那如果創造sparse.model.matrix，想用來預估 
+其他模型，查到的範例似乎都沒有移除1這個intercept，為什麼在xgboost需要移除， 而在預估其他模型便不需移除? 
+2.如果用hashed.model.matrix，也能夠搭配xgboost嗎，會有移除intercept的問題嗎? [程式範例]: sparse_matrix <- 
+sparse.model.matrix(Improved~.-1, data = df) [關鍵字]: sparse.model.matrix ,xgboost, hashed.model.matrix 
+以上的疑問，懇請各位先進解答，謝謝！
+```
+
+--- &vcenter .largecontent
+
+## 機器學習一定要會內功嘛？
+
+- 目前機器學習的目標，都是用數學來表示
+
+--- &vcenter .largecontent
+
+## 例子：手寫辨識
+
+`r fig("numbers.png")`
+
+<http://statweb.stanford.edu/~tibs/ElemStatLearn/>
+
+--- &vcenter .largecontent
+
+## 例子：手寫辨識
+
+<br/>
+<br/>
+<br/>
+`r fig("1NN.png")`
+
+<http://statweb.stanford.edu/~tibs/ElemStatLearn/>
+
+--- &vcenter .largecontent
+
+## 例子：手寫辨識
+
+<br/>
+<br/>
+<br/>
+`r fig("rotation-distance.png")`
+
+--- &vcenter .largecontent
+
+## 機器學習一定要會內功嘛？
+
+- 擁有數學基礎，才能「部份」知道，為什麼機器學習學的好
+
+--- &vcenter .largecontent
+
+## 參加競賽
+
+- Kaggle
+    - 比賽、交流、認識朋友
+    - 想了解如何做出精準預測的朋友請來這
+- 國內的競賽
+    - [DSP數據挑戰賽](http://dc.dsp.im/index)(聲明：我也是智庫驅動的成員之一)
+
+--- &fullimg `r bg("kaggle_criteo.png")`
+
+--- &fullimg `r bg("criteo_data.png")`
+
+--- &fullimg `r bg("criteo_evaluation.png")`
+
+--- &fullimg `r bg("kaggle_forum.png")`
+
+--- &vcenter .largecontent
+
+## 許多人會在Focum分享實際技術
+
+- Online logistic regression
+- Feature hash trick
+- Adaptive learning rate
+
+--- &fullimg `r bg("kaggle_code_share.png")`
+
+--- &vcenter .largecontent
+
+## The Elements of Statistical Learning
+
+<http://statweb.stanford.edu/~tibs/ElemStatLearn/>
+
+- 從統計的觀點出發，描述傳統機器學習方法的原理
+- 專注於講解「為什麼」機器學習方法會「準」
+- 解釋的過程會有數學，但是數學不是重點
+- 適合想了解「為什麼」的人閱讀
+
+--- &vcenter .largecontent
+
+## The Elements of Statistical Learning
+
+- 涵蓋大部分傳統的機器學習方法
+    - Logistic Regression (Ch 4)
+    - Gradient Boosted Decision Tree (Ch 9, 10)
+    - Deep Learning (Ch 11)
+    - SVM (Ch 12)
+
+--- &vcenter .largecontent
+
+## 新的機器學習方法...
+
+- 掌握書中技術後，學新的技術都更容易
+    - 大量數據的最佳化：Stochastic Gradient Descent
+        - [An overview of gradient descent optimization algorithms](http://sebastianruder.com/optimizing-gradient-descent/)
+    - Deep Learning 相關技術
+        - [Autoencoder](https://en.wikipedia.org/wiki/Autoencoder)
+        - [GloVe](http://nlp.stanford.edu/projects/glove/)
+
+--- &fullimg `r bg("contours_evaluation_optimizers.gif")`
+
+<http://sebastianruder.com/optimizing-gradient-descent/>
+
+--- &fullimg `r bg("Autoencoder_structure.png")`
+
+<https://en.wikipedia.org/wiki/Autoencoder>
+
+--- &fullimg `r bg("CVAE-sample.png")`
+
+<https://arxiv.org/abs/1606.05908>
+
+--- &fullimg `r bg("GloVe-NN.png")`
+
+<http://nlp.stanford.edu/projects/glove/>
+
+--- &fullimg `r bg("GloVe-Substraction.png")`
+
+<http://nlp.stanford.edu/projects/glove/>
+
+--- &vcenter .largecontent
+
+## 學習內功的好處
+
+- 了解傳統的方法，才能迅速了解新的方法的差異
+    - 大數據的機器學習與傳統機器學習的差異
+    - Deep Learning 的相關技術，與傳統機器學習的差異
+- 了解「為什麼傳統方法會準」，就能更快速了解「為什麼新的方法會準」
+- 限制：
+    - 許多機器學習的原理，仍然是Open Problem
+
+--- &vcenter .largecontent
+
+## 機器學習的趨勢
+
+- Structure learning
+- Transfer learning
+- Reinforcement learning
+
+--- &vcenter .largecontent
+
+## 從R學外功
+
+- [CRAN Task Views](https://cran.r-project.org/web/views/) --> [Machine Learning](https://cran.r-project.org/web/views/MachineLearning.html)
+    - 比賽常用套件：e1071、xgboost與glmnet，讀Vignettes即可學到兼顧理論與用法的組合技巧
+    - [ElemStatLearn](https://cran.r-project.org/web/packages/ElemStatLearn/index.html)
+- Python 等學習資源
+
+--- .dark .segue
+
+## 如何應用機器學習
+
+--- &vcenter .largecontent
+
+## 應用機器學習是需要跨部門的準備
+
+- 學習的方向
+- 學習的資料
+- 學習的系統
+
+--- &vcenter .largecontent
+
+## 例子：廣告系統
+
+- 標的：
+    - Click
+    - Conversion
+    - Buy
+- 應用
+    - 在店消費
+    - 再行銷(Retargeting)
+
+--- &vcenter .largecontent
+
+## 例子：網路廣告的付費模式
+
+- Cost Per Mille(1000 Impression)
+- Cost Per Click
+- Cost Per Action
+- Cost Per Install
+- Cost Per Order
+
+`r fig("CPM_CPC_CPI.png", 85)`
+
+*** =pnotes
+
+Source: <http://www.lafandar.org/2015/08/what-is-online-advertising-what-are-cpm.html>
+
+--- &vcenter .largecontent
+
+## 對廣告主來說，哪一種最划算？
+
+<br/><br/>
+<center>`r fig("discuss.jpg", 85)`</center>
+<small><http://www.icytales.com/top-10-group-discussion-myths-busted/></small>
+
+--- &vcenter .largecontent
+
+## 對廣告主來說，付出的代價為何？
+
+<br/><br/>
+<center>`r fig("discuss.jpg", 85)`</center>
+<small><http://www.icytales.com/top-10-group-discussion-myths-busted/></small>
+
+--- &vcenter .largecontent
+
+## 廣告商的處境
+
+- 從外部買流量，通常是CPM計費
+- 廣告主通常依據自己的需求，採用CPC，CPI計費
+- 如何制訂購買的價格？使用機器學習
+- 學習的標的，受到廣告主的決策所影響
+    - 實務上，機器學習的目標，是由業務目標所決定
+
+--- &vcenter .largecontent
+
+## 從業務目標到機器學習的目標
+
+- 目標的轉換，需要跨部門的討論
+- 越早決定學習的目標、優化的目標越好
+    - OEC = Overall Evaluation Criterion, OMTM = One Metric That Matters
+- 儘量站在客戶的立場做優化
+
+--- &vcenter .largecontent
+
+## 例子：搜尋引擎
+
+- 如何優化: Queries / Month
+
+--- &fullimg `r bg("search_engine.png")`
+
+<http://www.exp-platform.com/Pages/KDD2015KeynoteExPKohavi.aspx>
+
+--- &vcenter .largecontent
+
+## 有沒有使用機器學習的差異
+
+- 對廣告主以CPC收費
+- 根據其他業務資料，CPC = 1, Click-Through-Rate(點擊/曝光) = 0.1，我們出價0.1美元購買曝光
+
+```{r, fig.height=4}
+col <- rep(1,10)
+col[6] <- 2
+plot(1:10, rep(0.1, 10), xaxt = "n", xlab = "bids", ylab = "CPM", col = col, ylim = c(0, 0.2))
+y.enemy <- rep(0, 10)
+y.enemy[6] <- 0.2
+points(1:10, y.enemy, pch = 2, col = col)
+```
+
+--- &vcenter .largecontent
+
+## 如何準備資料
+
+- 不同的網站用不同的價格
+- 不同的網站、時間用不同的價格
+- 不同的網站、不同的時間與不同的性別有不同的價格
+- 不同的事件都有不同的價格
+
+--- &vcenter .largecontent
+
+## 實際的狀況
+
+- 對廣告主以CPI收費
+- 沒有Install的資料
+
+--- &vcenter .largecontent
+
+## 再行銷
+
+- 針對在商城看過電視的人，播放電視廣告
+- 如何才能機器可學？
+
+--- &vcenter .largecontent
+
+## 機器學習可以提昇點擊率嘛？
+
+- 整體的點擊率
+- 個別的點擊率
+
+--- &vcenter .largecontent
+
+## 機器學習系統與一般資訊系統
+
+- 需求不同
+- 技術債更高
+    - [Machine Learning: The High Interest Credit Card of Technical Debt](http://research.google.com/pubs/pub43146.html)
+
+--- .dark .segue
+
+## 總結
+
+--- &vcenter .largecontent
+
+## 做中學
+
+- R語言翻轉教室給予大家做中學R的環境
+- Kaggle給予大家在競賽中學機器學習的環境
+    - 但是請同時學習內功，了解「為什麼機器學習會有用」
+- 應用機器學習，刺激需求，讓自己更有動力繼續學習
+
+--- &vcenter .largecontent
+
+## 學習機器學習的素材
+
+- 內功
+    - [The Elements of Statistical Learning: Data Mining, Inference, and Prediction](http://statweb.stanford.edu/~tibs/ElemStatLearn/)
+    - [Machine Learning Foundations (機器學習基石) ](https://www.youtube.com/playlist?list=PLXVfgk9fNX2I7tB6oIINGBmW50rrmFTqf)
+- 外功
+    - [Kaggle](https://www.kaggle.com/)
+    - [CRAN Task Views](https://cran.r-project.org/web/views/) --> [Machine Learning](https://cran.r-project.org/web/views/MachineLearning.html)
+    - 比賽常用套件：e1071、xgboost與glmnet，讀Vignettes即可學到兼顧理論與用法的組合技巧
+    - [ElemStatLearn](https://cran.r-project.org/web/packages/ElemStatLearn/index.html)
+
+--- &vcenter .largecontent
+
+## Q&A
+
+
+
+
