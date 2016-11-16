@@ -913,17 +913,17 @@ points(1:10, y.enemy, pch = 2, col = col)
 
 --- &vcenter .largecontent
 
-## 實際的狀況
+## 實際情境與討論
 
 - 對廣告主以CPI收費
 - 沒有Install的資料
 
 --- &vcenter .largecontent
 
-## 再行銷
+## 實際情境與討論
 
-- 針對在商城看過電視的人，播放電視廣告
-- 如何才能機器可學？
+- 若使用者在商城看過特定商品，則播放該商品或類似商品（再行銷）
+- 如何實現？
 
 --- &vcenter .largecontent
 
