@@ -8,7 +8,7 @@ hitheme     : zenburn
 widgets     : []            # {mathjax, quiz, bootstrap}
 mode        : selfcontained # {standalone, draft}
 knit        : slidify::knit2slides
---- .dark .segue
+--- &vcenter .largecontent
 
 ```{r setup, include=FALSE, cache=FALSE}
 library(knitr)
@@ -34,6 +34,14 @@ used_record <- local({
 imdb <- read.delim("labeledTrainData.tsv", quote = "", as.is = T)
 ```
 
+## 今日大綱
+
+1. R 語言翻轉教室簡介
+1. 從翻轉教室到機器學習
+1. 在工作中使用機器學習
+
+--- .dark .segue
+
 ## R 是什麼？
 
 --- &fullimg `r bg("statician_10521919-655x280.jpg")`
@@ -54,6 +62,10 @@ imdb <- read.delim("labeledTrainData.tsv", quote = "", as.is = T)
 
 <http://img.diynetwork.com/DIY/2003/09/18/t134_3ca_med.jpg>
 
+--- &fullimg `r bg("dsc_process.png")`
+
+<https://en.wikipedia.org/wiki/Data_science>
+
 --- &vcenter .largecontent
 
 ## 和其他工具相比，R 的特色
@@ -65,10 +77,6 @@ imdb <- read.delim("labeledTrainData.tsv", quote = "", as.is = T)
 --- &fullimg `r bg("vgsmlGv.png")`
 
 <https://techcus.com/p/r1zSmbXut/top-5-highest-paying-programming-languages-of-2016/>
-
---- &fullimg `r bg("dsc_process.png")`
-
-<https://en.wikipedia.org/wiki/Data_science>
 
 --- .dark .segue
 
@@ -146,8 +154,9 @@ kable(head(TWII))
 
 ## 整個團隊都用R 之後
 
-- 共同的工作內容可以包裝成R 套件來共同使用
-- 實驗的可重複性
+- 工程的經驗可以共享
+- 開發客製化套件可以共享
+- 實驗有更高的可重複性
 
 --- &vcenter .largecontent
 
@@ -185,8 +194,7 @@ kable(head(TWII))
 - 學R 的同學通常都不具備程式背景
     - R 不是針對程式設計師所設計
 - 同學學R 的心態
-    - 資料才是主角
-    - R 的角色只是工具，深入學R 的報酬很低
+    - 資料分析才是主角，R 只是工具
 
 --- &vcenter .largecontent
 
@@ -223,15 +231,13 @@ kable(head(TWII))
 
 --- &vcenter .largecontent
 
-## 直接教語法的困難：
+## 直接教語法、原理的困難：
 
-- 程式是工具，同學很難持續去學一個「現在沒有在用」的工具
+- 很難持續去學一個「現在沒有在用」的工具
     - 背誦指令很困難、很無聊
 - 教學形式很挑戰：
     - 演講：聽過就忘了
     - 帶著做：跟不上就放空了
-
---- &fullimg `r bg("facebook_distraction.png")`
 
 --- &vcenter .largecontent
 
@@ -410,59 +416,6 @@ finish <- sum(used_record$type == 1)
 
 --- &vcenter .largecontent
 
-## 各單元的難度
-
-```{r dsr-pass-rate, fig.width = 10, fig.height = 6}
-
-suppressWarnings(suppressWarnings({
-  record.group <- lapply(lesson.group <- c("RBasic", "RDataEngineer", "RVisualization"), function(pattern) {
-    used_record[grepl(pattern, used_record$lesson),]
-  })
-  lapply(record.group, function(x) {
-    group_by(x, user_id, lesson) %>%
-      do(pass = {
-        enter <- any(.$type == 0)
-        finish <- any(.$type == 1)
-        if (enter) finish else NA
-      }) %>%
-      mutate(pass = unlist(pass)) %>%
-      group_by() %>%
-      summarise(pass.rate = mean(pass, na.rm = TRUE))
-  }) %>%
-    do.call(what = rbind) %>%
-    mutate(lesson.group = lesson.group) %>%
-    ggplot(aes(x = lesson.group, y = pass.rate, fill = lesson.group)) +
-    geom_bar(stat = "identity") +
-    theme_fivethirtyeight(24)
-}))
-```
-
---- &vcenter .largecontent
-
-## 使用者的學習深度
-
-```{r user-enter-rate, fig.width = 10, fig.height = 6}
-suppressWarnings(suppressWarnings({
-  used_record %>%
-    filter(type == 0) %>%
-    group_by(user_id, lesson) %>%
-    summarise(count = 1) %>%
-    group_by(user_id) %>%
-    summarise(count = sum(count)) %>%
-    mutate(count = cut(count, breaks = c(0:20, Inf))) %>%
-    mutate(count = c(paste(1:20), "20+")[as.integer(count)]) %>%
-    mutate(count = factor(count, levels = c(paste(1:20), "20+"))) %>%
-    group_by(count) %>%
-    summarise(users = length(user_id)) %>%
-    as.data.frame() %>%
-    ggplot(aes(x = count, y = users)) +
-    geom_bar(stat = "identity", position = "dodge") +
-    theme_fivethirtyeight(25)
-}))
-```
-
---- &vcenter .largecontent
-
 ## R語言翻轉教室要學多久？
 
 ```{r learning-time, fig.width = 10, fig.height = 6}
@@ -521,13 +474,12 @@ suppressWarnings(suppressWarnings({
 
 --- &vcenter .largecontent
 
-## 我與機器學習的關係
+## 關於我
 
 - 台大電機所博士候選人，研究領域為網路廣告推薦系統
     - 廣告的價值預測
     - 廣告的排程
     - 網路使用者的資訊挖掘
-- Taiwan R User Group 共同創辦人
 
 --- &vcenter .largecontent
 
@@ -584,6 +536,10 @@ cat(imdb$review[24])
 
 [Sentiment Analysis via R, FeatureHashing and XGBoost](https://cran.r-project.org/web/packages/FeatureHashing/vignettes/SentimentAnalysis.html)
 
+--- &vcenter .largecontent
+
+## 例子一：所用的知識與技術：
+
 - 特徵抽取
 - 分類樹
     - 函數空間
@@ -614,11 +570,10 @@ cat(imdb$review[24])
 
 --- &vcenter .largecontent
 
-## 例子二：所用的技術
+## 例子二：所用的知識與技術
 
 - 資料整理、資料詮釋
 - 分群演算法
-- R
 
 --- &vcenter .largecontent
 
@@ -629,6 +584,8 @@ cat(imdb$review[24])
 <br/>
 <br/>
 `r fig("John_Wanamaker.png", 75)`
+
+--- &fullimg `r bg("apple.png")`
 
 --- &fullimg `r bg("online_advertising.png")`
 
@@ -653,7 +610,7 @@ cat(imdb$review[24])
 
 ## 如何精通機器學習？
 
-- 網路上已不乏良好的學習資源
+- 網路有非常多的學習資源，但是一開使只需要精通一套學習機制
 - 任重而道遠，我們要擁有強烈的學習動機
 - 建議的學習方式：
     - 修課
@@ -662,23 +619,26 @@ cat(imdb$review[24])
 
 --- &vcenter .largecontent
 
-## 例子：
+## 例子：內功-->外功
 
 - 攻讀清大統計所碩士班
 - 謝老師開讀書會讀：[The Elements of Statistical Learning](http://statweb.stanford.edu/~tibs/ElemStatLearn/)
 - 參加社群：<https://www.meetup.com/Taiwan-R/>
-- 認識現在的Officer：嘉葳
-- 嘉葳推薦了一篇文章：<https://yanpanlau.github.io/2016/10/11/Torcs-Keras.html>
-- 發現新的實用工具：keras與Reinforcement Learning等相關學習資源
+- 學習寫程式、工作
+- 學海無涯
+    - 認識現在的Officer：嘉葳
+    - 嘉葳推薦了一篇文章：<https://yanpanlau.github.io/2016/10/11/Torcs-Keras.html>
+    - 發現新的實用工具：keras與Reinforcement Learning等相關學習資源
 
 --- &vcenter .largecontent
 
-## 例子：
+## 例子：外功-->內功(?)
 
 - 學會寫程式，勝任軟體工程師的工作
 - 工作之餘，參與數據預測相關競賽
-- 對機器學習產生興趣，收看線上課程：[機器學習基石](https://www.youtube.com/playlist?list=PLXVfgk9fNX2I7tB6oIINGBmW50rrmFTqf)
-- 一邊修課，一邊應用機器學習方法
+    - 重現別人的程式碼
+    - 學會如何使用套件與調參數
+- 修課，收看線上課程：[機器學習基石](https://www.youtube.com/playlist?list=PLXVfgk9fNX2I7tB6oIINGBmW50rrmFTqf)
 
 --- &vcenter .largecontent
 
@@ -696,12 +656,6 @@ cat(imdb$review[24])
 sparse.model.matrix(Improved~.-1, data = df) [關鍵字]: sparse.model.matrix ,xgboost, hashed.model.matrix 
 以上的疑問，懇請各位先進解答，謝謝！
 ```
-
---- &vcenter .largecontent
-
-## 機器學習一定要會內功嘛？
-
-- 目前機器學習的目標，都是用數學來表示
 
 --- &vcenter .largecontent
 
@@ -735,35 +689,11 @@ sparse.model.matrix(Improved~.-1, data = df) [關鍵字]: sparse.model.matrix ,x
 
 ## 機器學習一定要會內功嘛？
 
-- 擁有數學基礎，才能「部份」知道，為什麼機器學習學的好
+- 擁有內功基礎，才能「部份」知道，為什麼機器學習學的好
 
---- &vcenter .largecontent
+--- .dark .segue
 
-## 參加競賽
-
-- Kaggle
-    - 比賽、交流、認識朋友
-    - 想了解如何做出精準預測的朋友請來這
-- 國內的競賽
-    - [DSP數據挑戰賽](http://dc.dsp.im/index)(聲明：我也是智庫驅動的成員之一)
-
---- &fullimg `r bg("kaggle_criteo.png")`
-
---- &fullimg `r bg("criteo_data.png")`
-
---- &fullimg `r bg("criteo_evaluation.png")`
-
---- &fullimg `r bg("kaggle_forum.png")`
-
---- &vcenter .largecontent
-
-## 許多人會在Focum分享實際技術
-
-- Online logistic regression
-- Feature hash trick
-- Adaptive learning rate
-
---- &fullimg `r bg("kaggle_code_share.png")`
+## 學習資源
 
 --- &vcenter .largecontent
 
@@ -788,9 +718,44 @@ sparse.model.matrix(Improved~.-1, data = df) [關鍵字]: sparse.model.matrix ,x
 
 --- &vcenter .largecontent
 
+## 從R學外功
+
+- [CRAN Task Views](https://cran.r-project.org/web/views/) --> [Machine Learning](https://cran.r-project.org/web/views/MachineLearning.html)
+    - 比賽常用套件：
+        - e1071
+        - xgboost
+        - glmnet
+    - [ElemStatLearn](https://cran.r-project.org/web/packages/ElemStatLearn/index.html)可搭配上一本書做學習
+
+--- &vcenter .largecontent
+
+## 參加競賽
+
+- Kaggle
+- 國內的競賽
+    - [DSP數據挑戰賽](http://dc.dsp.im/index)(聲明：我也是智庫驅動的成員之一)
+
+--- &fullimg `r bg("kaggle_criteo.png")`
+
+--- &fullimg `r bg("criteo_data.png")`
+
+--- &fullimg `r bg("criteo_evaluation.png")`
+
+--- &fullimg `r bg("kaggle_forum.png")`
+
+--- &fullimg `r bg("kaggle_code_share.png")`
+
+--- &vcenter .largecontent
+
+## Kaggle Kernel
+
+- Live Demo
+
+--- &vcenter .largecontent
+
 ## 新的機器學習方法...
 
-- 掌握書中技術後，學新的技術都更容易
+- 掌握傳統技術後，學新的技術都更容易
     - 大量數據的最佳化：Stochastic Gradient Descent
         - [An overview of gradient descent optimization algorithms](http://sebastianruder.com/optimizing-gradient-descent/)
     - Deep Learning 相關技術
@@ -835,15 +800,6 @@ sparse.model.matrix(Improved~.-1, data = df) [關鍵字]: sparse.model.matrix ,x
 - Structure learning
 - Transfer learning
 - Reinforcement learning
-
---- &vcenter .largecontent
-
-## 從R學外功
-
-- [CRAN Task Views](https://cran.r-project.org/web/views/) --> [Machine Learning](https://cran.r-project.org/web/views/MachineLearning.html)
-    - 比賽常用套件：e1071、xgboost與glmnet，讀Vignettes即可學到兼顧理論與用法的組合技巧
-    - [ElemStatLearn](https://cran.r-project.org/web/packages/ElemStatLearn/index.html)
-- Python 等學習資源
 
 --- .dark .segue
 
