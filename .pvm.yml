@@ -1213,7 +1213,7 @@ scales:
   - name: Rcpp
   version: 0.4.0
 swirl:
-  repository: github::wush978/swirl#master
+  repository: github::wush978/swirl@master
   parent:
   - R
   - stringr
