@@ -34,7 +34,7 @@ base:
   name: base
   version: 3.3.2
 slidifyLibraries:
-  repository: github::wush978/slidifyLibraries
+  repository: github::wush978/slidifyLibraries@master
   priority: .na
   name: slidifyLibraries
   version: 0.3.1.1
@@ -113,6 +113,19 @@ RColorBrewer:
     op: '>='
     version: 2.0.0
   version: 1.1-2
+backports:
+  repository: CRAN
+  parent:
+  - R
+  - utils
+  priority: .na
+  name: backports
+  deps:
+  - name: R
+    op: '>='
+    version: 3.0.0
+  - name: utils
+  version: 1.0.5
 R6:
   repository: CRAN
   parent: R
@@ -143,19 +156,6 @@ curl:
     op: '>='
     version: 3.0.0
   version: 0.9.6
-pvm:
-  repository: CRAN
-  parent:
-  - R
-  - yaml
-  priority: .na
-  name: pvm
-  deps:
-  - name: R
-    op: '>='
-    version: '2.10'
-  - name: yaml
-  version: 0.1.0
 formatR:
   repository: CRAN
   parent: R
@@ -188,7 +188,17 @@ digest:
   - name: R
     op: '>='
     version: 2.4.1
-  version: 0.6.9
+  version: 0.6.12
+base64enc:
+  repository: CRAN
+  parent: R
+  priority: .na
+  name: base64enc
+  deps:
+  - name: R
+    op: '>='
+    version: 2.9.0
+  version: 0.1-3
 jpeg:
   repository: CRAN
   parent: R
@@ -292,6 +302,19 @@ nycflights13:
     op: '>='
     version: 3.1.0
   version: '0.1'
+rprojroot:
+  repository: CRAN
+  parent:
+  - R
+  - backports
+  priority: .na
+  name: rprojroot
+  deps:
+  - name: R
+    op: '>='
+    version: 3.0.0
+  - name: backports
+  version: '1.2'
 maps:
   repository: CRAN
   parent:
@@ -1309,7 +1332,7 @@ reshape:
   - name: plyr
   version: 0.8.5
 slidify:
-  repository: github::wush978/slidify
+  repository: github::wush978/slidify@master
   parent:
   - R
   - knitr
@@ -1428,6 +1451,31 @@ GGally:
     op: '>='
     version: 0.8.4
   version: 1.0.1
+swirlify:
+  repository: github::wush978/swirlify@master
+  parent:
+  - R
+  - swirl
+  - stringr
+  - yaml
+  - rmarkdown
+  - whisker
+  - utils
+  priority: .na
+  name: swirlify
+  deps:
+  - name: R
+    op: '>='
+    version: 3.2.0
+  - name: swirl
+    op: '>='
+    version: 2.2.11
+  - name: stringr
+  - name: yaml
+  - name: rmarkdown
+  - name: whisker
+  - name: utils
+  version: 0.4.1
 ggmap:
   repository: CRAN
   parent:
