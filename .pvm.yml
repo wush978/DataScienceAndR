@@ -1,0 +1,1468 @@
+utils:
+  repository: CRAN
+  priority: base
+  name: utils
+  version: 3.3.2
+bitops:
+  repository: CRAN
+  priority: .na
+  name: bitops
+  version: 1.0-6
+tools:
+  repository: CRAN
+  priority: base
+  name: tools
+  version: 3.3.2
+compiler:
+  repository: CRAN
+  priority: base
+  name: compiler
+  version: 3.3.2
+datasets:
+  repository: CRAN
+  priority: base
+  name: datasets
+  version: 3.3.2
+labeling:
+  repository: CRAN
+  priority: .na
+  name: labeling
+  version: '0.3'
+base:
+  repository: CRAN
+  priority: base
+  name: base
+  version: 3.3.2
+slidifyLibraries:
+  repository: CRAN
+  priority: .na
+  name: slidifyLibraries
+  version: 0.3.1.1
+grDevices:
+  repository: CRAN
+  priority: base
+  name: grDevices
+  version: 3.3.2
+rstudioapi:
+  repository: CRAN
+  priority: .na
+  name: rstudioapi
+  version: '0.5'
+testit:
+  repository: CRAN
+  priority: .na
+  name: testit
+  version: '0.5'
+magrittr:
+  repository: CRAN
+  priority: .na
+  name: magrittr
+  version: '1.5'
+littler:
+  repository: CRAN
+  priority: .na
+  name: littler
+  version: 0.3.1
+proto:
+  repository: CRAN
+  priority: .na
+  name: proto
+  version: 0.3-10
+whisker:
+  repository: CRAN
+  priority: .na
+  name: whisker
+  version: 0.3-2
+yaml:
+  repository: CRAN
+  priority: .na
+  name: yaml
+  version: 2.1.13
+BH:
+  repository: CRAN
+  priority: .na
+  name: BH
+  version: 1.60.0-1
+praise:
+  repository: CRAN
+  priority: .na
+  name: praise
+  version: 1.0.0
+openssl:
+  repository: CRAN
+  priority: .na
+  name: openssl
+  version: 0.9.6
+assertthat:
+  repository: CRAN
+  priority: .na
+  name: assertthat
+  version: '0.1'
+R:
+  repository: CRAN
+  priority: base
+  name: R
+  version: 3.3.2
+RColorBrewer:
+  repository: CRAN
+  parent: R
+  priority: .na
+  name: RColorBrewer
+  deps:
+  - name: R
+    op: '>='
+    version: 2.0.0
+  version: 1.1-2
+R6:
+  repository: CRAN
+  parent: R
+  priority: .na
+  name: R6
+  deps:
+  - name: R
+    op: '>='
+    version: '3.0'
+  version: 2.1.2
+lazyeval:
+  repository: CRAN
+  parent: R
+  priority: .na
+  name: lazyeval
+  deps:
+  - name: R
+    op: '>='
+    version: 3.1.0
+  version: 0.1.10
+curl:
+  repository: CRAN
+  parent: R
+  priority: .na
+  name: curl
+  deps:
+  - name: R
+    op: '>='
+    version: 3.0.0
+  version: 0.9.6
+pvm:
+  repository: CRAN
+  parent:
+  - R
+  - yaml
+  priority: .na
+  name: pvm
+  deps:
+  - name: R
+    op: '>='
+    version: '2.10'
+  - name: yaml
+  version: 0.1.0
+formatR:
+  repository: CRAN
+  parent: R
+  priority: .na
+  name: formatR
+  deps:
+  - name: R
+    op: '>='
+    version: 3.0.2
+  version: '1.3'
+caTools:
+  repository: CRAN
+  parent:
+  - R
+  - bitops
+  priority: .na
+  name: caTools
+  deps:
+  - name: R
+    op: '>='
+    version: 2.2.0
+  - name: bitops
+  version: 1.17.1
+digest:
+  repository: CRAN
+  parent: R
+  priority: .na
+  name: digest
+  deps:
+  - name: R
+    op: '>='
+    version: 2.4.1
+  version: 0.6.9
+jpeg:
+  repository: CRAN
+  parent: R
+  priority: .na
+  name: jpeg
+  deps:
+  - name: R
+    op: '>='
+    version: 2.9.0
+  version: 0.1-8
+highr:
+  repository: CRAN
+  parent: R
+  priority: .na
+  name: highr
+  deps:
+  - name: R
+    op: '>='
+    version: 3.0.2
+  version: 0.5.1
+grid:
+  repository: CRAN
+  parent:
+  - grDevices
+  - utils
+  priority: base
+  name: grid
+  deps:
+  - name: grDevices
+  - name: utils
+  version: 3.3.2
+parallel:
+  repository: CRAN
+  parent: tools
+  priority: base
+  name: parallel
+  deps:
+  - name: tools
+  version: 3.3.2
+tcltk:
+  repository: CRAN
+  parent: utils
+  priority: base
+  name: tcltk
+  deps:
+  - name: utils
+  version: 3.3.2
+rjson:
+  repository: CRAN
+  parent: R
+  priority: .na
+  name: rjson
+  deps:
+  - name: R
+    op: '>='
+    version: 3.1.0
+  version: 0.2.15
+codetools:
+  repository: CRAN
+  parent: R
+  priority: recommended
+  name: codetools
+  deps:
+  - name: R
+    op: '>='
+    version: '2.1'
+  version: 0.2-15
+png:
+  repository: CRAN
+  parent: R
+  priority: .na
+  name: png
+  deps:
+  - name: R
+    op: '>='
+    version: 2.9.0
+  version: 0.1-7
+graphics:
+  repository: CRAN
+  parent: grDevices
+  priority: base
+  name: graphics
+  deps:
+  - name: grDevices
+  version: 3.3.2
+mime:
+  repository: CRAN
+  parent: tools
+  priority: .na
+  name: mime
+  deps:
+  - name: tools
+  version: '0.4'
+nycflights13:
+  repository: CRAN
+  parent: R
+  priority: .na
+  name: nycflights13
+  deps:
+  - name: R
+    op: '>='
+    version: 3.1.0
+  version: '0.1'
+maps:
+  repository: CRAN
+  parent:
+  - R
+  - graphics
+  - utils
+  priority: .na
+  name: maps
+  deps:
+  - name: R
+    op: '>='
+    version: 2.14.0
+  - name: graphics
+  - name: utils
+  version: 3.1.0
+markdown:
+  repository: CRAN
+  parent:
+  - R
+  - mime
+  priority: .na
+  name: markdown
+  deps:
+  - name: R
+    op: '>='
+    version: 2.11.1
+  - name: mime
+    op: '>='
+    version: '0.3'
+  version: 0.7.7
+gtable:
+  repository: CRAN
+  parent:
+  - R
+  - grid
+  priority: .na
+  name: gtable
+  deps:
+  - name: R
+    op: '>='
+    version: '2.14'
+  - name: grid
+  version: 0.2.0
+stats:
+  repository: CRAN
+  parent:
+  - utils
+  - grDevices
+  - graphics
+  priority: base
+  name: stats
+  deps:
+  - name: utils
+  - name: grDevices
+  - name: graphics
+  version: 3.3.2
+memoise:
+  repository: CRAN
+  parent: digest
+  priority: .na
+  name: memoise
+  deps:
+  - name: digest
+    op: '>='
+    version: 0.6.3
+  version: 1.0.0
+rpart:
+  repository: CRAN
+  parent:
+  - R
+  - graphics
+  - stats
+  - grDevices
+  priority: recommended
+  name: rpart
+  deps:
+  - name: R
+    op: '>='
+    version: 2.15.0
+  - name: graphics
+  - name: stats
+  - name: grDevices
+  version: 4.1-10
+KernSmooth:
+  repository: CRAN
+  parent:
+  - R
+  - stats
+  priority: recommended
+  name: KernSmooth
+  deps:
+  - name: R
+    op: '>='
+    version: 2.5.0
+  - name: stats
+  version: 2.23-15
+nnet:
+  repository: CRAN
+  parent:
+  - R
+  - stats
+  - utils
+  priority: recommended
+  name: nnet
+  deps:
+  - name: R
+    op: '>='
+    version: 2.14.0
+  - name: stats
+  - name: utils
+  version: 7.3-12
+withr:
+  repository: CRAN
+  parent:
+  - R
+  - stats
+  - graphics
+  priority: .na
+  name: withr
+  deps:
+  - name: R
+    op: '>='
+    version: 3.0.2
+  - name: stats
+  - name: graphics
+  version: 1.0.1
+spatial:
+  repository: CRAN
+  parent:
+  - R
+  - graphics
+  - stats
+  - utils
+  priority: recommended
+  name: spatial
+  deps:
+  - name: R
+    op: '>='
+    version: 3.0.0
+  - name: graphics
+  - name: stats
+  - name: utils
+  version: 7.3-11
+dichromat:
+  repository: CRAN
+  parent:
+  - R
+  - stats
+  priority: .na
+  name: dichromat
+  deps:
+  - name: R
+    op: '>='
+    version: '2.10'
+  - name: stats
+  version: 2.0-0
+stringi:
+  repository: CRAN
+  parent:
+  - R
+  - tools
+  - utils
+  - stats
+  priority: .na
+  name: stringi
+  deps:
+  - name: R
+    op: '>='
+    version: 2.13.1
+  - name: tools
+  - name: utils
+  - name: stats
+  version: 1.1.2
+methods:
+  repository: CRAN
+  parent:
+  - utils
+  - stats
+  priority: base
+  name: methods
+  deps:
+  - name: utils
+  - name: stats
+  version: 3.3.2
+lattice:
+  repository: CRAN
+  parent:
+  - R
+  - grid
+  - grDevices
+  - graphics
+  - stats
+  - utils
+  priority: recommended
+  name: lattice
+  deps:
+  - name: R
+    op: '>='
+    version: 3.0.0
+  - name: grid
+  - name: grDevices
+  - name: graphics
+  - name: stats
+  - name: utils
+  version: 0.20-34
+splines:
+  repository: CRAN
+  parent:
+  - graphics
+  - stats
+  priority: base
+  name: splines
+  deps:
+  - name: graphics
+  - name: stats
+  version: 3.3.2
+mapproj:
+  repository: CRAN
+  parent:
+  - maps
+  - stats
+  - graphics
+  priority: .na
+  name: mapproj
+  deps:
+  - name: maps
+    op: '>='
+    version: 2.3-0
+  - name: stats
+  - name: graphics
+  version: 1.2-4
+boot:
+  repository: CRAN
+  parent:
+  - R
+  - graphics
+  - stats
+  priority: recommended
+  name: boot
+  deps:
+  - name: R
+    op: '>='
+    version: 3.0.0
+  - name: graphics
+  - name: stats
+  version: 1.3-18
+cluster:
+  repository: CRAN
+  parent:
+  - R
+  - graphics
+  - grDevices
+  - stats
+  - utils
+  priority: recommended
+  name: cluster
+  deps:
+  - name: R
+    op: '>='
+    version: 3.0.1
+  - name: graphics
+  - name: grDevices
+  - name: stats
+  - name: utils
+  version: 2.0.5
+nlme:
+  repository: CRAN
+  parent:
+  - R
+  - graphics
+  - stats
+  - utils
+  - lattice
+  priority: recommended
+  name: nlme
+  deps:
+  - name: R
+    op: '>='
+    version: 3.0.2
+  - name: graphics
+  - name: stats
+  - name: utils
+  - name: lattice
+  version: 3.1-128
+DBI:
+  repository: CRAN
+  parent:
+  - R
+  - methods
+  priority: .na
+  name: DBI
+  deps:
+  - name: R
+    op: '>='
+    version: 2.15.0
+  - name: methods
+  version: 0.3.1
+colorspace:
+  repository: CRAN
+  parent:
+  - R
+  - methods
+  - graphics
+  priority: .na
+  name: colorspace
+  deps:
+  - name: R
+    op: '>='
+    version: 2.13.0
+  - name: methods
+  - name: graphics
+  version: 1.2-6
+sp:
+  repository: CRAN
+  parent:
+  - R
+  - utils
+  - stats
+  - graphics
+  - grDevices
+  - methods
+  - lattice
+  - grid
+  priority: .na
+  name: sp
+  deps:
+  - name: R
+    op: '>='
+    version: 3.0.0
+  - name: utils
+  - name: stats
+  - name: graphics
+  - name: grDevices
+  - name: methods
+  - name: lattice
+  - name: grid
+  version: 1.2-2
+rappdirs:
+  repository: CRAN
+  parent:
+  - R
+  - methods
+  priority: .na
+  name: rappdirs
+  deps:
+  - name: R
+    op: '>='
+    version: '2.14'
+  - name: methods
+  version: 0.3.1
+stringr:
+  repository: CRAN
+  parent:
+  - R
+  - stringi
+  - magrittr
+  priority: .na
+  name: stringr
+  deps:
+  - name: R
+    op: '>='
+    version: '2.14'
+  - name: stringi
+    op: '>='
+    version: 0.4.1
+  - name: magrittr
+  version: 1.1.0
+foreign:
+  repository: CRAN
+  parent:
+  - R
+  - methods
+  - utils
+  - stats
+  priority: recommended
+  name: foreign
+  deps:
+  - name: R
+    op: '>='
+    version: 3.0.0
+  - name: methods
+  - name: utils
+  - name: stats
+  version: 0.8-67
+jsonlite:
+  repository: CRAN
+  parent: methods
+  priority: .na
+  name: jsonlite
+  deps:
+  - name: methods
+  version: 0.9.19
+RCurl:
+  repository: CRAN
+  parent:
+  - R
+  - methods
+  - bitops
+  priority: .na
+  name: RCurl
+  deps:
+  - name: R
+    op: '>='
+    version: 3.0.0
+  - name: methods
+  - name: bitops
+  version: 1.95-4.8
+Matrix:
+  repository: CRAN
+  parent:
+  - R
+  - methods
+  - graphics
+  - grid
+  - stats
+  - utils
+  - lattice
+  priority: recommended
+  name: Matrix
+  deps:
+  - name: R
+    op: '>='
+    version: 3.0.1
+  - name: methods
+  - name: graphics
+  - name: grid
+  - name: stats
+  - name: utils
+  - name: lattice
+  version: 1.2-7.1
+Rcpp:
+  repository: CRAN
+  parent:
+  - R
+  - methods
+  - utils
+  priority: .na
+  name: Rcpp
+  deps:
+  - name: R
+    op: '>='
+    version: 3.0.0
+  - name: methods
+  - name: utils
+  version: 0.12.4
+MASS:
+  repository: CRAN
+  parent:
+  - R
+  - grDevices
+  - graphics
+  - stats
+  - utils
+  - methods
+  priority: recommended
+  name: MASS
+  deps:
+  - name: R
+    op: '>='
+    version: 3.1.0
+  - name: grDevices
+  - name: graphics
+  - name: stats
+  - name: utils
+  - name: methods
+  version: 7.3-45
+RJSONIO:
+  repository: CRAN
+  parent: methods
+  priority: .na
+  name: RJSONIO
+  deps:
+  - name: methods
+  version: 1.3-0
+crayon:
+  repository: CRAN
+  parent:
+  - memoise
+  - grDevices
+  - methods
+  - utils
+  priority: .na
+  name: crayon
+  deps:
+  - name: memoise
+  - name: grDevices
+  - name: methods
+  - name: utils
+  version: 1.3.1
+stats4:
+  repository: CRAN
+  parent:
+  - graphics
+  - methods
+  - stats
+  priority: base
+  name: stats4
+  deps:
+  - name: graphics
+  - name: methods
+  - name: stats
+  version: 3.3.2
+XML:
+  repository: CRAN
+  parent:
+  - R
+  - methods
+  - utils
+  priority: .na
+  name: XML
+  deps:
+  - name: R
+    op: '>='
+    version: 2.13.0
+  - name: methods
+  - name: utils
+  version: 3.98-1.4
+filehash:
+  repository: CRAN
+  parent:
+  - R
+  - methods
+  priority: .na
+  name: filehash
+  deps:
+  - name: R
+    op: '>='
+    version: 3.0.0
+  - name: methods
+  version: '2.3'
+httr:
+  repository: CRAN
+  parent:
+  - R
+  - jsonlite
+  - mime
+  - curl
+  - openssl
+  - R6
+  priority: .na
+  name: httr
+  deps:
+  - name: R
+    op: '>='
+    version: 3.0.0
+  - name: jsonlite
+  - name: mime
+  - name: curl
+    op: '>='
+    version: 0.9.1
+  - name: openssl
+    op: '>='
+    version: '0.8'
+  - name: R6
+  version: 1.1.0
+docopt:
+  repository: CRAN
+  parent:
+  - methods
+  - stringr
+  priority: .na
+  name: docopt
+  deps:
+  - name: methods
+  - name: stringr
+  version: 0.4.5
+mgcv:
+  repository: CRAN
+  parent:
+  - R
+  - nlme
+  - methods
+  - stats
+  - graphics
+  - Matrix
+  priority: recommended
+  name: mgcv
+  deps:
+  - name: R
+    op: '>='
+    version: 2.14.0
+  - name: nlme
+    op: '>='
+    version: 3.1-64
+  - name: methods
+  - name: stats
+  - name: graphics
+  - name: Matrix
+  version: 1.8-16
+xml2:
+  repository: CRAN
+  parent:
+  - R
+  - Rcpp
+  - Rcpp
+  - BH
+  priority: .na
+  name: xml2
+  deps:
+  - name: R
+    op: '>='
+    version: 3.1.0
+  - name: Rcpp
+  - name: Rcpp
+    op: '>='
+    version: 0.11.4.6
+  - name: BH
+  version: 0.1.2
+readr:
+  repository: CRAN
+  parent:
+  - R
+  - Rcpp
+  - curl
+  - Rcpp
+  - BH
+  priority: .na
+  name: readr
+  deps:
+  - name: R
+    op: '>='
+    version: 3.0.2
+  - name: Rcpp
+    op: '>='
+    version: 0.11.5
+  - name: curl
+  - name: Rcpp
+  - name: BH
+  version: 0.2.2
+htmltools:
+  repository: CRAN
+  parent:
+  - R
+  - utils
+  - digest
+  - Rcpp
+  priority: .na
+  name: htmltools
+  deps:
+  - name: R
+    op: '>='
+    version: 2.14.1
+  - name: utils
+  - name: digest
+  - name: Rcpp
+  version: 0.3.5
+RSQLite:
+  repository: CRAN
+  parent:
+  - R
+  - DBI
+  - methods
+  priority: .na
+  name: RSQLite
+  deps:
+  - name: R
+    op: '>='
+    version: 2.10.0
+  - name: DBI
+    op: '>='
+    version: 0.3.1
+  - name: methods
+  version: 1.0.0
+tikzDevice:
+  repository: CRAN
+  parent:
+  - R
+  - filehash
+  - png
+  priority: .na
+  name: tikzDevice
+  deps:
+  - name: R
+    op: '>='
+    version: 2.14.0
+  - name: filehash
+    op: '>='
+    version: '2.3'
+  - name: png
+  version: 0.10-1
+dplyr:
+  repository: CRAN
+  parent:
+  - R
+  - assertthat
+  - utils
+  - R6
+  - Rcpp
+  - magrittr
+  - lazyeval
+  - DBI
+  - Rcpp
+  - BH
+  priority: .na
+  name: dplyr
+  deps:
+  - name: R
+    op: '>='
+    version: 3.1.2
+  - name: assertthat
+  - name: utils
+  - name: R6
+  - name: Rcpp
+  - name: magrittr
+  - name: lazyeval
+    op: '>='
+    version: 0.1.10
+  - name: DBI
+    op: '>='
+    version: '0.3'
+  - name: Rcpp
+    op: '>='
+    version: 0.12.0
+  - name: BH
+    op: '>='
+    version: 1.58.0-1
+  version: 0.4.3
+geosphere:
+  repository: CRAN
+  parent:
+  - sp
+  - R
+  priority: .na
+  name: geosphere
+  deps:
+  - name: sp
+  - name: R
+    op: '>='
+    version: 2.10.0
+  version: 1.5-1
+munsell:
+  repository: CRAN
+  parent:
+  - colorspace
+  - methods
+  priority: .na
+  name: munsell
+  deps:
+  - name: colorspace
+  - name: methods
+  version: 0.4.3
+plyr:
+  repository: CRAN
+  parent:
+  - R
+  - Rcpp
+  - Rcpp
+  priority: .na
+  name: plyr
+  deps:
+  - name: R
+    op: '>='
+    version: 3.1.0
+  - name: Rcpp
+    op: '>='
+    version: 0.11.0
+  - name: Rcpp
+  version: 1.8.3
+googleVis:
+  repository: CRAN
+  parent:
+  - R
+  - methods
+  - RJSONIO
+  - utils
+  priority: .na
+  name: googleVis
+  deps:
+  - name: R
+    op: '>='
+    version: 3.0.2
+  - name: methods
+  - name: RJSONIO
+  - name: utils
+  version: 0.5.10
+evaluate:
+  repository: CRAN
+  parent:
+  - R
+  - methods
+  - stringr
+  priority: .na
+  name: evaluate
+  deps:
+  - name: R
+    op: '>='
+    version: 3.0.2
+  - name: methods
+  - name: stringr
+    op: '>='
+    version: 0.6.2
+  version: 0.8.3
+httpuv:
+  repository: CRAN
+  parent:
+  - R
+  - methods
+  - Rcpp
+  - utils
+  - Rcpp
+  priority: .na
+  name: httpuv
+  deps:
+  - name: R
+    op: '>='
+    version: 2.15.1
+  - name: methods
+  - name: Rcpp
+    op: '>='
+    version: 0.11.0
+  - name: utils
+  - name: Rcpp
+  version: 1.3.3
+testthat:
+  repository: CRAN
+  parent:
+  - R
+  - methods
+  - digest
+  - crayon
+  - praise
+  priority: .na
+  name: testthat
+  deps:
+  - name: R
+    op: '>='
+    version: 3.1.0
+  - name: methods
+  - name: digest
+  - name: crayon
+  - name: praise
+  version: 0.11.0
+RgoogleMaps:
+  repository: CRAN
+  parent:
+  - R
+  - graphics
+  - stats
+  - utils
+  - png
+  - RJSONIO
+  priority: .na
+  name: RgoogleMaps
+  deps:
+  - name: R
+    op: '>='
+    version: '2.10'
+  - name: graphics
+  - name: stats
+  - name: utils
+  - name: png
+  - name: RJSONIO
+  version: 1.2.0.7
+class:
+  repository: CRAN
+  parent:
+  - R
+  - stats
+  - utils
+  - MASS
+  priority: recommended
+  name: class
+  deps:
+  - name: R
+    op: '>='
+    version: 3.0.0
+  - name: stats
+  - name: utils
+  - name: MASS
+  version: 7.3-14
+survival:
+  repository: CRAN
+  parent:
+  - R
+  - graphics
+  - Matrix
+  - methods
+  - splines
+  - stats
+  - utils
+  priority: recommended
+  name: survival
+  deps:
+  - name: R
+    op: '>='
+    version: 2.13.0
+  - name: graphics
+  - name: Matrix
+  - name: methods
+  - name: splines
+  - name: stats
+  - name: utils
+  version: 2.40-1
+scales:
+  repository: CRAN
+  parent:
+  - R
+  - RColorBrewer
+  - dichromat
+  - plyr
+  - munsell
+  - labeling
+  - methods
+  - Rcpp
+  priority: .na
+  name: scales
+  deps:
+  - name: R
+    op: '>='
+    version: '2.13'
+  - name: RColorBrewer
+  - name: dichromat
+  - name: plyr
+  - name: munsell
+    op: '>='
+    version: '0.2'
+  - name: labeling
+  - name: methods
+  - name: Rcpp
+  version: 0.4.0
+swirl:
+  repository: CRAN
+  parent:
+  - R
+  - stringr
+  - stringi
+  - testthat
+  - httr
+  - yaml
+  - RCurl
+  - digest
+  - tools
+  - utils
+  - methods
+  priority: .na
+  name: swirl
+  deps:
+  - name: R
+    op: '>='
+    version: 3.0.2
+  - name: stringr
+  - name: stringi
+  - name: testthat
+  - name: httr
+    op: '>='
+    version: 1.1.0
+  - name: yaml
+  - name: RCurl
+  - name: digest
+  - name: tools
+  - name: utils
+  - name: methods
+  version: 101.3.1-8
+knitr:
+  repository: CRAN
+  parent:
+  - R
+  - evaluate
+  - digest
+  - formatR
+  - highr
+  - markdown
+  - stringr
+  - yaml
+  - methods
+  - tools
+  priority: .na
+  name: knitr
+  deps:
+  - name: R
+    op: '>='
+    version: 3.0.2
+  - name: evaluate
+    op: '>='
+    version: '0.8'
+  - name: digest
+  - name: formatR
+  - name: highr
+  - name: markdown
+  - name: stringr
+    op: '>='
+    version: '0.6'
+  - name: yaml
+    op: '>='
+    version: 2.1.5
+  - name: methods
+  - name: tools
+  version: 1.12.3
+reshape2:
+  repository: CRAN
+  parent:
+  - plyr
+  - stringr
+  - Rcpp
+  priority: .na
+  name: reshape2
+  deps:
+  - name: plyr
+    op: '>='
+    version: 1.8.1
+  - name: stringr
+  - name: Rcpp
+  version: 1.4.1
+reshape:
+  repository: CRAN
+  parent:
+  - R
+  - plyr
+  priority: .na
+  name: reshape
+  deps:
+  - name: R
+    op: '>='
+    version: 2.6.1
+  - name: plyr
+  version: 0.8.5
+slidify:
+  repository: CRAN
+  parent:
+  - R
+  - knitr
+  - markdown
+  - stringr
+  - yaml
+  - whisker
+  priority: .na
+  name: slidify
+  deps:
+  - name: R
+    op: '>='
+    version: 2.15.0
+  - name: knitr
+    op: '>='
+    version: 1.0.0
+  - name: markdown
+  - name: stringr
+    op: '>='
+    version: 1.0.0
+  - name: yaml
+  - name: whisker
+  version: '0.5'
+rmarkdown:
+  repository: CRAN
+  parent:
+  - R
+  - tools
+  - utils
+  - grDevices
+  - knitr
+  - yaml
+  - htmltools
+  - caTools
+  priority: .na
+  name: rmarkdown
+  deps:
+  - name: R
+    op: '>='
+    version: '3.0'
+  - name: tools
+  - name: utils
+  - name: grDevices
+  - name: knitr
+    op: '>='
+    version: '1.11'
+  - name: yaml
+    op: '>='
+    version: 2.1.5
+  - name: htmltools
+    op: '>='
+    version: 0.2.4
+  - name: caTools
+  version: 0.9.5
+ggplot2:
+  repository: CRAN
+  parent:
+  - R
+  - digest
+  - grid
+  - gtable
+  - MASS
+  - plyr
+  - reshape2
+  - scales
+  - stats
+  priority: .na
+  name: ggplot2
+  deps:
+  - name: R
+    op: '>='
+    version: '3.1'
+  - name: digest
+  - name: grid
+  - name: gtable
+    op: '>='
+    version: 0.1.1
+  - name: MASS
+  - name: plyr
+    op: '>='
+    version: 1.7.1
+  - name: reshape2
+  - name: scales
+    op: '>='
+    version: 0.3.0
+  - name: stats
+  version: 2.1.0
+GGally:
+  repository: CRAN
+  parent:
+  - R
+  - ggplot2
+  - grid
+  - gtable
+  - plyr
+  - reshape
+  priority: .na
+  name: GGally
+  deps:
+  - name: R
+    op: '>='
+    version: '2.14'
+  - name: ggplot2
+    op: '>='
+    version: 2.0.0
+  - name: grid
+    op: '>='
+    version: 3.0.0
+  - name: gtable
+    op: '>='
+    version: 0.1.2
+  - name: plyr
+    op: '>='
+    version: '1.8'
+  - name: reshape
+    op: '>='
+    version: 0.8.4
+  version: 1.0.1
+ggmap:
+  repository: CRAN
+  parent:
+  - R
+  - ggplot2
+  - proto
+  - RgoogleMaps
+  - png
+  - plyr
+  - reshape2
+  - rjson
+  - mapproj
+  - jpeg
+  - geosphere
+  - digest
+  - scales
+  priority: .na
+  name: ggmap
+  deps:
+  - name: R
+    op: '>='
+    version: 2.14.0
+  - name: ggplot2
+    op: '>='
+    version: 2.0.0
+  - name: proto
+  - name: RgoogleMaps
+  - name: png
+  - name: plyr
+  - name: reshape2
+  - name: rjson
+  - name: mapproj
+  - name: jpeg
+  - name: geosphere
+  - name: digest
+  - name: scales
+  version: 2.6.1
+
