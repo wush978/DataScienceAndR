@@ -34,7 +34,7 @@ base:
   name: base
   version: 3.3.2
 slidifyLibraries:
-  repository: CRAN
+  repository: github::wush978/slidifyLibraries
   priority: .na
   name: slidifyLibraries
   version: 0.3.1.1
@@ -1213,7 +1213,7 @@ scales:
   - name: Rcpp
   version: 0.4.0
 swirl:
-  repository: CRAN
+  repository: github::wush978/swirl#master
   parent:
   - R
   - stringr
@@ -1309,7 +1309,7 @@ reshape:
   - name: plyr
   version: 0.8.5
 slidify:
-  repository: CRAN
+  repository: github::wush978/slidify
   parent:
   - R
   - knitr
