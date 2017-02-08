@@ -1,0 +1,212 @@
+---
+title       : "R語言翻轉教室前備知識：Programming"
+author      : "Wush Wu"
+job         : Taiwan R User Group
+framework   : io2012-wush
+highlighter : highlight.js
+hitheme     : zenburn
+widgets     : []            # {mathjax, quiz, bootstrap}
+mode        : selfcontained # {standalone, draft}
+knit        : slidify::knit2slides
+--- &vcenter .largecontent
+
+```{r setup, include=FALSE, cache=FALSE}
+library(knitr)
+library(magrittr)
+opts_chunk$set(echo = FALSE, cache=FALSE, comment="", 
+               cache.path = "cache-RProgramming-Intro/", 
+               dev.args=list(bg="transparent"),
+               fig.path = "./assets/fig/rprogramming-intro-")
+fig <- function(path, size = 100) {
+  sprintf("<img src='assets/img/%s' style='max-width: %d%%;max-height: %d%%'></img>", 
+          path, size, size)
+}
+bg <- function(path) sprintf("bg:url(assets/img/%s)", path)
+```
+
+## 大綱
+
+1. 資料科學與程式能力
+1. 如何自學程式
+    1. 程式是什麼？（以應用的觀點）
+    1. Divide and Conquer
+    1. 程式是工具
+    1. 自學程式
+1. 自學翻轉教室
+
+--- .dark .segue
+
+## 資料科學與程式能力
+
+--- &fullimg `r bg("Data_Science_VD.png")`
+
+<http://www.forbes.com>
+
+--- &fullimg `r bg("programming-not-main-role.png")`
+
+--- &fullimg `r bg("programming-not-god.png")`
+
+--- &fullimg `r bg("how-to-do.png")`
+
+--- &vcenter .largecontent
+
+## 我們必須要能夠「自學」
+
+- 程式的能力要符合分析上的需求
+    - 但是程式能力點太高對分析的幫助很少
+- 沒有人知道你需要多強的程式能力
+    - 你也不知道你明天會遇到什麼問題
+- 自學是唯一的辦法
+
+--- &vcenter .largecontent
+
+## 程式的學習能力分級
+
+1. 程式是什麼？能吃嗎？找學生/助理/外包廠商來做就好啦！
+1. Copy Paste
+1. Search + Copy Paste
+1. Search + Copy Paste + 修改
+1. 從教學中學習（如：書本、講義、線上資源與翻轉教室）
+1. 從別人的程式碼中學習
+1. 從工具的原始碼中學習
+
+--- &twocol .largecontent
+
+## 大家來投票吧！
+
+*** =left
+
+<center>`r fig("static_qr_code_without_logo.jpg", 100)`</center>
+
+*** =right
+
+<iframe src="http://qstn.co/q/7nFYcny4"></iframe>
+
+--- &fullimg `r bg("self-learning-from-dsr.png")`
+
+--- .dark .segue
+
+## 什麼是(R的)程式？
+
+--- &vcenter .largecontent
+
+## 程式讓機器「一步一步」執行特定的「動作」
+
+- 「一步一步」：流程控制
+- 「動作」：函數
+- 我們的目標：只要會這些就夠了！
+
+--- &twocol .largecontent
+
+## 什麼是「一步一步」的「動作」？
+
+這是一個讀取資料跑迴歸分析的程式
+
+*** =left
+
+- 讀取資料(?)
+- 根據資料計算回歸分析(?)
+- 輸出報表到螢幕
+
+*** =right
+
+```r
+df <- read.csv(...)
+g <- lm(~ ., df)
+summary(g)
+```
+
+--- &vcenter .largecontent
+
+## 程式的細節是魔鬼
+
+- （目前的）電腦沒辦法腦補細節
+- 我們必須要能把細節講清楚
+    - 所有的電腦都會提供一組基本的動作
+    - 我們定義的操作必須要能夠以基本的動作來定義
+- 各種工具都提供了更「高階」的動作
+    - 我們只需要以該「高階」的動作來定義我們要的操作
+
+--- &vcenter .largecontent
+
+## 何謂「基本動作」？範例：CPU指令集
+
+以下是電腦提供的基本動作：
+
+- 設定[Register](https://en.wikipedia.org/wiki/Processor_register)得值為某個常數
+- 拿兩個[Register](https://en.wikipedia.org/wiki/Processor_register)得值做加法或減法
+- 改變「動作」執行的順序
+
+--- &vcenter .largecontent
+
+## 何謂「細節」？範例：R 的函數與參數
+
+- 函數：動作
+- 參數：調整動作
+
+```{r, eval = FALSE, echo = TRUE}
+args(read.csv)
+```
+```r
+function (file, header = TRUE, sep = ",", quote = "\"", dec = ".", 
+    fill = TRUE, comment.char = "", ...) 
+```
+
+--- &vcenter .largecontent
+
+## 程式的細節是魔鬼
+
+```r
+df <- read.csv(...)
+```
+
+- 資料結構
+    - `read.csv`的參數有很多，各別是什麼？
+    - `df`會是什麼？
+- 初學者在實務上使用「函數」時很容易遇到各種錯誤
+    - 而且還看不懂錯誤訊息！
+
+<font color="red">Error in file(file, "rt") : 無法開啟連結 </font>
+
+--- &vcenter .largecontent
+
+## 如何上手？
+
+- 基本功跑不掉，請耐著性子撐過去
+- 
+
+--- &vcenter .largecontent
+
+## 程式的變數是什麼意思？
+
+- 文字本身的意思
+- 文字在程式碼之中的雙重意思
+
+--- &vcenter .largecontent
+
+
+
+--- &vcenter .largecontent
+
+## 如何從簡單的動作變成複雜的程式？
+
+- Divide
+- Conquer
+- Combine
+
+--- &vcenter .largecontent
+
+## 範例：監控價格
+
+--- &vcenter .largecontent
+
+## 範例：訂購自動化
+
+--- &vcenter .largecontent
+
+## 範例：股價預測（非實用性）
+
+--- &vcenter .largecontent
+
+## 
+
