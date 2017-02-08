@@ -123,14 +123,6 @@ window.onload =function(){
 
 <div class="well" style="height: 14em;"><ul id="records"></ul></div>
 
-## 線上體驗區（需參加實體課程）
-
-請有參加實體課程的同學打開： <http://server.datascienceandr.org:28787>
-
-並依照課堂上給的帳號密碼登入。
-
-有興趣的同學也歡迎聯繫我們（無論是在聊天室或是來信：[wush@datascienceandr.org](mailto:wush@datascienceandr.org)），取得線上體驗的帳號密碼。
-
 ## 快速安裝區
 
 同學可以參考以下的上手影片：
