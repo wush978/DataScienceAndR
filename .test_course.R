@@ -24,6 +24,7 @@ test_lesson = function(lesson_dir){
       R_file_path = paste0(lesson_dir, R_file)
       if(file.exists(R_file_path)) source(R_file_path,local = e)
     }
+    options(repos = c(CRAN = "http://cloud.r-project.org/"))
     
     for(.i in seq_along(lesson)) {
       question <- lesson[[.i]]
@@ -97,6 +98,7 @@ for(course in setdiff(course_list, result$course)) {
   result <- rbind(result, data.frame(course = course, result = FALSE, hash = "", stringsAsFactors = FALSE))
 }
 
+## test current setting
 for(course in course_list) {
   course.result <- result[course == result$course,]
   ## check result
@@ -128,4 +130,3 @@ for(course in course_list) {
   result$result[result$course == course] <- TRUE
   write.csv(result, file = result.path, row.names = FALSE)
 }
-
