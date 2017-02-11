@@ -12,6 +12,8 @@ install:
 # Adapt as necessary starting from here
 
 build_script:
+  - Rscript -e "install.packages('remotes')"
+  - Rscript -e "remotes::install_github('wush978/swirlify@master')"
   - Rscript -e "install.packages(c('stringr','testthat','httr','yaml','RCurl','digest','tools','rappdirs'), repos = 'http://wush978.github.io/R')"
   - Rscript -e "install.packages(c('swirl'), repos = c('http://wush978.github.io/R'))"
 

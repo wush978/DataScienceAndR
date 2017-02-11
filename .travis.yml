@@ -1,22 +1,50 @@
-language: c
-
-sudo: true
-
-script:
-  - Rscript -e "library(swirlify);set_lesson('00-Hello-DataScienceAndR/lesson.yml');source('.transform.R');transform_all()"
-  - Rscript .test_course.R push
-
-after_failure:
-  - ./travis-tool.sh dump_logs
-
-before_install:
-  - curl -OL http://raw.github.com/craigcitro/r-travis/master/scripts/travis-tool.sh
-  - chmod 755 ./travis-tool.sh
-  - ./travis-tool.sh bootstrap
+language: r
+sudo: false
+latex: false
 
 install:
-  - sudo apt-get install -y libcurl4-openssl-dev libssl-dev libxml2-dev
+  - Rscript -e "install.packages('remotes')"
+  - Rscript -e "remotes::install_github('wush978/swirlify@master')"
   - Rscript -e "source('http://wush978.github.io/R/init-swirl.R')"
+
+matrix:
+  include:
+    - r: oldrel
+      os: linux
+      script:
+        - Rscript .test_course.R push
+      addons: 
+        apt:
+          packages:
+            - libxml2-dev
+            - libcurl4-openssl-dev 
+            - libssl-dev
+    - r: release
+      os: linux
+      script:
+        - Rscript -e "library(swirlify);set_lesson('00-Hello-DataScienceAndR/lesson.yml');source('.transform.R');transform_all()"
+        - Rscript .test_course.R push
+      addons: 
+        apt:
+          packages:
+            - libxml2-dev
+            - libcurl4-openssl-dev 
+            - libssl-dev
+    - r: release
+      os: linux
+      script:
+        - Rscript .test_course.R push
+      addons: 
+        apt:
+          packages:
+            - libxml2-dev
+            - libcurl4-openssl-dev 
+            - libssl-dev
+    - r: release
+      os: osx
+      script:
+      - Rscript .test_course.R push
+    
 
 notifications:
   email:
@@ -29,8 +57,3 @@ notifications:
     on_failure: always  # options: [always|never|change] default: always
     on_start: never     # options: [always|never|change] default: always
 
-env:
-  - global:
-    - WARNINGS_ARE_ERRORS=1
-    - _R_CHECK_FORCE_SUGGESTS_=0
-    - BOOTSTRAP_LATEX=0
