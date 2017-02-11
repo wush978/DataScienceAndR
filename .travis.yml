@@ -22,6 +22,8 @@ matrix:
     - r: release
       os: linux
       script:
+        - ls
+        - ls DataScienceAndR
         - Rscript -e "library(swirlify);set_lesson('00-Hello-DataScienceAndR/lesson.yml');source('.transform.R');transform_all()"
         - Rscript .test_course.R push
       addons: 
