@@ -23,7 +23,7 @@ matrix:
       os: linux
       script:
         - ls 00-Hello-DataScienceAndR
-        - ls && Rscript -e "library(swirlify);set_lesson('00-Hello-DataScienceAndR/lesson.yml');source('.transform.R');transform_all()"
+        - ls && Rscript -e "print(getwd());library(swirlify);set_lesson(file.path(getwd(), '00-Hello-DataScienceAndR', 'lesson.yml'));source('.transform.R');transform_all()"
         - Rscript .test_course.R push
       addons: 
         apt:
