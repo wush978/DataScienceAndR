@@ -8,36 +8,34 @@
 
 - Class: text
   Output: |
-    能夠讀到這段中文字的同學，可以直接輸入enter進入。
+    讀到這段中文字的同學，請直接輸入enter進入課程。
     If you are windows user and you cannot read the chinese characters, please
     press `ESC` to exit swirl and execute the command `Sys.setlocale(locale = "cht")`. 
 
 - Class: text
   Output: |
-    這個課程的目的是為了測試同學的環境是否正常，能否進行本教材。
-    測試之後，我們會跟同學說明本教材提供的一些功能。在課程進行中，
-    同學如果看到最後有：`...`，代表這是一個說明關卡，在閱讀說明
-    文字之後可以輸入enter進入下一個關卡。
+    本課程的目的是為了測試同學的環境是否正常，能否進行本教材。
+    完成測試之後，會進一步跟同學說明本教材的部分功能，
+    在課程進行中，如果看到最後格式如：`...`的部分，代表該部分是一個說明關卡。
+    上述說明文字閱讀完畢後，請輸入enter進入下一個關卡。
 
 - Class: text
   Output: |
-    課程進行時，我們會請同學在R 的console（就是有`>`開頭的區塊）中輸入指令。
-    需要輸入的程式碼，我們會在兩邊用``來包覆。
+    課程進行時，會請同學在R 的console（即開頭為`>`的區塊）中輸入指令。
+    而需要輸入的程式碼，則會在內容兩端用``符號來包覆。
 
 - Class: cmd_question
   Output: |
-    這是一個需要輸入指令來過關的關卡。請同學在螢幕上輸入：`skip()`來過關。
-    本關卡會檢查swirl的套件版本，如果版本不夠新，請同學重新啟動R後，輸入：
-    `source("http://wush978.github.io/R/init-swirl.R")`來
-    更新swirl套件，並更新課程內容。
+    本關卡會檢查swirl的套件版本。這是一個需要輸入指令來過關的關卡，請同學在螢幕上輸入：`skip()`來過關。
+    如果版本不夠新，請同學重新啟動R後，輸入：`source("http://wush978.github.io/R/init-swirl.R")`更新swirl套件，並更新課程內容。
   CorrectAnswer: packageVersion("swirl")
   AnswerTests: check_version()
 
 - Class: text
   Output: |
-    課程進行中，同學都可以輸入`skip()`來看答案並跳過卡住的關卡。如果因為
+    課程進行中，同學都可以輸入`skip()`來看答案並跳過卡住的關卡。若是
     變數已經受到污染，導致連`skip()`都無法過關時，請同學輸入：`swirl()`
-    進行接關，甚至是重新開啟R 後載入swirl套件後輸入`swirl()`接關。如果
+    以接續進行下一關，甚至是重新開啟R 後載入swirl套件後輸入`swirl()`接關。如果
     仍然無法排除，請求助。
 
 - Class: cmd_question
