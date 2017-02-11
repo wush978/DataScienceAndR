@@ -8,7 +8,7 @@
 
 - Class: text
   Output: |
-    能夠讀到這段中文字的同學，可以直接輸入enter進入下一個關卡。
+    能夠讀到這段中文字的同學，可以直接輸入enter進入。
     If you are windows user and you cannot read the chinese characters, please
     press `ESC` to exit swirl and execute the command `Sys.setlocale(locale = "cht")`. 
 
