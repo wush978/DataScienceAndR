@@ -15,7 +15,7 @@
 - Class: text
   Output: |
     本課程的目的是為了測試同學的環境是否正常，能否進行本教材。
-    完成測試之後，會進一步跟同學說明本教材的部分功能，
+    完成測試之後，會進一步說明本教材的部分功能，
     在課程進行中，如果看到最後格式如：`...`的部分，代表該部分是一個說明關卡。
     上述說明文字閱讀完畢後，請輸入enter進入下一個關卡。
 
@@ -26,32 +26,30 @@
 
 - Class: cmd_question
   Output: |
-    本關卡會檢查swirl的套件版本。這是一個需要輸入指令來過關的關卡，請同學在螢幕上輸入：`skip()`來過關。
-    如果版本不夠新，請同學重新啟動R後，輸入：`source("http://wush978.github.io/R/init-swirl.R")`更新swirl套件，並更新課程內容。
+    本關卡會檢查swirl的套件版本。這是一個需要輸入指令來過關的關卡，請在螢幕上輸入：`skip()`來過關。
+    如果版本需要更新，請同學重新啟動R後，輸入：`source("http://wush978.github.io/R/init-swirl.R")`更新swirl套件以及課程內容。
   CorrectAnswer: packageVersion("swirl")
   AnswerTests: check_version()
 
 - Class: text
   Output: |
-    課程進行中，同學都可以輸入`skip()`來看答案並跳過卡住的關卡。若是
-    變數已經受到污染，導致連`skip()`都無法過關時，請同學輸入：`swirl()`
-    以接續進行下一關，甚至是重新開啟R 後載入swirl套件後輸入`swirl()`接關。如果
-    仍然無法排除，請求助。
+    課程中，可以輸入`skip()`來看答案並跳過卡住的關卡。
+    若是變數已經受到污染，以至於上述方式無法跳過關卡時，請改為輸入：`swirl()`以接續進行下一關。
+    有時需要重新開啟R，載入swirl套件後，輸入`swirl()`接續下一關。
+    如果上述方法嘗試之後仍然無法排除，請求助。
 
 - Class: cmd_question
   Output: |
-    請同學在console中輸入：`chat()`。同學必需要輸入一樣的指令才會
-    過關。這個指令則能讓同學打開聊天室的網頁。只要註冊github帳戶
-    （<https://github.com/join>）之後，就可以在這個聊天室之中求救。
+    請在console中輸入：`chat()`。此部分必需要輸入一樣的指令才會過關。
+    這個指令能打開聊天室的網頁。註冊github帳戶（<https://github.com/join>）之後，即可在這個聊天室之中求助。
   CorrectAnswer: chat()
 
 - Class: script
   Output: |
-    請同學確認，Rstudio是否有打開一個名稱為「test-script.R」的檔案，
-    並且裡面已經有：「# 這是測試功能的檔案」等字眼？如果同學沒辦法看到中文，請依序點
-    選Rstudio左上角的File -> Reopen With Encoding... -> 選取：UTF-8。如果使用Windows
-    的同學打開的檔案沒有任何文字，請使用非中文的使用者帳號進行課程。（不好意思，
-    目前我們仍然沒有好的解決方法，只能麻煩同學切換帳號）
+    請確認Rstudio是否有打開一個名稱為「test-script.R」的檔案，並且已經有：「# 這是測試功能的檔案」等字眼。
+    如果同學沒辦法看到中文，請依序點選Rstudio左上角的File -> Reopen With Encoding... -> 選取：UTF-8。如果使用Windows
+    的同學打開的檔案沒有任何文字，請使用非中文的使用者帳號進行課程。
+    （不好意思，目前我們仍然沒有好的解決方法，只能麻煩同學切換帳號）
   Script: test-script.R
   AnswerTests: check_version()
 
