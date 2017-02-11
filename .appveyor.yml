@@ -12,13 +12,10 @@ install:
 # Adapt as necessary starting from here
 
 build_script:
-  - Rscript -e "install.packages('remotes')"
-  - Rscript -e "remotes::install_github('wush978/swirlify@master')"
   - Rscript -e "install.packages(c('stringr','testthat','httr','yaml','RCurl','digest','tools','rappdirs'), repos = 'http://wush978.github.io/R')"
   - Rscript -e "install.packages(c('swirl'), repos = c('http://wush978.github.io/R'))"
 
 test_script:
-  - Rscript -e "library(swirlify);set_lesson('00-Hello-DataScienceAndR/lesson.yaml');source('.transform.R');transform_all()"
   - Rscript .test_course.R push
 
 on_failure:
