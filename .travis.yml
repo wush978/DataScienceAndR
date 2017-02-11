@@ -2,7 +2,8 @@ language: c
 
 sudo: true
 
-script: 
+script:
+  - Rscript -e "library(swirlify);set_lesson('00-Hello-DataScienceAndR/lesson.yml');source('.transform.R');transform_all()"
   - Rscript .test_course.R push
 
 after_failure:
