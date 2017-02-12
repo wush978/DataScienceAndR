@@ -40,38 +40,38 @@
 
 - Class: cmd_question
   Output: |
-    請在console中輸入：`chat()`。此部分必需要輸入一樣的指令才會過關。
+    請在console中輸入：`chat()`。此部分必需要輸入與上述一樣的指令才會過關。
     這個指令能打開聊天室的網頁。註冊github帳戶（<https://github.com/join>）之後，即可在這個聊天室之中求助。
   CorrectAnswer: chat()
 
 - Class: script
   Output: |
-    請確認Rstudio是否有打開一個名稱為「test-script.R」的檔案，並且已經有：「# 這是測試功能的檔案」等字眼。
-    如果同學沒辦法看到中文，請依序點選Rstudio左上角的File -> Reopen With Encoding... -> 選取：UTF-8。如果使用Windows
-    的同學打開的檔案沒有任何文字，請使用非中文的使用者帳號進行課程。
-    （不好意思，目前我們仍然沒有好的解決方法，只能麻煩同學切換帳號）
+    請確認Rstudio是否開啟名稱為「test-script.R」的檔案，並且已經顯示：「# 這是測試功能的檔案」等字眼。
+    如果無法看到中文，請依序點選Rstudio左上角的File -> Reopen With Encoding... -> 選取：UTF-8。
+    使用Windows的同學，如果打開的檔案後無法看到文字，請改由使用非中文的使用者帳號進行課程。
+    （針對此問題，目前尚沒有更好的解決方法，麻煩遇到此問題的同學切換帳號後，繼續進行課程）
   Script: test-script.R
   AnswerTests: check_version()
 
 - Class: text
   Output: |
-    提醒同學，未來進行課程時，編輯的文件都會在重新啟動R之後消失。同學如果有需要，
-    請自行留存副本。官方網站：<http://www.datascienceandr.org>中也有參考答案。
+    提醒同學，進行接下來的課程時，所有編輯中的文件將會在重新啟動R之後消失。
+    如果有需要，請同學自行留存副本。官方網站：<http://www.datascienceandr.org>中也有答案供參考。
 
 - Class: text
   Output: |
-    剛剛同學輸入的`skip()`與`submit()`都是swirl的指令。接著我們介紹：`play()`。
-    同學如果在課程進行中，想要自由摸索的話，可以輸入`play()`來暫時中止swirl。
-    需要回到課程的話，就輸入：`nxt()`。
+    上述關卡中輸入的`skip()`與`submit()`皆屬於swirl的指令。接著我們介紹：`play()`。
+    在課程進行中，若同學想要自由摸索嘗試的話，可以輸入`play()`來暫時中止swirl。
+    需要回到課程的話，則是輸入：`nxt()`返回課程。
 
 - Class: text
   Output: |
-    `bye()`則可以離開swirl環境。但是只要輸入`swirl()`後就可以選擇接關，繼續挑戰
+    輸入`bye()`則可以離開swirl環境。離開後，只要輸入`swirl()`即可選擇接關，繼續挑戰
     離開前的進度。
 
 - Class: text
   Output: |
-    需要繳交作業的同學，請在完成每個單元後確認有無看到：「You've reached the end 
+    需要繳交作業的同學，請在完成每個單元後確認是否看到訊息如下：「You've reached the end 
     of this lesson! Returning to the main menu... Your status has beed updated 
     to tracking server」。要有這一行文字，才代表我們有紀錄到同學完成課程的紀錄，
     並且轉交給同學的老師做紀錄。也因此，建議需要繳交作業的同學，儘量在有網路的狀
