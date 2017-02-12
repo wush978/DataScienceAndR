@@ -73,16 +73,16 @@
   Output: |
     需要繳交作業的同學，請在完成每個單元後確認是否看到訊息如下：「You've reached the end 
     of this lesson! Returning to the main menu... Your status has beed updated 
-    to tracking server」。要有這一行文字，才代表我們有紀錄到同學完成課程的紀錄，
-    並且轉交給同學的老師做紀錄。也因此，建議需要繳交作業的同學，儘量在有網路的狀
+    to tracking server」。出現上述訊息之後，代表同學完成課程的進度已經被確實記錄，
+    並且成功轉交給同學的老師。因此，建議需要繳交作業的同學，請確認在有網路連線的狀
     態下完成作業。
 
 - Class: text
   Output: |
-    有需要確認進度的同學，也可以輸入：`query_user_id("<你的id>")`來查詢目前該id
-    完成的單元。這也是會提供給老師們的作業紀錄。
+    需要確認進度的同學，也可以輸入：`query_user_id("<你的id>")`來查詢目前該id
+    完成的單元。此部分也會提供給老師們，以進行作業紀錄。
 
 - Class: text
   Output: |
-    測試與說明已經完成，請同學回到選單選擇你想進行的課程。（需要交作業的同學），
-    也可以趁機注意有無：「Your status has beed updated to tracking server」的字樣。
+    測試與說明已經完成，請同學回到選單選擇你想進行的課程。需要交作業的同學，
+    請於此測試課程結束後，留意是否出現訊息如下：「Your status has beed updated to tracking server」。
