@@ -7,44 +7,53 @@
   Version: 1.0
 
 - Class: text
-  Output: 這門課程要讓大家透過互動式的內容，上手R 語言。
+  Output: |
+    這門課程的目的，是要讓大家透過互動式的內容，上手R 語言。
 
 - Class : text
-  Output : 這份文件中的格式採用和Markdown相容的語法。
-    為了讓大家快速上手，這裡先說明一些常見的Markdown語法
-    所有的程式碼，都會用``來包覆。例如：當swirl提示要各位輸入：`sessionInfo()`
-    就代表各位同學要在console輸入：sessionInfo()
-
+  Output : |
+    這份文件的格式採用的語法和Markdown相容。
+    先說明一些常見的Markdown語法，以幫助同學快速上手。
+    首先，所有的程式碼，都會用``符號包覆。
+    舉例來說，當swirl提示輸入訊息如下：`sessionInfo()`，即代表各位同學要在console輸入的內容如下：sessionInfo()。
+    
 - Class : text
-  Output : 所有的超連結，都會用<>來包覆。例如：<https://www.google.com>
-    代表要請大家打開 https://www.google.com
+  Output : |
+    其次，所有的連結網址，都會用<>符號包覆。舉例來說，當顯示訊息如下: <https://www.google.com>，
+    則代表請同學打開下列網址: https://www.google.com
 
 - Class: text
-  Output: 本文的內容都取自於`help.start()`中的An Introduction to R。
+  Output: |
+    本文內容取自`help.start()`中的An Introduction to R。
 
 - Class : text
-  Output: 那我們就開始吧！
+  Output: |
+    那我們就開始吧！
 
 - Class : text
-  Output: 我們跳過介紹R 語言的部分，直接學習操作R 的部分。
-    在R 中，是可以隨時獲得一個函數的細節說明。舉例來說，如果
-    我們要查詢`solve`這個函數的詳細說明，就輸入：`help(solve)`。
-    另一種比較簡單的方式是：`?solve`
+  Output: |
+    跳過介紹R 語言的部分，我們直接學習R 的實際操作。
+    在R 中，可以隨時獲得某一個特定函數的細節說明。
+    舉例來說，如果我們要查詢`solve`這個函數的說明，就輸入：`help(solve)`。
+    另一種比較簡單的方式則是輸入：`?solve`
 
 
 - Class: cmd_question
-  Output: 現在請各位同學查詢`chol2inv`的說明。
-  CorrectAnswer: help(chol2inv)
-  AnswerTests: any_of_exprs("?chol2inv", "help(chol2inv)")
-  Hint: 還記得`?`或`help`嗎？
+  Output: |
+    現在請各位同學查詢`chol2inv`的說明。
+    CorrectAnswer: help(chol2inv)
+    AnswerTests: any_of_exprs("?chol2inv", "help(chol2inv)")
+    Hint: 還記得`?`或`help`嗎？
 
 - Class : text
-  Output: 在R中，每一段指令都是一個expression。
-    舉例來說，剛剛我們輸入的：`help(chol2inv)`就是一個有效的expression。
+  Output: |
+    在R中，每一段指令都是一個expression。
+    舉例來說，剛剛輸入的：`help(chol2inv)`則是一個有效的expression。
 
 - Class : text
-  Output: 而`help(chol2inv`少了一個`)`是無效的expression，需要完整的輸入help(chol2inv)
-
+  Output: |
+    而`help(chol2inv`少了一個`)`是無效的，完整的輸入help(chol2inv)才會是有效的expression。
+    
 - Class : text
   Output: 通常每一個給R 的指令，不是一個expression，就是一個assignment
 
