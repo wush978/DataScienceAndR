@@ -40,7 +40,7 @@
 
 - Class: cmd_question
   Output: |
-    現在請各位同學查詢`chol2inv`的說明。
+    現在請各位同學試著查詢`chol2inv`的說明。
   CorrectAnswer: help(chol2inv)
   AnswerTests: any_of_exprs("?chol2inv", "help(chol2inv)")
   Hint: 還記得`?`或`help`嗎？
@@ -48,26 +48,30 @@
 - Class : text
   Output: |
     在R中，每一段指令都是一個expression。
-    舉例來說，剛剛輸入的：`help(chol2inv)`則是一個有效的expression。
+    舉例來說，剛剛輸入的：`help(chol2inv)`即是一個有效的expression。
 
 - Class : text
   Output: |
-    而`help(chol2inv`少了一個`)`是無效的，完整的輸入help(chol2inv)才會是有效的expression。
+    而`help(`chol2inv`)`則是無效的，需依照完整格式，輸入help(chol2inv)才是有效的expression。
     
 - Class : text
-  Output: 通常每一個給R 的指令，不是一個expression，就是一個assignment
-
+  Output: |
+    通常給R 的指令分成兩種，一個expression，或是一個assignment。
+    
 - Class : cmd_question
-  Output: 舉例來說，`a <- 1`就是一個assigment的動作。
+  Output: |
+    舉例來說，`a <- 1`即是一個assigment的動作。
     請各位同學在console輸入`a <- 1`
   CorrectAnswer: a <- 1
   AnswerTests : omnitest("a <- 1", 1)
 
 - Class : text
-  Output: 通常R 在收到一個expression之後，它會做出以下的動作：
+  Output: |
+    通常R 在收到一個expression之後，它會做出以下的動作：
 
 - Class : cmd_question
-  Output: R 會evaluate這個expression，然後把結果顯示到螢幕上。
+  Output: |
+    R 會evaluate這個expression，然後把結果顯示到螢幕上。
     舉例來說，請同學輸入：`a + 1`
   CorrectAnswer: a + 1
   AnswerTests: omnitest("a + 1", 2)
