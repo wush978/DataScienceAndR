@@ -77,27 +77,32 @@
   AnswerTests: omnitest("a + 1", 2)
 
 - Class : text
-  Output: R 在收到`a + 1`這個expression之後，會進行計算，查到a 的值
-    是1 ，再和1 做相加，最後把2 顯示到螢幕上。
+  Output: |
+    在收到`a + 1`這個expression之後，R 會進行計算，查到a 的值
+    是1 ，再和1 做相加，最後會在螢幕上顯示結果為2。
 
 - Class : cmd_question
-  Output: 現在，請各位同學讓`a`的值變成 2。
+  Output: |
+    現在，請各位同學讓`a`的值變成 2。
   CorrectAnswer : a <- 2
   AnswerTests: any_of_exprs("a <- 2", "a = 2")
 
 - Class : text
-  Output: 有沒有注意到，R 並沒有在螢幕上顯示任何東西呢？
+  Output: | 
+    同學是否注意到，R 螢幕上並沒有顯示任何結果呢？
 
 - Class: mult_question
-  Output: 這裡測試一下同學懂不懂assignment的意思。請問現在如果
-    我們在R 的console中輸入`a - 1`，會顯示什麼呢？
+  Output: |
+    這裡測試一下同學是否理解assignment的意思。
+    請問現在如果在R 的console中輸入`a - 1`，會螢幕上會顯示什麼結果呢？
   AnswerChoices: 1;2;"不會顯示";"4"
   CorrectAnswer: 1
   AnswerTests: omnitest(correctVal= '1')
   Hint: 先想想`a - 1`是一個expression還是一個assignment，再想想`a`的值
 
 - Class : text
-  Output: 相信大家到這邊，對於expression和assignment有一些初步的認識。
+  Output: |
+    相信大家到這邊，對於expression和assignment有一些初步的認識。
     未來我們就是要寫大量的expression和assignment，來利用R 達成複雜的任務。
 
 - Class : text
