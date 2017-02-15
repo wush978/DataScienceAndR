@@ -8,26 +8,26 @@
 
 - Class: text
   Output: |
-    這門課程的目標是講解R object的入門操作。
+    這門課程的目標是講解R object的入門操作。
 
 - Class: text
   Output: |
-    R 的object結構是針對資料分析所設計的。所以最簡單
+    R 的object結構是針對資料分析所設計的。所以最簡單
     的object，就是一連串的數字。
 
 - Class : text
   Output: |
-    這讓R 和其他的程式語言不同，因為一般的程式語言
+    這讓R 和其他的程式語言不同，因為一般的程式語言
     最簡單的object會是一個數字。
 
 - Class : text
   Output: |
-    R 這樣設計的理由是因為在資料分析的應用中，一定是同時處理多筆資料，而不會只有單一筆資料。
+    R 這樣設計的理由是因為在資料分析的應用中，一定是同時處理多筆資料，而不會只有單一筆資料。
 
 
 - Class: cmd_question
   Output: |
-    要用R 建立一個內容為10.4, 5.6, 3.1和6.4的向量，
+    要用R 建立一個內容為10.4, 5.6, 3.1和6.4的向量，
     最常用的方式就是輸入：`c(10.4, 5.6, 3.1, 6.4)`
     請同學依照這樣的語法建立一個這樣的向量，並且把它存為變數x。
   CorrectAnswer: x <- c(10.4, 5.6, 3.1, 6.4)
@@ -37,14 +37,14 @@
 
 - Class: mult_question
   Output: |
-    請問同學，上述輸入的語法是assignment還是expression呢?
+    請問同學，上述輸入的語法是assignment還是expression呢?
   AnswerChoices: assignment;expression
   CorrectAnswer: assignment
   AnswerTests: omnitest(correctVal= 'assignment')
 
 - Class : cmd_question
   Output: |
-    在R 中，`c()`可以接受任意數量的向量參數，並依照順序將它們串接成一個單一向量。
+    在R 中，`c()`可以接受任意數量的向量參數，並依照順序將它們串接成一個單一向量。
     舉例來說：`c(x, 1)`會在剛剛我們建立的x 後面再接一個1 。
     而`c(x, 2, 3)`則會在x 之後接上2 和3 。
     請同學依照上述規則，撰寫一個expression，內容是建立一個在x 後面接上x 的向量。
@@ -55,7 +55,7 @@
 
 - Class : cmd_question
   Output: |
-    在R 中，大部份的運算都是向量式的。舉例來說，加法`+`在R 中就屬於向量式。
+    在R 中，大部份的運算都是向量式的。舉例來說，加法`+`在R 中就屬於向量式。
     請同學輸入：`c(1, 2, 3) + c(2, 4, 6)` 並觀察結果。
   CorrectAnswer: c(1, 2, 3) + c(2, 4, 6)
   AnswerTests: |
@@ -64,7 +64,7 @@
 
 - Class: text
   Output: |
-    同學是否有注意到，結果中的第一個值，就是輸入的兩個向量中，第一個
+    同學是否有注意到，結果中的第一個值，就是輸入的兩個向量中，第一個
     值的相加呢？以此類推，一直到第三個值都維持這樣的規律。這就是「向量式」
     的意思。
 
