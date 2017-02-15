@@ -52,7 +52,7 @@
 
 - Class : text
   Output: |
-    而`help(`chol2inv`)`則是無效的，需依照完整格式，輸入help(chol2inv)才是有效的expression。
+    而`help(`chol2inv`)`則是無效的，需依照完整格式，輸入help(chol2inv)才是有效的。
     
 - Class : text
   Output: |
@@ -60,7 +60,7 @@
     
 - Class : cmd_question
   Output: |
-    舉例來說，`a <- 1`即是一個assigment的動作。
+    舉例來說，`a <- 1`即是一個assignment的動作。
     請各位同學在console輸入`a <- 1`
   CorrectAnswer: a <- 1
   AnswerTests : omnitest("a <- 1", 1)
@@ -79,7 +79,7 @@
 - Class : text
   Output: |
     在收到`a + 1`這個expression之後，R 會進行計算，查到a 的值
-    是1 ，再和1 做相加，最後會在螢幕上顯示結果為2。
+    是1 ，再和1 做相加，最後會在螢幕上顯示計算結果為2。
 
 - Class : cmd_question
   Output: |
@@ -102,7 +102,7 @@
 
 - Class : text
   Output: |
-    相信大家對於expression和assignment有一些初步的認識了。
+    大家對於expression和assignment有一些初步的認識了。
     未來我們需要藉由大量的expression和assignment，來利用R 達成複雜的任務。
 
 - Class : text
@@ -111,12 +111,11 @@
 
 - Class : text
   Output: |
-    我們也可以在程式碼中插入註解：`#`。所有在# 之後輸入的內容，在跑程式時都會被R 略過。
+    我們也可以在程式碼中插入註解：`#`。所有在# 之後輸入的內容都會被R 所略過。
 
 - Class : text
   Output: |
-    如果有一個expression還沒有完成，（可能是少了`)`或`}`），那R
-    會在console的開頭用`+`進行提示。
+    如果有一個expression還沒有完成，（可能是少了`)`或`}`），那R會在console的開頭用`+`進行提示。
 
 - Class : text
   Output: |
@@ -143,15 +142,15 @@
 
 - Class : text
   Output: |
-    剛剛也跟各位同學介紹過assignment。在R 裡面，這些
-    我們存放資料的東西，例如上述例子中的`a`，都叫做object。
+    剛剛也跟各位同學介紹過assignment。
+    在R 裡面，這些存放資料的東西都叫做object，如上述例子中的`a`。
     object可以是一個變數、一連串的數字、文字，甚至是函數或更複雜的東西。
 
 
 - Class: cmd_question
   Output: |
     在R 中，我們可以利用`objects()`或`ls()`來列出所有目前存在的object
-    的名字。請同學試著輸入`objects()`或`ls()`。
+    的名字。請同學輸入`objects()`或`ls()`。
   CorrectAnswer: objects()
   AnswerTests: any_of_exprs("objects()", "ls()")
 
