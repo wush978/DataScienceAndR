@@ -1,5 +1,5 @@
 <!-- title: R 語言翻轉教室 -->
-<!-- subtitle: 版本號：v1.0 -->
+<!-- subtitle: 版本號：v1.1 -->
 
 <script>
   ((window.gitter = {}).chat = {}).options = {
@@ -95,6 +95,10 @@ window.onload =function(){
 
 
 測試結果： Linux ![](https://travis-ci.org/wush978/DataScienceAndR.svg?branch=course) Windows [![Build status](https://ci.appveyor.com/api/projects/status/tej2qnpdxwy2r5lp/branch/course?svg=true)](https://ci.appveyor.com/project/wush978/datascienceandr/branch/course)
+
+## 新聞專區
+
+### 全面中文化的swirl(v101.4)套件於2017-02-16上線。若網友有發現任何bug，麻煩到[聊天室](https://gitter.im/wush978/DataScienceAndR?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)回報，謝謝
 
 ## 簡介
 
