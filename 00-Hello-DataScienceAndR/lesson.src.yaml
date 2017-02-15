@@ -16,7 +16,7 @@
   Output: |
     本課程的目的是為了測試同學的環境是否正常，能否進行本教材。
     完成測試之後，會進一步說明本教材的部分功能，
-    在課程進行中，如果看到最後格式如：`...`的部分，代表該部分是一個說明關卡。
+    在課程進行中，如果看到格式如：`...`的部分，代表該部分是一個說明關卡。
     上述說明文字閱讀完畢後，請輸入enter進入下一個關卡。
 
 - Class: text
@@ -26,7 +26,7 @@
 
 - Class: cmd_question
   Output: |
-    本關卡會檢查swirl的套件版本。這是一個需要輸入指令來過關的關卡，請在螢幕上輸入：`skip()`來過關。
+    本關卡會檢查swirl的套件版本。這是一個需要輸入指令來過關的關卡，請在螢幕上輸入：`skip()`進行過關。
     如果版本需要更新，請同學重新啟動R後，輸入：`source("http://wush978.github.io/R/init-swirl.R")`更新swirl套件以及課程內容。
   CorrectAnswer: packageVersion("swirl")
   AnswerTests: check_version()
