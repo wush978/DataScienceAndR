@@ -16,7 +16,7 @@
     先說明一些常見的Markdown語法，以幫助同學快速上手。
     首先，所有的程式碼，都會用``符號包覆。
     舉例來說，當swirl提示輸入訊息如下：`sessionInfo()`，即代表各位同學要在console輸入的內容如下：sessionInfo()。
-    
+
 - Class : text
   Output : |
     其次，所有的連結網址，都會用<>符號包覆。舉例來說，當顯示訊息如下: <https://www.google.com>，
@@ -53,11 +53,11 @@
 - Class : text
   Output: |
     而`help(`chol2inv`)`則是無效的，需依照完整格式，輸入help(chol2inv)才是有效的。
-    
+
 - Class : text
   Output: |
     通常給R 的指令分成兩種，一個expression，或是一個assignment。
-    
+
 - Class : cmd_question
   Output: |
     舉例來說，`a <- 1`即是一個assignment的動作。
@@ -83,17 +83,17 @@
 
 - Class : cmd_question
   Output: |
-    現在，請各位同學讓`a`的值變成 2。
+    現在，請各位同學讓`a`的值變成 2。
   CorrectAnswer : a <- 2
   AnswerTests: any_of_exprs("a <- 2", "a = 2")
 
 - Class : text
-  Output: | 
-    同學是否注意到，R 螢幕上並沒有顯示任何結果呢？
+  Output: |
+    同學是否注意到，R 螢幕上並沒有顯示任何結果呢？
 
 - Class: mult_question
   Output: |
-    這裡測試一下同學是否理解assignment的意思。
+    這裡測試一下同學是否理解assignment的意思。
     請問現在如果在R 的console中輸入`a - 1`，會螢幕上會顯示什麼結果呢？
   AnswerChoices: 1;2;"不會顯示";"4"
   CorrectAnswer: 1
@@ -102,34 +102,34 @@
 
 - Class : text
   Output: |
-    大家對於expression和assignment有一些初步的認識了。
+    大家對於expression和assignment有一些初步的認識了。
     未來我們需要藉由大量的expression和assignment，來利用R 達成複雜的任務。
 
 - Class : text
   Output: |
-    我們可以把多個expression用`{`和`}`包覆起來，變成一個大的expression。
+    我們可以把多個expression用`{`和`}`包覆起來，變成一個大的expression。
 
 - Class : text
   Output: |
-    我們也可以在程式碼中插入註解：`#`。所有在# 之後輸入的內容都會被R 所略過。
+    我們也可以在程式碼中插入註解：`#`。所有在# 之後輸入的內容都會被R 所略過。
 
 - Class : text
   Output: |
-    如果有一個expression還沒有完成，（可能是少了`)`或`}`），那R會在console的開頭用`+`進行提示。
+    如果有一個expression還沒有完成，（可能是少了`)`或`}`），那R會在console的開頭用`+`進行提示。
 
 - Class : text
   Output: |
-    也可以用上下鍵，快速瀏覽輸入過的expression。
+    也可以用上下鍵，快速瀏覽輸入過的expression。
 
 - Class : text
   Output: |
-    要把指令輸入到R ，除了在console上一個字一個字的打之外，
+    要把指令輸入到R ，除了在console上一個字一個字的打之外，
     也可以透過`source`指令，來載入一個撰寫R 指令的文件，並且執行
     文件中的expressions。
 
 - Class: cmd_question
   Output: |
-    請看一下`source`的說明。輸入之後，使用R 一般界面的同學
+    請看一下`source`的說明。輸入之後，使用R 一般界面的同學
     會看到跳出的說明視窗，內容是R 對`source`的官方說明。而使用Rstudio
     的同學則請檢查右下角的視窗是否切換至`source`的官方說明。
   CorrectAnswer: help(source)
@@ -137,30 +137,30 @@
 
 - Class : text
   Output: |
-    先前在各位同學安裝swirl的時候，我們可能已經用過`source`
+    先前在各位同學安裝swirl的時候，我們可能已經用過`source`
     來執行講師預先寫好的expressions，進而幫助設定環境了。
 
 - Class : text
   Output: |
-    剛剛也跟各位同學介紹過assignment。
+    剛剛也跟各位同學介紹過assignment。
     在R 裡面，這些存放資料的東西都叫做object，如上述例子中的`a`。
     object可以是一個變數、一連串的數字、文字，甚至是函數或更複雜的東西。
 
 
 - Class: cmd_question
   Output: |
-    在R 中，我們可以利用`objects()`或`ls()`來列出所有目前存在的object
+    在R 中，我們可以利用`objects()`或`ls()`來列出所有目前存在的object
     的名字。請同學輸入`objects()`或`ls()`。
   CorrectAnswer: objects()
   AnswerTests: any_of_exprs("objects()", "ls()")
 
 - Class : cmd_question
   Output: |
-    我們可以刪除已經存在的物件。舉例來說，如果我們要刪除`a`，
+    我們可以刪除已經存在的物件。舉例來說，如果我們要刪除`a`，
     就只要輸入：`rm(a)`。請同學根據上述做法試試看。
   CorrectAnswer: rm(a)
   AnswerTests: omnitest("rm(a)")
 
 - Class : text
   Output : |
-    第一章的內容就到此結束了。
+    第一章的內容就到此結束了。
