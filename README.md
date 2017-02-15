@@ -42,6 +42,9 @@ function showRegistrationRecords() {
     });
     used_records.forEach(function(record) {
       m = moment(record.created_at);
+      if (record.is_tracked) {
+        record.user_id = record.user_id + "(*)";
+      }
       if (record.type == 0) {
         li = "<li>" + record.user_id  + "在" + m.fromNow() + "進入了" + record.course  + "</li>"
       } else {
@@ -193,7 +196,7 @@ ps. 如果你之前有進行過swirl的課程，swirl會出現下圖的選項詢
 
 ## 課程筆記
 
-以下連結記載swirl中的課程內容(sha-hash: 4636e186 版本)
+以下連結記載swirl中的課程內容(sha-hash: da8db872 版本)
 
 - [00-Hello-DataScienceAndR](note/00-Hello-DataScienceAndR.html)
 - [01-RBasic-01-Introduction](note/01-RBasic-01-Introduction.html)

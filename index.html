@@ -68,6 +68,9 @@ function showRegistrationRecords() {
     });
     used_records.forEach(function(record) {
       m = moment(record.created_at);
+      if (record.is_tracked) {
+        record.user_id = record.user_id + "(*)";
+      }
       if (record.type == 0) {
         li = "<li>" + record.user_id  + "在" + m.fromNow() + "進入了" + record.course  + "</li>"
       } else {
@@ -232,7 +235,7 @@ window.onload =function(){
 
 <h2 id="10">7. 課程筆記</h2>
 
-<p>以下連結記載swirl中的課程內容(sha-hash: 4636e186 版本)</p>
+<p>以下連結記載swirl中的課程內容(sha-hash: da8db872 版本)</p>
 
 <ul>
 <li><a href="note/00-Hello-DataScienceAndR.html">00-Hello-DataScienceAndR</a></li>

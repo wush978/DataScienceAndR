@@ -42,6 +42,9 @@ function showRegistrationRecords() {
     });
     used_records.forEach(function(record) {
       m = moment(record.created_at);
+      if (record.is_tracked) {
+        record.user_id = record.user_id + "(*)";
+      }
       if (record.type == 0) {
         li = "<li>" + record.user_id  + "在" + m.fromNow() + "進入了" + record.course  + "</li>"
       } else {
