@@ -98,7 +98,7 @@ window.onload =function(){
 
 ## 新聞專區
 
-### 全面中文化的swirl(v101.4)套件於2017-02-16上線。若網友有發現任何bug，麻煩到[聊天室](https://gitter.im/wush978/DataScienceAndR?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)回報，謝謝
+### 全面中文化的swirl(v101.4.1)套件於2017-02-16上線。若網友有發現任何bug，麻煩到[聊天室](https://gitter.im/wush978/DataScienceAndR?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)回報，謝謝
 
 ## 簡介
 
