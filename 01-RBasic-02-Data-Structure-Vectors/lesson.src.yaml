@@ -412,38 +412,42 @@
     同時，也可以注意到`c("X", "Y")`重複了五次，這是因為`paste`也是一個向量化的函數。
 
 - Class : cmd_question
-  Output: 另一個你會注意到的，是`paste`預設會在串接字串時，在
-    中間留下一個空格。如果這不是你喜歡的，可以使用`paste0`這個
-    和`paste`幾乎一模一樣的函數。除了一點：`paste0`預設在串接字串
-    的時候，中間是不會有空格的。同學請試試看：`paste0(c("X", "Y"), 1:10)`
+  Output: |
+    另一個值得注意到的是`paste`在串接字串時，在字串中間會留下一個預留的空格。
+    如果不希望再自船間出現空格，可以改為使用`paste0`。
+    `paste0`和`paste`為幾乎一樣的函數。差別在於`paste0`預設在串接字串時，中間是不會有空格的。
+    同學請試試看：`paste0(c("X", "Y"), 1:10)`
   CorrectAnswer: paste0(c("X", "Y"), 1:10)
   AnswerTests: omnitest('paste0(c("X", "Y"), 1:10)')
 
 - Class : text
-  Output: 最後，我們要介紹一個整理資料上非常重要的功能：如何
-    挑選向量中一部份的資料。
+  Output: |
+    最後，我們要介紹一個在整理資料時被廣泛運用的功能：如何在向量中挑選出一部份的資料。
 
 - Class : cmd_question
-  Output: 第一種方法，使用坐標。在R 之中，如果我們要挑選x 的
-    第一個和第三個位置的值，只要使用：`x[c(1,3)]`。
+  Output: |
+    第一種方法，使用坐標。
+    在R 之中，如果我們要挑選序列x 中的第一個和第三個位置的值，只要使用即可：`x[c(1,3)]`。
     請同學試試看。
   CorrectAnswer: x[c(1,3)]
   AnswerTests: omnitest('x[c(1,3)]')
 
 - Class : cmd_question
-  Output: 第二種方法，是利用邏輯向量。舉例來說，如果我們要
-    挑選x 之中超過5 的值，就透過`x[x > 5]`。請同學試試看。
+  Output: |
+    第二種方法則是利用邏輯向量。
+    舉例來說，如果要挑選x 之中超過5 的值，即可透過`x[x > 5]`取得。請同學試試看。
   CorrectAnswer: x[x > 5]
   AnswerTests: omnitest('x[x>5]')
 
 - Class : cmd_question
-  Output: 第三種方法，是削去法。如果我們要挑x _除了_第二個之外的
-    全部的值，可以使用`x[-2]`
+  Output: |
+    第三種方法為削去法。
+    如果我們要挑序列x 中除了第二個數值之外全部的值，則可以使用`x[-2]`。
   CorrectAnswer: x[-2]
   AnswerTests: omnitest('x[-2]')
 
 - Class : cmd_question
-  Output: 最後一個方法比較特別，我們要先介紹在R 中names的概念。
+  Output: 最後一個方法較為特別，我們要先介紹在R 中names的概念。
     R 的向量中，每一個值是可以有名字的。舉例來說，我們可以透過：
     `names(x) <- c("a", "b", "c", "d")`來幫x 的每個值取名。
     請同學試試看。
