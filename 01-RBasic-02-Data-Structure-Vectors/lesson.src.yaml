@@ -182,7 +182,7 @@
 
 - Class : cmd_question
   Output: |
-    `seq`本質上就是一個「函數」，而`seq(1,10)`這段expression中，我們將1 和10稱為此函數的參數(arguments)。
+    `seq`本質上就是一個「函數」，而`seq(1,10)`這段expression中，我們將1 和10稱為此函數的參數(Argument)。
     讓我們來看一下`seq`可以接受幾個參數。
     請同學用之前介紹的方式，打開`seq`的說明文件。
   CorrectAnswer: ?seq
@@ -197,110 +197,117 @@
 
 - Class : text
   Output: |
-    對於個別參數的使用方法，我們可以閱讀在Arguments之下的細節說明。
+    對於個別參數的使用方法，我們可以閱讀在Argument之下的細節說明。
     比如說，`from, to from, to   the starting and (maximal) end values of
     the sequence. Of length 1 unless just from is supplied as an unnamed
     argument.` 這段文字就說明了`from`和`to`的用法。
 
 - Class : text
-  Output: 有時候，說明文字不如程式碼來得清楚，所以我們可以直接翻閱到說明文件
-    的最底下，查閱Examples段落之中官方文件提供的`seq`的範例。
+  Output: |
+    有時候，說明文字不如程式碼來得清楚，請直接翻閱到說明文件最底下，查看Examples之中官方所提供的`seq`的範例。
 
 - Class : cmd_question
-  Output: 如果要嘗試跑這些範例，我們可以簡單輸入：`example(seq)`
-    請同學跟著輸入。
+  Output: |
+    如果要運行這些範例，可以簡單輸入：`example(seq)`，請同學跟著輸入。
   CorrectAnswer: example(seq)
   AnswerTests: omnitest(correctExpr = 'example(seq)')
 
 - Class : text
-  Output: 在R 中，`seq`的參數共有：`from`、`to`、`by`、`length.out`和`along.with`。
+  Output: |
+    在R 中，`seq`的參數共有：`from`、`to`、`by`、`length.out`和`along.with`五種。
     如果我們不指定，而是依照順序填入：`seq(1, 10)`，那就代表`from`是1 、
-    `to`是10、而`by`等其他argument就使用預設參數。
+    `to`是10、，而`by`等其他Argument則使用預設參數。
 
 - Class : cmd_question
-  Output: 我們也可以透過指定參數名稱的方式來告訴R `seq`的參數是什麼。
-    舉例來說，`seq(to = 10, from = 1)`告訴R 說參數`from`是1 而`to`是10。
-    所以結果應該要和`seq(1,10)`相同。請同學試試看。
+  Output: |
+    我們也可以透過指定參數名稱的方式來告訴R `seq`的參數是什麼。
+    舉例來說，`seq(to = 10, from = 1)`會告訴R 參數`from`的值是1 ，而`to`則是10。
+    因此，計算結果將會和`seq(1,10)`相同。請同學試試看。
   CorrectAnswer: seq(to = 10, from = 1)
   AnswerTests: omnitest(correctExpr = 'seq(to = 10, from = 1)')
 
 - Class : cmd_question
-  Output: 利用`seq`產生的序列也不一定要間隔是1 。如果我們希望間隔是0.5，
-    `seq`函數是透過`by`這個參數來控制間隔的，所以只要輸入`seq(1, 10, by = 0.5)`
-    就好了。請同學試試看。
+  Output: |
+    而利用`seq`所產生的序列間隔也不一定要是1 。`seq`函數可以透過`by`這個參數控制間隔，
+    如果希望間隔是0.5，所以只要輸入`seq(1, 10, by = 0.5)`即可產生。請同學試試看。
   CorrectAnswer: seq(1, 10, by = 0.5)
   AnswerTests: omnitest(correctExpr = 'seq(1, 10, by = 0.5)')
 
 - Class : cmd_question
-  Output: 有時候產生序列的方式，可以是指定開頭、間隔和長度。在`seq`中，
-    這對應到`from`、`by`和`length.out`這三個參數。請同學自己寫一個
-    expression，產生一個從1 開始，間隔2 ，長度為10的序列。參數請透過
+  Output: |
+    而我們也可以透過指定開頭、間隔和長度來產生序列。
+    在`seq`中，這對應到`from`、`by`和`length.out`這三個參數。
+    請同學寫一個expression，產生一個從1 開始，間隔為2 ，長度為10的序列。參數請透過
     名稱來給定。
   CorrectAnswer: seq(from = 1, by = 2, length.out = 10)
   AnswerTests: any_of_exprs('seq(from = 1, by = 2, length.out = 10)',
     'seq(1, by = 2, length.out = 10)')
 
 - Class : text
-  Output: R 很聰明，在指定argument的時候不用指定全名，而只要給出前面幾個可以
-    讓R 辨別argument名稱的字母就可以了。舉例來說：
-    `seq(from = 1, by = 2, length = 10)`也可以讓R 知道argument `length.out`的值
-    是10。
+  Output: |
+    R 很聰明，在指定argument時不須指定全名，只要給出前面幾個可以讓R 辨別argument名稱的字母即可。
+    舉例來說：`seq(from = 1, by = 2, length = 10)`也可以讓R 知道此序列中，argument `length.out`的值是10。
 
 - Class : cmd_question
-  Output: 如果我們不想要序列，而是想要重複一個數字，則可以用`rep`
+  Output: |
+    若是不使用序列，而是想要重複某一個數字，則可以用`rep`。
     請同學試試看：`rep(2, times = 10)`
   CorrectAnswer: rep(2, times = 10)
   AnswerTests: omnitest(correctExpr = 'rep(2, times = 10)')
 
 - Class : cmd_question
-  Output: 在R 中，`rep`也可以作用在一個序列上。如果使用者是了argument `times`定值，
-    那R 會將整個序列重複`times`次，然後接起來。請同學試試看：
-    `rep(x, times = 2)`
+  Output: |
+    `rep`也可以作用在一個序列上。如果給了argument `times`定值，那R 會將整個序列重複`times`次，並接起來。
+    請同學試試看：`rep(x, times = 2)`。
   CorrectAnswer : rep(x, times = 2)
   AnswerTests: omnitest(correctExpr = 'rep(x, times = 2)')
 
 - Class : cmd_question
-  Output: 如果我們沒有指定`rep`的argument `times`，而是argument `each`，
-    那R 會把向量的每一個值個別重複`each`遍之後，再接起來。
-    請同學試試看：`rep(x, each = 2)`
+  Output: |
+    如果`rep`沒有指定在argument `times`，而是在argument `each`，
+    那R 會將向量的每一個值，個別重複`each`遍之後，再接起來。
+    請同學試試看：`rep(x, each = 2)`。
   CorrectAnswer: rep(x, each = 2)
   AnswerTests: omnitest(correctExpr = 'rep(x, each = 2)')
 
 - Class : text
-  Output: 在R 中，`seq`和`rep`的搭配使用，在整理資料的時候很常用。
-    有興趣的同學可以在後續的實例教材中，看看如何應用這兩個函數
-    解決一些整理資料的問題。
+  Output: |
+    在R 中，整理資料的時候很常會將`seq`和`rep`的搭配使用。
+    有興趣的同學可以在後續的實例教材中，看看在整理資料的過程如何應用這兩個函數解決問題。
 
 - Class : text
-  Output: 在R 中，除了數值之外，邏輯值也是很常見的。類似數值，
-    R 最基礎的object之一，就是邏輯向量。而我們看到的一個值，只是
-    一個長度是1 的向量。
+  Output: |
+    除了數值之外，邏輯值也是很常見的。
+    類似數值，R 最基礎的object之一，就是邏輯向量。
+    在R 中，我們看到的一個值，其實只是一個長度為1 的向量。
 
 - Class : text
-  Output: 邏輯向量常常表示資料中如：「是、否」、「男、女」之類二
-    選一的選項。除此之外，在程式碼的流程控制，也是很常用。
+  Output: |
+    邏輯向量常常表示資料中如：「是、否」、「男、女」之類等二分法的選項。
+    除此之外，也很常用在程式碼的流程控制。
 
 - Class : text
-  Output: 在R 中，邏輯值「真」常用`TRUE`或`T`來代表。「假」則用
-    `FALSE`或`F`代表。第三種在邏輯向量會出現的值，就是NA（Not Available）。
-    注意：這裡的`T`和`F`是一個預設值是`TRUE`或`FALSE`的變數，並不是保留字。
-    所以同學是可以更改`T`和`F`的內容的！
+  Output: |
+    邏輯值「真」常用`TRUE`或`T`來代表。「假」則用`FALSE`或`F`代表。
+    第三種在邏輯向量會出現的值，就是NA（Not Available）。
+    注意：這裡的`T`和`F`所對應到的`TRUE`或`FALSE`變數只是預設值，並不是保留。如有需要，是可以更改`T`和`F`的內容的！
 
 - Class: cmd_question
-  Output: 我們可以利用各種「條件類型的expression」來建立邏輯向量。
-    舉例來說，我們手上有x ，就可以利用`x > 5`來建立一個長度和x 相同
-    的邏輯向量。請同學試試看。
+  Output: |
+    我們可以利用各種不同「條件類型的expression」來建立邏輯向量。
+    舉例來說，有一個序列x ，我們就可以利用`x > 5`來建立一個長度和x 相同的邏輯向量。請同學試試看。
   CorrectAnswer: x > 5
   AnswerTests : omnitest(correctExpr = 'x > 5')
 
 - Class : text
-  Output: 從結果可以看到，R 會拿x （`c(10.4, 5.6, 3.1, 6.4)`）的值
-    一個個的和5 做比較。比較大的就是TRUE，而比較小的是FALSE。
+  Output: |
+    從結果可以看到，R 會拿x （`c(10.4, 5.6, 3.1, 6.4)`）中的值一個個的和5 比較大小。
+    比較大的就是TRUE，而比較小的即是FALSE。
 
 - Class : text
-  Output: 類似可用於建立邏輯向量的「條件」有：大於`>`、大於等於`>=`、
-    小於`<`、小於等於`<=`、相等`==`和不相等`!=`。
-    這類邏輯向量在整理資料時，做資料篩選上是很常用的。
+  Output: |
+    依此類推，可用於建立邏輯向量的「條件」分別有：大於`>`、大於等於`>=`、小於`<`、小於等於`<=`、相等`==`和不相等`!=`。
+    這類邏輯向量在整理資料做資料篩選時，是很常用到的。
 
 - Class : cmd_question
   Output: 另外邏輯運算子「且」`&`和「或」`|`也是很常用的。他們可以
