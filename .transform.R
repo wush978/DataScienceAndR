@@ -1,8 +1,16 @@
 cat("Loading transform\n")
+yaml.load_file2 <- function(input) {
+  src <- readLines(input)
+  utf8_space <- rawToChar(as.raw(c(0xc2, 0xa0)))
+  space <- rawToChar(as.raw(0x20))
+  dst <- gsub(utf8_space, space, src, fixed = TRUE)
+  yaml::yaml.load(paste(dst, collapse = "\n"))
+}
+
 transform <- function() {
   path <- getOption("swirlify_lesson_file_path")
   src.path <- gsub("yaml", "src.yaml", path)
-  parsed <- yaml::yaml.load_file(src.path)
+  parsed <- yaml.load_file2(src.path)
   for(i in seq_along(parsed)) {
     if (parsed[[i]]$Class == "cmd_question") {
       if (is.null(parsed[[i]]$CorrectAnswer)) {
