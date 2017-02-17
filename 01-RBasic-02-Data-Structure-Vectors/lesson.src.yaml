@@ -392,21 +392,24 @@
   AnswerTests: omnitest(correctVal = '"')
 
 - Class : cmd_question
-  Output: 在R 中，`paste`是在R 中常常用來做字串處理的函數。我們可以丟任意個
-    arguments 給`paste`，結果R 會把這些argument以字串的形式接成一個字串。
+  Output: |
+    在R 中，`paste`為經常用來做字串處理的函數。
+    我們可以丟任意個Argument 給`paste`，結果R 會把這些argument以字串的形式接成一個字串。
     請同學試試看：`paste("a", "b")`
   CorrectAnswer: paste("a", "b")
   AnswerTests: omnitest('paste("a", "b")')
 
 - Class : cmd_question
-  Output: 請同學試試看：`paste(c("X", "Y"), 1:10)`
+  Output: |
+    請同學試試看：`paste(c("X", "Y"), 1:10)`
   CorrectAnswer: paste(c("X", "Y"), 1:10)
   AnswerTests: omnitest('paste(c("X", "Y"), 1:10)')
 
 - Class : text
-  Output: 你可以注意到，`1:10`被自動轉換成字串了。這又是一個
-    R 會自動判斷形態的例子。同時，我們可以注意到`c("X", "Y")`
-    重複了五次，這是因為`paste`也是一個向量化的函數。
+  Output: |
+     結果中會發現，`1:10`被自動轉換成字串了。
+    這又是一個R 自動判斷形態的例子。
+    同時，也可以注意到`c("X", "Y")`重複了五次，這是因為`paste`也是一個向量化的函數。
 
 - Class : cmd_question
   Output: 另一個你會注意到的，是`paste`預設會在串接字串時，在
