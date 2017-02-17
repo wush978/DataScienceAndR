@@ -68,123 +68,137 @@
     以此類推，一直到第三個值都維持這樣的規律。這就是「向量式」的意思。
 
 - Class : cmd_question
-  Output: 但是當相加的兩個向量長度不同的時候，會發生什麼事情呢？
-    R 會自動重複比較短的向量，補到長度和比較長的向量相同，然後用
-    一樣的概念去做計算。請同學輸入`2 + c(1,2,3)`試試看。
+  Output: |
+    當相加的兩個向量長度不同時，R 會自動重複比較短的向量，補到和較長的向量相同的長度，然後用
+    一樣的方式去做計算。請同學輸入`2 + c(1,2,3)`試試看。
   CorrectAnswer: 2 + c(1,2,3)
   AnswerTests: omnitest(correctExpr='2 + c(1,2,3)')
 
 - Class: text
-  Output: 向量式的運算讓我們在處理資料上非常容易。在R 之中，除了加減乘除
-    之外，而許多常用的數學算式都是向量式的。例如：`log`、`exp`、`sin`、
-    `cos`、`tan`和｀sqrt、。
+  Output: |
+    向量式運算可以讓我們在處理資料時更加容易。
+    在R 之中，除了加減乘除之外，許多常用的數學算式都是向量式的。例如：`log`、`exp`、`sin`、
+    `cos`、`tan`和`sqrt`。
 
 - Class : cmd_question
-  Output: 不是所有的運算都是向量式的。如果給定一個向量x ,
-    `max(x)`會傳回x 中最大的值，而`min(x)`會傳回x 最小的值。
-    有時候在分析的時候，我們如果想要知道數值的範圍，這兩個函數
-    就很有用。請同學寫一個expression來建立一個兩個值的向量，
-    而且第一個值是x 的最小值，第二個是x 的最大值。
+  Output: |
+    然而，並不是所有的運算都是向量式的。
+    舉例來說，給定一個向量x ,`max(x)`會傳回x 中最大的值，而`min(x)`則會傳回x 中最小的值。
+    若想要在分析數據的時知道數值的範圍，這兩個函數就可以派上用場。
+    請同學寫一個expression來建立兩個值的向量，而且第一個值是x 的最小值，第二個值則是x 的最大值。
   CorrectAnswer: c(min(x), max(x))
   AnswerTests: val_is(c(min(x), max(x)))
 
 - Class : cmd_question
-  Output: 在R 中，有一個函數`range`就能直接傳回輸入向量的
-    範圍（最小到最大）。請同學再算一次x 的範圍，但是是使用
-    `range`
+  Output: |
+    在R 中有，函數`range`能直接傳回輸入向量的範圍（最小到最大）。
+    請同學使用`range`，再算一次x 的範圍。
   CorrectAnswer: range(x)
   AnswerTests: omnitest('range(x)')
 
 - Class : cmd_question
-  Output: 在R 中，`sum(x)`會傳回x 所有值的加總。
-    `length(x)`函數能直接傳回x 的長度。請同學利用
-    `sum`和`length`計算x 的平均值。
+  Output: |
+    在R 中，函數`sum(x)`會傳回x 所有值的加總。
+    函數`length(x)`則能直接傳回x 的長度。
+    現在，請同學利用`sum`和`length`計算x 的平均值。
   CorrectAnswer: sum(x) / length(x)
   AnswerTests: omnitest(correctExpr = 'sum(x)/length(x)')
   Hint: 除法可以用 `/`
 
 - Class : text
-  Output: R 也內建許多統計相關的函數。例如`mean(x)`就能直接
-    計算x 的平均值。透過`mean`、`sum`和`length`，我們就能計算x 的樣本變異數：
-    `sum((x - mean(x))^2) / (length(x)-1)`。但是R 也有內建的函數
-    來簡化我們的工作。
+  Output: |
+    R 也內建許多統計函數。
+    例如`mean(x)`可以計算x 的平均值。透過`mean`、`sum`和`length`，我們就能計算x 的樣本變異數：`sum((x - mean(x))^2) / (length(x)-1)`。
+    但是R 也有內建的函數來簡化計算工作。
     透過`var(x)`，我們就能簡單用短短的函數計算樣本變異數。
 
 - Class : cmd_question
-  Output: 請利用`var`計算x 的樣本變異數。
+  Output: |
+    現在，請利用`var`計算x 的樣本變異數。
   CorrectAnswer: var(x)
   AnswerTests: omnitest(correctExpr = 'var(x)')
 
 - Class : cmd_question
-  Output: 請利用`sd`計算x 的樣本標準差。
+  Output: |
+    請利用`sd`計算x 的樣本標準差。
   CorrectAnswer: sd(x)
   AnswerTests: omnitest(correctExpr = 'sd(x)')
 
 - Class : cmd_question
-  Output: 在R 中，`sort(x)`則會產生一個和x 長度一樣的向量，但是值是
-    由小到大排列。請同學試試看：`sort(x)`
+  Output: |
+    而`sort(x)`則會產生一個和x 長度一樣的向量，但向量中的值是由小到大排列。
+    請同學試試看：`sort(x)`
   CorrectAnswer: sort(x)
   AnswerTests: omnitest(correctExpr = 'sort(x)')
 
 - Class : text
-  Output: 在數學上，輸入的x 可能是整數、實數甚至是複數。
-    R 的數學計算，會自動根據x 的屬性做調整。
+  Output: |
+    在數學中，計算中輸入的x ，代表的可能是整數、實數或甚至是複數。
+    而R 中的數學計算，則會自動根據x 的屬性做出調整。
 
 - Class : cmd_question
-  Output: 舉例來說，如果我們輸入`sqrt(-17)`，我們會得到NaN（Not A Number）。
-    請同學試試看輸入`sqrt(-17)`。這裡的`sqrt`代表的就是數學上開根號的運算。
+  Output: |
+    舉例來說，如果輸入`sqrt(-17)`，我們會得到NaN（Not A Number）的結果。
+    請同學試試看輸入`sqrt(-17)`。這裡的`sqrt`代表的是數學上開根號的運算。
   CorrectAnswer: sqrt(-17)
   AnswerTests: omnitest(correctExpr = 'sqrt(-17)', correctVal = NaN)
 
 - Class : text
-  Output: 在數學上，對負數開根號，在實數中是沒有答案的。
+  Output: |
+    在數學中，對負數開根號，在實數中是沒有答案的。
 
 - Class : cmd_question
-  Output: 但是若我們使用`sqrt(-17 + 0i)`，這時候因為輸入的是一個複數，
-    R 會自動調整行為，不再回傳一個NaN。請同學試試看。
+  Output: |
+    但是，若我們改為輸入`sqrt(-17 + 0i)`，這時候因為輸入的是一個複數，
+    R 會自動調整運算行為，不會再回傳一個NaN。請同學試試看。
   CorrectAnswer: sqrt(-17 + 0i)
   AnswerTests: omnitest(correctExpr = 'sqrt(-17 + 0i)')
 
 - Class : cmd_question
-  Output: R 也有簡易的功能可以產生一些附帶有規則的序列。例如：
-    `1:10`就會產生自1 至10的序列。這樣的功能，在整理資料的時候
-    很常用。例如說，如果我們需要取出第5筆到第100筆的資料，就會
-    用到類似的語法。
-    請同學嘗試利用`:`建立一個從20到40的序列。
+  Output: |
+    R 也具備有簡易的功能，可以產生一些附帶有規則的序列。
+    例如：`1:10`就會產生自1 至10的序列。
+    這樣的功能，在整理資料時十分實用。
+    舉例來說，如果需要取出第5筆到第100筆的資料，就會用到類似的語法。
+    請同學利用`:`建立一個從20到40的序列。
   CorrectAnswer: 20:40
   AnswerTests: omnitest("20:40")
 
 - Class : cmd_question
-  Output: 在R 中，`:`這個運算子的優先層級很高，也就是說如果R 看到：`2 * 1:10`
-    這段expression，會優先處理`1:10`，然後再把所有結果乘以2。
-    我們來讓同學試試看，請輸入：`2 * 1:10`
+  Output: |
+    在R 中，`:`這個運算子的優先層級很高。
+    也就是說，如果R 看到：`2 * 1:10`這段expression，會優先處理`1:10`的部分，然後再將結果乘以2。
+    我們來讓同學試試看，請輸入：`2 * 1:10`。
   CorrectAnswer: 2 * 1:10
   AnswerTests: omnitest(correctExpr = '2 * 1:10')
 
 - Class: cmd_question
-  Output: 另外我們也跟各位介紹一個更泛用產生向量的方式：`seq`。
-    `seq(1, 10)` 在R 中，其實就是`1:10`。請試試看輸入`seq(1, 10)`
+  Output: |
+    跟各位介紹一個更被廣泛運用，產生向量的方式：`seq`。
+    `seq(1, 10)` 在R 中所代表的，其實就是`1:10`。
+    請試試看輸入`seq(1, 10)`。
   CorrectAnswer: seq(1,10)
   AnswerTests: omnitest(correctExpr = 'seq(1,10)')
 
 - Class : cmd_question
-  Output: 這裡的`seq`本質上就是一個「函數」，而`seq(1,10)`這段
-    expression中，我們稱呼1 和10為這個函數的arguments。
-    讓我們來看一下`seq`可以接受幾個參數。請同學用之前介紹的方式，
-    打開seq的說明文件。
+  Output: |
+    `seq`本質上就是一個「函數」，而`seq(1,10)`這段expression中，我們將1 和10稱為此函數的參數(arguments)。
+    讓我們來看一下`seq`可以接受幾個參數。
+    請同學用之前介紹的方式，打開`seq`的說明文件。
   CorrectAnswer: ?seq
   AnswerTests: any_of_exprs("?seq", "help(seq)")
 
 - Class : text
-  Output: 我們可以在說明文件上，閱讀 Default S3 method 之下的那段說明程式碼：
+  Output: |
+    我們可以在說明文件上，閱讀 Default S3 method 之下的那段說明程式碼：
     `seq(from = 1, to = 1, by = ((to - from)/(length.out - 1)),
     length.out = NULL, along.with = NULL, ...)`
-    這段說明文字顯示了，`seq`一般來說接受五個參數，而他們分別為：
-    `from`、`to`、`by`、`length.out`和`along.with`。
+    這段說明文字顯示了`seq`可以接受五個參數，分別為：`from`、`to`、`by`、`length.out`和`along.with`。
 
 - Class : text
-  Output: 對於個別參數的使用方法，我們可以閱讀在Arguments之下的細節說明。
-    比如說，`from, to from, to     the starting and (maximal) end values of
+  Output: |
+    對於個別參數的使用方法，我們可以閱讀在Arguments之下的細節說明。
+    比如說，`from, to from, to   the starting and (maximal) end values of
     the sequence. Of length 1 unless just from is supplied as an unnamed
     argument.` 這段文字就說明了`from`和`to`的用法。
 
