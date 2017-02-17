@@ -167,7 +167,7 @@
 - Class : cmd_question
   Output: |
     在R 中，`:`這個運算子的優先層級很高。
-    也就是說，如果R 看到：`2 * 1:10`這段expression，會優先處理`1:10`的部分，然後再將結果乘以2。
+    也就是說，如果看到：`2 * 1:10`這段expression，會優先處理`1:10`的部分，然後再將結果乘以2。
     我們來讓同學試試看，請輸入：`2 * 1:10`。
   CorrectAnswer: 2 * 1:10
   AnswerTests: omnitest(correctExpr = '2 * 1:10')
