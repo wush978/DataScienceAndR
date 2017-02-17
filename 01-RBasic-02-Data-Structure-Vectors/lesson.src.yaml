@@ -310,73 +310,81 @@
     這類邏輯向量在整理資料做資料篩選時，是很常用到的。
 
 - Class : cmd_question
-  Output: 另外邏輯運算子「且」`&`和「或」`|`也是很常用的。他們可以
-    在兩個邏輯向量中做運算。請同學試試看：`x > 5 & x < 10`
+  Output: |
+    另外，「且」`&`以及「或」`|`這兩個邏輯運算子也是很常用的。它們可以
+    在兩個邏輯向量中做運算。請同學試試看：`x > 5 & x < 10`。
   CorrectAnswer: x > 5 & x < 10
   AnswerTests: omnitest(correctExpr = 'x > 5 & x < 10')
 
 - Class : text
-  Output: 輸出結果，應該是那些x （`c(10.4, 5.6, 3.1, 6.4)`）的值
-    介於5 和10之間的為TRUE，否則就為FALSE。當我們在篩選資料的時候，
-    有時候要篩選的條件很複雜，需要用多個條件來組合而成時，就會用到
-    `&`和`|`了。
+  Output: |
+    輸出結果顯示，在x （`c(10.4, 5.6, 3.1, 6.4)`）中，介於5 和10之間的數值會顯示為TRUE，否則顯示為FALSE。
+    在篩選資料時，若是篩選條件較為複雜，需要用到多個條件來組合而成時，就會用到`&`以及`|`。
 
 - Class : text
-  Output: 有時候，當資料的值無法取得的時候，R 就會給它一個特殊的記號：
-    NA。所有和NA做的運算結果，通常都會是NA。就常識來看，這很合理。因為
-    「無法取得的數字」加上1 ，結果還是「無法取得」
-
+  Output: |
+    當資料的值無法取得時，R 就會給它一個特殊的記號：NA。
+    所有和NA相關的運算結果，通常都會是NA。
+    就常識來看，這很合理。因為「無法取得的數字」加上1 ，結果依舊會是「無法取得」。
+    
 - Class : cmd_question
-  Output: 我們可以利用`is.na`來判斷一個向量裡面有沒有NA。請同學試試看
-    `is.na(x)`
+  Output: |
+    我們可以利用`is.na`來判斷一個向量裡面是否有NA存在。
+    請同學試試看`is.na(x)`。
   CorrectAnswer: is.na(x)
   AnswerTests: omnitest('is.na(x)')
 
 - Class : cmd_question
-  Output: 在R 中，`is.na(x)`的結果應該都是FALSE，因為x 的資料裡面沒有NA。
-    我們來玩一個有NA的向量吧！請試試看：`is.na(c(1,2,NA,3))`
+  Output: |
+    在R 中，`is.na(x)`的結果都是FALSE，因為x 的資料裡面沒有NA。
+    因此，我們來玩一個有NA的向量吧！
+    請試試看：`is.na(c(1,2,NA,3))`
   CorrectAnswer: is.na(c(1,2,NA,3))
   AnswerTests: omnitest('is.na(c(1,2,NA,3))')
 
 - Class : cmd_question
-  Output: 在R 之中，我們已經看過兩種特別的記號：NA和NaN。
-    NA代表的是缺失值，而NaN 往往來自於數學運算中沒有定義的行為。
-    例如：`sqrt(-17)`、`0/0`和`Inf - Inf`。在R 裡面，無限大就是`Inf`。
-    R 對這些數學的處理是很聰明的。舉例來說，同學們可以試試看R 計算
-    `Inf + 1` 的結果：
+  Output: |
+    在R 之中，我們已經看過兩種特別的記號，分別為：NA和NaN。
+    NA代表的是缺失值，而NaN 大多來自於數學運算中沒有定義的行為。
+    例如：`sqrt(-17)`、`0/0`和`Inf - Inf`。在R 中，無限大就是`Inf`。
+    R 對此類的數學處理是很聰明的。
+    同學們可以試試看使用R 計算`Inf + 1` 的結果。
   CorrectAnswer: Inf + 1
   AnswerTests: omnitest('Inf + 1')
 
 - Class: cmd_question
-  Output: 雖然我們理解NA和NaN的不同，但是`is.na`會把兩者都看成TRUE。
-    舉例來說，請同學試試看：`is.na(c(NA, NaN, 1))`
+  Output: |
+    雖然可以理解NA和NaN的不同，但是`is.na`會將兩者都定義成TRUE。
+    請同學試試看：`is.na(c(NA, NaN, 1))`
   CorrectAnswer: is.na(c(NA, NaN, 1))
   AnswerTests: omnitest('is.na(c(NA, NaN, 1))')
 
 - Class : text
-  Output: 有時候，我們需要處理文字類型的object。這些object常常用於
-    指定繪圖的標題、或是處理一些類別形變數，如：國籍、行政區等等。
-    這樣的資料，在R 之中是透過單引號`'`或雙引號`"`來建立的。
-    這類的資料，常常被人稱為：「字串」。
+  Output: |
+    有時候，我們需要處理文字類型的object。這些object通常被用於指定繪圖的標題、或是處理類別形變數，如：國籍、行政區等等。
+    在R 之中，這類的資料是透過單引號`'`或雙引號`"`來建立的。而這類的資料也常被人稱為：「字串」。
 
 - Class : cmd_question
-  Output: 舉例來說，如果我們直接輸入`x`而不用雙引號包覆它，R
-    會把這個`x`當成變數名稱，而回傳x 的內容。請同學試試看輸入：`x`
+  Output: |
+    舉例來說，如果直接輸入`x`而不用雙引號包覆它，R會自動將`x`當成變數名稱，進而回傳x 的內容。
+    請同學試試看輸入：`x`
   CorrectAnswer: x
   AnswerTests: omnitest('x')
 
 - Class : cmd_question
-  Output: 但是如果我們輸入的是`"x"`，那R 就會認為這是一個只有一個
-    字元、內容為"x"的字串。請同學試試看：`"x"`
+  Output: |
+    然而，若是輸入的為`"x"`，那R 就會認為這是一個只有一個字元、內容為"x"的字串。
+    請同學試試看輸入：`"x"`
   CorrectAnswer: "\"x\""
   AnswerTests: any_of_exprs('"x"', "'x'")
 
 - Class : text
-  Output: 由於方便教材的設計，後續操作swirl的時候，請同學
-    儘量使用`"`來建立字串。
+  Output: |
+    為了方便教材的設計，後續操作swirl的時候，請盡量使用`"`來建立字串。
 
 - Class : cmd_question
-  Output: 這類文字類型的object，在R 中，`\`符號代表字串中的跳脫符號。
+  Output: |
+    這類文字類型的object，在R 中，`\`符號代表字串中的跳脫符號。
     舉例來說，如果我們要輸入一個包含雙引號的字串，有兩種方法：一種是用
     單引號`'`來包覆雙引號，另外一種就是在雙引號之前插入`\`。請同學試試看
     用跳脫符號的方式，輸入一個字串，內容只有一個雙引號。
