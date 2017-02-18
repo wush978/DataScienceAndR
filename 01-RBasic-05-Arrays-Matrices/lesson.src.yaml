@@ -55,10 +55,11 @@
 
 - Class : text
   Output: |
-    我們看到有一個名字叫做"dim"的屬性，值是`c(6, 3)`，代表這是一個6 乘3 的矩陣。
+    有一個名字叫做"dim"的屬性，值是`c(6, 3)`，代表這是一個6 乘3 的矩陣。
 
 - Class : cmd_question
-  Output: 重要的屬性，R 都會提供內建函數來方便存取。`dim`就是可以存取矩陣維度的函數。
+  Output: |
+    重要的屬性，R 都會提供內建函數來方便存取。`dim`就是可以存取矩陣維度的函數。
     請同學試試看：`dim(x)`
   CorrectAnswer: dim(x)
   AnswerTests: test_all(omnitest('dim(x)'), val_is(c(6L, 3L)))
