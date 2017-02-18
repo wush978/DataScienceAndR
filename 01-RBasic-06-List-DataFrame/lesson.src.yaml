@@ -7,97 +7,117 @@
   Version: 1.0
 
 - Class : text
-  Output: 這堂課程要跟各位同學介紹list和data.frame這兩個很重要的資料結構。
+  Output: |
+    這堂課程要跟各位同學介紹list和data.frame這兩個很重要的資料結構。
 
 - Class : text
-  Output: R 的list是非常泛用的物件，相信同學在前面的課程也已經有簡單操作R 裡面的迴歸模型，
-    而這些迴歸模型的底層架構，就是用list所建立的。
+  Output: |
+    R 的list是非常泛用的物件，同學在前面的課程有簡單操作過R 裡面的迴歸模型，而這些迴歸模型的底層架構，就是用list所建立的。
 
 - Class : text
-  Output: 但是list的本質，其實就是一個「R 物件的向量」，這裡我想要強調「向量」的概念，因為list
-    是有順序性的。
+  Output: |
+    list的本質，其實就是一個「R 物件的向量」，這裡要特別強調「向量」的概念，因為list是有順序性的。
 
 - Class : cmd_question
-  Output: 請同學建立一個list，`x <- list(iris = iris, cars = cars, n = 2)`
+  Output: |
+    請同學建立一個list，`x <- list(iris = iris, cars = cars, n = 2)`
     這裡`iris = iris`的意思是說，第一個元素的名字是`"iris"`，而值會是變數`iris`的值。
     而`cars = cars`表示第二個元素的名字是`"cars"`，值則是變數`cars`的值。以此類推。
   CorrectAnswer: x <- list(iris = iris, cars = cars, n = 2)
   AnswerTests: any_of_exprs("x <- list(iris = iris, cars = cars, n = 2)", "x = list(iris = iris, cars = cars, n = 2)")
 
 - Class : cmd_question
-  Output: 在建立的過程中，因為iris在前面，所以是第一個元素（component），而cars跟在iris後面，所以
+  Output: |
+    在建立的過程中，因為iris在前面，所以是第一個元素（component），而cars跟在iris後面，所以
     是第二個component。我們可以利用兩個中括號：`[[]]`來取出component。請同學試試看：`x[[3]]`
   CorrectAnswer: x[[3]]
   AnswerTests: omnitest("x[[3]]", 2)
 
 - Class : cmd_question
-  Output: 請檢查一下`x[[3]]`的型態。
+  Output: |
+    請檢查一下`x[[3]]`的型態。
   CorrectAnswer: mode(x[[3]])
   AnswerTests: omnitest(correctVal = "numeric")
   Hint: 還記得`class`或`mode`這兩個函數嗎？
 
 - Class : text
-  Output: 我們可以看到`x[[3]]`的型態是numeric，這是因為`x <- list(iris = iris, cars = cars, n = 2)`，
-    所以`mode(x[[3]])`的結果等同於`mode(2)`，也就是numeric。同理，`mode(x[[1]])`和`mode(x[[2]])`
-    的結果則是x 的第一個值和第二個值的型態。
+  Output: |
+    可以看到`x[[3]]`的型態是numeric，這是因為`x <- list(iris = iris, cars = cars, n = 2)`，
+    所以`mode(x[[3]])`的結果等同於`mode(2)`，也就是numeric。
+    同理，`mode(x[[1]])`和`mode(x[[2]])`的結果則是x 的第一個值和第二個值的型態。
 
 - Class : cmd_question
-  Output: 因為list是個向量，所以我們過去學過得`[]`還能使用。如果我們運用如：`x[3]`的指令，從x 中選出只有包含
-    第三個元素的向量，得到的輸出會和`x`一樣是一個list向量。簡言之，`mode(x[1])`、`mode(x[2])`和`mode(x[3])`
-    的結果都會是list，和`mode(x[[3]])`是numeric是不同的。請同學試試看`mode(x[3])`
+  Output: |
+    因為list是個向量，所以可以使用我們過去學過的`[]`。
+    如果我們運用如：`x[3]`的指令，從x 中選出只有包含第三個元素的向量，得到的輸出會和`x`一樣是一個list向量。
+    簡言之，`mode(x[1])`、`mode(x[2])`和`mode(x[3])`的結果都會是list，和`mode(x[[3]])`是numeric是不同的。請同學試試看`mode(x[3])`
   CorrectAnswer: mode(x[3])
   AnswerTests: omnitest("mode(x[3])", "list")
 
 - Class : text
-  Output: 輸出的型態是否仍是list，就是`[[]]`和`[]`主要的不同。
+  Output: |
+    輸出的型態是否仍為list，就是`[[]]`和`[]`主要的不同。
 
 - Class : text
-  Output: 也由於list是一種向量，所以諸如`length`之類我們學過得函數，都是可以在list上使用的。
+  Output: |
+    也由於list是一種向量，所以先前學過的函數，如`length`之類，都是可以在list上使用的。
 
 - Class : mult_question
-  Output: 請各位同學猜猜看，`length(x)`的結果會是多少呢？
+  Output: |
+    請各位同學猜猜看，`length(x)`的結果會是多少呢？
   AnswerChoices: 2;3;4
   CorrectAnswer: 3
   AnswerTests: omnitest(correctVal = "3")
   Hint: 在R 中，`length`會計算向量的長度，而我們是運用`x <- list(iris = iris, cars = cars, n = 2)`來建立`x`的。
 
 - Class : cmd_question
-  Output: list的元素除了用位置做選取之外（如：`x[[3]]`），也可以用名字做選取。在我們建立list的時候，是使用
-    `x <- list(iris = iris, cars = cars, n = 2)`，這代表第一個元素的名字是`"iris"`，第二個是`"cars"`，第三個是`"n"`。
+  Output: |
+    list的元素除了用位置做選取之外（如：`x[[3]]`），也可以用名字做選取。
+    在我們建立list的時候，使用指令如下：`x <- list(iris = iris, cars = cars, n = 2)`，
+    這代表第一個元素的名字是`"iris"`，第二個是`"cars"`，第三個是`"n"`。
     而和我們使用`x[[3]]`的方式類似，我們也可以使用`x[["n"]]`來選擇第三個，也就是名字是`"n"`的元素。請同學試試看。
   CorrectAnswer: x[["n"]]
   AnswerTests: omnitest('x[["n"]]', 2)
 
 - Class : cmd_question
-  Output: 除了`[[]]`之外，也可以使用`$`來透過名字取出list的值。例如`x$n`就會取出`x`中名字為`"n"`的值。
+  Output: |
+    除了`[[]]`之外，也可以使用`$`來透過名字取出list的值。
+    舉例來說，`x$n`就會取出`x`中名字為`"n"`的值。
     請同學試試看。
   CorrectAnswer: x$n
   AnswerTests: omnitest('x$n', x$n)
 
 - Class : text
-  Output: 在windows上，如果名字是中文時，使用`$`的語法可能會出錯。一個比較保險的方式是： x$`中文名稱` 。這裡的 `
-    符號的按鍵，在美式鍵盤中位於1的左方，這個符號唸作：Grave accent，是R 在console中的跳脫字元。以特殊符號
-    為名稱的變數，可以透過兩邊包覆Grave accent來在console中存取。
+  Output: |
+    在windows系統中，如果名字是中文時，使用`$`的語法可能會出錯。一個比較保險的寫法是： x$`中文名稱` 。
+    這裡的 `符號的按鍵，在美式鍵盤中位於1的左方，這個符號唸作：Grave accent，是R 在console中的跳脫字元。
+    以特殊符號為名稱的變數可以透過兩邊包覆Grave accent來在console中進行存取。
 
 - Class : text
-  Output: 接著，我們要介紹一個R 很有名的物件。這個物件的設計，完全滿足了近代對結構化資料分析的需求。
+  Output: |
+    接著，我們要介紹一個在R 中很有名的物件。這個物件的設計，完全滿足了近代對結構化資料分析的需求。
 
 - Class : text
-  Output: 包含最近火紅的Apache Spark，以及Python的pandas都有受到這個物件的影響。這就是R 的data.frame。
+  Output: |
+    包含最近火紅的Apache Spark，以及Python的pandas都有受到這個物件的影響。這個物件就是R 的data.frame。
 
 - Class : text
-  Output: 傳統的matrix和array 由於有同質性的限制（所有的元素都要同樣的型態），所以在資料分析上並不方便。
-    因為我們分析的資料，通常都不會全部都用相同的型態。在結構化的資料中，通常資料是以表格的形式，而各欄位
-    會有自己的型態，例如是：數值型態、類別型態等等。
+  Output: |
+    由於傳統的matrix和array 有同質性的限制（所有的元素都要同樣的型態），所以在資料分析上並不方便。
+    因為我們分析的資料，通常並不會全部都用相同的型態。
+    在結構化的資料中，通常資料是以表格的形式，而各欄位會有自己的型態，例如是：數值型態、類別型態等等。
 
 - Class : text
-  Output: R 的data.frame就是要表現出二維表格特性的物件。以下我們要介紹data.frame這個物件。
+  Output: |
+    R 的data.frame就是要表現出二維表格特性的物件。以下我們要介紹data.frame這個物件。
 
 - Class : text
-  Output: 首先，data.frame是一種list。因為表格的各欄是型態不一的向量，所以我們需要用list來裝不同型態的向量。
+  Output: |
+    首先，data.frame是一種list。因為表格的各欄是型態不一的向量，所以我們需要用list來裝不同型態的向量。
 
 - Class : text
-  Output: 第二，因為表格的資料是結構化的，所以data.frame的值不能存放太奇怪的物件。具體來說，data.frame的各個
+  Output: |
+    第二，因為表格的資料是結構化的，所以data.frame的值不能存放太奇怪的物件。具體來說，data.frame的各個
     元素必須是以下幾種類型之一：數值(numeric)、字串(character)、布林(logical)、類別(factor)、數值矩陣(numeric matrix)、
     list或data.frame。
 
