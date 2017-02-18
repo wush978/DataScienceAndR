@@ -65,114 +65,138 @@
   AnswerTests: test_all(omnitest('dim(x)'), val_is(c(6L, 3L)))
 
 - Class : cmd_question
-  Output: 也可以利用`dim(x) <- c(3, 6)`來更改x 的維度。請同學試試看。
+  Output: |
+    也可以利用`dim(x) <- c(3, 6)`來更改x 的維度。請同學試試看。
   CorrectAnswer: dim(x) <- c(3, 6)
   AnswerTests: any_of_exprs('dim(x) <- c(3, 6)', 'dim(x) = c(3, 6)')
 
 - Class : cmd_question
-  Output: 我們可以把x 印出來看看。
+  Output: |
+    我們可以把x 印出來看看。
   CorrectAnswer: x
   AnswerTests: val_is(matrix(1:18, 3, 6))
 
 - Class : cmd_question
-  Output: R 的除了矩陣(matrix)之外，還有高維度的陣列。舉例來說，我們可以直接更改x 的維度到更高維：
-    `dim(x) <- c(3, 3, 2)`。請同學試試看。
+  Output: |
+    R 的除了矩陣(matrix)之外，還有高維度的陣列。
+    我們可以直接更改x 的維度到更高維。請同學試試看：`dim(x) <- c(3, 3, 2)`。
   CorrectAnswer: dim(x) <- c(3, 3, 2)
   AnswerTests: any_of_exprs('dim(x) <- c(3, 3, 2)', 'dim(x) = c(3, 3, 2)')
 
 - Class : cmd_question
-  Output: 請同學把x 印出來看看。
+  Output: |
+    請同學把x 印出來看看。
   CorrectAnswer: x
   AnswerTests: val_is(array(1:18, c(3, 3, 2)))
 
 - Class : cmd_question
-  Output: 我們也可以用`array(1:18, c(3, 3, 2))`來建立一個高維矩陣。這裡很清楚可以看到：`array`的第二個參數就是維度。
+  Output: |
+    也可以利用`array(1:18, c(3, 3, 2))`來建立一個高維矩陣。這裡很清楚可以看到，`array`的第二個參數就是維度。
     我們請同學試試看輸入`array(1:18, c(3, 3, 2))`。
   CorrectAnswer: array(1:18, c(3, 3, 2))
   AnswerTests: val_is(array(1:18, c(3, 3, 2)))
 
 - Class : text
-  Output: 在RBasic-02-Data-Structure-Vectors的課程中，我們有提過兩種從
-    向量中挑選一部分的值得方式。一種是用座標，另外一種則是使用邏輯向量。
+  Output: |
+    在RBasic-02-Data-Structure-Vectors的課程中，我們有提過兩種方式，可以從向量中挑選一部分的值。
+    一種是用座標，另外一種則是使用邏輯向量。
     在矩陣和陣列上，還是可以用這兩種方式從矩陣或陣列中挑選一部分的值。
 
 - Class : text
-  Output: 我們可以利用中括號`[`來取出矩陣或陣列中的值。舉例來說，如果x 是矩陣，`x[2,1]`會取出x 第二列第一行
-    的值。陣列的狀況，也是類似的。`x[1,2,3]`會拿出第一個維度的第1 個方向，第二個維度的第2 個方向，第三個維度的第3 個方向。
+  Output: |
+    我們可以利用中括號`[`來取出矩陣或陣列中部分的值。舉例來說，如果x 是矩陣，`x[2,1]`會取出x 第二列第一行的值。
+    陣列的狀況也是類似的。
+    `x[1,2,3]`則會拿出第一個維度的第1 個方向，第二個維度的第2 個方向，第三個維度的第3 個方向。
     這就是以座標的方式做挑選。
 
 - Class : mult_question
-  Output: 我們來測測看同學有沒有理解剛剛的說明。請問目前這個相當於`array(1:18, c(3, 3, 2))`的x , `x[1,2,2]`的值會是多少呢？
+  Output: |
+    我們來測測看同學是否理解剛剛的說明。
+    目前相當於`array(1:18, c(3, 3, 2))`的x , `x[1,2,2]`的值會是多少呢？
   AnswerChoices: 1;10;13;18
   CorrectAnswer: 13
   AnswerTests: omnitest(correctVal = as.character(x[1,2,2]))
   Hint: 可以往上卷，看一看x 的輸出，在`, , 2` 底下的 `[1,]` 和 `[,2]` 的交會點。
 
 - Class : mult_question
-  Output: 在R 中，矩陣的資料順序是：`c(x[1,1], x[2,1], x[3,1], ...)`。也就是說，如果我們下指令：`matrix(1:18, 3, 6)`，
-    則x[1,1]會是1, x[2,1]會是2, x[3,1]是3, x[1,2]是4, 以此類推。高維度的矩陣也是類似。我們來試試看，目前的x 應該是一個高維
-    陣列，而請問大家：x[3,1,1]的值會是多少呢？
+  Output: |
+    在R 中，矩陣的資料順序是：`c(x[1,1], x[2,1], x[3,1], ...)`。也就是說，如果我們下指令：`matrix(1:18, 3, 6)`，
+    則x[1,1]會是1, x[2,1]會是2, x[3,1]是3, x[1,2]是4, 以此類推。高維度的矩陣也是類似。
+    我們來試試看，目前的x 是一個高維陣列，請問：x[3,1,1]的值會是多少呢？
   AnswerChoices: 1;3;7;10;18
   CorrectAnswer: 3
   AnswerTests: omnitest(correctVal = as.character(x[3,1,1]))
 
 - Class : cmd_question
-  Output: 如果給一個陣列，我們只是要取一個方向的向量，也可以適當的使用`[`。先讓我們再印出x 一次。
+  Output: |
+    如果給一個陣列，而只是要取單一個方向的向量，也可以適當的使用`[`完成取出。
+    請同學再印出x 一次。
   CorrectAnswer: x
   AnswerTests: val_is(array(1:18, c(3, 3, 2)))
 
 - Class : cmd_question
-  Output: 我們可以看到，螢幕上的`, , 2` 之後，顯示出一個3 乘3 的矩陣。這個矩陣，就是我們沿著第三個維度的第2個方向，
-    所切面出來的矩陣。這也就是螢幕上的`, , 2`的意思。而在R 中，我們可以利用`x[,,2]`取得這個矩陣。請同學取得這個矩陣，並把它存到變數x2中。
+  Output: |
+    我們可以看到，在螢幕上的`, , 2` 之後，顯示出一個3 乘3 的矩陣。
+    這個矩陣即是沿著第三個維度的第2個方向所切面出來的矩陣。
+    也是螢幕上`, , 2`所代表的意思。
+    而在R 中，我們可以利用`x[,,2]`取得這個矩陣。請取得這個矩陣，並把它存到變數x2中。
   CorrectAnswer: x2 <- x[,,2]
   AnswerTests: any_of_exprs('x2 <- x[,,2]', 'x2 = x[,,2]')
 
 - Class : cmd_question
-  Output: 我們先印出x2來看看。
+  Output: |
+    我們先印出x2來看看。
   CorrectAnswer: x2
   AnswerTests: test_all(omnitest('x2'), val_is(matrix(10:18, 3, 3)))
 
 - Class : cmd_question
-  Output: 如果我們要選出第一列，只要輸入`x2[1,]`就可以了。同學可以看一下x2的輸出，在第一列的左方有`[1,]`的圖示，就是提示使
-    可以用`x2[1,]`來選第一列。我們請同學試試看選出`x2[1,]`
+  Output: |
+    如果我們要選出第一列，只要輸入`x2[1,]`就可以了。請看一下x2的輸出，在第一列的左方有`[1,]`的圖示，即是提示可以用`x2[1,]`來選出第一列。
+    我們請同學試試看選出`x2[1,]`
   CorrectAnswer: x2[1,]
   AnswerTests: test_all(omnitest('x2[1,]'), val_is(c(10, 13, 16)))
 
 - Class : cmd_question
-  Output: 如果我們要直接從x 中呼叫` , , 2` 之下的矩陣裡面的第一列，我們可以使用：`x[1,,2]`。這裡的矩陣，在左方有`[1,]`、`[2,]`和`[3,]`，
-    就代表要取出對應的列，我們要分別使用：`x[1,]`、`x[2,]`和`x[3,]`這樣的符號。由於目前x 是一個三個維度的陣列，所以最後還要加上上面的：
-    `, , 2`，所以就變成：`x[1, , 2]`。請同學試試看。
+  Output: |
+    如果要直接從x 中，呼叫` , , 2` 之下矩陣裡的第一列，我們可以使用：`x[1,,2]`。
+    這裡的矩陣，在左方有`[1,]`、`[2,]`和`[3,]`，代表著若要取出對應的列，我們要分別使用：`x[1,]`、`x[2,]`和`x[3,]`這樣的符號。
+    由於目前x 是一個三個維度的陣列，最後，還需要加上上述的：`, , 2`。
+    所以若是要執行「呼叫` , , 2` 之下矩陣裡的第一列」，就會變成：`x[1, , 2]`。請同學試試看。
   CorrectAnswer: x[1,,2]
   AnswerTests: val_is(c(10, 13, 16))
 
 - Class : cmd_question
-  Output: 回答下一個問題之前，我們先印出x
+  Output: |
+    回答下一個問題之前，我們先印出x。
   CorrectAnswer: x
   AnswerTests: test_all(omnitest("x"), val_is(array(1:18, c(3, 3, 2))))
 
 - Class : mult_question
-  Output: 請問`x[,3,1]`的值會是什麼呢？
+  Output: |
+    請問`x[,3,1]`的值會是什麼呢？
   AnswerChoices: c(7,8,9);c(3,6,9);c(16,17,18);c(12,15,18)
   CorrectAnswer: c(7,8,9)
   AnswerTests: omnitest(correctVal = "c(7,8,9)")
 
 - Class : text
-  Output: 我們也可以利用中括號`[]`搭配邏輯向量取出矩陣或陣列中的值。
-    R 會根據邏輯向量在`[]`中的位置，選擇該維度，只挑出該邏輯向量為TRUE
-    的座標。
+  Output: |
+    也可以利用中括號`[]`搭配邏輯向量，取出矩陣或陣列中的值。
+    R 會根據邏輯向量在`[]`中的位置，選擇該維度，只挑出該邏輯向量為TRUE的座標。
 
 - Class : mult_question
-  Output: 請問同學，依照上述的說明，`x[c(TRUE, TRUE, FALSE), , ]`的效果就等同於
-    以下哪一個程式碼？
+  Output: |
+    請問同學，依照上述的說明，`x[c(TRUE, TRUE, FALSE), , ]`的效果等同於以下哪一個程式碼呢？
   AnswerChoices: x[1:2,,];x[,1:2,];x[,,1:2]
   CorrectAnswer: "x[1:2,,]"
   AnswerTests: omnitest(correctVal = "x[1:2,,]")
 
 - Class : text
-  Output: 接著我們介紹如何修改矩陣和陣列的元素。
+  Output: |
+    接著我們介紹如何修改矩陣和陣列的元素。
 
 - Class : cmd_question
-  Output: 如果我們要修改矩陣的值，就是搭配`[]`和`<-`就可以了。首先，如果我們要更改`x[1,1,1]`的值為2，
+  Output: |
+    如果我們要修改矩陣的值，就是搭配`[]`和`<-`就可以了。首先，如果我們要更改`x[1,1,1]`的值為2，
     我們可以使用`x[1,1,1] <- 2`。請同學試試看。
   CorrectAnswer: x[1,1,1] <- 2
   AnswerTests: any_of_exprs('x[1,1,1] <- 2', 'x[1,1,1] = 2')
