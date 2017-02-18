@@ -7,46 +7,55 @@
   Version: 1.0
 
 - Class : text
-  Output: 這門課程是要介紹R 的線性代數運算系統。線性代數在許多現代的統計方法、Data Mining方法上都很重要。
-    所以理解R 的線性代數系統，對於撰寫自己的演算法，以及了解Open Source的演算法，是非常重要的。
+  Output: |
+    這門課程是要介紹R 的線性代數運算系統。線性代數在許多現代的統計方法、Data Mining方法上都很重要。
+    理解R 的線性代數系統，無論是對於撰寫自己的演算法，或是了解Open Source的演算法，都是非常重要的。
 
 - Class : cmd_question
-  Output: 我們先來複習R 中的向量。請同學建立一個型態為numeric，由1到18的向量。
+  Output: |
+    我們先來複習R 中的向量。請同學建立一個型態為numeric，由1到18的向量。
   CorrectAnswer: 1:18
   AnswerTests: val_is(1:18)
 
 - Class : cmd_question
-  Output: 我們可以利用`matrix`這個函數來建立一個矩陣。舉例來說，`matrix(1:18, 6, 3)`就可以建立一個6 乘3 的矩陣。
+  Output: |
+    我們可以利用`matrix`這個函數來建立一個矩陣。舉例來說，`matrix(1:18, 6, 3)`就可以建立一個6 乘3 的矩陣。
     請同學試試看，並把這個矩陣寫入變數x 。
   CorrectAnswer: x <- matrix(1:18, 6, 3)
   AnswerTests: any_of_exprs('x <- matrix(1:18, 6, 3)', 'x = matrix(1:18, 6, 3)')
 
 - Class : cmd_question
-  Output: 要了解`matrix`，我們可以先打開matrix的說明頁面。
+  Output: |
+    要了解`matrix`，請先打開matrix的說明頁面。
   CorrectAnswer: help(matrix)
   AnswerTests: any_of_exprs('help(matrix)', '?matrix', 'help("matrix")', "help('matrix')")
 
 - Class : mult_question
-  Output: 根據matrix的說明頁面，請問以下哪些不是matrix的參數？
+  Output: |
+    根據matrix的說明頁面，請問以下哪些不是matrix的參數呢？
   AnswerChoices: data;nrow;ncol;byrow;dimnames;dim
   CorrectAnswer: dim
   AnswerTests: omnitest(correctVal = 'dim')
   Hint: 請參考matrix的說明頁面的Usage。
 
 - Class : cmd_question
-  Output: 數學上來說，一個矩陣除了值之外，需要的就是維度的定義。而`matrix`這個函數，`data`的參數代表矩陣的值，
-    `nrow`的部份代表這個矩陣有多少列，而`ncol`的部份代表這個矩陣有多少行。所以`matrix(1:18, 6, 3)`會產生一個
-    6 列3 行（簡稱6 乘3 ）的矩陣。請同學輸入`x` 看一下R 是如何印出x 這個6 乘3 的矩陣。
+  Output: |
+    數學上來說，一個矩陣除了值之外，需要的就是維度的定義。而`matrix`這個函數中，`data`的參數代表該矩陣的值，
+    `nrow`的部份代表該矩陣的列數，而`ncol`的部份則代表該矩陣的行數。
+    根據上述的邏輯，`matrix(1:18, 6, 3)`會產生一個6 列3 行（簡稱6 乘3 ）的矩陣。
+    請同學輸入`x` 看一下R 是如何印出x 這個6 乘3 的矩陣。
   CorrectAnswer: x
   AnswerTests: omnitest('x')
 
 - Class : cmd_question
-  Output: 我們可以看看x 的屬性。
+  Output: |
+    請同學看看x 的屬性。
   CorrectAnswer: attributes(x)
   AnswerTests: omnitest('attributes(x)')
 
 - Class : text
-  Output: 我們看到有一個名字叫做"dim"的屬性，值是`c(6, 3)`，代表這是一個6 乘3 的矩陣。
+  Output: |
+    我們看到有一個名字叫做"dim"的屬性，值是`c(6, 3)`，代表這是一個6 乘3 的矩陣。
 
 - Class : cmd_question
   Output: 重要的屬性，R 都會提供內建函數來方便存取。`dim`就是可以存取矩陣維度的函數。
