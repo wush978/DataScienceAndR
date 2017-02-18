@@ -1,5 +1,5 @@
 #' iris 是一個很有名的資料集。
-#' R 在處理iris的Species欄位，也就是鳶尾花資料集時，預設是使用factor型態
+#' 在R 的預設中，處理iris的Species欄位，也就是鳶尾花資料集時，使用的是factor型態。
 species <- iris$Species
 
 #' 請問species共有哪幾種類別？（答案應該是一個character vector）
