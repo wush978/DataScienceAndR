@@ -7,138 +7,163 @@
   Version: 1.0
 
 - Class : text
-  Output: 在R 中，我們操作的所有變數，都是一種R 物件(Object)。
+  Output: |
+    在R 中，我們操作的所有變數，都是一種R 物件(Object)。
     這一堂課程中，就是要簡介R 的物件結構。
 
 - Class : text
-  Output: 在所有物件中，最基礎的「原子」物件，就是在上一堂課中介紹的各種向量。
-    其他的物件都是有這些原子物件組合而成。
+  Output: |
+    在所有物件中，最基礎的「原子」物件，就是在上一堂課中介紹的各種向量。
+    其他的物件都是由這些原子物件組合而成。
 
 - Class : text
-  Output: 這些向量物件有兩個很重要的屬性：`mode`和`length`。
+  Output: |
+    向量物件有兩個很重要的屬性：`mode`和`length`。
     `mode`代表這個向量的值型態，總共有：`logical`、`integer`、`numeric`、`complex`、`character`和`raw`。
-    `length`代表這個向量的值的個數。
+    `length`則代表這個向量中值的個數。
 
 - Class : cmd_question
-  Output: 同學可以用`mode`和`length`這個函數來查詢一個向量的型態和長度。
-    請同學試試看：`mode(x)`
+  Output: |
+    若要查詢一個向量的型態和長度，可以使用函數`mode`和`length`。
+    請同學試試看：`mode(x)`。
   CorrectAnswer: mode(x)
   AnswerTests: omnitest('mode(x)', "numeric")
 
 - Class : mult_question
-  Output: 請問x 的型態是？
+  Output: |
+    請問x 的型態是？
   AnswerChoices: logical;integer;numeric;complex;character;raw
   CorrectAnswer: numeric
   AnswerTests: omnitest(correctVal = 'numeric')
   Hint: 請參考`mode(x)`的輸出
 
 - Class: cmd_question
-  Output: 接著，請試試看`length(x)`
+  Output: |
+    接著，請試試看`length(x)`。
   CorrectAnswer: length(x)
   AnswerTests: omnitest('length(x)', 5L)
 
 - Class: mult_question
-  Output: 請問x 的長度是？
+  Output: |
+    請問x 的長度是？
   AnswerChoices: 1;2;3;4;5;6
   CorrectAnswer: 5
   AnswerTests: omnitest(correctVal = '5')
   Hint: 請參考`length(x)`的輸出
 
 - Class: text
-  Output: R 也可以建立一種叫做`list`的向量，這是「R 物件」的向量。換句話說，每一個值
-    都是R 物件，都有自己的`mode`、`length`等屬性。我們會在一些複雜的統計模型中，見到這樣的
-    資料型態。舉例來說，在R 中如果要建立一個迴歸模型，會使用：`g <- lm(dist ~ speed, cars)`
+  Output: |
+    R 也可以建立一種叫做`list`的向量，這是「R 物件」的向量。
+    在此向量中，每一個值都是R 物件，都具有各自的`mode`、`length`等屬性。我們會在較為複雜的統計模型中，見到這樣的資料型態。
+    舉例來說，在R 中如果要建立一個迴歸模型，會使用：`g <- lm(dist ~ speed, cars)`
     這樣的程式碼會利用車速當解釋變數、煞車距離當應變數，建立一個迴歸模型。
-    這裡我們先不管`lm`怎麼用，而是要看看`g`這個物件的結構。同學只要掌握這個課程的內容，
-    未來就可以輕鬆的探索各種機器學習或統計分析演算法的輸出結果。
+    先不管`lm`如何使用，上述的例子主要是希望能讓同學了解`g`這個物件的結構。
+    只要掌握這部分的課程內容，未來就可以輕鬆的探索更多機器學習或統計分析演算法的輸出結果。
 
 - Class: cmd_question
-  Output: 請同學檢查`g`的型態
+  Output: |
+    請同學檢查`g`的型態。
   CorrectAnswer: mode(g)
   AnswerTests: omnitest('mode(g)', mode(g))
 
 - Class: cmd_question
-  Output: 請同學檢查`g`的長度
+  Output: |
+    請同學檢查`g`的長度。
   CorrectAnswer: length(g)
   AnswerTests: omnitest('length(g)', length(g))
 
 - Class: cmd_question
-  Output: 在上一個章節中，我們有介紹可以使用如`g[1:2]`的方式來拿出`g`的第一個到第二個值。
-    而這樣的輸出結果，還是會和`g`有同樣的`mode`。這裡請同學看看`g[1:2]`的結果。
+  Output: |
+    在上一個章節中提及，可以使用如`g[1:2]`的方式取出`g`的第一個到第二個值。
+    而這樣的輸出結果和`g`會有同樣的`mode`。
+    請同學試看看`g[1:2]`的結果。
   CorrectAnswer: g[1:2]
   AnswerTests: omnitest('g[1:2]', g[1:2])
 
 - Class : text
-  Output: 同學會在R console看到一些數字與奇妙的文字。在最上面的`$coefficients`，表示
-    `g[1:2]`這個向量的第一個值（同時也是`g`的第一個值），是有名字的。他的名字是：`"coefficients"`。
-    接著，由於`g[1:2]`的第一個值是一個有名字的numeric 向量，所以R 就把這個向量所有的名字和值
-    一起顯示在console。也就是說，這個numeric 向量的第一個值是-17.579095，而名字是`"(Intercept)"`。
-    第二個值是3.932409，而名字是`"speed"`。
+  Output: |
+    同學會在R console看到一些數字以及文字出現。
+    在最上面的`$coefficients`，表示`g[1:2]`這個向量的第一個值（同時也是`g`的第一個值），是有名字的。而它的名字是：`"coefficients"`。
+    由於`g[1:2]`的第一個值是一個有名字的numeric 向量，R 就把這個向量所有的名字和值一起顯示在console之中。
+    而這個numeric 向量的第一個值是-17.579095，名字是`"(Intercept)"`。第二個值是3.932409，名字則是`"speed"`。
 
 - Class : text
-  Output: 接著，`$residuals`表示`g[1:2]`的第二個值也是有名字的，而且它的名字是`"residuals"`。由於
-    這個值也是一個有名字的numeric 向量，所以R 就把值和名字同時顯示到console上。所以我們就
-    可以知道，這個numeric 向量的第一個值的名字是`"1"`，值是3.849460。以此類推。
+  Output: |
+    接著，`$residuals`表示`g[1:2]`的第二個值也是有名字的，而且它的名字是`"residuals"`。
+    由於這個值也是一個有名字的numeric 向量，所以R 就把值和名字同時顯示到console上。
+    所以我們就可以知道，這個numeric 向量的第一個值的名字是`"1"`，值是3.849460。以此類推。
 
 - Class : text
-  Output: 然而整個R Console的顯示告訴我們`g[1:2]`仍然是一個list，因為R 只有在顯示list的內容
+  Output: |
+    然而，整個R Console的結果顯示，`g[1:2]`仍然是一個list，因為R 只有在顯示list的內容
     才會帶有`$coefficients`和`$residuals`這種標記。如果只是一個numeric 向量，就不會顯示出
     `$coefficients`和`$residuals`。
 
 - Class : cmd_question
-  Output: 請同學輸入`list(1, a = 2)`來看看R 是如何顯示list，以及比較當值有附帶名字，或是沒有
-    附帶名字時，輸出的不同。
+  Output: |
+    請同學輸入`list(1, a = 2)`來看看R 如何顯示list，並比較當值有附帶名字及沒有附帶名字時，輸出結果的不同。
   CorrectAnswer: list(1, a = 2)
   AnswerTests: omnitest('list(1, a = 2)')
 
 - Class : text
-  Output: 在一開始，R 顯示了`[[1]]`，然後才顯示一個值為1 的numeric 向量。開頭的`[[1]]`不只
-    說明了這個物件是一個list，也說明接下來顯示的是第一個值的內容。
+  Output: |
+    在輸出結果的一開始，R 顯示了`[[1]]`，接著顯示一個值為1 的numeric 向量。
+    開頭的`[[1]]`不只說明了這個物件是一個list，也說明接下來顯示的是第一個值的內容。
 
 - Class : text
-  Output: 接著，R 顯示了`$a`，後才顯示了一個值為2 的numeric 向量。開頭的`$a`因為位置在第二，
-    所以代表這是這個list物件的第二個值。同時，這個值的名字是`"a"`。
+  Output: |
+    接著，R 顯示了`$a`，以及顯示一個值為2 的numeric 向量。
+    開頭的`$a`因為位置在上述的`[[1]]`之後，所以代表這是這個list物件的第二個值。
+    同時，這個值的名字是`"a"`。
 
 - Class : cmd_question
-  Output: 但是如果我們想拿出，`g`的第一個值，並且是這個物件的本身，而非被包在一個list中，
-    我們需要用：`g[[1]]`。請同學試試看。
+  Output: |
+    若想找出`g`的第一個值的物件本身，而非被包在一個list中，我們需要用到：`g[[1]]`。
+    請同學試試看。
   CorrectAnswer: g[[1]]
   AnswerTests: omnitest('g[[1]]', g[[1]])
 
 - Class : cmd_question
-  Output: 請同學查詢`g[[1]]`的型態
+  Output: |
+    請同學查詢`g[[1]]`的型態。
   CorrectAnswer: mode(g[[1]])
   AnswerTests: omnitest('mode(g[[1]])', mode(g[[1]]))
 
 - Class : cmd_question
-  Output: 請同學查詢`g[[1]]`的長度
+  Output: |
+    請同學查詢`g[[1]]`的長度。
   CorrectAnswer: length(g[[1]])
   AnswerTests: omnitest('length(g[[1]])', length(g[[1]]))
 
 - Class : text
-  Output: 這裡再解釋一次`g[1]`和`g[[1]]`的差異。使用`g[1]`時，R 取出向量的第一個元素，並且維持list的結構，
-    所以`g[1]`的結果還仍是list。使用`g[[1]]`時，R 會打破list的結構，再取出向量的第一個元素，所以`g[[1]]`的
-    型態會是存放在list裡面的R 物件的型態。
-    所以在上述的例子中，`g[1]`的型態是list，而`g[[1]]`的型態就是numeric。這是因為g 這個list的第一個存放
-    的R 物件是numeric向量。
+  Output: |
+    再針對`g[1]`和`g[[1]]`的差異進行說明一次。
+    使用`g[1]`時，R 取出向量的第一個元素，並且維持list的結構，所以`g[1]`的結果還仍是list。
+    相反的，使用`g[[1]]`時，R 會打破list的結構，再取出向量的第一個元素，所以`g[[1]]`的型態會是存放在list裡面的R 物件的型態。
+    在上述的例子中，因為g 這個list的第一個存放的R 物件是numeric向量，所以得到`g[1]`的型態是list，`g[[1]]`的型態則是numeric。
 
 - Class : text
-  Output: 一般來說，對R 物件使用`[]`之後，會取得會和該物件相同的物件。舉例來說，`a[1]`的型態會和`a`一樣。
-    而`[[]]`就沒有類似的特性了。
+  Output: |
+    一般來說，對R 物件使用`[]`之後，會取得和該物件相同型態的物件。
+    所以`a[1]`的型態會和`a`一樣，而`[[]]`就沒有類似的特性了。
 
 - Class : text
-  Output: 經過這些練習，相信同學也會理解list這個「R 物件的向量」是什麼意思。
-    list向量最有用的地方，在於它可以裝不同型態的值。以`g`為範例，雖然它大部分的值的型態都是numeric，
-    但是有些物件的型態會是call和list。這讓R 的開發者能更有彈性的建立一些複雜的模型。
-    同時同學在學會list之後，也更有能力來了解各種R 套件所建立的模型物件。
+  Output: |
+    經過上述的練習，相信同學可以理解list這個「R 物件的向量」所代表的意義。
+    list向量最實用的特性，在於它可以裝不同型態的值。
+    以`g`為範例，雖然大部分值的型態都是numeric，但是也有些型態為call和list的物件。
+    list向量讓R 的開發者能更有彈性的建立較為複雜的模型。
+    同學在學會list之後，也可以更有能力來了解不同R 套件所建立的模型物件。
 
 - Class: cmd_question
-  Output: 請同學檢查看看`g[[10]]`的型態
+  Output: |
+    請同學檢查看看`g[[10]]`的型態。
   CorrectAnswer: mode(g[[10]])
   AnswerTests: omnitest('mode(g[[10]])', 'call')
 
 - Class : text
-  Output: 這裡的`g[[10]]`其實是記載著產生g 的程式碼。在R 裡面，這樣的程式碼是存成call型態的物件。
+  Output: |
+    這裡的`g[[10]]`其實是記載著產生g 的程式碼。在R 裡面，這樣的程式碼是存成call型態的物件。
     我們現在只要知道這是一種call就可以了。至於call是什麼東西，要等到同學需要開始深入的學習R 的原始碼、運作機制時，
     才需要弄懂。我們現在只要知道，list可以裝所有R 的物件就可以了。
 
