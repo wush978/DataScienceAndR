@@ -117,26 +117,30 @@
 
 - Class : text
   Output: |
-    第二，因為表格的資料是結構化的，所以data.frame的值不能存放太奇怪的物件。具體來說，data.frame的各個
-    元素必須是以下幾種類型之一：數值(numeric)、字串(character)、布林(logical)、類別(factor)、數值矩陣(numeric matrix)、
+    第二，因為表格的資料是結構化的，所以data.frame存放的值會有格式上的限制。
+    具體來說，data.frame的各個元素必須是以下幾種類型之一：數值(numeric)、字串(character)、布林(logical)、類別(factor)、數值矩陣(numeric matrix)、
     list或data.frame。
 
 - Class : text
-  Output: 最重要的，因為data.frame代表的是二維表格，所以每一個值的長度都要一致（矩陣或data.frame的話，則是列(row)
-    的個數）。這種特性讓我們在整理資料上是非常的方便。
+  Output: |
+    最重要的是，因為data.frame代表的是二維表格，所以每一個值的長度須一致（若為矩陣或data.frame，則是列(row)的數量需一致）。
+    上述的特性可以在整理資料時提供很大的幫助。
 
 - Class : mult_question
-  Output: 請問下列哪一個list物件，符合data.frame的要素？如果不確定的話，可以看Hint了解原因。
+  Output: |
+    請問下列哪一個list物件，符合data.frame的要素？如果不確定的話，可以看Hint了解原因。
   AnswerChoices: list(a = 1:3, b = 1:4);list(a = function() { }, b = 1:4);list(a = 1:3, b = matrix(1:6, nrow = 3, ncol = 2))
   CorrectAnswer: list(a = 1:3, b = matrix(1:6, nrow = 3, ncol = 2))
   AnswerTests: omnitest(correctVal = 'list(a = 1:3, b = matrix(1:6, nrow = 3, ncol = 2))')
   Hint: 提醒同學，`list(a = 1:3, b = 1:4)`長度不一樣，`list(a = function() { }, b = 1:4)`的第一個值是函數，不符合型態的條件。
 
 - Class : text
-  Output: data.frame的操作也是非常重要的。
+  Output: |
+    data.frame的操作也是非常重要的。
 
 - Class : cmd_question
-  Output: 在R 之中，我們可以使用`data.frame`函數來建立一個data.frame。
+  Output: |
+    在R 之中，可以使用`data.frame`函數來建立一個data.frame。
     請同學現在試試看利用`data.frame(class = "NTU", id = 1:10,scores = matrix(c(80:99),nrow=10,ncol=2 ) )`
     建立一個data.frame，並且把這個物件存到變數`a`
   CorrectAnswer: a <- data.frame(class = "NTU", id = 1:10,scores = matrix(c(80:99),nrow=10,ncol=2 ) )
@@ -144,27 +148,30 @@
     'a = data.frame(class = "NTU", id = 1:10,scores = matrix(c(80:99),nrow=10,ncol=2 ) )')
 
 - Class : mult_question
-  Output: 所有list的操作，都可用在data.frame上。請問同學，下面哪一個語法「不能」選取`a` 的第一欄？
+  Output: |
+    所有list的操作，都可用在data.frame上。
+    請問同學，下面哪一個語法「不能」選取`a` 的第一欄？
   AnswerChoices: a[["class"]];a[[1]];a$class;a$`class`;a[["id"]]
   CorrectAnswer: a[["id"]]
   AnswerTests: omnitest(correctVal = 'a[["id"]]')
   Hint: 提醒同學，`a` 是透過`data.frame(class = "NTU", id = 1:10,scores = matrix(c(80:99),nrow=10,ncol=2 ) )`建立的。
 
 - Class : text
-  Output: 除了list的語法之外，我們也可以使用類似matrix的語法。
+  Output: |
+    除了list的語法之外，在data.frame上也可以使用和matrix一樣的語法。
 
 - Class: text
   Output: |
-    舉例來說，`nrow(a)`可以列出a 所包含的列數、`ncol(a)`可以
-    列出a 所包含的欄數、`dim(a)`可以一次列出兩者。這些都和
-    matrix非常類似。
+    舉例來說，`nrow(a)`可以列出a 所包含的列數、`ncol(a)`可以列出a 所包含的欄數、`dim(a)`則可以一次列出兩者。
+    上述特性都和matrix一樣。
 
 - Class: cmd_question
   Output: |
-    資料的選取也很類似。我們可以用`a[,1]`選取第一欄。請同學試試看。
+    資料的選取的方式也是一樣的。我們可以用`a[,1]`選取第一欄。請同學試試看。
 
 - Class : mult_question
-  Output: 根據螢幕上的輸出，請問同學`a[,1]`的類別是什麼呢？
+  Output: |
+    根據螢幕上的輸出，請問同學`a[,1]`的類別是什麼呢？
   AnswerChoices: list;data.frame;factor
   CorrectAnswer: factor
   AnswerTests: omnitest(correctVal = 'factor')
@@ -177,17 +184,20 @@
 
 - Class: cmd_question
   Output: |
-    `colnames(a)`則可以取出a 的欄位名稱。請同學試試看。名稱也可
-    以用於接下來的資料選取中。
+    `colnames(a)`則可以取出a 的欄位名稱。請同學試試看。名稱也可以用於接下來的資料選取中。
 
 - Class : cmd_question
-  Output: 欄位的方向，也可以用名字代替。舉例來說，`a[2,"id"]`可以選到第二列第二欄，因為`a[2,]`代表第二列，
-    `a[,"id"]` 會選到名稱為`"id"`的第二欄。而兩者的交集，就是第2 列第2 欄。請同學試試看。
+  Output: |
+    資料選取時，欄位的方向也可以用名字代替。
+    舉例來說，`a[2,"id"]`可以選到第二列第二欄，因為`a[2,]`代表第二列，而`a[,"id"]` 會選到名稱為`"id"`的第二欄。
+    兩者的交集，就是第2 列第2 欄。請同學試試看。
   CorrectAnswer: a[2,"id"]
   AnswerTests: omnitest('a[2,"id"]', 2)
 
 - Class : mult_question
-  Output: 中括號`[]`也可以一次選取多列多欄。舉例來說，`a[1:2,"id"]`可以一次選取`a$id`底下的第一到第二的值。
+  Output: |
+    中括號`[]`也可以一次選取多列多欄。
+    舉例來說，`a[1:2,"id"]`可以一次選取`a$id`底下第1個到第2個的值。
     請問同學，下面哪一種語法「不能」得到一樣的結果？
   AnswerChoices: a$id[1:2];a[[2]][1:2];a[["id"]][1:2];a[1:2]["id"]
   CorrectAnswer: a[1:2]["id"]
@@ -195,36 +205,42 @@
   Hint: 在data.frame上，通常會先對欄位做選擇，取得欄位中的向量以後，才能使用中括號。
 
 - Class : cmd_question
-  Output: 另一個用法是：`a[1:2,1:2]`，可以選出前兩列和前兩欄。請同學試試看。
+  Output: |
+    另一個用法是：`a[1:2,1:2]`，可以選許出前兩列的前兩欄。請同學試試看。
 
 - Class : cmd_question
-  Output: 請問同學，能不能用`class`查看`a[1:2,1:2]`的型態呢？
+  Output: |
+    請問同學，能不能用`class`查看`a[1:2,1:2]`的型態呢？
   CorrectAnswer: class(a[1:2,1:2])
   AnswerTests: omnitest('class(a[1:2,1:2])', 'data.frame')
 
 - Class : text
-  Output: 有沒有注意到，在輸入`a[1:2,"id"]`的時候R 會輸出一個向量，但是輸入`a[1:2,1:2]`的時候R 反而
-    會給一個data.frame呢？其實這樣不一致的行為，在未來同學如果寫一些複雜的資料整理時，會帶來困擾的。
+  Output: |
+    同學是否注意到，在輸入`a[1:2,"id"]`的時候，R 會輸出一個向量，但是輸入`a[1:2,1:2]`的時候R 反而會給一個data.frame呢？
+    其實這樣不一致的行為，在未來若要進行更複雜的資料整理時，會帶來困擾的。
 
 - Class : cmd_question
-  Output: 其實`[]`中括號這個函數，有一個參數叫做：`drop`，而且預設為`TRUE`。當我們使用`[]`取得結果的時候，
-    如果有一個方向可以縮減維度（例如只有一個欄位的表格），R 就會自動把表格的結構破壞，回傳一個向量。
+  Output: |
+    其實`[]`中括號這個函數，有一個參數叫做：`drop`，而且預設為`TRUE`。
+    當我們使用`[]`取得結果的時候，如果有一個方向可以縮減維度（例如只有一個欄位的表格），R 就會自動把表格的結構破壞，回傳一個向量。
     請同學試試看：`a[1:2, "id", drop = FALSE]`
   CorrectAnswer: a[1:2, "id", drop = FALSE]
   AnswerTests: omnitest('a[1:2, "id", drop = FALSE]')
 
 - Class : text
   Output: |
-    從R 顯示在console的輸出結果，同學應該會同意這是一個data.frame。
-    在R 中，console會根據不同的`class`
-    而用不同的方式呈現輸出結果。
+    從R 顯示在console的輸出結果，同學會發現這是一個data.frame。
+    在R 中，console會根據不同的`class`而用不同的方式呈現輸出結果。
 
 - Class : text
-  Output: 那我們對於list和data.frame的介紹就到這了。data.frame是處理資料和跑各種進階演算法時，非常常用到的結構。
-    所以請同學務必要熟悉各種data.frame的操作，才能順利的整理收集的資料，並且在資料上跑其他的演算法。
+  Output: |
+    上述的內容就是我們對於list和data.frame的介紹。
+    data.frame是處理資料和進行進階演算法時非常實用結構。
+    所以請同學務必要熟悉不同data.frame的操作，才能有系統地整理資料，並且在資料上運行其他的演算法。
 
 - Class : script
-  Output: 接著，請同學依照這個課程所學到的技巧，做一個簡單的練習。
+  Output: |
+    接著，請同學依照這個課程所學到的技巧，做一個簡單的練習。
     請同學在完成之後存檔，並輸入`submit()`來檢查結果是否符合預期。
     如果同學在檔案中看到亂碼，請使用Rstudio 左上角的File -> Reopen
     With Encoding... -> 選取：UTF-8
