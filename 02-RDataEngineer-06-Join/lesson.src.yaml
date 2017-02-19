@@ -368,69 +368,71 @@
 - Class: text
   Output: |
     結果只列出`df1`中和`df2`比對失敗的資料。
-    這是目前為止唯一的一次，在結果欄位只出現「`x`的欄位所產生的JOIN結果」。
+    這是目前為止，唯一欄位只剩下`x`的欄位，所產生的JOIN結果。
 
 - Class: text
   Output: |
-    在講解`semi_join`之前，我們要先提醒同學一個狀況：當比對的欄位，
-    值不唯一的時候，JOIN要如何作操作呢？
+    在講解`semi_join`之前，我們要先提醒同學一個狀況：當比對的欄位，值不唯一的時候，JOIN要如何作操作呢？
 
 - Class: cmd_question
   Output: |
     舉例來說，我們已經建立了兩個data.frame: `df3`與`df4`。
-    他們的`x`欄位都有兩個1。請同學輸入`View(df3)`看看`df3`
+    他們的`x`欄位都有兩個1。
+    請同學輸入`View(df3)`看看`df3`。
   CorrectAnswer: View(df3)
   AnswerTests: omnitest('View(df3)')
 
 - Class: cmd_question
-  Output: 請同學輸入`View(df4)`看看`df4`
+  Output: |
+    請同學輸入`View(df4)`看看`df4`。
   CorrectAnswer: View(df4)
   AnswerTests: omnitest('View(df4)')
 
 - Class: cmd_question
-  Output: 接著，我們輸入`inner_join(df3, df4)`看看結果有多少列。
+  Output: |
+    接著，我們輸入`inner_join(df3, df4)`看看結果有多少列。
   CorrectAnswer: inner_join(df3, df4)
   AnswerTests : omnitest('inner_join(df3, df4)')
 
 - Class: text
   Output: |
-    上述的這些`join`都會窮舉出所有可能排列組合。因為`df3`的`x`有
-    兩個1, `df4`的`x`有兩個1, 所以所有可能的排列組合有：2 * 2 = 4
+    上述的這些`join`都會窮舉出所有可能排列組合。
+    因為`df3`的`x`有兩個1, `df4`的`x`有兩個1, 所有可能的排列組合就有：2 * 2 = 4種
     因此`inner_join`就回傳4列。
 
 - Class: text
   Output: |
-    最後一個`semi_join`非常類似`inner_join`，但是當比對的資料不是
-    唯一時，它不會窮舉所有的可能性，而只是把有比對成功的`x`的資料留下
-    來。
+    最後一個`semi_join`非常類似`inner_join`，但是當比對的資料不是唯一時，
+    它不會窮舉所有的可能性，而只是將有比對成功的`x`的資料給保留下來。
 
 - Class: cmd_question
-  Output: 請同學輸入：`semi_join(df3, df4)`看看結果。
+  Output: |
+    請同學輸入：`semi_join(df3, df4)`看看結果。
   CorrectAnswer: semi_join(df3, df4)
   AnswerTests: omnitest('semi_join(df3, df4)')
 
 - Class: text
-  Output: 結果幾乎等價於`df3[1:2,]`，這是因為只有前兩列資料
-    有和`df4`比對成功。
+  Output: |
+    結果幾乎等價於`df3[1:2,]`，原因是只有前兩列資料有和`df4`比對成功。
 
 - Class: text
   Output: |
-    這次的大魔王要延續RDataEngineer-05-Data-Manipulation最後所
-    使用的`cl_info`資料。
+    這次的大魔王要延續在RDataEngineer-05-Data-Manipulation最後所使用的`cl_info`資料。
 
 - Class: text
   Output: |
-    同時，我們也準備了從央行抓取的GDP資料。但是這份資料要請同學自己想辦法讀出來。
+    同時，我們也準備了從央行抓取的GDP資料。但是這份資料請同學自己想辦法讀出來。
 
 - Class: text
   Output: |
-    我們的目標，是要比對房貸餘額是否超過GDP的40%。這是一種拿來評估房地產是否會泡沫化
-    的指標。
+    我們的目標是要比對房貸餘額是否超過GDP的40%。
+    這是一種拿來評估房地產是否會泡沫化的指標。
 
 - Class: script
   Output: |
-    就請同學多多加油了！利用從RBasic到RDataEngineer系列所學到的知識，完成這個挑戰。
+    就請同學多多加油了！
+    利用從RBasic到RDataEngineer系列所學到的知識，完成這個挑戰。
     請同學在完成之後存檔，並輸入`submit()`來檢查結果是否符合預期。
-    如果同學在檔案中看到亂碼，請使用Rstudio 左上角的File -> Reopen
+    如果同學在檔案中看到亂碼，請使用Rstudio 左上角的File -> Reopen。
   Script: RDataEngineer-06-HW.R
   AnswerTests: rdataengineer_06_hw(gdp, cl_info_year, answerHW)
