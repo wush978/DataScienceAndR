@@ -20,4 +20,4 @@ cl_info3 <- local({
 stopifnot(nrow(cl_info3) == 98)
 stopifnot(ncol(cl_info3) == 2)
 stopifnot(!is.unsorted(cl_info3$year_month))
-#' 這個資料集只要能和GDP做比較，就是一個我國房地產泡沫化的指標。
+#' 這個資料集只要能和GDP進行比較，就是一個我國房地產泡沫化的指標。
