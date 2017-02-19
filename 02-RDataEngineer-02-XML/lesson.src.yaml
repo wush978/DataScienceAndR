@@ -26,8 +26,7 @@
 - Class: mult_question
   Output: |
     如果我們收到一個文件，內容如下：
-		'<th>廠商名稱</th>
-		<td>台灣翔登股份有限公司</td>'
+    '<th>廠商名稱</th><td>台灣翔登股份有限公司</td>'
     請問同學，「廠商名稱」這段文字是什麼標籤呢？
   AnswerChoices: th;td
   CorrectAnswer: "th"
@@ -42,8 +41,8 @@
 - Class: mult_question
   Output: |
     如果我們收到一份文件，內容如下：
-		'<th class="T11b" bgcolor="#ffdd83" align="left" valign="middle" width="200">廠商名稱</th>
-		<td class="newstop" bgcolor="#EFF1F1">台灣翔登股份有限公司</td>'
+    '<th class="T11b" bgcolor="#ffdd83" align="left" valign="middle" width="200">廠商名稱</th>
+    <td class="newstop" bgcolor="#EFF1F1">台灣翔登股份有限公司</td>'
     請問同學，th標籤的class屬性的值為何呢？'
   AnswerChoices: T11b;newstop
   CorrectAnswer: "T11b"
