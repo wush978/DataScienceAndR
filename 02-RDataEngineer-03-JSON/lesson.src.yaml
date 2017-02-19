@@ -7,99 +7,111 @@
   Version: 2.3.1.1
 
 - Class: text
-  Output: 這門課程要跟各位同學介紹JSON（JavaScript Object Notation）資料的處理。
+  Output: |
+    這門課程要跟各位同學介紹JSON（JavaScript Object Notation）資料的處理。
 
 - Class: text
-  Output: JSON在網際網路上已經是最廣泛使用的格式之一，尤其常見於各種傳遞資料的API之中。
-    舉例來說，台北的Youbike的API資料、甚至是Facebook上的API資料，都是以JSON格式傳輸。
+  Output: |
+    JSON在網際網路上已經是最廣泛使用的資料格式之一，尤其常見於各種傳遞資料的API之中。
+    舉例來說，台北的YouBike、或甚至是Facebook上的API資料，都是以JSON格式傳輸。
 
 - Class: cmd_question
   Output: |
-    JSON格式也非常簡單，通常我們一般人就可以輕鬆理解。舉例來說，請同學輸入：
-    `cat(facebook_error, sep = "\n")`來看看Facebook的錯誤訊息
+    JSON格式也非常簡單，一般人可以輕鬆理解。
+    舉例來說，請同學輸入：`cat(facebook_error, sep = "\n")`來看看Facebook的錯誤訊息。
   CorrectAnswer: cat(facebook_error, sep = "\n")
   AnswerTests: omnitest('cat(facebook_error, sep = "\n")')
 
 - Class: text
-  Output: 從畫面上，我們可以簡單看到整個訊息的前後分別有`{`和`}`，這代表整個訊息就是一個
-    JSON物件。每個物件中則包含一對一對的「名稱」與「值」的組合。舉例來說，整個訊息的JSON物件
-    中，只有一對名稱與值得組合：名稱是："error"，值則是另一個JSON物件。
+  Output: |
+    從畫面上，我們可以看到整個訊息的前後分別有`{`和`}`，代表整個訊息就是一個JSON物件。
+    每個JSON物件中則包含一對對「名稱」與「值」的組合。
+    上述例子中，Facebook錯誤訊息的這個JSON物件只包含一對名稱與值的組合。名稱是："error"，值則是另一個JSON物件。
 
 - Class: mult_question
-  Output: 請問同學，"error"的值中，所包含的一對一對名稱與值的組合中，對應到值為"OAuthException"
-    的名稱，為下列何者？
+  Output: |
+    請問同學，在"error"的值中，包含的一對一對名稱與值的組合，而對應到值為"OAuthException"的為下列哪一個名稱呢？
   AnswerChoices: message;type;code;fbtrace_id
   CorrectAnswer: "type"
   AnswerTests: omnitest(correctVal = "type")
 
 - Class: cmd_question
-  Output: 在R 中，我們可以利用jsonlite套件，把一個JSON文件轉換成R 的list。
+  Output: |
+    在R 中，我們可以利用jsonlite套件，將一個JSON文件轉換成R 的list。
     請同學先安裝jsonlite套件。
   CorrectAnswer: check_then_install("jsonlite", "0.9.19")
   AnswerTests: test_package_version("jsonlite", "0.9.19")
 
 - Class: cmd_question
-  Output: 接著，請載入jsonlite套件。
+  Output: |
+    接著，請載入jsonlite套件。
   CorrectAnswer: library(jsonlite)
   AnswerTests: test_search_path("jsonlite")
 
 - Class: cmd_question
-  Output: 接著請同學檢查看看jsonlite套件的作者有沒有提供vignette讓R 使用者閱讀。
-    請同學輸入：`vignette(package = "jsonlite")`
+  Output: |
+    接著，請同學檢查看看jsonlite套件的作者是否提供vignette，供R 的使用者閱讀。
+    請同學輸入：`vignette(package = "jsonlite")`。
   CorrectAnswer: vignette(package = "jsonlite")
   AnswerTests: omnitest('vignette(package = "jsonlite")')
 
 - Class: cmd_question
   Output: |
-    jsonlite的作者很熱情，一口氣寫了四、五篇vignettes。由於我們這次教學的目的
-    是要上手jsonlite物件，所以就請同學輸入：`vignette("json-aaquickstart", "jsonlite")`
+    jsonlite的作者很熱情，一口氣寫了四、五篇vignettes。
+    由於這堂課的目的是要上手jsonlite物件，所以就請同學輸入：`vignette("json-aaquickstart", "jsonlite")`。
   CorrectAnswer: vignette("json-aaquickstart", "jsonlite")
   AnswerTests: omnitest('vignette("json-aaquickstart", "jsonlite")')
 
 - Class: text
-  Output: 這份文件是以網頁的形式，而非pdf的形式呈現給使用者。這種比較不正式，但是更彈性的方式，
-    在近年來受到許多R 套件開發者的青睞。例如我本人也寫了一篇這種類型的vignettes。
+  Output: |
+    這份文件是以網頁，而非pdf的形式呈現給使用者。
+    這種方式雖然比較不正式，但是和pdf相比之下較為彈性，近年來受到許多R 套件開發者的青睞。
+    例如我本人也寫了一篇這種類型的vignettes。
 
 - Class: text
-  Output: 在Vignettes的第一段很清楚的說明jsonlite的功能：讓R 和JSON物件之間能在不損失資訊
-    的狀況下轉換。而作者也馬上給了一個簡單的範例：使用jsonlite提供的`toJSON`和`fromJSON`，
-    可以完整的還原一個R 的data.frame。這種方式，是驗證轉換過程中是否有遺失資訊的一種方式。
+  Output: |
+    在Vignettes的第一段，很清楚的說明了jsonlite的功能：讓R 和JSON物件之間能在不損失資訊的狀況下轉換。
+    作者給了一個簡單的範例：使用jsonlite提供的`toJSON`和`fromJSON`，可以完整的還原一個R 的data.frame。
+    這種方式，是驗證轉換過程中是否有遺失資訊的一種方式。
 
 - Class: text
-  Output: 範例中所使用的`all.equal`是一種用來驗證程式碼正確性時，常常使用的工具。它會一字不漏
-    的比對兩個R 物件，必需要一模一樣才會回傳`TRUE`，否則會回報不一致的理由。
+  Output: |
+    範例中所使用的`all.equal`是一種用來驗證程式碼正確性時，經常使用到的工具。
+    它會一字不漏的比對兩個R 物件，必需要一模一樣才會回傳`TRUE`，否則會回報不一致的理由。
 
 - Class: text
-  Output: 文件的第二段描述jsonlite在把JSON物件轉換成R 物件時，會自動嘗試把JSON物件轉換成
-    更適合的物件。舉例來說，`["Amsterdam", "Rotterdam", "Utrecht", "Den Haag"]`如果
-    直接轉換，可能會變成一個長度為4 的list，而每個元素都是長度為1 的字串向量。
+  Output: |
+    文件的第二段描述jsonlite在把JSON物件轉換成R 物件時，會自動嘗試把JSON物件轉換成更適合的物件。
+    舉例來說，如果直接轉換`["Amsterdam", "Rotterdam", "Utrecht", "Den Haag"]`，結果可能會變成一個長度為4 的list，且每個元素都是長度為1 的字串向量。
 
 - Class: cmd_question
-  Output: 我們已經把`["Amsterdam", "Rotterdam", "Utrecht", "Den Haag"]`這段文字儲
-    存於變數`x1`，請同學試試看：`fromJSON(x1, simplifyVector = FALSE)`
+  Output: |
+    我們已經把`["Amsterdam", "Rotterdam", "Utrecht", "Den Haag"]`這段文字儲存於變數`x1`。
+    請同學試試看：`fromJSON(x1, simplifyVector = FALSE)`。
   CorrectAnswer: fromJSON(x1, simplifyVector = FALSE)
   AnswerTests: omnitest('fromJSON(x1, simplifyVector = FALSE)')
 
 - Class: text
-  Output: 如前所述，這是一個長度為4 的list，而且每個元素都是長度為1 的字串向量。
+  Output: |
+    如上方所述，這是一個長度為4 的list，而且每個元素都是長度為1 的字串向量。
 
 - Class: cmd_question
   Output: |
-    但是如果我們把`simplifyVector`設定成TRUE，那結果就會不同。這裡因為
-    `simplifyVector`參數的預設值是TRUE，所以我們不用額外的設定。如果想
-    知道函數的預設值，說明文件中都有清楚的記載。請同學輸入：`fromJSON(x1)`。
+    但是如果我們把`simplifyVector`設定成TRUE，那結果就會不同。
+    本案例中，因為`simplifyVector`參數的預設值是TRUE，所以不需要額外的設定。
+    如果想知道函數的預設值，說明文件中都有清楚的記載。
+    請同學輸入：`fromJSON(x1)`。
   CorrectAnswer: fromJSON(x1)
   AnswerTests: omnitest('fromJSON(x1)')
 
 - Class: text
-  Output: jsonlite的vignettes後面的段落仔細的介紹處理JSON的細節，未來同學
-    如果有需要使用，建議是先把作者提供的vignettes讀過以後，能省掉很多找bug的
-    時間。
+  Output: |
+    jsonlite的vignettes後面的段落有處理JSON細節的仔細介紹，未來同學如果有需要使用，建議先將作者提供的vignettes讀過，能省掉很多找bug的時間。
 
 - Class : script
-  Output: jsonlite在某些時候是很方便的套件，所以我們就直接請同學利用它來萃取
-    youbike API所抓下來的資料。請同學在完成之後存檔，並輸入`submit()`來檢查
-    結果是否符合預期。如果同學在檔案中看到亂碼，請使用Rstudio 左上角的File ->
-    Reopen With Encoding... -> 選取：UTF-8
+  Output: |
+    jsonlite是很方便的套件，請同學利用它來萃取youbike API所抓下來的資料。
+    請同學在完成之後存檔，並輸入`submit()`來檢查結果是否符合預期。
+    如果同學在檔案中看到亂碼，請使用Rstudio 左上角的File ->Reopen With Encoding... -> 選取：UTF-8
   Script: RDataEngineer-03-HW.R
   AnswerTests: rdataengineer_03_hw_test()
