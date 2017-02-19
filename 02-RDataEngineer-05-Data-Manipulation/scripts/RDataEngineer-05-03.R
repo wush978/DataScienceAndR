@@ -4,4 +4,4 @@ answer03 <- local({
   result1 <-
   # 並請用select從result1挑出year, month 和day。
 })
-# 完成後，請回到console輸入submit()。
+# 完成後，請回到console輸入`submit()`。
