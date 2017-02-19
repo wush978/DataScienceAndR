@@ -1,4 +1,4 @@
-# 首先，我們重新連線到另一個資料庫
+# 首先，請重新連線到另一個資料庫。
 library(RSQLite)
 drv <- dbDriver("SQLite")
 db <- dbConnect(drv, db_path2)
@@ -12,43 +12,43 @@ db <- dbConnect(drv, db_path2)
 #  error in statement: database is locked
 #Error in sqliteSendQuery(con, statement, bind.data) :
 #  error in statement: database is locked
-# 請執行：`gc()`
+# 請執行：`gc()`。
 
-# 請列出現在的資料庫中的表格清單
+# 請列出現在的資料庫中的表格清單。
 tb_list <- {
-  # 請填寫你的程式碼
+  # 請填寫你的程式碼。
 }
 
-# 資料庫中的TWII是台灣加權指數，是透過quantmod套件從yahoo下載的數據
+# 資料庫中的TWII是台灣加權指數，是透過quantmod套件從yahoo下載的數據。
 # 請問同學，這段數據的日期範圍，是幾號到幾號呢？
-# 你的答案應該是一個字串
+# 你的答案應該是一個字串。
 twii_head <- {
-  # 請填寫你的程式碼
+  # 請填寫你的程式碼。
 }
 twii_tail <- {
-  # 請填寫你的程式碼
+  # 請填寫你的程式碼。
 }
 stopifnot(class(twii_head) == "character")
 stopifnot(length(twii_head) == 1)
 stopifnot(class(twii_tail) == "character")
 stopifnot(length(twii_tail) == 1)
 
-# 接著我們開啟一個Transaction
+# 接著我們開啟一個Transaction。
 dbBegin(db)
 
-# R 內建的iris資料共有三種類別，一共150筆花的量測資料
+# R 內建的iris資料共有三種類別，一共150筆花的量測資料。
 # 請同學將屬於setosa種類（Species的值為"setosa"）的資料，
-# 寫入到database，並且取名為"setosa"
+# 寫入到database，並且取名為"setosa"。
 {
-  # 請填寫你的程式碼
+  # 請填寫你的程式碼。
 }
 
 # 請確實將資料寫入！
 {
-  # 請填寫你的程式碼
+  # 請填寫你的程式碼。
 }
 
-# 最後，我們中斷連線
+# 最後，我們中斷連線。
 dbDisconnect(db)
 
-# 測試程式將會檢查這個資料庫內的資料
+# 測試程式將會檢查這個資料庫內的資料。
