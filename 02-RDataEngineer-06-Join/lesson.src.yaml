@@ -129,7 +129,7 @@
 
 - Class: script
   Output: |
-    接著請同學從flights中「依序」選出`year, day, hour, origin, dest, tailnum, carrier`等欄位，再抽出前100筆記資料，最後和`airlines`做`left_join`。
+    接著請同學從flights中「依序」選出`year:day, hour, origin, dest, tailnum, carrier`等欄位，再抽出前100筆記資料，最後和`airlines`做`left_join`。
   Script: RDataEngineer-06-01.R
   AnswerTests: rdataengineer_06_01(answer01)
 
