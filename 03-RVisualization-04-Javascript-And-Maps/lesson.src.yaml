@@ -139,63 +139,66 @@
   Output: |
     這是拿台股指數搭配googleVis提供的月曆API所繪製的圖。
     我們可以從中清楚的看到台股停止交易(或是yahoo沒有抓到資料)的日期，大部份為週末。
-    這類和人的活動很相關的資料，使用googleVis進行呈現，會比直接用傳統的line chart還要容易發現數據和周末等日期的相關性。
+    這類和人的活動很相關的資料，使用googleVis進行呈現，會比直接用傳統的line chart還要容易發現數據和周末等日期之間的相關性。
 
 - Class: cmd_question
   Output: |
-    還有如：`gvisOrgChart(Regions) %>% plot`，則是拿來繪製組織圖的選擇。
+    還有其他範例，如：`gvisOrgChart(Regions) %>% plot`則是拿來繪製組織圖的選擇。
 
 - Class: cmd_question
   Output: |
-    接著我們介紹ggmap這個可以處理地理資料的套件。請同學輸入`skip()`檢查
-    有無安裝ggmap
+    接著我們介紹ggmap這個可以處理地理資料的套件。
+    請同學輸入`skip()`檢查有無安裝ggmap。
   CorrectAnswer: check_then_install("ggmap", "2.6.1")
   AnswerTests: test_package_version("ggmap", "2.6.1")
 
 - Class: cmd_question
   Output: |
-    接著，我們載入ggmap
+    接著，請載入ggmap。
   CorrectAnswer: library(ggmap)
   AnswerTests: test_search_path("ggmap")
 
 - Class: cmd_question
   Output: |
-    eq是來自<http://earthquake.usgs.gov>所抓取的地震資料。請同學輸入`View(eq)`看一下這筆資料。
+    eq是來自<http://earthquake.usgs.gov>所抓取的地震資料。
+    請同學輸入`View(eq)`觀察一下這筆資料。
 
 - Class: text
   Output: |
-    同學可以看到eq中有提供地震的位置(經緯度：longitude, latitude)和地震的規模(mag)
-
+    同學可以看到，eq中有提供地震的位置(經緯度：longitude, latitude)和地震的規模(mag)。
+    
 - Class: cmd_question
   Output: |
-    接著我們示範一次怎麼把地震畫在地圖中。首先我們要先從google拿到圖資。請同學輸入：
-    `twmap <- try(get_map("Taiwan", 3), silent = TRUE)`
-    第一個參數是告訴google我們要抓取的圖資的位置。第二個參數則是地圖的範圍大小，值從3（世界規模）到21（建築物的規模）
+    接著我們示範一次如何將地震畫在地圖中。
+    首先我們要先從google拿到圖資。
+    請同學輸入：`twmap <- try(get_map("Taiwan", 3), silent = TRUE)`。
+    第一個參數是告訴google我們要抓取的圖資的位置。
+    第二個參數則是地圖的範圍大小，值從3（世界規模）到21（建築物的規模）。
   CorrectAnswer: twmap <- readRDS(.get_path("twmap.Rds"))
   AnswerTests: any_of_exprs('twmap <- try(get_map("Taiwan", 3), silent = TRUE)', 'twmap <- readRDS(.get_path("twmap.Rds"))')
 
 - Class: cmd_question
   Output: |
-    接著請同學輸入: `skip()`來確認圖資有確實載入。
+    接著請同學輸入: `skip()`來確認圖資是否確實載入。
   CorrectAnswer: if (class(twmap)[1] == "try-error") twmap <- readRDS(.get_path("twmap.Rds"))
   AnswerTests: omnitest('if (class(twmap)[1] == "try-error") twmap <- readRDS(.get_path("twmap.Rds"))')
 
 - Class: cmd_question
   Output: |
-    我們接著建立ggplot物件：`g <- ggmap(twmap, extent = "device")`
-
+    我們接著建立ggplot物件：`g <- ggmap(twmap, extent = "device")`。
+    
 - Class: cmd_question
   Output: |
     我們輸入`g`看一下剛剛抓回來的圖資。
 
 - Class: cmd_question
   Output: |
-    接著請同學輸入：`g + geom_point(aes(x = longitude, y = latitude), data = eq)`
+    接著請同學輸入：`g + geom_point(aes(x = longitude, y = latitude), data = eq)`，
     來繪製新的圖層標示地震位置。
 
 - Class: cmd_question
   Output: |
-    接著請同學輸入：`g + geom_point(aes(x = longitude, y = latitude, size = mag), data = eq)`
+    接著請同學輸入：`g + geom_point(aes(x = longitude, y = latitude, size = mag), data = eq)`，
     來用點的大小表示地震規模。
 
 - Class: text
