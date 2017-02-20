@@ -8,109 +8,114 @@
 
 - Class: text
   Output: |
-    大家好，本課程主要跟大家解說如何在R 裡面處理新時代的互動式繪圖與新型態的數據。
+    大家好，本堂課主要跟大家解說，如何在R 裡面處理新時代的互動式繪圖與新型態的數據。
 
 - Class: cmd_question
-  Output: 我們想介紹的是googleVis套件。請同學試著安裝googleVis
+  Output: |
+    我們會介紹的是googleVis套件。
+    請同學安裝googleVis
   CorrectAnswer: check_then_install("googleVis", "0.5.10")
   AnswerTests: test_package_version("googleVis", "0.5.10")
 
 - Class: cmd_question
-  Output: 請同學載入googleVis套件
+  Output: |
+    請同學載入googleVis套件。
   CorrectAnswer: library(googleVis)
   AnswerTests: test_search_path("googleVis")
 
 - Class: cmd_question
   Output: |
-    同學可以打開`vignette("googleVis_examples", package = "googleVis")`，
+    同學請打開`vignette("googleVis_examples", package = "googleVis")`，
     我們簡單用這個文件做範例。
 
 - Class: text
   Output: |
-    在第一章Line chart的部份，同學可以把滑鼠移動到線上。這就是用網頁技術做
-    視覺化的好處：圖形可以「直接」跟使用者互動，而不需要透過程式碼。
+    在第一章Line chart的部份，同學可以把滑鼠移動到線上。
+    這就是用網頁技術做視覺化的好處：圖形可以「直接」跟使用者互動，而不需要透過程式碼。
 
 - Class: cmd_question
   Output: |
-    然而googleVis的API設計是要我們完全自行整理資料。因此我們
-    得先載入`dplyr`。請同學安裝`dplyr`或是輸入skip()跳過。
+    然而googleVis的API設計，需要我們完全自行整理資料。
+    因此我們得先載入`dplyr`。
+    請同學安裝`dplyr`或是輸入skip()跳過。
   CorrectAnswer: check_then_install("dplyr", "0.4.3")
   AnswerTests: test_package_version("dplyr", "0.4.3")
 
 - Class: cmd_question
-  Output: 請同學載入dplyr
+  Output: |
+    請同學載入dplyr。
   CorrectAnswer: library(dplyr)
   AnswerTests: test_search_path("dplyr")
 
 - Class: cmd_question
   Output: |
     請同學輸入：
-    `dat1 <- group_by(hsb, race, sex) %>% summarise(math.avg = mean(math))`
+    `dat1 <- group_by(hsb, race, sex) %>% summarise(math.avg = mean(math))`。
+    
+- Class: cmd_question
+  Output: |
+    接著我們輸入：`g <- gvisBarChart(dat1)`建立一個gvis物件。
+    如果同學探索這個物件，會發現它是一個網頁的HTML。
 
 - Class: cmd_question
   Output: |
-    接著我們輸入：`g <- gvisBarChart(dat1)`建立一個gvis物件。如果同學
-    去探索這個物件，會發現它是一個網頁的HTML。
-
-- Class: cmd_question
-  Output: |
-    接著，我們輸入：`plot(g)`
-
+    接著，我們輸入：`plot(g)`。
+    
 - Class: text
   Output: |
-    同學的電腦瀏覽器中，就會打開一個網頁，上面繪製著一份barchart。
+    同學的電腦瀏覽器中會打開一個網頁，上面繪製著一份barchart。
     如果我們把滑鼠移上去，還會跳出確切的值。
 
 - Class: cmd_question
   Output: |
-    然而gvisBarChart吃資料的邏輯和dplyr所整理出的資料不太一致。
-    gvisBarChart是把操作顏色的類別，放在data.frame的column方向。
-    因此，我們需要用一個套件快速做轉換。請同學輸入`skip()`檢查
-    是否有安裝reshape2套件。若無，課程會自動安裝該套件。
+    然而，gvisBarChart接收資料的邏輯和dplyr所整理出的資料不太一致。
+    gvisBarChart將操作顏色的類別，放在data.frame的column方向。
+    因此，我們需要用一個可以快速做轉換的套件。
+    請同學輸入`skip()`檢查是否有安裝reshape2套件。
+    若無，課程會自動安裝該套件。
   CorrectAnswer: check_then_install("reshape2", "1.4.1")
   AnswerTests: test_package_version("reshape2", "1.4.1")
 
 - Class: cmd_question
   Output: |
-    請同學載入reshape2
+    請同學載入reshape2。
   CorrectAnswer: library(reshape2)
   AnswerTests: test_search_path("reshape2")
 
 - Class: cmd_question
   Output: |
-    接著我們試著執行：`dcast(dat1, race ~ sex)`
-
+    接著我們執行：`dcast(dat1, race ~ sex)`。
 - Class: text
   Output: |
-    同學會看到sex欄位被拉到data.frame的欄位，也就是female一欄，male一欄。
+    同學會看到sex欄位被拉到data.frame的欄位，也就是female和male各一欄。
 
 - Class: cmd_question
   Output: |
-    讓我們把這筆資料餵給gvisBarChart後呈現在網頁上。請同學輸入：
-    `dcast(dat1, race ~ sex) %>% gvisBarChart() %>% plot()`
-
+    讓我們把這筆資料提供給gvisBarChart後呈現在網頁上。
+    請同學輸入：`dcast(dat1, race ~ sex) %>% gvisBarChart() %>% plot()`。
 - Class: text
   Output: |
-    這次就會看到不同的性別有不同的顏色。
+    這次就會看到不同的性別有著不同的顏色。
 
 - Class: cmd_question
   Output: |
-    接著我們挑出read和math做scatter plot。請同學輸入：
-    `select(hsb, read, math) %>% gvisScatterChart() %>% plot()`
-
+    接著我們挑出read和math做scatter plot。
+    請同學輸入：`select(hsb, read, math) %>% gvisScatterChart() %>% plot()`。
+    
 - Class: text
   Output: |
-    目前googleVis整合了google Chart API，提供了許多功能。但是和ggplot2相比，它的功能相對簡單。
+    目前googleVis整合了google Chart API，提供了許多功能。
+    但是和ggplot2相比，它的功能仍是相對簡單。
     googleVis這類套件帶給R社群的影響，是讓大家了解javascript based的繪圖引擎所帶來的可能性。
 
 - Class: text
   Output: |
-    傳統工具要讓使用者與R互動，技術門檻很高。但是javascript等網頁技術大幅度的降低這類門檻。
+    傳統的視覺化工具需要使用者與R互動，技術門檻很高。
+    但是javascript等網頁技術則可以大幅度的降低這類技術門檻。
 
 - Class: text
   Output: |
-    因此，現在R 與javascript整合的套件可說是百花齊放，可惜我還沒有注意到有一套像ggplot2一樣
-    有代表性的套件。
+    因此，現在R 與javascript整合的套件可說是百花齊放，可惜目前為止我還沒有注意到有一套像ggplot2一樣有代表性的套件出現。
 
 - Class: text
   Output: |
@@ -118,22 +123,23 @@
 
 - Class: cmd_question
   Output: |
-    請同學輸入：`gvisSankey(dat_sk) %>% plot()`
-
+    請同學輸入：`gvisSankey(dat_sk) %>% plot()`。
+    
 - Class: text
   Output: |
-    這張圖描述了兩個state之間的流動。舉例來說，如果我們知道去年購買各種品牌筆電的消費者，今年
-    各自是買哪一個品牌的筆電，那透過分析品牌間的變化，我們就可以利用Sankey Diagram來觀察變化
+    這張圖描述了兩個state之間的流動。
+    舉例來說，如果我們知道去年購買不同品牌筆電的消費者，今年各自是買哪一個品牌的筆電，那透過分析品牌間的數據變化，我們就可以利用Sankey Diagram來觀察變化
     的細節。
 
 - Class: cmd_question
-  Output: 接著，請同學輸入： `gvisCalendar(TWII) %>% plot`
-
+  Output: |
+    接著，請同學輸入： `gvisCalendar(TWII) %>% plot`。
+    
 - Class: text
   Output: |
-    這是拿台股指數搭配googleVis提供的月曆API所繪製的圖。我們可以從中清楚的看到台股停止交易
-    (或是yahoo沒有抓到資料)的日期，期中大部份是週末。這樣的數據如果拿來呈現和人的活動很相關
-    的資料，會比直接用傳統的line chart還要容易發現是不是有和周末等日期的相關性。
+    這是拿台股指數搭配googleVis提供的月曆API所繪製的圖。
+    我們可以從中清楚的看到台股停止交易(或是yahoo沒有抓到資料)的日期，大部份為週末。
+    這類和人的活動很相關的資料，使用googleVis進行呈現，會比直接用傳統的line chart還要容易發現數據和周末等日期的相關性。
 
 - Class: cmd_question
   Output: |
