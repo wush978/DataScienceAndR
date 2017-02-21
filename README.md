@@ -95,7 +95,11 @@ window.onload =function(){
 
 ## 新聞專區
 
-### 全面中文化的swirl(v101.4.1)套件於2017-02-16上線。若網友有發現任何bug，麻煩到[聊天室](https://gitter.im/wush978/DataScienceAndR?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)回報，謝謝
+- **新版本的swirl(v101.5)已上線**
+    - **全面中文化並自動協助使用者設定適當的locale**
+    - **課程需以Google或Facebook登入**
+
+若網友有發現任何bug，麻煩到[聊天室](https://gitter.im/wush978/DataScienceAndR?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)回報，謝謝
 
 ## 簡介
 
@@ -197,7 +201,7 @@ ps. 如果你之前有進行過swirl的課程，swirl會出現下圖的選項詢
 
 ## 課程筆記
 
-以下連結記載swirl中的課程內容(sha-hash: da8db872 版本)
+以下連結記載swirl中的課程內容(sha-hash: 2595c77d 版本)
 
 - [00-Hello-DataScienceAndR](note/00-Hello-DataScienceAndR.html)
 - [01-RBasic-01-Introduction](note/01-RBasic-01-Introduction.html)
@@ -218,7 +222,7 @@ ps. 如果你之前有進行過swirl的課程，swirl會出現下圖的選項詢
 - [03-RVisualization-03-ggplot2](note/03-RVisualization-03-ggplot2.html)
 - [03-RVisualization-04-Javascript-And-Maps](note/03-RVisualization-04-Javascript-And-Maps.html)
 - [Optional-RProgramming-01-Loop-And-Condition](note/Optional-RProgramming-01-Loop-And-Condition.html)
-- [Optional-RProgramming-02-Function](note/Optional-RProgramming-02-Function.html)
+- [Optional-RProgramming-02-Function-Introduction](note/Optional-RProgramming-02-Function-Introduction.html)
 - [Project-ROpenData-Power-GDP](note/Project-ROpenData-Power-GDP.html)
 
 ## 課程投影片
