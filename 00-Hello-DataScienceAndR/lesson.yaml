@@ -6,9 +6,10 @@
   Organization: Taiwan R User Group
   Version: 2.3.1.2
 - Class: text
-  Output: "讀到這段中文字的同學，請直接輸入enter進入課程。\nIf you are windows user and you cannot read
-    the chinese characters, please\npress `ESC` to exit swirl and execute the command
-    `Sys.setlocale(locale = \"cht\")`. \n"
+  Output: |
+    讀到這段中文字的同學，請直接輸入enter進入課程。
+    If you are windows user and you cannot read the chinese characters, please
+    press `ESC` to exit swirl and execute the command `Sys.setlocale(locale = "cht")`.
 - Class: text
   Output: |
     本課程的目的是為了測試同學的環境是否正常，能否進行本教材。
@@ -61,12 +62,16 @@
     輸入`bye()`則可以離開swirl環境。離開後，只要輸入`swirl()`即可選擇接關，繼續挑戰
     離開前的進度。
 - Class: text
-  Output: "需要繳交作業的同學，請在完成每個單元後確認是否看到訊息如下：「You've reached the end \nof this lesson!
-    Returning to the main menu... Your status has beed updated \nto tracking server」。出現上述訊息之後，代表同學完成課程的進度已經被確實記錄，\n並且成功轉交給同學的老師。因此，建議需要繳交作業的同學，請確認在有網路連線的狀\n態下完成作業。\n"
+  Output: |
+    需要繳交作業的同學，請在完成每個單元後確認是否看到訊息如下：「You've reached the end
+    of this lesson! Returning to the main menu... Your status has beed updated
+    to tracking server」。出現上述訊息之後，代表同學完成課程的進度已經被確實記錄，
+    並且成功轉交給同學的老師。因此，建議需要繳交作業的同學，請確認在有網路連線的狀
+    態下完成作業。
 - Class: text
   Output: |
-    需要確認進度的同學，也可以輸入：`query_user_id("<你的id>")`來查詢目前該id
-    完成的單元。此部分也會提供給老師們，以進行作業紀錄。
+    需要確認進度的同學，也可以輸入：`my_progress()`來查詢目前你登入的使用者所完成的單元。
+    此部分也會提供給有合作的老師們，以進行作業紀錄。
 - Class: text
   Output: |-
     測試與說明已經完成，請同學回到選單選擇你想進行的課程。需要交作業的同學，
