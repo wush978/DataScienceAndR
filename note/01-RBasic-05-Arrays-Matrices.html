@@ -113,7 +113,7 @@ $(document).ready(function () {
 
 <div id="-1" class="section level2">
 <h2>關卡 1</h2>
-<p>這門課程是要介紹R的線性代數運算系統。線性代數在許多現代的統計方法、DataMining方法上都很重要。所以理解R的線性代數系統，對於撰寫自己的演算法，以及了解OpenSource的演算法，是非常重要的。</p>
+<p>這門課程是要介紹R的線性代數運算系統。線性代數在許多現代的統計方法、DataMining方法上都很重要。理解R的線性代數系統，無論是對於撰寫自己的演算法，或是了解OpenSource的演算法，都是非常重要的。</p>
 </div>
 <div id="-2" class="section level2">
 <h2>關卡 2</h2>
@@ -127,27 +127,27 @@ $(document).ready(function () {
 </div>
 <div id="-4" class="section level2">
 <h2>關卡 4</h2>
-<p>要了解<code>matrix</code>，我們可以先打開matrix的說明頁面。</p>
+<p>要了解<code>matrix</code>，請先打開matrix的說明頁面。</p>
 <pre class="r"><code>help(matrix)</code></pre>
 </div>
 <div id="-5" class="section level2">
 <h2>關卡 5</h2>
-<p>根據matrix的說明頁面，請問以下哪些不是matrix的參數？</p>
+<p>根據matrix的說明頁面，請問以下哪些不是matrix的參數呢？</p>
 <p>dim</p>
 </div>
 <div id="-6" class="section level2">
 <h2>關卡 6</h2>
-<p>數學上來說，一個矩陣除了值之外，需要的就是維度的定義。而<code>matrix</code>這個函數，<code>data</code>的參數代表矩陣的值，<code>nrow</code>的部份代表這個矩陣有多少列，而<code>ncol</code>的部份代表這個矩陣有多少行。所以<code>matrix(1:18,6,3)</code>會產生一個6列3行（簡稱6乘3）的矩陣。請同學輸入<code>x</code>看一下R是如何印出x這個6乘3的矩陣。</p>
+<p>數學上來說，一個矩陣除了值之外，需要的就是維度的定義。而<code>matrix</code>這個函數中，<code>data</code>的參數代表該矩陣的值，<code>nrow</code>的部份代表該矩陣的列數，而<code>ncol</code>的部份則代表該矩陣的行數。根據上述的邏輯，<code>matrix(1:18,6,3)</code>會產生一個6列3行（簡稱6乘3）的矩陣。請同學輸入<code>x</code>看一下R是如何印出x這個6乘3的矩陣。</p>
 <pre class="r"><code>x</code></pre>
 </div>
 <div id="-7" class="section level2">
 <h2>關卡 7</h2>
-<p>我們可以看看x的屬性。</p>
+<p>請同學看看x的屬性。</p>
 <pre class="r"><code>attributes(x)</code></pre>
 </div>
 <div id="-8" class="section level2">
 <h2>關卡 8</h2>
-<p>我們看到有一個名字叫做“dim”的屬性，值是<code>c(6,3)</code>，代表這是一個6乘3的矩陣。</p>
+<p>有一個名字叫做“dim”的屬性，值是<code>c(6,3)</code>，代表這是一個6乘3的矩陣。</p>
 </div>
 <div id="-9" class="section level2">
 <h2>關卡 9</h2>
@@ -166,7 +166,7 @@ $(document).ready(function () {
 </div>
 <div id="-12" class="section level2">
 <h2>關卡 12</h2>
-<p>R的除了矩陣(matrix)之外，還有高維度的陣列。舉例來說，我們可以直接更改x的維度到更高維：<code>dim(x)&lt;-c(3,3,2)</code>。請同學試試看。</p>
+<p>R的除了矩陣(matrix)之外，還有高維度的陣列。我們可以直接更改x的維度到更高維。請同學試試看：<code>dim(x)&lt;-c(3,3,2)</code>。</p>
 <pre class="r"><code>dim(x) &lt;- c(3, 3, 2)</code></pre>
 </div>
 <div id="-13" class="section level2">
@@ -176,35 +176,35 @@ $(document).ready(function () {
 </div>
 <div id="-14" class="section level2">
 <h2>關卡 14</h2>
-<p>我們也可以用<code>array(1:18,c(3,3,2))</code>來建立一個高維矩陣。這裡很清楚可以看到：<code>array</code>的第二個參數就是維度。我們請同學試試看輸入<code>array(1:18,c(3,3,2))</code>。</p>
+<p>也可以利用<code>array(1:18,c(3,3,2))</code>來建立一個高維矩陣。這裡很清楚可以看到，<code>array</code>的第二個參數就是維度。我們請同學試試看輸入<code>array(1:18,c(3,3,2))</code>。</p>
 <pre class="r"><code>array(1:18, c(3, 3, 2))</code></pre>
 </div>
 <div id="-15" class="section level2">
 <h2>關卡 15</h2>
-<p>在RBasic-02-Data-Structure-Vectors的課程中，我們有提過兩種從向量中挑選一部分的值得方式。一種是用座標，另外一種則是使用邏輯向量。在矩陣和陣列上，還是可以用這兩種方式從矩陣或陣列中挑選一部分的值。</p>
+<p>在RBasic-02-Data-Structure-Vectors的課程中，我們有提過兩種方式，可以從向量中挑選一部分的值。一種是用座標，另外一種則是使用邏輯向量。在矩陣和陣列上，還是可以用這兩種方式從矩陣或陣列中挑選一部分的值。</p>
 </div>
 <div id="-16" class="section level2">
 <h2>關卡 16</h2>
-<p>我們可以利用中括號<code>[</code>來取出矩陣或陣列中的值。舉例來說，如果x是矩陣，<code>x[2,1]</code>會取出x第二列第一行的值。陣列的狀況，也是類似的。<code>x[1,2,3]</code>會拿出第一個維度的第1個方向，第二個維度的第2個方向，第三個維度的第3個方向。這就是以座標的方式做挑選。</p>
+<p>我們可以利用中括號<code>[</code>來取出矩陣或陣列中部分的值。舉例來說，如果x是矩陣，<code>x[2,1]</code>會取出x第二列第一行的值。陣列的狀況也是類似的。<code>x[1,2,3]</code>則會拿出第一個維度的第1個方向，第二個維度的第2個方向，第三個維度的第3個方向。這就是以座標的方式做挑選。</p>
 </div>
 <div id="-17" class="section level2">
 <h2>關卡 17</h2>
-<p>我們來測測看同學有沒有理解剛剛的說明。請問目前這個相當於<code>array(1:18,c(3,3,2))</code>的x,<code>x[1,2,2]</code>的值會是多少呢？</p>
+<p>我們來測測看同學是否理解剛剛的說明。目前相當於<code>array(1:18,c(3,3,2))</code>的x,<code>x[1,2,2]</code>的值會是多少呢？</p>
 <p>13</p>
 </div>
 <div id="-18" class="section level2">
 <h2>關卡 18</h2>
-<p>在R中，矩陣的資料順序是：<code>c(x[1,1],x[2,1],x[3,1],...)</code>。也就是說，如果我們下指令：<code>matrix(1:18,3,6)</code>，則x[1,1]會是1,x[2,1]會是2,x[3,1]是3,x[1,2]是4,以此類推。高維度的矩陣也是類似。我們來試試看，目前的x應該是一個高維陣列，而請問大家：x[3,1,1]的值會是多少呢？</p>
+<p>在R中，矩陣的資料順序是：<code>c(x[1,1],x[2,1],x[3,1],...)</code>。也就是說，如果我們下指令：<code>matrix(1:18,3,6)</code>，則x[1,1]會是1,x[2,1]會是2,x[3,1]是3,x[1,2]是4,以此類推。高維度的矩陣也是類似。我們來試試看，目前的x是一個高維陣列，請問：x[3,1,1]的值會是多少呢？</p>
 <p>3</p>
 </div>
 <div id="-19" class="section level2">
 <h2>關卡 19</h2>
-<p>如果給一個陣列，我們只是要取一個方向的向量，也可以適當的使用<code>[</code>。先讓我們再印出x一次。</p>
+<p>如果給一個陣列，而只是要取單一個方向的向量，也可以適當的使用<code>[</code>完成取出。請同學再印出x一次。</p>
 <pre class="r"><code>x</code></pre>
 </div>
 <div id="-20" class="section level2">
 <h2>關卡 20</h2>
-<p>我們可以看到，螢幕上的<code>,,2</code>之後，顯示出一個3乘3的矩陣。這個矩陣，就是我們沿著第三個維度的第2個方向，所切面出來的矩陣。這也就是螢幕上的<code>,,2</code>的意思。而在R中，我們可以利用<code>x[,,2]</code>取得這個矩陣。請同學取得這個矩陣，並把它存到變數x2中。</p>
+<p>我們可以看到，在螢幕上的<code>,,2</code>之後，顯示出一個3乘3的矩陣。這個矩陣即是沿著第三個維度的第2個方向所切面出來的矩陣。也是螢幕上<code>,,2</code>所代表的意思。而在R中，我們可以利用<code>x[,,2]</code>取得這個矩陣。請取得這個矩陣，並把它存到變數x2中。</p>
 <pre class="r"><code>x2 &lt;- x[,,2]</code></pre>
 </div>
 <div id="-21" class="section level2">
@@ -214,17 +214,17 @@ $(document).ready(function () {
 </div>
 <div id="-22" class="section level2">
 <h2>關卡 22</h2>
-<p>如果我們要選出第一列，只要輸入<code>x2[1,]</code>就可以了。同學可以看一下x2的輸出，在第一列的左方有<code>[1,]</code>的圖示，就是提示使可以用<code>x2[1,]</code>來選第一列。我們請同學試試看選出<code>x2[1,]</code></p>
+<p>如果我們要選出第一列，只要輸入<code>x2[1,]</code>就可以了。請看一下x2的輸出，在第一列的左方有<code>[1,]</code>的圖示，即是提示可以用<code>x2[1,]</code>來選出第一列。我們請同學試試看選出<code>x2[1,]</code></p>
 <pre class="r"><code>x2[1,]</code></pre>
 </div>
 <div id="-23" class="section level2">
 <h2>關卡 23</h2>
-<p>如果我們要直接從x中呼叫<code>,,2</code>之下的矩陣裡面的第一列，我們可以使用：<code>x[1,,2]</code>。這裡的矩陣，在左方有<code>[1,]</code>、<code>[2,]</code>和<code>[3,]</code>，就代表要取出對應的列，我們要分別使用：<code>x[1,]</code>、<code>x[2,]</code>和<code>x[3,]</code>這樣的符號。由於目前x是一個三個維度的陣列，所以最後還要加上上面的：<code>,,2</code>，所以就變成：<code>x[1,,2]</code>。請同學試試看。</p>
+<p>如果要直接從x中，呼叫<code>,,2</code>之下矩陣裡的第一列，我們可以使用：<code>x[1,,2]</code>。這裡的矩陣，在左方有<code>[1,]</code>、<code>[2,]</code>和<code>[3,]</code>，代表著若要取出對應的列，我們要分別使用：<code>x[1,]</code>、<code>x[2,]</code>和<code>x[3,]</code>這樣的符號。由於目前x是一個三個維度的陣列，最後，還需要加上上述的：<code>,,2</code>。所以若是要執行「呼叫<code>,,2</code>之下矩陣裡的第一列」，就會變成：<code>x[1,,2]</code>。請同學試試看。</p>
 <pre class="r"><code>x[1,,2]</code></pre>
 </div>
 <div id="-24" class="section level2">
 <h2>關卡 24</h2>
-<p>回答下一個問題之前，我們先印出x</p>
+<p>回答下一個問題之前，我們先印出x。</p>
 <pre class="r"><code>x</code></pre>
 </div>
 <div id="-25" class="section level2">
@@ -234,11 +234,11 @@ $(document).ready(function () {
 </div>
 <div id="-26" class="section level2">
 <h2>關卡 26</h2>
-<p>我們也可以利用中括號<code>[]</code>搭配邏輯向量取出矩陣或陣列中的值。R會根據邏輯向量在<code>[]</code>中的位置，選擇該維度，只挑出該邏輯向量為TRUE的座標。</p>
+<p>也可以利用中括號<code>[]</code>搭配邏輯向量，取出矩陣或陣列中的值。R會根據邏輯向量在<code>[]</code>中的位置，選擇該維度，只挑出該邏輯向量為TRUE的座標。</p>
 </div>
 <div id="-27" class="section level2">
 <h2>關卡 27</h2>
-<p>請問同學，依照上述的說明，<code>x[c(TRUE,TRUE,FALSE),,]</code>的效果就等同於以下哪一個程式碼？</p>
+<p>請問同學，依照上述的說明，<code>x[c(TRUE,TRUE,FALSE),,]</code>的效果等同於以下哪一個程式碼呢？</p>
 <p>x[1:2,,]</p>
 </div>
 <div id="-28" class="section level2">
@@ -247,17 +247,17 @@ $(document).ready(function () {
 </div>
 <div id="-29" class="section level2">
 <h2>關卡 29</h2>
-<p>如果我們要修改矩陣的值，就是搭配<code>[]</code>和<code>&lt;-</code>就可以了。首先，如果我們要更改<code>x[1,1,1]</code>的值為2，我們可以使用<code>x[1,1,1]&lt;-2</code>。請同學試試看。</p>
+<p>如果我們要修改矩陣的值，只需要搭配使用<code>[]</code>和<code>&lt;-</code>就可以了。首先，如果我們要將<code>x[1,1,1]</code>的值更改為2，我們可以使用<code>x[1,1,1]&lt;-2</code>。請同學試試看。</p>
 <pre class="r"><code>x[1,1,1] &lt;- 2</code></pre>
 </div>
 <div id="-30" class="section level2">
 <h2>關卡 30</h2>
-<p>我們可以印出<code>x[1,1,1]</code>（不是印出全部的x）看看值有沒有被成功地更動。</p>
+<p>我們可以印出<code>x[1,1,1]</code>（不是印出全部的x）確認數值是否被修改成功。</p>
 <pre class="r"><code>x[1,1,1]</code></pre>
 </div>
 <div id="-31" class="section level2">
 <h2>關卡 31</h2>
-<p>如果我們想要更改一排的資料，要領也是類似。舉例來說，<code>x[,1,1]&lt;-3</code>可以把<code>,,1</code>底下矩陣的<code>[,1]</code>那行改成<code>c(3,3,3)</code>向量。這樣的運算也是向量式，R會自動重複3直到把x[,1,1]填滿。</p>
+<p>要更改一整排的資料也是類似的方法。舉例來說，<code>x[,1,1]&lt;-3</code>可以把<code>,,1</code>底下矩陣的<code>[,1]</code>該行改成<code>c(3,3,3)</code>向量。這樣的運算也是向量式，R會自動重複3直到把x[,1,1]填滿。</p>
 <pre class="r"><code>x[,1,1] &lt;- 3</code></pre>
 </div>
 <div id="-32" class="section level2">
@@ -271,7 +271,7 @@ $(document).ready(function () {
 </div>
 <div id="-34" class="section level2">
 <h2>關卡 34</h2>
-<p>接下來我們來說明陣列和矩陣的向量式運算。我們先複習一下在向量的狀況下，R的向量式運算。</p>
+<p>接下來說明的是陣列和矩陣的向量式運算。先複習一下在向量的狀況下，R的向量式運算。</p>
 </div>
 <div id="-35" class="section level2">
 <h2>關卡 35</h2>
@@ -285,12 +285,12 @@ $(document).ready(function () {
 </div>
 <div id="-37" class="section level2">
 <h2>關卡 37</h2>
-<p>我們先說明矩陣的向量式運算。它和向量的運算也非常類似，也是會自動比對位置，並且在相同運算的位置上做運算。請同學先印出<code>x[,,1]</code></p>
+<p>先針對矩陣的向量式運算進行說明。它和向量的運算非常類似，在運算時R也會自動比對位置，並且在相同運算位置上做運算。請同學先印出<code>x[,,1]</code>。</p>
 <pre class="r"><code>x[,,1]</code></pre>
 </div>
 <div id="-38" class="section level2">
 <h2>關卡 38</h2>
-<p>再請同學印出<code>x[,,2]</code></p>
+<p>再請同學印出<code>x[,,2]</code>。</p>
 <pre class="r"><code>x[,,2]</code></pre>
 </div>
 <div id="-39" class="section level2">
@@ -300,31 +300,31 @@ $(document).ready(function () {
 </div>
 <div id="-40" class="section level2">
 <h2>關卡 40</h2>
-<p>這裡相加的結果，就是把<code>x[,,1]</code>和<code>x[,,2]</code>對應的位置做相加。同學可以比對前面的輸出結果。</p>
+<p>這裡相加的結果，就是將<code>x[,,1]</code>和<code>x[,,2]</code>對應的位置做相加。同學可以比對前面的輸出結果。</p>
 </div>
 <div id="-41" class="section level2">
 <h2>關卡 41</h2>
-<p>而當維度不相同的時候，R會自動重複比較短的那邊。當一邊是矩陣，一邊是單值的時候，很簡單。請同學試試看：<code>x[,,1]+1</code></p>
+<p>而當維度不相同的時候，R會自動重複維度較低的那方。舉例來說，當一邊是矩陣，一邊是單值的時候，運算相對簡單。請同學試試看：<code>x[,,1]+1</code></p>
 <pre class="r"><code>x[,,1] + 1</code></pre>
 </div>
 <div id="-42" class="section level2">
 <h2>關卡 42</h2>
-<p>但是當兩邊都是矩陣或陣列的時候，長度不一樣時，就不容易了。這裡我們先複習一下，陣列的值得排列方式。如果<code>y&lt;-array(1:8,c(2,2,2))</code>，那<code>y[1,1,1]</code>是1、<code>y[2,1,1]</code>是2。R會把<code>1:8</code>的值依照第一個維度（列）、第二個維度（行）到第三個維度，一個一個填入。以此類推，所以<code>y[1,2,1]</code>的值會是？</p>
+<p>但是，當兩邊都是矩陣或陣列，並且長度不一樣時，就不容易了。先跟同學複習一下，陣列的值的排列方式。如果<code>y&lt;-array(1:8,c(2,2,2))</code>，那<code>y[1,1,1]</code>是1、<code>y[2,1,1]</code>是2。R會將<code>1:8</code>的值依照第一個維度（列）、第二個維度（行）到第三個維度，一個一個填入。以此類推，所以<code>y[1,2,1]</code>的值會是？</p>
 <p>3</p>
 </div>
 <div id="-43" class="section level2">
 <h2>關卡 43</h2>
-<p>當陣列和向量相加的時候，R會一直重複向量，到它的長度和陣列需要的長度相符合。舉例來說，一個3乘2乘2的陣列需要12個值。接著，R會把這個向量轉換成和陣列一樣的維度，然後在對應的位置做相加。請同學試試看：<code>matrix(1:4,2,2)+1:2</code></p>
+<p>當陣列和向量相加的時候，R會一直重複向量，直到向量的長度和陣列需要的長度相符合。舉例來說，一個3乘2乘2的陣列需要12個值。接著，R會把這個向量轉換成和陣列一樣的維度，然後在對應的位置做相加。請同學試試看：<code>matrix(1:4,2,2)+1:2</code></p>
 <pre class="r"><code>matrix(1:4, 2, 2) + 1:2</code></pre>
 </div>
 <div id="-44" class="section level2">
 <h2>關卡 44</h2>
-<p>另外我們提一個重要的事情，是關於上一個課程中有提到屬性的概念。現在的變數x也是個R物件，也有屬性。請同學查一下它的屬性。</p>
+<p>另外提及一件重要的事情，是關於上一個課程中有提到屬性的概念。現在的變數x也是個R物件，也有屬性。請同學查一下它的屬性。</p>
 <pre class="r"><code>attributes(x)</code></pre>
 </div>
 <div id="-45" class="section level2">
 <h2>關卡 45</h2>
-<p>同學有沒有看到名稱叫做dim的一個整數向量呢？這個dim屬性非常重要，所有的矩陣和陣列，就是一般的向量加上dim這個屬性而已。R也提供了<code>dim</code>這個函數讓使用者可以存取dim屬性。舉例來說，<code>dim(x)</code>會印出x的維度。而我們可以透過<code>dim(x)&lt;-NULL</code>來移除x的dim屬性。請同學試試看<code>dim(x)&lt;-NULL</code></p>
+<p>同學是否有看到名稱叫做dim的一個整數向量呢？這個dim屬性非常重要，所有的矩陣和陣列，都是一般的向量加上dim這個屬性。R也提供了<code>dim</code>這個函數讓使用者可以存取dim屬性。舉例來說，<code>dim(x)</code>會印出x的維度。而我們可以透過<code>dim(x)&lt;-NULL</code>來移除x的dim屬性。請同學試試看<code>dim(x)&lt;-NULL</code>。</p>
 <pre class="r"><code>dim(x) &lt;- NULL</code></pre>
 </div>
 <div id="-46" class="section level2">
@@ -338,7 +338,7 @@ $(document).ready(function () {
 </div>
 <div id="-48" class="section level2">
 <h2>關卡 48</h2>
-<p>R在陣列和向量的向量式運算，也可以回到兩個向量的運算。差別只是在它們多了維度的屬性，所以當維度差異太大的時候，R會認為向量式運算無效。所以一般來說，我們只會拿單值或向量去和陣列做運算，或是維度相同的矩陣或陣列做運算。</p>
+<p>R中的陣列和向量的向量式運算，也可以回到兩個向量的運算。差別在於它們多了維度的屬性，所以當維度差異太大的時候，R會認為向量式運算無效。所以一般來說只會拿單值或向量去和陣列做運算，或是維度相同的矩陣或陣列進行運算。</p>
 </div>
 <div id="-49" class="section level2">
 <h2>關卡 49</h2>
@@ -346,12 +346,12 @@ $(document).ready(function () {
 </div>
 <div id="-50" class="section level2">
 <h2>關卡 50</h2>
-<p>在R中，使用<code>cbind</code>和<code>rbind</code>則可以合併兩個矩陣。舉例來說，<code>cbind(matrix(1:4,2,2),matrix(1:4,2,2))</code>會把兩個矩陣的行合併，所以會變成2乘4的矩陣。請同學試試看。</p>
+<p>在R中，使用<code>cbind</code>和<code>rbind</code>則可以合併兩個矩陣。舉例來說，<code>cbind(matrix(1:4,2,2),matrix(1:4,2,2))</code>會將兩個矩陣的行合併，運算之後會變成2乘4的矩陣。請同學試試看。</p>
 <pre class="r"><code>cbind(matrix(1:4, 2, 2), matrix(1:4, 2, 2))</code></pre>
 </div>
 <div id="-51" class="section level2">
 <h2>關卡 51</h2>
-<p>使用<code>rbind(matrix(1:4,2,2),matrix(1:4,2,2))</code>則會把兩個矩陣的列合併，所以會變成4乘2的矩陣。請同學試試看。</p>
+<p>使用<code>rbind(matrix(1:4,2,2),matrix(1:4,2,2))</code>則會把兩個矩陣的列合併，運算之後會變成4乘2的矩陣。請同學試試看。</p>
 <pre class="r"><code>rbind(matrix(1:4, 2, 2), matrix(1:4, 2, 2))</code></pre>
 </div>
 <div id="-52" class="section level2">
@@ -375,7 +375,7 @@ $(document).ready(function () {
 </div>
 <div id="-56" class="section level2">
 <h2>關卡 56</h2>
-<p>R上的線性代數運算的底層是透過BLAS等函式庫做運算的，所以效能遠勝過我們自己用C寫的線性代數運算。另外R預設是使用比較被廣泛驗證過正確性的BLAS庫，而不是效能比較快，但是還比較年輕的BLAS函式庫，例如OpenBLAS。這是因為，RcoreTeam認為正確性比較重要，所以目前是採用比較舊，但是也比較可靠的BLAS庫。</p>
+<p>在R中，線性代數運算的底層是透過BLAS等函式庫做運算的，所以效能遠勝過自己用C寫的線性代數運算。另外，R預設的BLAS庫為比較被廣泛驗證過正確性的，而非效能比較快，但是還比較年輕的BLAS函式庫，例如OpenBLAS。這是因為，RcoreTeam認為正確性比較重要，所以目前是採用比較舊，但是也比較可靠的BLAS庫。</p>
 </div>
 <div id="-57" class="section level2">
 <h2>關卡 57</h2>
@@ -394,12 +394,12 @@ $(document).ready(function () {
 </div>
 <div id="-60" class="section level2">
 <h2>關卡 60</h2>
-<p>如果已知<code>A%*%x=b</code>，給定<code>A</code>和<code>b</code>我們可以用<code>solve</code>解出x。舉例來說，若<code>A</code>是<code>matrix(1:4,2,2)</code>、b是<code>c(3,8)</code>，<code>solve(A,b)</code>就會給出<code>x</code>。變數<code>A</code>和<code>b</code>已經存在了，所以請同學直接解出<code>x</code>並且把它存到<code>x</code>之中。</p>
+<p>如果已知<code>A%*%x=b</code>，給定<code>A</code>和<code>b</code>，我們就可以用<code>solve</code>解出x。舉例來說，若<code>A</code>是<code>matrix(1:4,2,2)</code>、b是<code>c(3,8)</code>，<code>solve(A,b)</code>即可以給出<code>x</code>。變數<code>A</code>和<code>b</code>已經存在了，所以請同學直接解出<code>x</code>並且把它存到<code>x</code>之中。</p>
 <pre class="r"><code>x &lt;- solve(A, b)</code></pre>
 </div>
 <div id="-61" class="section level2">
 <h2>關卡 61</h2>
-<p>我們來驗算一下，<code>A%*%x</code>看看是不是真的是<code>b</code></p>
+<p>我們來驗算一下，<code>A%*%x</code>的結果是否真的是<code>b</code>呢?</p>
 <pre class="r"><code>A %*% x</code></pre>
 </div>
 <div id="-62" class="section level2">

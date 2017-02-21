@@ -113,89 +113,89 @@ $(document).ready(function () {
 
 <div id="-1" class="section level2">
 <h2>關卡 1</h2>
-<p>這個課程帶大家快速了解R語言的Factor資料結構</p>
+<p>這個課程將帶大家快速了解R語言的Factor資料結構。</p>
 </div>
 <div id="-2" class="section level2">
 <h2>關卡 2</h2>
-<p>Factor是一個向量物件，用途是儲存「類別」的資料，有這樣的資料格式，我們可以輕易把資料集依照類別分組。屬於「類別」資料的例子如：「男、女」，「台北市、台中市、台東市、台南市」</p>
+<p>Factor是一個向量物件，用途是儲存「類別」的資料。有這樣的資料格式，我們可以將資料集依照類別分組。屬於「類別」資料的例子如：「男、女」、「台北市、台中市、台東市、台南市」等。</p>
 </div>
 <div id="-3" class="section level2">
 <h2>關卡 3</h2>
-<p>我們觀察一個實際的例子。課程儲存了一個文字向量blood_type，記載著30個人的血型資料。請輸入blood_type。</p>
+<p>觀察一個實際的例子。課程儲存了一個文字向量blood_type，記載著30個人的血型資料。請輸入blood_type。</p>
 <pre class="r"><code>blood_type</code></pre>
 </div>
 <div id="-4" class="section level2">
 <h2>關卡 4</h2>
-<p>大家可以觀察到這個文字向量有A,B,O,AB四種血型，在資料中重複出現。我們要將他轉為Factor向量，請輸入blood_type_factor&lt;-factor(blood_type)</p>
+<p>大家可以觀察到，這個文字向量中有A,B,O,AB四種血型，在資料中重複出現。請輸入<code>blood_type_factor&lt;-factor(blood_type)</code>，將它轉為Factor向量。</p>
 <pre class="r"><code>blood_type_factor &lt;- factor(blood_type)</code></pre>
 </div>
 <div id="-5" class="section level2">
 <h2>關卡 5</h2>
-<p>我們仔細觀察這個Factor向量。請輸入blood_type_factor。</p>
+<p>仔細觀察這個Factor向量。請輸入<code>blood_type_factor</code>。</p>
 <pre class="r"><code>blood_type_factor</code></pre>
 </div>
 <div id="-6" class="section level2">
 <h2>關卡 6</h2>
-<p>可以觀察到R印出Factor向量和文字向量時的方式不太一樣。Factor多出levels這個屬性。</p>
+<p>觀察後可以發現，R印出Factor向量和文字向量的方式不太一樣。在Factor向量的部分多出了levels這個屬性。</p>
 </div>
 <div id="-7" class="section level2">
 <h2>關卡 7</h2>
-<p>Factor向量中的levels屬性代表向量中允許出現的類別。要取出這些類別，可使用levels函數。請輸入levels(blood_type_factor)來取出所有允許的血型。</p>
+<p>Factor向量中的levels屬性，代表向量中允許出現的類別。要取出這些類別，可使用levels函數。請輸入<code>levels(blood_type_factor)</code>來取出所有允許的血型。</p>
 <pre class="r"><code>levels(blood_type_factor)</code></pre>
 </div>
 <div id="-8" class="section level2">
 <h2>關卡 8</h2>
-<p>在Factor向量中指派沒在levels裡面的類別，會出現NA。請輸入blood_type_factor[5]&lt;-“C”</p>
+<p>若在Factor向量中指派的類別不存在在levels之中，就會出現NA。請輸入<code>blood_type_factor[5]&lt;-&quot;C&quot;</code>。</p>
 <pre class="r"><code>blood_type_factor[5] &lt;- &quot;C&quot;</code></pre>
 </div>
 <div id="-9" class="section level2">
 <h2>關卡 9</h2>
-<p>輸入blood_type_factor確認第五個元素變成NA。</p>
+<p>輸入<code>blood_type_factor</code>確認第五個元素變成NA。</p>
 <pre class="r"><code>blood_type_factor</code></pre>
 </div>
 <div id="-10" class="section level2">
 <h2>關卡 10</h2>
-<p>R預設是以字母順序排序levels</p>
+<p>在R的預設值中，排序levels時會依照字母順序排序。</p>
 </div>
 <div id="-11" class="section level2">
 <h2>關卡 11</h2>
-<p>進一步觀察factor向量的結構。請輸入str(blood_type_factor)</p>
+<p>進一步觀察factor向量的結構。請輸入<code>str(blood_type_factor)</code>。</p>
 <pre class="r"><code>str(blood_type_factor)</code></pre>
 </div>
 <div id="-12" class="section level2">
 <h2>關卡 12</h2>
-<p>str印出的資訊顯示，Factor向量有四個levels，並列出levels對應的名稱。在levels名稱後是一串整數，Factor實際上是以整數代表對應的levels名稱。例如：一開始3代表第三個level「B」，第二個1代表第一個level「A」。（你可以對照Rstudio右上角Environment中blood_type和blood_type_factor）</p>
+<p>str印出的資訊顯示Factor向量的四個levels，並列出levels對應的名稱。在levels名稱後是一串整數，Factor實際上是以整數代表對應的levels名稱。例如：一開始3代表第三個level「B」，第二個1代表第一個level「A」。（你可以對照Rstudio右上角Environment中blood_type和blood_type_factor）</p>
 </div>
 <div id="-13" class="section level2">
 <h2>關卡 13</h2>
-<p>所以Factor向量本質上只是整數向量加上levels。這樣設計的原因是儲存整數比儲存文字更省空間。</p>
+<p>Factor向量本質上只是整數向量加上levels。而這樣設計的原因是儲存整數比儲存文字更省空間。</p>
 </div>
 <div id="-14" class="section level2">
 <h2>關卡 14</h2>
-<p>其實「類別」的資料有兩種。分為「無順序」與「有順序」的，血型的資料是無順序的例子。因為血型並無大小先後之分，你無法說O型比A型大或小。</p>
+<p>「類別」的資料有兩種。分為「無順序」與「有順序」的，血型的資料是無順序的例子。因為血型並無大小先後之分，你無法說O型比A型大或小。</p>
 </div>
 <div id="-15" class="section level2">
 <h2>關卡 15</h2>
-<p>對於無順序的資料硬要去比大小，R會印出警告訊息。以血型例子，第一個血型是「A」，第二個血型是「AB」。請試著輸入blood_type_factor[1]&gt;blood_type_factor[2]來比較大小。</p>
+<p>若硬是將無順序的資料進行比大小，R會印出警告訊息。以血型例子，第一個血型是「A」，第二個血型是「AB」。請試著輸入<code>blood_type_factor[1]&gt;blood_type_factor[2]</code>來比較大小。</p>
 <pre class="r"><code>blood_type_factor[1]&gt; blood_type_factor[2]</code></pre>
 </div>
 <div id="-16" class="section level2">
 <h2>關卡 16</h2>
-<p>對於有順序的資料，我們提供另一個等第制資料集作為範例。請輸入grades載入五個同學的等第資料。</p>
+<p>對於有順序的資料，請見另一個等第制資料集作為範例。請輸入<code>grades</code>載入五個同學的等第資料。</p>
 <pre class="r"><code>grades</code></pre>
 </div>
 <div id="-17" class="section level2">
 <h2>關卡 17</h2>
-<p>這個資料中有「A」、「B」、「C」三種等第，照一般學校的慣例，A比B好、B比C好、A也比C好。我們可以把等第定出順序。</p>
+<p>這個資料中有「A」、「B」、「C」三種等第，依照常理看來，A比B好、B比C好、A也比C好。所以我們可以將等第定出順序。</p>
 </div>
 <div id="-18" class="section level2">
 <h2>關卡 18</h2>
-<p>接著把grades轉為有順序的factor向量。做法是在factor函數中，把ordered設為TRUE。並且把levels順序以向量方式傳入，level要由小到大填入。請輸入grades_factor&lt;-factor(grades,ordered=TRUE,levels=c(“C”,“B”,“A”))</p>
+<p>要將grades轉為有順序的factor向量。做法是在factor函數中，將ordered設定為TRUE。並且將levels順序以向量方式傳入，level要由小到大填入。請同學輸入：<code>grades_factor&lt;-factor(grades,ordered=TRUE,levels=c(&quot;C&quot;,&quot;B&quot;,&quot;A&quot;))</code></p>
 <pre class="r"><code>grades_factor &lt;- factor(grades, ordered = TRUE, levels = c(&quot;C&quot;,&quot;B&quot;,&quot;A&quot;))</code></pre>
 </div>
 <div id="-19" class="section level2">
 <h2>關卡 19</h2>
-<p>輸入grades_factor觀察</p>
+<p>輸入<code>grades_factor</code>並觀察。</p>
 <pre class="r"><code>grades_factor</code></pre>
 </div>
 <div id="-20" class="section level2">
@@ -204,16 +204,16 @@ $(document).ready(function () {
 </div>
 <div id="-21" class="section level2">
 <h2>關卡 21</h2>
-<p>這時比較等第大小有意義。我們可以比較前兩個同學的等第。請輸入grades_factor[1]&gt;grades_factor[2]</p>
+<p>這時比較等第大小有意義。請輸入<code>grades_factor[1]&gt;grades_factor[2]</code>，比較前兩個同學的等第。</p>
 <pre class="r"><code>grades_factor[1]&gt; grades_factor[2]</code></pre>
 </div>
 <div id="-22" class="section level2">
 <h2>關卡 22</h2>
-<p>我們在這裡做個總結。Factor向量用來儲存類別的資料。level屬性限制能在向量中出現的類別種類。Factor本質上是整數向量，只是帶有levels。Factor可以是無順序或有順序的，可用在Factor函數中使用ordered=TRUE讓Factor變成有序。</p>
+<p>針對以上內容做個總結。Factor向量用來儲存類別的資料。level屬性限制能在向量中出現的類別種類。Factor本質上是整數向量，只是帶有levels。Factor可以是無順序或有順序的，可用在Factor函數中使用ordered=TRUE讓Factor變成有順序。</p>
 </div>
 <div id="-23" class="section level2">
 <h2>關卡 23</h2>
-<p>最後我們請同學運用這個課程所學到的技巧，做一個簡短的練習。請同學在完成之後存檔，並輸入<code>submit()</code>來檢查結果是否符合預期。如果同學在檔案中看到亂碼，請使用Rstudio左上角的File-&gt;ReopenWithEncoding…-&gt;選取：UTF-8</p>
+<p>最後，請同學運用這個課程所學到的技巧做簡短的練習。請同學在完成之後存檔，並輸入<code>submit()</code>來檢查結果是否符合預期。如果同學在檔案中看到亂碼，請使用Rstudio左上角的File-&gt;ReopenWithEncoding…-&gt;選取：UTF-8</p>
 <pre class="r"><code>#' iris 是一個很有名的資料集。
 #' R 在處理iris的Species欄位，也就是鳶尾花資料集時，預設是使用factor型態
 species &lt;- iris$Species

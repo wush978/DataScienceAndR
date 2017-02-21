@@ -113,19 +113,19 @@ $(document).ready(function () {
 
 <div id="-1" class="section level2">
 <h2>關卡 1</h2>
-<p>這門課程要讓大家透過互動式的內容，上手R語言。</p>
+<p>這門課程的目的，是要讓大家透過互動式的內容，上手R語言。</p>
 </div>
 <div id="-2" class="section level2">
 <h2>關卡 2</h2>
-<p>這份文件中的格式採用和Markdown相容的語法。為了讓大家快速上手，這裡先說明一些常見的Markdown語法所有的程式碼，都會用`<code>來包覆。例如：當swirl提示要各位輸入：</code>sessionInfo()`就代表各位同學要在console輸入：sessionInfo()</p>
+<p>這份文件的格式採用的語法和Markdown相容。先說明一些常見的Markdown語法，以幫助同學快速上手。首先，所有的程式碼，都會用`<code>符號包覆。舉例來說，當swirl提示輸入訊息如下：</code>sessionInfo()`，即代表各位同學要在console輸入的內容如下：sessionInfo()。</p>
 </div>
 <div id="-3" class="section level2">
 <h2>關卡 3</h2>
-<p>所有的超連結，都會用&lt;&gt;來包覆。例如：<a href="https://www.google.com" class="uri">https://www.google.com</a>代表要請大家打開https://www.google.com</p>
+<p>其次，所有的連結網址，都會用&lt;&gt;符號包覆。舉例來說，當顯示訊息如下:<a href="https://www.google.com" class="uri">https://www.google.com</a>，則代表請同學打開下列網址:<a href="https://www.google.com" class="uri">https://www.google.com</a></p>
 </div>
 <div id="-4" class="section level2">
 <h2>關卡 4</h2>
-<p>本文的內容都取自於<code>help.start()</code>中的AnIntroductiontoR。</p>
+<p>本文內容取自<code>help.start()</code>中的AnIntroductiontoR。</p>
 </div>
 <div id="-5" class="section level2">
 <h2>關卡 5</h2>
@@ -133,28 +133,28 @@ $(document).ready(function () {
 </div>
 <div id="-6" class="section level2">
 <h2>關卡 6</h2>
-<p>我們跳過介紹R語言的部分，直接學習操作R的部分。在R中，是可以隨時獲得一個函數的細節說明。舉例來說，如果我們要查詢<code>solve</code>這個函數的詳細說明，就輸入：<code>help(solve)</code>。另一種比較簡單的方式是：<code>?solve</code></p>
+<p>跳過介紹R語言的部分，我們直接學習R的實際操作。在R中，可以隨時獲得某一個特定函數的細節說明。舉例來說，如果我們要查詢<code>solve</code>這個函數的說明，就輸入：<code>help(solve)</code>。另一種比較簡單的方式則是輸入：<code>?solve</code></p>
 </div>
 <div id="-7" class="section level2">
 <h2>關卡 7</h2>
-<p>現在請各位同學查詢<code>chol2inv</code>的說明。</p>
+<p>現在請各位同學試著查詢<code>chol2inv</code>的說明。</p>
 <pre class="r"><code>help(chol2inv)</code></pre>
 </div>
 <div id="-8" class="section level2">
 <h2>關卡 8</h2>
-<p>在R中，每一段指令都是一個expression。舉例來說，剛剛我們輸入的：<code>help(chol2inv)</code>就是一個有效的expression。</p>
+<p>在R中，每一段指令都是一個expression。舉例來說，剛剛輸入的：<code>help(chol2inv)</code>即是一個有效的expression。</p>
 </div>
 <div id="-9" class="section level2">
 <h2>關卡 9</h2>
-<p>而<code>help(chol2inv</code>少了一個<code>)</code>是無效的expression，需要完整的輸入help(chol2inv)</p>
+<p>而<code>help(</code>chol2inv<code>)</code>則是無效的，需依照完整格式，輸入help(chol2inv)才是有效的。</p>
 </div>
 <div id="-10" class="section level2">
 <h2>關卡 10</h2>
-<p>通常每一個給R的指令，不是一個expression，就是一個assignment</p>
+<p>通常給R的指令分成兩種，一個expression，或是一個assignment。</p>
 </div>
 <div id="-11" class="section level2">
 <h2>關卡 11</h2>
-<p>舉例來說，<code>a&lt;-1</code>就是一個assigment的動作。請各位同學在console輸入<code>a&lt;-1</code></p>
+<p>舉例來說，<code>a&lt;-1</code>即是一個assignment的動作。請各位同學在console輸入<code>a&lt;-1</code></p>
 <pre class="r"><code>a &lt;- 1</code></pre>
 </div>
 <div id="-12" class="section level2">
@@ -168,7 +168,7 @@ $(document).ready(function () {
 </div>
 <div id="-14" class="section level2">
 <h2>關卡 14</h2>
-<p>R在收到<code>a+1</code>這個expression之後，會進行計算，查到a的值是1，再和1做相加，最後把2顯示到螢幕上。</p>
+<p>在收到<code>a+1</code>這個expression之後，R會進行計算，查到a的值是1，再和1做相加，最後會在螢幕上顯示計算結果為2。</p>
 </div>
 <div id="-15" class="section level2">
 <h2>關卡 15</h2>
@@ -177,16 +177,16 @@ $(document).ready(function () {
 </div>
 <div id="-16" class="section level2">
 <h2>關卡 16</h2>
-<p>有沒有注意到，R並沒有在螢幕上顯示任何東西呢？</p>
+<p>同學是否注意到，R螢幕上並沒有顯示任何結果呢？</p>
 </div>
 <div id="-17" class="section level2">
 <h2>關卡 17</h2>
-<p>這裡測試一下同學懂不懂assignment的意思。請問現在如果我們在R的console中輸入<code>a-1</code>，會顯示什麼呢？</p>
+<p>這裡測試一下同學是否理解assignment的意思。請問現在如果在R的console中輸入<code>a-1</code>，會螢幕上會顯示什麼結果呢？</p>
 <p>1</p>
 </div>
 <div id="-18" class="section level2">
 <h2>關卡 18</h2>
-<p>相信大家到這邊，對於expression和assignment有一些初步的認識。未來我們就是要寫大量的expression和assignment，來利用R達成複雜的任務。</p>
+<p>大家對於expression和assignment有一些初步的認識了。未來我們需要藉由大量的expression和assignment，來利用R達成複雜的任務。</p>
 </div>
 <div id="-19" class="section level2">
 <h2>關卡 19</h2>
@@ -194,41 +194,41 @@ $(document).ready(function () {
 </div>
 <div id="-20" class="section level2">
 <h2>關卡 20</h2>
-<p>我們也可以在程式碼中插入註解：<code>#</code>。所有在#之後的輸入，R都會略過。</p>
+<p>我們也可以在程式碼中插入註解：<code>#</code>。所有在#之後輸入的內容都會被R所略過。</p>
 </div>
 <div id="-21" class="section level2">
 <h2>關卡 21</h2>
-<p>如果有一個expression還沒有完成，（可能是少了<code>)</code>或<code>}</code>），那R會在console的開頭用<code>+</code>來提示你。</p>
+<p>如果有一個expression還沒有完成，（可能是少了<code>)</code>或<code>}</code>），那R會在console的開頭用<code>+</code>進行提示。</p>
 </div>
 <div id="-22" class="section level2">
 <h2>關卡 22</h2>
-<p>我們也可以用上下的按鍵來快速瀏覽輸入過的expression。</p>
+<p>也可以用上下鍵，快速瀏覽輸入過的expression。</p>
 </div>
 <div id="-23" class="section level2">
 <h2>關卡 23</h2>
-<p>要把指令輸入到R，也不一定要在console上一個字一個字的打。我們可以透過<code>source</code>指令，來載入一個撰寫R指令的文件，並且執行文件中的expressions。</p>
+<p>要把指令輸入到R，除了在console上一個字一個字的打之外，也可以透過<code>source</code>指令，來載入一個撰寫R指令的文件，並且執行文件中的expressions。</p>
 </div>
 <div id="-24" class="section level2">
 <h2>關卡 24</h2>
-<p>請各位同學看一下<code>source</code>的說明。輸入之後，使用R一般界面的同學會看到跳出的說明視窗，內容則是R對<code>source</code>的官方說明。。使用Rstudio的同學則請檢查右下角的視窗是否有切換至<code>source</code>的官方說明。</p>
+<p>請看一下<code>source</code>的說明。輸入之後，使用R一般界面的同學會看到跳出的說明視窗，內容是R對<code>source</code>的官方說明。而使用Rstudio的同學則請檢查右下角的視窗是否切換至<code>source</code>的官方說明。</p>
 <pre class="r"><code>help(source)</code></pre>
 </div>
 <div id="-25" class="section level2">
 <h2>關卡 25</h2>
-<p>在各位同學安裝swirl的過程中，我們可能已經用過<code>source</code>來執行講師預先寫好的expressions來設定環境了。</p>
+<p>先前在各位同學安裝swirl的時候，我們可能已經用過<code>source</code>來執行講師預先寫好的expressions，進而幫助設定環境了。</p>
 </div>
 <div id="-26" class="section level2">
 <h2>關卡 26</h2>
-<p>剛剛我們也有跟各位同學介紹過assignment。在R裡面，這些我們存放資料的東西，例如剛剛的<code>a</code>，都叫做object。object可以是一個變數，也可以是一連串的數字，文字，甚至是函數，以及更複雜的東西。</p>
+<p>剛剛也跟各位同學介紹過assignment。在R裡面，這些存放資料的東西都叫做object，如上述例子中的<code>a</code>。object可以是一個變數、一連串的數字、文字，甚至是函數或更複雜的東西。</p>
 </div>
 <div id="-27" class="section level2">
 <h2>關卡 27</h2>
-<p>在R中，我們可以利用<code>objects()</code>或<code>ls()</code>來列出所有目前存在的object的名字。請同學嘗輸入<code>objects()</code>或<code>ls()</code></p>
+<p>在R中，我們可以利用<code>objects()</code>或<code>ls()</code>來列出所有目前存在的object的名字。請同學輸入<code>objects()</code>或<code>ls()</code>。</p>
 <pre class="r"><code>objects()</code></pre>
 </div>
 <div id="-28" class="section level2">
 <h2>關卡 28</h2>
-<p>我們可以刪除已經存在的物件。舉例來說，如果我們要刪除<code>a</code>，就只要輸入：<code>rm(a)</code>。請同學試試看：</p>
+<p>我們可以刪除已經存在的物件。舉例來說，如果我們要刪除<code>a</code>，就只要輸入：<code>rm(a)</code>。請同學根據上述做法試試看。</p>
 <pre class="r"><code>rm(a)</code></pre>
 </div>
 <div id="-29" class="section level2">

@@ -113,50 +113,50 @@ $(document).ready(function () {
 
 <div id="-1" class="section level2">
 <h2>關卡 1</h2>
-<p>大家好，這門課程的目的是想要教大家如何處理XML或HTML的資料。這是大部分的網頁資料（HTML）所採用的格式。</p>
+<p>這門課程的目的是想要教大家如何處理XML或HTML的資料。這是大部分的網頁資料（HTML）所採用的格式。</p>
 </div>
 <div id="-2" class="section level2">
 <h2>關卡 2</h2>
-<p>XML的全名是：eXtensibleMarkupLanguage，是一種讓電腦可以快速理解資訊的標記語言。XML的透過標記來讓電腦理解資訊的內容，並且把標籤與內容清楚的切割開。</p>
+<p>XML的全名是eXtensibleMarkupLanguage，是一種讓電腦可以快速理解資訊的標記語言。XML的透過標記來讓電腦理解資訊的內容，並且清楚的切割開標籤與內容。</p>
 </div>
 <div id="-3" class="section level2">
 <h2>關卡 3</h2>
-舉例來說，如果我們要用XML來記載這門課程的資訊，可能的記載方式如下：“<course>DataScienceAndR</course>
+舉例來說，若我們要用XML來記載這門課程的資訊，記載方式可以如下：“<course>DataScienceAndR</course>
 <title>
 RDataEngineer-02-XML
 </title>
-<p><author>WushWu</author>“用<code>&lt;&gt;</code>框起來的文字代表標籤，所以上述文件有三個標籤：course、title和author。以course標籤為例，標籤的開始是<course>，結束則是</course>，會多一個”/“記號。透過這些標籤，電腦就清楚的知道，DataScienceAndR代表的是course，RDataEngineer-02代表的是title，而WushWu代表的是author。對電腦而言，標籤與內容很清楚的被分開了，不會被混淆。</p>
+<p><author>WushWu</author>“。用<code>&lt;&gt;</code>框起來的文字代表標籤，上述文件中共有三個標籤：course、title和author。以course標籤為例，標籤的開始是<course>，結束則是</course>，會多一個”/“記號。透過這些標籤，電腦可以清楚的知道DataScienceAndR代表的是course，RDataEngineer-02代表的是title，而WushWu代表的是author。對電腦而言，標籤與內容很清楚地被分開了，不會被混淆。</p>
 </div>
 <div id="-4" class="section level2">
 <h2>關卡 4</h2>
-如果我們收到一個文件：
+如果我們收到一個文件，內容如下：’
 <th>
 廠商名稱
 </th>
 <td>
 台灣翔登股份有限公司
 </td>
-<p>請問同學，「廠商名稱」這段文字是什麼標籤呢？</p>
+<p>’請問同學，「廠商名稱」這段文字是什麼標籤呢？</p>
 <p>th</p>
 </div>
 <div id="-5" class="section level2">
 <h2>關卡 5</h2>
-現代的網頁中，都是以類似的格式傳遞資訊，讓電腦處理。而除了簡單的標籤與內文之外，我們也可以定義標籤的屬性。舉例來說：“<titletype='regular'>RDataEngineer-02-XML
+現代的網頁都是以類似的格式傳遞資訊，讓電腦進行處理。而除了簡單的標籤與內文之外，我們也可以定義標籤的屬性。舉例來說：“<titletype='regular'>RDataEngineer-02-XML
 </title>
-<p>“這樣的訊息中，除了標籤與內容外，電腦還會知道，這個標籤「title」還附帶有屬性：「type」，並且這個屬性的值是「regular」</p>
+<p>“這樣的訊息中，除了標籤與內容外，電腦還會知道，這個標籤「title」還附帶有屬性：「type」，而且屬性的值是「regular」。</p>
 </div>
 <div id="-6" class="section level2">
 <h2>關卡 6</h2>
-如果我們收到一份文件：<thclass="T11b"bgcolor="#ffdd83"align="left"valign="middle"width="200">廠商名稱
+如果我們收到一份文件，內容如下：’<thclass="T11b"bgcolor="#ffdd83"align="left"valign="middle"width="200">廠商名稱
 </th>
 <tdclass="newstop"bgcolor="#EFF1F1">台灣翔登股份有限公司
 </td>
-<p>請問同學，th標籤的class屬性的值為何？</p>
+<p>‘請問同學，th標籤的class屬性的值為何呢？’</p>
 <p>T11b</p>
 </div>
 <div id="-7" class="section level2">
 <h2>關卡 7</h2>
-XML的文件中，標籤是可以有結構關係的。我們拿一小段等等要處理的文件作範例：’
+XML的文件中，標籤可以有結構關係。我們拿一小段稍後要處理的文件作範例：’
 <tr>
 <thclass="T11b"bgcolor="#ffdd83"align="left"valign="middle"width="200">廠商名稱
 </th>
@@ -167,7 +167,7 @@ XML的文件中，標籤是可以有結構關係的。我們拿一小段等等�
 </div>
 <div id="-8" class="section level2">
 <h2>關卡 8</h2>
-在慣例中，我們會說tr是th的父標籤（parent），而th與td兩者都是tr的子標籤（children）每個標籤最多只有一個父標籤。這是因為th和td兩個標籤，寫在
+依照慣例，我們會將tr稱為th的父標籤（parent），而th與td兩者都是tr的子標籤（children），每個標籤最多只有一個父標籤。這是因為th和td兩個標籤，寫在
 <tr>
 和
 </tr>
@@ -179,7 +179,7 @@ XML的文件中，標籤是可以有結構關係的。我們拿一小段等等�
 </div>
 <div id="-10" class="section level2">
 <h2>關卡 10</h2>
-<p>如果同學對XML或HTML的背景知識很有興趣，之後可以輸入wiki_html()或wiki_xml()了解更仔細的背景知識。</p>
+<p>如果同學對XML或HTML的背景知識有興趣，之後可以輸入wiki_html()或wiki_xml()了解更仔細的背景知識。</p>
 </div>
 <div id="-11" class="section level2">
 <h2>關卡 11</h2>
@@ -192,7 +192,7 @@ XML的文件中，標籤是可以有結構關係的。我們拿一小段等等�
 </div>
 <div id="-13" class="section level2">
 <h2>關卡 13</h2>
-<p>請同學載入xml2套件</p>
+<p>請同學載入xml2套件。</p>
 <pre class="r"><code>library(xml2)</code></pre>
 </div>
 <div id="-14" class="section level2">
@@ -207,7 +207,7 @@ XML的文件中，標籤是可以有結構關係的。我們拿一小段等等�
 </div>
 <div id="-16" class="section level2">
 <h2>關卡 16</h2>
-<p>xml2套件要處理XML或HTML文件之前，必須要先作解析，將文件建立成一種特殊的R物件後，才能讓我們挖掘資訊。這裡我們使用的是<code>read_xml</code>函數。請同學輸入：<code>?read_xml</code>打開說明頁面。</p>
+<p>在利用xml2套件處理XML或HTML文件之前，必須要先作解析，將文件建立成一種特殊的R物件後，才能讓進行挖掘資訊。這裡我們使用的是<code>read_xml</code>函數。請同學輸入：<code>?read_xml</code>打開說明頁面。</p>
 <pre class="r"><code>?read_xml</code></pre>
 </div>
 <div id="-17" class="section level2">
@@ -217,7 +217,7 @@ XML的文件中，標籤是可以有結構關係的。我們拿一小段等等�
 </div>
 <div id="-18" class="section level2">
 <h2>關卡 18</h2>
-<p>請同學以<code>doc1&lt;-read_xml(x1)</code>將x1解析後的結果儲存到變數<code>doc1</code>。</p>
+<p>請同學利用<code>doc1&lt;-read_xml(x1)</code>，將x1解析後的結果儲存到變數<code>doc1</code>。</p>
 <pre class="r"><code>doc1 &lt;- read_xml(x1)</code></pre>
 </div>
 <div id="-19" class="section level2">
@@ -232,15 +232,15 @@ XML的文件中，標籤是可以有結構關係的。我們拿一小段等等�
 </div>
 <div id="-21" class="section level2">
 <h2>關卡 21</h2>
-<p>目前xml2中的物件，大致上可以分成三種：xml_document、xml_node和xml_nodesetxml_document就代表整個XML文件。xml_node則對應到上述介紹的XML標籤，在經過<code>read_xml</code>後每個標籤會被轉化為一個xml_node。xml_nodeset則是一群標籤的集合。接下來的例子會具體介紹如何使用這些物件。</p>
+<p>目前xml2中的物件，大致上可以分成三種：xml_document、xml_node和xml_nodeset。xml_document就代表整個XML文件。xml_node對應到上述介紹的XML標籤。而在經過<code>read_xml</code>後，每個標籤會被轉化為一個xml_node，xml_nodeset則是一群標籤的集合。接下來的例子會具體介紹如何使用這些物件。</p>
 </div>
 <div id="-22" class="section level2">
 <h2>關卡 22</h2>
-<p>在挖掘網頁資訊時，最困難的工作就是要如何從成千上萬的標籤中，找到我們感興趣的，再把標籤內的資訊（可能是屬性，也可能是內容）給擷取出來。所以接下來我們要跟大家講解我們挖掘網頁資訊的三步驟：1.找到標籤2.查詢屬性3.檢查內容</p>
+<p>在挖掘網頁資訊時，最困難的部分就是要從成千上萬的標籤中，找到我們感興趣的，再將標籤內的資訊（可能是屬性，也可能是內容）給擷取出來。所以接下來，我們要講解挖掘網頁資訊的三步驟：1.找到標籤2.查詢屬性3.檢查內容。</p>
 </div>
 <div id="-23" class="section level2">
 <h2>關卡 23</h2>
-<p>找標籤是這些動作中最困難的，因為每份文件的標籤可能都不同，所以我們先要找出我們感興趣的內容是屬於那一類的標籤，接著再用xml2等套件把我們想找的標籤給定位出來。第一段的方式，必須要透過其他工具的輔助，目前在R中並沒有很好的方法，只能透過嘗試、嘗試、再嘗試才能找到我們的目標標籤。這裡我們要介紹的是在已經知道目的標籤時，如何利用xml2來找出目標。</p>
+<p>第一部分找標籤是這些步驟中最困難的，因為每份文件的標籤可能都不同，我們需要先找出我們感興趣的內容屬於那一類的標籤，接著再用xml2等套件把我們想找的標籤給定位出來。第一段的方式，必須要透過其他工具的輔助，目前在R中並沒有很好的方法，只能透過嘗試、嘗試、再嘗試才能找到我們的目標標籤。這裡我們要介紹的是，在已經知道目的標籤時，如何利用xml2來找出目標。</p>
 </div>
 <div id="-24" class="section level2">
 <h2>關卡 24</h2>
@@ -249,40 +249,40 @@ XML的文件中，標籤是可以有結構關係的。我們拿一小段等等�
 </div>
 <div id="-25" class="section level2">
 <h2>關卡 25</h2>
-<p>根據說明文件，<code>xml_find_all</code>共有兩個參數：<code>x</code>與<code>xpath</code>。<code>x</code>可以是xml_document、xml_node或xml_nodeset。而<code>xpath</code>（XMLPathLanguage）則是一種特別的格式，讓我們可以和電腦溝通我們要搜尋的標籤。有興趣的同學可以直接讀wiki_xpath()</p>
+<p>根據說明文件，<code>xml_find_all</code>共有兩個參數：<code>x</code>與<code>xpath</code>。<code>x</code>可以是xml_document、xml_node或xml_nodeset。而<code>xpath</code>（XMLPathLanguage）則是一種特別的格式，讓我們可以和電腦溝通我們要搜尋的標籤。有興趣的同學可以直接閱讀wiki_xpath()。</p>
 </div>
 <div id="-26" class="section level2">
 <h2>關卡 26</h2>
-<p>我們先玩一下<code>xml_find_all</code>後，再講解<code>xpath</code>。請同學先輸入：<code>xml_find_all(doc1,&quot;/a/b&quot;)</code></p>
+<p>我們先操作練習一下<code>xml_find_all</code>後，再講解<code>xpath</code>。請同學輸入：<code>xml_find_all(doc1,&quot;/a/b&quot;)</code>。</p>
 <pre class="r"><code>xml_find_all(doc1, &quot;/a/b&quot;)</code></pre>
 </div>
 <div id="-27" class="section level2">
 <h2>關卡 27</h2>
-<p>我們應該會看到<code>xml_find_all</code>找了唯一的標籤b給我們。同學應該可以猜到，xpath最後類似路徑的格式，其實就是在描述標籤的相對位置。但是如果我們輸入的是：<code>xml_find_all(doc1,&quot;/b&quot;)</code>呢？請同學試試看。</p>
+<p>同學會看到<code>xml_find_all</code>找了唯一的標籤b給我們。同學應該可以猜到，xpath最後類似路徑的格式，其實就是在描述標籤的相對位置。但是如果我們輸入的是：<code>xml_find_all(doc1,&quot;/b&quot;)</code>呢？請同學試試看。</p>
 <pre class="r"><code>xml_find_all(doc1, &quot;/b&quot;)</code></pre>
 </div>
 <div id="-28" class="section level2">
 <h2>關卡 28</h2>
-<p>我們可以看到<code>xml_find_all</code>回報說它找到的是空的。在XPath的規範中，我們要尋找的標籤名稱，就是整個路徑的最後一個位置。所以“/a”就代表要找“<a>…</a>”，而“/b”則代表要找“<b>…</b>”斜線則代表標籤在文件中的相對位置。“/a”代表這個標籤在根部，也就是沒有父標籤。“/a/b”則代表這個標籤“<b>…</b>”的父標籤是“<a>…</a>”，並且再往父標籤的方向走，就到底了。</p>
+<p>我們可以看到<code>xml_find_all</code>回報沒有找到任何結果。在XPath的規範中，我們要尋找的標籤名稱，就是整個路徑的最後一個位置。所以“/a”就代表要找“<a>…</a>”，而“/b”則代表要找“<b>…</b>”，斜線則代表標籤在文件中的相對位置。“/a”代表這個標籤在根部，也就是沒有父標籤。“/a/b”則代表這個標籤“<b>…</b>”的父標籤是“<a>…</a>”，並且再往父標籤的方向走，就到底了。</p>
 </div>
 <div id="-29" class="section level2">
 <h2>關卡 29</h2>
-<p>請問下列哪一個XPath路徑可以找到<code>x1</code>中的“c”標籤？<code>x1</code>的內容為：“<a><b>B</b><c>C1</c><cclass='x'>C2</c></a>”</p>
+<p>請問下列哪一個XPath路徑可以找到<code>x1</code>中的“c”標籤？<code>x1</code>的內容為：“<a><b>B</b><c>C1</c><cclass='x'>C2</c></a>”。</p>
 <p>/a/c</p>
 </div>
 <div id="-30" class="section level2">
 <h2>關卡 30</h2>
-<p>接著，我們請同學輸入：<code>ns&lt;-xml_find_all(doc1,&quot;/a/c&quot;)</code></p>
+<p>接著，我們請同學輸入：<code>ns&lt;-xml_find_all(doc1,&quot;/a/c&quot;)</code>。</p>
 <pre class="r"><code>ns &lt;- xml_find_all(doc1, &quot;/a/c&quot;)</code></pre>
 </div>
 <div id="-31" class="section level2">
 <h2>關卡 31</h2>
-<p>請同學檢查<code>ns</code>的型態</p>
+<p>請同學檢查<code>ns</code>的型態。</p>
 <pre class="r"><code>class(ns)</code></pre>
 </div>
 <div id="-32" class="section level2">
 <h2>關卡 32</h2>
-<p>我們可以透過<code>[[</code>和<code>[</code>來從xml_nodeset中取出xml_node或是xml_nodeset。xml2在這邊的設計非常接近R的list，所以同學可以用處理list的經驗來作判斷。</p>
+<p>我們可以透過<code>[[</code>和<code>[</code>，從xml_nodeset中取出xml_node或是xml_nodeset。xml2在這邊的設計和R的list非常接近，所以同學可以用處理list的經驗來作判斷。</p>
 </div>
 <div id="-33" class="section level2">
 <h2>關卡 33</h2>
@@ -296,61 +296,61 @@ XML的文件中，標籤是可以有結構關係的。我們拿一小段等等�
 </div>
 <div id="-35" class="section level2">
 <h2>關卡 35</h2>
-<p>我們可以把第一個c標籤，存到變數<code>n1</code>。請同學輸入：<code>n1&lt;-ns[[1]]</code></p>
+<p>我們可以把第一個c標籤，存到變數<code>n1</code>。請同學輸入：<code>n1&lt;-ns[[1]]</code>。</p>
 <pre class="r"><code>n1 &lt;- ns[[1]]</code></pre>
 </div>
 <div id="-36" class="section level2">
 <h2>關卡 36</h2>
-<p>根據<code>x1</code>的內容：“<a><b>B</b><c>C1</c><cclass='x'>C2</c></a>”，請問<code>n1</code>，也就是<a>…</a>底下的第一個<c>..</c>標籤，他的內容是什麼？</p>
+<p>根據<code>x1</code>的內容：“<a><b>B</b><c>C1</c><cclass='x'>C2</c></a>”，請問<code>n1</code>，也就是<a>…</a>底下的第一個<c>..</c>標籤，他的內容是什麼呢？</p>
 <p>C1</p>
 </div>
 <div id="-37" class="section level2">
 <h2>關卡 37</h2>
-<p>我們可以透過<code>xml_text(n1)</code>取出xml_node的內容。在這裡，我們應該要看到“C1”請同學試試看。</p>
+<p>我們可以透過<code>xml_text(n1)</code>取出xml_node的內容。在這裡，我們應該要看到“C1”，請同學試試看。</p>
 <pre class="r"><code>xml_text(n1)</code></pre>
 </div>
 <div id="-38" class="section level2">
 <h2>關卡 38</h2>
-<p>我們也可以用<code>xml_parent</code>來看一個標籤的父標籤。請同學試試看輸入：<code>xml_parent(n1)</code></p>
+<p>我們也可以用<code>xml_parent</code>來看一個標籤的父標籤。請同學試試看輸入：<code>xml_parent(n1)</code>。</p>
 <pre class="r"><code>xml_parent(n1)</code></pre>
 </div>
 <div id="-39" class="section level2">
 <h2>關卡 39</h2>
-<p>接著請執行：<code>n2&lt;-ns[[2]]</code></p>
+<p>接著請執行：<code>n2&lt;-ns[[2]]</code>。</p>
 <pre class="r"><code>n2 &lt;- ns[[2]]</code></pre>
 </div>
 <div id="-40" class="section level2">
 <h2>關卡 40</h2>
-<p>我們可以檢查一下<code>xml_text(n2)</code>的輸出，確認這是第二個c標籤</p>
+<p>我們可以檢查一下<code>xml_text(n2)</code>的輸出，確認這是第二個c標籤。</p>
 <pre class="r"><code>xml_text(n2)</code></pre>
 </div>
 <div id="-41" class="section level2">
 <h2>關卡 41</h2>
-<p>另一個檢查內容的函數是<code>xml_contents</code>。當含有子標籤時，它和<code>xml_text</code>的行為會不太一致。</p>
+<p>另一個檢查內容的函數是<code>xml_contents</code>。當含有子標籤時，它和<code>xml_text</code>的行為會不一致。</p>
 </div>
 <div id="-42" class="section level2">
 <h2>關卡 42</h2>
-<p>請同學輸入：<code>a&lt;-xml_find_one(doc1,&quot;/a&quot;)</code>。這裡我們使用<code>xml_find_one</code>作選取，所以輸出的就只有一個node，型態就會是xml_node</p>
+<p>請同學輸入：<code>a&lt;-xml_find_one(doc1,&quot;/a&quot;)</code>。這裡我們使用<code>xml_find_one</code>作選取，所以輸出的就只有一個node，型態就會是xml_node。</p>
 <pre class="r"><code>a &lt;- xml_find_one(doc1, &quot;/a&quot;)</code></pre>
 </div>
 <div id="-43" class="section level2">
 <h2>關卡 43</h2>
-<p>接著我們試試看輸入：<code>xml_text(a)</code>，同學應該會看到在<a>…</a>之間的所有文字。</p>
+<p>接著我們試試看輸入：<code>xml_text(a)</code>，同學會看到在<a>…</a>之間的所有文字。</p>
 <pre class="r"><code>xml_text(a)</code></pre>
 </div>
 <div id="-44" class="section level2">
 <h2>關卡 44</h2>
-<p>但是我們若輸入：<code>xml_contents(a)</code>，R就會回傳一個xml_nodeset給我們。請試試看。</p>
+<p>但是我們若輸入：<code>xml_contents(a)</code>，R就會回傳一個xml_nodeset給我們。請同學試試看。</p>
 <pre class="r"><code>xml_contents(a)</code></pre>
 </div>
 <div id="-45" class="section level2">
 <h2>關卡 45</h2>
-<p>我們也能透過<code>xml_children(a)</code>來取得所有以a為父標籤的標籤們（在這裡，即是一個b標籤和兩個c標籤）。請同學試試看。</p>
+<p>我們也能透過<code>xml_children(a)</code>來取得所有以a為父標籤的標籤們（在此案例中為是一個b標籤和兩個c標籤）。請同學試試看。</p>
 <pre class="r"><code>xml_children(a)</code></pre>
 </div>
 <div id="-46" class="section level2">
 <h2>關卡 46</h2>
-<p>回到剛剛的節點<code>n2</code>和<code>n1</code>。這兩個節點在結構上不同的，<code>n2</code>附帶了屬性，而<code>n1</code>沒有。請同學先看看<code>xml_attrs(n1)</code>的結果</p>
+<p>回到剛剛的節點<code>n2</code>和<code>n1</code>。這兩個節點在結構上不同的，<code>n2</code>附帶了屬性，而<code>n1</code>沒有。請同學先看看<code>xml_attrs(n1)</code>的結果。</p>
 <pre class="r"><code>xml_attrs(n1)</code></pre>
 </div>
 <div id="-47" class="section level2">
@@ -359,7 +359,7 @@ XML的文件中，標籤是可以有結構關係的。我們拿一小段等等�
 </div>
 <div id="-48" class="section level2">
 <h2>關卡 48</h2>
-<p>請同學先看看<code>xml_attrs(n2)</code>的結果</p>
+<p>再請同學看看<code>xml_attrs(n2)</code>的結果。</p>
 <pre class="r"><code>xml_attrs(n2)</code></pre>
 </div>
 <div id="-49" class="section level2">
@@ -373,28 +373,28 @@ XML的文件中，標籤是可以有結構關係的。我們拿一小段等等�
 </div>
 <div id="-51" class="section level2">
 <h2>關卡 51</h2>
-<p>我們甚至還可以指定屬性的值，例如：<code>xml_find_all(doc1,&quot;/a/c[@class='g']&quot;)</code>，就代表我們要找的c標籤不只是有class屬性而已，這個屬性還必須要是“g”。這裡也要請同學注意我們是如何交替的使用雙引號和單引號。由於這裡的“g”必須要加上引號，但是整個文字的外面已經套上雙引號，如果重複使用雙引號的話會造成R在判斷字串的困難。因此這裡要使用單引號。請同學試試看。</p>
+<p>我們甚至可以指定屬性的值，例如：<code>xml_find_all(doc1,&quot;/a/c[@class='g']&quot;)</code>就代表我們要找的c標籤不只是有class屬性而已，這個屬性還必須要是“g”。在這裡，也要請同學注意我們是如何交替的使用雙引號和單引號。由於這裡的“g”必須要加上引號，但是整個文字的外面已經套上雙引號，如果重複使用雙引號的話會造成R在判斷字串的困難。因此這裡要使用單引號。請同學試試看。</p>
 <pre class="r"><code>xml_find_all(doc1, &quot;/a/c[@class='g']&quot;)</code></pre>
 </div>
 <div id="-52" class="section level2">
 <h2>關卡 52</h2>
-<p>最後我們要介紹一種XPath中常常使用的定位方式：“//”。這裡的“//”代表的就是任意位置。當我們在處理複雜的網頁資料時，如果每次都要從根部尋找正確的路徑，是非常不方便的。此時，透過“//a”，我們就可以找到在所有位置都出現的a標籤。這樣的語法等等會在最後一關用到。</p>
+<p>最後我們要介紹一種在XPath中常常使用的定位方式：“//”。這裡的“//”代表的就是任意位置。當我們在處理複雜的網頁資料時，如果每次都要從根部尋找正確的路徑，是非常不方便的。此時，透過“//a”，我們就可以找到在所有位置都出現的a標籤。這樣的語法等等會在最後一關中用到。</p>
 </div>
 <div id="-53" class="section level2">
 <h2>關卡 53</h2>
-<p>也請同學不要忘記，“//”的用法是可以搭配屬性的過濾使用的。</p>
+<p>也請同學不要忘記，“//”的用法是可以搭配屬性過濾使用的。</p>
 </div>
 <div id="-54" class="section level2">
 <h2>關卡 54</h2>
-<p>以上的課程內容，我們介紹了在給定道標籤的名稱（a標籤<a>…</a>或b標籤<b>…</b>）、標籤的位置（根部是“/”，任意位置是“//”）及標籤的屬性後，要如何利用xml_find_all來搜尋標籤。</p>
+<p>以上的課程內容，我們介紹了在給定標籤的名稱（a標籤<a>…</a>或b標籤<b>…</b>）、標籤的位置（根部是“/”，任意位置是“//”）及標籤的屬性後，如何利用xml_find_all來搜尋標籤。</p>
 </div>
 <div id="-55" class="section level2">
 <h2>關卡 55</h2>
-<p>我們也知道當找到這些標籤後，要怎麼取出標籤的內容（xml_contents和xml_text）與屬性（xml_attrs）。另外我們也可以沿著標籤往父標籤（xml_parent)，或是取出子標籤（xml_children）最後跟同學報告，這些操作都是向量式的喔！你可以對xml_nodeset使用如xml_text等函數一次操作大量的xml_nodeset。等等的練習就會用到這些功能。</p>
+<p>我們也知道當找到這些標籤後，要怎麼取出標籤的內容（xml_contents和xml_text）與屬性（xml_attrs）。另外我們也可以沿著標籤往父標籤（xml_parent)，或是取出子標籤（xml_children）。最後跟同學說明，這些操作都是向量式的喔！可以對xml_nodeset使用如xml_text等函數，一次操作大量的xml_nodeset。稍後的練習中就會用到這些功能。</p>
 </div>
 <div id="-56" class="section level2">
 <h2>關卡 56</h2>
-<p>接著就請同學透過上述所學，從政府的決標公告網頁中找出各種資訊。請同學在完成之後存檔，並輸入<code>submit()</code>來檢查結果是否符合預期。如果同學在檔案中看到亂碼，請使用Rstudio左上角的File-&gt;ReopenWithEncoding…-&gt;選取：UTF-8</p>
+<p>接著就請同學透過上述所學，從政府的決標公告網頁中試著找出不同的資訊。請同學在完成之後存檔，並輸入<code>submit()</code>來檢查結果是否符合預期。如果同學在檔案中看到亂碼，請使用Rstudio左上角的File-&gt;ReopenWithEncoding…-&gt;選取：UTF-8</p>
 <pre class="r"><code>
 # 這個段落的程式碼，是先幫助同學觀察資料的，不包含在作答的檢查範圍
 if (FALSE) {
