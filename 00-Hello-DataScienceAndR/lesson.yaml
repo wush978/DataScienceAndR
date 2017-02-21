@@ -6,73 +6,69 @@
   Organization: Taiwan R User Group
   Version: 2.3.1.2
 - Class: text
-  Output: "能夠讀到這段中文字的同學，可以直接輸入enter進入下一個關卡。\nIf you are windows user and you cannot
-    read the chinese characters, please\npress `ESC` to exit swirl and execute the
-    command `Sys.setlocale(locale = \"cht\")`. \n"
+  Output: "讀到這段中文字的同學，請直接輸入enter進入課程。\nIf you are windows user and you cannot read
+    the chinese characters, please\npress `ESC` to exit swirl and execute the command
+    `Sys.setlocale(locale = \"cht\")`. \n"
 - Class: text
   Output: |
-    這個課程的目的是為了測試同學的環境是否正常，能否進行本教材。
-    測試之後，我們會跟同學說明本教材提供的一些功能。在課程進行中，
-    同學如果看到最後有：`...`，代表這是一個說明關卡，在閱讀說明
-    文字之後可以輸入enter進入下一個關卡。
+    本課程的目的是為了測試同學的環境是否正常，能否進行本教材。
+    完成測試之後，會進一步說明本教材的部分功能，
+    在課程進行中，如果看到格式如：`...`的部分，代表該部分是一個說明關卡。
+    上述說明文字閱讀完畢後，請輸入enter進入下一個關卡。
 - Class: text
   Output: |
-    課程進行時，我們會請同學在R 的console（就是有`>`開頭的區塊）中輸入指令。
-    需要輸入的程式碼，我們會在兩邊用``來包覆。
+    課程進行時，會請同學在R 的console（即開頭為`>`的區塊）中輸入指令。
+    而需要輸入的程式碼，則會在內容兩端用``符號來包覆。
 - Class: cmd_question
   Output: |
-    這是一個需要輸入指令來過關的關卡。請同學在螢幕上輸入：`skip()`來過關。
-    本關卡會檢查swirl的套件版本，如果版本不夠新，請同學重新啟動R後，輸入：
-    `source("http://wush978.github.io/R/init-swirl.R")`來
-    更新swirl套件，並更新課程內容。
+    本關卡會檢查swirl的套件版本。這是一個需要輸入指令來過關的關卡，請在螢幕上輸入：`skip()`進行過關。
+    如果版本需要更新，請同學重新啟動R後，輸入：`source("http://wush978.github.io/R/init-swirl.R")`更新swirl套件以及課程內容。
   CorrectAnswer: packageVersion("swirl")
   AnswerTests: check_version()
   Hint: packageVersion("swirl")
 - Class: text
   Output: |
-    課程進行中，同學都可以輸入`skip()`來看答案並跳過卡住的關卡。如果因為
-    變數已經受到污染，導致連`skip()`都無法過關時，請同學輸入：`swirl()`
-    進行接關，甚至是重新開啟R 後載入swirl套件後輸入`swirl()`接關。如果
-    仍然無法排除，請求助。
+    課程中，可以輸入`skip()`來看答案並跳過卡住的關卡。
+    若是變數已經受到污染，以至於上述方式無法跳過關卡時，請改為輸入：`swirl()`以接續進行下一關。
+    有時需要重新開啟R，載入swirl套件後，輸入`swirl()`接續下一關。
+    如果上述方法嘗試之後仍然無法排除，請求助。
 - Class: cmd_question
   Output: |
-    請同學在console中輸入：`chat()`。同學必需要輸入一樣的指令才會
-    過關。這個指令則能讓同學打開聊天室的網頁。只要註冊github帳戶
-    （<https://github.com/join>）之後，就可以在這個聊天室之中求救。
+    請在console中輸入：`chat()`。此部分必需要輸入與上述一樣的指令才會過關。
+    這個指令能打開聊天室的網頁。註冊github帳戶（<https://github.com/join>）之後，即可在這個聊天室之中求助。
   CorrectAnswer: chat()
   AnswerTests: omnitest('chat()')
   Hint: chat()
 - Class: script
   Output: |
-    請同學確認，Rstudio是否有打開一個名稱為「test-script.R」的檔案，
-    並且裡面已經有：「# 這是測試功能的檔案」等字眼？如果同學沒辦法看到中文，請依序點
-    選Rstudio左上角的File -> Reopen With Encoding... -> 選取：UTF-8。如果使用Windows
-    的同學打開的檔案沒有任何文字，請使用非中文的使用者帳號進行課程。（不好意思，
-    目前我們仍然沒有好的解決方法，只能麻煩同學切換帳號）
+    請確認Rstudio是否開啟名稱為「test-script.R」的檔案，並且已經顯示：「# 這是測試功能的檔案」等字眼。
+    如果無法看到中文，請依序點選Rstudio左上角的File -> Reopen With Encoding... -> 選取：UTF-8。
+    使用Windows的同學，如果打開的檔案後無法看到文字，請改由使用非中文的使用者帳號進行課程。
+    （針對此問題，目前尚沒有更好的解決方法，麻煩遇到此問題的同學切換帳號後，繼續進行課程）
   Script: test-script.R
   AnswerTests: check_version()
 - Class: text
   Output: |
-    提醒同學，未來進行課程時，編輯的文件都會在重新啟動R之後消失。同學如果有需要，
-    請自行留存副本。官方網站：<http://www.datascienceandr.org>中也有參考答案。
+    提醒同學，進行接下來的課程時，所有編輯中的文件將會在重新啟動R之後消失。
+    如果有需要，請同學自行留存副本。官方網站：<http://www.datascienceandr.org>中也有答案供參考。
 - Class: text
   Output: |
-    剛剛同學輸入的`skip()`與`submit()`都是swirl的指令。接著我們介紹：`play()`。
-    同學如果在課程進行中，想要自由摸索的話，可以輸入`play()`來暫時中止swirl。
-    需要回到課程的話，就輸入：`nxt()`。
+    上述關卡中輸入的`skip()`與`submit()`皆屬於swirl的指令。接著我們介紹：`play()`。
+    在課程進行中，若同學想要自由摸索嘗試的話，可以輸入`play()`來暫時中止swirl。
+    需要回到課程的話，則是輸入：`nxt()`返回課程。
 - Class: text
   Output: |
-    `bye()`則可以離開swirl環境。但是只要輸入`swirl()`後就可以選擇接關，繼續挑戰
+    輸入`bye()`則可以離開swirl環境。離開後，只要輸入`swirl()`即可選擇接關，繼續挑戰
     離開前的進度。
 - Class: text
-  Output: "需要繳交作業的同學，請在完成每個單元後確認有無看到：「You've reached the end \nof this lesson! Returning
-    to the main menu... Your status has beed updated \nto tracking server」。要有這一行文字，才代表我們有紀錄到同學完成課程的紀錄，\n並且轉交給同學的老師做紀錄。也因此，建議需要繳交作業的同學，儘量在有網路的狀\n態下完成作業。\n"
+  Output: "需要繳交作業的同學，請在完成每個單元後確認是否看到訊息如下：「You've reached the end \nof this lesson!
+    Returning to the main menu... Your status has beed updated \nto tracking server」。出現上述訊息之後，代表同學完成課程的進度已經被確實記錄，\n並且成功轉交給同學的老師。因此，建議需要繳交作業的同學，請確認在有網路連線的狀\n態下完成作業。\n"
 - Class: text
   Output: |
-    有需要確認進度的同學，也可以輸入：`query_user_id("<你的id>")`來查詢目前該id
-    完成的單元。這也是會提供給老師們的作業紀錄。
+    需要確認進度的同學，也可以輸入：`query_user_id("<你的id>")`來查詢目前該id
+    完成的單元。此部分也會提供給老師們，以進行作業紀錄。
 - Class: text
   Output: |-
-    測試與說明已經完成，請同學回到選單選擇你想進行的課程。（需要交作業的同學），
-    也可以趁機注意有無：「Your status has beed updated to tracking server」的字樣。
+    測試與說明已經完成，請同學回到選單選擇你想進行的課程。需要交作業的同學，
+    請於此測試課程結束後，留意是否出現訊息如下：「Your status has beed updated to tracking server」。
 
