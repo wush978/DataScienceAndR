@@ -1,4 +1,4 @@
-if (packageVersion("swirl") < package_version("100.3.1-8")) {
+if (packageVersion("swirl") < package_version("100.5.2")) {
   stop("Please upgrade the version of swirl via: `install.packages('swirl', repos = 'http://wush978.github.io/R')`")
 }
 
@@ -17,7 +17,7 @@ assign("check_then_install",
        },
        envir = globalenv())
 
-assign("check_then_install_github", 
+assign("check_then_install_github",
        function(pkg_name, pkg_version, ...) {
          if (!require(pkg_name, character.only = TRUE)) devtools::install_github(...) else {
          if (packageVersion(pkg_name) < package_version(pkg_version)) devtools::install_github(...)
