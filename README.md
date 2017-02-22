@@ -95,7 +95,7 @@ window.onload =function(){
 
 ## 新聞專區
 
-- **新版本的swirl(v101.5)已上線**
+- **新版本的swirl(v101.5.3.1)已上線**
     - **全面中文化並自動協助使用者設定適當的locale**
     - **課程需以Google或Facebook登入**
 
@@ -201,7 +201,7 @@ ps. 如果你之前有進行過swirl的課程，swirl會出現下圖的選項詢
 
 ## 課程筆記
 
-以下連結記載swirl中的課程內容(sha-hash: 2595c77d 版本)
+以下連結記載swirl中的課程內容(sha-hash: 064ea888 版本)
 
 - [00-Hello-DataScienceAndR](note/00-Hello-DataScienceAndR.html)
 - [01-RBasic-01-Introduction](note/01-RBasic-01-Introduction.html)

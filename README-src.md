@@ -95,7 +95,7 @@ window.onload =function(){
 
 ## 新聞專區
 
-- **新版本的swirl(v101.5)已上線**
+- **新版本的swirl(v101.5.3.1)已上線**
     - **全面中文化並自動協助使用者設定適當的locale**
     - **課程需以Google或Facebook登入**
 
