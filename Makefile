@@ -5,9 +5,9 @@ README.md : README-src.md
 	-rm -r note
 	Rscript get_note.R
 
-index.html : README.md
+index.html : README.md get_index.R
 	node_modules/.bin/markdown2bootstrap -h README.md
-	mv README.html index.html
+	Rscript get_index.R
 
 teacher.html : teacher.md
 	node_modules/.bin/markdown2bootstrap $<

@@ -1,4 +1,4 @@
-<!-- title: R 語言翻轉教室 -->
+<!-- title: R語言翻轉教室 -->
 <!-- subtitle: 版本號：v1.1 -->
 
 <script>
