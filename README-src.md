@@ -95,9 +95,10 @@ window.onload =function(){
 
 ## 新聞專區
 
-- **新版本的swirl(v101.5.3.2)已上線**
+- **新版本的swirl(v101.5.4)已上線**
     - **全面中文化並自動協助使用者設定適當的locale**
     - **課程需以Google或Facebook登入**
+    - **合作專案的同學可使用`upload_my_progress`與`download_my_progress`來在不同機器間同步進度**
 
 若網友有發現任何bug，麻煩到[聊天室](https://gitter.im/wush978/DataScienceAndR?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)回報，謝謝
 
