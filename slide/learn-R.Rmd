@@ -611,15 +611,6 @@ swirl()
 
 --- &vcenter .largecontent
 
-## 登入翻轉教室
-
-- 這周確認選課名單後，請用ntu + 學號登入
-    - 例如: `ntud01921016`
-- 密碼請用學號後三碼
-- 請以這個帳號完成作業
-
---- &vcenter .largecontent
-
 ## 介紹訊息
 
 ```txt
@@ -707,14 +698,4 @@ Your status has beed updated to tracking server
 | you cannot read the chinese characters, please press `ESC` to exit swirl and
 | execute the command `Sys.setlocale(locale = "cht")`.
 
-```
-
---- &vcenter .largecontent
-
-## 安裝今天的隨堂練習
-
-```r
-library(swirl)
-install_course_url("http://13.85.30.195/R/exercise/2017-NTUCSX.zip")
-# 分流: install_course_url("https://wush978.github.io/R/exercise/2017-NTUCSX.zip")
 ```
