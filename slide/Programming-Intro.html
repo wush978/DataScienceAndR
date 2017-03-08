@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>R語言翻轉教室前備知識：Programming</title>
+  <meta charset="utf-8">
+  <meta name="description" content="R語言翻轉教室前備知識：Programming">
+  <meta name="author" content="Wush Wu">
+  <meta name="generator" content="slidify" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <link rel="stylesheet" href="libraries/frameworks/io2012-wush/css/default.css" media="all" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012-wush/css/phone.css" 
+    media="only screen and (max-device-width: 480px)" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012-wush/css/slidify.css" >
+  <link rel="stylesheet" href="libraries/highlighters/highlight.js/css/zenburn.css" />
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->  <link rel=stylesheet href="./assets/css/custom.css"></link>
+<link rel=stylesheet href="./assets/css/ribbons.css"></link>
+
+  
+  <!-- Grab CDN jQuery, fall back to local if offline -->
+  <script src="libraries/frameworks/io2012-wush/js/jquery-1.7.min.js"></script>
+  <!-- <script>window.jQuery || document.write('<script src="libraries/widgets/quiz/js/jquery.js"><\/script>')</script> -->
+  <script data-main="libraries/frameworks/io2012-wush/js/slides" 
+    src="libraries/frameworks/io2012-wush/js/require-1.0.8.min.js">
+  </script>
+  
+  
+
+</head>
+<body style="opacity: 0">
+  <slides class="layout-widescreen">
+    
+    <!-- LOGO SLIDE -->
+        <slide class="title-slide segue nobackground">
+  <hgroup class="auto-fadein">
+    <h1>R語言翻轉教室前備知識：Programming</h1>
+    <h2></h2>
+    <p>Wush Wu<br/>Taiwan R User Group</p>
+  </hgroup>
+  <article></article>  
+</slide>
+    
+
+    <!-- SLIDES -->
+    <slide class="largecontent" id="slide-1" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>大綱</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ol>
+<li>資料科學與程式能力</li>
+<li>如何自學程式
+
+<ol>
+<li>程式是什麼？（以應用的觀點）</li>
+<li>Divide and Conquer</li>
+<li>程式是工具</li>
+<li>自學程式</li>
+</ol></li>
+<li>自學翻轉教室</li>
+</ol>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="dark segue" id="slide-2" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2>資料科學與程式能力</h2>
+  </hgroup>
+  <article data-timings="">
+    
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="" id="slide-3" style="background:url(assets/img/Data_Science_VD.png); background-size: 100% 100%;">
+  <article data-timings="" style="display: table;">
+    <div style="display: table-cell;vertical-align: bottom;">
+      <p><a href="http://www.forbes.com">http://www.forbes.com</a></p>
+
+    </div>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="" id="slide-4" style="background:url(assets/img/programming-not-main-role.png); background-size: 100% 100%;">
+  <article data-timings="" style="display: table;">
+    <div style="display: table-cell;vertical-align: bottom;">
+      
+    </div>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="" id="slide-5" style="background:url(assets/img/programming-not-god.png); background-size: 100% 100%;">
+  <article data-timings="" style="display: table;">
+    <div style="display: table-cell;vertical-align: bottom;">
+      
+    </div>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="" id="slide-6" style="background:url(assets/img/how-to-do.png); background-size: 100% 100%;">
+  <article data-timings="" style="display: table;">
+    <div style="display: table-cell;vertical-align: bottom;">
+      
+    </div>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-7" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>我們必須要能夠「自學」</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>程式的能力要符合分析上的需求
+
+<ul>
+<li>但是程式能力點太高對分析的幫助很少</li>
+</ul></li>
+<li>沒有人知道你需要多強的程式能力
+
+<ul>
+<li>你也不知道你明天會遇到什麼問題</li>
+</ul></li>
+<li>自學是唯一的辦法</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-8" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>程式的學習能力分級</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ol>
+<li>程式是什麼？能吃嗎？找學生/助理/外包廠商來做就好啦！</li>
+<li>Copy Paste</li>
+<li>Search + Copy Paste</li>
+<li>Search + Copy Paste + 修改</li>
+<li>從教學中學習（如：書本、講義、線上資源與翻轉教室）</li>
+<li>從別人的程式碼中學習</li>
+<li>從工具的原始碼中學習</li>
+</ol>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-9" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2>大家來投票吧！</h2>
+  </hgroup>
+  <article data-timings="">
+    
+<div style='float:left;width:48%;' class='centered'>
+  <p><center><img src='assets/img/static_qr_code_without_logo.jpg' style='max-width: 100%;max-height: 100%'></img></center></p>
+
+</div>
+<div style='float:right;width:48%;' class='centered'>
+  <iframe src="http://qstn.co/q/7nFYcny4"></iframe>
+
+</div>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="" id="slide-10" style="background:url(assets/img/self-learning-from-dsr.png); background-size: 100% 100%;">
+  <article data-timings="" style="display: table;">
+    <div style="display: table-cell;vertical-align: bottom;">
+      
+    </div>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="dark segue" id="slide-11" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2>什麼是(R的)程式？</h2>
+  </hgroup>
+  <article data-timings="">
+    
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-12" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>程式讓機器「一步一步」執行特定的「動作」</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>「一步一步」：流程控制</li>
+<li>「動作」：函數</li>
+<li>我們的目標：只要會這些就夠了！</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-13" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2>什麼是「一步一步」的「動作」？</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>這是一個讀取資料跑迴歸分析的程式</p>
+
+<div style='float:left;width:48%;' class='centered'>
+  <ul>
+<li>讀取資料(?)</li>
+<li>根據資料計算回歸分析(?)</li>
+<li>輸出報表到螢幕</li>
+</ul>
+
+</div>
+<div style='float:right;width:48%;' class='centered'>
+  <pre><code class="r">df &lt;- read.csv(...)
+g &lt;- lm(~ ., df)
+summary(g)
+</code></pre>
+
+</div>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-14" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>程式的細節是魔鬼</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>（目前的）電腦沒辦法腦補細節</li>
+<li>我們必須要能把細節講清楚
+
+<ul>
+<li>所有的電腦都會提供一組基本的動作</li>
+<li>我們定義的操作必須要能夠以基本的動作來定義</li>
+</ul></li>
+<li>各種工具都提供了更「高階」的動作
+
+<ul>
+<li>我們只需要以該「高階」的動作來定義我們要的操作</li>
+</ul></li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-15" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>何謂「基本動作」？範例：CPU指令集</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<p>以下是電腦提供的基本動作：</p>
+
+<ul>
+<li>設定<a href="https://en.wikipedia.org/wiki/Processor_register">Register</a>得值為某個常數</li>
+<li>拿兩個<a href="https://en.wikipedia.org/wiki/Processor_register">Register</a>得值做加法或減法</li>
+<li>改變「動作」執行的順序</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-16" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>何謂「細節」？範例：R 的函數與參數</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>函數：動作</li>
+<li>參數：調整動作</li>
+</ul>
+
+<pre><code class="r">args(read.csv)
+</code></pre>
+
+<pre><code class="r">function (file, header = TRUE, sep = &quot;,&quot;, quote = &quot;\&quot;&quot;, dec = &quot;.&quot;, 
+    fill = TRUE, comment.char = &quot;&quot;, ...) 
+</code></pre>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-17" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>程式的細節是魔鬼</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<pre><code class="r">df &lt;- read.csv(...)
+</code></pre>
+
+<ul>
+<li>資料結構
+
+<ul>
+<li><code>read.csv</code>的參數有很多，各別是什麼？</li>
+<li><code>df</code>會是什麼？</li>
+</ul></li>
+<li>初學者在實務上使用「函數」時很容易遇到各種錯誤
+
+<ul>
+<li>而且還看不懂錯誤訊息！</li>
+</ul></li>
+</ul>
+
+<p><font color="red">Error in file(file, &quot;rt&quot;) : 無法開啟連結 </font></p>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-18" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>如何上手？</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<h2>- 基本功跑不掉，請耐著性子撐過去</h2>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-19" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>程式的變數是什麼意思？</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>文字本身的意思</li>
+<li>文字在程式碼之中的雙重意思</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-20" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  
+</hgroup>
+<article class = 'flexbox vcenter'>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-21" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>如何從簡單的動作變成複雜的程式？</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>Divide</li>
+<li>Conquer</li>
+<li>Combine</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-22" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>範例：監控價格</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-23" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>範例：訂購自動化</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-24" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>範例：股價預測（非實用性）</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-25" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  
+</hgroup>
+<article class = 'flexbox vcenter'>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+    <slide class="backdrop"></slide>
+  </slides>
+  <div class="pagination pagination-small" id='io2012-ptoc' style="display:none;">
+    <ul>
+      <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=1 title='大綱'>
+         1
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=2 title='資料科學與程式能力'>
+         2
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=3 title='NA'>
+         3
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=4 title='NA'>
+         4
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=5 title='NA'>
+         5
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=6 title='NA'>
+         6
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=7 title='我們必須要能夠「自學」'>
+         7
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=8 title='程式的學習能力分級'>
+         8
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=9 title='大家來投票吧！'>
+         9
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=10 title='NA'>
+         10
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=11 title='什麼是(R的)程式？'>
+         11
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=12 title='程式讓機器「一步一步」執行特定的「動作」'>
+         12
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=13 title='什麼是「一步一步」的「動作」？'>
+         13
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=14 title='程式的細節是魔鬼'>
+         14
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=15 title='何謂「基本動作」？範例：CPU指令集'>
+         15
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=16 title='何謂「細節」？範例：R 的函數與參數'>
+         16
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=17 title='程式的細節是魔鬼'>
+         17
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=18 title='如何上手？'>
+         18
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=19 title='程式的變數是什麼意思？'>
+         19
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=20 title='NA'>
+         20
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=21 title='如何從簡單的動作變成複雜的程式？'>
+         21
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=22 title='範例：監控價格'>
+         22
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=23 title='範例：訂購自動化'>
+         23
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=24 title='範例：股價預測（非實用性）'>
+         24
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=25 title='NA'>
+         25
+      </a>
+    </li>
+  </ul>
+  </div>  <!--[if IE]>
+    <script 
+      src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js">  
+    </script>
+    <script>CFInstall.check({mode: 'overlay'});</script>
+  <![endif]-->
+</body>
+  <!-- Load Javascripts for Widgets -->
+  
+  <!-- LOAD HIGHLIGHTER JS FILES -->
+  <script src="libraries/highlighters/highlight.js/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <!-- DONE LOADING HIGHLIGHTER JS FILES -->
+   
+  </html>

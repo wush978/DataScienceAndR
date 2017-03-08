@@ -1,0 +1,1936 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>進擊的R 語言</title>
+  <meta charset="utf-8">
+  <meta name="description" content="進擊的R 語言">
+  <meta name="author" content="Wush Wu">
+  <meta name="generator" content="slidify" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <link rel="stylesheet" href="libraries/frameworks/io2012-wush/css/default.css" media="all" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012-wush/css/phone.css" 
+    media="only screen and (max-device-width: 480px)" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012-wush/css/slidify.css" >
+  <link rel="stylesheet" href="libraries/highlighters/highlight.js/css/zenburn.css" />
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->  <link rel=stylesheet href="./assets/css/custom.css"></link>
+<link rel=stylesheet href="./assets/css/ribbons.css"></link>
+
+  
+  <!-- Grab CDN jQuery, fall back to local if offline -->
+  <script src="libraries/frameworks/io2012-wush/js/jquery-1.7.min.js"></script>
+  <!-- <script>window.jQuery || document.write('<script src="libraries/widgets/quiz/js/jquery.js"><\/script>')</script> -->
+  <script data-main="libraries/frameworks/io2012-wush/js/slides" 
+    src="libraries/frameworks/io2012-wush/js/require-1.0.8.min.js">
+  </script>
+  
+  
+
+</head>
+<body style="opacity: 0">
+  <slides class="layout-widescreen">
+    
+    <!-- LOGO SLIDE -->
+        <slide class="title-slide segue nobackground">
+  <hgroup class="auto-fadein">
+    <h1>進擊的R 語言</h1>
+    <h2></h2>
+    <p>Wush Wu<br/>國立台灣大學</p>
+  </hgroup>
+  <article></article>  
+</slide>
+    
+
+    <!-- SLIDES -->
+    <slide class="largecontent" id="slide-1" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>本次課程目錄</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>R 的簡介</li>
+<li>R 的傳統用途</li>
+<li>R 的社群與近代R 的演變</li>
+<li>如何學習R 語言</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="dark segue" id="slide-2" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2>R 簡介</h2>
+  </hgroup>
+  <article data-timings="">
+    
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="" id="slide-3" style="background:url(assets/img/statician_10521919-655x280.jpg); background-size: 100% 100%;">
+  <article data-timings="" style="display: table;">
+    <div style="display: table-cell;vertical-align: bottom;">
+      
+    </div>
+  </article>
+  <!-- Presenter Notes -->
+  <aside class="note" id="">
+    <section>
+      <p>取自 <a href="http://myfootpath.com/careers/engineering-careers/statistician-careers/">http://myfootpath.com/careers/engineering-careers/statistician-careers/</a></p>
+
+    </section>
+  </aside>
+</slide>
+<slide class="" id="slide-4" style="background:url(assets/img/flights_sml.jpg); background-size: 100% 100%;">
+  <article data-timings="" style="display: table;">
+    <div style="display: table-cell;vertical-align: bottom;">
+      
+    </div>
+  </article>
+  <!-- Presenter Notes -->
+  <aside class="note" id="">
+    <section>
+      <p>取自 <a href="http://www.r-bloggers.com/mapping-the-worlds-biggest-airlines/">http://www.r-bloggers.com/mapping-the-worlds-biggest-airlines/</a></p>
+
+    </section>
+  </aside>
+</slide>
+<slide class="" id="slide-5" style="background:url(assets/img/t134_3ca_lg.jpg); background-size: 100% 100%;">
+  <article data-timings="" style="display: table;">
+    <div style="display: table-cell;vertical-align: bottom;">
+      
+    </div>
+  </article>
+  <!-- Presenter Notes -->
+  <aside class="note" id="">
+    <section>
+      <p>取自 <a href="http://img.diynetwork.com/DIY/2003/09/18/t134_3ca_med.jpg">http://img.diynetwork.com/DIY/2003/09/18/t134_3ca_med.jpg</a></p>
+
+    </section>
+  </aside>
+</slide>
+<slide class="largecontent" id="slide-6" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>R 很容易和其他工具整合</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<p><center>
+<img src="./assets/fig/introduction-of-r-r-integration-1.png" alt="plot of chunk r-integration">
+</center></p>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-7" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>R 很容易擴充和客製化</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<p><br/></p>
+
+<p><img src="./assets/fig/introduction-of-r-number-of-R-pkgs-1.png" alt="plot of chunk number-of-R-pkgs"></p>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="dark segue" id="slide-8" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2>R 的傳統用途</h2>
+  </hgroup>
+  <article data-timings="">
+    
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-9" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>範例 - 探索數據的分佈</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>統計很多理論都需要常態分佈</li>
+<li>但是一組數據真的是常態分佈嗎？</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-10" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>範例 - 探索數據的分佈</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<p><br/>
+<br/></p>
+
+<pre><code class="r">plot(density(x))
+</code></pre>
+
+<p><img src="./assets/fig/introduction-of-r-ks.test1-1.png" alt="plot of chunk ks.test1"></p>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-11" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>範例 - 探索數據的分佈</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>做「是否為常態分佈」的統計檢定？再一行：<code>shaprio.test(x)</code></li>
+</ul>
+
+<pre><code>
+    Shapiro-Wilk normality test
+
+data:  x
+W = 0.9291, p-value = 4.427e-05
+</code></pre>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-12" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>範例 - 探索數據的分佈</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>比較兩個數據是不是來自相同的分佈？沒問題</li>
+</ul>
+
+<pre><code class="r">plot(density(x1), xlim = range(c(x1, x2)), main = &quot;Sample PDF&quot;)
+lines(density(x2), col = 2)
+legend(&quot;topright&quot;, c(&quot;x1&quot;, &quot;x2&quot;), lty = 1, col = 1:2)
+</code></pre>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-13" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>範例 - 探索數據的分佈</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<p><img src="./assets/fig/introduction-of-r-ks.test3-1.png" alt="plot of chunk ks.test3"></p>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-14" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>範例 - 探索數據的分佈</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>檢定？<code>ks.test(x1, x2)</code></li>
+</ul>
+
+<pre><code>
+    Two-sample Kolmogorov-Smirnov test
+
+data:  x1 and x2
+D = 0.14, p-value = 0.7166
+alternative hypothesis: two-sided
+</code></pre>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-15" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>R 是做統計的首選工具之一</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>內建大量統計相關的功能
+
+<ul>
+<li>繪製統計圖表、進行統計檢定...</li>
+</ul></li>
+<li>擁有大量第三方開發的統計套件
+
+<ul>
+<li>範例：<a href="https://github.com/wush978/supc">supc</a> 一個實做(Shiu and Chen 2016)的R 套件</li>
+</ul></li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-16" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>資料科學，不只是統計...</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>收集數據</li>
+<li>清理數據</li>
+<li>大量數據</li>
+<li>分析結果的呈現</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="dark segue" id="slide-17" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2>R 的社群與近代R 的演變</h2>
+  </hgroup>
+  <article data-timings="">
+    
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-18" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2>什麼是社群?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>依照各種屬性所展開的人際關係</li>
+</ul>
+
+<p><center>
+<img src="./assets/fig/introduction-of-r-what-is-social-group-1.png" alt="plot of chunk what-is-social-group">
+</center></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-19" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2>什麼是R 社群?</h2>
+  </hgroup>
+  <article data-timings="">
+    
+<div style='float:left;width:48%;' class='centered'>
+  <p><br/>
+<br/>
+<br/>
+<br/></p>
+
+<ul>
+<li>開發者</li>
+<li>貢獻者</li>
+<li>使用者</li>
+</ul>
+
+</div>
+<div style='float:right;width:48%;' class='centered'>
+  <p><br/>
+<br/>
+<br/>
+<br/></p>
+
+<p><img src='assets/img/Community.png' style='max-width: 100%;max-height: 100%'></img></p>
+
+</div>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-20" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>社群的力量</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>工具的可靠性
+
+<ul>
+<li>使用者的人數決定工具的可靠度，付錢的工具不一定可靠（要夠紅）</li>
+</ul></li>
+<li>開發的速度
+
+<ul>
+<li>工程師很貴</li>
+<li>社群會幫忙的開發與測試（要夠紅）</li>
+</ul></li>
+<li>開發的方向
+
+<ul>
+<li>社群會給發展方向的回饋（要夠紅）</li>
+</ul></li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-21" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>範例 - 相關性</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>R 擁有許多你想像不到的方式來探索數據
+
+<ul>
+<li>他們都來自於世界各地的貢獻者</li>
+</ul></li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-22" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>範例 - 相關性</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<p><br/>
+<br/></p>
+
+<pre><code class="r">suppressPackageStartupMessages(library(PerformanceAnalytics))
+chart.Correlation(iris[-5], bg=iris$Species, pch=21)
+</code></pre>
+
+<p><img src="./assets/fig/introduction-of-r-chart.correlation-1.png" alt="plot of chunk chart.correlation"></p>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-23" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2>範例 - 經濟學人風格的視覺化</h2>
+  </hgroup>
+  <article data-timings="">
+    <p><center>
+<img src="./assets/fig/introduction-of-r-ggthemes-1.png" alt="plot of chunk ggthemes">
+</center></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-24" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>社群知道資料科學的需要</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>社群知道傳統的R在以下功能的不足
+
+<ul>
+<li>資料的收集</li>
+<li>資料的清理</li>
+<li>報表的呈現</li>
+</ul></li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-25" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>R Core Team (主導者) v.s. R Packages (社群)</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>R Core Team 對新需求的要求很保守
+
+<ul>
+<li>正確姓是絕對的</li>
+<li>向下相容: 新功能要能在十年前的電腦上運作</li>
+</ul></li>
+<li>Community: 那我們就自己寫套件來玩
+
+<ul>
+<li><a href="https://github.com">GitHub · Build software better, together</a></li>
+<li>Hadley降低了寫套件的難度</li>
+</ul></li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-26" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>我們仍然對R Core Team 非常尊敬</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>現在已經有 70000+ 次的更動</li>
+<li>在2009年10月9日時達到50000次更動 by Prof. Ripley</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="" id="slide-27" style="background:url(assets/img/R-commits.gif); background-size: 100% 100%;">
+  <article data-timings="" style="display: table;">
+    <div style="display: table-cell;vertical-align: bottom;">
+      
+    </div>
+  </article>
+  <!-- Presenter Notes -->
+  <aside class="note" id="">
+    <section>
+      <p>取自 <a href="https://yihui.name/en/2009/10/50000-revisions-committed-to-r/">https://yihui.name/en/2009/10/50000-revisions-committed-to-r/</a></p>
+
+    </section>
+  </aside>
+</slide>
+<slide class="largecontent" id="slide-28" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>社群補上了R 在資料科學上不足的部份</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>由於R Core Team相對保守，在Hadley大大降低套件開發的門檻之後，社群即以百花齊放的套件來解決R 的不足</li>
+<li><a href="https://priceonomics.com/hadley-wickham-the-man-who-revolutionized-r/">Hadley Wickham, the Man Who Revolutionized R</a></li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-29" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>資料的收集</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>R 已經可以寫網路爬蟲
+
+<ul>
+<li>httr, xml2, rvest, ...</li>
+</ul></li>
+<li>R 可以讀取、處理許多資料格式
+
+<ul>
+<li><a href="https://cran.r-project.org/doc/manuals/r-release/R-data.html">R Data Import/Export by CRAN</a></li>
+</ul></li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-30" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>清理資料</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>資料的格式需要校正
+
+<ul>
+<li>常見的例子：<code>1,234</code></li>
+</ul></li>
+<li>資料有缺失
+
+<ul>
+<li>實務的資料，有時會用如<code>-99</code>來代表資料的遺失</li>
+</ul></li>
+<li>調整資料的意義，為資料整合作準備</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-31" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>常見的分析流程</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<p><img src="./assets/fig/introduction-of-r-unnamed-chunk-1-1.png" alt="plot of chunk unnamed-chunk-1"></p>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-32" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>範例：政府招標資訊網</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<p><br/></p>
+
+<ul>
+<li>中華民國政府電子採購網
+
+<ul>
+<li>利用決標查詢功能來瀏覽與抓取決標資料</li>
+<li>時間範圍自2013年10月至2015年11月</li>
+<li>一共108360筆決標資料</li>
+</ul></li>
+<li>決標資料內容：
+
+<ul>
+<li>機關資料，如：名稱、地址、聯絡人與聯絡電話等</li>
+<li>採購資料，如：案號、招標方式、決標方式、標的分類、辦理方式與相關法源依據等</li>
+<li>投標廠商，如：廠商統編、名稱、決標金額等</li>
+<li>決標品向，如：品向名稱以及得標廠商的相關資料</li>
+<li>決標資料，如總決標金額、履約執行機關等</li>
+</ul></li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+<aside class="note">
+  <section>
+    <p><center><img src='assets/img/Selection_031.png' style='max-width: 100%;max-height: 100%'></img></center></p>
+
+  </section>
+</aside>
+</slide>
+<slide class="largecontent" id="slide-33" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>範例：政府招標資訊網</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<pre><code class="txt">2015-12-21 08:48:44 INFO::Crawling page from 2013-10/00105-page.csv.gz
+2015-12-21 08:48:44 INFO::Crawling (1/100  2013-10:2013-10/00105-page.csv.gz)
+2015-12-21 08:48:44 INFO::Crawling (2/100  2013-10:2013-10/00105-page.csv.gz)
+2015-12-21 08:48:44 INFO::Crawling (3/100  2013-10:2013-10/00105-page.csv.gz)
+2015-12-21 08:48:44 INFO::Crawling (4/100  2013-10:2013-10/00105-page.csv.gz)
+2015-12-21 08:48:44 INFO::Crawling (5/100  2013-10:2013-10/00105-page.csv.gz)
+2015-12-21 08:48:44 INFO::Crawling (6/100  2013-10:2013-10/00105-page.csv.gz)
+2015-12-21 08:48:44 INFO::Crawling (7/100  2013-10:2013-10/00105-page.csv.gz)
+2015-12-21 08:48:44 INFO::Crawling (8/100  2013-10:2013-10/00105-page.csv.gz)
+2015-12-21 08:48:44 INFO::Crawling (9/100  2013-10:2013-10/00105-page.csv.gz)
+2015-12-21 08:48:44 INFO::Crawling (10/100  2013-10:2013-10/00105-page.csv.gz)
+2015-12-21 08:48:44 INFO::Crawling (11/100  2013-10:2013-10/00105-page.csv.gz)
+2015-12-21 08:48:44 INFO::Crawling (12/100  2013-10:2013-10/00105-page.csv.gz)
+2015-12-21 08:48:44 INFO::Crawling (13/100  2013-10:2013-10/00105-page.csv.gz)
+2015-12-21 08:48:44 INFO::Crawling (14/100  2013-10:2013-10/00105-page.csv.gz)
+</code></pre>
+
+</article>
+<!-- Presenter Notes -->
+<aside class="note">
+  <section>
+    <p><center><img src='assets/img/Selection_032.png' style='max-width: 100%;max-height: 100%'></img></center></p>
+
+  </section>
+</aside>
+</slide>
+<slide class="largecontent" id="slide-34" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>範例：政府招標資訊網</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<p><img src="./assets/fig/introduction-of-r-tenders-1.png" alt="plot of chunk tenders"></p>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-35" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>範例: 股票資料</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<pre><code class="r">library(quantmod)
+getSymbols(&quot;^TWII&quot;)
+head(TWII)
+</code></pre>
+
+<table><thead>
+<tr>
+<th align="right">TWII.Open</th>
+<th align="right">TWII.High</th>
+<th align="right">TWII.Low</th>
+<th align="right">TWII.Close</th>
+<th align="right">TWII.Volume</th>
+<th align="right">TWII.Adjusted</th>
+</tr>
+</thead><tbody>
+<tr>
+<td align="right">7871.41</td>
+<td align="right">7937.26</td>
+<td align="right">7843.60</td>
+<td align="right">7920.80</td>
+<td align="right">5710600</td>
+<td align="right">7920.80</td>
+</tr>
+<tr>
+<td align="right">7954.96</td>
+<td align="right">7999.42</td>
+<td align="right">7917.30</td>
+<td align="right">7917.30</td>
+<td align="right">5951400</td>
+<td align="right">7917.30</td>
+</tr>
+<tr>
+<td align="right">7929.89</td>
+<td align="right">7955.90</td>
+<td align="right">7901.24</td>
+<td align="right">7934.51</td>
+<td align="right">5717400</td>
+<td align="right">7934.51</td>
+</tr>
+<tr>
+<td align="right">7940.20</td>
+<td align="right">7942.23</td>
+<td align="right">7821.71</td>
+<td align="right">7835.57</td>
+<td align="right">5181400</td>
+<td align="right">7835.57</td>
+</tr>
+<tr>
+<td align="right">7778.57</td>
+<td align="right">7797.57</td>
+<td align="right">7736.11</td>
+<td align="right">7736.71</td>
+<td align="right">4292400</td>
+<td align="right">7736.71</td>
+</tr>
+<tr>
+<td align="right">7778.38</td>
+<td align="right">7827.93</td>
+<td align="right">7778.38</td>
+<td align="right">7790.01</td>
+<td align="right">4516000</td>
+<td align="right">7790.01</td>
+</tr>
+</tbody></table>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-36" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>範例: 股票資料</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<p><br/>
+<br/></p>
+
+<pre><code class="r">chartSeries(TWII, subset = &quot;last 4 months&quot;, TA = c(addVo(), addBBands()))
+</code></pre>
+
+<p><img src="./assets/fig/introduction-of-r-signal-1.png" alt="plot of chunk signal"></p>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-37" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>範例: 棒球分析</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<pre><code class="r">library(Lahman)
+head(Teams[,c(&quot;yearID&quot;, &quot;name&quot;, &quot;Rank&quot;, &quot;W&quot;, &quot;L&quot;, &quot;R&quot;, &quot;RA&quot;)])
+</code></pre>
+
+<table><thead>
+<tr>
+<th align="right">yearID</th>
+<th align="left">name</th>
+<th align="right">Rank</th>
+<th align="right">W</th>
+<th align="right">L</th>
+<th align="right">R</th>
+<th align="right">RA</th>
+</tr>
+</thead><tbody>
+<tr>
+<td align="right">1871</td>
+<td align="left">Boston Red Stockings</td>
+<td align="right">3</td>
+<td align="right">20</td>
+<td align="right">10</td>
+<td align="right">401</td>
+<td align="right">303</td>
+</tr>
+<tr>
+<td align="right">1871</td>
+<td align="left">Chicago White Stockings</td>
+<td align="right">2</td>
+<td align="right">19</td>
+<td align="right">9</td>
+<td align="right">302</td>
+<td align="right">241</td>
+</tr>
+<tr>
+<td align="right">1871</td>
+<td align="left">Cleveland Forest Citys</td>
+<td align="right">8</td>
+<td align="right">10</td>
+<td align="right">19</td>
+<td align="right">249</td>
+<td align="right">341</td>
+</tr>
+<tr>
+<td align="right">1871</td>
+<td align="left">Fort Wayne Kekiongas</td>
+<td align="right">7</td>
+<td align="right">7</td>
+<td align="right">12</td>
+<td align="right">137</td>
+<td align="right">243</td>
+</tr>
+<tr>
+<td align="right">1871</td>
+<td align="left">New York Mutuals</td>
+<td align="right">5</td>
+<td align="right">16</td>
+<td align="right">17</td>
+<td align="right">302</td>
+<td align="right">313</td>
+</tr>
+<tr>
+<td align="right">1871</td>
+<td align="left">Philadelphia Athletics</td>
+<td align="right">1</td>
+<td align="right">21</td>
+<td align="right">7</td>
+<td align="right">376</td>
+<td align="right">266</td>
+</tr>
+</tbody></table>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-38" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>範例: 棒球分析</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<p><center>
+<img src="./assets/fig/introduction-of-r-baseball-1.png" alt="plot of chunk baseball">
+</center></p>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-39" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>範例: 棒球分析</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<table><thead>
+<tr>
+<th align="left">playerID</th>
+<th align="right">yearID</th>
+<th align="right">W</th>
+<th align="right">L</th>
+<th align="right">ERA</th>
+</tr>
+</thead><tbody>
+<tr>
+<td align="left">wangch01</td>
+<td align="right">2005</td>
+<td align="right">8</td>
+<td align="right">5</td>
+<td align="right">4.02</td>
+</tr>
+<tr>
+<td align="left">wangch01</td>
+<td align="right">2006</td>
+<td align="right">19</td>
+<td align="right">6</td>
+<td align="right">3.63</td>
+</tr>
+<tr>
+<td align="left">wangch01</td>
+<td align="right">2007</td>
+<td align="right">19</td>
+<td align="right">7</td>
+<td align="right">3.70</td>
+</tr>
+<tr>
+<td align="left">wangch01</td>
+<td align="right">2008</td>
+<td align="right">8</td>
+<td align="right">2</td>
+<td align="right">4.07</td>
+</tr>
+<tr>
+<td align="left">wangch01</td>
+<td align="right">2009</td>
+<td align="right">1</td>
+<td align="right">6</td>
+<td align="right">9.64</td>
+</tr>
+<tr>
+<td align="left">wangch01</td>
+<td align="right">2011</td>
+<td align="right">4</td>
+<td align="right">3</td>
+<td align="right">4.04</td>
+</tr>
+</tbody></table>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-40" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>報表的呈現</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<pre><code>
+Call:
+lm(formula = dist ~ speed, data = cars)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-29.069  -9.525  -2.272   9.215  43.201 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) -17.5791     6.7584  -2.601   0.0123 *  
+speed         3.9324     0.4155   9.464 1.49e-12 ***
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+Residual standard error: 15.38 on 48 degrees of freedom
+Multiple R-squared:  0.6511,    Adjusted R-squared:  0.6438 
+F-statistic: 89.57 on 1 and 48 DF,  p-value: 1.49e-12
+</code></pre>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-41" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>報表的呈現</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<pre><code class="r">library(sjPlot)
+sjt.lm(lm(dist ~ speed, cars))
+</code></pre>
+
+<table style="border-collapse:collapse; border:none;border-bottom:double;">
+<td style="padding:0.2cm; border-top:double;">&nbsp;</td>
+<td style="border-bottom:1px solid; padding-left:0.5em; padding-right:0.5em; border-top:double;">&nbsp;</td>
+<td style="padding:0.2cm; text-align:center; border-bottom:1px solid; border-top:double;" colspan="3">dist</td>
+</tr>
+<tr>
+<td style="padding:0.2cm; font-style:italic;">&nbsp;</td>
+<td style="padding-left:0.5em; padding-right:0.5em; font-style:italic;">&nbsp;</td>
+<td style="padding:0.2cm; text-align:center; font-style:italic; ">B</td>
+<td style="padding:0.2cm; text-align:center; font-style:italic; ">CI</td>
+<td style="padding:0.2cm; text-align:center; font-style:italic; ">p</td> 
+</tr>
+<tr>
+<td style="padding:0.2cm; border-top:1px solid; text-align:left;">(Intercept)</td>
+<td style="padding-left:0.5em; padding-right:0.5em; border-top:1px solid; ">&nbsp;</td>
+<td style="padding:0.2cm; text-align:center; border-top:1px solid; ">&#45;17.58</td>
+<td style="padding:0.2cm; text-align:center; border-top:1px solid; ">&#45;31.17&nbsp;&ndash;&nbsp;&#45;3.99</td>
+<td style="padding:0.2cm; text-align:center; border-top:1px solid; ">.012</td>
+</tr>
+<tr>
+<td style="padding:0.2cm; text-align:left;">speed</td>
+<td style="padding-left:0.5em; padding-right:0.5em;">&nbsp;</td>
+<td style="padding:0.2cm; text-align:center; ">3.93</td>
+<td style="padding:0.2cm; text-align:center; ">3.10&nbsp;&ndash;&nbsp;4.77</td>
+<td style="padding:0.2cm; text-align:center; ">&lt;.001</td>
+</tr>
+<tr>
+<td style="padding:0.2cm; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left; border-top:1px solid;">Observations</td>
+<td style="padding-left:0.5em; padding-right:0.5em; border-top:1px solid;">&nbsp;</td><td style="padding:0.2cm; padding-top:0.1cm; padding-bottom:0.1cm; text-align:center; border-top:1px solid;" colspan="3">50</td>
+</tr>
+<tr>
+<td style="padding:0.2cm; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">R<sup>2</sup> / adj. R<sup>2</sup></td>
+
+<td style="padding-left:0.5em; padding-right:0.5em;">&nbsp;</td><td style="padding:0.2cm; text-align:center; padding-top:0.1cm; padding-bottom:0.1cm;" colspan="3">.651 / .644</td>
+ </tr>
+</table>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-42" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>報表的呈現</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li><a href="http://shiny.rstudio.com/">Shiny</a></li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="" id="slide-43" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <article data-timings="">
+    <div style="position: absolute; float: left; clear: both; width: 100%; height: 350px; z-index: 0; left no-repeat;">
+  <iframe src="http://shiny.rstudio.com/gallery/kmeans-example.html">
+  </iframe>
+</div>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-44" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>現在的R ，是一個資料科學的「解決方案」</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>所有的資料分析所需功能，都可以透過R 完成</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="" id="slide-45" style="background:url(assets/img/dsr-process.png); background-size: 100% 100%;">
+  <article data-timings="" style="display: table;">
+    <div style="display: table-cell;vertical-align: bottom;">
+      
+    </div>
+  </article>
+  <!-- Presenter Notes -->
+  <aside class="note" id="">
+    <section>
+      <p>出處: <a href="http://blog.revolutionanalytics.com/2016/10/the-team-data-science-process.html">http://blog.revolutionanalytics.com/2016/10/the-team-data-science-process.html</a></p>
+
+    </section>
+  </aside>
+</slide>
+<slide class="largecontent" id="slide-46" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>R 核心功能 v.s. 社群提供的功能</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>核心函數已經提供許多整理資料的功能
+
+<ul>
+<li>字串: <code>gsub</code>、<code>regmatch</code>、<code>substring</code>、<code>paste</code>...</li>
+<li>數值化: <code>as.numeric</code>...</li>
+<li>類別化: <code>cut</code>、<code>factor</code>...</li>
+<li>泛用: <code>split</code>...</li>
+</ul></li>
+<li>核心函數的命名較無系統，只能透過經驗與增廣見聞來習得</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-47" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>R 核心功能 v.s. 社群提供的功能</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>社群提供更多五花八門的手法
+
+<ul>
+<li>字串: <code>stringr</code>、<code>stringi</code></li>
+<li>時間: <code>lubridate</code></li>
+</ul></li>
+<li>Hadley 自行開創一套整理資料的體系: <code>dplyr</code>: 以類SQL 的方式讓我們有系統化的手法處理資料(表)
+
+<ul>
+<li>SQL(Structured Query Language) 是處理資料最常用的工具之一，個人認為這個工具在工作上比R 更重要</li>
+<li>學dplyr可以順便學SQL的概念，許多基本功能兩者是互通的</li>
+</ul></li>
+<li>Pipeline Operator: <code>%&gt;%</code>
+
+<ul>
+<li>讓整理資料的程式碼寫起來更愉悅(?)</li>
+</ul></li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-48" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>台灣的R 社群</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>社群是可以從自己開始創造
+
+<ul>
+<li>讀書會、同好會</li>
+</ul></li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-49" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2><a href="https://www.meetup.com/taiwan-R">Taiwan R User Group</a></h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>創立於2012年10月，第一次meeting在台大博理館</li>
+<li>聚會、增廣見聞與交朋友</li>
+<li>辦過多場workshop</li>
+<li>媒合了多個創業團隊</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="" id="slide-50" style="background:url(assets/img/tw-r-2014-04-07.jpg); background-size: 100% 100%;">
+  <article data-timings="" style="display: table;">
+    <div style="display: table-cell;vertical-align: bottom;">
+      
+    </div>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="" id="slide-51" style="background:url(assets/img/tw-r-2015-03-02.jpg); background-size: 100% 100%;">
+  <article data-timings="" style="display: table;">
+    <div style="display: table-cell;vertical-align: bottom;">
+      
+    </div>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-52" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2><a href="">ptt R_Language</a></h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>開板於2013-03-28</li>
+<li>大家求救的好地方</li>
+<li>有熱心的板友常駐</li>
+<li>請不要擔心問出笨問題、Google的問題... </li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-53" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>故事: 某天，某個問題...</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<pre><code class="txt">程式諮詢
+(做21點的遊戲)
+
+
+
+[問題敘述]:
+
+電腦對電腦玩，目前卡在
+
+sample(52)
+
+cards&lt;-sample(52)
+
+num&lt;-cards%%13
+</code></pre>
+
+<p><a href="https://www.ptt.cc/bbs/R_Language/M.1445866999.A.D0B.html">https://www.ptt.cc/bbs/R_Language/M.1445866999.A.D0B.html</a></p>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-54" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>故事: 現任板主非常非常非常熱情...</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<pre><code class="txt">get_num = function(cards){
+  factor(cards %% 13, levels = 0:12, labels = c(1:10, &quot;J&quot;, &quot;Q&quot;, &quot;K&quot;))
+}
+get_suit = function(cards){
+  factor((cards-1) %/% 13, levels = 0:3,
+      labels = c(&quot;spade&quot;, &quot;heart&quot;, &quot;diamend&quot;,&quot;club&quot;))
+}
+
+desk = sample(1:52)
+n_player = 2
+num_cards_out = 0
+player_cards = vector(&#39;list&#39;, n_player)               
+</code></pre>
+
+<p><a href="https://www.ptt.cc/bbs/R_Language/M.1445868193.A.526.html">https://www.ptt.cc/bbs/R_Language/M.1445868193.A.526.html</a></p>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-55" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>故事: 結果...</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<pre><code class="txt">
+同學作業要自己做喔
+老師會不定期來查水表
+誰作業跟這篇一樣就GG了
+希望這學期不用動用程式碼比對工具
+
+P.S. 老師已備份這篇
+</code></pre>
+
+<p><a href="https://www.ptt.cc/bbs/R_Language/M.1446047725.A.106.html">https://www.ptt.cc/bbs/R_Language/M.1446047725.A.106.html</a></p>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-56" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>你也可以改變R 語言</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>什麼是開放自由？
+
+<ul>
+<li>你可以擁有對事情做出改變的權力</li>
+</ul></li>
+<li>你可以成為R 的社群的一份子:
+
+<ul>
+<li>貢獻R 的套件、參與發展方向的討論</li>
+<li>在各地或各處的R 社群交流(問問題、討論、解決問題)</li>
+<li>推廣R</li>
+</ul></li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="dark segue" id="slide-57" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2>進擊的R 語言</h2>
+  </hgroup>
+  <article data-timings="">
+    
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-58" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>R 是活生生的在變化的工具</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<p><br/>
+<br/></p>
+
+<p><img src="./assets/fig/introduction-of-r-number-of-R-pkgs2-1.png" alt="plot of chunk number-of-R-pkgs2"></p>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-59" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>R 仍然正在更新</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<pre><code class="txt">[Rd] R 3.3.3 on March 6
+Peter Dalgaard pd.mes at cbs.dk
+Sun Feb 5 15:14:41 CET 2017
+
+...
+The wrap-up release of the R-3.3.x series will be on Monday, March 6th. 
+
+Package maintainers should check that their packages still work with this release. In particular, recommended-package maintainers should be extra careful since we do not want unexpected turbulence at this point.
+
+On behalf of the R Core Team
+Peter Dalgaard
+...
+</code></pre>
+
+<p>出處: <a href="https://stat.ethz.ch/pipermail/r-devel/2017-February/073705.html">https://stat.ethz.ch/pipermail/r-devel/2017-February/073705.html</a></p>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-60" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>結論</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>介紹R 的發展史</li>
+<li>R 身為工具的定位，以及定位的演化
+
+<ul>
+<li>統計分析工具 ==&gt; 資料科學的解決方案</li>
+</ul></li>
+<li>社群對R 造成的影響</li>
+<li>現代的R 是一個資料科學的解決方案
+
+<ul>
+<li>推薦學R 的主因</li>
+</ul></li>
+<li>R 仍然在不停的演進</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="dark segue" id="slide-61" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2>如何學習R 語言</h2>
+  </hgroup>
+  <article data-timings="">
+    
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-62" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>至聖先師 孔子如是說</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<p><img src='assets/img/200px-Confucius_Tang_Dynasty.jpg' style='max-width: 100%;max-height: 100%'></img></p>
+
+<ul>
+<li>學R 不思則罔</li>
+<li>思R 不學則怠</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+<aside class="note">
+  <section>
+    <p>圖片出處: <a href="https://zh.wikipedia.org/wiki/%E5%AD%94%E5%AD%90">https://zh.wikipedia.org/wiki/%E5%AD%94%E5%AD%90</a></p>
+
+  </section>
+</aside>
+</slide>
+<slide class="largecontent" id="slide-63" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>上手R 、自學R</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>從0 --&gt; 1</li>
+<li>從1 --&gt; 10</li>
+<li>從10 --&gt; 100</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="dark segue" id="slide-64" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2>R 的自學等級</h2>
+  </hgroup>
+  <article data-timings="">
+    
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="" id="slide-65" style="background:url(assets/img/); background-size: 100% 100%;">
+  <article data-timings="" style="display: table;">
+    <div style="display: table-cell;vertical-align: bottom;">
+      <p><center><img src='assets/img/copy-paste.jpg' style='max-width: 100%;max-height: 100%'></img></center></p>
+
+    </div>
+  </article>
+  <!-- Presenter Notes -->
+  <aside class="note" id="">
+    <section>
+      <p>出處: <a href="https://www.facebook.com/ProgrammersCreateLife/photos/a.241809332534619.55240.241806149201604/1263901770325365/?type=3&amp;theater">I am Programmer, I have no life.</a></p>
+
+    </section>
+  </aside>
+</slide>
+<slide class="" id="slide-66" style="background:url(assets/img/copy-paste-modify.gif); background-size: 100% 100%;">
+  <article data-timings="" style="display: table;">
+    <div style="display: table-cell;vertical-align: bottom;">
+      
+    </div>
+  </article>
+  <!-- Presenter Notes -->
+  <aside class="note" id="">
+    <section>
+      <ul>
+<li>出處: <a href="https://en.wikipedia.org/wiki/Copy_and_paste_programming">Copy and paste programming</a></li>
+<li>By Bokanko - Own work, CC BY-SA 3.0, <a href="https://commons.wikimedia.org/w/index.php?curid=29682303">https://commons.wikimedia.org/w/index.php?curid=29682303</a></li>
+</ul>
+
+    </section>
+  </aside>
+</slide>
+<slide class="" id="slide-67" style="background:url(assets/img/books.jpg); background-size: 100% 100%;">
+  <article data-timings="" style="display: table;">
+    <div style="display: table-cell;vertical-align: bottom;">
+      
+    </div>
+  </article>
+  <!-- Presenter Notes -->
+  <aside class="note" id="">
+    <section>
+      <ul>
+<li>出處: <a href="https://en.wikipedia.org/wiki/Book">Book</a></li>
+<li>By Johannes Jansson/norden.org, CC BY 2.5 dk, <a href="https://commons.wikimedia.org/w/index.php?curid=25009679">https://commons.wikimedia.org/w/index.php?curid=25009679</a></li>
+</ul>
+
+    </section>
+  </aside>
+</slide>
+<slide class="" id="slide-68" style="background:url(assets/img/teacher.jpg); background-size: 100% 100%;">
+  <article data-timings="" style="display: table;">
+    <div style="display: table-cell;vertical-align: bottom;">
+      
+    </div>
+  </article>
+  <!-- Presenter Notes -->
+  <aside class="note" id="">
+    <section>
+      <ul>
+<li>出處: <a href="https://en.wikipedia.org/wiki/Teacher">Teacher</a></li>
+<li>By Bundesarchiv, Bild 183-13055-0008 / CC-BY-SA 3.0, CC BY-SA 3.0 de, <a href="https://commons.wikimedia.org/w/index.php?curid=5339854">https://commons.wikimedia.org/w/index.php?curid=5339854</a></li>
+</ul>
+
+    </section>
+  </aside>
+</slide>
+<slide class="" id="slide-69" style="background:url(assets/img/Selection_046.png); background-size: 100% 100%;">
+  <article data-timings="" style="display: table;">
+    <div style="display: table-cell;vertical-align: bottom;">
+      
+    </div>
+  </article>
+  <!-- Presenter Notes -->
+  <aside class="note" id="">
+    <section>
+      <p>出處: <a href="https://www.r-bloggers.com/">R-bloggers</a></p>
+
+    </section>
+  </aside>
+</slide>
+<slide class="" id="slide-70" style="background:url(assets/img/CodeCmmt002.svg); background-size: 100% 100%;">
+  <article data-timings="" style="display: table;">
+    <div style="display: table-cell;vertical-align: bottom;">
+      
+    </div>
+  </article>
+  <!-- Presenter Notes -->
+  <aside class="note" id="">
+    <section>
+      <ul>
+<li><a href="https://en.wikipedia.org/wiki/Source_code">https://en.wikipedia.org/wiki/Source_code</a></li>
+<li>By The original uploader was Dreftymac at English Wikipedia - Transferred from en.wikipedia to Commons.28041964, CC BY 2.5, <a href="https://commons.wikimedia.org/w/index.php?curid=2412235">https://commons.wikimedia.org/w/index.php?curid=2412235</a></li>
+</ul>
+
+    </section>
+  </aside>
+</slide>
+<slide class="largecontent" id="slide-71" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>這學期的目標</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>具備用R 處理資料的能力</li>
+<li>具備整合不同來源資料的能力</li>
+<li>具備資料視覺化的能力</li>
+<li>具備自學R 的能力</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="" id="slide-72" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2><a href="http://datascienceandr.org">R 語言翻轉教室</a></h2>
+  </hgroup>
+  <article data-timings="">
+    
+<div style='float:left;width:48%;' class='centered'>
+  <p><center><img src='assets/img/dsr-qr.svg' style='max-width: 100%;max-height: 100%'></img></center></p>
+
+</div>
+<div style='float:right;width:48%;' class='centered'>
+  <p><img src='assets/img/Selection_047.png' style='max-width: 100%;max-height: 100%'></img></p>
+
+</div>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="" id="slide-73" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2><a href="https://gitter.im/wush978/DataScienceAndR">線上聊天室</a></h2>
+  </hgroup>
+  <article data-timings="">
+    
+<div style='float:left;width:48%;' class='centered'>
+  <p><center><img src='assets/img/gitter.svg' style='max-width: 100%;max-height: 100%'></img></center></p>
+
+</div>
+<div style='float:right;width:48%;' class='centered'>
+  <p><img src='assets/img/Selection_048.png' style='max-width: 100%;max-height: 100%'></img></p>
+
+</div>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-74" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>Q&amp;A</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+    <slide class="backdrop"></slide>
+  </slides>
+  <div class="pagination pagination-small" id='io2012-ptoc' style="display:none;">
+    <ul>
+      <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=1 title='本次課程目錄'>
+         1
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=2 title='R 簡介'>
+         2
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=3 title='NA'>
+         3
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=4 title='NA'>
+         4
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=5 title='NA'>
+         5
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=6 title='R 很容易和其他工具整合'>
+         6
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=7 title='R 很容易擴充和客製化'>
+         7
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=8 title='R 的傳統用途'>
+         8
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=9 title='範例 - 探索數據的分佈'>
+         9
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=10 title='範例 - 探索數據的分佈'>
+         10
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=11 title='範例 - 探索數據的分佈'>
+         11
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=12 title='範例 - 探索數據的分佈'>
+         12
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=13 title='範例 - 探索數據的分佈'>
+         13
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=14 title='範例 - 探索數據的分佈'>
+         14
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=15 title='R 是做統計的首選工具之一'>
+         15
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=16 title='資料科學，不只是統計...'>
+         16
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=17 title='R 的社群與近代R 的演變'>
+         17
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=18 title='什麼是社群?'>
+         18
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=19 title='什麼是R 社群?'>
+         19
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=20 title='社群的力量'>
+         20
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=21 title='範例 - 相關性'>
+         21
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=22 title='範例 - 相關性'>
+         22
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=23 title='範例 - 經濟學人風格的視覺化'>
+         23
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=24 title='社群知道資料科學的需要'>
+         24
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=25 title='R Core Team (主導者) v.s. R Packages (社群)'>
+         25
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=26 title='我們仍然對R Core Team 非常尊敬'>
+         26
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=27 title='NA'>
+         27
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=28 title='社群補上了R 在資料科學上不足的部份'>
+         28
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=29 title='資料的收集'>
+         29
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=30 title='清理資料'>
+         30
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=31 title='常見的分析流程'>
+         31
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=32 title='範例：政府招標資訊網'>
+         32
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=33 title='範例：政府招標資訊網'>
+         33
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=34 title='範例：政府招標資訊網'>
+         34
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=35 title='範例: 股票資料'>
+         35
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=36 title='範例: 股票資料'>
+         36
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=37 title='範例: 棒球分析'>
+         37
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=38 title='範例: 棒球分析'>
+         38
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=39 title='範例: 棒球分析'>
+         39
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=40 title='報表的呈現'>
+         40
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=41 title='報表的呈現'>
+         41
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=42 title='報表的呈現'>
+         42
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=43 title='NA'>
+         43
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=44 title='現在的R ，是一個資料科學的「解決方案」'>
+         44
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=45 title='NA'>
+         45
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=46 title='R 核心功能 v.s. 社群提供的功能'>
+         46
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=47 title='R 核心功能 v.s. 社群提供的功能'>
+         47
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=48 title='台灣的R 社群'>
+         48
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=49 title='<a href="https://www.meetup.com/taiwan-R">Taiwan R User Group</a>'>
+         49
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=50 title='NA'>
+         50
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=51 title='NA'>
+         51
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=52 title='<a href="">ptt R_Language</a>'>
+         52
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=53 title='故事: 某天，某個問題...'>
+         53
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=54 title='故事: 現任板主非常非常非常熱情...'>
+         54
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=55 title='故事: 結果...'>
+         55
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=56 title='你也可以改變R 語言'>
+         56
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=57 title='進擊的R 語言'>
+         57
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=58 title='R 是活生生的在變化的工具'>
+         58
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=59 title='R 仍然正在更新'>
+         59
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=60 title='結論'>
+         60
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=61 title='如何學習R 語言'>
+         61
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=62 title='至聖先師 孔子如是說'>
+         62
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=63 title='上手R 、自學R'>
+         63
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=64 title='R 的自學等級'>
+         64
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=65 title='NA'>
+         65
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=66 title='NA'>
+         66
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=67 title='NA'>
+         67
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=68 title='NA'>
+         68
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=69 title='NA'>
+         69
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=70 title='NA'>
+         70
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=71 title='這學期的目標'>
+         71
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=72 title='<a href="http://datascienceandr.org">R 語言翻轉教室</a>'>
+         72
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=73 title='<a href="https://gitter.im/wush978/DataScienceAndR">線上聊天室</a>'>
+         73
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=74 title='Q&amp;A'>
+         74
+      </a>
+    </li>
+  </ul>
+  </div>  <!--[if IE]>
+    <script 
+      src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js">  
+    </script>
+    <script>CFInstall.check({mode: 'overlay'});</script>
+  <![endif]-->
+</body>
+  <!-- Load Javascripts for Widgets -->
+  
+  <!-- MathJax: Fall back to local if CDN offline but local image fonts are not supported (saves >100MB) -->
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        processEscapes: true
+      }
+    });
+  </script>
+  <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/2.0-latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  <!-- <script src="https://c328740.ssl.cf1.rackcdn.com/mathjax/2.0-latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script> -->
+  <script>window.MathJax || document.write('<script type="text/x-mathjax-config">MathJax.Hub.Config({"HTML-CSS":{imageFont:null}});<\/script><script src="libraries/widgets/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"><\/script>')
+</script>
+<!-- LOAD HIGHLIGHTER JS FILES -->
+  <script src="libraries/highlighters/highlight.js/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <!-- DONE LOADING HIGHLIGHTER JS FILES -->
+   
+  </html>

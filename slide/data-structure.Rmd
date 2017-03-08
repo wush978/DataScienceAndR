@@ -1,0 +1,514 @@
+---
+title       : "R 語言的資料型態"
+author      : "Wush Wu"
+job         : 國立台灣大學
+framework   : io2012-wush
+highlighter : highlight.js
+hitheme     : zenburn
+widgets     : [mathjax]            # {mathjax, quiz, bootstrap}
+mode        : selfcontained # {standalone, draft}
+knit        : slidify::knit2slides
+--- &vcenter .largecontent
+
+## 大綱
+
+1. 分析中的資料形態
+1. R 語言的資料型態
+1. 活用R 語言的資料型態
+
+```{r setup, include = FALSE}
+library(ggplot2)
+library(xtable)
+library(knitr)
+library(microbenchmark)
+library(dplyr)
+opts_chunk$set(echo = FALSE, cache=FALSE, comment="", 
+               cache.path = "cache-data-structure/", 
+               dev.args=list(bg="transparent"),
+               fig.path = "./assets/fig/data-structure-")
+fig <- function(path, size = 100) {
+  sprintf("<img src='assets/img/%s' style='max-width: %d%%;max-height: %d%%'></img>", 
+          path, size, size)
+}
+bg <- function(path) sprintf("bg:url(assets/img/%s)", path)
+```
+
+--- .segue .dark
+
+## 分析中的資料形態
+
+--- &vcenter .largecontent
+
+## 數值系統的分類
+
+<center>
+```{r, results='asis', echo=FALSE}
+data_type <- data.frame(
+  "資料衡量尺度" = c("名目資料(nomial)", "順序資料(ordinal)", "區間資料(interval)", "比例資料(ratio)"),
+  "變數形態" = rep(c("質化", "量化"), each=2),
+  "特性" = c("類別", "優先順序", "大小距離", "比值")
+  )
+print(xtable(data_type), type="html", html.table.attributes = "style = \"font-size: 20px\"")
+```
+</center>
+
+--- &vcenter .largecontent
+
+## 名目資料
+
+- 數值只用於記號，值毫無意義的數據
+- 範例:
+    - 性別
+    - Domain
+    - Cookie
+
+--- &vcenter .largecontent
+
+## 順序資料
+
+- 數值有順序關係，但是差距沒有意義
+- 範例:
+    - 硬度表
+    - 名次
+    - 排序表
+
+--- &vcenter .largecontent
+
+## 區間資料
+
+- 有差距的概念，沒有倍數的概念
+- 數值有1的概念，沒有0的概念。可加減
+- 範例:
+    - 溫度
+    - 時間
+
+--- &vcenter .largecontent
+
+## 比值資料
+
+- 同時有差距和倍數的概念。
+- 數值有1和0的概念。可加減乘除。
+- 範例:
+    - 營收
+    - 股價
+
+--- &vcenter .largecontent
+
+## 小挑戰
+
+- 請再舉出四種資料形態的範例
+- 眾數、中位數、四分位差和算數平均數能用於哪些資料形態？
+- 對於區間資料，成長率有沒有意義？
+- 在應用Machine Learning的演算法時，不同的資料形態的值能直接使用嗎？
+    - Regression
+    - Decision Tree
+- 以下資料，各又是怎樣的資料形態呢？
+    - `140.118.1.1`
+    - `#R,Text Mining Series,Taiwan R User Group`
+
+--- .segue .dark
+
+## R 的資料形態
+
+--- &vcenter .largecontent
+
+## R 的資料形態分類
+
+<br/>
+
+### 資料相關的型態
+
+- Atomic Type: Vector of
+    - Integer
+    - Numeric
+    - Logical
+    - R Objects
+
+### 非資料相關
+
+- Functions
+- Environments
+- Expressions
+
+--- &vcenter .largecontent
+
+## 什麼是Atomic?
+
+- 組成R 中變數的最小單位
+- 理解Atomic Type與Atomic Type的組合方法，就可以理解80%的R 物件們
+
+--- &twocol
+
+## Character
+
+*** =left
+
+- 最廣泛的資料結構，可用於處理文字相關的工作，如：設定圖片的標題
+- 輸入的時候利用`"`或`'`來包覆要輸入的文字
+    - 可以直接用`\"`來輸入`"`或`\'` 
+
+*** =right
+
+```{r character-figure-title, out.extra='class="fig100"'}
+plot(cars, main="\"hello world\"")
+```
+
+
+--- &twocol
+
+## 常用的Character處理函數：
+
+*** =left
+
+### 字串的剪接：`paste`
+
+```{r character_demo1}
+x <- "abc";y <- "bbb"
+paste(x, y, sep=",")
+```
+
+### 字串的切割：`strsplit`
+
+```{r character_demo2}
+strsplit(x, "b")
+```
+
+*** =right
+
+### 字串的長度：`nchar`
+
+```{r character_demo3}
+nchar(x)
+```
+
+### 截取子字串：`substring`
+
+```{r character_demo}
+substring(x, 1, 2)
+```
+
+--- &twocol
+
+## Logical
+
+*** =left
+
+- 產生自比較，或是使用`T`、`TRUE`、`F`或`FALSE`輸入
+
+```{r logical-demo1}
+x <- 1
+x < 2
+x <= 1
+```
+
+*** =right
+
+- 常用來做流程控制
+
+```{r logical-if}
+if (T) {
+  print("This is TRUE")
+} else {
+  print ("This is FALSE")
+}
+```
+*** =right
+
+--- &twocol
+
+## Logical常用的Operator
+
+*** =left
+
+### NOT
+
+```{r logical-operator-not}
+!TRUE
+```
+
+
+
+*** =right
+
+### AND
+
+```{r logical-operator-and}
+T & T
+```
+
+### OR
+
+```{r logical-operator-or}
+T | F
+```
+
+--- &twocol
+
+## Integer and Numeric
+
+
+*** =left
+
+### `+`
+
+```{r integer-plus}
+1 + 2
+```
+
+### `-`
+
+```{r integer-minus}
+1 - 2
+```
+
+*** =right
+
+### `*`
+
+```{r integer-times}
+1 * 2
+```
+
+### `/`
+
+```{r integer-divide}
+1L / 2L
+```
+
+--- &vcenter .largecontent 
+
+## 向量式資料結構
+
+### 所有Atomic Type都有長度
+
+```{r vector-length}
+length(0L)
+```
+
+### 可以利用`:`或`c()`快速建立Vector
+
+```{r vector-construct}
+1:3
+c(1L,2L,3L)
+```
+
+--- &vcenter .largecontent 
+
+## 向量式的運算
+
+## 幾乎內建的Operations、Functions都是Vectorize
+
+```{r vector-operator}
+1:3 + 2:4
+1:2 + 1:3
+```
+
+--- &twocol
+
+## 向量式資料結構
+
+*** =left
+
+### 長度不同會自動延伸
+
+```{r vector-length-inconsistent}
+1:2 + 1:3
+```
+
+1 2 1 <font color='red'>2</font><br/>
+1 2 3
+<hr/>
+2 4 4
+
+
+*** =right
+
+### Vectorized的效能都好很多
+
+```{r vector-efficiency, echo=TRUE}
+f1 <- function() 1:1000 + 1
+f2 <- function() {
+  r <- integer(1000)
+  for(i in 1:1000) r[i] <- i + 1
+  r
+}
+```
+
+```{r vector-efficiency-eval, echo=FALSE, results='asis'}
+df <- summarise(group_by(microbenchmark(f1(), f2()), expr), "median(nano seconds)"=median(time))
+print.xtable(xtable(df), type="html")
+```
+
+--- &twocol
+
+## 向量的同質性
+
+*** =left
+
+### Character > Numeric > Integer > Logical
+
+```{r homogenous}
+x <- c(1L, 2.0, "3")
+class(x)
+x
+```
+
+*** =right
+
+### 改一個，全部就都變了
+
+```{r homogenous2}
+x <- matrix(1:4, 2, 2)
+class(x)
+x[2]
+x[2] <- as.character(x[2])
+x
+```
+
+--- &vcenter .largecontent
+
+## R 會在console告訴我們
+
+--- .dark .segue
+
+## 活用R 語言的資料型態
+
+--- &vcenter .largecontent
+
+## 為什麼要這樣設計？
+
+- 處理資料，一定是很多數據，而不是單一的數據
+- 利用R 語言的資料型態來告訴R ，數據在分析上的型態
+
+--- &vcenter .largecontent
+
+## 範例: `summary`
+
+```{r}
+?summary
+summary(1:10)
+summary(paste(1:10))
+```
+
+--- &vcenter .largecontent
+
+## 型態很重要
+
+- 在R 中，查詢變數型態的指令有三種
+    - `class`
+    - `typeof`
+    - `mode`
+
+--- &vcenter `r bg("")` .largecontent
+
+## 型態很重要
+
+```{r, collapse = TRUE}
+class(1)
+class(1L)
+typeof(1)
+typeof(1L)
+mode(1)
+mode(1L)
+```
+
+--- &vcenter .largecontent
+
+## 型態的用途
+
+- 儲存上的意義
+    - 例如: `numeric`、`logical`或`character`
+- 使用上的意義
+    - 例如`S3`方法
+    - `Date` v.s. `Integer`
+
+--- &vcenter .largecontent
+
+## 小挑戰
+
+- Atomic Type之中的character, logical, integer, numeric，哪些可以處理質性資料，哪些可以處理量化資料？
+- 根據character, numeric, integer, logical之間的轉換，誰是最廣泛的形態？
+
+--- &twocol
+
+## 自向量中選取資料  `[`
+
+```{r operator-braket}
+x <- 11:20
+x
+```
+
+*** =left
+
+### `[` + logical
+
+```{r operator-braket-logical, collapse=TRUE}
+x < 13
+x[x < 13]
+```
+
+*** =right
+
+### `[` + integer/numeric
+
+```{r operator-braket-integer, collapse=TRUE}
+x[1:2]
+head(x, 2)
+```
+
+--- &twocol
+
+## 自向量中選取資料  `[`
+
+```{r operator-braket-name}
+names(x) <- letters[1:10]
+x
+x["d"]
+x[c("a", "b")]
+```
+
+--- &vcenter .largecontent
+
+## 小挑戰
+
+- 比較有名字與沒有名字的顯示結果後，嘗試回答以下問題:
+
+```{r}
+height <- c("John" = 198, "Tom" = 166, "Peter" = 170)
+height
+```
+
+- 請問`height`是有名字的向量還是沒有名字的向量?
+- 請問`height`是`numeric`、`integer`還是`character`?
+
+--- &vcenter .largecontent
+
+## 小挑戰
+
+- 請試著使用`[`回答以下問題:
+    - 請從`height`中取出"Peter"的資料
+    - 請取出身高低於180的資料
+    - 請取出身高第二高的資料 hint: `?sort`
+- 那一種`[`來作答最方便?
+
+--- &vcenter .largecontent
+
+## 小挑戰
+
+- 若經過三年後，他們三人的身高變成:
+
+```{r}
+height2 <- c("Tom" = 170, "Peter" = 185, "John" = 200)
+```
+
+- 請問他們身高各成長了百分之多少?$\frac{x_{new} - x_{old}}{x_{old}}$
+
+--- &vcenter .largecontent
+
+## Summary
+
+- 了解型態的用途
+- 了解基礎向量的操作
+
+--- &vcenter .largecontent
+

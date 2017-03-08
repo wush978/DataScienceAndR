@@ -1,0 +1,1007 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>R 語言的資料型態</title>
+  <meta charset="utf-8">
+  <meta name="description" content="R 語言的資料型態">
+  <meta name="author" content="Wush Wu">
+  <meta name="generator" content="slidify" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <link rel="stylesheet" href="libraries/frameworks/io2012-wush/css/default.css" media="all" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012-wush/css/phone.css" 
+    media="only screen and (max-device-width: 480px)" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012-wush/css/slidify.css" >
+  <link rel="stylesheet" href="libraries/highlighters/highlight.js/css/zenburn.css" />
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->  <link rel=stylesheet href="./assets/css/custom.css"></link>
+<link rel=stylesheet href="./assets/css/ribbons.css"></link>
+
+  
+  <!-- Grab CDN jQuery, fall back to local if offline -->
+  <script src="libraries/frameworks/io2012-wush/js/jquery-1.7.min.js"></script>
+  <!-- <script>window.jQuery || document.write('<script src="libraries/widgets/quiz/js/jquery.js"><\/script>')</script> -->
+  <script data-main="libraries/frameworks/io2012-wush/js/slides" 
+    src="libraries/frameworks/io2012-wush/js/require-1.0.8.min.js">
+  </script>
+  
+  
+
+</head>
+<body style="opacity: 0">
+  <slides class="layout-widescreen">
+    
+    <!-- LOGO SLIDE -->
+        <slide class="title-slide segue nobackground">
+  <hgroup class="auto-fadein">
+    <h1>R 語言的資料型態</h1>
+    <h2></h2>
+    <p>Wush Wu<br/>國立台灣大學</p>
+  </hgroup>
+  <article></article>  
+</slide>
+    
+
+    <!-- SLIDES -->
+    <slide class="largecontent" id="slide-1" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>大綱</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ol>
+<li>分析中的資料形態</li>
+<li>R 語言的資料型態</li>
+<li>活用R 語言的資料型態</li>
+</ol>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="segue dark" id="slide-2" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2>分析中的資料形態</h2>
+  </hgroup>
+  <article data-timings="">
+    
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-3" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>數值系統的分類</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<p><center></p>
+
+<!-- html table generated in R 3.3.2 by xtable 1.8-2 package -->
+
+<!-- Thu Mar  9 00:47:00 2017 -->
+
+<table style = "font-size: 20px">
+<tr> <th>  </th> <th> 資料衡量尺度 </th> <th> 變數形態 </th> <th> 特性 </th>  </tr>
+  <tr> <td align="right"> 1 </td> <td> 名目資料(nomial) </td> <td> 質化 </td> <td> 類別 </td> </tr>
+  <tr> <td align="right"> 2 </td> <td> 順序資料(ordinal) </td> <td> 質化 </td> <td> 優先順序 </td> </tr>
+  <tr> <td align="right"> 3 </td> <td> 區間資料(interval) </td> <td> 量化 </td> <td> 大小距離 </td> </tr>
+  <tr> <td align="right"> 4 </td> <td> 比例資料(ratio) </td> <td> 量化 </td> <td> 比值 </td> </tr>
+   </table>
+
+<p></center></p>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-4" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>名目資料</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>數值只用於記號，值毫無意義的數據</li>
+<li>範例:
+
+<ul>
+<li>性別</li>
+<li>Domain</li>
+<li>Cookie</li>
+</ul></li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-5" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>順序資料</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>數值有順序關係，但是差距沒有意義</li>
+<li>範例:
+
+<ul>
+<li>硬度表</li>
+<li>名次</li>
+<li>排序表</li>
+</ul></li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-6" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>區間資料</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>有差距的概念，沒有倍數的概念</li>
+<li>數值有1的概念，沒有0的概念。可加減</li>
+<li>範例:
+
+<ul>
+<li>溫度</li>
+<li>時間</li>
+</ul></li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-7" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>比值資料</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>同時有差距和倍數的概念。</li>
+<li>數值有1和0的概念。可加減乘除。</li>
+<li>範例:
+
+<ul>
+<li>營收</li>
+<li>股價</li>
+</ul></li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-8" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>小挑戰</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>請再舉出四種資料形態的範例</li>
+<li>眾數、中位數、四分位差和算數平均數能用於哪些資料形態？</li>
+<li>對於區間資料，成長率有沒有意義？</li>
+<li>在應用Machine Learning的演算法時，不同的資料形態的值能直接使用嗎？
+
+<ul>
+<li>Regression</li>
+<li>Decision Tree</li>
+</ul></li>
+<li>以下資料，各又是怎樣的資料形態呢？
+
+<ul>
+<li><code>140.118.1.1</code></li>
+<li><code>#R,Text Mining Series,Taiwan R User Group</code></li>
+</ul></li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="segue dark" id="slide-9" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2>R 的資料形態</h2>
+  </hgroup>
+  <article data-timings="">
+    
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-10" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>R 的資料形態分類</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<p><br/></p>
+
+<h3>資料相關的型態</h3>
+
+<ul>
+<li>Atomic Type: Vector of
+
+<ul>
+<li>Integer</li>
+<li>Numeric</li>
+<li>Logical</li>
+<li>R Objects</li>
+</ul></li>
+</ul>
+
+<h3>非資料相關</h3>
+
+<ul>
+<li>Functions</li>
+<li>Environments</li>
+<li>Expressions</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-11" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>什麼是Atomic?</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>組成R 中變數的最小單位</li>
+<li>理解Atomic Type與Atomic Type的組合方法，就可以理解80%的R 物件們</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="" id="slide-12" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2>Character</h2>
+  </hgroup>
+  <article data-timings="">
+    
+<div style='float:left;width:48%;' class='centered'>
+  <ul>
+<li>最廣泛的資料結構，可用於處理文字相關的工作，如：設定圖片的標題</li>
+<li>輸入的時候利用<code>&quot;</code>或<code>&#39;</code>來包覆要輸入的文字
+
+<ul>
+<li>可以直接用<code>\&quot;</code>來輸入<code>&quot;</code>或<code>\&#39;</code> </li>
+</ul></li>
+</ul>
+
+</div>
+<div style='float:right;width:48%;' class='centered'>
+  <p><img src="./assets/fig/data-structure-character-figure-title-1.png" title="plot of chunk character-figure-title" alt="plot of chunk character-figure-title" class="fig100" /></p>
+
+</div>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="" id="slide-13" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2>常用的Character處理函數：</h2>
+  </hgroup>
+  <article data-timings="">
+    
+<div style='float:left;width:48%;' class='centered'>
+  <h3>字串的剪接：<code>paste</code></h3>
+
+<pre><code>[1] &quot;abc,bbb&quot;
+</code></pre>
+
+<h3>字串的切割：<code>strsplit</code></h3>
+
+<pre><code>[[1]]
+[1] &quot;a&quot; &quot;c&quot;
+</code></pre>
+
+</div>
+<div style='float:right;width:48%;' class='centered'>
+  <h3>字串的長度：<code>nchar</code></h3>
+
+<pre><code>[1] 3
+</code></pre>
+
+<h3>截取子字串：<code>substring</code></h3>
+
+<pre><code>[1] &quot;ab&quot;
+</code></pre>
+
+</div>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="" id="slide-14" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2>Logical</h2>
+  </hgroup>
+  <article data-timings="">
+    
+<div style='float:left;width:48%;' class='centered'>
+  <ul>
+<li>產生自比較，或是使用<code>T</code>、<code>TRUE</code>、<code>F</code>或<code>FALSE</code>輸入</li>
+</ul>
+
+<pre><code>[1] TRUE
+</code></pre>
+
+<pre><code>[1] TRUE
+</code></pre>
+
+</div>
+<div style='float:right;width:48%;' class='centered'>
+  <ul>
+<li>常用來做流程控制</li>
+</ul>
+
+<pre><code>[1] &quot;This is TRUE&quot;
+</code></pre>
+
+</div>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="" id="slide-15" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2>Logical常用的Operator</h2>
+  </hgroup>
+  <article data-timings="">
+    
+<div style='float:left;width:48%;' class='centered'>
+  <h3>NOT</h3>
+
+<pre><code>[1] FALSE
+</code></pre>
+
+</div>
+<div style='float:right;width:48%;' class='centered'>
+  <h3>AND</h3>
+
+<pre><code>[1] TRUE
+</code></pre>
+
+<h3>OR</h3>
+
+<pre><code>[1] TRUE
+</code></pre>
+
+</div>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="" id="slide-16" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2>Integer and Numeric</h2>
+  </hgroup>
+  <article data-timings="">
+    
+<div style='float:left;width:48%;' class='centered'>
+  <h3><code>+</code></h3>
+
+<pre><code>[1] 3
+</code></pre>
+
+<h3><code>-</code></h3>
+
+<pre><code>[1] -1
+</code></pre>
+
+</div>
+<div style='float:right;width:48%;' class='centered'>
+  <h3><code>*</code></h3>
+
+<pre><code>[1] 2
+</code></pre>
+
+<h3><code>/</code></h3>
+
+<pre><code>[1] 0.5
+</code></pre>
+
+</div>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-17" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>向量式資料結構</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<h3>所有Atomic Type都有長度</h3>
+
+<pre><code>[1] 1
+</code></pre>
+
+<h3>可以利用<code>:</code>或<code>c()</code>快速建立Vector</h3>
+
+<pre><code>[1] 1 2 3
+</code></pre>
+
+<pre><code>[1] 1 2 3
+</code></pre>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-18" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>向量式的運算</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<h2>幾乎內建的Operations、Functions都是Vectorize</h2>
+
+<pre><code>[1] 3 5 7
+</code></pre>
+
+<pre><code>Warning in 1:2 + 1:3: longer object length is not a multiple of shorter
+object length
+</code></pre>
+
+<pre><code>[1] 2 4 4
+</code></pre>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="" id="slide-19" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2>向量式資料結構</h2>
+  </hgroup>
+  <article data-timings="">
+    
+<div style='float:left;width:48%;' class='centered'>
+  <h3>長度不同會自動延伸</h3>
+
+<pre><code>Warning in 1:2 + 1:3: longer object length is not a multiple of shorter
+object length
+</code></pre>
+
+<pre><code>[1] 2 4 4
+</code></pre>
+
+<p>1 2 1 <font color='red'>2</font><br/>
+1 2 3</p>
+
+<hr/>
+
+<p>2 4 4</p>
+
+</div>
+<div style='float:right;width:48%;' class='centered'>
+  <h3>Vectorized的效能都好很多</h3>
+
+<pre><code class="r">f1 &lt;- function() 1:1000 + 1
+f2 &lt;- function() {
+  r &lt;- integer(1000)
+  for(i in 1:1000) r[i] &lt;- i + 1
+  r
+}
+</code></pre>
+
+<!-- html table generated in R 3.3.2 by xtable 1.8-2 package -->
+
+<!-- Thu Mar  9 00:47:01 2017 -->
+
+<table border=1>
+<tr> <th>  </th> <th> expr </th> <th> median(nano seconds) </th>  </tr>
+  <tr> <td align="right"> 1 </td> <td> f1() </td> <td align="right"> 3202.00 </td> </tr>
+  <tr> <td align="right"> 2 </td> <td> f2() </td> <td align="right"> 625949.00 </td> </tr>
+   </table>
+
+</div>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="" id="slide-20" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2>向量的同質性</h2>
+  </hgroup>
+  <article data-timings="">
+    
+<div style='float:left;width:48%;' class='centered'>
+  <h3>Character &gt; Numeric &gt; Integer &gt; Logical</h3>
+
+<pre><code>[1] &quot;character&quot;
+</code></pre>
+
+<pre><code>[1] &quot;1&quot; &quot;2&quot; &quot;3&quot;
+</code></pre>
+
+</div>
+<div style='float:right;width:48%;' class='centered'>
+  <h3>改一個，全部就都變了</h3>
+
+<pre><code>[1] &quot;matrix&quot;
+</code></pre>
+
+<pre><code>[1] 2
+</code></pre>
+
+<pre><code>     [,1] [,2]
+[1,] &quot;1&quot;  &quot;3&quot; 
+[2,] &quot;2&quot;  &quot;4&quot; 
+</code></pre>
+
+</div>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-21" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>R 會在console告訴我們</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="dark segue" id="slide-22" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2>活用R 語言的資料型態</h2>
+  </hgroup>
+  <article data-timings="">
+    
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-23" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>為什麼要這樣設計？</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>處理資料，一定是很多數據，而不是單一的數據</li>
+<li>利用R 語言的資料型態來告訴R ，數據在分析上的型態</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-24" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>範例: <code>summary</code></h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+   1.00    3.25    5.50    5.50    7.75   10.00 
+</code></pre>
+
+<pre><code>   Length     Class      Mode 
+       10 character character 
+</code></pre>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-25" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>型態很重要</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>在R 中，查詢變數型態的指令有三種
+
+<ul>
+<li><code>class</code></li>
+<li><code>typeof</code></li>
+<li><code>mode</code></li>
+</ul></li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-26" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>型態很重要</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<pre><code>[1] &quot;numeric&quot;
+[1] &quot;integer&quot;
+[1] &quot;double&quot;
+[1] &quot;integer&quot;
+[1] &quot;numeric&quot;
+[1] &quot;numeric&quot;
+</code></pre>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-27" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>型態的用途</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>儲存上的意義
+
+<ul>
+<li>例如: <code>numeric</code>、<code>logical</code>或<code>character</code></li>
+</ul></li>
+<li>使用上的意義
+
+<ul>
+<li>例如<code>S3</code>方法</li>
+<li><code>Date</code> v.s. <code>Integer</code></li>
+</ul></li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-28" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>小挑戰</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>Atomic Type之中的character, logical, integer, numeric，哪些可以處理質性資料，哪些可以處理量化資料？</li>
+<li>根據character, numeric, integer, logical之間的轉換，誰是最廣泛的形態？</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="" id="slide-29" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2>自向量中選取資料  <code>[</code></h2>
+  </hgroup>
+  <article data-timings="">
+    <pre><code> [1] 11 12 13 14 15 16 17 18 19 20
+</code></pre>
+
+<div style='float:left;width:48%;' class='centered'>
+  <h3><code>[</code> + logical</h3>
+
+<pre><code> [1]  TRUE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+[1] 11 12
+</code></pre>
+
+</div>
+<div style='float:right;width:48%;' class='centered'>
+  <h3><code>[</code> + integer/numeric</h3>
+
+<pre><code>[1] 11 12
+[1] 11 12
+</code></pre>
+
+</div>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="" id="slide-30" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2>自向量中選取資料  <code>[</code></h2>
+  </hgroup>
+  <article data-timings="">
+    <pre><code> a  b  c  d  e  f  g  h  i  j 
+11 12 13 14 15 16 17 18 19 20 
+</code></pre>
+
+<pre><code> d 
+14 
+</code></pre>
+
+<pre><code> a  b 
+11 12 
+</code></pre>
+
+<div style='float:left;width:48%;' class='centered'>
+  
+</div>
+<div style='float:right;width:48%;' class='centered'>
+  
+</div>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-31" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>小挑戰</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>比較有名字與沒有名字的顯示結果後，嘗試回答以下問題:</li>
+</ul>
+
+<pre><code> John   Tom Peter 
+  198   166   170 
+</code></pre>
+
+<ul>
+<li>請問<code>height</code>是有名字的向量還是沒有名字的向量?</li>
+<li>請問<code>height</code>是<code>numeric</code>、<code>integer</code>還是<code>character</code>?</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-32" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>小挑戰</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>請試著使用<code>[</code>回答以下問題:
+
+<ul>
+<li>請從<code>height</code>中取出&quot;Peter&quot;的資料</li>
+<li>請取出身高低於180的資料</li>
+<li>請取出身高第二高的資料 hint: <code>?sort</code></li>
+</ul></li>
+<li>那一種<code>[</code>來作答最方便?</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-33" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>小挑戰</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li><p>若經過三年後，他們三人的身高變成:</p></li>
+<li><p>請問他們身高各成長了百分之多少?\(\frac{x_{new} - x_{old}}{x_{old}}\)</p></li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-34" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>Summary</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>了解型態的用途</li>
+<li>了解基礎向量的操作</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-35" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  
+</hgroup>
+<article class = 'flexbox vcenter'>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+    <slide class="backdrop"></slide>
+  </slides>
+  <div class="pagination pagination-small" id='io2012-ptoc' style="display:none;">
+    <ul>
+      <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=1 title='大綱'>
+         1
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=2 title='分析中的資料形態'>
+         2
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=3 title='數值系統的分類'>
+         3
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=4 title='名目資料'>
+         4
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=5 title='順序資料'>
+         5
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=6 title='區間資料'>
+         6
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=7 title='比值資料'>
+         7
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=8 title='小挑戰'>
+         8
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=9 title='R 的資料形態'>
+         9
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=10 title='R 的資料形態分類'>
+         10
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=11 title='什麼是Atomic?'>
+         11
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=12 title='Character'>
+         12
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=13 title='常用的Character處理函數：'>
+         13
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=14 title='Logical'>
+         14
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=15 title='Logical常用的Operator'>
+         15
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=16 title='Integer and Numeric'>
+         16
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=17 title='向量式資料結構'>
+         17
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=18 title='向量式的運算'>
+         18
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=19 title='向量式資料結構'>
+         19
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=20 title='向量的同質性'>
+         20
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=21 title='R 會在console告訴我們'>
+         21
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=22 title='活用R 語言的資料型態'>
+         22
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=23 title='為什麼要這樣設計？'>
+         23
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=24 title='範例: <code>summary</code>'>
+         24
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=25 title='型態很重要'>
+         25
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=26 title='型態很重要'>
+         26
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=27 title='型態的用途'>
+         27
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=28 title='小挑戰'>
+         28
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=29 title='自向量中選取資料  <code>[</code>'>
+         29
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=30 title='自向量中選取資料  <code>[</code>'>
+         30
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=31 title='小挑戰'>
+         31
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=32 title='小挑戰'>
+         32
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=33 title='小挑戰'>
+         33
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=34 title='Summary'>
+         34
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=35 title='NA'>
+         35
+      </a>
+    </li>
+  </ul>
+  </div>  <!--[if IE]>
+    <script 
+      src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js">  
+    </script>
+    <script>CFInstall.check({mode: 'overlay'});</script>
+  <![endif]-->
+</body>
+  <!-- Load Javascripts for Widgets -->
+  
+  <!-- MathJax: Fall back to local if CDN offline but local image fonts are not supported (saves >100MB) -->
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        processEscapes: true
+      }
+    });
+  </script>
+  <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/2.0-latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  <!-- <script src="https://c328740.ssl.cf1.rackcdn.com/mathjax/2.0-latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script> -->
+  <script>window.MathJax || document.write('<script type="text/x-mathjax-config">MathJax.Hub.Config({"HTML-CSS":{imageFont:null}});<\/script><script src="libraries/widgets/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"><\/script>')
+</script>
+<!-- LOAD HIGHLIGHTER JS FILES -->
+  <script src="libraries/highlighters/highlight.js/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <!-- DONE LOADING HIGHLIGHTER JS FILES -->
+   
+  </html>

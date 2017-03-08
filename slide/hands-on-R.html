@@ -1,0 +1,1564 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>上手R語言</title>
+  <meta charset="utf-8">
+  <meta name="description" content="上手R語言">
+  <meta name="author" content="Wush Wu">
+  <meta name="generator" content="slidify" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <link rel="stylesheet" href="libraries/frameworks/io2012-wush/css/default.css" media="all" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012-wush/css/phone.css" 
+    media="only screen and (max-device-width: 480px)" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012-wush/css/slidify.css" >
+  <link rel="stylesheet" href="libraries/highlighters/highlight.js/css/zenburn.css" />
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->  <link rel=stylesheet href="./assets/css/custom.css"></link>
+<link rel=stylesheet href="./assets/css/ribbons.css"></link>
+
+  
+  <!-- Grab CDN jQuery, fall back to local if offline -->
+  <script src="libraries/frameworks/io2012-wush/js/jquery-1.7.min.js"></script>
+  <!-- <script>window.jQuery || document.write('<script src="libraries/widgets/quiz/js/jquery.js"><\/script>')</script> -->
+  <script data-main="libraries/frameworks/io2012-wush/js/slides" 
+    src="libraries/frameworks/io2012-wush/js/require-1.0.8.min.js">
+  </script>
+  
+  
+
+</head>
+<body style="opacity: 0">
+  <slides class="layout-widescreen">
+    
+    <!-- LOGO SLIDE -->
+        <slide class="title-slide segue nobackground">
+  <hgroup class="auto-fadein">
+    <h1>上手R語言</h1>
+    <h2></h2>
+    <p>Wush Wu<br/>國立台灣大學</p>
+  </hgroup>
+  <article></article>  
+</slide>
+    
+
+    <!-- SLIDES -->
+    <slide class="largecontent" id="slide-1" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>大綱</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ol>
+<li>安裝R 與Rstudio</li>
+<li>Rstudio 功能簡介</li>
+<li>上手R 程式撰寫</li>
+</ol>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="dark segue" id="slide-2" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2>安裝R 與Rstudio</h2>
+  </hgroup>
+  <article data-timings="">
+    
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-3" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>事前注意事項</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>Windows 使用者請確定自己的使用者名稱不包含中文
+
+<ul>
+<li>否則請開一個純英文的使用者名稱</li>
+</ul></li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-4" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>安裝R</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li><a href="https://cran.r-project.org">CRAN</a></li>
+<li><a href="http://cran.csie.ntu.edu.tw">台大的CRAN Mirror</a></li>
+<li>依據作業系統做選擇:
+
+<ul>
+<li><a href="http://cran.csie.ntu.edu.tw/bin/windows/">Windows</a> --&gt; <a href="http://cran.csie.ntu.edu.tw/bin/windows/base/">base</a> --&gt; <a href="http://cran.csie.ntu.edu.tw/bin/windows/base/R-3.3.2-win.exe">Download R 3.3.2 for Windows</a> --&gt; 打開下載後的檔案並安裝</li>
+<li><a href="http://cran.csie.ntu.edu.tw/bin/macosx/">Mac OS X</a> --&gt; <a href="http://cran.csie.ntu.edu.tw/bin/macosx/R-3.3.2.pkg">R-3.3.2.pkg</a> --&gt; 打開下載後的檔案並安裝</li>
+<li><a href="http://cran.csie.ntu.edu.tw/bin/linux/">Linux</a> 請參考不同distribution的安裝說明，有問題課後<a href="https://gitter.im/wush978/DataScienceAndR">找助教</a></li>
+</ul></li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-5" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>影片示範: Windows</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<p><a href="http://www.youtube.com/watch?v=FsOHPGUIDZU"><img src="http://img.youtube.com/vi/FsOHPGUIDZU/0.jpg" alt="在Windows上安裝R"></a></p>
+
+<ul>
+<li>影片中的範例是 3.0.2 的版本，請使用者記得安裝 3.1 以上的版本喔！</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-6" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>影片示範: OS X</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<p><a href="http://www.youtube.com/watch?v=72MYRBNo5Bk"><img src="http://img.youtube.com/vi/72MYRBNo5Bk/0.jpg" alt="Mac OS X 安裝R軟體"></a></p>
+
+<ul>
+<li>此影片由中華R軟體學會的李明昌老師提供</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-7" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>Linux Ubuntu</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<pre><code class="sh">sudo sh -c &#39;echo &quot;deb http://cran.csie.ntu.edu.tw/bin/linux/ubuntu trusty/&quot; &gt;&gt; /etc/apt/sources.list&#39;
+sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E084DAB9
+sudo apt-get update &amp;&amp; apt-get install -y r-base libcurl4-openssl-dev libxml2-dev espeak
+</code></pre>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-8" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>安裝Rstudio</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li><a href="https://www.rstudio.com/products/RStudio">Rstudio</a>
+
+<ul>
+<li><a href="">Desktop</a> --&gt; <a href="https://www.rstudio.com/products/rstudio/download/">Open Source Edition</a> --&gt; 根據作業系統選擇</li>
+</ul></li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-9" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>示範影片搜尋</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<p><br/><br/></p>
+
+<ul>
+<li>Rstudio 的官方網頁一直在改版... 所以請<a href="https://www.google.com.tw/search?q=how+to+install+rstudio&amp;client=ubuntu&amp;hs=n8j&amp;channel=fs&amp;biw=1760&amp;bih=876&amp;tbm=vid&amp;source=lnt&amp;tbs=qdr:m&amp;sa=X&amp;ved=0ahUKEwjUiJruuJnSAhWKpJQKHfrzBCMQpwUIEg&amp;dpr=1.09">在Google搜尋最近一個月關於「how to install rstudio」的影片</a></li>
+<li>可能失效的範例：</li>
+</ul>
+
+<p><a href="http://www.youtube.com/watch?v=Hl24HClmR0Y"><img src="http://img.youtube.com/vi/Hl24HClmR0Y/0.jpg" alt="安裝Rstudio"></a></p>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="dark segue" id="slide-10" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2>RStudio 界面介紹</h2>
+  </hgroup>
+  <article data-timings="">
+    
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="" id="slide-11" style="background:url(assets/img/Workspace1_036.png); background-size: 100% 100%;">
+  <article data-timings="" style="display: table;">
+    <div style="display: table-cell;vertical-align: bottom;">
+      
+    </div>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-12" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>程式碼編輯區(1)</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>主要撰寫程式碼的區域</li>
+<li>具備多種功能協助我們使用程式碼</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-13" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>語法錯誤提示</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<p><img src='assets/img/error-hint.gif' style='max-width: 100%;max-height: 100%'></img></p>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-14" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>自動完成與說明文件</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<p><img src='assets/img/auto-completion.gif' style='max-width: 100%;max-height: 100%'></img></p>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-15" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>對稱的括號提示</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<p><img src='assets/img/parantheses-match.gif' style='max-width: 100%;max-height: 100%'></img></p>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-16" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>Console(2)</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<p><img src='assets/img/console.gif' style='max-width: 100%;max-height: 100%'></img></p>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-17" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>環境資訊(3)</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<p><img src='assets/img/Selection_037.png' style='max-width: 100%;max-height: 100%'></img></p>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-18" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>檔案系統、說明文件與圖片(4)</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<p><img src='assets/img/Selection_039.png' style='max-width: 100%;max-height: 100%'></img></p>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-19" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>檔案系統、說明文件與圖片(4)</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<p><img src='assets/img/Selection_042.png' style='max-width: 100%;max-height: 100%'></img></p>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-20" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>檔案系統、說明文件與圖片(4)</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<p><img src='assets/img/Selection_043.png' style='max-width: 100%;max-height: 100%'></img></p>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="dark segue" id="slide-21" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2>上手R 程式撰寫</h2>
+  </hgroup>
+  <article data-timings="">
+    
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-22" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>學習目標</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>了解什麼是<code>expression</code>(敘述)</li>
+<li>了解變數(名字、值)
+
+<ul>
+<li>了解assignment</li>
+</ul></li>
+<li>了解函數、參數</li>
+<li>學習簡易套件安裝</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-23" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2><code>expression</code></h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<p><img src='assets/img/expression1.gif' style='max-width: 100%;max-height: 100%'></img></p>
+
+</article>
+<!-- Presenter Notes -->
+<aside class="note">
+  <section>
+    <ul>
+<li>介紹 + - * /</li>
+</ul>
+
+  </section>
+</aside>
+</slide>
+<slide class="largecontent" id="slide-24" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2><code>expression</code></h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>R 的程式是由一個又一個的expression所構成</li>
+<li>Console 會回應每一個「完整」的expression</li>
+<li>Console上的<code>&gt;</code>代表「R 正準備接受下一個expression」</li>
+<li><code>Enter</code>代表一個expression的結束</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-25" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2><code>expression</code></h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<p><img src='assets/img/expression2.gif' style='max-width: 100%;max-height: 100%'></img></p>
+
+</article>
+<!-- Presenter Notes -->
+<aside class="note">
+  <section>
+    <ul>
+<li>先乘除後加減</li>
+<li>括號最優先: 括號是子expression</li>
+</ul>
+
+  </section>
+</aside>
+</slide>
+<slide class="largecontent" id="slide-26" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2><code>expression</code></h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>先乘除後加減，括號更優先</li>
+<li>Console上的<code>+</code>代表「R 認為expression沒有結束」</li>
+<li>完成expression後R 才會處理</li>
+<li><code>ESC</code>可以中斷expression</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-27" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2><code>expression</code></h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>輸入到console的程式碼，都會被當成expression處理</li>
+<li><code>#</code>之後的程式碼不會被處理，稱為「註解」</li>
+<li>投影片之後會用以下格式Demo程式碼的執行結果:</li>
+</ul>
+
+<pre><code>[1] 2
+</code></pre>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-28" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>練習: 請同學估計以下資料所需要的記憶體</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>買電腦的時候，上面會寫：這台筆記型電腦有4GB的記憶體(RAM)</li>
+<li>在電腦中資料的單位：
+
+<ul>
+<li>1個<code>0</code>或<code>1</code>是一個位元(bit)</li>
+<li>8個<code>0</code>或<code>1</code>是一個位元組(Bytes)</li>
+<li>1024個位元組是1KB</li>
+<li>1024KB是1MB</li>
+<li>1024MB是1GB</li>
+</ul></li>
+<li>請問: 1MB是多少位元?</li>
+<li>一個整數需要4個位元組大小的記憶體，請問50000個整數需要多少記憶體? 請用MB為單位</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-29" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>練習: 請同學估計以下資料所需要的記憶體</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>全台灣人的身份證字號與性別的表格</li>
+<li>2300萬人</li>
+<li>身份證字號共10碼，每碼佔用1Bytes</li>
+<li>性別以整數紀錄，<code>0</code> : 女性、<code>1</code>：男性</li>
+<li>請問需要多大的記憶體(MB)儲存上述資料？</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-30" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>練習: 請同學查詢自己的電腦有多少記憶體</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<p>或是看課堂老師的說明</p>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-31" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>變數</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>變數的概念很接近數學的「未知數」</li>
+<li>範例:</li>
+</ul>
+
+<pre><code class="sh">y = x + 1
+x 代入 1 則 y 為 2
+x 代入 2 則 y 為 3
+</code></pre>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-32" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>字串</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>前後利用<code>&quot;</code>所夾住的文字，在程式碼中會視為字串(character)</li>
+</ul>
+
+<pre><code>[1] 2
+</code></pre>
+
+<pre><code>[1] &quot;1 + 1&quot;
+</code></pre>
+
+<ul>
+<li><strong>字串不是程式碼、字串不是變數</strong></li>
+<li>字串就是文字</li>
+<li>字串與變數的不同：R 處理變數的名字時，會先找到該名字所對應的值，用值把名字替換掉之後再執行</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-33" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>字串 v.s. 變數的名字</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<p><img src="./assets/fig/hands-on-r-unnamed-chunk-4-1.png" alt="plot of chunk unnamed-chunk-4"><img src="./assets/fig/hands-on-r-unnamed-chunk-4-2.png" alt="plot of chunk unnamed-chunk-4"></p>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-34" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>透過變數，我們可以描述「邏輯」</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>儲存2300萬人的身份證字號與性別需要多大的記憶體(MB)?</li>
+</ul>
+
+<pre><code>[1] 307.0831
+</code></pre>
+
+<ul>
+<li>儲存<code>x</code>萬人的身份證字號與性別需要多大的記憶體(MB)?</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-35" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>透過變數，我們可以描述「邏輯」</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>儲存台北市270萬人的身份證字號與性別需要多大的記憶體(MB)?</li>
+</ul>
+
+<pre><code>[1] 36.04889
+</code></pre>
+
+<ul>
+<li>儲存新北市400萬人的身份證字號與性別需要多大的記憶體(MB)?</li>
+</ul>
+
+<pre><code>[1] 53.40576
+</code></pre>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-36" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>變數</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li><p>描述從<strong>名字</strong>到<strong>值</strong>的關係</p>
+
+<ul>
+<li>每個變數都有一個「名字」與對應的「值」
+<code>r
+x = 270
+</code></li>
+</ul></li>
+<li><p><code>x</code>是名字、值則是<code>270</code></p></li>
+<li><p><code>x = 270</code>這類型的程式碼被稱為<code>assignment</code>(賦值)</p>
+
+<ul>
+<li><code>assignment</code>是不是一種<code>expression</code>?</li>
+</ul></li>
+<li><p>在R 裡面，以下都是assignment</p></li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="" id="slide-37" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>練習</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<pre><code class="r"># 雲林縣的人口有69萬人、苗栗縣有56萬人、新竹縣有55萬人、嘉義縣有52萬人，
+# 請問儲存以上縣市所有的身份證字號(用10個文字，10 Bytes)、性別(用整數，4 Bytes)與電話號碼(用整數4 Bytes)
+# 需要多少記憶體(MB)? 請用x 的方式寫
+x &lt;- &lt;數字&gt;
+x * 10000 * (&lt;每儲存一個人的資訊所需要的記憶體大小&gt;) / 1024 / 1024
+</code></pre>
+
+<ul>
+<li>提示: 請在<strong>程式碼編輯區</strong>操作
+
+<ol>
+<li>File -&gt; New File -&gt; R Script (CTRL + SHIFT + N)</li>
+<li>嘗試輸入以下的程式碼，並且把<code>&lt;數字&gt;</code>與<code>&lt;每儲存一個人的資訊所需要的記憶體大小&gt;</code>替換成你的<code>expression</code></li>
+<li>當游標在<strong>程式碼編輯區</strong>時，按下CTRL + ENTER可以把程式碼輸入Console</li>
+<li>不同的<code>x &lt;- &lt;數字&gt;</code>可以算出不同的答案</li>
+</ol></li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-38" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>可能的答案</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<pre><code>[1] 11.84464
+</code></pre>
+
+<pre><code>[1] 9.613037
+</code></pre>
+
+<pre><code>[1] 9.441376
+</code></pre>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-39" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>輸入與輸出的關係</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>輸入是變數<code>x</code>, 輸出是<code>x * 10000 * (10 + 4 + 4) / 1024 / 1024</code></li>
+<li>這是一個函數</li>
+</ul>
+
+<p><img src='assets/img/function.png' style='max-width: 100%;max-height: 100%'></img></p>
+
+<ul>
+<li>R 也可以建立函數: </li>
+</ul>
+
+<pre><code class="r">f &lt;- function(x) x * 10000 * (10 + 4 + 4) / 1024 / 1024
+</code></pre>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-40" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>可能的答案</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<pre><code>[1] 11.84464
+</code></pre>
+
+<pre><code>[1] 9.613037
+</code></pre>
+
+<pre><code>[1] 9.441376
+</code></pre>
+
+<pre><code>[1] 8.926392
+</code></pre>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-41" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>使用R 會用到大量的函數</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="" id="slide-42" style="background:url(assets/img/flights_sml.jpg); background-size: 100% 100%;">
+  <article data-timings="" style="display: table;">
+    <div style="display: table-cell;vertical-align: bottom;">
+      
+    </div>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-43" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>使用R 會用到大量的函數</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>具體提供以下功能的，都是函數
+
+<ul>
+<li>讀取資料</li>
+<li>清理資料</li>
+<li>繪圖</li>
+</ul></li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-44" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>了解R 中的函數</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>函數的本質也是變數
+
+<ul>
+<li>函數有名字</li>
+<li>值的本質是函數</li>
+</ul></li>
+</ul>
+
+<pre><code>[1] 2.5
+</code></pre>
+
+<pre><code>[1] 2.5
+</code></pre>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-45" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>了解R 中的函數</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<p><img src='assets/img/Selection_045.png' style='max-width: 100%;max-height: 100%'></img></p>
+
+<ol>
+<li><code>mean</code>: 函數的名字</li>
+<li><code>(</code>、<code>)</code>: 括號。名字後面接括號，代表這個名字的變數是一種函數</li>
+<li><code>a</code>: <code>arguments</code>(參數)</li>
+</ol>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-46" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>了解R 中的函數</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>函數就是「動作」
+
+<ul>
+<li>範例：「計算需要的記憶體的動作」, 之前的練習所提到的函數</li>
+<li>範例：「計算x的平均數」, <code>mean(x)</code></li>
+</ul></li>
+<li>名字是動作的名稱
+
+<ul>
+<li><code>mean</code>: 算平均數</li>
+<li><code>sd</code>: 算樣本標準差</li>
+</ul></li>
+<li>參數控制動作
+
+<ul>
+<li><code>mean(x)</code>: 計算x 的平均數</li>
+<li><code>mean(y)</code>: 計算y 的平均數</li>
+<li><code>mean(x, na.rm = TRUE)</code>: 計算x 的平均數，不包含遺失值</li>
+</ul></li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-47" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>了解R 中的函數</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>函數就是功能</li>
+<li>R 之中有許許多多的函數
+
+<ul>
+<li>讀取資料的函數</li>
+<li>處理資料的函數</li>
+<li>操作檔案的函數</li>
+<li>輸出資料的函數</li>
+</ul></li>
+<li>R 的套件，提供更多更多的函數</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-48" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>套件</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>有些提供R 沒有提供的功能
+
+<ul>
+<li>處理網頁的套件: <code>XML</code>、<code>xml2</code>、<code>jsonlite</code></li>
+<li>爬網站的套件: <code>httr</code></li>
+<li>跑進階分析(某篇paper的演算法)的套件: <code>supc</code></li>
+</ul></li>
+<li>有些提供類似，但是設計不同的功能
+
+<ul>
+<li>整理資料: <code>dplyr</code></li>
+<li>繪圖: <code>ggplot2</code></li>
+</ul></li>
+<li>有些提供資料
+
+<ul>
+<li>棒球資料: <code>Lahman</code></li>
+</ul></li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-49" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>套件</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>套件提供函數、函數就是功能，所以套件就是提供「一系列相關主題的功能」</li>
+<li>套件本身都會提供說明文件，解釋如何使用套件
+
+<ul>
+<li><code>examples</code></li>
+<li><code>demo</code></li>
+<li><code>vignettes</code></li>
+</ul></li>
+<li>如果我要找特定功能的套件，怎麼辦?
+
+<ul>
+<li><a href="https://cran.r-project.org/web/views/">CRAN Task Views</a></li>
+</ul></li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-50" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>安裝套件</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<pre><code class="r">install.packages(&quot;ctv&quot;)
+</code></pre>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-51" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>載入套件</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<pre><code>Error in library(ctv): there is no package called &#39;ctv&#39;
+</code></pre>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-52" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>使用套件的函數</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<pre><code>Error in loadNamespace(name): there is no package called &#39;ctv&#39;
+</code></pre>
+
+<pre><code>Error in x[[5]]: subscript out of bounds
+</code></pre>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-53" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>函數的參數</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<pre><code>function (pkgs, lib, repos = getOption(&quot;repos&quot;), contriburl = contrib.url(repos, 
+    type), method, available = NULL, destdir = NULL, dependencies = NA, 
+    type = getOption(&quot;pkgType&quot;), configure.args = getOption(&quot;configure.args&quot;), 
+    configure.vars = getOption(&quot;configure.vars&quot;), clean = FALSE, 
+    Ncpus = getOption(&quot;Ncpus&quot;, 1L), verbose = getOption(&quot;verbose&quot;), 
+    libs_only = FALSE, INSTALL_opts, quiet = FALSE, keep_outputs = FALSE, 
+    ...) 
+NULL
+</code></pre>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-54" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>函數的參數</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li><p><code>install.packages</code> 負責安裝套件</p></li>
+<li><p>電腦需要知道動作的細節才能運作:</p>
+
+<ul>
+<li>要安裝什麼套件?</li>
+<li>從哪裡安裝套件?</li>
+<li class='..'>以及其他種種細節</li>
+</ul></li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-55" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>函數的參數</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<pre><code>function (pkgs, lib, repos = getOption(&quot;repos&quot;), contriburl = contrib.url(repos, 
+    type), method, available = NULL, destdir = NULL, dependencies = NA, 
+    type = getOption(&quot;pkgType&quot;), configure.args = getOption(&quot;configure.args&quot;), 
+    configure.vars = getOption(&quot;configure.vars&quot;), clean = FALSE, 
+    Ncpus = getOption(&quot;Ncpus&quot;, 1L), verbose = getOption(&quot;verbose&quot;), 
+    libs_only = FALSE, INSTALL_opts, quiet = FALSE, keep_outputs = FALSE, 
+    ...) 
+NULL
+</code></pre>
+
+<ul>
+<li>一個函數的參數可以有很多個</li>
+<li>每個參數都有對應的「名字」</li>
+<li><code>install.packages</code>的參數有: <code>pkg</code>、<code>lib</code>、<code>repos</code>...
+
+<ul>
+<li><code>pkg</code> 代表「要安裝的套件的名稱」</li>
+<li><code>repos</code> 代表「提供套件的網站」</li>
+</ul></li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-56" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>函數的參數</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<pre><code>function (pkgs, lib, repos = getOption(&quot;repos&quot;), contriburl = contrib.url(repos, 
+    type), method, available = NULL, destdir = NULL, dependencies = NA, 
+    type = getOption(&quot;pkgType&quot;), configure.args = getOption(&quot;configure.args&quot;), 
+    configure.vars = getOption(&quot;configure.vars&quot;), clean = FALSE, 
+    Ncpus = getOption(&quot;Ncpus&quot;, 1L), verbose = getOption(&quot;verbose&quot;), 
+    libs_only = FALSE, INSTALL_opts, quiet = FALSE, keep_outputs = FALSE, 
+    ...) 
+NULL
+</code></pre>
+
+<pre><code class="r">install.packages(&quot;ctv&quot;)
+</code></pre>
+
+<ul>
+<li><code>pkg</code> : <code>&quot;ctv&quot;</code></li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-57" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>函數的參數</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<pre><code>function (pkgs, lib, repos = getOption(&quot;repos&quot;), contriburl = contrib.url(repos, 
+    type), method, available = NULL, destdir = NULL, dependencies = NA, 
+    type = getOption(&quot;pkgType&quot;), configure.args = getOption(&quot;configure.args&quot;), 
+    configure.vars = getOption(&quot;configure.vars&quot;), clean = FALSE, 
+    Ncpus = getOption(&quot;Ncpus&quot;, 1L), verbose = getOption(&quot;verbose&quot;), 
+    libs_only = FALSE, INSTALL_opts, quiet = FALSE, keep_outputs = FALSE, 
+    ...) 
+NULL
+</code></pre>
+
+<pre><code class="r">install.packages(&quot;ctv&quot;, &quot;http://cran.csie.ntu.edu.tw&quot;)
+</code></pre>
+
+<ul>
+<li><code>pkg</code> : <code>&quot;ctv&quot;</code></li>
+<li><code>lib</code> : <code>&quot;http://cran.csie.ntu.edu.tw&quot;</code></li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-58" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>函數的參數</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<pre><code>function (pkgs, lib, repos = getOption(&quot;repos&quot;), contriburl = contrib.url(repos, 
+    type), method, available = NULL, destdir = NULL, dependencies = NA, 
+    type = getOption(&quot;pkgType&quot;), configure.args = getOption(&quot;configure.args&quot;), 
+    configure.vars = getOption(&quot;configure.vars&quot;), clean = FALSE, 
+    Ncpus = getOption(&quot;Ncpus&quot;, 1L), verbose = getOption(&quot;verbose&quot;), 
+    libs_only = FALSE, INSTALL_opts, quiet = FALSE, keep_outputs = FALSE, 
+    ...) 
+NULL
+</code></pre>
+
+<pre><code class="r">install.packages(&quot;ctv&quot;, repos = &quot;http://cran.csie.ntu.edu.tw&quot;)
+</code></pre>
+
+<ul>
+<li><code>pkg</code> : <code>&quot;ctv&quot;</code></li>
+<li><code>repos</code> : <code>&quot;http://cran.csie.ntu.edu.tw&quot;</code></li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-59" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>函數的參數</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<pre><code>function (pkgs, lib, repos = getOption(&quot;repos&quot;), contriburl = contrib.url(repos, 
+    type), method, available = NULL, destdir = NULL, dependencies = NA, 
+    type = getOption(&quot;pkgType&quot;), configure.args = getOption(&quot;configure.args&quot;), 
+    configure.vars = getOption(&quot;configure.vars&quot;), clean = FALSE, 
+    Ncpus = getOption(&quot;Ncpus&quot;, 1L), verbose = getOption(&quot;verbose&quot;), 
+    libs_only = FALSE, INSTALL_opts, quiet = FALSE, keep_outputs = FALSE, 
+    ...) 
+NULL
+</code></pre>
+
+<pre><code class="r">install.packages(&quot;ctv&quot;, repo = &quot;http://cran.csie.ntu.edu.tw&quot;)
+</code></pre>
+
+<ul>
+<li><code>pkg</code> : <code>&quot;ctv&quot;</code></li>
+<li><code>repos</code> : <code>&quot;http://cran.csie.ntu.edu.tw&quot;</code></li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-60" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>函數的參數</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<pre><code>function (pkgs, lib, repos = getOption(&quot;repos&quot;), contriburl = contrib.url(repos, 
+    type), method, available = NULL, destdir = NULL, dependencies = NA, 
+    type = getOption(&quot;pkgType&quot;), configure.args = getOption(&quot;configure.args&quot;), 
+    configure.vars = getOption(&quot;configure.vars&quot;), clean = FALSE, 
+    Ncpus = getOption(&quot;Ncpus&quot;, 1L), verbose = getOption(&quot;verbose&quot;), 
+    libs_only = FALSE, INSTALL_opts, quiet = FALSE, keep_outputs = FALSE, 
+    ...) 
+NULL
+</code></pre>
+
+<pre><code class="r">install.packages(&quot;ctv&quot;, &quot;http://cran.csie.ntu.edu.tw&quot;, lib = &quot;/home/wush/Project/2017-DS-Programming/.lib&quot;)
+</code></pre>
+
+<ul>
+<li><code>pkg</code> : <code>&quot;ctv&quot;</code></li>
+<li><code>lib</code> : <code>&quot;/home/wush/Project/2017-DS-Programming/.lib&quot;</code></li>
+<li><code>repos</code> : <code>&quot;http://cran.csie.ntu.edu.tw&quot;</code></li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-61" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>函數的參數: 預設值</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<pre><code>function (pkgs, lib, repos = getOption(&quot;repos&quot;), contriburl = contrib.url(repos, 
+    type), method, available = NULL, destdir = NULL, dependencies = NA, 
+    type = getOption(&quot;pkgType&quot;), configure.args = getOption(&quot;configure.args&quot;), 
+    configure.vars = getOption(&quot;configure.vars&quot;), clean = FALSE, 
+    Ncpus = getOption(&quot;Ncpus&quot;, 1L), verbose = getOption(&quot;verbose&quot;), 
+    libs_only = FALSE, INSTALL_opts, quiet = FALSE, keep_outputs = FALSE, 
+    ...) 
+NULL
+</code></pre>
+
+<pre><code class="r">install.packages(&quot;ctv&quot;)
+</code></pre>
+
+<ul>
+<li><code>repos</code> : <code>getOption(&quot;repos&quot;)</code></li>
+<li><code>destdir</code> : <code>NULL</code></li>
+<li class='..</li>'></ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-62" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>參數的規則</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>順序、名字
+
+<ul>
+<li>有給名字，則「部份比對名字」(Best Practice: 請打全名)</li>
+<li>沒給名字，則照順序，但是會跳過<strong>已經給名字的參數</strong></li>
+<li>剩下的參數則考慮預設值</li>
+</ul></li>
+<li>建議: 超過三個以上，都用使用「全名」來指定參數</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-63" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>練習</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<pre><code>function (x, split, fixed = FALSE, perl = FALSE, useBytes = FALSE) 
+NULL
+</code></pre>
+
+<pre><code>[[1]]
+[1] &quot;ab&quot; &quot;ef&quot;
+</code></pre>
+
+<ul>
+<li>請問參數<code>x</code>、<code>split</code>、<code>fixed</code>、<code>perl</code>與<code>useBytes</code>的值各為何?</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-64" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>總結</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>初步了解如何構成一個R 的程式
+
+<ul>
+<li>函數... 函數... 函數.......</li>
+<li>當然還有其他的東西</li>
+</ul></li>
+<li>函數就是功能，套件提供更多的函數</li>
+<li>知道如何安裝套件</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+    <slide class="backdrop"></slide>
+  </slides>
+  <div class="pagination pagination-small" id='io2012-ptoc' style="display:none;">
+    <ul>
+      <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=1 title='大綱'>
+         1
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=2 title='安裝R 與Rstudio'>
+         2
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=3 title='事前注意事項'>
+         3
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=4 title='安裝R'>
+         4
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=5 title='影片示範: Windows'>
+         5
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=6 title='影片示範: OS X'>
+         6
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=7 title='Linux Ubuntu'>
+         7
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=8 title='安裝Rstudio'>
+         8
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=9 title='示範影片搜尋'>
+         9
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=10 title='RStudio 界面介紹'>
+         10
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=11 title='NA'>
+         11
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=12 title='程式碼編輯區(1)'>
+         12
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=13 title='語法錯誤提示'>
+         13
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=14 title='自動完成與說明文件'>
+         14
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=15 title='對稱的括號提示'>
+         15
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=16 title='Console(2)'>
+         16
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=17 title='環境資訊(3)'>
+         17
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=18 title='檔案系統、說明文件與圖片(4)'>
+         18
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=19 title='檔案系統、說明文件與圖片(4)'>
+         19
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=20 title='檔案系統、說明文件與圖片(4)'>
+         20
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=21 title='上手R 程式撰寫'>
+         21
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=22 title='學習目標'>
+         22
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=23 title='<code>expression</code>'>
+         23
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=24 title='<code>expression</code>'>
+         24
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=25 title='<code>expression</code>'>
+         25
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=26 title='<code>expression</code>'>
+         26
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=27 title='<code>expression</code>'>
+         27
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=28 title='練習: 請同學估計以下資料所需要的記憶體'>
+         28
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=29 title='練習: 請同學估計以下資料所需要的記憶體'>
+         29
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=30 title='練習: 請同學查詢自己的電腦有多少記憶體'>
+         30
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=31 title='變數'>
+         31
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=32 title='字串'>
+         32
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=33 title='字串 v.s. 變數的名字'>
+         33
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=34 title='透過變數，我們可以描述「邏輯」'>
+         34
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=35 title='透過變數，我們可以描述「邏輯」'>
+         35
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=36 title='變數'>
+         36
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=37 title='練習'>
+         37
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=38 title='可能的答案'>
+         38
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=39 title='輸入與輸出的關係'>
+         39
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=40 title='可能的答案'>
+         40
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=41 title='使用R 會用到大量的函數'>
+         41
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=42 title='NA'>
+         42
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=43 title='使用R 會用到大量的函數'>
+         43
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=44 title='了解R 中的函數'>
+         44
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=45 title='了解R 中的函數'>
+         45
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=46 title='了解R 中的函數'>
+         46
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=47 title='了解R 中的函數'>
+         47
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=48 title='套件'>
+         48
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=49 title='套件'>
+         49
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=50 title='安裝套件'>
+         50
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=51 title='載入套件'>
+         51
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=52 title='使用套件的函數'>
+         52
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=53 title='函數的參數'>
+         53
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=54 title='函數的參數'>
+         54
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=55 title='函數的參數'>
+         55
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=56 title='函數的參數'>
+         56
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=57 title='函數的參數'>
+         57
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=58 title='函數的參數'>
+         58
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=59 title='函數的參數'>
+         59
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=60 title='函數的參數'>
+         60
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=61 title='函數的參數: 預設值'>
+         61
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=62 title='參數的規則'>
+         62
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=63 title='練習'>
+         63
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=64 title='總結'>
+         64
+      </a>
+    </li>
+  </ul>
+  </div>  <!--[if IE]>
+    <script 
+      src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js">  
+    </script>
+    <script>CFInstall.check({mode: 'overlay'});</script>
+  <![endif]-->
+</body>
+  <!-- Load Javascripts for Widgets -->
+  
+  <!-- MathJax: Fall back to local if CDN offline but local image fonts are not supported (saves >100MB) -->
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        processEscapes: true
+      }
+    });
+  </script>
+  <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/2.0-latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  <!-- <script src="https://c328740.ssl.cf1.rackcdn.com/mathjax/2.0-latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script> -->
+  <script>window.MathJax || document.write('<script type="text/x-mathjax-config">MathJax.Hub.Config({"HTML-CSS":{imageFont:null}});<\/script><script src="libraries/widgets/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"><\/script>')
+</script>
+<!-- LOAD HIGHLIGHTER JS FILES -->
+  <script src="libraries/highlighters/highlight.js/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <!-- DONE LOADING HIGHLIGHTER JS FILES -->
+   
+  </html>

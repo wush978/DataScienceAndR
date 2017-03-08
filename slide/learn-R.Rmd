@@ -1,0 +1,720 @@
+---
+title       : "自學R 語言"
+author      : "Wush Wu"
+job         : 國立台灣大學
+framework   : io2012-wush
+highlighter : highlight.js
+hitheme     : zenburn
+widgets     : [mathjax]            # {mathjax, quiz, bootstrap}
+mode        : selfcontained # {standalone, draft}
+knit        : slidify::knit2slides
+--- &vcenter .largecontent
+
+## 大綱
+
+1. 為什麼要自學
+1. 自學的前提
+1. 如何自學R
+1. 如何靠自己解決問題
+
+```{r setup, include = FALSE}
+library(ggplot2)
+library(knitr)
+opts_chunk$set(echo = FALSE, cache=FALSE, comment="", 
+               cache.path = "cache-learn-R/", 
+               dev.args=list(bg="transparent"),
+               fig.path = "./assets/fig/learn-r-")
+fig <- function(path, size = 100) {
+  sprintf("<img src='assets/img/%s' style='max-width: %d%%;max-height: %d%%'></img>", 
+          path, size, size)
+}
+bg <- function(path) sprintf("bg:url(assets/img/%s)", path)
+```
+
+--- .dark .segue
+
+## 為什麼要自學
+
+```{r number-of-R-pkgs, include = FALSE, fig.width = 4, fig.height = 3, dpi = 256}
+if (!file.exists("pkgs.csv")) local({
+  ## original idea & report by Henrik Bengtsson at
+  ## https://stat.ethz.ch/pipermail/r-devel/2016-February/072388.html
+  
+  ## This script downloads the list of currently published R packages
+  ## from CRAN and also looks at all the archived package versions to
+  ## combine these into a list of all R packages ever published on
+  ## CRAN with the date of first release.
+  
+  ## CRAN mirror to use
+  CRAN_page <- function(...) {
+      file.path('https://cran.rstudio.com/src/contrib', ...)
+  }
+  
+  ## get list of currently available packages on CRAN
+  pkgs <- readHTMLTable(readLines(CRAN_page()),
+                                  which = 1, stringsAsFactors = FALSE)
+  
+  ## we love data.table
+  setDT(pkgs)
+  
+  ## drop directories
+  pkgs <- pkgs[Size != '-']
+  ## drop files that does not seem to be R packages
+  pkgs <- pkgs[grep('tar.gz$', Name)]
+  
+  ## package name should contain only (ASCII) letters, numbers and dot
+  pkgs[, name := sub('^([a-zA-Z0-9\\.]*).*', '\\1', Name)]
+  
+  ## grab date from last modified timestamp
+  pkgs[, date := as.POSIXct(`Last modified`, format = '%d-%b-%Y %H:%M')]
+  pkgs[, date := as.character(date)]
+  
+  ## keep date and name
+  pkgs <- pkgs[, .(name, date)]
+  
+  ## list of packages with at least one archived version
+  archives <- readHTMLTable(readLines(CRAN_page('Archive')),
+                            which = 1, stringsAsFactors = FALSE)
+  setDT(archives)
+  
+  ## keep directories
+  archives <- archives[grep('/$', Name)]
+  
+  ## add packages not found in current list of R packages
+  archives[, Name := sub('/$', '', Name)]
+  pkgs <- rbind(pkgs,
+                archives[!Name %in% pkgs$name, .(name = Name)],
+                fill = TRUE)
+  
+  ## reorder pkg in alphabet order
+  setorder(pkgs, name)
+  
+  ## number of versions released is 1 for published packages
+  pkgs[, versions := 0]
+  pkgs[!is.na(date), versions := 1]
+  
+  ## mark archived pacakges
+  pkgs[, archived := FALSE]
+  pkgs[name %in% archives$Name, archived := TRUE]
+  
+  ## NA date of packages with archived versions
+  pkgs[archived == TRUE, date := NA]
+  
+  ## lookup release date of first version & number of releases
+  pkgs[is.na(date), c('date', 'versions') := {
+  
+      cat(name, '\n')
+  
+      ## download archive page
+      page <- readLines(CRAN_page('Archive', name))
+  
+      ## extract date with regexp as HTML parsing can be slow :)
+      date <- sub('.*([0-9]{2}-[A-Za-z]{3}-[0-9]{4} [0-9]{2}:[0-9]{2}).*', '\\1', page[10])
+  
+      ## convert to YYYY-mm-dd format
+      date <- as.POSIXct(date, format = '%d-%b-%Y %H:%M')
+  
+      ## number of previous releases
+      archived_versions <- length(page) - 9 - 4
+  
+      ## return
+      list(as.character(date), versions + archived_versions)
+  
+  }, by = name]
+  
+  ## rename cols
+  setnames(pkgs, 'date', 'first_release')
+  
+  ## order by date & alphabet
+  setorder(pkgs, first_release, name)
+  pkgs[, index := .I]
+  pkgs[c(250, 500, (1:9)*1000)]
+  
+  ##                 name       first_release versions archived index
+  ##  1:          pls.pcr 2003-03-31 12:44:00       13     TRUE   250
+  ##  2:            MEMSS 2005-02-25 08:07:00       12     TRUE   500
+  ##  3: signalextraction 2007-03-15 18:50:00        4     TRUE  1000
+  ##  4:         ORIClust 2009-09-18 20:18:00        2     TRUE  2000
+  ##  5:           MAPLES 2011-04-26 17:36:00        1    FALSE  3000
+  ##  6:            Bclim 2012-06-22 05:42:00        3     TRUE  4000
+  ##  7:    RadialPlotter 2013-03-21 06:53:00        9     TRUE  5000
+  ##  8:             ltsk 2014-02-06 20:35:00        5     TRUE  6000
+  ##  9:             matR 2014-10-23 09:50:00        1    FALSE  7000
+  ## 10:            CompR 2015-07-01 14:06:00        1    FALSE  8000
+  ## 11:       ggcorrplot 2016-01-12 22:12:00        1    FALSE  9000
+  
+  
+  ## store report
+  write.csv(pkgs, 'pkgs.csv', row.names = FALSE)
+})
+## plot trend
+pkgs <- read.csv("pkgs.csv")
+ggplot(pkgs, aes(as.Date(first_release), index)) +
+    geom_line(size = 2) +
+    scale_x_date(date_breaks = '2 year', date_labels = '%Y') +
+    scale_y_continuous(breaks = seq(0, 9000, 1000)) +
+    xlab('') + ylab('') + theme_bw() #+
+    # ggtitle('Number of R packages ever published on CRAN')
+```
+
+--- &fullimg `r bg("../fig/number-of-R-pkgs-1.png")`
+
+## R 一直在變化(ex: R 的套件)
+
+--- &vcenter .largecontent
+
+## R 是工具，工具要解決問題
+
+- 沒有人知道未來你要解決的問題是什麼，包含你自己
+- 時代變得太快
+
+--- &fullimg `r bg("self-directed-learn.png")`
+
+*** =pnotes
+
+Source: <https://alchetron.com/Eric-Hoffer-1328858-W#->
+
+--- &vcenter .largecontent
+
+## 範例: 資料整合
+
+- 苦主是文組畢業
+- 苦主在A 、B 、C 、D 等平台管理廣告
+- 每天需要追蹤廣告成效
+
+--- &fullimg `r bg("Selection_049.png")`
+
+--- &fullimg `r bg("ads-management-console-1.gif")`
+
+*** =pnotes
+
+Source: <http://ad-management-console.sharewarejunction.com/>
+
+--- &fullimg `r bg("ads-management-console-2.png")`
+
+*** =pnotes
+
+Source: <https://blogs.msdn.microsoft.com/mvpawardprogram/2015/08/04/mobile-device-management-for-office-365-with-azure-active-directory/>
+
+--- &vcenter .largecontent
+
+## 自學的目的
+
+- 解決問題
+- 自我進修
+- 獲得好工作(?)
+
+--- .dark .segue
+
+## 自學的前提
+
+--- &vcenter .largecontent
+
+## 範例：資料整合
+
+- 學習網站介紹的功能，操作網站，人工整合
+- 了解網頁的運作基礎、自己寫程式整合
+
+--- &fullimg `r bg ("../fig/layer-of-technology-1.png")`
+
+
+```{r layer-of-technology, fig.width = 4, fig.height = 3, dpi = 256, include = FALSE}
+par(bg = "transparent", mar = c(0, 0, 0, 0))
+plot(1, 1, type = "n", xlim = c(-2, 2), ylim = c(0, 3), xaxt = "n", yaxt = "n", bty = "n")
+h <- 2.8
+gap <- 0.1
+n <- 3
+yshift <- 0.1
+polygon(c(-sqrt(h^2/3), 0, sqrt(h^2/3)), c(0, h, 0) + yshift, lty = 0)
+start <- 0
+ylen <- (h - (n-1) * gap) / n
+get.x <- function(y) {
+  x2 <- sqrt(y^2 / 3)
+  x0 <- sqrt(h^2/3)
+  retval <- c(x0 - x2)
+  c(-retval, retval)
+}
+text <- c("架網站", "HTML", "操作")
+for(i in 1:n) {
+  polygon(
+    c(get.x(start) , -get.x(start + ylen)), 
+    c(start, start, start + ylen, start + ylen) + yshift,
+    col = "lightblue", lty = 0
+  )
+  text(0, start + ylen / 2 + yshift, text[i], cex = 1.5, col = 4)
+  start <- start + ylen + gap
+}
+arrow.x <- get.x(0)[2] - 0.2
+arrow.y1 <- 3 * yshift
+arrow.y2 <- h - 2 * yshift
+arrow.xshift <- 0.4
+arrows(x0 = arrow.x, y0 = arrow.y1, x1 = arrow.x, y1 = arrow.y2, code = 3, lwd = 5, col = "darkred")
+text(arrow.x - arrow.xshift, arrow.y1, "難", cex = 1, col = "indianred")
+text(arrow.x - arrow.xshift, arrow.y2, "易", cex = 1, col = "indianred")
+text(arrow.x + arrow.xshift, arrow.y1, "不變", cex = 1, col = "orangered")
+text(arrow.x + arrow.xshift, arrow.y2, "變", cex = 1, col = "orangered")
+```
+
+## 技術的層級
+
+--- &vcenter .largecontent
+
+## 工作中的自學：由底層往上層
+
+- 具備下層的知識(技術)，則可以快速自學上層的知識(技術)
+- 在工作後，比較難去打根基
+    - 仍然是辦得到的
+
+--- &fullimg `r bg("o-OBSTACLES-facebook.jpg")`
+
+*** =pnotes
+
+## 挑方向學
+
+Source: <http://www.huffingtonpost.com/michele-lian/5-obstacles-that-are-keeping-you-overweight-and-how-to-break-past-them_b_9880976.html>
+
+--- &fullimg `r bg("obstacle1.jpg")`
+
+*** =pnotes
+
+## 要有克服困難的熱情（需要）
+
+Source: <http://bradleyjohnsonproductions.com/obstacles-inevitable-success/>
+
+--- .dark .segue
+
+## 如何自學R 語言
+
+--- &vcenter .largecontent
+
+## 我不是不教R 了...
+
+- 但是我沒辦法教你全部的R 知識
+- 但是我沒辦法教你最新的R 知識
+
+--- &vcenter .largecontent
+
+## 查詢函數
+
+```{r help, eval = FALSE}
+?mean
+help(mean)
+help("mean")
+```
+
+--- &vcenter .largecontent
+
+## Description
+
+- 簡單描述函數的功能
+
+```txt
+Arithmetic Mean
+
+Description
+
+Generic function for the (trimmed) arithmetic mean.
+```
+
+--- &vcenter .largecontent
+
+## Usage
+
+- 語法上如何使用函數
+
+```r
+mean(x, ...)
+
+## Default S3 method:
+mean(x, trim = 0, na.rm = FALSE, ...)
+```
+
+--- &vcenter .largecontent
+
+## Default S3 method:
+
+- 請同學在Rstudio中輸入`mean.`後稍待
+
+<center>`r fig("s3.gif")`</center>
+
+--- &vcenter .largecontent
+
+## S3 是什麼?
+
+- S3方法讓R 的函數可以對不同的變數具有不同的方法
+- 範例：`mean`
+    - `mean.Date`: 對日期取平均
+    - `mean.difftime`: 對時間的區間取平均
+    - `mean.default`: 預設的取平均算法
+- 語法：`<函數名稱>.<型態名稱>
+    - 型態: 變數的種類
+
+--- &vcenter .largecontent
+
+## Usage
+
+- 參數列表
+- 預設參數: `na.rm = FALSE`
+- 不定參數: `...`
+    - `?mean.Date`中有`digits`這個不再`mean`中列出的參數
+
+--- &vcenter .largecontent
+
+## Arguments
+
+```txt
+Arguments
+
+x	      An R object. Currently there are methods for numeric/logical vectors and date, date-time and time interval objects. Complex vectors are allowed for trim = 0, only.
+trim	  the fraction (0 to 0.5) of observations to be trimmed from each end of x before the mean is computed. Values of trim outside that range are taken as the nearest endpoint.
+na.rm	  a logical value indicating whether NA values should be stripped before the computation proceeds.
+...	    further arguments passed to or from other methods.
+```
+
+--- &vcenter .largecontent
+
+## Arguments
+
+- 說明每個參數的功能
+- 說明每個參數的型態
+
+```{r}
+mean("a")
+```
+
+--- &vcenter .largecontent
+
+## Value
+
+- 代表函數執行後的結果
+
+--- &vcenter .largecontent
+
+## Examples
+
+```{r}
+example(mean)
+```
+
+--- &vcenter .largecontent
+
+## 其他章節
+
+- Reference: 可以參考的文章
+- See Also: 其他類似的函數
+
+--- &vcenter .largecontent
+
+## 學習套件的用法: vignettes
+
+```{r, eval = FALSE}
+vignette(package = "knitr")
+vignette("knitr-markdown", package = "knitr")
+```
+
+
+--- &vcenter .largecontent
+
+## CRAN Task View
+
+- 針對特定領域的入門方式
+- <https://cran.r-project.org/web/views/>
+
+--- &vcenter .largecontent
+
+## 推薦的自學R 的summary
+
+1. 確定自己要學的領域
+1. 參考CRAN Task View的套件
+1. 參考套件的vignettes
+1. 參考套件的examples
+1. help
+
+--- &vcenter .largecontent
+
+## 範例: 學習在R 中使用Support Vector Machine (SVM)
+
+- SVM 是 Machine Learning 的演算法
+- 閱讀 [CRAN Task View: Machine Learning & Statistical Learning](https://cran.r-project.org/web/views/MachineLearning.html)
+- 注意到`e1071`這個svm 套件
+- 安裝`e1071`
+- 參考`vignette(package = "e1071")`
+- 閱讀`vignette("svmdoc", package = "e1071")`
+
+--- .dark .segue
+
+## 如何靠自己解決問題
+
+--- &vcenter .largecontent
+
+## 自學能力的應用
+
+- 問問題
+- 拆解問題
+- 自學
+- 解決問題
+
+--- &vcenter .largecontent
+
+## 範例: 整理政府決標公告中的投標廠商清單
+
+- 問問題: 整理列出政府決標公告中的投標廠商清單?
+    - 獲得所有決標公告的廠商清單
+
+--- &vcenter .largecontent
+
+## 範例: 整理政府決標公告中的投標廠商清單
+
+- 問問題: 如何獲得所有決標公告的廠商清單?
+    - 政府公開招標網上有查詢功能
+    - 利用查詢功能列出網頁
+    - 下載網頁的內容
+
+--- &vcenter .largecontent
+
+## 範例: 整理政府決標公告中的投標廠商清單
+
+- 問問題: 如何用R 利用查詢功能列出網頁
+    - 用R 模擬網頁的操作
+- 問問題: 如何用R 下載網頁內容
+    - 用R 下載網頁
+
+--- &vcenter .largecontent
+
+## 範例: 整理政府決標公告中的投標廠商清單
+
+- 問問題: 用R 模擬網頁的操作
+    - 關鍵字: 網路爬蟲(crawling) (可能需要去討論區獲取關鍵字相關資訊)
+    - [Google R + crawling](https://www.google.com.tw/search?q=R+crawling) (可用社群資源取代)
+    - 第一個網站: [Learning to crawl](https://cran.r-project.org/web/packages/crawl/vignettes/crawl_intro.html)
+        - 發現這不是爬網站的教學，而是Correlated RAndom Walk 這個方法的套件
+    - 第二、三個網站都是`crawl`套件...
+    - 依序檢查網站的內容，最後會看到: [Create a Web Crawler in R](https://www.r-bloggers.com/create-a-web-crawler-in-r/)
+    - 網站中有範例的程式: <https://gist.github.com/Btibert3/817607>
+    - 從程式中發現套件`XML`
+    - 閱讀程式的註解, 學習並嘗試重現(但是因為年代久遠，應該會失敗)
+
+--- &vcenter .largecontent
+
+## 範例: 整理政府決標公告中的投標廠商清單
+
+- 問問題: 用R 模擬網頁的操作
+    - [Google R + crawling 並且是最近一年](https://www.google.com.tw/search?q=R+crawling) (可用社群資源取代)
+    - 獲得slide: A Starter's Guide for Web Crawling in R 並閱讀
+    - 獲得以下關鍵知識:
+        - 套件`rvest`
+        - CSS selector
+- 查詢套件`rvest`, 發現vignette: Selectorgadget
+- ps. 從[CRAN Task View: Web Technologies and Services](https://cran.r-project.org/web/views/WebTechnologies.html)也可以找到相關的關鍵字
+
+--- &vcenter .largecontent
+
+## 重複上述過程，直到:
+
+1. 成功重現教學中抓網頁的程式碼
+1. 修正程式碼，改成從政府決標公告中做查詢
+1. Remark
+    - 以上的關鍵內容還缺乏: http post...
+    - 再不理解HTTP的運作模式之前，直接硬學仍然很困難
+    - 但是若能找到好的slide / document，則能獲取充分的網頁運作原理的知識，進而獲得爬網站的能力
+
+--- &vcenter .largecontent
+
+## 拆解問題
+
+- 應用問題 ==> 功能問題 ==> 解決問題
+- 問題的拆解
+    - 把複雜的問題，變成比較簡單，能針對行解決的問題
+    - 把問題變成可以自學的問題
+
+--- .dark .segue
+
+## 為什麼要學R 的知識
+
+--- &vcenter .largecontent
+
+## 我們目前只講了基礎中的基礎...
+
+--- &vcenter .largecontent
+
+## R 語言翻轉教室
+
+- 使用R 的基本使用知識
+- 如何用R 讀取資料與讀取中文
+- 如何用R 從公開資料中萃取資訊
+- 如何用R 整理資訊
+- 如何利用R 將整理好的資訊繪製統計圖表與地圖
+
+--- &vcenter .largecontent
+
+## R 語言翻轉教室
+
+- 讓你有更好的自學基礎
+
+--- &fullimg `r bg("learn-by-doing.jpg")`
+
+*** =pnotes
+
+Source: <http://radiusonline.com/interns/my-first-month-at-radiusonline/learn-by-doing/>
+
+--- &vcenter .largecontent
+
+## 不一樣的學習體驗
+
+- 利用問答、過關的方式，刺激學習動機
+    - 問題的設計由淺入深
+    - 每個章節的最後，都有「真實資料處理」的練習
+- 同學可以依照自己喜歡的速度學習
+
+--- &vcenter .largecontent
+
+## 安裝翻轉教室
+
+- 用`sessionInfo()`確定R 的版本
+- 重開R
+- 執行`source("http://wush978.github.io/R/init-swirl.R")` 或 `source("http://13.85.30.195/R/init-swirl.R")`
+- 下頁續...
+
+--- &vcenter .largecontent
+
+## 安裝翻轉教室
+
+```r
+Do you want to set the language to Chinese traditional?(y/n)y
+This is the suggested command: `Sys.setlocale(locale = "en_US.UTF-8")`
+It is recommended to adjust the locale for beginners.
+If you cannot see any chinese, please visit <https://gitter.im/wush978/DataScienceAndR>.
+Do you want me to adjust the locale for you? (y/n)y
+
+| 嗨! 我看到你有很多變數儲存在你的 workspace。 為了能夠順利進行，我建議你在開始swirl前清空workspace 。
+
+| 輸入 ls() 檢視你的workspace儲存的變數列表。 然後, 輸入 rm(list=ls()) 以清空你的workspace。
+
+| 當你準備好開始的時候，輸入 swirl()。
+
+  |====================================================================================================================================| 100%
+> 
+```
+
+--- &vcenter .largecontent
+
+## 開啟翻轉教室
+
+```r
+# library(swirl) 這次不用，但是之後重開R 後就需要
+swirl()
+# 選擇登入的服務
+# 1. Google
+# 2. Facebook
+# 3. Classroom
+```
+
+--- &vcenter .largecontent
+
+## 登入翻轉教室
+
+- 這周確認選課名單後，請用ntu + 學號登入
+    - 例如: `ntud01921016`
+- 密碼請用學號後三碼
+- 請以這個帳號完成作業
+
+--- &vcenter .largecontent
+
+## 介紹訊息
+
+```txt
+| 謝謝， wush. 再開始我們第一節課前，我們先瞭解一些基本的實用項目。 第一關,
+| 當您看到 '...', 代表當您結束閱讀並準備繼續時，請按下Enter鍵。
+
+...  <-- That's your cue to press Enter to continue
+
+| 當您看到 'ANSWER:' 也就是R 的提示符 (>)
+| 時，或者當要求您從列表中選擇時，這也意味著您需要輸入Enter繼續。
+
+Select 1, 2, or 3 and press Enter 
+
+1: 繼續。
+2: 接著做.
+3: 讓我們保持前進!
+
+Selection: 1
+```
+
+--- &vcenter .largecontent
+
+## 介紹訊息
+
+```r
+| You can exit swirl and return to the R prompt (>) at any time by pressing the
+| Esc key. If you are already at the prompt, type bye() to exit and save your
+| progress. When you exit properly, you'll see a short message letting you know
+| you've done so.
+
+| 當你在R提示符時 (>):
+| -- 輸入 skip() 幫助你跳過當前的問題。
+| -- 輸入 play() 可以幫助你按自己的意願進行R的測試; swirl
+| 會忽略掉你在這部分做的嘗試...
+| -- 直到你輸入 nxt() ，它會幫助你重新得到swirl 的注意。
+| -- 輸入 bye() 會使swirl 退出。你的進度將會被儲存。
+| -- 輸入 main() 使你返回到 swirl 的主選單。
+| -- 輸入 info() 會再次顯示以上的資訊。
+
+| 讓我們開始吧!
+
+...
+```
+
+--- &vcenter .largecontent
+
+## 選擇課程
+
+```r
+| 請選擇一門課程，或輸入 0 退出 swirl。
+
+1: DataScienceAndR
+2: 帶我去 swirl 課程庫！
+
+Selection: 1
+```
+
+--- &vcenter .largecontent
+
+## 選擇課程
+
+```r
+| 請選擇一節課，或輸入 0 回到課程目錄。
+
+ 1: 00-Hello-DataScienceAndR
+ 2: 01-RBasic-01-Introduction
+ 3: 01-RBasic-02-Data-Structure-Vectors
+ 4: 01-RBasic-03-Data-Structure-Object
+ 5: 01-RBasic-04-Factors
+...
+
+Selection: 1
+```
+
+--- &vcenter .largecontent
+
+## 請跟著老師示範，完成課程
+
+```r
+Your status has beed updated to tracking server
+  |                                                            |   0%
+ (step: 1/13)
+
+| 讀到這段中文字的同學，請直接輸入enter進入課程。 If you are windows user and
+| you cannot read the chinese characters, please press `ESC` to exit swirl and
+| execute the command `Sys.setlocale(locale = "cht")`.
+
+```
+
+--- &vcenter .largecontent
+
+## 安裝今天的隨堂練習
+
+```r
+library(swirl)
+install_course_url("http://13.85.30.195/R/exercise/2017-NTUCSX.zip")
+# 分流: install_course_url("https://wush978.github.io/R/exercise/2017-NTUCSX.zip")
+```

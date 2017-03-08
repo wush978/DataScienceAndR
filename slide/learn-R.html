@@ -1,0 +1,1330 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>自學R 語言</title>
+  <meta charset="utf-8">
+  <meta name="description" content="自學R 語言">
+  <meta name="author" content="Wush Wu">
+  <meta name="generator" content="slidify" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <link rel="stylesheet" href="libraries/frameworks/io2012-wush/css/default.css" media="all" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012-wush/css/phone.css" 
+    media="only screen and (max-device-width: 480px)" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012-wush/css/slidify.css" >
+  <link rel="stylesheet" href="libraries/highlighters/highlight.js/css/zenburn.css" />
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->  <link rel=stylesheet href="./assets/css/custom.css"></link>
+<link rel=stylesheet href="./assets/css/ribbons.css"></link>
+
+  
+  <!-- Grab CDN jQuery, fall back to local if offline -->
+  <script src="libraries/frameworks/io2012-wush/js/jquery-1.7.min.js"></script>
+  <!-- <script>window.jQuery || document.write('<script src="libraries/widgets/quiz/js/jquery.js"><\/script>')</script> -->
+  <script data-main="libraries/frameworks/io2012-wush/js/slides" 
+    src="libraries/frameworks/io2012-wush/js/require-1.0.8.min.js">
+  </script>
+  
+  
+
+</head>
+<body style="opacity: 0">
+  <slides class="layout-widescreen">
+    
+    <!-- LOGO SLIDE -->
+        <slide class="title-slide segue nobackground">
+  <hgroup class="auto-fadein">
+    <h1>自學R 語言</h1>
+    <h2></h2>
+    <p>Wush Wu<br/>國立台灣大學</p>
+  </hgroup>
+  <article></article>  
+</slide>
+    
+
+    <!-- SLIDES -->
+    <slide class="largecontent" id="slide-1" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>大綱</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ol>
+<li>為什麼要自學</li>
+<li>自學的前提</li>
+<li>如何自學R</li>
+<li>如何靠自己解決問題</li>
+</ol>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="dark segue" id="slide-2" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2>為什麼要自學</h2>
+  </hgroup>
+  <article data-timings="">
+    
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="" id="slide-3" style="background:url(assets/img/../fig/number-of-R-pkgs-1.png); background-size: 100% 100%;">
+  <hgroup>
+    <h2>R 一直在變化(ex: R 的套件)</h2>
+  </hgroup>
+  <article data-timings="" style="display: table;">
+    <div style="display: table-cell;vertical-align: bottom;">
+      
+    </div>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-4" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>R 是工具，工具要解決問題</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>沒有人知道未來你要解決的問題是什麼，包含你自己</li>
+<li>時代變得太快</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="" id="slide-5" style="background:url(assets/img/self-directed-learn.png); background-size: 100% 100%;">
+  <article data-timings="" style="display: table;">
+    <div style="display: table-cell;vertical-align: bottom;">
+      
+    </div>
+  </article>
+  <!-- Presenter Notes -->
+  <aside class="note" id="">
+    <section>
+      <p>Source: <a href="https://alchetron.com/Eric-Hoffer-1328858-W#-">https://alchetron.com/Eric-Hoffer-1328858-W#-</a></p>
+
+    </section>
+  </aside>
+</slide>
+<slide class="largecontent" id="slide-6" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>範例: 資料整合</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>苦主是文組畢業</li>
+<li>苦主在A 、B 、C 、D 等平台管理廣告</li>
+<li>每天需要追蹤廣告成效</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="" id="slide-7" style="background:url(assets/img/Selection_049.png); background-size: 100% 100%;">
+  <article data-timings="" style="display: table;">
+    <div style="display: table-cell;vertical-align: bottom;">
+      
+    </div>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="" id="slide-8" style="background:url(assets/img/ads-management-console-1.gif); background-size: 100% 100%;">
+  <article data-timings="" style="display: table;">
+    <div style="display: table-cell;vertical-align: bottom;">
+      
+    </div>
+  </article>
+  <!-- Presenter Notes -->
+  <aside class="note" id="">
+    <section>
+      <p>Source: <a href="http://ad-management-console.sharewarejunction.com/">http://ad-management-console.sharewarejunction.com/</a></p>
+
+    </section>
+  </aside>
+</slide>
+<slide class="" id="slide-9" style="background:url(assets/img/ads-management-console-2.png); background-size: 100% 100%;">
+  <article data-timings="" style="display: table;">
+    <div style="display: table-cell;vertical-align: bottom;">
+      
+    </div>
+  </article>
+  <!-- Presenter Notes -->
+  <aside class="note" id="">
+    <section>
+      <p>Source: <a href="https://blogs.msdn.microsoft.com/mvpawardprogram/2015/08/04/mobile-device-management-for-office-365-with-azure-active-directory/">https://blogs.msdn.microsoft.com/mvpawardprogram/2015/08/04/mobile-device-management-for-office-365-with-azure-active-directory/</a></p>
+
+    </section>
+  </aside>
+</slide>
+<slide class="largecontent" id="slide-10" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>自學的目的</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>解決問題</li>
+<li>自我進修</li>
+<li>獲得好工作(?)</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="dark segue" id="slide-11" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2>自學的前提</h2>
+  </hgroup>
+  <article data-timings="">
+    
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-12" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>範例：資料整合</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>學習網站介紹的功能，操作網站，人工整合</li>
+<li>了解網頁的運作基礎、自己寫程式整合</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="" id="slide-13" style="background:url(assets/img/../fig/layer-of-technology-1.png); background-size: 100% 100%;">
+  <hgroup>
+    <h2>技術的層級</h2>
+  </hgroup>
+  <article data-timings="" style="display: table;">
+    <div style="display: table-cell;vertical-align: bottom;">
+      
+    </div>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-14" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>工作中的自學：由底層往上層</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>具備下層的知識(技術)，則可以快速自學上層的知識(技術)</li>
+<li>在工作後，比較難去打根基
+
+<ul>
+<li>仍然是辦得到的</li>
+</ul></li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="" id="slide-15" style="background:url(assets/img/o-OBSTACLES-facebook.jpg); background-size: 100% 100%;">
+  <article data-timings="" style="display: table;">
+    <div style="display: table-cell;vertical-align: bottom;">
+      
+    </div>
+  </article>
+  <!-- Presenter Notes -->
+  <aside class="note" id="">
+    <section>
+      <h2>挑方向學</h2>
+
+<p>Source: <a href="http://www.huffingtonpost.com/michele-lian/5-obstacles-that-are-keeping-you-overweight-and-how-to-break-past-them_b_9880976.html">http://www.huffingtonpost.com/michele-lian/5-obstacles-that-are-keeping-you-overweight-and-how-to-break-past-them_b_9880976.html</a></p>
+
+    </section>
+  </aside>
+</slide>
+<slide class="" id="slide-16" style="background:url(assets/img/obstacle1.jpg); background-size: 100% 100%;">
+  <article data-timings="" style="display: table;">
+    <div style="display: table-cell;vertical-align: bottom;">
+      
+    </div>
+  </article>
+  <!-- Presenter Notes -->
+  <aside class="note" id="">
+    <section>
+      <h2>要有克服困難的熱情（需要）</h2>
+
+<p>Source: <a href="http://bradleyjohnsonproductions.com/obstacles-inevitable-success/">http://bradleyjohnsonproductions.com/obstacles-inevitable-success/</a></p>
+
+    </section>
+  </aside>
+</slide>
+<slide class="dark segue" id="slide-17" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2>如何自學R 語言</h2>
+  </hgroup>
+  <article data-timings="">
+    
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-18" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>我不是不教R 了...</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>但是我沒辦法教你全部的R 知識</li>
+<li>但是我沒辦法教你最新的R 知識</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-19" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>查詢函數</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-20" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>Description</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>簡單描述函數的功能</li>
+</ul>
+
+<pre><code class="txt">Arithmetic Mean
+
+Description
+
+Generic function for the (trimmed) arithmetic mean.
+</code></pre>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-21" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>Usage</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>語法上如何使用函數</li>
+</ul>
+
+<pre><code class="r">mean(x, ...)
+
+## Default S3 method:
+mean(x, trim = 0, na.rm = FALSE, ...)
+</code></pre>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-22" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>Default S3 method:</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>請同學在Rstudio中輸入<code>mean.</code>後稍待</li>
+</ul>
+
+<p><center><img src='assets/img/s3.gif' style='max-width: 100%;max-height: 100%'></img></center></p>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-23" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>S3 是什麼?</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>S3方法讓R 的函數可以對不同的變數具有不同的方法</li>
+<li>範例：<code>mean</code>
+
+<ul>
+<li><code>mean.Date</code>: 對日期取平均</li>
+<li><code>mean.difftime</code>: 對時間的區間取平均</li>
+<li><code>mean.default</code>: 預設的取平均算法</li>
+</ul></li>
+<li>語法：`&lt;函數名稱&gt;.&lt;型態名稱&gt;
+
+<ul>
+<li>型態: 變數的種類</li>
+</ul></li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-24" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>Usage</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>參數列表</li>
+<li>預設參數: <code>na.rm = FALSE</code></li>
+<li>不定參數: <code>...</code>
+
+<ul>
+<li><code>?mean.Date</code>中有<code>digits</code>這個不再<code>mean</code>中列出的參數</li>
+</ul></li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-25" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>Arguments</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<pre><code class="txt">Arguments
+
+x         An R object. Currently there are methods for numeric/logical vectors and date, date-time and time interval objects. Complex vectors are allowed for trim = 0, only.
+trim      the fraction (0 to 0.5) of observations to be trimmed from each end of x before the mean is computed. Values of trim outside that range are taken as the nearest endpoint.
+na.rm     a logical value indicating whether NA values should be stripped before the computation proceeds.
+...     further arguments passed to or from other methods.
+</code></pre>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-26" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>Arguments</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>說明每個參數的功能</li>
+<li>說明每個參數的型態</li>
+</ul>
+
+<pre><code>Warning in mean.default(&quot;a&quot;): argument is not numeric or logical: returning
+NA
+</code></pre>
+
+<pre><code>[1] NA
+</code></pre>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-27" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>Value</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>代表函數執行後的結果</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-28" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>Examples</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<pre><code>
+mean&gt; x &lt;- c(0:10, 50)
+
+mean&gt; xm &lt;- mean(x)
+
+mean&gt; c(xm, mean(x, trim = 0.10))
+[1] 8.75 5.50
+</code></pre>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-29" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>其他章節</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>Reference: 可以參考的文章</li>
+<li>See Also: 其他類似的函數</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-30" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>學習套件的用法: vignettes</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-31" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>CRAN Task View</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>針對特定領域的入門方式</li>
+<li><a href="https://cran.r-project.org/web/views/">https://cran.r-project.org/web/views/</a></li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-32" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>推薦的自學R 的summary</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ol>
+<li>確定自己要學的領域</li>
+<li>參考CRAN Task View的套件</li>
+<li>參考套件的vignettes</li>
+<li>參考套件的examples</li>
+<li>help</li>
+</ol>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-33" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>範例: 學習在R 中使用Support Vector Machine (SVM)</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>SVM 是 Machine Learning 的演算法</li>
+<li>閱讀 <a href="https://cran.r-project.org/web/views/MachineLearning.html">CRAN Task View: Machine Learning &amp; Statistical Learning</a></li>
+<li>注意到<code>e1071</code>這個svm 套件</li>
+<li>安裝<code>e1071</code></li>
+<li>參考<code>vignette(package = &quot;e1071&quot;)</code></li>
+<li>閱讀<code>vignette(&quot;svmdoc&quot;, package = &quot;e1071&quot;)</code></li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="dark segue" id="slide-34" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2>如何靠自己解決問題</h2>
+  </hgroup>
+  <article data-timings="">
+    
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-35" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>自學能力的應用</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>問問題</li>
+<li>拆解問題</li>
+<li>自學</li>
+<li>解決問題</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-36" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>範例: 整理政府決標公告中的投標廠商清單</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>問問題: 整理列出政府決標公告中的投標廠商清單?
+
+<ul>
+<li>獲得所有決標公告的廠商清單</li>
+</ul></li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-37" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>範例: 整理政府決標公告中的投標廠商清單</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>問問題: 如何獲得所有決標公告的廠商清單?
+
+<ul>
+<li>政府公開招標網上有查詢功能</li>
+<li>利用查詢功能列出網頁</li>
+<li>下載網頁的內容</li>
+</ul></li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-38" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>範例: 整理政府決標公告中的投標廠商清單</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>問問題: 如何用R 利用查詢功能列出網頁
+
+<ul>
+<li>用R 模擬網頁的操作</li>
+</ul></li>
+<li>問問題: 如何用R 下載網頁內容
+
+<ul>
+<li>用R 下載網頁</li>
+</ul></li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-39" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>範例: 整理政府決標公告中的投標廠商清單</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>問問題: 用R 模擬網頁的操作
+
+<ul>
+<li>關鍵字: 網路爬蟲(crawling) (可能需要去討論區獲取關鍵字相關資訊)</li>
+<li><a href="https://www.google.com.tw/search?q=R+crawling">Google R + crawling</a> (可用社群資源取代)</li>
+<li>第一個網站: <a href="https://cran.r-project.org/web/packages/crawl/vignettes/crawl_intro.html">Learning to crawl</a>
+
+<ul>
+<li>發現這不是爬網站的教學，而是Correlated RAndom Walk 這個方法的套件</li>
+</ul></li>
+<li>第二、三個網站都是<code>crawl</code>套件...</li>
+<li>依序檢查網站的內容，最後會看到: <a href="https://www.r-bloggers.com/create-a-web-crawler-in-r/">Create a Web Crawler in R</a></li>
+<li>網站中有範例的程式: <a href="https://gist.github.com/Btibert3/817607">https://gist.github.com/Btibert3/817607</a></li>
+<li>從程式中發現套件<code>XML</code></li>
+<li>閱讀程式的註解, 學習並嘗試重現(但是因為年代久遠，應該會失敗)</li>
+</ul></li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-40" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>範例: 整理政府決標公告中的投標廠商清單</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>問問題: 用R 模擬網頁的操作
+
+<ul>
+<li><a href="https://www.google.com.tw/search?q=R+crawling">Google R + crawling 並且是最近一年</a> (可用社群資源取代)</li>
+<li>獲得slide: A Starter&#39;s Guide for Web Crawling in R 並閱讀</li>
+<li>獲得以下關鍵知識:
+
+<ul>
+<li>套件<code>rvest</code></li>
+<li>CSS selector</li>
+</ul></li>
+</ul></li>
+<li>查詢套件<code>rvest</code>, 發現vignette: Selectorgadget</li>
+<li>ps. 從<a href="https://cran.r-project.org/web/views/WebTechnologies.html">CRAN Task View: Web Technologies and Services</a>也可以找到相關的關鍵字</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-41" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>重複上述過程，直到:</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ol>
+<li>成功重現教學中抓網頁的程式碼</li>
+<li>修正程式碼，改成從政府決標公告中做查詢</li>
+<li>Remark
+
+<ul>
+<li>以上的關鍵內容還缺乏: http post...</li>
+<li>再不理解HTTP的運作模式之前，直接硬學仍然很困難</li>
+<li>但是若能找到好的slide / document，則能獲取充分的網頁運作原理的知識，進而獲得爬網站的能力</li>
+</ul></li>
+</ol>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-42" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>拆解問題</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>應用問題 ==&gt; 功能問題 ==&gt; 解決問題</li>
+<li>問題的拆解
+
+<ul>
+<li>把複雜的問題，變成比較簡單，能針對行解決的問題</li>
+<li>把問題變成可以自學的問題</li>
+</ul></li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="dark segue" id="slide-43" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2>為什麼要學R 的知識</h2>
+  </hgroup>
+  <article data-timings="">
+    
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-44" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>我們目前只講了基礎中的基礎...</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-45" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>R 語言翻轉教室</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>使用R 的基本使用知識</li>
+<li>如何用R 讀取資料與讀取中文</li>
+<li>如何用R 從公開資料中萃取資訊</li>
+<li>如何用R 整理資訊</li>
+<li>如何利用R 將整理好的資訊繪製統計圖表與地圖</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-46" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>R 語言翻轉教室</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>讓你有更好的自學基礎</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="" id="slide-47" style="background:url(assets/img/learn-by-doing.jpg); background-size: 100% 100%;">
+  <article data-timings="" style="display: table;">
+    <div style="display: table-cell;vertical-align: bottom;">
+      
+    </div>
+  </article>
+  <!-- Presenter Notes -->
+  <aside class="note" id="">
+    <section>
+      <p>Source: <a href="http://radiusonline.com/interns/my-first-month-at-radiusonline/learn-by-doing/">http://radiusonline.com/interns/my-first-month-at-radiusonline/learn-by-doing/</a></p>
+
+    </section>
+  </aside>
+</slide>
+<slide class="largecontent" id="slide-48" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>不一樣的學習體驗</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>利用問答、過關的方式，刺激學習動機
+
+<ul>
+<li>問題的設計由淺入深</li>
+<li>每個章節的最後，都有「真實資料處理」的練習</li>
+</ul></li>
+<li>同學可以依照自己喜歡的速度學習</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-49" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>安裝翻轉教室</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>用<code>sessionInfo()</code>確定R 的版本</li>
+<li>重開R</li>
+<li>執行<code>source(&quot;http://wush978.github.io/R/init-swirl.R&quot;)</code> 或 <code>source(&quot;http://13.85.30.195/R/init-swirl.R&quot;)</code></li>
+<li>下頁續...</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-50" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>安裝翻轉教室</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<pre><code class="r">Do you want to set the language to Chinese traditional?(y/n)y
+This is the suggested command: `Sys.setlocale(locale = &quot;en_US.UTF-8&quot;)`
+It is recommended to adjust the locale for beginners.
+If you cannot see any chinese, please visit &lt;https://gitter.im/wush978/DataScienceAndR&gt;.
+Do you want me to adjust the locale for you? (y/n)y
+
+| 嗨! 我看到你有很多變數儲存在你的 workspace。 為了能夠順利進行，我建議你在開始swirl前清空workspace 。
+
+| 輸入 ls() 檢視你的workspace儲存的變數列表。 然後, 輸入 rm(list=ls()) 以清空你的workspace。
+
+| 當你準備好開始的時候，輸入 swirl()。
+
+  |====================================================================================================================================| 100%
+&gt; 
+</code></pre>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-51" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>開啟翻轉教室</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<pre><code class="r"># library(swirl) 這次不用，但是之後重開R 後就需要
+swirl()
+# 選擇登入的服務
+# 1. Google
+# 2. Facebook
+# 3. Classroom
+</code></pre>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-52" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>登入翻轉教室</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>這周確認選課名單後，請用ntu + 學號登入
+
+<ul>
+<li>例如: <code>ntud01921016</code></li>
+</ul></li>
+<li>密碼請用學號後三碼</li>
+<li>請以這個帳號完成作業</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-53" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>介紹訊息</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<pre><code class="txt">| 謝謝， wush. 再開始我們第一節課前，我們先瞭解一些基本的實用項目。 第一關,
+| 當您看到 &#39;...&#39;, 代表當您結束閱讀並準備繼續時，請按下Enter鍵。
+
+...  &lt;-- That&#39;s your cue to press Enter to continue
+
+| 當您看到 &#39;ANSWER:&#39; 也就是R 的提示符 (&gt;)
+| 時，或者當要求您從列表中選擇時，這也意味著您需要輸入Enter繼續。
+
+Select 1, 2, or 3 and press Enter 
+
+1: 繼續。
+2: 接著做.
+3: 讓我們保持前進!
+
+Selection: 1
+</code></pre>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-54" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>介紹訊息</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<pre><code class="r">| You can exit swirl and return to the R prompt (&gt;) at any time by pressing the
+| Esc key. If you are already at the prompt, type bye() to exit and save your
+| progress. When you exit properly, you&#39;ll see a short message letting you know
+| you&#39;ve done so.
+
+| 當你在R提示符時 (&gt;):
+| -- 輸入 skip() 幫助你跳過當前的問題。
+| -- 輸入 play() 可以幫助你按自己的意願進行R的測試; swirl
+| 會忽略掉你在這部分做的嘗試...
+| -- 直到你輸入 nxt() ，它會幫助你重新得到swirl 的注意。
+| -- 輸入 bye() 會使swirl 退出。你的進度將會被儲存。
+| -- 輸入 main() 使你返回到 swirl 的主選單。
+| -- 輸入 info() 會再次顯示以上的資訊。
+
+| 讓我們開始吧!
+
+...
+</code></pre>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-55" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>選擇課程</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<pre><code class="r">| 請選擇一門課程，或輸入 0 退出 swirl。
+
+1: DataScienceAndR
+2: 帶我去 swirl 課程庫！
+
+Selection: 1
+</code></pre>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-56" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>選擇課程</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<pre><code class="r">| 請選擇一節課，或輸入 0 回到課程目錄。
+
+ 1: 00-Hello-DataScienceAndR
+ 2: 01-RBasic-01-Introduction
+ 3: 01-RBasic-02-Data-Structure-Vectors
+ 4: 01-RBasic-03-Data-Structure-Object
+ 5: 01-RBasic-04-Factors
+...
+
+Selection: 1
+</code></pre>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-57" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>請跟著老師示範，完成課程</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<pre><code class="r">Your status has beed updated to tracking server
+  |                                                            |   0%
+ (step: 1/13)
+
+| 讀到這段中文字的同學，請直接輸入enter進入課程。 If you are windows user and
+| you cannot read the chinese characters, please press `ESC` to exit swirl and
+| execute the command `Sys.setlocale(locale = &quot;cht&quot;)`.
+
+</code></pre>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-58" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>安裝今天的隨堂練習</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<pre><code class="r">library(swirl)
+install_course_url(&quot;http://13.85.30.195/R/exercise/2017-NTUCSX.zip&quot;)
+# 分流: install_course_url(&quot;https://wush978.github.io/R/exercise/2017-NTUCSX.zip&quot;)
+</code></pre>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+    <slide class="backdrop"></slide>
+  </slides>
+  <div class="pagination pagination-small" id='io2012-ptoc' style="display:none;">
+    <ul>
+      <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=1 title='大綱'>
+         1
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=2 title='為什麼要自學'>
+         2
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=3 title='R 一直在變化(ex: R 的套件)'>
+         3
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=4 title='R 是工具，工具要解決問題'>
+         4
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=5 title='NA'>
+         5
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=6 title='範例: 資料整合'>
+         6
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=7 title='NA'>
+         7
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=8 title='NA'>
+         8
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=9 title='NA'>
+         9
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=10 title='自學的目的'>
+         10
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=11 title='自學的前提'>
+         11
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=12 title='範例：資料整合'>
+         12
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=13 title='技術的層級'>
+         13
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=14 title='工作中的自學：由底層往上層'>
+         14
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=15 title='NA'>
+         15
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=16 title='NA'>
+         16
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=17 title='如何自學R 語言'>
+         17
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=18 title='我不是不教R 了...'>
+         18
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=19 title='查詢函數'>
+         19
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=20 title='Description'>
+         20
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=21 title='Usage'>
+         21
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=22 title='Default S3 method:'>
+         22
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=23 title='S3 是什麼?'>
+         23
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=24 title='Usage'>
+         24
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=25 title='Arguments'>
+         25
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=26 title='Arguments'>
+         26
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=27 title='Value'>
+         27
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=28 title='Examples'>
+         28
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=29 title='其他章節'>
+         29
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=30 title='學習套件的用法: vignettes'>
+         30
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=31 title='CRAN Task View'>
+         31
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=32 title='推薦的自學R 的summary'>
+         32
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=33 title='範例: 學習在R 中使用Support Vector Machine (SVM)'>
+         33
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=34 title='如何靠自己解決問題'>
+         34
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=35 title='自學能力的應用'>
+         35
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=36 title='範例: 整理政府決標公告中的投標廠商清單'>
+         36
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=37 title='範例: 整理政府決標公告中的投標廠商清單'>
+         37
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=38 title='範例: 整理政府決標公告中的投標廠商清單'>
+         38
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=39 title='範例: 整理政府決標公告中的投標廠商清單'>
+         39
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=40 title='範例: 整理政府決標公告中的投標廠商清單'>
+         40
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=41 title='重複上述過程，直到:'>
+         41
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=42 title='拆解問題'>
+         42
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=43 title='為什麼要學R 的知識'>
+         43
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=44 title='我們目前只講了基礎中的基礎...'>
+         44
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=45 title='R 語言翻轉教室'>
+         45
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=46 title='R 語言翻轉教室'>
+         46
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=47 title='NA'>
+         47
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=48 title='不一樣的學習體驗'>
+         48
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=49 title='安裝翻轉教室'>
+         49
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=50 title='安裝翻轉教室'>
+         50
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=51 title='開啟翻轉教室'>
+         51
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=52 title='登入翻轉教室'>
+         52
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=53 title='介紹訊息'>
+         53
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=54 title='介紹訊息'>
+         54
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=55 title='選擇課程'>
+         55
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=56 title='選擇課程'>
+         56
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=57 title='請跟著老師示範，完成課程'>
+         57
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=58 title='安裝今天的隨堂練習'>
+         58
+      </a>
+    </li>
+  </ul>
+  </div>  <!--[if IE]>
+    <script 
+      src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js">  
+    </script>
+    <script>CFInstall.check({mode: 'overlay'});</script>
+  <![endif]-->
+</body>
+  <!-- Load Javascripts for Widgets -->
+  
+  <!-- MathJax: Fall back to local if CDN offline but local image fonts are not supported (saves >100MB) -->
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        processEscapes: true
+      }
+    });
+  </script>
+  <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/2.0-latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  <!-- <script src="https://c328740.ssl.cf1.rackcdn.com/mathjax/2.0-latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script> -->
+  <script>window.MathJax || document.write('<script type="text/x-mathjax-config">MathJax.Hub.Config({"HTML-CSS":{imageFont:null}});<\/script><script src="libraries/widgets/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"><\/script>')
+</script>
+<!-- LOAD HIGHLIGHTER JS FILES -->
+  <script src="libraries/highlighters/highlight.js/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <!-- DONE LOADING HIGHLIGHTER JS FILES -->
+   
+  </html>

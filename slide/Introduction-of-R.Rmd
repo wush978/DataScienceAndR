@@ -1,0 +1,1089 @@
+---
+title       : "進擊的R 語言"
+author      : "Wush Wu"
+job         : 國立台灣大學
+framework   : io2012-wush
+highlighter : highlight.js
+hitheme     : zenburn
+widgets     : [mathjax]            # {mathjax, quiz, bootstrap}
+mode        : selfcontained # {standalone, draft}
+knit        : slidify::knit2slides
+--- &vcenter .largecontent
+
+```{r setup, include=FALSE, cache=FALSE}
+library(knitr)
+library(magrittr)
+library(XML)
+library(data.table)
+library(dplyr)
+# library(dtplyr)
+library(ggplot2)
+library(diagram)
+library(igraph)
+library(quantmod)
+library(DT)
+library(Lahman)
+library(sjPlot)
+
+opts_chunk$set(echo = FALSE, cache=FALSE, comment="", 
+               cache.path = "cache-Introduction-of-R/", 
+               dev.args=list(bg="transparent"),
+               fig.path = "./assets/fig/introduction-of-r-")
+fig <- function(path, size = 100) {
+  sprintf("<img src='assets/img/%s' style='max-width: %d%%;max-height: %d%%'></img>", 
+          path, size, size)
+}
+fig2 <- function(path, size = 100) {
+  sprintf("<img src='assets/img/%s' style='width: %d%%'></img>", 
+          path, size)
+}
+bg <- function(path) sprintf("bg:url(assets/img/%s)", path)
+sys_name <- Sys.info()["sysname"] %>% tolower
+sys_encode <- c("utf8", "utf8", "big5")[pmatch(sys_name, c("linux", "darwin", "windows"))]
+sessionInfo() %>% capture.output %>% cat(file = "sessionInfo.log", sep = "\n")
+Sys.setlocale(category = "LC_TIME", locale = "en_US.UTF-8")
+```
+
+## 本次課程目錄
+
+- R 的簡介
+- R 的傳統用途
+- R 的社群與近代R 的演變
+- 如何學習R 語言
+
+--- .dark .segue
+
+## R 簡介
+
+--- &fullimg `r bg("statician_10521919-655x280.jpg")`
+
+*** =pnotes
+
+取自 <http://myfootpath.com/careers/engineering-careers/statistician-careers/>
+
+--- &fullimg `r bg("flights_sml.jpg")`
+
+*** =pnotes
+
+取自 <http://www.r-bloggers.com/mapping-the-worlds-biggest-airlines/>
+
+--- &fullimg `r bg("t134_3ca_lg.jpg")`
+
+*** =pnotes
+
+取自 <http://img.diynetwork.com/DIY/2003/09/18/t134_3ca_med.jpg>
+
+--- &vcenter .largecontent
+
+## R 很容易和其他工具整合
+
+<center>
+```{r r-integration, warning=FALSE}
+tools <- strsplit("Rcpp,rJava,rpy2,RHadoop,RMySQL,RPostgreSQL,RJDBC,RODBC,ROpenOffice,rredis,rmongodb,RSelenium", ",")[[1]]
+freq <- rep(1, length(tools))
+pal <- RColorBrewer::brewer.pal(length(tools),"BuGn")
+wordcloud::wordcloud(tools, freq, random.color = TRUE, colors = pal)
+```
+</center>
+
+--- &vcenter .largecontent
+
+## R 很容易擴充和客製化
+
+<br/>
+
+```{r number-of-R-pkgs, warning=FALSE}
+if (!file.exists("pkgs.csv")) local({
+  ## original idea & report by Henrik Bengtsson at
+  ## https://stat.ethz.ch/pipermail/r-devel/2016-February/072388.html
+  
+  ## This script downloads the list of currently published R packages
+  ## from CRAN and also looks at all the archived package versions to
+  ## combine these into a list of all R packages ever published on
+  ## CRAN with the date of first release.
+  
+  ## CRAN mirror to use
+  CRAN_page <- function(...) {
+      file.path('https://cran.rstudio.com/src/contrib', ...)
+  }
+  
+  ## get list of currently available packages on CRAN
+  pkgs <- readHTMLTable(readLines(CRAN_page()),
+                                  which = 1, stringsAsFactors = FALSE)
+  
+  ## we love data.table
+  setDT(pkgs)
+  
+  ## drop directories
+  pkgs <- pkgs[Size != '-']
+  ## drop files that does not seem to be R packages
+  pkgs <- pkgs[grep('tar.gz$', Name)]
+  
+  ## package name should contain only (ASCII) letters, numbers and dot
+  pkgs[, name := sub('^([a-zA-Z0-9\\.]*).*', '\\1', Name)]
+  
+  ## grab date from last modified timestamp
+  pkgs[, date := as.POSIXct(`Last modified`, format = '%d-%b-%Y %H:%M')]
+  pkgs[, date := as.character(date)]
+  
+  ## keep date and name
+  pkgs <- pkgs[, .(name, date)]
+  
+  ## list of packages with at least one archived version
+  archives <- readHTMLTable(readLines(CRAN_page('Archive')),
+                            which = 1, stringsAsFactors = FALSE)
+  setDT(archives)
+  
+  ## keep directories
+  archives <- archives[grep('/$', Name)]
+  
+  ## add packages not found in current list of R packages
+  archives[, Name := sub('/$', '', Name)]
+  pkgs <- rbind(pkgs,
+                archives[!Name %in% pkgs$name, .(name = Name)],
+                fill = TRUE)
+  
+  ## reorder pkg in alphabet order
+  setorder(pkgs, name)
+  
+  ## number of versions released is 1 for published packages
+  pkgs[, versions := 0]
+  pkgs[!is.na(date), versions := 1]
+  
+  ## mark archived pacakges
+  pkgs[, archived := FALSE]
+  pkgs[name %in% archives$Name, archived := TRUE]
+  
+  ## NA date of packages with archived versions
+  pkgs[archived == TRUE, date := NA]
+  
+  ## lookup release date of first version & number of releases
+  pkgs[is.na(date), c('date', 'versions') := {
+  
+      cat(name, '\n')
+  
+      ## download archive page
+      page <- readLines(CRAN_page('Archive', name))
+  
+      ## extract date with regexp as HTML parsing can be slow :)
+      date <- sub('.*([0-9]{2}-[A-Za-z]{3}-[0-9]{4} [0-9]{2}:[0-9]{2}).*', '\\1', page[10])
+  
+      ## convert to YYYY-mm-dd format
+      date <- as.POSIXct(date, format = '%d-%b-%Y %H:%M')
+  
+      ## number of previous releases
+      archived_versions <- length(page) - 9 - 4
+  
+      ## return
+      list(as.character(date), versions + archived_versions)
+  
+  }, by = name]
+  
+  ## rename cols
+  setnames(pkgs, 'date', 'first_release')
+  
+  ## order by date & alphabet
+  setorder(pkgs, first_release, name)
+  pkgs[, index := .I]
+  pkgs[c(250, 500, (1:9)*1000)]
+  
+  ##                 name       first_release versions archived index
+  ##  1:          pls.pcr 2003-03-31 12:44:00       13     TRUE   250
+  ##  2:            MEMSS 2005-02-25 08:07:00       12     TRUE   500
+  ##  3: signalextraction 2007-03-15 18:50:00        4     TRUE  1000
+  ##  4:         ORIClust 2009-09-18 20:18:00        2     TRUE  2000
+  ##  5:           MAPLES 2011-04-26 17:36:00        1    FALSE  3000
+  ##  6:            Bclim 2012-06-22 05:42:00        3     TRUE  4000
+  ##  7:    RadialPlotter 2013-03-21 06:53:00        9     TRUE  5000
+  ##  8:             ltsk 2014-02-06 20:35:00        5     TRUE  6000
+  ##  9:             matR 2014-10-23 09:50:00        1    FALSE  7000
+  ## 10:            CompR 2015-07-01 14:06:00        1    FALSE  8000
+  ## 11:       ggcorrplot 2016-01-12 22:12:00        1    FALSE  9000
+  
+  
+  ## store report
+  write.csv(pkgs, 'pkgs.csv', row.names = FALSE)
+})
+## plot trend
+pkgs <- read.csv("pkgs.csv")
+ggplot(pkgs, aes(as.Date(first_release), index)) +
+    geom_line(size = 2) +
+    scale_x_date(date_breaks = '2 year', date_labels = '%Y') +
+    scale_y_continuous(breaks = seq(0, 9000, 1000)) +
+    xlab('') + ylab('') + theme_bw() +
+    ggtitle('Number of R packages ever published on CRAN')
+```
+
+--- .dark .segue
+
+## R 的傳統用途
+
+--- &vcenter .largecontent
+
+## 範例 - 探索數據的分佈
+
+- 統計很多理論都需要常態分佈
+- 但是一組數據真的是常態分佈嗎？
+
+--- &vcenter .largecontent
+
+## 範例 - 探索數據的分佈
+
+<br/>
+<br/>
+
+```r
+plot(density(x))
+```
+
+```{r ks.test1}
+x <- c(rnorm(50), rnorm(50, 4))
+plot(density(x))
+```
+
+--- &vcenter .largecontent
+
+## 範例 - 探索數據的分佈
+
+- 做「是否為常態分佈」的統計檢定？再一行：`shaprio.test(x)`
+
+```{r ks.test2, echo = FALSE, dependson="ks.test"}
+shapiro.test(x)
+```
+
+--- &vcenter .largecontent
+
+## 範例 - 探索數據的分佈
+
+- 比較兩個數據是不是來自相同的分佈？沒問題
+
+```r
+plot(density(x1), xlim = range(c(x1, x2)), main = "Sample PDF")
+lines(density(x2), col = 2)
+legend("topright", c("x1", "x2"), lty = 1, col = 1:2)
+```
+
+--- &vcenter .largecontent
+
+## 範例 - 探索數據的分佈
+
+```{r ks.test3, echo = FALSE}
+x1 <- rnorm(50)
+x2 <- rt(50, df = 2)
+plot(density(x1), xlim = range(c(x1, x2)), main = "Sample PDF")
+lines(density(x2), col = 2)
+legend("topright", c("x1", "x2"), lty = 1, col = 1:2)
+```
+
+--- &vcenter .largecontent
+
+## 範例 - 探索數據的分佈
+
+- 檢定？`ks.test(x1, x2)`
+
+```{r ks.test4, echo = FALSE, dependson="ks.test3"}
+ks.test(x1, x2)
+```
+
+--- &vcenter .largecontent
+
+## R 是做統計的首選工具之一
+
+- 內建大量統計相關的功能
+    - 繪製統計圖表、進行統計檢定...
+- 擁有大量第三方開發的統計套件
+    - 範例：[supc](https://github.com/wush978/supc) 一個實做(Shiu and Chen 2016)的R 套件
+
+--- &vcenter .largecontent
+
+## 資料科學，不只是統計...
+
+- 收集數據
+- 清理數據
+- 大量數據
+- 分析結果的呈現
+
+--- .dark .segue
+
+## R 的社群與近代R 的演變
+
+--- .largecontent
+
+## 什麼是社群?
+
+
+- 依照各種屬性所展開的人際關係
+
+<center>
+```{r what-is-social-group, echo = FALSE}
+par(mar = c(1, 1, 1, 1), bg = "transparent")
+openplotmat(xlim = c(-1.2, 1.2), y = c(-1.2, 1.2) + 0.6)
+theta <- seq(0, pi, length.out = 7)
+elpos <- cbind(cos(theta), sin(theta))
+elpos <- rbind(elpos, c(0, 0))
+fromto <- cbind(8, 1:7)
+nr     <- nrow(fromto)
+arrpos <- matrix(ncol = 2, nrow = nr)
+for (i in 1:nr)
+ arrpos[i, ] <- straightarrow (to = elpos[fromto[i, 2], ],
+                              from = elpos[fromto[i, 1], ],
+                              lwd = 2, arr.pos = 0.6, arr.length = 0.5)
+lab <- c(
+  "創作",
+  "想法",
+  "工作",
+  "生活圈",
+  "認同",
+  "興趣",
+  "經歷",
+  "自我"
+)
+for(i in 1:8) {
+  if (i == 8) {
+    textellipse(elpos[i,], 0.2, 0.1, lab = lab[i], box.col = "yellow",
+              shadow.col = "gray", shadow.size = 0.005, cex = 1.5)
+  } else {
+    textellipse(elpos[i,], 0.2, 0.1, lab = lab[i], box.col = "orange",
+              shadow.col = "darkgreen", shadow.size = 0.005, cex = 1.5)
+  }
+}
+```
+</center>
+
+--- &twocol .largecontent
+
+## 什麼是R 社群?
+
+*** =left
+
+<br/>
+<br/>
+<br/>
+<br/>
+
+- 開發者
+- 貢獻者
+- 使用者
+
+*** =right
+
+<br/>
+<br/>
+<br/>
+<br/>
+
+`r fig("Community.png", 100)`
+
+--- &vcenter .largecontent
+
+## 社群的力量
+
+- 工具的可靠性
+    - 使用者的人數決定工具的可靠度，付錢的工具不一定可靠（要夠紅）
+- 開發的速度
+    - 工程師很貴
+    - 社群會幫忙的開發與測試（要夠紅）
+- 開發的方向
+    - 社群會給發展方向的回饋（要夠紅）
+
+--- &vcenter .largecontent
+
+## 範例 - 相關性
+
+- R 擁有許多你想像不到的方式來探索數據
+    - 他們都來自於世界各地的貢獻者
+
+--- &vcenter .largecontent
+
+## 範例 - 相關性
+
+<br/>
+<br/>
+
+```{r chart.correlation, results = 'hide', warning = FALSE, echo = TRUE}
+suppressPackageStartupMessages(library(PerformanceAnalytics))
+chart.Correlation(iris[-5], bg=iris$Species, pch=21)
+```
+
+--- .largecontent
+
+## 範例 - 經濟學人風格的視覺化
+
+<center>
+```{r ggthemes, warning=FALSE}
+library(ggthemes)
+dsamp <- diamonds[sample(nrow(diamonds), 1000), ]
+q <- (qplot(carat, price, data=dsamp, colour=clarity)
+      + ggtitle("Diamonds Are Forever"))
+
+## Standard
+q + theme_economist() + scale_colour_economist()
+```
+</center>
+
+--- &vcenter .largecontent
+
+## 社群知道資料科學的需要
+
+- 社群知道傳統的R在以下功能的不足
+  - 資料的收集
+  - 資料的清理
+  - 報表的呈現
+
+--- &vcenter .largecontent
+
+## R Core Team (主導者) v.s. R Packages (社群)
+
+- R Core Team 對新需求的要求很保守
+  - 正確姓是絕對的
+  - 向下相容: 新功能要能在十年前的電腦上運作
+- Community: 那我們就自己寫套件來玩
+  - [GitHub · Build software better, together](https://github.com)
+  - Hadley降低了寫套件的難度
+
+--- &vcenter .largecontent
+
+## 我們仍然對R Core Team 非常尊敬
+
+- 現在已經有 70000+ 次的更動
+- 在2009年10月9日時達到50000次更動 by Prof. Ripley
+
+--- &fullimg `r bg("R-commits.gif")`
+
+*** =pnotes
+
+取自 <https://yihui.name/en/2009/10/50000-revisions-committed-to-r/>
+
+--- &vcenter .largecontent
+
+## 社群補上了R 在資料科學上不足的部份
+
+- 由於R Core Team相對保守，在Hadley大大降低套件開發的門檻之後，社群即以百花齊放的套件來解決R 的不足
+- [Hadley Wickham, the Man Who Revolutionized R](https://priceonomics.com/hadley-wickham-the-man-who-revolutionized-r/)
+
+--- &vcenter .largecontent
+
+## 資料的收集
+
+- R 已經可以寫網路爬蟲
+  - httr, xml2, rvest, ...
+- R 可以讀取、處理許多資料格式
+  - [R Data Import/Export by CRAN](https://cran.r-project.org/doc/manuals/r-release/R-data.html)
+
+--- &vcenter .largecontent
+
+## 清理資料
+
+- 資料的格式需要校正
+    - 常見的例子：`1,234`
+- 資料有缺失
+    - 實務的資料，有時會用如`-99`來代表資料的遺失
+- 調整資料的意義，為資料整合作準備
+
+--- &vcenter .largecontent
+
+## 常見的分析流程
+
+```{r, echo = FALSE, results = "figure"}
+par(mar = c(1, 1, 1, 1), bg = "transparent")
+openplotmat()
+elpos  <- coordinates (c(1, 1, 1))
+fromto <- matrix(c(
+  1, 2,
+  2, 3
+), byrow = TRUE, ncol = 2)
+nr     <- nrow(fromto)
+arrpos <- matrix(ncol = 2, nrow = nr)
+for (i in 1:nr)
+ arrpos[i, ] <- straightarrow (to = elpos[fromto[i, 2], ],
+                              from = elpos[fromto[i, 1], ],
+                              lwd = 2, arr.pos = 0.6, arr.length = 0.5)
+textellipse(elpos[1,], 0.4, 0.1,       lab = "用R抓取網頁資訊，儲存HTML檔案至硬碟",           box.col = "orange",
+            shadow.col = "darkgreen", shadow.size = 0.005, cex = 1.5)
+textrect   (elpos[2,], 0.3, 0.05,lab = "使用R讀取HTML並轉成表格資料",     box.col = "orange",
+            shadow.col = "darkblue", shadow.size = 0.005, cex = 1.5)
+textrect   (elpos[3,], 0.3, 0.05, lab = "利用分析工具與繪圖工具做報告",        box.col = "orange",
+            shadow.col = "darkblue", shadow.size = 0.005, cex = 1.5)
+```
+
+--- &vcenter .largecontent
+
+## 範例：政府招標資訊網
+
+<br/>
+
+- 中華民國政府電子採購網
+    - 利用決標查詢功能來瀏覽與抓取決標資料
+    - 時間範圍自2013年10月至2015年11月
+    - 一共108360筆決標資料
+- 決標資料內容：
+    - 機關資料，如：名稱、地址、聯絡人與聯絡電話等
+    - 採購資料，如：案號、招標方式、決標方式、標的分類、辦理方式與相關法源依據等
+    - 投標廠商，如：廠商統編、名稱、決標金額等
+    - 決標品向，如：品向名稱以及得標廠商的相關資料
+    - 決標資料，如總決標金額、履約執行機關等
+
+*** =pnotes
+
+<center>`r fig("Selection_031.png")`</center>
+
+--- &vcenter .largecontent
+
+## 範例：政府招標資訊網
+
+```txt
+2015-12-21 08:48:44 INFO::Crawling page from 2013-10/00105-page.csv.gz
+2015-12-21 08:48:44 INFO::Crawling (1/100  2013-10:2013-10/00105-page.csv.gz)
+2015-12-21 08:48:44 INFO::Crawling (2/100  2013-10:2013-10/00105-page.csv.gz)
+2015-12-21 08:48:44 INFO::Crawling (3/100  2013-10:2013-10/00105-page.csv.gz)
+2015-12-21 08:48:44 INFO::Crawling (4/100  2013-10:2013-10/00105-page.csv.gz)
+2015-12-21 08:48:44 INFO::Crawling (5/100  2013-10:2013-10/00105-page.csv.gz)
+2015-12-21 08:48:44 INFO::Crawling (6/100  2013-10:2013-10/00105-page.csv.gz)
+2015-12-21 08:48:44 INFO::Crawling (7/100  2013-10:2013-10/00105-page.csv.gz)
+2015-12-21 08:48:44 INFO::Crawling (8/100  2013-10:2013-10/00105-page.csv.gz)
+2015-12-21 08:48:44 INFO::Crawling (9/100  2013-10:2013-10/00105-page.csv.gz)
+2015-12-21 08:48:44 INFO::Crawling (10/100  2013-10:2013-10/00105-page.csv.gz)
+2015-12-21 08:48:44 INFO::Crawling (11/100  2013-10:2013-10/00105-page.csv.gz)
+2015-12-21 08:48:44 INFO::Crawling (12/100  2013-10:2013-10/00105-page.csv.gz)
+2015-12-21 08:48:44 INFO::Crawling (13/100  2013-10:2013-10/00105-page.csv.gz)
+2015-12-21 08:48:44 INFO::Crawling (14/100  2013-10:2013-10/00105-page.csv.gz)
+```
+
+*** =pnotes
+
+<center>`r fig("Selection_032.png")`</center>
+
+--- &vcenter .largecontent
+
+## 範例：政府招標資訊網
+
+```{r tenders, cache = TRUE, warning = FALSE, fig.width = 10}
+companies <- readRDS("company-info.Rds") %>%
+  data.table()
+companies %<>% mutate(n = seq_len(nrow(companies)) - 1) %>%
+  data.table()
+setkey(companies, "id")
+stopifnot(is.na(companies$name) %>% sum == 0)
+tenders <- readRDS("tenders.Rds")
+
+tenders.dfs <- lapply(seq_along(tenders), function(i) {
+  name <- names(tenders)[i]
+  x <- tenders[[i]]
+  data.frame( stringsAsFactors = FALSE,
+    id = sapply(x$tender_company, `[[`, "id"),
+    is_win = sapply(x$tender_company, `[[`, "is_win"),
+    award = x$tender_award$award,
+    tender = name
+  )
+})
+tenders.df <- rbindlist(tenders.dfs)
+setkey(tenders.df, "id")
+tenders.df2 <- rbindlist(tenders.dfs)
+setkey(tenders.df2, "tender")
+
+id_na <- nrow(companies)
+
+get_graph <- function(award_lower = 0, award_upper = 1e6, common_tender_lowerbound = 5) {
+  tenders.id <- local({
+    tmp <- 
+      tenders.df %>% 
+  #     dplyr::filter(grepl("^\\d+$", id)) %>%
+  #     dplyr::filter(id %in% companies$id) %>%
+      mutate(is_in_companies = id %in% companies$id) %>%
+      group_by(tender) %>%
+      summarise(id = paste(id, collapse=","), award = first(award), count_in_companies = sum(is_in_companies)) %>%
+      dplyr::filter(count_in_companies > 1, award < award_upper, award >= award_lower)
+    tmp2 <- strsplit(tmp$id, ",")
+    names(tmp2) <- tmp$tender
+    tmp2
+  })
+  edges.src <- lapply(tenders.id, function(ids) {
+    tmp <- companies[ids]
+    tmp2 <- tmp$n
+    tmp2[is.na(tmp2)] <- id_na
+    tmp2 <- unique(tmp2)
+    if (length(tmp2) > 1) {
+      tmp3 <- combn(tmp2 %>% sort, 2, simplify = TRUE)
+      data.frame(V1 = tmp3[1,], V2 = tmp3[2,])
+    } else NULL
+  }) %>%
+    Filter(f = function(x) !is.null(x)) %>%
+    rbindlist() %>%
+    group_by(V1, V2) %>%
+    summarise(count = n()) %>%
+    dplyr::filter(count >= common_tender_lowerbound)
+  edges.node <- c(edges.src$V1, edges.src$V2) %>% 
+    unique %>% 
+    setdiff(id_na)
+  
+  companies <- companies[edges.node+1,]
+  header.str <- 
+  '<?xml version="1.0" encoding="UTF-8"?>
+  <graphml xmlns="http://graphml.graphdrawing.org/xmlns"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns
+           http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd">
+    <key id="v_name" for="node" attr.name="name" attr.type="string"/>
+    <graph id="G" edgedefault="undirected">
+  '
+  id <- companies$id
+  stopifnot(is.character(id))
+  id <- c(id, "NA")
+  n <- c(companies$n, id_na)
+  nodes.str <- sprintf('    <node id="n%d"><data key="v_name">%s</data></node>', n, id)
+  edges.str <- sprintf('    <edge source="n%d" target="n%d"></edge>', 
+                       edges.src$V1,
+                       edges.src$V2)
+  footer.str <- 
+  '
+    </graph>
+  </graphml>
+  '
+  
+  out.path <- tempfile(fileext = ".graphml")
+  c(header.str, nodes.str, edges.str, footer.str) %>%
+    write(file = out.path)
+  read_graph(out.path, format = "graphml")
+}
+g <- get_graph()
+
+# vcount(g)
+# ecount(g)
+stopifnot(degree(g) %>% min == 1)
+# transitivity(g, type = "global")
+# png("Local-Cluster-Coefficient.png", bg = "transparent")
+# transitivity(g, type = "local", isolates = "zero") %>%
+  # hist(main = "Local Clustering Coefficient", xlab = "Clustering Coefficient")
+
+lec <- clusters(g, mode = "strong")
+# table(lec$membership)
+# table(lec$membership) %>%
+#   table()
+# which(table(lec$membership) == 9)
+
+get_subgraph <- function(membership) {
+  g2 <- subgraph(g, V(g)$name[lec$membership == membership])
+  V(g2)$name <- companies[V(g2)$name]$name
+  vertex.color <- rainbow(vcount(g2))
+  par(bg = "transparent")
+  plot(g2, vertex.color = vertex.color, vertex.label = "", xlim = c(-2.5, 1),
+       vertex.frame.color = vertex.color, edge.color = "white", edge.width = 2)
+  legend("left", V(g2)$name, pch = 19, col = vertex.color, 
+         bg = "transparent", cex = 1.2, box.lty = 0, text.col = "white")
+}
+csize <- lec$csize
+csize[csize > 10] <- NA
+get_subgraph(which.max(csize))
+```
+
+--- &vcenter .largecontent
+
+## 範例: 股票資料
+
+```{r quantmod-echo, echo = TRUE, eval = FALSE}
+library(quantmod)
+getSymbols("^TWII")
+head(TWII)
+```
+
+```{r quantmod, echo = FALSE, eval = TRUE, results = "asis"}
+TWII <- readRDS("TWII.Rds")
+kable(head(TWII))
+```
+
+--- &vcenter .largecontent
+
+## 範例: 股票資料
+
+<br/>
+<br/>
+
+```{r signal, echo = TRUE, fig.width = 10, fig.height = 7}
+chartSeries(TWII, subset = "last 4 months", TA = c(addVo(), addBBands()))
+```
+
+--- &vcenter .largecontent
+
+## 範例: 棒球分析
+
+```r
+library(Lahman)
+head(Teams[,c("yearID", "name", "Rank", "W", "L", "R", "RA")])
+```
+
+```{r lahman, results="asis"}
+library(Lahman)
+kable(head(Teams[,c("yearID", "name", "Rank", "W", "L", "R", "RA")]))
+```
+
+--- &vcenter .largecontent
+
+## 範例: 棒球分析
+
+<center>
+```{r baseball, echo = FALSE}
+totalRS <- Teams %>% select(yearID, R, G) %>% 
+  mutate(AvgRperG = R/G) %>% group_by(yearID) %>% summarise(sum(AvgRperG))
+names(totalRS) <- c("yearID", "RUN")
+suppressWarnings({
+  ggplot(data = totalRS, aes(x = yearID, y = RUN)) + stat_smooth(method = "loess") +
+    geom_line()
+})
+```
+</center>
+
+--- &vcenter .largecontent
+
+## 範例: 棒球分析
+
+```{r wangch01, echo = FALSE, results = "asis"}
+head(filter(Pitching, playerID == "wangch01") %>% select(playerID, yearID, W, L, ERA)) %>% kable
+
+```
+
+--- &vcenter .largecontent
+
+## 報表的呈現
+
+```{r naive-reporting}
+summary(lm(dist ~ speed, cars))
+```
+
+--- &vcenter .largecontent
+
+## 報表的呈現
+
+```{r sjt-echo, echo = TRUE, eval = FALSE}
+library(sjPlot)
+sjt.lm(lm(dist ~ speed, cars))
+```
+
+```{r sjt, echo = FALSE, results="asis"}
+.tb <- sjt.lm(lm(dist ~ speed, cars), no.output = TRUE)
+cat(.tb$knitr)
+```
+
+--- &vcenter .largecontent
+
+## 報表的呈現
+
+- [Shiny](http://shiny.rstudio.com/)
+
+--- bg:url()
+
+<div style="position: absolute; float: left; clear: both; width: 100%; height: 350px; z-index: 0; left no-repeat;">
+  <iframe src="http://shiny.rstudio.com/gallery/kmeans-example.html">
+  </iframe>
+</div>
+
+--- &vcenter .largecontent
+
+## 現在的R ，是一個資料科學的「解決方案」
+
+- 所有的資料分析所需功能，都可以透過R 完成
+
+--- &fullimg `r bg("dsr-process.png")`
+
+*** =pnotes
+
+出處: <http://blog.revolutionanalytics.com/2016/10/the-team-data-science-process.html>
+
+--- &vcenter .largecontent
+
+## R 核心功能 v.s. 社群提供的功能
+
+- 核心函數已經提供許多整理資料的功能
+    - 字串: `gsub`、`regmatch`、`substring`、`paste`...
+    - 數值化: `as.numeric`...
+    - 類別化: `cut`、`factor`...
+    - 泛用: `split`...
+- 核心函數的命名較無系統，只能透過經驗與增廣見聞來習得
+
+--- &vcenter .largecontent
+
+## R 核心功能 v.s. 社群提供的功能
+
+- 社群提供更多五花八門的手法
+    - 字串: `stringr`、`stringi`
+    - 時間: `lubridate`
+- Hadley 自行開創一套整理資料的體系: `dplyr`: 以類SQL 的方式讓我們有系統化的手法處理資料(表)
+    - SQL(Structured Query Language) 是處理資料最常用的工具之一，個人認為這個工具在工作上比R 更重要
+    - 學dplyr可以順便學SQL的概念，許多基本功能兩者是互通的
+- Pipeline Operator: `%>%`
+    - 讓整理資料的程式碼寫起來更愉悅(?)
+
+--- &vcenter .largecontent
+
+## 台灣的R 社群
+
+- 社群是可以從自己開始創造
+    - 讀書會、同好會
+
+--- &vcenter .largecontent
+
+## [Taiwan R User Group](https://www.meetup.com/taiwan-R)
+
+- 創立於2012年10月，第一次meeting在台大博理館
+- 聚會、增廣見聞與交朋友
+- 辦過多場workshop
+- 媒合了多個創業團隊
+
+--- &fullimg `r bg("tw-r-2014-04-07.jpg")`
+
+--- &fullimg `r bg("tw-r-2015-03-02.jpg")`
+
+--- &vcenter .largecontent
+
+## [ptt R_Language]()
+
+- 開板於2013-03-28
+- 大家求救的好地方
+- 有熱心的板友常駐
+- 請不要擔心問出笨問題、Google的問題... 
+
+--- &vcenter .largecontent
+
+## 故事: 某天，某個問題...
+
+```txt
+程式諮詢
+(做21點的遊戲)
+
+[軟體熟悉度]:
+新手
+
+[問題敘述]:
+
+電腦對電腦玩，目前卡在
+
+sample(52)
+
+cards<-sample(52)
+
+num<-cards%%13
+```
+
+<https://www.ptt.cc/bbs/R_Language/M.1445866999.A.D0B.html>
+
+--- &vcenter .largecontent
+
+## 故事: 現任板主非常非常非常熱情...
+
+```txt
+get_num = function(cards){
+  factor(cards %% 13, levels = 0:12, labels = c(1:10, "J", "Q", "K"))
+}
+get_suit = function(cards){
+  factor((cards-1) %/% 13, levels = 0:3,
+      labels = c("spade", "heart", "diamend","club"))
+}
+
+desk = sample(1:52)
+n_player = 2
+num_cards_out = 0
+player_cards = vector('list', n_player)               
+```
+
+<https://www.ptt.cc/bbs/R_Language/M.1445868193.A.526.html>
+
+--- &vcenter .largecontent
+
+## 故事: 結果...
+
+```txt
+
+同學作業要自己做喔
+老師會不定期來查水表
+誰作業跟這篇一樣就GG了
+希望這學期不用動用程式碼比對工具
+
+P.S. 老師已備份這篇
+```
+
+<https://www.ptt.cc/bbs/R_Language/M.1446047725.A.106.html>
+
+--- &vcenter .largecontent
+
+## 你也可以改變R 語言
+
+- 什麼是開放自由？
+    - 你可以擁有對事情做出改變的權力
+- 你可以成為R 的社群的一份子:
+    - 貢獻R 的套件、參與發展方向的討論
+    - 在各地或各處的R 社群交流(問問題、討論、解決問題)
+    - 推廣R
+
+--- .dark .segue
+
+## 進擊的R 語言
+
+--- &vcenter .largecontent
+
+## R 是活生生的在變化的工具
+
+<br/>
+<br/>
+
+```{r number-of-R-pkgs2, dependson="number-of-R-pkgs", warning=FALSE}
+pkgs2 <- pkgs
+pkgs2$first_release <- as.Date(pkgs2$first_release)
+pkgs2$color <- 1
+pkgs2.g <- lm(log(index) ~ first_release, pkgs2)
+d <- data.frame(
+  "first_release" = seq.Date(max(pkgs2$first_release, na.rm = TRUE) + 1, as.Date("2020-01-01"), by = 1)
+)
+d$index <- exp(predict(pkgs2.g, d))
+d$color <- 2
+pkgs2 <- rbind(pkgs2[,c("first_release", "index", "color")], d)
+ggplot(pkgs2, aes(as.Date(first_release), index)) +
+    geom_line(mapping = aes(color = color), size = 2) +
+    scale_x_date(date_breaks = '2 year', date_labels = '%Y') +
+    scale_y_continuous(breaks = seq(0, max(pkgs2$index), 1000)) +
+    xlab('') + ylab('') + theme_bw() +
+    theme(legend.position = "none") +
+    ggtitle('Predicted Number of R packages ever published on CRAN')
+```
+
+--- &vcenter .largecontent
+
+## R 仍然正在更新
+
+```txt
+[Rd] R 3.3.3 on March 6
+Peter Dalgaard pd.mes at cbs.dk
+Sun Feb 5 15:14:41 CET 2017
+
+...
+The wrap-up release of the R-3.3.x series will be on Monday, March 6th. 
+
+Package maintainers should check that their packages still work with this release. In particular, recommended-package maintainers should be extra careful since we do not want unexpected turbulence at this point.
+
+On behalf of the R Core Team
+Peter Dalgaard
+...
+```
+
+出處: <https://stat.ethz.ch/pipermail/r-devel/2017-February/073705.html>
+
+--- &vcenter .largecontent
+
+## 結論
+
+- 介紹R 的發展史
+- R 身為工具的定位，以及定位的演化
+    - 統計分析工具 ==> 資料科學的解決方案
+- 社群對R 造成的影響
+- 現代的R 是一個資料科學的解決方案
+    - 推薦學R 的主因
+- R 仍然在不停的演進
+
+--- .dark .segue
+
+## 如何學習R 語言
+
+--- &vcenter .largecontent
+
+## 至聖先師 孔子如是說
+
+`r fig("200px-Confucius_Tang_Dynasty.jpg")`
+
+- 學R 不思則罔
+- 思R 不學則怠
+
+*** =pnotes
+
+圖片出處: <https://zh.wikipedia.org/wiki/%E5%AD%94%E5%AD%90>
+
+--- &vcenter .largecontent
+
+## 上手R 、自學R 
+
+- 從0 --> 1
+- 從1 --> 10
+- 從10 --> 100
+
+--- .dark .segue
+
+## R 的自學等級
+
+--- &fullimg `r bg("")`
+
+<center>`r fig("copy-paste.jpg")`</center>
+
+
+*** =pnotes
+
+出處: [I am Programmer, I have no life.](https://www.facebook.com/ProgrammersCreateLife/photos/a.241809332534619.55240.241806149201604/1263901770325365/?type=3&theater)
+
+--- &fullimg `r bg("copy-paste-modify.gif")`
+
+*** =pnotes
+
+- 出處: [Copy and paste programming](https://en.wikipedia.org/wiki/Copy_and_paste_programming)
+- By Bokanko - Own work, CC BY-SA 3.0, https://commons.wikimedia.org/w/index.php?curid=29682303
+
+--- &fullimg `r bg("books.jpg")`
+
+*** =pnotes
+
+- 出處: [Book](https://en.wikipedia.org/wiki/Book)
+- By Johannes Jansson/norden.org, CC BY 2.5 dk, https://commons.wikimedia.org/w/index.php?curid=25009679
+
+--- &fullimg `r bg("teacher.jpg")`
+
+*** =pnotes
+
+- 出處: [Teacher](https://en.wikipedia.org/wiki/Teacher)
+- By Bundesarchiv, Bild 183-13055-0008 / CC-BY-SA 3.0, CC BY-SA 3.0 de, https://commons.wikimedia.org/w/index.php?curid=5339854
+
+--- &fullimg `r bg("Selection_046.png")`
+
+*** =pnotes
+
+出處: [R-bloggers](https://www.r-bloggers.com/)
+
+
+--- &fullimg `r bg("CodeCmmt002.svg")`
+
+*** =pnotes
+
+- <https://en.wikipedia.org/wiki/Source_code>
+- By The original uploader was Dreftymac at English Wikipedia - Transferred from en.wikipedia to Commons.28041964, CC BY 2.5, https://commons.wikimedia.org/w/index.php?curid=2412235
+
+--- &vcenter .largecontent
+
+## 這學期的目標
+
+- 具備用R 處理資料的能力
+- 具備整合不同來源資料的能力
+- 具備資料視覺化的能力
+- 具備自學R 的能力
+
+--- &twocol
+
+## [R 語言翻轉教室](http://datascienceandr.org)
+
+*** =left
+
+<center>`r fig("dsr-qr.svg")`</center>
+
+*** =right
+
+`r fig("Selection_047.png")`
+
+--- &twocol
+
+## [線上聊天室](https://gitter.im/wush978/DataScienceAndR)
+
+*** =left
+
+<center>`r fig("gitter.svg")`</center>
+
+*** =right
+
+`r fig("Selection_048.png")`
+
+--- &vcenter .largecontent
+
+## Q&A
+

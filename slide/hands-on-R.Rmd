@@ -1,0 +1,710 @@
+---
+title       : "上手R語言"
+author      : "Wush Wu"
+job         : 國立台灣大學
+framework   : io2012-wush
+highlighter : highlight.js
+hitheme     : zenburn
+widgets     : [mathjax]            # {mathjax, quiz, bootstrap}
+mode        : selfcontained # {standalone, draft}
+knit        : slidify::knit2slides
+--- &vcenter .largecontent
+
+## 大綱
+
+1. 安裝R 與Rstudio
+1. Rstudio 功能簡介
+1. 上手R 程式撰寫
+
+```{r setup, include = FALSE}
+library(knitr)
+opts_chunk$set(echo = FALSE, cache=FALSE, comment="", 
+               cache.path = "cache-hands-on-R/", 
+               dev.args=list(bg="transparent"),
+               fig.path = "./assets/fig/hands-on-r-")
+fig <- function(path, size = 100) {
+  sprintf("<img src='assets/img/%s' style='max-width: %d%%;max-height: %d%%'></img>", 
+          path, size, size)
+}
+bg <- function(path) sprintf("bg:url(assets/img/%s)", path)
+```
+
+--- .dark .segue
+
+## 安裝R 與Rstudio
+
+--- &vcenter .largecontent
+
+## 事前注意事項
+
+- Windows 使用者請確定自己的使用者名稱不包含中文
+    - 否則請開一個純英文的使用者名稱
+
+--- &vcenter .largecontent
+
+## 安裝R
+
+- [CRAN](https://cran.r-project.org)
+- [台大的CRAN Mirror](http://cran.csie.ntu.edu.tw)
+- 依據作業系統做選擇:
+    - [Windows](http://cran.csie.ntu.edu.tw/bin/windows/) --> [base](http://cran.csie.ntu.edu.tw/bin/windows/base/) --> [Download R 3.3.2 for Windows](http://cran.csie.ntu.edu.tw/bin/windows/base/R-3.3.2-win.exe) --> 打開下載後的檔案並安裝
+    - [Mac OS X](http://cran.csie.ntu.edu.tw/bin/macosx/) --> [R-3.3.2.pkg](http://cran.csie.ntu.edu.tw/bin/macosx/R-3.3.2.pkg) --> 打開下載後的檔案並安裝
+    - [Linux](http://cran.csie.ntu.edu.tw/bin/linux/) 請參考不同distribution的安裝說明，有問題課後[找助教](https://gitter.im/wush978/DataScienceAndR)
+
+--- &vcenter .largecontent
+
+## 影片示範: Windows
+
+<a href="http://www.youtube.com/watch?v=FsOHPGUIDZU"><img src="http://img.youtube.com/vi/FsOHPGUIDZU/0.jpg" alt="在Windows上安裝R"></a>
+
+- 影片中的範例是 3.0.2 的版本，請使用者記得安裝 3.1 以上的版本喔！
+
+--- &vcenter .largecontent
+
+## 影片示範: OS X
+
+<a href="http://www.youtube.com/watch?v=72MYRBNo5Bk"><img src="http://img.youtube.com/vi/72MYRBNo5Bk/0.jpg" alt="Mac OS X 安裝R軟體"></a>
+
+- 此影片由中華R軟體學會的李明昌老師提供
+
+--- &vcenter .largecontent
+
+## Linux Ubuntu
+
+```sh
+sudo sh -c 'echo "deb http://cran.csie.ntu.edu.tw/bin/linux/ubuntu trusty/" >> /etc/apt/sources.list'
+sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E084DAB9
+sudo apt-get update && apt-get install -y r-base libcurl4-openssl-dev libxml2-dev espeak
+```
+
+--- &vcenter .largecontent
+
+## 安裝Rstudio
+
+- [Rstudio](https://www.rstudio.com/products/RStudio)
+    - [Desktop]() --> [Open Source Edition](https://www.rstudio.com/products/rstudio/download/) --> 根據作業系統選擇
+
+--- &vcenter .largecontent
+
+## 示範影片搜尋
+
+<br/><br/>
+- Rstudio 的官方網頁一直在改版... 所以請[在Google搜尋最近一個月關於「how to install rstudio」的影片](https://www.google.com.tw/search?q=how+to+install+rstudio&client=ubuntu&hs=n8j&channel=fs&biw=1760&bih=876&tbm=vid&source=lnt&tbs=qdr:m&sa=X&ved=0ahUKEwjUiJruuJnSAhWKpJQKHfrzBCMQpwUIEg&dpr=1.09)
+- 可能失效的範例：
+
+<a href="http://www.youtube.com/watch?v=Hl24HClmR0Y"><img src="http://img.youtube.com/vi/Hl24HClmR0Y/0.jpg" alt="安裝Rstudio"></a>
+
+--- .dark .segue
+
+## RStudio 界面介紹
+
+--- &fullimg `r bg("Workspace1_036.png")`
+
+--- &vcenter .largecontent
+
+## 程式碼編輯區(1)
+
+- 主要撰寫程式碼的區域
+- 具備多種功能協助我們使用程式碼
+
+--- &vcenter .largecontent
+
+## 語法錯誤提示
+
+`r fig("error-hint.gif")`
+
+--- &vcenter .largecontent
+
+## 自動完成與說明文件
+
+`r fig("auto-completion.gif")`
+
+--- &vcenter .largecontent
+
+## 對稱的括號提示
+
+`r fig("parantheses-match.gif")`
+
+--- &vcenter .largecontent
+
+## Console(2)
+
+`r fig("console.gif")`
+
+--- &vcenter .largecontent
+
+## 環境資訊(3)
+
+`r fig("Selection_037.png")`
+
+--- &vcenter .largecontent
+
+## 檔案系統、說明文件與圖片(4)
+
+`r fig("Selection_039.png")`
+
+--- &vcenter .largecontent
+
+## 檔案系統、說明文件與圖片(4)
+
+`r fig("Selection_042.png")`
+
+--- &vcenter .largecontent
+
+## 檔案系統、說明文件與圖片(4)
+
+`r fig("Selection_043.png")`
+
+--- .dark .segue
+
+## 上手R 程式撰寫
+
+--- &vcenter .largecontent
+
+## 學習目標
+
+- 了解什麼是`expression`(敘述)
+- 了解變數(名字、值)
+    - 了解assignment
+- 了解函數、參數
+- 學習簡易套件安裝
+
+--- &vcenter .largecontent
+
+## `expression`
+
+`r fig("expression1.gif")`
+
+*** =pnotes
+
+- 介紹 + - * /
+
+--- &vcenter .largecontent
+
+## `expression`
+
+- R 的程式是由一個又一個的expression所構成
+- Console 會回應每一個「完整」的expression
+- Console上的`>`代表「R 正準備接受下一個expression」
+- `Enter`代表一個expression的結束
+
+--- &vcenter .largecontent
+
+## `expression`
+
+`r fig("expression2.gif")`
+
+*** =pnotes
+
+- 先乘除後加減
+- 括號最優先: 括號是子expression
+
+--- &vcenter .largecontent
+
+## `expression`
+
+- 先乘除後加減，括號更優先
+- Console上的`+`代表「R 認為expression沒有結束」
+- 完成expression後R 才會處理
+- `ESC`可以中斷expression
+
+--- &vcenter .largecontent
+
+## `expression`
+
+- 輸入到console的程式碼，都會被當成expression處理
+- `#`之後的程式碼不會被處理，稱為「註解」
+- 投影片之後會用以下格式Demo程式碼的執行結果:
+
+```{r}
+1 + 1
+#1 + 1
+```
+
+
+--- &vcenter .largecontent
+
+## 練習: 請同學估計以下資料所需要的記憶體
+
+- 買電腦的時候，上面會寫：這台筆記型電腦有4GB的記憶體(RAM)
+- 在電腦中資料的單位：
+    - 1個`0`或`1`是一個位元(bit)
+    - 8個`0`或`1`是一個位元組(Bytes)
+    - 1024個位元組是1KB
+    - 1024KB是1MB
+    - 1024MB是1GB
+- 請問: 1MB是多少位元?
+- 一個整數需要4個位元組大小的記憶體，請問50000個整數需要多少記憶體? 請用MB為單位
+
+--- &vcenter .largecontent
+
+## 練習: 請同學估計以下資料所需要的記憶體
+
+- 全台灣人的身份證字號與性別的表格
+- 2300萬人
+- 身份證字號共10碼，每碼佔用1Bytes
+- 性別以整數紀錄，`0` : 女性、`1`：男性
+- 請問需要多大的記憶體(MB)儲存上述資料？
+
+--- &vcenter .largecontent
+
+## 練習: 請同學查詢自己的電腦有多少記憶體
+
+```{r}
+# Windows
+system("wmic memorychip get capacity")
+# OS X
+system("top -l 1 | grep PhysMem: | awk '{print $10}'")
+# Linux
+system("free -h")
+```
+
+或是看課堂老師的說明
+
+--- &vcenter .largecontent
+
+## 變數
+
+- 變數的概念很接近數學的「未知數」
+- 範例:
+
+```sh
+y = x + 1
+x 代入 1 則 y 為 2
+x 代入 2 則 y 為 3
+```
+
+--- &vcenter .largecontent
+
+## 字串
+
+- 前後利用`"`所夾住的文字，在程式碼中會視為字串(character)
+
+```{r}
+1 + 1
+"1 + 1"
+```
+
+- **字串不是程式碼、字串不是變數**
+- 字串就是文字
+- 字串與變數的不同：R 處理變數的名字時，會先找到該名字所對應的值，用值把名字替換掉之後再執行
+
+--- &vcenter .largecontent
+
+## 字串 v.s. 變數的名字
+
+```{r, fig.height = 7, fig.height = 2}
+a <- 1
+plot(cars, main = "a")
+plot(cars, main = a)
+```
+
+--- &vcenter .largecontent
+
+## 透過變數，我們可以描述「邏輯」
+
+- 儲存2300萬人的身份證字號與性別需要多大的記憶體(MB)?
+
+```{r}
+2300 * 10000 * (10 + 4) / 1024 / 1024
+```
+
+- 儲存`x`萬人的身份證字號與性別需要多大的記憶體(MB)?
+
+```{r, eval = FALSE}
+x * 10000 * (10 + 4) / 1024 / 1024
+```
+
+--- &vcenter .largecontent
+
+## 透過變數，我們可以描述「邏輯」
+
+- 儲存台北市270萬人的身份證字號與性別需要多大的記憶體(MB)?
+
+```{r}
+x = 270
+x * 10000 * (10 + 4) / 1024 / 1024
+```
+
+- 儲存新北市400萬人的身份證字號與性別需要多大的記憶體(MB)?
+
+```{r}
+x = 400
+x * 10000 * (10 + 4) / 1024 / 1024
+```
+
+--- &vcenter .largecontent
+
+## 變數
+
+- 描述從**名字**到**值**的關係
+    - 每個變數都有一個「名字」與對應的「值」
+```r
+x = 270
+```
+
+- `x`是名字、值則是`270`
+- `x = 270`這類型的程式碼被稱為`assignment`(賦值)
+    - `assignment`是不是一種`expression`?
+- 在R 裡面，以下都是assignment
+
+```{r}
+x = 1
+x <- 1
+```
+
+--- &vcenter
+
+## 練習
+
+```r
+# 雲林縣的人口有69萬人、苗栗縣有56萬人、新竹縣有55萬人、嘉義縣有52萬人，
+# 請問儲存以上縣市所有的身份證字號(用10個文字，10 Bytes)、性別(用整數，4 Bytes)與電話號碼(用整數4 Bytes)
+# 需要多少記憶體(MB)? 請用x 的方式寫
+x <- <數字>
+x * 10000 * (<每儲存一個人的資訊所需要的記憶體大小>) / 1024 / 1024
+```
+
+- 提示: 請在**程式碼編輯區**操作
+    1. File -> New File -> R Script (CTRL + SHIFT + N)
+    1. 嘗試輸入以下的程式碼，並且把`<數字>`與`<每儲存一個人的資訊所需要的記憶體大小>`替換成你的`expression`
+    1. 當游標在**程式碼編輯區**時，按下CTRL + ENTER可以把程式碼輸入Console
+    1. 不同的`x <- <數字>`可以算出不同的答案
+
+--- &vcenter .largecontent
+
+## 可能的答案
+
+```{r}
+x <- 69 # 雲林縣的人口有69萬人
+x * 10000 * (10 + 4 + 4) / 1024 / 1024
+x <- 56 # 苗栗縣有56萬人
+x * 10000 * (10 + 4 + 4) / 1024 / 1024
+x <- 55 # 新竹縣有55萬人
+x * 10000 * (10 + 4 + 4) / 1024 / 1024
+```
+
+--- &vcenter .largecontent
+
+## 輸入與輸出的關係
+
+- 輸入是變數`x`, 輸出是`x * 10000 * (10 + 4 + 4) / 1024 / 1024`
+- 這是一個函數
+
+`r fig("function.png")`
+
+- R 也可以建立函數: 
+
+```r
+f <- function(x) x * 10000 * (10 + 4 + 4) / 1024 / 1024
+```
+
+--- &vcenter .largecontent
+
+## 可能的答案
+
+```{r}
+f <- function(x) x * 10000 * (10 + 4 + 4) / 1024 / 1024
+f(69) # 雲林縣的人口有69萬人
+f(56) # 苗栗縣有56萬人
+f(55) # 新竹縣有55萬人
+f(52) # 嘉義縣有52萬人
+```
+
+--- &vcenter .largecontent
+
+## 使用R 會用到大量的函數
+
+```{r, eval = FALSE}
+# 1. 利用地圖資料與natural earth data 上的 urban 資料，畫出類似地球夜景的效果
+# 2. 利用大圓畫出航道
+library(maps)
+library(maptools)
+library(geosphere)
+library(plyr) 
+library(ggplot2)
+library(sp)
+library(rgeos)
+library(grid)
+library(gridExtra)
+airports <- read.csv(url("http://www.stanford.edu/~cengel/cgi-bin/anthrospace/wp-content/uploads/2012/03/airports.csv"), as.is=TRUE, header=TRUE)
+flights <- read.csv(url("http://www.stanford.edu/~cengel/cgi-bin/anthrospace/wp-content/uploads/2012/03/PEK-openflights-export-2012-03-19.csv"), as.is=TRUE, header=TRUE)
+# ... 待續
+```
+
+--- &fullimg `r bg("flights_sml.jpg")`
+
+--- &vcenter .largecontent
+
+## 使用R 會用到大量的函數
+
+- 具體提供以下功能的，都是函數
+    - 讀取資料
+    - 清理資料
+    - 繪圖
+
+--- &vcenter .largecontent
+
+## 了解R 中的函數
+
+- 函數的本質也是變數
+    - 函數有名字
+    - 值的本質是函數
+
+```{r}
+a <- c(1, 2, 3, 4)
+# 平均數
+mean(a)
+f <- mean
+f(a)
+```
+
+--- &vcenter .largecontent
+
+## 了解R 中的函數
+
+`r fig("Selection_045.png")`
+
+1. `mean`: 函數的名字
+2. `(`、`)`: 括號。名字後面接括號，代表這個名字的變數是一種函數
+3. `a`: `arguments`(參數)
+
+--- &vcenter .largecontent
+
+## 了解R 中的函數
+
+- 函數就是「動作」
+    - 範例：「計算需要的記憶體的動作」, 之前的練習所提到的函數
+    - 範例：「計算x的平均數」, `mean(x)`
+- 名字是動作的名稱
+    - `mean`: 算平均數
+    - `sd`: 算樣本標準差
+- 參數控制動作
+    - `mean(x)`: 計算x 的平均數
+    - `mean(y)`: 計算y 的平均數
+    - `mean(x, na.rm = TRUE)`: 計算x 的平均數，不包含遺失值
+
+--- &vcenter .largecontent
+
+## 了解R 中的函數
+
+- 函數就是功能
+- R 之中有許許多多的函數
+    - 讀取資料的函數
+    - 處理資料的函數
+    - 操作檔案的函數
+    - 輸出資料的函數
+- R 的套件，提供更多更多的函數
+
+--- &vcenter .largecontent
+
+## 套件
+
+- 有些提供R 沒有提供的功能
+    - 處理網頁的套件: `XML`、`xml2`、`jsonlite`
+    - 爬網站的套件: `httr`
+    - 跑進階分析(某篇paper的演算法)的套件: `supc`
+- 有些提供類似，但是設計不同的功能
+    - 整理資料: `dplyr`
+    - 繪圖: `ggplot2`
+- 有些提供資料
+    - 棒球資料: `Lahman`
+
+--- &vcenter .largecontent
+
+## 套件
+
+- 套件提供函數、函數就是功能，所以套件就是提供「一系列相關主題的功能」
+- 套件本身都會提供說明文件，解釋如何使用套件
+    - `examples`
+    - `demo`
+    - `vignettes`
+- 如果我要找特定功能的套件，怎麼辦?
+    - [CRAN Task Views](https://cran.r-project.org/web/views/)
+
+--- &vcenter .largecontent
+
+## 安裝套件
+
+```r
+install.packages("ctv")
+```
+
+--- &vcenter .largecontent
+
+## 載入套件
+
+```{r}
+library(ctv)
+```
+
+--- &vcenter .largecontent
+
+## 使用套件的函數
+
+```{r, eval = FALSE}
+library(ctv)
+# ctv::available.views()
+available.views()
+```
+
+```{r, echo = FALSE}
+x <- ctv::available.views(repos = "http://cran.csie.ntu.edu.tw")
+x[[5]]
+```
+
+--- &vcenter .largecontent
+
+## 函數的參數
+
+```{r}
+args(install.packages)
+```
+
+--- &vcenter .largecontent
+
+## 函數的參數
+
+- `install.packages` 負責安裝套件
+
+- 電腦需要知道動作的細節才能運作:
+    - 要安裝什麼套件?
+    - 從哪裡安裝套件?
+    - ... 以及其他種種細節
+
+--- &vcenter .largecontent
+
+## 函數的參數
+
+```{r, echo = FALSE}
+args(install.packages)
+```
+
+- 一個函數的參數可以有很多個
+- 每個參數都有對應的「名字」
+- `install.packages`的參數有: `pkg`、`lib`、`repos`...
+    - `pkg` 代表「要安裝的套件的名稱」
+    - `repos` 代表「提供套件的網站」
+
+--- &vcenter .largecontent
+
+## 函數的參數
+
+```{r, echo = FALSE}
+args(install.packages)
+```
+
+```r
+install.packages("ctv")
+```
+
+- `pkg` : `"ctv"`
+
+--- &vcenter .largecontent
+
+## 函數的參數
+
+```{r, echo = FALSE}
+args(install.packages)
+```
+
+```r
+install.packages("ctv", "http://cran.csie.ntu.edu.tw")
+```
+
+- `pkg` : `"ctv"`
+- `lib` : `"http://cran.csie.ntu.edu.tw"`
+
+--- &vcenter .largecontent
+
+## 函數的參數
+
+```{r, echo = FALSE}
+args(install.packages)
+```
+
+```r
+install.packages("ctv", repos = "http://cran.csie.ntu.edu.tw")
+```
+
+- `pkg` : `"ctv"`
+- `repos` : `"http://cran.csie.ntu.edu.tw"`
+
+--- &vcenter .largecontent
+
+## 函數的參數
+
+```{r, echo = FALSE}
+args(install.packages)
+```
+
+```r
+install.packages("ctv", repo = "http://cran.csie.ntu.edu.tw")
+```
+
+- `pkg` : `"ctv"`
+- `repos` : `"http://cran.csie.ntu.edu.tw"`
+
+--- &vcenter .largecontent
+
+## 函數的參數
+
+```{r, echo = FALSE}
+args(install.packages)
+```
+
+```r
+install.packages("ctv", "http://cran.csie.ntu.edu.tw", lib = "/home/wush/Project/2017-DS-Programming/.lib")
+```
+
+- `pkg` : `"ctv"`
+- `lib` : `"/home/wush/Project/2017-DS-Programming/.lib"`
+- `repos` : `"http://cran.csie.ntu.edu.tw"`
+
+--- &vcenter .largecontent
+
+## 函數的參數: 預設值
+
+```{r, echo = FALSE}
+args(install.packages)
+```
+
+```r
+install.packages("ctv")
+```
+
+- `repos` : `getOption("repos")`
+- `destdir` : `NULL`
+- ...
+
+--- &vcenter .largecontent
+
+## 參數的規則
+
+- 順序、名字
+    - 有給名字，則「部份比對名字」(Best Practice: 請打全名)
+    - 沒給名字，則照順序，但是會跳過**已經給名字的參數**
+    - 剩下的參數則考慮預設值
+- 建議: 超過三個以上，都用使用「全名」來指定參數
+
+--- &vcenter .largecontent
+
+## 練習
+
+```{r}
+args(strsplit)
+strsplit("abcdef", TRUE, split = "cd")
+```
+
+- 請問參數`x`、`split`、`fixed`、`perl`與`useBytes`的值各為何?
+
+--- &vcenter .largecontent
+
+## 總結
+
+- 初步了解如何構成一個R 的程式
+    - 函數... 函數... 函數.......
+    - 當然還有其他的東西
+- 函數就是功能，套件提供更多的函數
+- 知道如何安裝套件
+
