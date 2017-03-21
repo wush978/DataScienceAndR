@@ -414,7 +414,7 @@
 - Class : cmd_question
   Output: |
     另一個值得注意到的是`paste`在串接字串時，在字串中間會留下一個預留的空格。
-    如果不希望再自船間出現空格，可以改為使用`paste0`。
+    如果不希望在字串間出現空格，可以改為使用`paste0`。
     `paste0`和`paste`為幾乎一樣的函數。差別在於`paste0`預設在串接字串時，中間是不會有空格的。
     同學請試試看：`paste0(c("X", "Y"), 1:10)`
   CorrectAnswer: paste0(c("X", "Y"), 1:10)
