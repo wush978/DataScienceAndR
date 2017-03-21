@@ -309,13 +309,6 @@
   CorrectAnswer: "C"
   AnswerTests: omnitest(correctVal = "C")
 
-- Class: mult_question
-  Output: |
-    請問同學，這個曲線有沒有在某個地方有奇怪的尖峰？
-  AnswerChoices: Yes;No
-  CorrectAnswer: "No"
-  AnswerTests: omnitest(correctVal = "No")
-
 - Class: cmd_question
   Output: |
     這個統計方法中，很重要的參數是：`bw`。我們先請同學來畫出不同`bw`的結果。
