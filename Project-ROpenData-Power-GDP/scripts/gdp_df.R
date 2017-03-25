@@ -1,7 +1,8 @@
 # 開始的index
 year.index.start <- year.index
 # 結束的index
-## 我們拿下一個開始的index - 1 當成現在結尾的index
+## 每一個開始的index接續到下一個開始的index
+## 也就是結尾的index就是下一個開始的index
 year.index.end <- c(tail(year.index, -1), length(gdp.split))
 # 開始撰寫for迴圈
 ## 我們先建立每一年份整理出來的gdp 資料
