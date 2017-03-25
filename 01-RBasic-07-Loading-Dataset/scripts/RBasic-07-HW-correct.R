@@ -6,6 +6,7 @@ answer.raw <- readBin(orglist.path, what = "raw", n = file.info(orglist.path)$si
 answer.txt <- stringi::stri_encode(answer.raw, from = "UTF-16", to = "UTF-8")
 get_text_connection_by_l10n_info <- function(x) {
   info <- l10n_info()
+  # 以下的if else是因為需要讓正確答案跨平台
   if (info$MBCS & !info$`UTF-8`) {
     textConnection(x)
   } else {

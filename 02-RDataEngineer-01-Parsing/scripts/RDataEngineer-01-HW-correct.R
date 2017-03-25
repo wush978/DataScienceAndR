@@ -12,6 +12,8 @@ pirate_info <- readLines(file(pirate_path, encoding = "BIG5"))
 pirate_info_key_value <- {
   # 請在這邊填寫你的程式碼
   # 這個程式碼可以多行
+  # 這裡的.delim其實是要從原始資料中取出冒號
+  # 為了要讓正確答案跨平台，所以只能這樣寫
   .delim <- strsplit(pirate_info[2], "")[[1]][3]
   strsplit(pirate_info, .delim)
 }
