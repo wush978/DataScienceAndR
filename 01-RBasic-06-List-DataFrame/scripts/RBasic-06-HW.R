@@ -13,7 +13,7 @@ answer3 <- NULL #請將NULL替換成你的程式碼
 #' 請問uptake這欄的平均值為多少？
 answer4 <- NULL #請將NULL替換成你的程式碼
 
-#' CO2 共有很多很多列（answer3），
+#' CO2 共有很多很多列（answer1），
 #' 請從CO2 中挑出一些列，滿足以下的條件：
 #' 這些列的uptake值，超過全部CO2"平均"的uptake值
 #' （`answer4`）

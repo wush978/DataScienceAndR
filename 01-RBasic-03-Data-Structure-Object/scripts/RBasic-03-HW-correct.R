@@ -1,5 +1,5 @@
 #' 以下內容改自prcomp 的範例程式碼
-#' 
+#'
 #' PCA(Principle Components Analysis) 是一個資料分析時常用的技術，
 #' 它的原理會在後面的課程講解。
 #' 在R 中，我們可以利用prcomp這個指令對USArrests這筆資料進行PCA 的分析，
@@ -19,6 +19,8 @@ answer3 <- names(pca)
 #' 請同學參考help(prcomp)的說明的Value章節
 #' 將各個principal components的standard deviations
 #' 寫入變數answer4
+
+# 也可以使用教材中教的 `pca[["sdev"]]` ，這裡`[[`與`$`都有從list拿出物件的功能
 answer4 <- pca$sdev
 
 #' pca 的元素中，有一個是PCA的中心(center)。請同學參考help(prcomp)的說明，
