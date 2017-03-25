@@ -1,6 +1,6 @@
 power.df3 <-
   power.df2 %>%
-  mutate(id2 = translation.gdp[id]) %>%
+  mutate(id2 = translation.power[id]) %>%
   filter(!is.na(id2)) %>%
   group_by(year, id2) %>%
   summarise(power = sum(power), name = paste(name, collapse = ","))
