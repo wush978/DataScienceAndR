@@ -460,17 +460,17 @@
     請同學挑戰看看。
   Script: power-gdp.R
   AnswerTests: "check_val(\"power.gdp\", local({\n  power.df3 <-\n    power.df2 %>%\n
-    \   mutate(id2 = translation.gdp[id]) %>%\n    filter(!is.na(id2)) %>%\n    group_by(year,
+    \   mutate(id2 = translation.power[id]) %>%\n    filter(!is.na(id2)) %>%\n    group_by(year,
     id2) %>%\n    summarise(power = sum(power), name = paste(name, collapse = \",\"))\n
     \ \n  gdp.df3 <- \n    gdp.df2 %>%\n    mutate(id2 = translation.gdp[id]) %>%\n
     \   group_by(year, id2) %>%\n    summarise(gdp = sum(gdp))\n  power.gdp <- inner_join(power.df3,
     gdp.df3, c(\"year\", \"id2\")) %>%\n    mutate(eff = gdp / power) %>%\n    as.data.frame()\n
     \ stopifnot(isTRUE(all.equal(class(power.gdp), \"data.frame\")))\n  stopifnot(isTRUE(all.equal(nrow(power.gdp),
-    56)))\n  stopifnot(isTRUE(all.equal(ncol(power.gdp), 6)))\n  stopifnot(isTRUE(all.equal(colnames(power.gdp),
+    70)))\n  stopifnot(isTRUE(all.equal(ncol(power.gdp), 6)))\n  stopifnot(isTRUE(all.equal(colnames(power.gdp),
     c(\"year\", \"id2\", \"power\", \"name\", \"gdp\", \"eff\"))))\n  stopifnot(isTRUE(all.equal(rownames(power.gdp),
-    paste(1:56))))\n  stopifnot(isTRUE(all.equal(sum(power.gdp$year), 112560)))\n
-    \ stopifnot(isTRUE(all.equal(sum(power.gdp$id2), 252)))\n  stopifnot(!is.unsorted(power.gdp$year
-    * 8 + power.gdp$id2))\n  stopifnot(isTRUE(all.equal(sum(power.gdp$gdp), 72840324)))\n
+    paste(1:70))))\n  stopifnot(isTRUE(all.equal(sum(power.gdp$year), 140700)))\n
+    \ stopifnot(isTRUE(all.equal(sum(power.gdp$id2), 385)))\n  stopifnot(!is.unsorted(power.gdp$year
+    * 10 + power.gdp$id2))\n  stopifnot(isTRUE(all.equal(sum(power.gdp$gdp), 94279743)))\n
     \ stopifnot(power.gdp$eff == power.gdp$gdp / power.gdp$power)\n  power.gdp\n}))\n"
 - Class: text
   Output: |
