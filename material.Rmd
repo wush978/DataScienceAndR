@@ -1,0 +1,211 @@
+```{r setup, include=FALSE, results='hold'}
+library(magrittr)
+library(yaml)
+library(git2r)
+library(xml2)
+library(jsonlite)
+# check current version
+local({
+  if (file.exists("material.html")) {
+    .text <- readLines("material.html")
+    assign("current.dsr.version", regmatches(.text, regexec("以下連結記載swirl中DataScienceAndR\\(版本: (.*)\\)的課程內容", .text)) %>%
+      Filter(f = function(x) length(x) == 2) %>%
+      unlist() %>%
+      `[`(2), envir = globalenv())
+    assign("current.dsr.version", NA, envir = globalenv())
+  } else {
+    assign("current.dsr.version", NA, envir = globalenv())
+  }
+})
+# check remote version
+dsr.version <- fromJSON(url("https://api.github.com/repos/wush978/DataScienceAndR/git/refs/heads/course"))$object$sha
+zero_na_is_false <- function(x) {
+  if (length(x) == 0) FALSE else if (is.na(x)) FALSE else x
+}
+is.dsr <- !zero_na_is_false(dsr.version == current.dsr.version)
+if (is.dsr) {
+  dsr_dir <- ".DataScienceAndR"
+  if (!file.exists(dsr_dir)) {
+    repo <- clone("https://github.com/wush978/DataScienceAndR.git", local_path = dsr_dir, branch = "course")
+  } else {
+    repo <- repository(dsr_dir)
+  }
+  if (dsr.version != branch_target(head(repo))) {
+    pull(repo)
+  }
+}
+invisible(gc())
+```
+
+## 快速安裝教材
+
+同學可以參考以下的上手影片：
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/fcd6zSk0yd8" frameborder="0" allowfullscreen></iframe>
+
+或是依照以下的動作安裝教材：
+
+1. 安裝R
+2. 安裝Rstudio(Windows 使用者請安裝Rstudio或自備能夠編輯UTF-8 編碼的編輯器，OS X 與Linux使用者可依據自己喜好決定是否使用Rstudio)
+3. 打開R ，執行：`source("http://wush978.github.io/R/init-swirl.R")`（如果是網路環境受到限制，只能使用80 port 的同學，請參考 <https://gist.github.com/wush978/957d8bee92f78f6c0aead949609f921d>中的指令進行安裝）
+4. 輸入`library(swirl);swirl()`後即進入教學環境。
+5. 進入00-Hello-DataScienceAndR課程檢查你的電腦能不能執行本教材的所有功能，並瞭解本教材所提供的功能。
+
+有興趣了解安裝細節的同學，請操考：
+
+- [Windows](https://github.com/wush978/DataScienceAndR/wiki/Windows-%E8%A8%AD%E5%AE%9A%E6%8C%87%E5%8D%97)
+- [Mac OS X](https://github.com/wush978/DataScienceAndR/wiki/Mac-OS-X-%E8%A8%AD%E5%AE%9A%E6%8C%87%E5%8D%97)
+- [Ubuntu](https://github.com/wush978/DataScienceAndR/wiki/Ubuntu-%E8%A8%AD%E5%AE%9A%E6%8C%87%E5%8D%97)
+
+安裝上有問題，或是在執行00-Hello-DataScienceAndR不順利的同學請到[求助專區](#求助專區)取得協助
+
+## 互動式學習環境快速上手
+
+在輸入`swirl()`之後，同學即進入R 的互動式學習環境(swirl環境)。請參考以下動作做操作：
+
+### 1. 進入學習環境
+
+![Imgur](http://i.imgur.com/sYGDy72.png)
+
+ps. 如果你之前有進行過swirl的課程，swirl會出現下圖的選項詢問你是否要接關。請根據你的需求作答：
+
+![Imgur](http://i.imgur.com/SwlSa3W.png)
+
+如不接關，請選取：`No. Let me start something new.`
+
+### 2. 選擇課程(Course)
+
+![Imgur](http://i.imgur.com/Sfj0K1l.png)
+
+### 3. 選擇你要進行的單元(Lesson)
+
+![Imgur](http://i.imgur.com/OFgU4wM.png)
+
+目前主要課程分成以下三塊：
+
+- 01-RBasic區：講解R 語言的基礎知識與使用方法。所有以下的課程都需要知道RBasic的知識。
+- 02-RDataEngineer區：講解載入資料至R 語言，以及清理、整理資料的所需知識。
+- 03-RVisualization區：介紹R的視覺化功能
+
+其他的課程，同學可以視自己的興趣決定要不要完成
+
+- Optional-RProgramming區：介紹R 語言的程式功能。
+- Optional-RDataMining區：介紹R 語言在Data Mining中常用的套件。
+- Optional-RStatistic區：搭配實體課程所使用的swirl課程，不建議同學自行使用
+
+## 求助專區
+
+有問題的朋友，麻煩先註冊一個Github帳號後，可以到以下地方討論：
+
+- [Issue回報區](https://github.com/wush978/DataScienceAndR/issues)
+- Gitter聊天室：[![Gitter](https://badges.gitter.im/wush978/DataScienceAndR.svg)](https://gitter.im/wush978/DataScienceAndR?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+
+## 課程筆記 
+
+以下連結記載swirl中DataScienceAndR(版本: `r dsr.version`)的課程內容
+
+```{r-note, echo=FALSE, warning=FALSE, error=FALSE, results='asis'}
+if (is.dsr) {
+unlink("note", recursive = TRUE)
+course_list <- dir(repo@path, "lesson.yaml", full.names = TRUE, recursive = TRUE)
+get_lecture_note <- function(course, out_dir = tempdir()) {
+  
+  from_text <- function(level, i) {
+sprintf("
+
+## 關卡 %d
+
+%s
+
+", i, gsub("\\s", "", level$Output))
+  }
+
+  from_cmd_question <- function(level, i) {
+sprintf("
+
+## 關卡 %d
+
+%s
+
+%sr
+%s
+%s
+
+", i, gsub("\\s", "", level$Output), "```", level$CorrectAnswer, "```")
+  }
+  
+  from_mult_question <- function(level, i) {
+sprintf("
+
+## 關卡 %d
+
+%s
+
+%s
+", i, gsub("\\s", "", level$Output), level$CorrectAnswer)
+  }
+  
+  from_script <- function(level, i) {
+    script_path <- file.path(dirname(course), "scripts", level$Script)
+    correct_script_path <- file.path(dirname(course), "scripts", gsub(".R", "-correct.R", level$Script, fixed = TRUE))
+    if (file.exists(correct_script_path)) {
+      script <- readLines(correct_script_path)
+    } else {
+      script <- readLines(script_path)
+    }
+    script <- script %>%
+      paste(collapse = "\n")
+sprintf("
+
+## 關卡 %d
+
+%s
+
+%sr
+%s
+%s
+
+", i, gsub("\\s", "", level$Output), "```", script, "```")
+  }
+    
+  content <- yaml.load_file(course)
+  retval <- character(0)
+  for(i in seq_along(content) %>% tail(-1)) {
+    operator <- get(sprintf("from_%s", content[[i]]$Class))
+    retval %<>% append(operator(content[[i]], i - 1))
+  }
+  rmd_file <- tempfile(fileext = ".Rmd")
+  write(retval, file = rmd_file)
+  md_file <- tempfile(fileext = ".md")
+  knitr::knit(rmd_file, md_file, quiet = TRUE)
+  # browser()
+  html_file <- file.path(out_dir, sprintf("%s.html", dirname(course) %>% basename())) %>%
+    gsub(pattern = "/./", replacement = "/", fixed = TRUE) %>%
+    gsub(pattern = "^\\.", replacement = getwd()) %>%
+    normalizePath(mustWork = FALSE)
+#   html_file <- tempfile(fileext = ".html")
+#   browser()
+  rmarkdown::render(md_file, "html_document", html_file, quiet = TRUE)
+  invisible(html_file)
+}
+
+if (!file.exists("note")) dir.create("note")
+htmls <- character(0)
+for(i in seq_along(course_list)) {
+  capture.output(htmls %<>% append(get_lecture_note(course_list[i], "./note")))
+}
+sprintf("- [%s](%s)", basename(htmls) %>% tools::file_path_sans_ext(), file.path("note", basename(htmls))) %>%
+  paste(collapse = "\n") %>%
+  cat()
+}
+```
+
+## 課程投影片
+
+以下連結是課程中使用的投影片
+
+- [RBasic-Introduction](slide/RBasic-Introduction.html)
+- [RBasic-DataStructure](slide/RBasic-DataStructure.html)
+- [RDataEngineer-Introduction](slide/RDataEngineer-Introduction.html)
+- [RVisualization-Introduction](slide/RVisualization-Introduction.html)
+- [從R語言翻轉教室到機器學習](slide/DSRToML.html) <iframe width="560" height="315" src="https://www.youtube.com/embed/zax6l3ilg2A" frameborder="0" allowfullscreen></iframe>

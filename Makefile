@@ -1,11 +1,19 @@
-all : index.html teacher.html
+WORKDIR=$()
+SRC=index.Rmd material.Rmd before.Rmd after.Rmd teacher.Rmd
+
+all : $(SRC:.Rmd=.html)
 	$(MAKE) -C slide
 
-index.md : index.Rmd
+%.md : %.Rmd
 	Rscript -e "knitr::knit('$<', '$@')"
+	cat header.md > $@.tmp
+	cat $@ >> $@.tmp
+	mv $@.tmp $@
 
-index.html : index.md
-	node_modules/.bin/markdown2bootstrap -h  $<
+%.html : %.md
+	node_modules/.bin/markdown2bootstrap -h --nav=$(CURDIR)/nav.js $<
 
-teacher.html : teacher.md
-	node_modules/.bin/markdown2bootstrap $<
+.PHONY : clean
+
+clean :
+	rm $(SRC:.Rmd=.html)

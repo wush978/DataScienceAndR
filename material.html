@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>R語言翻轉教室</title>
+
+    <!-- Le styles -->
+    <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="bootstrap/css/docs.css" rel="stylesheet">
+    <link href="bootstrap/js/google-code-prettify/prettify.css" rel="stylesheet">
+
+  </head>
+
+  <body data-spy="scroll" data-target=".bs-docs-sidebar">
+
+  <header class="jumbotron subhead" id="overview"><div class="container"><h1><img src="http://i.imgur.com/81C5LBk.png?v=1" style="height:7em" /></h1><p class="lead">全中文R語言互動式教材</p></div></header>
+
+  <div class="container">
+
+  <div class="row">
+
+<div class="container"><ul class="nav nav-tabs"><li><a href="index.html"><h1 style="color: #0088cc;">首頁</h1></a></li><li class="active"><a href="#"><h1>主要教材</h1></a></li><li><a href="before.html"><h1 style="color: #0088cc;">上手教材</h1></a></li><li><a href="after.html"><h1 style="color: #0088cc;">課後教材</h1></a></li><li><a href="teacher.html"><h1 style="color: #0088cc;">教師專區</h1></a></li></ul></div><div class="span3 bs-docs-sidebar"><ul class="nav nav-list bs-docs-sidenav" data-spy="affix"><li><a href="#1">1. 快速安裝教材</a></li><li><a href="#2">2. 互動式學習環境快速上手</a></li><li><a href="#3">2.1. 1. 進入學習環境</a></li><li><a href="#4">2.2. 2. 選擇課程(Course)</a></li><li><a href="#5">2.3. 3. 選擇你要進行的單元(Lesson)</a></li><li><a href="#6">3. 求助專區</a></li><li><a href="#7">4. 課程筆記</a></li><li><a href="#8">5. 課程投影片</a></li></ul></div><div class="span9"><p><!-- title: <img src="http://i.imgur.com/81C5LBk.png?v=1" style="height:7em" /> -->
+<!-- subtitle: 全中文R語言互動式教材 -->
+<!-- header-title: R語言翻轉教室 --></p>
+
+<script>
+  ((window.gitter = {}).chat = {}).options = {
+    room: 'wush978/DataScienceAndR'
+  };
+</script>
+
+<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
+
+<script src="http://momentjs.com/downloads/moment-with-locales.min.js" async defer></script>
+
+<h2 id="1">1. 快速安裝教材</h2>
+
+<p>同學可以參考以下的上手影片：</p>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/fcd6zSk0yd8" frameborder="0" allowfullscreen></iframe>
+
+<p>或是依照以下的動作安裝教材：</p>
+
+<ol>
+<li>安裝R</li>
+<li>安裝Rstudio(Windows 使用者請安裝Rstudio或自備能夠編輯UTF-8 編碼的編輯器，OS X 與Linux使用者可依據自己喜好決定是否使用Rstudio)</li>
+<li>打開R ，執行：<code>source("http://wush978.github.io/R/init-swirl.R")</code>（如果是網路環境受到限制，只能使用80 port 的同學，請參考 <a href="https://gist.github.com/wush978/957d8bee92f78f6c0aead949609f921d">https://gist.github.com/wush978/957d8bee92f78f6c0aead949609f921d</a>中的指令進行安裝）</li>
+<li>輸入<code>library(swirl);swirl()</code>後即進入教學環境。</li>
+<li>進入00-Hello-DataScienceAndR課程檢查你的電腦能不能執行本教材的所有功能，並瞭解本教材所提供的功能。</li>
+</ol>
+
+<p>有興趣了解安裝細節的同學，請操考：</p>
+
+<ul>
+<li><a href="https://github.com/wush978/DataScienceAndR/wiki/Windows-%E8%A8%AD%E5%AE%9A%E6%8C%87%E5%8D%97">Windows</a></li>
+<li><a href="https://github.com/wush978/DataScienceAndR/wiki/Mac-OS-X-%E8%A8%AD%E5%AE%9A%E6%8C%87%E5%8D%97">Mac OS X</a></li>
+<li><a href="https://github.com/wush978/DataScienceAndR/wiki/Ubuntu-%E8%A8%AD%E5%AE%9A%E6%8C%87%E5%8D%97">Ubuntu</a></li>
+</ul>
+
+<p>安裝上有問題，或是在執行00-Hello-DataScienceAndR不順利的同學請到<a href="#求助專區">求助專區</a>取得協助</p>
+
+<h2 id="2">2. 互動式學習環境快速上手</h2>
+
+<p>在輸入<code>swirl()</code>之後，同學即進入R 的互動式學習環境(swirl環境)。請參考以下動作做操作：</p>
+
+<h3 id="3">2.1. 1. 進入學習環境</h3>
+
+<p><img src="http://i.imgur.com/sYGDy72.png" alt="Imgur" title="" /></p>
+
+<p>ps. 如果你之前有進行過swirl的課程，swirl會出現下圖的選項詢問你是否要接關。請根據你的需求作答：</p>
+
+<p><img src="http://i.imgur.com/SwlSa3W.png" alt="Imgur" title="" /></p>
+
+<p>如不接關，請選取：<code>No. Let me start something new.</code></p>
+
+<h3 id="4">2.2. 2. 選擇課程(Course)</h3>
+
+<p><img src="http://i.imgur.com/Sfj0K1l.png" alt="Imgur" title="" /></p>
+
+<h3 id="5">2.3. 3. 選擇你要進行的單元(Lesson)</h3>
+
+<p><img src="http://i.imgur.com/OFgU4wM.png" alt="Imgur" title="" /></p>
+
+<p>目前主要課程分成以下三塊：</p>
+
+<ul>
+<li>01-RBasic區：講解R 語言的基礎知識與使用方法。所有以下的課程都需要知道RBasic的知識。</li>
+<li>02-RDataEngineer區：講解載入資料至R 語言，以及清理、整理資料的所需知識。</li>
+<li>03-RVisualization區：介紹R的視覺化功能</li>
+</ul>
+
+<p>其他的課程，同學可以視自己的興趣決定要不要完成</p>
+
+<ul>
+<li>Optional-RProgramming區：介紹R 語言的程式功能。</li>
+<li>Optional-RDataMining區：介紹R 語言在Data Mining中常用的套件。</li>
+<li>Optional-RStatistic區：搭配實體課程所使用的swirl課程，不建議同學自行使用</li>
+</ul>
+
+<h2 id="6">3. 求助專區</h2>
+
+<p>有問題的朋友，麻煩先註冊一個Github帳號後，可以到以下地方討論：</p>
+
+<ul>
+<li><a href="https://github.com/wush978/DataScienceAndR/issues">Issue回報區</a></li>
+<li>Gitter聊天室：<a href="https://gitter.im/wush978/DataScienceAndR?utm_source=badge&amp;utm_medium=badge&amp;utm_campaign=pr-badge"><img src="https://badges.gitter.im/wush978/DataScienceAndR.svg" alt="Gitter" title="" /></a></li>
+</ul>
+
+<h2 id="7">4. 課程筆記</h2>
+
+<p>以下連結記載swirl中DataScienceAndR(版本: a4c8174f5cc041cdb7b0e46ac30f5f3c415ca84f)的課程內容</p>
+
+<ul>
+<li><a href="note/00-Hello-DataScienceAndR.html">00-Hello-DataScienceAndR</a></li>
+<li><a href="note/01-RBasic-01-Introduction.html">01-RBasic-01-Introduction</a></li>
+<li><a href="note/01-RBasic-02-Data-Structure-Vectors.html">01-RBasic-02-Data-Structure-Vectors</a></li>
+<li><a href="note/01-RBasic-03-Data-Structure-Object.html">01-RBasic-03-Data-Structure-Object</a></li>
+<li><a href="note/01-RBasic-04-Factors.html">01-RBasic-04-Factors</a></li>
+<li><a href="note/01-RBasic-05-Arrays-Matrices.html">01-RBasic-05-Arrays-Matrices</a></li>
+<li><a href="note/01-RBasic-06-List-DataFrame.html">01-RBasic-06-List-DataFrame</a></li>
+<li><a href="note/01-RBasic-07-Loading-Dataset.html">01-RBasic-07-Loading-Dataset</a></li>
+<li><a href="note/02-RDataEngineer-01-Parsing.html">02-RDataEngineer-01-Parsing</a></li>
+<li><a href="note/02-RDataEngineer-02-XML.html">02-RDataEngineer-02-XML</a></li>
+<li><a href="note/02-RDataEngineer-03-JSON.html">02-RDataEngineer-03-JSON</a></li>
+<li><a href="note/02-RDataEngineer-04-Database.html">02-RDataEngineer-04-Database</a></li>
+<li><a href="note/02-RDataEngineer-05-Data-Manipulation.html">02-RDataEngineer-05-Data-Manipulation</a></li>
+<li><a href="note/02-RDataEngineer-06-Join.html">02-RDataEngineer-06-Join</a></li>
+<li><a href="note/03-RVisualization-01-One-Variable-Visualization.html">03-RVisualization-01-One-Variable-Visualization</a></li>
+<li><a href="note/03-RVisualization-02-Multiple-Variables-Visualization.html">03-RVisualization-02-Multiple-Variables-Visualization</a></li>
+<li><a href="note/03-RVisualization-03-ggplot2.html">03-RVisualization-03-ggplot2</a></li>
+<li><a href="note/03-RVisualization-04-Javascript-And-Maps.html">03-RVisualization-04-Javascript-And-Maps</a></li>
+<li><a href="note/Optional-RProgramming-01-Loop-And-Condition.html">Optional-RProgramming-01-Loop-And-Condition</a></li>
+<li><a href="note/Optional-RProgramming-02-Function-Introduction.html">Optional-RProgramming-02-Function-Introduction</a></li>
+<li><a href="note/Project-ROpenData-Power-GDP.html">Project-ROpenData-Power-GDP</a></li>
+</ul>
+
+<h2 id="8">5. 課程投影片</h2>
+
+<p>以下連結是課程中使用的投影片</p>
+
+<ul>
+<li><a href="slide/RBasic-Introduction.html">RBasic-Introduction</a></li>
+<li><a href="slide/RBasic-DataStructure.html">RBasic-DataStructure</a></li>
+<li><a href="slide/RDataEngineer-Introduction.html">RDataEngineer-Introduction</a></li>
+<li><a href="slide/RVisualization-Introduction.html">RVisualization-Introduction</a></li>
+<li><a href="slide/DSRToML.html">從R語言翻轉教室到機器學習</a> <iframe width="560" height="315" src="https://www.youtube.com/embed/zax6l3ilg2A" frameborder="0" allowfullscreen></iframe></li>
+</ul>
+      </div>
+    </div>
+
+  </div>
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="bootstrap/js/jquery.js"></script>
+    <script src="bootstrap/js/google-code-prettify/prettify.js"></script>
+    <script src="bootstrap/js/bootstrap.js"></script>
+    <script type="text/javascript">prettyPrint();</script>
+
+  </body>
+</html>
