@@ -73,7 +73,7 @@
   Output: |
     接著請同學依照在RBasic-07中所學到的技巧，用`read.table`和`file`兩個函數的組合，並適當的設定`sep`、`header`和`encoding`等參數，將`hospital_path`的內容存到`hospital`之中。
   CorrectAnswer: hospital <- .read.table.big5(hospital_path, header = TRUE, sep = ",")
-  AnswerTests: val_is(.read.table.big5(hospital_path, header = TRUE, sep = ","))
+  AnswerTests: check_val("hospital", .read.table.big5(hospital_path, header = TRUE, sep = ","))
   Hint: hospital <- read.table(file(hospital_path, encoding = "BIG5"), sep = ",", header = TRUE)
 
 - Class: cmd_question
@@ -185,9 +185,9 @@
 
 - Class: cmd_question
   Output: |
-    請問同學，`tmp`中總共有多少筆資料呢？
+    請問同學，`tmp`中總共有多少筆資料呢？
   CorrectAnswer: length(tmp)
-  AnswerTests: omnitest(correctVal = length(tmp))
+  AnswerTests: val_is(length(tmp))
 
 - Class: text
   Output: |
