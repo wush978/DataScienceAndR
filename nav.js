@@ -3,5 +3,6 @@ module.exports = {
   "安裝教材" : "material.html",
   "上手教材" : "before.html",
   "課後教材" : "after.html",
-  "教師專區" : "teacher.html"
+  "教師專區" : "teacher.html",
+  "感謝清單" : "thanks.html"
 };
