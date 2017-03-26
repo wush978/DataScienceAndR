@@ -335,7 +335,7 @@ $(document).ready(function () {
 <h2>關卡 49</h2>
 <p>最後，我們請同學用本課程中所學的內容，處理一個PCA的結果。請同學在完成之後存檔，並輸入<code>submit()</code>來檢查結果是否符合預期。如果同學在檔案中看到亂碼，請使用Rstudio左上角的File-&gt;ReopenWithEncoding…-&gt;選取：UTF-8</p>
 <pre class="r"><code>#' 以下內容改自prcomp 的範例程式碼
-#' 
+#'
 #' PCA(Principle Components Analysis) 是一個資料分析時常用的技術，
 #' 它的原理會在後面的課程講解。
 #' 在R 中，我們可以利用prcomp這個指令對USArrests這筆資料進行PCA 的分析，
@@ -355,6 +355,8 @@ answer3 &lt;- names(pca)
 #' 請同學參考help(prcomp)的說明的Value章節
 #' 將各個principal components的standard deviations
 #' 寫入變數answer4
+
+# 也可以使用教材中教的 `pca[[&quot;sdev&quot;]]` ，這裡`[[`與`$`都有從list拿出物件的功能
 answer4 &lt;- pca$sdev
 
 #' pca 的元素中，有一個是PCA的中心(center)。請同學參考help(prcomp)的說明，

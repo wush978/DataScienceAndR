@@ -94,12 +94,62 @@ window.onload =function(){
 
 測試結果： Linux ![](https://travis-ci.org/wush978/DataScienceAndR.svg?branch=course) Windows [![Build status](https://ci.appveyor.com/api/projects/status/tej2qnpdxwy2r5lp/branch/course?svg=true)](https://ci.appveyor.com/project/wush978/datascienceandr/branch/course)
 
-
+```{r setup, include=FALSE, results='hold'}
+library(magrittr)
+library(yaml)
+library(git2r)
+library(xml2)
+library(jsonlite)
+# check current version
+local({
+  if (file.exists("index.html")) {
+    doc <- xml2::read_html("index.html")
+    .node <- xml_find_one(doc, "//html/body/div/div/div/ul/li/code") 
+    stopifnot(xml_text(.node) == "DataScienceAndR")
+    .text <- .node %>%
+      xml_parent() %>%
+      xml_parent() %>%
+      xml_text(trim = TRUE) %>%
+      strsplit(split = "\n", fixed = TRUE) %>%
+      unlist()
+    assign("current.swirl.version", regmatches(.text, regexec("swirl版本:(.*)$", .text)) %>%
+      Filter(f = function(x) length(x) > 0) %>%
+      unlist() %>%
+      `[`(2), envir = globalenv())
+    assign("current.dsr.version", regmatches(.text, regexec("DataScienceAndR教材版本:(.*)$", .text)) %>%
+      Filter(f = function(x) length(x) > 0) %>%
+      unlist() %>%
+      `[`(2), envir = globalenv())
+  } else {
+    assign("current.swirl.version", NA, envir = globalenv())
+    assign("current.dsr.version", NA, envir = globalenv())
+  }
+})
+# check remote version
+swirl.version <- read.dcf(url("https://raw.githubusercontent.com/wush978/swirl/master/DESCRIPTION"))[,"Version"]
+dsr.version <- fromJSON(url("https://api.github.com/repos/wush978/DataScienceAndR/git/refs/heads/course"))$object$sha
+zero_na_is_false <- function(x) {
+  if (length(x) == 0) FALSE else if (is.na(x)) FALSE else x
+}
+is.dsr <- !zero_na_is_false(dsr.version == current.dsr.version)
+if (is.dsr) {
+  dsr_dir <- ".DataScienceAndR"
+  if (!file.exists(dsr_dir)) {
+    repo <- clone("https://github.com/wush978/DataScienceAndR.git", local_path = dsr_dir, branch = "course")
+  } else {
+    repo <- repository(dsr_dir)
+  }
+  if (dsr.version != branch_target(head(repo))) {
+    pull(repo)
+  }
+}
+invisible(gc())
+```
 
 ## 新聞專區
 
-- swirl版本:101.5.4.1
-- `DataScienceAndR`教材版本:a4c8174f5cc041cdb7b0e46ac30f5f3c415ca84f
+- swirl版本:`r swirl.version`
+- `DataScienceAndR`教材版本:`r dsr.version`
 - **全面中文化並自動協助使用者設定適當的locale**
 - **課程需以Google或Facebook登入**
 - **擁有Classroom帳號的同學可使用`upload_my_progress`與`download_my_progress`來在不同機器間同步進度**
@@ -208,27 +258,101 @@ ps. 如果你之前有進行過swirl的課程，swirl會出現下圖的選項詢
 
 以下連結記載swirl中的課程內容
 
-- [00-Hello-DataScienceAndR](note/00-Hello-DataScienceAndR.html)
-- [01-RBasic-01-Introduction](note/01-RBasic-01-Introduction.html)
-- [01-RBasic-02-Data-Structure-Vectors](note/01-RBasic-02-Data-Structure-Vectors.html)
-- [01-RBasic-03-Data-Structure-Object](note/01-RBasic-03-Data-Structure-Object.html)
-- [01-RBasic-04-Factors](note/01-RBasic-04-Factors.html)
-- [01-RBasic-05-Arrays-Matrices](note/01-RBasic-05-Arrays-Matrices.html)
-- [01-RBasic-06-List-DataFrame](note/01-RBasic-06-List-DataFrame.html)
-- [01-RBasic-07-Loading-Dataset](note/01-RBasic-07-Loading-Dataset.html)
-- [02-RDataEngineer-01-Parsing](note/02-RDataEngineer-01-Parsing.html)
-- [02-RDataEngineer-02-XML](note/02-RDataEngineer-02-XML.html)
-- [02-RDataEngineer-03-JSON](note/02-RDataEngineer-03-JSON.html)
-- [02-RDataEngineer-04-Database](note/02-RDataEngineer-04-Database.html)
-- [02-RDataEngineer-05-Data-Manipulation](note/02-RDataEngineer-05-Data-Manipulation.html)
-- [02-RDataEngineer-06-Join](note/02-RDataEngineer-06-Join.html)
-- [03-RVisualization-01-One-Variable-Visualization](note/03-RVisualization-01-One-Variable-Visualization.html)
-- [03-RVisualization-02-Multiple-Variables-Visualization](note/03-RVisualization-02-Multiple-Variables-Visualization.html)
-- [03-RVisualization-03-ggplot2](note/03-RVisualization-03-ggplot2.html)
-- [03-RVisualization-04-Javascript-And-Maps](note/03-RVisualization-04-Javascript-And-Maps.html)
-- [Optional-RProgramming-01-Loop-And-Condition](note/Optional-RProgramming-01-Loop-And-Condition.html)
-- [Optional-RProgramming-02-Function-Introduction](note/Optional-RProgramming-02-Function-Introduction.html)
-- [Project-ROpenData-Power-GDP](note/Project-ROpenData-Power-GDP.html)
+```{r-note, echo=FALSE, warning=FALSE, error=FALSE, results='asis'}
+if (is.dsr) {
+unlink("note", recursive = TRUE)
+course_list <- dir(repo@path, "lesson.yaml", full.names = TRUE, recursive = TRUE)
+get_lecture_note <- function(course, out_dir = tempdir()) {
+  
+  from_text <- function(level, i) {
+sprintf("
+
+## 關卡 %d
+
+%s
+
+", i, gsub("\\s", "", level$Output))
+  }
+
+  from_cmd_question <- function(level, i) {
+sprintf("
+
+## 關卡 %d
+
+%s
+
+%sr
+%s
+%s
+
+", i, gsub("\\s", "", level$Output), "```", level$CorrectAnswer, "```")
+  }
+  
+  from_mult_question <- function(level, i) {
+sprintf("
+
+## 關卡 %d
+
+%s
+
+%s
+", i, gsub("\\s", "", level$Output), level$CorrectAnswer)
+  }
+  
+  from_script <- function(level, i) {
+    script_path <- file.path(dirname(course), "scripts", level$Script)
+    correct_script_path <- file.path(dirname(course), "scripts", gsub(".R", "-correct.R", level$Script, fixed = TRUE))
+    if (file.exists(correct_script_path)) {
+      script <- readLines(correct_script_path)
+    } else {
+      script <- readLines(script_path)
+    }
+    script <- script %>%
+      paste(collapse = "\n")
+sprintf("
+
+## 關卡 %d
+
+%s
+
+%sr
+%s
+%s
+
+", i, gsub("\\s", "", level$Output), "```", script, "```")
+  }
+    
+  content <- yaml.load_file(course)
+  retval <- character(0)
+  for(i in seq_along(content) %>% tail(-1)) {
+    operator <- get(sprintf("from_%s", content[[i]]$Class))
+    retval %<>% append(operator(content[[i]], i - 1))
+  }
+  rmd_file <- tempfile(fileext = ".Rmd")
+  write(retval, file = rmd_file)
+  md_file <- tempfile(fileext = ".md")
+  knitr::knit(rmd_file, md_file, quiet = TRUE)
+  # browser()
+  html_file <- file.path(out_dir, sprintf("%s.html", dirname(course) %>% basename())) %>%
+    gsub(pattern = "/./", replacement = "/", fixed = TRUE) %>%
+    gsub(pattern = "^\\.", replacement = getwd()) %>%
+    normalizePath(mustWork = FALSE)
+#   html_file <- tempfile(fileext = ".html")
+#   browser()
+  rmarkdown::render(md_file, "html_document", html_file, quiet = TRUE)
+  invisible(html_file)
+}
+
+if (!file.exists("note")) dir.create("note")
+htmls <- character(0)
+for(i in seq_along(course_list)) {
+  capture.output(htmls %<>% append(get_lecture_note(course_list[i], "./note")))
+}
+sprintf("- [%s](%s)", basename(htmls) %>% tools::file_path_sans_ext(), file.path("note", basename(htmls))) %>%
+  paste(collapse = "\n") %>%
+  cat()
+}
+```
 
 ## 課程投影片
 

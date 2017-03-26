@@ -1,0 +1,22 @@
+{
+  "name": "DataScienceAndR",
+  "version": "1.0.0",
+  "description": "R語言翻轉教室的網頁編譯程式",
+  "dependencies": {
+    "markdown2bootstrap": "git+https://github.com/wush978/markdown2bootstrap.git"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wush978/DataScienceAndR.git"
+  },
+  "author": "Wush Wu",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wush978/DataScienceAndR/issues"
+  },
+  "homepage": "http://datascienceandr.org"
+}

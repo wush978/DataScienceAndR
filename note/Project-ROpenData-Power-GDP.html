@@ -349,7 +349,8 @@ $(document).ready(function () {
 <pre class="r"><code># 開始的index
 year.index.start &lt;- year.index
 # 結束的index
-## 我們拿下一個開始的index - 1 當成現在結尾的index
+## 每一個開始的index接續到下一個開始的index
+## 也就是結尾的index就是下一個開始的index
 year.index.end &lt;- c(tail(year.index, -1), length(gdp.split))
 # 開始撰寫for迴圈
 ## 我們先建立每一年份整理出來的gdp 資料
@@ -496,7 +497,7 @@ stopifnot(sum(power.df2$year) == 409224)</code></pre>
 <p>接著，透過translation，我們就可以將兩邊的資料比對成一個data.frame。請同學挑戰看看。</p>
 <pre class="r"><code>power.df3 &lt;-
   power.df2 %&gt;%
-  mutate(id2 = translation.gdp[id]) %&gt;%
+  mutate(id2 = translation.power[id]) %&gt;%
   filter(!is.na(id2)) %&gt;%
   group_by(year, id2) %&gt;%
   summarise(power = sum(power), name = paste(name, collapse = &quot;,&quot;))

@@ -362,6 +362,7 @@ answer.raw &lt;- readBin(orglist.path, what = &quot;raw&quot;, n = file.info(org
 answer.txt &lt;- stringi::stri_encode(answer.raw, from = &quot;UTF-16&quot;, to = &quot;UTF-8&quot;)
 get_text_connection_by_l10n_info &lt;- function(x) {
   info &lt;- l10n_info()
+  # 以下的if else是因為需要讓正確答案跨平台
   if (info$MBCS &amp; !info$`UTF-8`) {
     textConnection(x)
   } else {
