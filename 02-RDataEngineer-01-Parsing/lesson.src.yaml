@@ -187,7 +187,7 @@
   Output: |
     請問同學，`tmp`中總共有多少筆資料呢？
   CorrectAnswer: length(tmp)
-  AnswerTests: omnitest(correctVal = length(tmp))
+  AnswerTests: val_is(length(tmp))
 
 - Class: text
   Output: |
