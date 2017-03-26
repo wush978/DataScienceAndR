@@ -185,7 +185,7 @@
 
 - Class: cmd_question
   Output: |
-    請問同學，`tmp`中總共有多少筆資料呢？
+    請問同學，`tmp`中總共有多少筆資料呢？
   CorrectAnswer: length(tmp)
   AnswerTests: omnitest(correctVal = length(tmp))
 
