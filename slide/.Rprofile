@@ -1,0 +1,2 @@
+.libPaths(new = "../.lib")
+
