@@ -167,9 +167,8 @@ sprintf("
 
 ", i, gsub("\\s", "", level$Output), "```", script, "```")
   }
-    
   content <- yaml.load_file(course)
-  retval <- character(0)
+  retval <- sprintf("---\ntitle: \"%s\"\ndate: \"`r Sys.Date()`\"\noutput:\n  rmdformats::html_clean\n---\n\n", content[[1]]$Lesson)
   for(i in seq_along(content) %>% tail(-1)) {
     operator <- get(sprintf("from_%s", content[[i]]$Class))
     retval %<>% append(operator(content[[i]], i - 1))
@@ -178,14 +177,13 @@ sprintf("
   write(retval, file = rmd_file)
   md_file <- tempfile(fileext = ".md")
   knitr::knit(rmd_file, md_file, quiet = TRUE)
-  # browser()
   html_file <- file.path(out_dir, sprintf("%s.html", dirname(course) %>% basename())) %>%
     gsub(pattern = "/./", replacement = "/", fixed = TRUE) %>%
     gsub(pattern = "^\\.", replacement = getwd()) %>%
     normalizePath(mustWork = FALSE)
 #   html_file <- tempfile(fileext = ".html")
 #   browser()
-  rmarkdown::render(md_file, "html_document", html_file, quiet = TRUE)
+  rmarkdown::render(md_file, output_file = html_file, quiet = TRUE)
   invisible(html_file)
 }
 
