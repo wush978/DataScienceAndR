@@ -169,6 +169,26 @@ sprintf("
   }
   content <- yaml.load_file(course)
   retval <- sprintf("---\ntitle: \"%s\"\ndate: \"`r Sys.Date()`\"\noutput:\n  rmdformats::html_clean\n---\n\n", content[[1]]$Lesson)
+  retval %<>% append(sprintf('<div id="disqus_thread"></div>
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = %s;  // Replace PAGE_URL with your page\'s canonical URL variable
+this.page.identifier = %s; // Replace PAGE_IDENTIFIER with your page\'s unique identifier variable
+};
+*/
+(function() { // DON\'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement(\'script\');
+s.src = \'https://ryu-yan-fan-zhuan-jiao-shi.disqus.com/embed.js\';
+s.setAttribute(\'data-timestamp\', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>', sprintf("http://datascienceandr.org/note/%s.html", content[[1]]$Lesson), content[[1]]$Lesson))
   for(i in seq_along(content) %>% tail(-1)) {
     operator <- get(sprintf("from_%s", content[[i]]$Class))
     retval %<>% append(operator(content[[i]], i - 1))
