@@ -142,20 +142,20 @@ Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">
 </div>
 <div id="-2" class="section level2">
 <h2>關卡 2</h2>
-<p>R的list是非常泛用的物件，同學在前面的課程有簡單操作過R裡面的迴歸模型，而這些迴歸模型的底層架構，就是用list所建立的。</p>
+<p>R 的list是非常泛用的物件，同學在前面的課程有簡單操作過R 裡面的迴歸模型，而這些迴歸模型的底層架構，就是用list所建立的。</p>
 </div>
 <div id="-3" class="section level2">
 <h2>關卡 3</h2>
-<p>list的本質，其實就是一個「R物件的向量」，這裡要特別強調「向量」的概念，因為list是有順序性的。</p>
+<p>list的本質，其實就是一個「R 物件的向量」，這裡要特別強調「向量」的概念，因為list是有順序性的。</p>
 </div>
 <div id="-4" class="section level2">
 <h2>關卡 4</h2>
-<p>請同學建立一個list，<code>x&lt;-list(iris=iris,cars=cars,n=2)</code>這裡<code>iris=iris</code>的意思是說，第一個元素的名字是<code>&quot;iris&quot;</code>，而值會是變數<code>iris</code>的值。而<code>cars=cars</code>表示第二個元素的名字是<code>&quot;cars&quot;</code>，值則是變數<code>cars</code>的值。以此類推。</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">iris =</span> iris, <span class="dt">cars =</span> cars, <span class="dt">n =</span> <span class="dv">2</span>)</code></pre></div>
+<p>請同學建立一個list，<code>x &amp;lt;- list(iris = iris, cars = cars, n = 2)</code> 這裡<code>iris = iris</code>的意思是說，第一個元素的名字是<code>&amp;quot;iris&amp;quot;</code>，而值會是變數<code>iris</code>的值。 而<code>cars = cars</code>表示第二個元素的名字是<code>&amp;quot;cars&amp;quot;</code>，值則是變數<code>cars</code>的值。以此類推。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &amp;lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">iris =</span> iris, <span class="dt">cars =</span> cars, <span class="dt">n =</span> <span class="dv">2</span>)</code></pre></div>
 </div>
 <div id="-5" class="section level2">
 <h2>關卡 5</h2>
-<p>在建立的過程中，因為iris在前面，所以是第一個元素（component），而cars跟在iris後面，所以是第二個component。我們可以利用兩個中括號：<code>[[]]</code>來取出component。請同學試試看：<code>x[[3]]</code></p>
+<p>在建立的過程中，因為iris在前面，所以是第一個元素（component），而cars跟在iris後面，所以 是第二個component。我們可以利用兩個中括號：<code>[[]]</code>來取出component。請同學試試看：<code>x[[3]]</code></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x[[<span class="dv">3</span>]]</code></pre></div>
 </div>
 <div id="-6" class="section level2">
@@ -165,11 +165,11 @@ Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">
 </div>
 <div id="-7" class="section level2">
 <h2>關卡 7</h2>
-<p>可以看到<code>x[[3]]</code>的型態是numeric，這是因為<code>x&lt;-list(iris=iris,cars=cars,n=2)</code>，所以<code>mode(x[[3]])</code>的結果等同於<code>mode(2)</code>，也就是numeric。同理，<code>mode(x[[1]])</code>和<code>mode(x[[2]])</code>的結果則是x的第一個值和第二個值的型態。</p>
+<p>可以看到<code>x[[3]]</code>的型態是numeric，這是因為<code>x &amp;lt;- list(iris = iris, cars = cars, n = 2)</code>， 所以<code>mode(x[[3]])</code>的結果等同於<code>mode(2)</code>，也就是numeric。 同理，<code>mode(x[[1]])</code>和<code>mode(x[[2]])</code>的結果則是x 的第一個值和第二個值的型態。</p>
 </div>
 <div id="-8" class="section level2">
 <h2>關卡 8</h2>
-<p>因為list是個向量，所以可以使用我們過去學過的<code>[]</code>。如果我們運用如：<code>x[3]</code>的指令，從x中選出只有包含第三個元素的向量，得到的輸出會和<code>x</code>一樣是一個list向量。簡言之，<code>mode(x[1])</code>、<code>mode(x[2])</code>和<code>mode(x[3])</code>的結果都會是list，和<code>mode(x[[3]])</code>是numeric是不同的。請同學試試看<code>mode(x[3])</code></p>
+<p>因為list是個向量，所以可以使用我們過去學過的<code>[]</code>。 如果我們運用如：<code>x[3]</code>的指令，從x 中選出只有包含第三個元素的向量，得到的輸出會和<code>x</code>一樣是一個list向量。 簡言之，<code>mode(x[1])</code>、<code>mode(x[2])</code>和<code>mode(x[3])</code>的結果都會是list，和<code>mode(x[[3]])</code>是numeric是不同的。請同學試試看<code>mode(x[3])</code></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mode</span>(x[<span class="dv">3</span>])</code></pre></div>
 </div>
 <div id="-9" class="section level2">
@@ -187,33 +187,33 @@ Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">
 </div>
 <div id="-12" class="section level2">
 <h2>關卡 12</h2>
-<p>list的元素除了用位置做選取之外（如：<code>x[[3]]</code>），也可以用名字做選取。在我們建立list的時候，使用指令如下：<code>x&lt;-list(iris=iris,cars=cars,n=2)</code>，這代表第一個元素的名字是<code>&quot;iris&quot;</code>，第二個是<code>&quot;cars&quot;</code>，第三個是<code>&quot;n&quot;</code>。而和我們使用<code>x[[3]]</code>的方式類似，我們也可以使用<code>x[[&quot;n&quot;]]</code>來選擇第三個，也就是名字是<code>&quot;n&quot;</code>的元素。請同學試試看。</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x[[<span class="st">&quot;n&quot;</span>]]</code></pre></div>
+<p>list的元素除了用位置做選取之外（如：<code>x[[3]]</code>），也可以用名字做選取。 在我們建立list的時候，使用指令如下：<code>x &amp;lt;- list(iris = iris, cars = cars, n = 2)</code>， 這代表第一個元素的名字是<code>&amp;quot;iris&amp;quot;</code>，第二個是<code>&amp;quot;cars&amp;quot;</code>，第三個是<code>&amp;quot;n&amp;quot;</code>。 而和我們使用<code>x[[3]]</code>的方式類似，我們也可以使用<code>x[[&amp;quot;n&amp;quot;]]</code>來選擇第三個，也就是名字是<code>&amp;quot;n&amp;quot;</code>的元素。請同學試試看。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x[[&amp;quot;n&amp;quot;]]</code></pre></div>
 </div>
 <div id="-13" class="section level2">
 <h2>關卡 13</h2>
-<p>除了<code>[[]]</code>之外，也可以使用<code>$</code>來透過名字取出list的值。舉例來說，<code>x$n</code>就會取出<code>x</code>中名字為<code>&quot;n&quot;</code>的值。請同學試試看。</p>
+<p>除了<code>[[]]</code>之外，也可以使用<code>$</code>來透過名字取出list的值。 舉例來說，<code>x$n</code>就會取出<code>x</code>中名字為<code>&amp;quot;n&amp;quot;</code>的值。 請同學試試看。</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x$n</code></pre></div>
 </div>
 <div id="-14" class="section level2">
 <h2>關卡 14</h2>
-<p>在windows系統中，如果名字是中文時，使用<code>$</code>的語法可能會出錯。一個比較保險的寫法是：x$<code>中文名稱</code>。這裡的`符號的按鍵，在美式鍵盤中位於1的左方，這個符號唸作：Graveaccent，是R在console中的跳脫字元。以特殊符號為名稱的變數可以透過兩邊包覆Graveaccent來在console中進行存取。</p>
+<p>在windows系統中，如果名字是中文時，使用<code>$</code>的語法可能會出錯。一個比較保險的寫法是： x$<code>中文名稱</code> 。 這裡的 `符號的按鍵，在美式鍵盤中位於1的左方，這個符號唸作：Grave accent，是R 在console中的跳脫字元。 以特殊符號為名稱的變數可以透過兩邊包覆Grave accent來在console中進行存取。</p>
 </div>
 <div id="-15" class="section level2">
 <h2>關卡 15</h2>
-<p>接著，我們要介紹一個在R中很有名的物件。這個物件的設計，完全滿足了近代對結構化資料分析的需求。</p>
+<p>接著，我們要介紹一個在R 中很有名的物件。這個物件的設計，完全滿足了近代對結構化資料分析的需求。</p>
 </div>
 <div id="-16" class="section level2">
 <h2>關卡 16</h2>
-<p>包含最近火紅的ApacheSpark，以及Python的pandas都有受到這個物件的影響。這個物件就是R的data.frame。</p>
+<p>包含最近火紅的Apache Spark，以及Python的pandas都有受到這個物件的影響。這個物件就是R 的data.frame。</p>
 </div>
 <div id="-17" class="section level2">
 <h2>關卡 17</h2>
-<p>由於傳統的matrix和array有同質性的限制（所有的元素都要同樣的型態），所以在資料分析上並不方便。因為我們分析的資料，通常並不會全部都用相同的型態。在結構化的資料中，通常資料是以表格的形式，而各欄位會有自己的型態，例如是：數值型態、類別型態等等。</p>
+<p>由於傳統的matrix和array 有同質性的限制（所有的元素都要同樣的型態），所以在資料分析上並不方便。 因為我們分析的資料，通常並不會全部都用相同的型態。 在結構化的資料中，通常資料是以表格的形式，而各欄位會有自己的型態，例如是：數值型態、類別型態等等。</p>
 </div>
 <div id="-18" class="section level2">
 <h2>關卡 18</h2>
-<p>R的data.frame就是要表現出二維表格特性的物件。以下我們要介紹data.frame這個物件。</p>
+<p>R 的data.frame就是要表現出二維表格特性的物件。以下我們要介紹data.frame這個物件。</p>
 </div>
 <div id="-19" class="section level2">
 <h2>關卡 19</h2>
@@ -221,11 +221,11 @@ Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">
 </div>
 <div id="-20" class="section level2">
 <h2>關卡 20</h2>
-<p>第二，因為表格的資料是結構化的，所以data.frame存放的值會有格式上的限制。具體來說，data.frame的各個元素必須是以下幾種類型之一：數值(numeric)、字串(character)、布林(logical)、類別(factor)、數值矩陣(numericmatrix)、list或data.frame。</p>
+<p>第二，因為表格的資料是結構化的，所以data.frame存放的值會有格式上的限制。 具體來說，data.frame的各個元素必須是以下幾種類型之一：數值(numeric)、字串(character)、布林(logical)、類別(factor)、數值矩陣(numeric matrix)、 list或data.frame。</p>
 </div>
 <div id="-21" class="section level2">
 <h2>關卡 21</h2>
-<p>最重要的是，因為data.frame代表的是二維表格，所以每一個值的長度須一致（若為矩陣或data.frame，則是列(row)的數量需一致）。上述的特性可以在整理資料時提供很大的幫助。</p>
+<p>最重要的是，因為data.frame代表的是二維表格，所以每一個值的長度須一致（若為矩陣或data.frame，則是列(row)的數量需一致）。 上述的特性可以在整理資料時提供很大的幫助。</p>
 </div>
 <div id="-22" class="section level2">
 <h2>關卡 22</h2>
@@ -238,12 +238,12 @@ Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">
 </div>
 <div id="-24" class="section level2">
 <h2>關卡 24</h2>
-<p>在R之中，可以使用<code>data.frame</code>函數來建立一個data.frame。請同學現在試試看利用<code>data.frame(class=&quot;NTU&quot;,id=1:10,scores=matrix(c(80:99),nrow=10,ncol=2))</code>建立一個data.frame，並且把這個物件存到變數<code>a</code></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">class =</span> <span class="st">&quot;NTU&quot;</span>, <span class="dt">id =</span> <span class="dv">1</span>:<span class="dv">10</span>,<span class="dt">scores =</span> <span class="kw">matrix</span>(<span class="kw">c</span>(<span class="dv">80</span>:<span class="dv">99</span>),<span class="dt">nrow=</span><span class="dv">10</span>,<span class="dt">ncol=</span><span class="dv">2</span> ) )</code></pre></div>
+<p>在R 之中，可以使用<code>data.frame</code>函數來建立一個data.frame。 請同學現在試試看利用<code>data.frame(class = &amp;quot;NTU&amp;quot;, id = 1:10,scores = matrix(c(80:99),nrow=10,ncol=2 ) )</code> 建立一個data.frame，並且把這個物件存到變數<code>a</code></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a &amp;lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">class =</span> &amp;quot;NTU&amp;quot;, <span class="dt">id =</span> <span class="dv">1</span>:<span class="dv">10</span>,<span class="dt">scores =</span> <span class="kw">matrix</span>(<span class="kw">c</span>(<span class="dv">80</span>:<span class="dv">99</span>),<span class="dt">nrow=</span><span class="dv">10</span>,<span class="dt">ncol=</span><span class="dv">2</span> ) )</code></pre></div>
 </div>
 <div id="-25" class="section level2">
 <h2>關卡 25</h2>
-<p>所有list的操作，都可用在data.frame上。請問同學，下面哪一個語法「不能」選取<code>a</code>的第一欄？</p>
+<p>所有list的操作，都可用在data.frame上。 請問同學，下面哪一個語法「不能」選取<code>a</code> 的第一欄？</p>
 <p>a[[“id”]]</p>
 </div>
 <div id="-26" class="section level2">
@@ -252,7 +252,7 @@ Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">
 </div>
 <div id="-27" class="section level2">
 <h2>關卡 27</h2>
-<p>舉例來說，<code>nrow(a)</code>可以列出a所包含的列數、<code>ncol(a)</code>可以列出a所包含的欄數、<code>dim(a)</code>則可以一次列出兩者。上述特性都和matrix一樣。</p>
+<p>舉例來說，<code>nrow(a)</code>可以列出a 所包含的列數、<code>ncol(a)</code>可以列出a 所包含的欄數、<code>dim(a)</code>則可以一次列出兩者。 上述特性都和matrix一樣。</p>
 </div>
 <div id="-28" class="section level2">
 <h2>關卡 28</h2>
@@ -266,22 +266,22 @@ Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">
 </div>
 <div id="-30" class="section level2">
 <h2>關卡 30</h2>
-<p>同理，我們也可以用<code>a[1,2]</code>來取出第1列、第2欄的資料。請同學試試看。</p>
+<p>同理，我們也可以用<code>a[1,2]</code>來取出第1 列、第2 欄的資料。 請同學試試看。</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a[<span class="dv">1</span>,<span class="dv">2</span>]</code></pre></div>
 </div>
 <div id="-31" class="section level2">
 <h2>關卡 31</h2>
-<p><code>colnames(a)</code>則可以取出a的欄位名稱。請同學試試看。名稱也可以用於接下來的資料選取中。</p>
+<p><code>colnames(a)</code>則可以取出a 的欄位名稱。請同學試試看。名稱也可以用於接下來的資料選取中。</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">colnames</span>(a)</code></pre></div>
 </div>
 <div id="-32" class="section level2">
 <h2>關卡 32</h2>
-<p>資料選取時，欄位的方向也可以用名字代替。舉例來說，<code>a[2,&quot;id&quot;]</code>可以選到第二列第二欄，因為<code>a[2,]</code>代表第二列，而<code>a[,&quot;id&quot;]</code>會選到名稱為<code>&quot;id&quot;</code>的第二欄。兩者的交集，就是第2列第2欄。請同學試試看。</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a[<span class="dv">2</span>,<span class="st">&quot;id&quot;</span>]</code></pre></div>
+<p>資料選取時，欄位的方向也可以用名字代替。 舉例來說，<code>a[2,&amp;quot;id&amp;quot;]</code>可以選到第二列第二欄，因為<code>a[2,]</code>代表第二列，而<code>a[,&amp;quot;id&amp;quot;]</code> 會選到名稱為<code>&amp;quot;id&amp;quot;</code>的第二欄。 兩者的交集，就是第2 列第2 欄。請同學試試看。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a[<span class="dv">2</span>,&amp;quot;id&amp;quot;]</code></pre></div>
 </div>
 <div id="-33" class="section level2">
 <h2>關卡 33</h2>
-<p>中括號<code>[]</code>也可以一次選取多列多欄。舉例來說，<code>a[1:2,&quot;id&quot;]</code>可以一次選取<code>a$id</code>底下第1個到第2個的值。請問同學，下面哪一種語法「不能」得到一樣的結果？</p>
+<p>中括號<code>[]</code>也可以一次選取多列多欄。 舉例來說，<code>a[1:2,&amp;quot;id&amp;quot;]</code>可以一次選取<code>a$id</code>底下第1個到第2個的值。 請問同學，下面哪一種語法「不能」得到一樣的結果？</p>
 <p>a[1:2][“id”]</p>
 </div>
 <div id="-34" class="section level2">
@@ -296,20 +296,20 @@ Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">
 </div>
 <div id="-36" class="section level2">
 <h2>關卡 36</h2>
-<p>同學是否注意到，在輸入<code>a[1:2,&quot;id&quot;]</code>的時候，R會輸出一個向量，但是輸入<code>a[1:2,1:2]</code>的時候R反而會給一個data.frame呢？其實這樣不一致的行為，在未來若要進行更複雜的資料整理時，會帶來困擾的。</p>
+<p>同學是否注意到，在輸入<code>a[1:2,&amp;quot;id&amp;quot;]</code>的時候，R 會輸出一個向量，但是輸入<code>a[1:2,1:2]</code>的時候R 反而會給一個data.frame呢？ 其實這樣不一致的行為，在未來若要進行更複雜的資料整理時，會帶來困擾的。</p>
 </div>
 <div id="-37" class="section level2">
 <h2>關卡 37</h2>
-<p>其實<code>[]</code>中括號這個函數，有一個參數叫做：<code>drop</code>，而且預設為<code>TRUE</code>。當我們使用<code>[]</code>取得結果的時候，如果有一個方向可以縮減維度（例如只有一個欄位的表格），R就會自動把表格的結構破壞，回傳一個向量。請同學試試看：<code>a[1:2,&quot;id&quot;,drop=FALSE]</code></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a[<span class="dv">1</span>:<span class="dv">2</span>, <span class="st">&quot;id&quot;</span>, drop =<span class="st"> </span><span class="ot">FALSE</span>]</code></pre></div>
+<p>其實<code>[]</code>中括號這個函數，有一個參數叫做：<code>drop</code>，而且預設為<code>TRUE</code>。 當我們使用<code>[]</code>取得結果的時候，如果有一個方向可以縮減維度（例如只有一個欄位的表格），R 就會自動把表格的結構破壞，回傳一個向量。 請同學試試看：<code>a[1:2, &amp;quot;id&amp;quot;, drop = FALSE]</code></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a[<span class="dv">1</span>:<span class="dv">2</span>, &amp;quot;id&amp;quot;, drop =<span class="st"> </span><span class="ot">FALSE</span>]</code></pre></div>
 </div>
 <div id="-38" class="section level2">
 <h2>關卡 38</h2>
-<p>從R顯示在console的輸出結果，同學會發現這是一個data.frame。在R中，console會根據不同的<code>class</code>而用不同的方式呈現輸出結果。</p>
+<p>從R 顯示在console的輸出結果，同學會發現這是一個data.frame。 在R 中，console會根據不同的<code>class</code>而用不同的方式呈現輸出結果。</p>
 </div>
 <div id="-39" class="section level2">
 <h2>關卡 39</h2>
-<p>上述的內容就是我們對於list和data.frame的介紹。data.frame是處理資料和進行進階演算法時非常實用結構。所以請同學務必要熟悉不同data.frame的操作，才能有系統地整理資料，並且在資料上運行其他的演算法。</p>
+<p>上述的內容就是我們對於list和data.frame的介紹。 data.frame是處理資料和進行進階演算法時非常實用結構。 所以請同學務必要熟悉不同data.frame的操作，才能有系統地整理資料，並且在資料上運行其他的演算法。</p>
 </div>
 <div id="-40" class="section level2">
 <h2>關卡 40</h2>

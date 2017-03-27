@@ -138,40 +138,40 @@ Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">
 </noscript>
 <div id="-1" class="section level2">
 <h2>關卡 1</h2>
-<p>這次個課程將著重於如何用R讀寫關聯式資料庫。<strong>因為本次課程會操作資料庫，所以在接關功能上會有些狀況。同學請儘量一口氣完成這門課程</strong></p>
+<p>這次個課程將著重於如何用R 讀寫關聯式資料庫。 <strong>因為本次課程會操作資料庫，所以在接關功能上會有些狀況。同學請儘量一口氣完成這門課程</strong></p>
 </div>
 <div id="-2" class="section level2">
 <h2>關卡 2</h2>
-<p>資料庫（Database）泛指能夠儲存資料的檔案櫃。使用者可以對檔案中的資料進行新增、擷取、更新和刪除。</p>
+<p>資料庫（Database）泛指能夠儲存資料的檔案櫃。 使用者可以對檔案中的資料進行新增、擷取、更新和刪除。</p>
 </div>
 <div id="-3" class="section level2">
 <h2>關卡 3</h2>
-<p>關聯式資料庫（Relationaldatabase）是近代資訊科學發展得非常成熟的一個領域。目前當人們提到「資料庫」時，在沒有額外說明下，通常都是指「關聯式資料庫」。</p>
+<p>關聯式資料庫（Relational database）是近代資訊科學發展得非常成熟的一個領域。 目前當人們提到「資料庫」時，在沒有額外說明下，通常都是指「關聯式資料庫」。</p>
 </div>
 <div id="-4" class="section level2">
 <h2>關卡 4</h2>
-<p>關聯式資料庫背後的設計牽涉到一種叫「RelationalModel」的數學，並且由許多資訊科學的學者發展出的理論在背後支撐。而關聯式資料庫設計的成功，則可以從現代資訊科學在企業的應用層面所體現。</p>
+<p>關聯式資料庫背後的設計牽涉到一種叫「Relational Model」的數學，並且由許多資訊科學的學者發展出的理論在背後支撐。 而關聯式資料庫設計的成功，則可以從現代資訊科學在企業的應用層面所體現。</p>
 </div>
 <div id="-5" class="section level2">
 <h2>關卡 5</h2>
-<p>在資訊時代，幾乎所有日常生活中碰觸到的重要資訊，都會過經過關聯式資料庫。例如購票系統、會計系統、倉儲系統等等。關聯式資料庫的設計可以滿足廣泛的系統需求。</p>
+<p>在資訊時代，幾乎所有日常生活中碰觸到的重要資訊，都會過經過關聯式資料庫。 例如購票系統、會計系統、倉儲系統等等。 關聯式資料庫的設計可以滿足廣泛的系統需求。</p>
 </div>
 <div id="-6" class="section level2">
 <h2>關卡 6</h2>
-<p>而有數據的地方，就有潛在的分析需求。R語言身為大數據時代最火熱的工具之一，在與各種資料庫系統的串接上，自然有一席之地。</p>
+<p>而有數據的地方，就有潛在的分析需求。 R 語言身為大數據時代最火熱的工具之一，在與各種資料庫系統的串接上，自然有一席之地。</p>
 </div>
 <div id="-7" class="section level2">
 <h2>關卡 7</h2>
-<p>這次課程中，我們會描述R語言如何透過DBI和其系列套件，操作關聯式資料庫。而這裡我們以SQLite這套精巧的關聯式資料庫系統為例。</p>
+<p>這次課程中，我們會描述R 語言如何透過DBI和其系列套件，操作關聯式資料庫。 而這裡我們以SQLite這套精巧的關聯式資料庫系統為例。</p>
 </div>
 <div id="-8" class="section level2">
 <h2>關卡 8</h2>
-<p>在課程開始之前先跟各位同學聲明，這次的教學並不會碰到太多資料庫的設計與效能問題。這些問題都是需要搭配系統的架構後，才能妥善解決的問題。我們也要提醒同學，如果直接用R大量的撈取線上資料庫，是很有可能影響到資料庫的效能的。所以在實際操作時，建議同學最好是先知會與請教負責資料庫系統的同仁後再進行。</p>
+<p>在課程開始之前先跟各位同學聲明，這次的教學並不會碰到太多資料庫的設計與效能問題。 這些問題都是需要搭配系統的架構後，才能妥善解決的問題。 我們也要提醒同學，如果直接用R 大量的撈取線上資料庫，是很有可能影響到資料庫的效能的。 所以在實際操作時，建議同學最好是先知會與請教負責資料庫系統的同仁後再進行。</p>
 </div>
 <div id="-9" class="section level2">
 <h2>關卡 9</h2>
-<p>請同學先安裝RSQLite套件。它是R與SQLite資料庫之間的橋樑。專業的術語叫：「客戶端」（Client）。</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">check_then_install</span>(<span class="st">&quot;RSQLite&quot;</span>, <span class="st">&quot;1.0.0&quot;</span>)</code></pre></div>
+<p>請同學先安裝RSQLite套件。 它是R 與SQLite資料庫之間的橋樑。 專業的術語叫：「客戶端」（Client）。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">check_then_install</span>(&amp;quot;RSQLite&amp;quot;, &amp;quot;<span class="fl">1.0.0</span>&amp;quot;)</code></pre></div>
 </div>
 <div id="-10" class="section level2">
 <h2>關卡 10</h2>
@@ -180,34 +180,34 @@ Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">
 </div>
 <div id="-11" class="section level2">
 <h2>關卡 11</h2>
-<p>雖然目前市面上有許多不同的SQL資料庫，但是這些資料庫在R中操作起來都是非常類似的。R都是透過DBI套件所定義的函數，讓使用者操作資料庫。</p>
+<p>雖然目前市面上有許多不同的SQL 資料庫，但是這些資料庫在R 中操作起來都是非常類似的。 R 都是透過DBI 套件所定義的函數，讓使用者操作資料庫。</p>
 </div>
 <div id="-12" class="section level2">
 <h2>關卡 12</h2>
-<p>接下來的內容中，我們要帶同學操作一次SQLite資料庫的連線、寫入資料、讀取資料、更改資料和刪除資料。這樣的操作是最基本的，未來在使用R操作其他資料庫，甚至是NoSQL等外部儲存裝置時，流程也是一樣的：連線、寫入、讀取、更改和刪除。</p>
+<p>接下來的內容中，我們要帶同學操作一次SQLite 資料庫的連線、寫入資料、讀取資料、更改資料和刪除資料。 這樣的操作是最基本的，未來在使用R 操作其他資料庫，甚至是NoSQL等外部儲存裝置時，流程也是一樣的：連線、寫入、讀取、更改和刪除。</p>
 </div>
 <div id="-13" class="section level2">
 <h2>關卡 13</h2>
-<p>在跟同學繼續解釋之前，請先連接SQLite資料庫。我們已經事先準備了一個SQLite資料庫的檔案，並且將路徑存在：<code>db_path</code>變數之中。請同學輸入：<code>drv&lt;-dbDriver(&quot;SQLite&quot;)</code>以取得連接SQLite資料庫的方式。</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">drv &lt;-<span class="st"> </span><span class="kw">dbDriver</span>(<span class="st">&quot;SQLite&quot;</span>)</code></pre></div>
+<p>在跟同學繼續解釋之前，請先連接SQLite 資料庫。 我們已經事先準備了一個SQLite資料庫的檔案，並且將路徑存在：<code>db_path</code>變數之中。 請同學輸入：<code>drv &amp;lt;- dbDriver(&amp;quot;SQLite&amp;quot;)</code>以取得連接SQLite 資料庫的方式。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">drv &amp;lt;-<span class="st"> </span><span class="kw">dbDriver</span>(&amp;quot;SQLite&amp;quot;)</code></pre></div>
 </div>
 <div id="-14" class="section level2">
 <h2>關卡 14</h2>
-<p>接著我們和SQLite資料庫建立連線：<code>db&lt;-dbConnect(drv,db_path)</code>。</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">db &lt;-<span class="st"> </span><span class="kw">dbConnect</span>(drv, db_path)</code></pre></div>
+<p>接著我們和SQLite 資料庫建立連線：<code>db &amp;lt;- dbConnect(drv, db_path)</code>。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">db &amp;lt;-<span class="st"> </span><span class="kw">dbConnect</span>(drv, db_path)</code></pre></div>
 </div>
 <div id="-15" class="section level2">
 <h2>關卡 15</h2>
-<p>這裡的<code>db</code>物件，就是這個資料庫在R中的代理人。若要從這個資料庫作任何動作，需要把<code>db</code>這個物件當成函數的參數之一。DBI的文件中會將<code>db</code>這種角色的物件記載為：<code>connection</code>。</p>
+<p>這裡的<code>db</code>物件，就是這個資料庫在R 中的代理人。 若要從這個資料庫作任何動作，需要把<code>db</code>這個物件當成函數的參數之一。 DBI的文件中會將<code>db</code>這種角色的物件記載為：<code>connection</code>。</p>
 </div>
 <div id="-16" class="section level2">
 <h2>關卡 16</h2>
-<p>接著我們來嘗試把這筆數據寫入SQL資料庫之中。在DBI界面中，提供了<code>dbWriteTable</code>這個函數，請大家打開這個函數的說明頁面。</p>
+<p>接著我們來嘗試把這筆數據寫入SQL 資料庫之中。 在DBI界面中，提供了<code>dbWriteTable</code>這個函數，請大家打開這個函數的說明頁面。</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">?dbWriteTable</code></pre></div>
 </div>
 <div id="-17" class="section level2">
 <h2>關卡 17</h2>
-<p>同學可以在說明視窗的左上角看到：<code>dbReadTable{DBI}</code>的字樣。這表示我們目前所操作的函數是由DBI套件所提供的功能。而dbReadTable和dbWriteTable的說明頁面是寫在同一頁的。</p>
+<p>同學可以在說明視窗的左上角看到：<code>dbReadTable {DBI}</code>的字樣。 這表示我們目前所操作的函數是由DBI套件所提供的功能。 而dbReadTable和dbWriteTable的說明頁面是寫在同一頁的。</p>
 </div>
 <div id="-18" class="section level2">
 <h2>關卡 18</h2>
@@ -216,34 +216,34 @@ Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">
 </div>
 <div id="-19" class="section level2">
 <h2>關卡 19</h2>
-<p>因為<code>db</code>是由RSQLite所提供的資料庫代理人（當初的<code>drv</code>代表的是<code>dbDriver(&quot;SQLite&quot;)</code>)，除了DBI的<code>dbWriteTable</code>之外，我們還有額外的參數可以使用。請同學輸入：<code>help.search(&quot;dbWriteTable&quot;)</code></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">help.search</span>(<span class="st">&quot;dbWriteTable&quot;</span>)</code></pre></div>
+<p>因為<code>db</code>是由RSQLite所提供的資料庫代理人（當初的<code>drv</code>代表的是<code>dbDriver(&amp;quot;SQLite&amp;quot;)</code>)，除了DBI的<code>dbWriteTable</code>之外，我們還有額外的參數可以使用。 請同學輸入：<code>help.search(&amp;quot;dbWriteTable&amp;quot;)</code></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">help.search</span>(&amp;quot;dbWriteTable&amp;quot;)</code></pre></div>
 </div>
 <div id="-20" class="section level2">
 <h2>關卡 20</h2>
-<p>R會列出至少兩個dbWriteTable的說明，且其中一個是來自RSQLite。在Rstudio下，同學只要用滑鼠去點選連結即可。但是限於swirl環境，這裡需要同學輸入以下指令（或是<code>skip()</code>）：<code>help(&quot;dbWriteTable,SQLiteConnection,character,data.frame-method&quot;)</code>。使用R原生環境的同學也是利用上述指令查詢RSQLite提供的dbWriteTable。</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">help</span>(<span class="st">&quot;dbWriteTable,SQLiteConnection,character,data.frame-method&quot;</span>)</code></pre></div>
+<p>R 會列出至少兩個dbWriteTable的說明，且其中一個是來自RSQLite。 在Rstudio下，同學只要用滑鼠去點選連結即可。 但是限於swirl環境，這裡需要同學輸入以下指令（或是<code>skip()</code>）：<code>help(&amp;quot;dbWriteTable,SQLiteConnection,character,data.frame-method&amp;quot;)</code>。 使用R 原生環境的同學也是利用上述指令查詢RSQLite提供的dbWriteTable。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">help</span>(&amp;quot;dbWriteTable,SQLiteConnection,character,data.frame-method&amp;quot;)</code></pre></div>
 </div>
 <div id="-21" class="section level2">
 <h2>關卡 21</h2>
-<p>此時的說明頁面左上角，會註明這份文件是來自RSQLite套件。請同學參考文件內容後，回答以下問題：<code>overwrite</code>是不是dbWRiteTable的參數呢？</p>
+<p>此時的說明頁面左上角，會註明這份文件是來自RSQLite套件。 請同學參考文件內容後，回答以下問題：<code>overwrite</code>是不是dbWRiteTable的參數呢？</p>
 <p>yes</p>
 </div>
 <div id="-22" class="section level2">
 <h2>關卡 22</h2>
-<p>這是R在處理SQL資料庫的設計。如果使用者只有操作到DBI的dbWriteTable提供的功能，那未來相同的程式碼運作在其他的資料庫系統時，不需要太大的修改即可運作。但是如果是用了RSQLite提供的功能（如overwrite），那在切換資料庫時，就需確認新的資料庫的R套件是否提供類似的功能。</p>
+<p>這是R 在處理SQL 資料庫的設計。 如果使用者只有操作到DBI的dbWriteTable提供的功能，那未來相同的程式碼運作在其他的資料庫系統時，不需要太大的修改即可運作。 但是如果是用了RSQLite提供的功能（如overwrite），那在切換資料庫時，就需確認新的資料庫的R 套件是否提供類似的功能。</p>
 </div>
 <div id="-23" class="section level2">
 <h2>關卡 23</h2>
-<p>在解釋<code>dbWriteTable</code>之前，我們要先對資料庫系統有一點簡單的認知。資料庫在處理數據時，會將數據放在一個又一個的表格中。這和R會把一個data.frame存放到對應的變數之中是相似的。</p>
+<p>在解釋<code>dbWriteTable</code>之前，我們要先對資料庫系統有一點簡單的認知。 資料庫在處理數據時，會將數據放在一個又一個的表格中。 這和R 會把一個data.frame存放到對應的變數之中是相似的。</p>
 </div>
 <div id="-24" class="section level2">
 <h2>關卡 24</h2>
-<p>回到<code>DBI::dbWriteTable(connection,name,value,...)</code>的說明，R會嘗試透過connection物件，將value的data.frame寫入到名稱為name的表格中。</p>
+<p>回到<code>DBI::dbWriteTable(connection, name, value, ...)</code>的說明，R 會嘗試透過connection物件，將value的data.frame寫入到名稱為name的表格中。</p>
 </div>
 <div id="-25" class="section level2">
 <h2>關卡 25</h2>
-<p>舉例來說，若我們想要將<code>lvr_land</code>這個記載實價登錄資訊的表格，寫到SQLite資料庫中。請同學利用指令：<code>head(lvr_land)</code>看一下這個資料集。</p>
+<p>舉例來說，若我們想要將<code>lvr_land</code>這個記載實價登錄資訊的表格，寫到SQLite資料庫中。 請同學利用指令：<code>head(lvr_land)</code>看一下這個資料集。</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(lvr_land)</code></pre></div>
 </div>
 <div id="-26" class="section level2">
@@ -252,135 +252,135 @@ Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">
 </div>
 <div id="-27" class="section level2">
 <h2>關卡 27</h2>
-<p>接著，我們透過<code>dbWriteTable</code>將實價登錄資料寫入資料庫中。請同學輸入：<code>dbWriteTable(db,&quot;lvr_land2&quot;,lvr_land)</code>。</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dbWriteTable</span>(db, <span class="st">&quot;lvr_land2&quot;</span>, lvr_land)</code></pre></div>
+<p>接著，我們透過<code>dbWriteTable</code>將實價登錄資料寫入資料庫中。 請同學輸入：<code>dbWriteTable(db, &amp;quot;lvr_land2&amp;quot;, lvr_land)</code>。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dbWriteTable</span>(db, &amp;quot;lvr_land2&amp;quot;, lvr_land)</code></pre></div>
 </div>
 <div id="-28" class="section level2">
 <h2>關卡 28</h2>
-<p>這樣的動作，就類似在R中執行：<code>lvr_land2&lt;-&lt;lvr_land的值&gt;</code>，差別只在於lvr_land2這個名字是一個SQLite資料庫的表格。</p>
+<p>這樣的動作，就類似在R 中執行：<code>lvr_land2 &amp;lt;- &amp;lt;lvr_land的值&amp;gt;</code>，差別只在於lvr_land2這個名字是一個SQLite資料庫的表格。</p>
 </div>
 <div id="-29" class="section level2">
 <h2>關卡 29</h2>
-<p>R大部分的資料庫套件，在<code>dbWriteTable</code>函數中都會提供<code>append</code>和<code>overwrite</code>兩個參數。</p>
+<p>R 大部分的資料庫套件，在<code>dbWriteTable</code>函數中都會提供<code>append</code>和<code>overwrite</code>兩個參數。</p>
 </div>
 <div id="-30" class="section level2">
 <h2>關卡 30</h2>
-<p><code>overwrite=TRUE</code>時，R會自動把撞名的表格刪除，並且寫入新的資料。如果是<code>overwrite=FALSE</code>時撞名，R就會出錯。這個部分若是讓同學測試的話，swirl會跳掉，所以就只能先帶過了。</p>
+<p><code>overwrite = TRUE</code> 時，R 會自動把撞名的表格刪除，並且寫入新的資料。 如果是<code>overwrite = FALSE</code>時撞名，R 就會出錯。 這個部分若是讓同學測試的話，swirl會跳掉，所以就只能先帶過了。</p>
 </div>
 <div id="-31" class="section level2">
 <h2>關卡 31</h2>
-<p><code>append=TRUE</code>時，R會把我們要寫入的資料，接在撞名的表格之下。這等介紹完<code>dbReadTable</code>之後，我們再試試。</p>
+<p><code>append = TRUE</code>時，R 會把我們要寫入的資料，接在撞名的表格之下。 這等介紹完<code>dbReadTable</code>之後，我們再試試。</p>
 </div>
 <div id="-32" class="section level2">
 <h2>關卡 32</h2>
-<p>接下來，透過<code>dbReadTable</code>來從表格中取出資料。這個指令只需要兩個參數：<code>connection</code>和<code>name</code>。請同學輸入：<code>dbReadTable(db,&quot;lvr_land2&quot;)</code>，就可以看到剛剛的數據。</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dbReadTable</span>(db, <span class="st">&quot;lvr_land2&quot;</span>)</code></pre></div>
+<p>接下來，透過<code>dbReadTable</code>來從表格中取出資料。 這個指令只需要兩個參數：<code>connection</code>和<code>name</code>。 請同學輸入：<code>dbReadTable(db, &amp;quot;lvr_land2&amp;quot;)</code>，就可以看到剛剛的數據。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dbReadTable</span>(db, &amp;quot;lvr_land2&amp;quot;)</code></pre></div>
 </div>
 <div id="-33" class="section level2">
 <h2>關卡 33</h2>
-<p>我們可以再寫入一次<code>lvr_land</code>，並且設定<code>append=TRUE</code>。請同學試試看輸入：<code>dbWriteTable(db,&quot;lvr_land2&quot;,lvr_land,append=TRUE)</code></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dbWriteTable</span>(db, <span class="st">&quot;lvr_land2&quot;</span>, lvr_land, <span class="dt">append =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<p>我們可以再寫入一次<code>lvr_land</code>，並且設定<code>append = TRUE</code>。 請同學試試看輸入：<code>dbWriteTable(db, &amp;quot;lvr_land2&amp;quot;, lvr_land, append = TRUE)</code></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dbWriteTable</span>(db, &amp;quot;lvr_land2&amp;quot;, lvr_land, <span class="dt">append =</span> <span class="ot">TRUE</span>)</code></pre></div>
 </div>
 <div id="-34" class="section level2">
 <h2>關卡 34</h2>
-<p>請再次執行<code>dbReadTable(db,&quot;lvr_land2&quot;)</code>，讀取“lvr_land2”表格看看。</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dbReadTable</span>(db, <span class="st">&quot;lvr_land2&quot;</span>)</code></pre></div>
+<p>請再次執行<code>dbReadTable(db, &amp;quot;lvr_land2&amp;quot;)</code>，讀取“lvr_land2”表格看看。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dbReadTable</span>(db, &amp;quot;lvr_land2&amp;quot;)</code></pre></div>
 </div>
 <div id="-35" class="section level2">
 <h2>關卡 35</h2>
-<p>這次應該會看到38或57筆資料（因為lvr_land總共有19筆資料，寫入兩次後會有38筆，三次則會有57筆），如果不幸需要接關的同學可能看到更多筆…</p>
+<p>這次應該會看到38或57筆資料（因為lvr_land總共有19筆資料，寫入兩次後會有38筆，三次則會有57筆）， 如果不幸需要接關的同學可能看到更多筆…</p>
 </div>
 <div id="-36" class="section level2">
 <h2>關卡 36</h2>
-<p><code>dbListTables(db)</code>可以列出目前已經存在於資料庫的表格。請同學試試看。</p>
+<p><code>dbListTables(db)</code>可以列出目前已經存在於資料庫的表格。 請同學試試看。</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dbListTables</span>(db)</code></pre></div>
 </div>
 <div id="-37" class="section level2">
 <h2>關卡 37</h2>
-<p>請試著用<code>iris2&lt;-dbReadTable(db,&quot;iris&quot;)</code>來讀出剛剛看到的<code>iris</code>表格，並存入變數<code>iris2</code>。這是我是前先將R內建的iris資料集寫入資料庫後所產生的表格。</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">iris2 &lt;-<span class="st"> </span><span class="kw">dbReadTable</span>(db, <span class="st">&quot;iris&quot;</span>)</code></pre></div>
+<p>請試著用<code>iris2 &amp;lt;- dbReadTable(db, &amp;quot;iris&amp;quot;)</code>來讀出剛剛看到的<code>iris</code>表格，並存入變數<code>iris2</code>。 這是我是前先將R 內建的iris資料集寫入資料庫後所產生的表格。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">iris2 &amp;lt;-<span class="st"> </span><span class="kw">dbReadTable</span>(db, &amp;quot;iris&amp;quot;)</code></pre></div>
 </div>
 <div id="-38" class="section level2">
 <h2>關卡 38</h2>
-<p>如同在RDataMining-03中看到jsonlite的vignette，我們可以用<code>all.equal(iris,iris2)</code>來比較看看兩者是不是一模一樣。</p>
+<p>如同在RDataMining-03中看到jsonlite的vignette，我們可以用<code>all.equal(iris, iris2)</code>來比較看看兩者是不是一模一樣。</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">all.equal</span>(iris, iris2)</code></pre></div>
 </div>
 <div id="-39" class="section level2">
 <h2>關卡 39</h2>
-<p>同學會看到：<code>&quot;Component“Species”:'current'isnotafactor&quot;</code>的字樣，這表示當我們從資料庫中將iris拿出來後，Species的型態改變了。</p>
+<p>同學會看到：<code>&amp;quot;Component “Species”: 'current' is not a factor&amp;quot;</code>的字樣，這表示當我們從資料庫中將iris拿出來後，Species的型態改變了。</p>
 </div>
 <div id="-40" class="section level2">
 <h2>關卡 40</h2>
-<p>型態改變這件事情，其實是可大可小的。在大部分的狀況下，例如建立統計模型、製作圖表、或是factor字串（character）的互換並不會帶來太大的困擾。但是在某些很不常見的狀況下（如<code>strsplit</code>在遇到factor的時候會出錯），可能會導致程式出錯。這是很討厭的。</p>
+<p>型態改變這件事情，其實是可大可小的。 在大部分的狀況下，例如建立統計模型、製作圖表、或是factor字串（character）的互換並不會帶來太大的困擾。 但是在某些很不常見的狀況下（如<code>strsplit</code>在遇到factor的時候會出錯），可能會導致程式出錯。 這是很討厭的。</p>
 </div>
 <div id="-41" class="section level2">
 <h2>關卡 41</h2>
-<p>我有開發過大型R的應用系統的經驗，而像這類型態不符的地方，往往會導致系統產生無法預期的結果。舉例來說，當我嘗試把資料處理的流程搬入資料庫後，某些原本可以運作的程式碼就變成無法運作了（就是<code>strsplit</code>）。</p>
+<p>我有開發過大型R 的應用系統的經驗，而像這類型態不符的地方，往往會導致系統產生無法預期的結果。 舉例來說，當我嘗試把資料處理的流程搬入資料庫後，某些原本可以運作的程式碼就變成無法運作了（就是<code>strsplit</code>）。</p>
 </div>
 <div id="-42" class="section level2">
 <h2>關卡 42</h2>
-<p>大部分的R使用者，大概都不需要管到這件事情。但是如果有一天R不聽你話的時候，請記得檢查上述提及的這些小地方。</p>
+<p>大部分的R 使用者，大概都不需要管到這件事情。 但是如果有一天R 不聽你話的時候，請記得檢查上述提及的這些小地方。</p>
 </div>
 <div id="-43" class="section level2">
 <h2>關卡 43</h2>
-<p>以上講解的<code>dbReadTable</code>和<code>dbWriteTable</code>，都是一次將所有資料倒進去和拿出來的方法，雖然方便，但當數據量很大的時候，一次可能只需要一部分的資料。進階的使用者可能需要更多關聯式資料庫所提供的功能。</p>
+<p>以上講解的<code>dbReadTable</code>和<code>dbWriteTable</code>，都是一次將所有資料倒進去和拿出來的方法，雖然方便，但當數據量很大的時候，一次可能只需要一部分的資料。 進階的使用者可能需要更多關聯式資料庫所提供的功能。</p>
 </div>
 <div id="-44" class="section level2">
 <h2>關卡 44</h2>
-<p>DBI界面中，我們可以利用<code>dbGetQuery</code>和<code>dbSendQuery</code>來執行SQL語句。SQL是操作關聯式資料庫的必學工具，也是資料科學家必備的工具之一。請同學執行：<code>dbGetQuery(db,&quot;SELECT*FROMirisWHEREspecies=\&quot;virginica\&quot;&quot;)</code></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dbGetQuery</span>(db, <span class="st">&quot;SELECT * FROM iris WHERE species = </span><span class="ch">\&quot;</span><span class="st">virginica</span><span class="ch">\&quot;</span><span class="st">&quot;</span>)</code></pre></div>
+<p>DBI界面中，我們可以利用<code>dbGetQuery</code>和<code>dbSendQuery</code>來執行SQL語句。 SQL是操作關聯式資料庫的必學工具，也是資料科學家必備的工具之一。 請同學執行：<code>dbGetQuery(db, &amp;quot;SELECT * FROM iris WHERE species = \&amp;quot;virginica\&amp;quot;&amp;quot;)</code></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dbGetQuery</span>(db, &amp;quot;SELECT *<span class="st"> </span>FROM iris WHERE <span class="dt">species =</span> \&amp;quot;virginica\&amp;quot;&amp;quot;)</code></pre></div>
 </div>
 <div id="-45" class="section level2">
 <h2>關卡 45</h2>
-<p>剛剛的範例中，<code>&quot;SELECT*FROMirisWHEREspecies=\&quot;virtinica\&quot;&quot;</code>是一段SQLexpression。而<code>dbGetQuery</code>會解析這樣的SQLexpression，並且依照指令進行資料庫的操作後，再將結果直接回傳給R。</p>
+<p>剛剛的範例中，<code>&amp;quot;SELECT * FROM iris WHERE species = \&amp;quot;virtinica\&amp;quot;&amp;quot;</code>是一段SQL expression。 而<code>dbGetQuery</code>會解析這樣的SQL expression，並且依照指令進行資料庫的操作後，再將結果直接回傳給R 。</p>
 </div>
 <div id="-46" class="section level2">
 <h2>關卡 46</h2>
-<p><code>dbSendQuery</code>函數則會先將結果儲存於Result物件中，再由使用者一段一段的取出。請同學試著執行：<code>rs&lt;-dbSendQuery(db,&quot;SELECT*FROMiris&quot;)</code>。</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">rs &lt;-<span class="st"> </span><span class="kw">dbSendQuery</span>(db, <span class="st">&quot;SELECT * FROM iris&quot;</span>)</code></pre></div>
+<p><code>dbSendQuery</code>函數則會先將結果儲存於Result物件中，再由使用者一段一段的取出。 請同學試著執行：<code>rs &amp;lt;- dbSendQuery(db, &amp;quot;SELECT * FROM iris&amp;quot;)</code>。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">rs &amp;lt;-<span class="st"> </span><span class="kw">dbSendQuery</span>(db, &amp;quot;SELECT *<span class="st"> </span>FROM iris&amp;quot;)</code></pre></div>
 </div>
 <div id="-47" class="section level2">
 <h2>關卡 47</h2>
-<p>上一關所拿到的<code>rs</code>物件，就是整個資料集的「代理」。我們可以利用<code>fetch</code>方法，一次拿一點資料出來。請同學試試看：<code>fetch(rs,1)</code>。</p>
+<p>上一關所拿到的<code>rs</code>物件，就是整個資料集的「代理」。 我們可以利用<code>fetch</code>方法，一次拿一點資料出來。 請同學試試看：<code>fetch(rs, 1)</code>。</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">fetch</span>(rs, <span class="dv">1</span>)</code></pre></div>
 </div>
 <div id="-48" class="section level2">
 <h2>關卡 48</h2>
-<p>請同學再試一次：<code>fetch(rs,1)</code>（可以按一下↑，正常安裝的R會顯示上一個輸入）</p>
+<p>請同學再試一次：<code>fetch(rs, 1)</code>（可以按一下 ↑ ，正常安裝的R 會顯示上一個輸入）</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">fetch</span>(rs, <span class="dv">1</span>)</code></pre></div>
 </div>
 <div id="-49" class="section level2">
 <h2>關卡 49</h2>
-<p>同學應該會注意到，兩次的結果是不同的。這是因為在第一次<code>dbSendQuery</code>指令完成之後，R和資料庫就把結果暫存到某個地方，並且將代理物件(也就是<code>rs</code>)回傳。之後每次執行<code>fetch</code>指令時，R就會「依照順序」把結果一個又一個的回傳給使用者。如果使用者每次想多拿一些資料，則可以更改第二個參數，如：<code>fetch(rs,100)</code>一次取出100筆資料。</p>
+<p>同學應該會注意到，兩次的結果是不同的。 這是因為在第一次<code>dbSendQuery</code>指令完成之後，R 和資料庫就把結果暫存到某個地方，並且將代理物件(也就是<code>rs</code>)回傳。 之後每次執行<code>fetch</code>指令時，R 就會「依照順序」把結果一個又一個的回傳給使用者。 如果使用者每次想多拿一些資料，則可以更改第二個參數，如：<code>fetch(rs, 100)</code>一次取出100筆資料。</p>
 </div>
 <div id="-50" class="section level2">
 <h2>關卡 50</h2>
-<p>當我們不需要再使用<code>rs</code>物件時，就刪除它：<code>dbClearResult(rs)</code>。請同學試試看。</p>
+<p>當我們不需要再使用<code>rs</code>物件時，就刪除它：<code>dbClearResult(rs)</code>。 請同學試試看。</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dbClearResult</span>(rs)</code></pre></div>
 </div>
 <div id="-51" class="section level2">
 <h2>關卡 51</h2>
-<p><code>dbSendQuery</code>和<code>fetch</code>的技巧在使用R處理「大量資料」，是非常有用的。尤其是當資料量「超過記憶體」時，運用資料庫可以很有效率地優化硬碟處理資料的效能。此時，如果我們的演算法不需要一次看到所有的資料，那<code>dbSendQuery</code>和<code>fetch</code>就非常有用，它們可以避免我們發生滑鼠不能移動的悲劇。</p>
+<p><code>dbSendQuery</code>和<code>fetch</code>的技巧在使用R 處理「大量資料」，是非常有用的。 尤其是當資料量「超過記憶體」時，運用資料庫可以很有效率地優化硬碟處理資料的效能。 此時，如果我們的演算法不需要一次看到所有的資料，那<code>dbSendQuery</code>和<code>fetch</code>就非常有用，它們可以避免我們發生滑鼠不能移動的悲劇。</p>
 </div>
 <div id="-52" class="section level2">
 <h2>關卡 52</h2>
-<p>上述的課程中，我們並沒有講解SQLexpression。同學如果有興趣的話，可以再找SQL相關的資料學習。這部份的細節，留待後續<code>dplyr</code>套件的系列課程中，再跟同學介紹。我們這裡想要強調的是所有對資料庫的基礎操作，以及DBI所提供一些輔助函數，例如：<code>dbGetQuery</code>、<code>dbSendQuery</code>等。</p>
+<p>上述的課程中，我們並沒有講解SQL expression。 同學如果有興趣的話，可以再找SQL相關的資料學習。 這部份的細節，留待後續<code>dplyr</code>套件的系列課程中，再跟同學介紹。 我們這裡想要強調的是所有對資料庫的基礎操作，以及DBI所提供一些輔助函數，例如：<code>dbGetQuery</code>、<code>dbSendQuery</code>等。</p>
 </div>
 <div id="-53" class="section level2">
 <h2>關卡 53</h2>
-<p>最後，我們示範資料庫的transaction功能。這在處理資料時，也是非常重要的操作步驟。</p>
+<p>最後，我們示範資料庫的transaction功能。 這在處理資料時，也是非常重要的操作步驟。</p>
 </div>
 <div id="-54" class="section level2">
 <h2>關卡 54</h2>
-<p>當我們在運用外部資源（如資料庫、如檔案系統）處理資料時，最害怕的狀況是被意外中斷。舉例來說，網路可能剛好斷線、硬碟突然壞軌、或是發生意想不到的狀況。這時候除了幫工程師買乖乖之外，實務上其實有一些技巧可以避免意外帶來的困擾。</p>
+<p>當我們在運用外部資源（如資料庫、如檔案系統）處理資料時，最害怕的狀況是被意外中斷。 舉例來說，網路可能剛好斷線、硬碟突然壞軌、或是發生意想不到的狀況。 這時候除了幫工程師買乖乖之外，實務上其實有一些技巧可以避免意外帶來的困擾。</p>
 </div>
 <div id="-55" class="section level2">
 <h2>關卡 55</h2>
-<p>意外對我們最大的困擾並不是工作中斷。畢竟作分析的工作，畫畫的時候R掛掉了，就…重新開R再跑一遍就好了。但是當我們正在寫入資料庫時，意外的中斷就會帶來以下的困擾。</p>
+<p>意外對我們最大的困擾並不是工作中斷。 畢竟作分析的工作，畫畫的時候R 掛掉了，就… 重新開R再跑一遍就好了。 但是當我們正在寫入資料庫時，意外的中斷就會帶來以下的困擾。</p>
 </div>
 <div id="-56" class="section level2">
 <h2>關卡 56</h2>
-<p>在排除意外的原因繼續工作之前，我們需要先知道目前資料庫，是處於「還未寫入」、「寫到一半」或是「寫入完畢」中哪一個狀態。在「還未寫入」的狀況下，我們只要重新執行程式即可。而「寫入完畢」的話就更棒了，可以繼續後續的工作。但是若是「寫到一半」的狀態，要接著工作就會非常麻煩，甚至可能還需要改動程式碼。</p>
+<p>在排除意外的原因繼續工作之前，我們需要先知道目前資料庫，是處於「還未寫入」、「寫到一半」或是「寫入完畢」中哪一個狀態。 在「還未寫入」的狀況下，我們只要重新執行程式即可。 而「寫入完畢」的話就更棒了，可以繼續後續的工作。 但是若是「寫到一半」的狀態，要接著工作就會非常麻煩，甚至可能還需要改動程式碼。</p>
 </div>
 <div id="-57" class="section level2">
 <h2>關卡 57</h2>
@@ -388,23 +388,23 @@ Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">
 </div>
 <div id="-58" class="section level2">
 <h2>關卡 58</h2>
-<p>在進行接下來關於Transaction的練習之前，我們先重新連線。請同學先中斷連線，輸入：<code>dbDisconnect(db)</code>。</p>
+<p>在進行接下來關於Transaction的練習之前，我們先重新連線。 請同學先中斷連線，輸入：<code>dbDisconnect(db)</code>。</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dbDisconnect</span>(db)</code></pre></div>
 </div>
 <div id="-59" class="section level2">
 <h2>關卡 59</h2>
-<p>請同學再次輸入：db&lt;-dbConnect(drv,db_path)`。</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">db &lt;-<span class="st"> </span><span class="kw">dbConnect</span>(drv, db_path)</code></pre></div>
+<p>請同學再次輸入：db &lt;- dbConnect(drv, db_path)`。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">db &amp;lt;-<span class="st"> </span><span class="kw">dbConnect</span>(drv, db_path)</code></pre></div>
 </div>
 <div id="-60" class="section level2">
 <h2>關卡 60</h2>
-<p>在R中，我們可以利用<code>dbBegin(db)</code>來開啟一個Transaction。請同學試試看。</p>
+<p>在R 中，我們可以利用<code>dbBegin(db)</code>來開啟一個Transaction。 請同學試試看。</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dbBegin</span>(db)</code></pre></div>
 </div>
 <div id="-61" class="section level2">
 <h2>關卡 61</h2>
-<p>接著，讓我們利用<code>dbRemoveTable(db,&quot;CO2&quot;)</code>來刪除“CO2”表格。</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dbRemoveTable</span>(db, <span class="st">&quot;CO2&quot;</span>)</code></pre></div>
+<p>接著，讓我們利用<code>dbRemoveTable(db, &amp;quot;CO2&amp;quot;)</code>來刪除“CO2”表格。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dbRemoveTable</span>(db, &amp;quot;CO2&amp;quot;)</code></pre></div>
 </div>
 <div id="-62" class="section level2">
 <h2>關卡 62</h2>
@@ -418,8 +418,8 @@ Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">
 </div>
 <div id="-64" class="section level2">
 <h2>關卡 64</h2>
-<p>請同學輸入<code>db&lt;-dbConnect(drv,db_path)</code>重新連接資料庫。</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">db &lt;-<span class="st"> </span><span class="kw">dbConnect</span>(drv, db_path)</code></pre></div>
+<p>請同學輸入<code>db &amp;lt;- dbConnect(drv, db_path)</code>重新連接資料庫。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">db &amp;lt;-<span class="st"> </span><span class="kw">dbConnect</span>(drv, db_path)</code></pre></div>
 </div>
 <div id="-65" class="section level2">
 <h2>關卡 65</h2>
@@ -437,8 +437,8 @@ Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">
 </div>
 <div id="-68" class="section level2">
 <h2>關卡 68</h2>
-<p>接著，讓我們利用<code>dbRemoveTable(db,&quot;CO2&quot;)</code>再刪除“CO2”表格一次。</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dbRemoveTable</span>(db, <span class="st">&quot;CO2&quot;</span>)</code></pre></div>
+<p>接著，讓我們利用<code>dbRemoveTable(db, &amp;quot;CO2&amp;quot;)</code>再刪除“CO2”表格一次。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dbRemoveTable</span>(db, &amp;quot;CO2&amp;quot;)</code></pre></div>
 </div>
 <div id="-69" class="section level2">
 <h2>關卡 69</h2>
@@ -456,11 +456,11 @@ Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">
 </div>
 <div id="-72" class="section level2">
 <h2>關卡 72</h2>
-<p>總而言之，當<code>dbBegin(db)</code>開始運行之後，所有的變更都要等到執行<code>dbCommit(db)</code>後才會生效。中間只要發生任何狀況：無論是使用者主動<code>dbRollback(db)</code>，或是發生意外導致斷線，資料庫都會自動復原至我們執行<code>dbBegin(db)</code>時的狀態。這個方法在寫入大量數據時，也是很重要的技巧，可以保證我們的「資料正確性」。</p>
+<p>總而言之，當<code>dbBegin(db)</code>開始運行之後，所有的變更都要等到執行<code>dbCommit(db)</code>後才會生效。 中間只要發生任何狀況：無論是使用者主動<code>dbRollback(db)</code>，或是發生意外導致斷線，資料庫都會自動復原至我們執行<code>dbBegin(db)</code>時的狀態。 這個方法在寫入大量數據時，也是很重要的技巧，可以保證我們的「資料正確性」。</p>
 </div>
 <div id="-73" class="section level2">
 <h2>關卡 73</h2>
-<p>資料庫還有許多處理資料的技術與手法，例如JOIN等相關技術。但是這都牽涉到SQL語法的學習，而且各家資料庫系統在這部份的語法也會略有差異，所以本次課程僅著重於R與資料庫之間的簡易操作以及基礎概念。</p>
+<p>資料庫還有許多處理資料的技術與手法，例如JOIN等相關技術。 但是這都牽涉到SQL語法的學習，而且各家資料庫系統在這部份的語法也會略有差異，所以本次課程僅著重於R 與資料庫之間的簡易操作以及基礎概念。</p>
 </div>
 <div id="-74" class="section level2">
 <h2>關卡 74</h2>

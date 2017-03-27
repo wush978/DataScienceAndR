@@ -138,24 +138,24 @@ Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">
 </noscript>
 <div id="-1" class="section level2">
 <h2>關卡 1</h2>
-<p>這門課程的目標是講解Robject的入門操作。</p>
+<p>這門課程的目標是講解R object的入門操作。</p>
 </div>
 <div id="-2" class="section level2">
 <h2>關卡 2</h2>
-<p>R的object結構是針對資料分析所設計的。所以最簡單的object，就是一連串的數字。</p>
+<p>R 的object結構是針對資料分析所設計的。所以最簡單 的object，就是一連串的數字。</p>
 </div>
 <div id="-3" class="section level2">
 <h2>關卡 3</h2>
-<p>這讓R和其他的程式語言不同，因為一般的程式語言最簡單的object會是一個數字。</p>
+<p>這讓R 和其他的程式語言不同，因為一般的程式語言 最簡單的object會是一個數字。</p>
 </div>
 <div id="-4" class="section level2">
 <h2>關卡 4</h2>
-<p>R這樣設計的理由是因為在資料分析的應用中，一定是同時處理多筆資料，而不會只有單一筆資料。</p>
+<p>R 這樣設計的理由是因為在資料分析的應用中，一定是同時處理多筆資料，而不會只有單一筆資料。</p>
 </div>
 <div id="-5" class="section level2">
 <h2>關卡 5</h2>
-<p>要用R建立一個內容為10.4,5.6,3.1和6.4的向量，最常用的方式就是輸入：<code>c(10.4,5.6,3.1,6.4)</code>請同學依照這樣的語法建立一個這樣的向量，並且把它存為變數x。</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">10.4</span>, <span class="fl">5.6</span>, <span class="fl">3.1</span>, <span class="fl">6.4</span>)</code></pre></div>
+<p>要用R 建立一個內容為10.4, 5.6, 3.1和6.4的向量， 最常用的方式就是輸入：<code>c(10.4, 5.6, 3.1, 6.4)</code> 請同學依照這樣的語法建立一個這樣的向量，並且把它存為變數x。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &amp;lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">10.4</span>, <span class="fl">5.6</span>, <span class="fl">3.1</span>, <span class="fl">6.4</span>)</code></pre></div>
 </div>
 <div id="-6" class="section level2">
 <h2>關卡 6</h2>
@@ -164,68 +164,68 @@ Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">
 </div>
 <div id="-7" class="section level2">
 <h2>關卡 7</h2>
-<p>在R中，<code>c()</code>可以接受任意數量的向量參數，並依照順序將它們串接成一個單一向量。舉例來說：<code>c(x,1)</code>會在剛剛我們建立的x後面再接一個1。而<code>c(x,2,3)</code>則會在x之後接上2和3。請同學依照上述規則，撰寫一個expression，內容是建立一個在x後面接上x的向量。</p>
+<p>在R 中，<code>c()</code>可以接受任意數量的向量參數，並依照順序將它們串接成一個單一向量。 舉例來說：<code>c(x, 1)</code>會在剛剛我們建立的x 後面再接一個1 。 而<code>c(x, 2, 3)</code>則會在x 之後接上2 和3 。 請同學依照上述規則，撰寫一個expression，內容是建立一個在x 後面接上x 的向量。</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">c</span>(x, x)</code></pre></div>
 </div>
 <div id="-8" class="section level2">
 <h2>關卡 8</h2>
-<p>在R中，大部份的運算都是向量式的。舉例來說，加法<code>+</code>在R中就屬於向量式。請同學輸入：<code>c(1,2,3)+c(2,4,6)</code>並觀察結果。</p>
+<p>在R 中，大部份的運算都是向量式的。舉例來說，加法<code>+</code>在R 中就屬於向量式。 請同學輸入：<code>c(1, 2, 3) + c(2, 4, 6)</code> 並觀察結果。</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>) +<span class="st"> </span><span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">6</span>)</code></pre></div>
 </div>
 <div id="-9" class="section level2">
 <h2>關卡 9</h2>
-<p>計算結果中的第一個值，就是輸入的兩個向量中，第一個值的相加。以此類推，一直到第三個值都維持這樣的規律。這就是「向量式」的意思。</p>
+<p>計算結果中的第一個值，就是輸入的兩個向量中，第一個值的相加。 以此類推，一直到第三個值都維持這樣的規律。這就是「向量式」的意思。</p>
 </div>
 <div id="-10" class="section level2">
 <h2>關卡 10</h2>
-<p>當相加的兩個向量長度不同時，R會自動重複比較短的向量，補到和較長的向量相同的長度，然後用一樣的方式去做計算。請同學輸入<code>2+c(1,2,3)</code>試試看。</p>
+<p>當相加的兩個向量長度不同時，R 會自動重複比較短的向量，補到和較長的向量相同的長度，然後用 一樣的方式去做計算。請同學輸入<code>2 + c(1,2,3)</code>試試看。</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">2</span> +<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>)</code></pre></div>
 </div>
 <div id="-11" class="section level2">
 <h2>關卡 11</h2>
-<p>向量式運算可以讓我們在處理資料時更加容易。在R之中，除了加減乘除之外，許多常用的數學算式都是向量式的。例如：<code>log</code>、<code>exp</code>、<code>sin</code>、<code>cos</code>、<code>tan</code>和<code>sqrt</code>。</p>
+<p>向量式運算可以讓我們在處理資料時更加容易。 在R 之中，除了加減乘除之外，許多常用的數學算式都是向量式的。例如：<code>log</code>、<code>exp</code>、<code>sin</code>、 <code>cos</code>、<code>tan</code>和<code>sqrt</code>。</p>
 </div>
 <div id="-12" class="section level2">
 <h2>關卡 12</h2>
-<p>然而，並不是所有的運算都是向量式的。舉例來說，給定一個向量x,<code>max(x)</code>會傳回x中最大的值，而<code>min(x)</code>則會傳回x中最小的值。若想要在分析數據的時知道數值的範圍，這兩個函數就可以派上用場。請同學寫一個expression來建立兩個值的向量，而且第一個值是x的最小值，第二個值則是x的最大值。</p>
+<p>然而，並不是所有的運算都是向量式的。 舉例來說，給定一個向量x ,<code>max(x)</code>會傳回x 中最大的值，而<code>min(x)</code>則會傳回x 中最小的值。 若想要在分析數據的時知道數值的範圍，這兩個函數就可以派上用場。 請同學寫一個expression來建立兩個值的向量，而且第一個值是x 的最小值，第二個值則是x 的最大值。</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">c</span>(<span class="kw">min</span>(x), <span class="kw">max</span>(x))</code></pre></div>
 </div>
 <div id="-13" class="section level2">
 <h2>關卡 13</h2>
-<p>在R中有，函數<code>range</code>能直接傳回輸入向量的範圍（最小到最大）。請同學使用<code>range</code>，再算一次x的範圍。</p>
+<p>在R 中有，函數<code>range</code>能直接傳回輸入向量的範圍（最小到最大）。 請同學使用<code>range</code>，再算一次x 的範圍。</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">range</span>(x)</code></pre></div>
 </div>
 <div id="-14" class="section level2">
 <h2>關卡 14</h2>
-<p>在R中，函數<code>sum(x)</code>會傳回x所有值的加總。函數<code>length(x)</code>則能直接傳回x的長度。現在，請同學利用<code>sum</code>和<code>length</code>計算x的平均值。</p>
+<p>在R 中，函數<code>sum(x)</code>會傳回x 所有值的加總。 函數<code>length(x)</code>則能直接傳回x 的長度。 現在，請同學利用<code>sum</code>和<code>length</code>計算x 的平均值。</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(x) /<span class="st"> </span><span class="kw">length</span>(x)</code></pre></div>
 </div>
 <div id="-15" class="section level2">
 <h2>關卡 15</h2>
-<p>R也內建許多統計函數。例如<code>mean(x)</code>可以計算x的平均值。透過<code>mean</code>、<code>sum</code>和<code>length</code>，我們就能計算x的樣本變異數：<code>sum((x-mean(x))^2)/(length(x)-1)</code>。但是R也有內建的函數來簡化計算工作。透過<code>var(x)</code>，我們就能簡單用短短的函數計算樣本變異數。</p>
+<p>R 也內建許多統計函數。 例如<code>mean(x)</code>可以計算x 的平均值。透過<code>mean</code>、<code>sum</code>和<code>length</code>，我們就能計算x 的樣本變異數：<code>sum((x - mean(x))^2) / (length(x)-1)</code>。 但是R 也有內建的函數來簡化計算工作。 透過<code>var(x)</code>，我們就能簡單用短短的函數計算樣本變異數。</p>
 </div>
 <div id="-16" class="section level2">
 <h2>關卡 16</h2>
-<p>現在，請利用<code>var</code>計算x的樣本變異數。</p>
+<p>現在，請利用<code>var</code>計算x 的樣本變異數。</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">var</span>(x)</code></pre></div>
 </div>
 <div id="-17" class="section level2">
 <h2>關卡 17</h2>
-<p>請利用<code>sd</code>計算x的樣本標準差。</p>
+<p>請利用<code>sd</code>計算x 的樣本標準差。</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sd</span>(x)</code></pre></div>
 </div>
 <div id="-18" class="section level2">
 <h2>關卡 18</h2>
-<p>而<code>sort(x)</code>則會產生一個和x長度一樣的向量，但向量中的值是由小到大排列。請同學試試看：<code>sort(x)</code></p>
+<p>而<code>sort(x)</code>則會產生一個和x 長度一樣的向量，但向量中的值是由小到大排列。 請同學試試看：<code>sort(x)</code></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sort</span>(x)</code></pre></div>
 </div>
 <div id="-19" class="section level2">
 <h2>關卡 19</h2>
-<p>在數學中，計算中輸入的x，代表的可能是整數、實數或甚至是複數。而R中的數學計算，則會自動根據x的屬性做出調整。</p>
+<p>在數學中，計算中輸入的x ，代表的可能是整數、實數或甚至是複數。 而R 中的數學計算，則會自動根據x 的屬性做出調整。</p>
 </div>
 <div id="-20" class="section level2">
 <h2>關卡 20</h2>
-<p>舉例來說，如果輸入<code>sqrt(-17)</code>，我們會得到NaN（NotANumber）的結果。請同學試試看輸入<code>sqrt(-17)</code>。這裡的<code>sqrt</code>代表的是數學上開根號的運算。</p>
+<p>舉例來說，如果輸入<code>sqrt(-17)</code>，我們會得到NaN（Not A Number）的結果。 請同學試試看輸入<code>sqrt(-17)</code>。這裡的<code>sqrt</code>代表的是數學上開根號的運算。</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sqrt</span>(-<span class="dv">17</span>)</code></pre></div>
 </div>
 <div id="-21" class="section level2">
@@ -234,36 +234,36 @@ Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">
 </div>
 <div id="-22" class="section level2">
 <h2>關卡 22</h2>
-<p>但是，若我們改為輸入<code>sqrt(-17+0i)</code>，這時候因為輸入的是一個複數，R會自動調整運算行為，不會再回傳一個NaN。請同學試試看。</p>
+<p>但是，若我們改為輸入<code>sqrt(-17 + 0i)</code>，這時候因為輸入的是一個複數， R 會自動調整運算行為，不會再回傳一個NaN。請同學試試看。</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sqrt</span>(-<span class="dv">17</span> +<span class="st"> </span>0i)</code></pre></div>
 </div>
 <div id="-23" class="section level2">
 <h2>關卡 23</h2>
-<p>R也具備有簡易的功能，可以產生一些附帶有規則的序列。例如：<code>1:10</code>就會產生自1至10的序列。這樣的功能，在整理資料時十分實用。舉例來說，如果需要取出第5筆到第100筆的資料，就會用到類似的語法。請同學利用<code>:</code>建立一個從20到40的序列。</p>
+<p>R 也具備有簡易的功能，可以產生一些附帶有規則的序列。 例如：<code>1:10</code>就會產生自1 至10的序列。 這樣的功能，在整理資料時十分實用。 舉例來說，如果需要取出第5筆到第100筆的資料，就會用到類似的語法。 請同學利用<code>:</code>建立一個從20到40的序列。</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">20</span>:<span class="dv">40</span></code></pre></div>
 </div>
 <div id="-24" class="section level2">
 <h2>關卡 24</h2>
-<p>在R中，<code>:</code>這個運算子的優先層級很高。也就是說，如果看到：<code>2*1:10</code>這段expression，會優先處理<code>1:10</code>的部分，然後再將結果乘以2。我們來讓同學試試看，請輸入：<code>2*1:10</code>。</p>
+<p>在R 中，<code>:</code>這個運算子的優先層級很高。 也就是說，如果看到：<code>2 * 1:10</code>這段expression，會優先處理<code>1:10</code>的部分，然後再將結果乘以2。 我們來讓同學試試看，請輸入：<code>2 * 1:10</code>。</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">2</span> *<span class="st"> </span><span class="dv">1</span>:<span class="dv">10</span></code></pre></div>
 </div>
 <div id="-25" class="section level2">
 <h2>關卡 25</h2>
-<p>跟各位介紹一個更被廣泛運用，產生向量的方式：<code>seq</code>。<code>seq(1,10)</code>在R中所代表的，其實就是<code>1:10</code>。請試試看輸入<code>seq(1,10)</code>。</p>
+<p>跟各位介紹一個更被廣泛運用，產生向量的方式：<code>seq</code>。 <code>seq(1, 10)</code> 在R 中所代表的，其實就是<code>1:10</code>。 請試試看輸入<code>seq(1, 10)</code>。</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">seq</span>(<span class="dv">1</span>,<span class="dv">10</span>)</code></pre></div>
 </div>
 <div id="-26" class="section level2">
 <h2>關卡 26</h2>
-<p><code>seq</code>本質上就是一個「函數」，而<code>seq(1,10)</code>這段expression中，我們將1和10稱為此函數的參數(Argument)。讓我們來看一下<code>seq</code>可以接受幾個參數。請同學用之前介紹的方式，打開<code>seq</code>的說明文件。</p>
+<p><code>seq</code>本質上就是一個「函數」，而<code>seq(1,10)</code>這段expression中，我們將1 和10稱為此函數的參數(Argument)。 讓我們來看一下<code>seq</code>可以接受幾個參數。 請同學用之前介紹的方式，打開<code>seq</code>的說明文件。</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">?seq</code></pre></div>
 </div>
 <div id="-27" class="section level2">
 <h2>關卡 27</h2>
-<p>我們可以在說明文件上，閱讀DefaultS3method之下的那段說明程式碼：<code>seq(from=1,to=1,by=((to-from)/(length.out-1)),length.out=NULL,along.with=NULL,...)</code>這段說明文字顯示了<code>seq</code>可以接受五個參數，分別為：<code>from</code>、<code>to</code>、<code>by</code>、<code>length.out</code>和<code>along.with</code>。</p>
+<p>我們可以在說明文件上，閱讀 Default S3 method 之下的那段說明程式碼： <code>seq(from = 1, to = 1, by = ((to - from)/(length.out - 1)), length.out = NULL, along.with = NULL, ...)</code> 這段說明文字顯示了<code>seq</code>可以接受五個參數，分別為：<code>from</code>、<code>to</code>、<code>by</code>、<code>length.out</code>和<code>along.with</code>。</p>
 </div>
 <div id="-28" class="section level2">
 <h2>關卡 28</h2>
-<p>對於個別參數的使用方法，我們可以閱讀在Argument之下的細節說明。比如說，<code>from,tofrom,tothestartingand(maximal)endvaluesofthesequence.Oflength1unlessjustfromissuppliedasanunnamedargument.</code>這段文字就說明了<code>from</code>和<code>to</code>的用法。</p>
+<p>對於個別參數的使用方法，我們可以閱讀在Argument之下的細節說明。 比如說，<code>from, to from, to   the starting and (maximal) end values of the sequence. Of length 1 unless just from is supplied as an unnamed argument.</code> 這段文字就說明了<code>from</code>和<code>to</code>的用法。</p>
 </div>
 <div id="-29" class="section level2">
 <h2>關卡 29</h2>
@@ -276,145 +276,145 @@ Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">
 </div>
 <div id="-31" class="section level2">
 <h2>關卡 31</h2>
-<p>在R中，<code>seq</code>的參數共有：<code>from</code>、<code>to</code>、<code>by</code>、<code>length.out</code>和<code>along.with</code>五種。如果我們不指定，而是依照順序填入：<code>seq(1,10)</code>，那就代表<code>from</code>是1、<code>to</code>是10、，而<code>by</code>等其他Argument則使用預設參數。</p>
+<p>在R 中，<code>seq</code>的參數共有：<code>from</code>、<code>to</code>、<code>by</code>、<code>length.out</code>和<code>along.with</code>五種。 如果我們不指定，而是依照順序填入：<code>seq(1, 10)</code>，那就代表<code>from</code>是1 、 <code>to</code>是10、，而<code>by</code>等其他Argument則使用預設參數。</p>
 </div>
 <div id="-32" class="section level2">
 <h2>關卡 32</h2>
-<p>我們也可以透過指定參數名稱的方式來告訴R<code>seq</code>的參數是什麼。舉例來說，<code>seq(to=10,from=1)</code>會告訴R參數<code>from</code>的值是1，而<code>to</code>則是10。因此，計算結果將會和<code>seq(1,10)</code>相同。請同學試試看。</p>
+<p>我們也可以透過指定參數名稱的方式來告訴R <code>seq</code>的參數是什麼。 舉例來說，<code>seq(to = 10, from = 1)</code>會告訴R 參數<code>from</code>的值是1 ，而<code>to</code>則是10。 因此，計算結果將會和<code>seq(1,10)</code>相同。請同學試試看。</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">seq</span>(<span class="dt">to =</span> <span class="dv">10</span>, <span class="dt">from =</span> <span class="dv">1</span>)</code></pre></div>
 </div>
 <div id="-33" class="section level2">
 <h2>關卡 33</h2>
-<p>而利用<code>seq</code>所產生的序列間隔也不一定要是1。<code>seq</code>函數可以透過<code>by</code>這個參數控制間隔，如果希望間隔是0.5，所以只要輸入<code>seq(1,10,by=0.5)</code>即可產生。請同學試試看。</p>
+<p>而利用<code>seq</code>所產生的序列間隔也不一定要是1 。<code>seq</code>函數可以透過<code>by</code>這個參數控制間隔， 如果希望間隔是0.5，所以只要輸入<code>seq(1, 10, by = 0.5)</code>即可產生。請同學試試看。</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">seq</span>(<span class="dv">1</span>, <span class="dv">10</span>, <span class="dt">by =</span> <span class="fl">0.5</span>)</code></pre></div>
 </div>
 <div id="-34" class="section level2">
 <h2>關卡 34</h2>
-<p>而我們也可以透過指定開頭、間隔和長度來產生序列。在<code>seq</code>中，這對應到<code>from</code>、<code>by</code>和<code>length.out</code>這三個參數。請同學寫一個expression，產生一個從1開始，間隔為2，長度為10的序列。參數請透過名稱來給定。</p>
+<p>而我們也可以透過指定開頭、間隔和長度來產生序列。 在<code>seq</code>中，這對應到<code>from</code>、<code>by</code>和<code>length.out</code>這三個參數。 請同學寫一個expression，產生一個從1 開始，間隔為2 ，長度為10的序列。參數請透過 名稱來給定。</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">seq</span>(<span class="dt">from =</span> <span class="dv">1</span>, <span class="dt">by =</span> <span class="dv">2</span>, <span class="dt">length.out =</span> <span class="dv">10</span>)</code></pre></div>
 </div>
 <div id="-35" class="section level2">
 <h2>關卡 35</h2>
-<p>R很聰明，在指定argument時不須指定全名，只要給出前面幾個可以讓R辨別argument名稱的字母即可。舉例來說：<code>seq(from=1,by=2,length=10)</code>也可以讓R知道此序列中，argument<code>length.out</code>的值是10。</p>
+<p>R 很聰明，在指定argument時不須指定全名，只要給出前面幾個可以讓R 辨別argument名稱的字母即可。 舉例來說：<code>seq(from = 1, by = 2, length = 10)</code>也可以讓R 知道此序列中，argument <code>length.out</code>的值是10。</p>
 </div>
 <div id="-36" class="section level2">
 <h2>關卡 36</h2>
-<p>若是不使用序列，而是想要重複某一個數字，則可以用<code>rep</code>。請同學試試看：<code>rep(2,times=10)</code></p>
+<p>若是不使用序列，而是想要重複某一個數字，則可以用<code>rep</code>。 請同學試試看：<code>rep(2, times = 10)</code></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rep</span>(<span class="dv">2</span>, <span class="dt">times =</span> <span class="dv">10</span>)</code></pre></div>
 </div>
 <div id="-37" class="section level2">
 <h2>關卡 37</h2>
-<p><code>rep</code>也可以作用在一個序列上。如果給了argument<code>times</code>定值，那R會將整個序列重複<code>times</code>次，並接起來。請同學試試看：<code>rep(x,times=2)</code>。</p>
+<p><code>rep</code>也可以作用在一個序列上。如果給了argument <code>times</code>定值，那R 會將整個序列重複<code>times</code>次，並接起來。 請同學試試看：<code>rep(x, times = 2)</code>。</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rep</span>(x, <span class="dt">times =</span> <span class="dv">2</span>)</code></pre></div>
 </div>
 <div id="-38" class="section level2">
 <h2>關卡 38</h2>
-<p>如果<code>rep</code>沒有指定在argument<code>times</code>，而是在argument<code>each</code>，那R會將向量的每一個值，個別重複<code>each</code>遍之後，再接起來。請同學試試看：<code>rep(x,each=2)</code>。</p>
+<p>如果<code>rep</code>沒有指定在argument <code>times</code>，而是在argument <code>each</code>， 那R 會將向量的每一個值，個別重複<code>each</code>遍之後，再接起來。 請同學試試看：<code>rep(x, each = 2)</code>。</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rep</span>(x, <span class="dt">each =</span> <span class="dv">2</span>)</code></pre></div>
 </div>
 <div id="-39" class="section level2">
 <h2>關卡 39</h2>
-<p>在R中，整理資料的時候很常會將<code>seq</code>和<code>rep</code>的搭配使用。有興趣的同學可以在後續的實例教材中，看看在整理資料的過程如何應用這兩個函數解決問題。</p>
+<p>在R 中，整理資料的時候很常會將<code>seq</code>和<code>rep</code>的搭配使用。 有興趣的同學可以在後續的實例教材中，看看在整理資料的過程如何應用這兩個函數解決問題。</p>
 </div>
 <div id="-40" class="section level2">
 <h2>關卡 40</h2>
-<p>除了數值之外，邏輯值也是很常見的。類似數值，R最基礎的object之一，就是邏輯向量。在R中，我們看到的一個值，其實只是一個長度為1的向量。</p>
+<p>除了數值之外，邏輯值也是很常見的。 類似數值，R 最基礎的object之一，就是邏輯向量。 在R 中，我們看到的一個值，其實只是一個長度為1 的向量。</p>
 </div>
 <div id="-41" class="section level2">
 <h2>關卡 41</h2>
-<p>邏輯向量常常表示資料中如：「是、否」、「男、女」之類等二分法的選項。除此之外，也很常用在程式碼的流程控制。</p>
+<p>邏輯向量常常表示資料中如：「是、否」、「男、女」之類等二分法的選項。 除此之外，也很常用在程式碼的流程控制。</p>
 </div>
 <div id="-42" class="section level2">
 <h2>關卡 42</h2>
-<p>邏輯值「真」常用<code>TRUE</code>或<code>T</code>來代表。「假」則用<code>FALSE</code>或<code>F</code>代表。第三種在邏輯向量會出現的值，就是NA（NotAvailable）。注意：這裡的<code>T</code>和<code>F</code>所對應到的<code>TRUE</code>或<code>FALSE</code>變數只是預設值，並不是保留。如有需要，是可以更改<code>T</code>和<code>F</code>的內容的！</p>
+<p>邏輯值「真」常用<code>TRUE</code>或<code>T</code>來代表。「假」則用<code>FALSE</code>或<code>F</code>代表。 第三種在邏輯向量會出現的值，就是NA（Not Available）。 注意：這裡的<code>T</code>和<code>F</code>所對應到的<code>TRUE</code>或<code>FALSE</code>變數只是預設值，並不是保留。如有需要，是可以更改<code>T</code>和<code>F</code>的內容的！</p>
 </div>
 <div id="-43" class="section level2">
 <h2>關卡 43</h2>
-<p>我們可以利用各種不同「條件類型的expression」來建立邏輯向量。舉例來說，有一個序列x，我們就可以利用<code>x&gt;5</code>來建立一個長度和x相同的邏輯向量。請同學試試看。</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &gt;<span class="st"> </span><span class="dv">5</span></code></pre></div>
+<p>我們可以利用各種不同「條件類型的expression」來建立邏輯向量。 舉例來說，有一個序列x ，我們就可以利用<code>x &amp;gt; 5</code>來建立一個長度和x 相同的邏輯向量。請同學試試看。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &amp;gt; <span class="dv">5</span></code></pre></div>
 </div>
 <div id="-44" class="section level2">
 <h2>關卡 44</h2>
-<p>從結果可以看到，R會拿x（<code>c(10.4,5.6,3.1,6.4)</code>）中的值一個個的和5比較大小。比較大的就是TRUE，而比較小的即是FALSE。</p>
+<p>從結果可以看到，R 會拿x （<code>c(10.4, 5.6, 3.1, 6.4)</code>）中的值一個個的和5 比較大小。 比較大的就是TRUE，而比較小的即是FALSE。</p>
 </div>
 <div id="-45" class="section level2">
 <h2>關卡 45</h2>
-<p>依此類推，可用於建立邏輯向量的「條件」分別有：大於<code>&gt;</code>、大於等於<code>&gt;=</code>、小於<code>&lt;</code>、小於等於<code>&lt;=</code>、相等<code>==</code>和不相等<code>!=</code>。這類邏輯向量在整理資料做資料篩選時，是很常用到的。</p>
+<p>依此類推，可用於建立邏輯向量的「條件」分別有：大於<code>&amp;gt;</code>、大於等於<code>&amp;gt;=</code>、小於<code>&amp;lt;</code>、小於等於<code>&amp;lt;=</code>、相等<code>==</code>和不相等<code>!=</code>。 這類邏輯向量在整理資料做資料篩選時，是很常用到的。</p>
 </div>
 <div id="-46" class="section level2">
 <h2>關卡 46</h2>
-<p>另外，「且」<code>&amp;</code>以及「或」<code>|</code>這兩個邏輯運算子也是很常用的。它們可以在兩個邏輯向量中做運算。請同學試試看：<code>x&gt;5&amp;x&lt;10</code>。</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &gt;<span class="st"> </span><span class="dv">5</span> &amp;<span class="st"> </span>x &lt;<span class="st"> </span><span class="dv">10</span></code></pre></div>
+<p>另外，「且」<code>&amp;amp;</code>以及「或」<code>|</code>這兩個邏輯運算子也是很常用的。它們可以 在兩個邏輯向量中做運算。請同學試試看：<code>x &amp;gt; 5 &amp;amp; x &amp;lt; 10</code>。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &amp;gt; <span class="dv">5</span> &amp;amp; x &amp;lt; <span class="dv">10</span></code></pre></div>
 </div>
 <div id="-47" class="section level2">
 <h2>關卡 47</h2>
-<p>輸出結果顯示，在x（<code>c(10.4,5.6,3.1,6.4)</code>）中，介於5和10之間的數值會顯示為TRUE，否則顯示為FALSE。在篩選資料時，若是篩選條件較為複雜，需要用到多個條件來組合而成時，就會用到<code>&amp;</code>以及<code>|</code>。</p>
+<p>輸出結果顯示，在x （<code>c(10.4, 5.6, 3.1, 6.4)</code>）中，介於5 和10之間的數值會顯示為TRUE，否則顯示為FALSE。 在篩選資料時，若是篩選條件較為複雜，需要用到多個條件來組合而成時，就會用到<code>&amp;amp;</code>以及<code>|</code>。</p>
 </div>
 <div id="-48" class="section level2">
 <h2>關卡 48</h2>
-<p>當資料的值無法取得時，R就會給它一個特殊的記號：NA。所有和NA相關的運算結果，通常都會是NA。就常識來看，這很合理。因為「無法取得的數字」加上1，結果依舊會是「無法取得」。</p>
+<p>當資料的值無法取得時，R 就會給它一個特殊的記號：NA。 所有和NA相關的運算結果，通常都會是NA。 就常識來看，這很合理。因為「無法取得的數字」加上1 ，結果依舊會是「無法取得」。</p>
 </div>
 <div id="-49" class="section level2">
 <h2>關卡 49</h2>
-<p>我們可以利用<code>is.na</code>來判斷一個向量裡面是否有NA存在。請同學試試看<code>is.na(x)</code>。</p>
+<p>我們可以利用<code>is.na</code>來判斷一個向量裡面是否有NA存在。 請同學試試看<code>is.na(x)</code>。</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">is.na</span>(x)</code></pre></div>
 </div>
 <div id="-50" class="section level2">
 <h2>關卡 50</h2>
-<p>在R中，<code>is.na(x)</code>的結果都是FALSE，因為x的資料裡面沒有NA。因此，我們來玩一個有NA的向量吧！請試試看：<code>is.na(c(1,2,NA,3))</code></p>
+<p>在R 中，<code>is.na(x)</code>的結果都是FALSE，因為x 的資料裡面沒有NA。 因此，我們來玩一個有NA的向量吧！ 請試試看：<code>is.na(c(1,2,NA,3))</code></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">is.na</span>(<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="ot">NA</span>,<span class="dv">3</span>))</code></pre></div>
 </div>
 <div id="-51" class="section level2">
 <h2>關卡 51</h2>
-<p>在R之中，我們已經看過兩種特別的記號，分別為：NA和NaN。NA代表的是缺失值，而NaN大多來自於數學運算中沒有定義的行為。例如：<code>sqrt(-17)</code>、<code>0/0</code>和<code>Inf-Inf</code>。在R中，無限大就是<code>Inf</code>。R對此類的數學處理是很聰明的。同學們可以試試看使用R計算<code>Inf+1</code>的結果。</p>
+<p>在R 之中，我們已經看過兩種特別的記號，分別為：NA和NaN。 NA代表的是缺失值，而NaN 大多來自於數學運算中沒有定義的行為。 例如：<code>sqrt(-17)</code>、<code>0/0</code>和<code>Inf - Inf</code>。在R 中，無限大就是<code>Inf</code>。 R 對此類的數學處理是很聰明的。 同學們可以試試看使用R 計算<code>Inf + 1</code> 的結果。</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="ot">Inf</span> +<span class="st"> </span><span class="dv">1</span></code></pre></div>
 </div>
 <div id="-52" class="section level2">
 <h2>關卡 52</h2>
-<p>雖然可以理解NA和NaN的不同，但是<code>is.na</code>會將兩者都定義成TRUE。請同學試試看：<code>is.na(c(NA,NaN,1))</code></p>
+<p>雖然可以理解NA和NaN的不同，但是<code>is.na</code>會將兩者都定義成TRUE。 請同學試試看：<code>is.na(c(NA, NaN, 1))</code></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">is.na</span>(<span class="kw">c</span>(<span class="ot">NA</span>, <span class="ot">NaN</span>, <span class="dv">1</span>))</code></pre></div>
 </div>
 <div id="-53" class="section level2">
 <h2>關卡 53</h2>
-<p>有時候，我們需要處理文字類型的object。這些object通常被用於指定繪圖的標題、或是處理類別形變數，如：國籍、行政區等等。在R之中，這類的資料是透過單引號<code>'</code>或雙引號<code>&quot;</code>來建立的。而這類的資料也常被人稱為：「字串」。</p>
+<p>有時候，我們需要處理文字類型的object。這些object通常被用於指定繪圖的標題、或是處理類別形變數，如：國籍、行政區等等。 在R 之中，這類的資料是透過單引號<code>'</code>或雙引號<code>&amp;quot;</code>來建立的。而這類的資料也常被人稱為：「字串」。</p>
 </div>
 <div id="-54" class="section level2">
 <h2>關卡 54</h2>
-<p>舉例來說，如果直接輸入<code>x</code>而不用雙引號包覆它，R會自動將<code>x</code>當成變數名稱，進而回傳x的內容。請同學試試看輸入：<code>x</code></p>
+<p>舉例來說，如果直接輸入<code>x</code>而不用雙引號包覆它，R會自動將<code>x</code>當成變數名稱，進而回傳x 的內容。 請同學試試看輸入：<code>x</code></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x</code></pre></div>
 </div>
 <div id="-55" class="section level2">
 <h2>關卡 55</h2>
-<p>然而，若是輸入的為<code>&quot;x&quot;</code>，那R就會認為這是一個只有一個字元、內容為“x”的字串。請同學試試看輸入：<code>&quot;x&quot;</code></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="st">&quot;x&quot;</span></code></pre></div>
+<p>然而，若是輸入的為<code>&amp;quot;x&amp;quot;</code>，那R 就會認為這是一個只有一個字元、內容為“x”的字串。 請同學試試看輸入：<code>&amp;quot;x&amp;quot;</code></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">&amp;quot;x&amp;quot;</code></pre></div>
 </div>
 <div id="-56" class="section level2">
 <h2>關卡 56</h2>
-<p>為了方便教材的設計，後續操作swirl的時候，請盡量使用<code>&quot;</code>來建立字串。</p>
+<p>為了方便教材的設計，後續操作swirl的時候，請盡量使用<code>&amp;quot;</code>來建立字串。</p>
 </div>
 <div id="-57" class="section level2">
 <h2>關卡 57</h2>
-<p>這類文字類型的object，在R中，<code>\</code>符號代表字串中的跳脫符號。舉例來說，如果我們要輸入一個包含雙引號的字串，有兩種方法：一種是用單引號<code>'</code>來包覆雙引號，另外一種就是在雙引號之前插入<code>\</code>。請同學試試看用跳脫符號的方式，輸入一個字串，內容只有一個雙引號。</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="st">&quot;</span><span class="ch">\&quot;</span><span class="st">&quot;</span></code></pre></div>
+<p>這類文字類型的object，在R 中，<code>\</code>符號代表字串中的跳脫符號。 舉例來說，如果我們要輸入一個包含雙引號的字串，有兩種方法：一種是用 單引號<code>'</code>來包覆雙引號，另外一種就是在雙引號之前插入<code>\</code>。請同學試試看 用跳脫符號的方式，輸入一個字串，內容只有一個雙引號。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">&amp;quot;\&amp;quot;&amp;quot;</code></pre></div>
 </div>
 <div id="-58" class="section level2">
 <h2>關卡 58</h2>
-<p>在R中，<code>paste</code>為經常用來做字串處理的函數。我們可以丟任意個Argument給<code>paste</code>，結果R會把這些argument以字串的形式接成一個字串。請同學試試看：<code>paste(&quot;a&quot;,&quot;b&quot;)</code></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">paste</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>)</code></pre></div>
+<p>在R 中，<code>paste</code>為經常用來做字串處理的函數。 我們可以丟任意個Argument 給<code>paste</code>，結果R 會把這些argument以字串的形式接成一個字串。 請同學試試看：<code>paste(&amp;quot;a&amp;quot;, &amp;quot;b&amp;quot;)</code></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">paste</span>(&amp;quot;a&amp;quot;, &amp;quot;b&amp;quot;)</code></pre></div>
 </div>
 <div id="-59" class="section level2">
 <h2>關卡 59</h2>
-<p>請同學試試看：<code>paste(c(&quot;X&quot;,&quot;Y&quot;),1:10)</code></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">paste</span>(<span class="kw">c</span>(<span class="st">&quot;X&quot;</span>, <span class="st">&quot;Y&quot;</span>), <span class="dv">1</span>:<span class="dv">10</span>)</code></pre></div>
+<p>請同學試試看：<code>paste(c(&amp;quot;X&amp;quot;, &amp;quot;Y&amp;quot;), 1:10)</code></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">paste</span>(<span class="kw">c</span>(&amp;quot;X&amp;quot;, &amp;quot;Y&amp;quot;), <span class="dv">1</span>:<span class="dv">10</span>)</code></pre></div>
 </div>
 <div id="-60" class="section level2">
 <h2>關卡 60</h2>
-<p>結果中會發現，<code>1:10</code>被自動轉換成字串了。這又是一個R自動判斷形態的例子。同時，也可以注意到<code>c(&quot;X&quot;,&quot;Y&quot;)</code>重複了五次，這是因為<code>paste</code>也是一個向量化的函數。</p>
+<p>結果中會發現，<code>1:10</code>被自動轉換成字串了。 這又是一個R 自動判斷形態的例子。 同時，也可以注意到<code>c(&amp;quot;X&amp;quot;, &amp;quot;Y&amp;quot;)</code>重複了五次，這是因為<code>paste</code>也是一個向量化的函數。</p>
 </div>
 <div id="-61" class="section level2">
 <h2>關卡 61</h2>
-<p>另一個值得注意到的是<code>paste</code>在串接字串時，在字串中間會留下一個預留的空格。如果不希望在字串間出現空格，可以改為使用<code>paste0</code>。<code>paste0</code>和<code>paste</code>為幾乎一樣的函數。差別在於<code>paste0</code>預設在串接字串時，中間是不會有空格的。同學請試試看：<code>paste0(c(&quot;X&quot;,&quot;Y&quot;),1:10)</code></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">paste0</span>(<span class="kw">c</span>(<span class="st">&quot;X&quot;</span>, <span class="st">&quot;Y&quot;</span>), <span class="dv">1</span>:<span class="dv">10</span>)</code></pre></div>
+<p>另一個值得注意到的是<code>paste</code>在串接字串時，在字串中間會留下一個預留的空格。 如果不希望在字串間出現空格，可以改為使用<code>paste0</code>。 <code>paste0</code>和<code>paste</code>為幾乎一樣的函數。差別在於<code>paste0</code>預設在串接字串時，中間是不會有空格的。 同學請試試看：<code>paste0(c(&amp;quot;X&amp;quot;, &amp;quot;Y&amp;quot;), 1:10)</code></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">paste0</span>(<span class="kw">c</span>(&amp;quot;X&amp;quot;, &amp;quot;Y&amp;quot;), <span class="dv">1</span>:<span class="dv">10</span>)</code></pre></div>
 </div>
 <div id="-62" class="section level2">
 <h2>關卡 62</h2>
@@ -422,41 +422,41 @@ Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">
 </div>
 <div id="-63" class="section level2">
 <h2>關卡 63</h2>
-<p>第一種方法，使用坐標。在R之中，如果我們要挑選序列x中的第一個和第三個位置的值，只要使用即可：<code>x[c(1,3)]</code>。請同學試試看。</p>
+<p>第一種方法，使用坐標。 在R 之中，如果我們要挑選序列x 中的第一個和第三個位置的值，只要使用即可：<code>x[c(1,3)]</code>。 請同學試試看。</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x[<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">3</span>)]</code></pre></div>
 </div>
 <div id="-64" class="section level2">
 <h2>關卡 64</h2>
-<p>第二種方法則是利用邏輯向量。舉例來說，如果要挑選x之中超過5的值，即可透過<code>x[x&gt;5]</code>取得。請同學試試看。</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x[x &gt;<span class="st"> </span><span class="dv">5</span>]</code></pre></div>
+<p>第二種方法則是利用邏輯向量。 舉例來說，如果要挑選x 之中超過5 的值，即可透過<code>x[x &amp;gt; 5]</code>取得。請同學試試看。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x[x &amp;gt; <span class="dv">5</span>]</code></pre></div>
 </div>
 <div id="-65" class="section level2">
 <h2>關卡 65</h2>
-<p>第三種方法為削去法。如果我們要挑序列x中除了第二個數值之外全部的值，則可以使用<code>x[-2]</code>。</p>
+<p>第三種方法為削去法。 如果我們要挑序列x 中除了第二個數值之外全部的值，則可以使用<code>x[-2]</code>。</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x[-<span class="dv">2</span>]</code></pre></div>
 </div>
 <div id="-66" class="section level2">
 <h2>關卡 66</h2>
-<p>最後一個方法較為特別，在介紹方法之前，我們要先介紹在R中names的概念。在R的向量中，可以針對每一個值進行命名。舉例來說，我們可以透過：<code>names(x)&lt;-c(&quot;a&quot;,&quot;b&quot;,&quot;c&quot;,&quot;d&quot;)</code>來幫x的每個值命名。請同學試試看。</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">names</span>(x) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>, <span class="st">&quot;d&quot;</span>)</code></pre></div>
+<p>最後一個方法較為特別，在介紹方法之前，我們要先介紹在R 中names的概念。 在R 的向量中，可以針對每一個值進行命名。 舉例來說，我們可以透過：<code>names(x) &amp;lt;- c(&amp;quot;a&amp;quot;, &amp;quot;b&amp;quot;, &amp;quot;c&amp;quot;, &amp;quot;d&amp;quot;)</code>來幫x 的每個值命名。 請同學試試看。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">names</span>(x) &amp;lt;-<span class="st"> </span><span class="kw">c</span>(&amp;quot;a&amp;quot;, &amp;quot;b&amp;quot;, &amp;quot;c&amp;quot;, &amp;quot;d&amp;quot;)</code></pre></div>
 </div>
 <div id="-67" class="section level2">
 <h2>關卡 67</h2>
-<p>現在請將x印到螢幕上看看。</p>
+<p>現在請將x 印到螢幕上看看。</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x</code></pre></div>
 </div>
 <div id="-68" class="section level2">
 <h2>關卡 68</h2>
-<p>可以看到R在顯示每個x的值時，也會在上一行對應的位置中印出它的名字。</p>
+<p>可以看到R 在顯示每個x 的值時，也會在上一行對應的位置中印出它的名字。</p>
 </div>
 <div id="-69" class="section level2">
 <h2>關卡 69</h2>
-<p>所以如果想要選取名稱為<code>c(&quot;b&quot;,&quot;d&quot;)</code>的值，就只要輸入：<code>x[c(&quot;b&quot;,&quot;d&quot;)]</code>。請同學試試看。</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x[<span class="kw">c</span>(<span class="st">&quot;b&quot;</span>, <span class="st">&quot;d&quot;</span>)]</code></pre></div>
+<p>所以如果想要選取名稱為<code>c(&amp;quot;b&amp;quot;, &amp;quot;d&amp;quot;)</code>的值，就只要輸入：<code>x[c(&amp;quot;b&amp;quot;, &amp;quot;d&amp;quot;)]</code>。 請同學試試看。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x[<span class="kw">c</span>(&amp;quot;b&amp;quot;, &amp;quot;d&amp;quot;)]</code></pre></div>
 </div>
 <div id="-70" class="section level2">
 <h2>關卡 70</h2>
-<p>上述內容為關於R資料結構的入門。接下來，只要再學會對於矩陣和data.frame的操作，就可以開始解決實際的問題了！</p>
+<p>上述內容為關於R 資料結構的入門。 接下來，只要再學會對於矩陣和data.frame的操作，就可以開始解決實際的問題了！</p>
 </div>
 <div id="-71" class="section level2">
 <h2>關卡 71</h2>

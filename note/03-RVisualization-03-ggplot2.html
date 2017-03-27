@@ -142,11 +142,11 @@ Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">
 </div>
 <div id="-2" class="section level2">
 <h2>關卡 2</h2>
-<p>為什麼我們在學過看過R的繪圖功能後，還要學ggplot2呢？因為以下幾個理由：ggplot2提供更美觀的預設圖片。所以我們不用作大量的微調，就可以獲得不錯的圖。我們也可以利用theme的功能，直接取用其他貢獻者繪製的樣本，畫出不同風格的圖。</p>
+<p>為什麼我們在學過看過R的繪圖功能後，還要學ggplot2呢？ 因為以下幾個理由：ggplot2提供更美觀的預設圖片。所以我們不用作大量的微調，就可以獲得不錯的圖。 我們也可以利用theme的功能，直接取用其他貢獻者繪製的樣本，畫出不同風格的圖。</p>
 </div>
 <div id="-3" class="section level2">
 <h2>關卡 3</h2>
-<p>圖形本身會完整的物件化。而且使用者可以對物件化的圖形進行修正。也就是說，你可以把繪圖的指令結果，存到變數之中。而在存到變數中之後還可以操作這個變數，更改我們想要的繪圖效果。</p>
+<p>圖形本身會完整的物件化。而且使用者可以對物件化的圖形進行修正。 也就是說，你可以把繪圖的指令結果，存到變數之中。 而在存到變數中之後還可以操作這個變數，更改我們想要的繪圖效果。</p>
 </div>
 <div id="-4" class="section level2">
 <h2>關卡 4</h2>
@@ -154,7 +154,7 @@ Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">
 </div>
 <div id="-5" class="section level2">
 <h2>關卡 5</h2>
-<p>更完整的文件如下。<a href="http://docs.ggplot2.org" class="uri">http://docs.ggplot2.org</a>裡面收錄了所有的繪圖指令。</p>
+<p>更完整的文件如下。 &lt;<a href="http://docs.ggplot2.org%3E裡面收錄了所有的繪圖指令" class="uri">http://docs.ggplot2.org&gt;裡面收錄了所有的繪圖指令</a>。</p>
 </div>
 <div id="-6" class="section level2">
 <h2>關卡 6</h2>
@@ -163,7 +163,7 @@ Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">
 <div id="-7" class="section level2">
 <h2>關卡 7</h2>
 <p>請同學先安裝ggplot2。</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">check_then_install</span>(<span class="st">&quot;ggplot2&quot;</span>, <span class="st">&quot;2.0.0&quot;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">check_then_install</span>(&amp;quot;ggplot2&amp;quot;, &amp;quot;<span class="fl">2.0.0</span>&amp;quot;)</code></pre></div>
 </div>
 <div id="-8" class="section level2">
 <h2>關卡 8</h2>
@@ -172,56 +172,56 @@ Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">
 </div>
 <div id="-9" class="section level2">
 <h2>關卡 9</h2>
-<p>由於ggplot2沒有提供上手的vignette，我們就略過查詢vignette的動作。但是還是要提醒同學，當學習一個新套件時，第一個步驟不外乎就是先從讀README、找vignette開始。</p>
+<p>由於ggplot2沒有提供上手的vignette，我們就略過查詢vignette的動作。 但是還是要提醒同學，當學習一個新套件時，第一個步驟不外乎就是先從讀README、找vignette開始。</p>
 </div>
 <div id="-10" class="section level2">
 <h2>關卡 10</h2>
-<p>我們還是先從<code>infert</code>這筆數據開始。請同學輸入：<code>g&lt;-ggplot(infert,aes(x=education))</code>建立一個ggplot2物件。</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">g &lt;-<span class="st"> </span><span class="kw">ggplot</span>(infert, <span class="kw">aes</span>(<span class="dt">x =</span> education))</code></pre></div>
+<p>我們還是先從<code>infert</code>這筆數據開始。 請同學輸入：<code>g &amp;lt;- ggplot(infert, aes(x = education))</code>建立一個ggplot2物件。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">g &amp;lt;-<span class="st"> </span><span class="kw">ggplot</span>(infert, <span class="kw">aes</span>(<span class="dt">x =</span> education))</code></pre></div>
 </div>
 <div id="-11" class="section level2">
 <h2>關卡 11</h2>
-<p><code>ggplot</code>函數通常只需要一個參數。第一個參數是一個data.frame，負責提供資料。而後續的參數則會通通被傳遞給後續用<code>+</code>連結的繪圖函數。</p>
+<p><code>ggplot</code>函數通常只需要一個參數。 第一個參數是一個data.frame，負責提供資料。 而後續的參數則會通通被傳遞給後續用<code>+</code>連結的繪圖函數。</p>
 </div>
 <div id="-12" class="section level2">
 <h2>關卡 12</h2>
-<p>請同學輸入：<code>g+geom_bar()</code>，繪製第一個ggplot2的長條圖。請同學試試看。</p>
+<p>請同學輸入：<code>g + geom_bar()</code>，繪製第一個ggplot2的長條圖。請同學試試看。</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">g +<span class="st"> </span><span class="kw">geom_bar</span>()</code></pre></div>
 </div>
 <div id="-13" class="section level2">
 <h2>關卡 13</h2>
-<p><code>geom_bar</code>會繪製出一個圖層，裡面的內容就是依據<code>infert</code>所繪製的barchart（長條圖）。為了更仔細的解釋，先請同學輸入：<code>?geom_bar</code>打開這個函數的說明文件。</p>
+<p><code>geom_bar</code>會繪製出一個圖層，裡面的內容就是依據<code>infert</code>所繪製的bar chart（長條圖）。 為了更仔細的解釋，先請同學輸入：<code>?geom_bar</code>打開這個函數的說明文件。</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">?geom_bar</code></pre></div>
 </div>
 <div id="-14" class="section level2">
 <h2>關卡 14</h2>
-<p>ggplot2的說明文件和一般的函數較為不同，舉<code>geom_bar</code>為例。<code>geom_bar</code>的參數有：<code>mapping</code>,<code>data</code>,<code>stat</code>和<code>position</code>。<code>mapping</code>與<code>data</code>幾乎是所有<code>geom_</code>開頭的函數都會具備的，所以大家理解一次就夠了。一般來說，我們不會在<code>geom_</code>開頭的函數指定<code>data</code>參數。在這個例子，因為我們輸入的是：<code>g+geom_bar()</code>，所以<code>geom_bar</code>就直接透過<code>g</code>知道它正在依照<code>infert</code>繪圖。</p>
+<p>ggplot2的說明文件和一般的函數較為不同，舉<code>geom_bar</code>為例。 <code>geom_bar</code>的參數有：<code>mapping</code>, <code>data</code>, <code>stat</code>和<code>position</code>。 <code>mapping</code>與<code>data</code>幾乎是所有<code>geom_</code>開頭的函數都會具備的，所以大家理解一次就夠了。 一般來說，我們不會在<code>geom_</code>開頭的函數指定<code>data</code>參數。 在這個例子，因為我們輸入的是：<code>g + geom_bar()</code>，所以<code>geom_bar</code>就直接透過<code>g</code>知道它正在依照<code>infert</code>繪圖。</p>
 </div>
 <div id="-15" class="section level2">
 <h2>關卡 15</h2>
-<p><code>infert</code>的資料欄位這麼多，ggplot怎麼知道畫的是education呢？就是透過<code>geom_bar</code>的<code>mapping</code>參數。當初我們在建立<code>g</code>的指令是：<code>ggplot(infert,aes(x=education))</code>。這裡的第二個參數，會被傳遞到<code>geom_bar</code>的<code>mapping</code>參數。而<code>mapping</code>的參數，都是用<code>aes</code>建立的對應物件，語法就類似：<code>aes(x=education)</code>一樣。(請注意，education不需要加上雙引號)。</p>
+<p><code>infert</code>的資料欄位這麼多，ggplot怎麼知道畫的是education呢？就是透過<code>geom_bar</code>的<code>mapping</code>參數。 當初我們在建立<code>g</code>的指令是：<code>ggplot(infert, aes(x = education))</code>。 這裡的第二個參數，會被傳遞到<code>geom_bar</code>的<code>mapping</code>參數。 而<code>mapping</code>的參數，都是用<code>aes</code>建立的對應物件，語法就類似：<code>aes(x = education)</code>一樣。 (請注意，education不需要加上雙引號)。</p>
 </div>
 <div id="-16" class="section level2">
 <h2>關卡 16</h2>
-<p>那<code>aes</code>裡面需要哪些參數呢？每個<code>geom_</code>開頭的函數需要的<code>mapping</code>不太一樣。請同學直接看說明文件中<code>Aesthetics</code>的段落。ggplot2列出了所有需要的欄位，而黑色粗體字的是必須要填入的(如：<code>x</code>)。其他的選項有預設值，所以我們不需要給。而這些<code>mapping</code>是代表什麼意思呢？</p>
+<p>那<code>aes</code>裡面需要哪些參數呢？ 每個<code>geom_</code>開頭的函數需要的<code>mapping</code>不太一樣。 請同學直接看說明文件中<code>Aesthetics</code>的段落。 ggplot2列出了所有需要的欄位，而黑色粗體字的是必須要填入的(如：<code>x</code>)。 其他的選項有預設值，所以我們不需要給。 而這些<code>mapping</code>是代表什麼意思呢？</p>
 </div>
 <div id="-17" class="section level2">
 <h2>關卡 17</h2>
-<p>所有<code>mapping</code>裡面的東西，都會被視為<code>data</code>的欄位名稱。舉例來說，請同學輸入：<code>g+geom_bar(aes(fill=education))</code>。</p>
+<p>所有<code>mapping</code>裡面的東西，都會被視為<code>data</code>的欄位名稱。 舉例來說，請同學輸入：<code>g + geom_bar(aes(fill = education))</code>。</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">g +<span class="st"> </span><span class="kw">geom_bar</span>(<span class="kw">aes</span>(<span class="dt">fill =</span> education))</code></pre></div>
 </div>
 <div id="-18" class="section level2">
 <h2>關卡 18</h2>
-<p>同學有沒有注意到，長條圖中區域的顏色改變了。<code>fill</code>在這裡就代表填滿區塊的顏色。ggplot2在收到<code>fill=education</code>之後，就會去尋找infert的education欄位。如果找不到，就會找外部名稱為education的變數。找到以後，ggplot2就會依照預設的調色盤，根據education的值予以配色，每一個類別擁有一個顏色。同時也在右半邊新增顏色與education類別對應的說明。</p>
+<p>同學有沒有注意到，長條圖中區域的顏色改變了。 <code>fill</code>在這裡就代表填滿區塊的顏色。 ggplot2在收到<code>fill = education</code>之後，就會去尋找infert的education欄位。 如果找不到，就會找外部名稱為education的變數。 找到以後，ggplot2就會依照預設的調色盤，根據education的值予以配色，每一個類別擁有一個顏色。 同時也在右半邊新增顏色與education類別對應的說明。</p>
 </div>
 <div id="-19" class="section level2">
 <h2>關卡 19</h2>
-<p>這次請同學輸入：<code>g+geom_bar(aes(fill=&quot;purple&quot;))</code>。</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">g +<span class="st"> </span><span class="kw">geom_bar</span>(<span class="kw">aes</span>(<span class="dt">fill =</span> <span class="st">&quot;purple&quot;</span>))</code></pre></div>
+<p>這次請同學輸入：<code>g + geom_bar(aes(fill = &amp;quot;purple&amp;quot;))</code>。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">g +<span class="st"> </span><span class="kw">geom_bar</span>(<span class="kw">aes</span>(<span class="dt">fill =</span> &amp;quot;purple&amp;quot;))</code></pre></div>
 </div>
 <div id="-20" class="section level2">
 <h2>關卡 20</h2>
-<p>但是儘管我們輸入“purple”，ggplot2還是用粉紅色來呈現，而不是紫色。這是因為有加雙引號，所以ggplot2在收到“purple”之後，就會假設infert中有一個欄位，其中所有的值都是“purple”。而ggplot2有內建的調色盤，所以就運用調色盤中第一個顏色來著色。在ggplot2中，如果要指定顏色，只有設定調色盤的顏色一途，無法單純透過<code>ggplot</code>或<code>geom_bar</code>來達成。這點和R基礎的繪圖API是不同的。</p>
+<p>但是儘管我們輸入“purple”，ggplot2還是用粉紅色來呈現，而不是紫色。 這是因為有加雙引號，所以ggplot2在收到“purple”之後，就會假設infert中有一個欄位，其中所有的值都是“purple”。 而ggplot2有內建的調色盤，所以就運用調色盤中第一個顏色來著色。 在ggplot2中，如果要指定顏色，只有設定調色盤的顏色一途，無法單純透過<code>ggplot</code>或<code>geom_bar</code>來達成。 這點和R 基礎的繪圖API是不同的。</p>
 </div>
 <div id="-21" class="section level2">
 <h2>關卡 21</h2>
@@ -229,32 +229,32 @@ Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">
 </div>
 <div id="-22" class="section level2">
 <h2>關卡 22</h2>
-<p>接著我們使用前面課程用過的<code>hsb</code>資料集做範例。請同學輸入：<code>g&lt;-ggplot(hsb)</code>。</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">g &lt;-<span class="st"> </span><span class="kw">ggplot</span>(hsb)</code></pre></div>
+<p>接著我們使用前面課程用過的<code>hsb</code>資料集做範例。 請同學輸入：<code>g &amp;lt;- ggplot(hsb)</code>。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">g &amp;lt;-<span class="st"> </span><span class="kw">ggplot</span>(hsb)</code></pre></div>
 </div>
 <div id="-23" class="section level2">
 <h2>關卡 23</h2>
-<p>在我們沒有指定圖層的時候，R是不會畫出圖的，所以上一個指令沒有畫出新的圖。接著請同學輸入：<code>g+geom_bar(aes(x=sex))</code>畫出「呈現性別分佈」的長條圖。</p>
+<p>在我們沒有指定圖層的時候，R是不會畫出圖的，所以上一個指令沒有畫出新的圖。 接著請同學輸入：<code>g + geom_bar(aes(x = sex))</code>畫出「呈現性別分佈」的長條圖。</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">g +<span class="st"> </span><span class="kw">geom_bar</span>(<span class="kw">aes</span>(<span class="dt">x =</span> sex))</code></pre></div>
 </div>
 <div id="-24" class="section level2">
 <h2>關卡 24</h2>
-<p>同學應該會看到「呈現性別分佈」的長條圖。請同學這次輸入：<code>g+geom_bar(aes(x=sex,fill=race))</code>。</p>
+<p>同學應該會看到「呈現性別分佈」的長條圖。 請同學這次輸入：<code>g + geom_bar(aes(x = sex, fill = race))</code>。</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">g +<span class="st"> </span><span class="kw">geom_bar</span>(<span class="kw">aes</span>(<span class="dt">x =</span> sex, <span class="dt">fill =</span> race))</code></pre></div>
 </div>
 <div id="-25" class="section level2">
 <h2>關卡 25</h2>
-<p>由於<code>x=sex</code>，所以長條圖是以<code>sex</code>為主。且因為<code>fill=race</code>，所以顏色是以種族為主。接著請同學輸入：<code>g+geom_bar(aes(x=sex,fill=race),position=&quot;dodge&quot;)</code>。</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">g +<span class="st"> </span><span class="kw">geom_bar</span>(<span class="kw">aes</span>(<span class="dt">x =</span> sex, <span class="dt">fill =</span> race), <span class="dt">position =</span> <span class="st">&quot;dodge&quot;</span>)</code></pre></div>
+<p>由於<code>x = sex</code>，所以長條圖是以<code>sex</code>為主。 且因為<code>fill = race</code>，所以顏色是以種族為主。 接著請同學輸入：<code>g + geom_bar(aes(x = sex, fill = race), position = &amp;quot;dodge&amp;quot;)</code>。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">g +<span class="st"> </span><span class="kw">geom_bar</span>(<span class="kw">aes</span>(<span class="dt">x =</span> sex, <span class="dt">fill =</span> race), <span class="dt">position =</span> &amp;quot;dodge&amp;quot;)</code></pre></div>
 </div>
 <div id="-26" class="section level2">
 <h2>關卡 26</h2>
-<p>請比較用<code>g+geom_bar(aes(x=sex,fill=race))</code>與<code>g+geom_bar(aes(x=sex,fill=race),position=&quot;dodge&quot;)</code>的差異。當<code>position=&quot;stack&quot;</code>（預設值）時，長條圖型會將race推疊呈現，而此時圖的重點是在於比較sex個數的差異。而當<code>position=&quot;dodge&quot;</code>時，長條圖會將race錯開呈現，而此時圖的重點是在於比較相同sex中，不同race個數的差異。</p>
+<p>請比較用<code>g + geom_bar(aes(x = sex,fill=race))</code>與<code>g + geom_bar(aes(x = sex, fill = race), position = &amp;quot;dodge&amp;quot;)</code>的差異。 當<code>position = &amp;quot;stack&amp;quot;</code>（預設值）時，長條圖型會將race推疊呈現，而此時圖的重點是在於比較sex個數的差異。 而當<code>position = &amp;quot;dodge&amp;quot;</code>時，長條圖會將race錯開呈現，而此時圖的重點是在於比較相同sex中，不同race個數的差異。</p>
 </div>
 <div id="-27" class="section level2">
 <h2>關卡 27</h2>
 <p>接著請同學輸入<code>skip()</code>檢查有無安裝dplyr。</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">check_then_install</span>(<span class="st">&quot;dplyr&quot;</span>, <span class="st">&quot;0.4.3&quot;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">check_then_install</span>(&amp;quot;dplyr&amp;quot;, &amp;quot;<span class="fl">0.4.3</span>&amp;quot;)</code></pre></div>
 </div>
 <div id="-28" class="section level2">
 <h2>關卡 28</h2>
@@ -283,30 +283,30 @@ answer01 &lt;-<span class="st"> </span><span class="kw">local</span>({
 </div>
 <div id="-30" class="section level2">
 <h2>關卡 30</h2>
-<p>請同學輸入：<code>ggplot(answer01,aes(x=sex))+geom_bar()</code>。</p>
+<p>請同學輸入：<code>ggplot(answer01, aes(x = sex)) + geom_bar()</code>。</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(answer01, <span class="kw">aes</span>(<span class="dt">x =</span> sex)) +<span class="st"> </span><span class="kw">geom_bar</span>()</code></pre></div>
 </div>
 <div id="-31" class="section level2">
 <h2>關卡 31</h2>
-<p>我們會看到一張長條圖，表示兩種性別都是1。會有這樣的結果，是因為在<code>answer01</code>中，兩種性別各佔一筆資料。為了要讓長條圖理解值位於<code>count</code>的欄位，我們必須要改成輸入：<code>ggplot(answer01,aes(x=sex,y=count))+geom_bar(stat=&quot;identity&quot;)</code>。</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(answer01, <span class="kw">aes</span>(<span class="dt">x =</span> sex, <span class="dt">y =</span> count)) +<span class="st"> </span><span class="kw">geom_bar</span>(<span class="dt">stat =</span> <span class="st">&quot;identity&quot;</span>)</code></pre></div>
+<p>我們會看到一張長條圖，表示兩種性別都是1。 會有這樣的結果，是因為在<code>answer01</code>中，兩種性別各佔一筆資料。 為了要讓長條圖理解值位於<code>count</code>的欄位，我們必須要改成輸入：<code>ggplot(answer01, aes(x = sex, y = count)) + geom_bar(stat = &amp;quot;identity&amp;quot;)</code>。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(answer01, <span class="kw">aes</span>(<span class="dt">x =</span> sex, <span class="dt">y =</span> count)) +<span class="st"> </span><span class="kw">geom_bar</span>(<span class="dt">stat =</span> &amp;quot;identity&amp;quot;)</code></pre></div>
 </div>
 <div id="-32" class="section level2">
 <h2>關卡 32</h2>
-<p>在剛剛的例子中，<code>stat=&quot;identity&quot;</code>的意思，就是在告訴ggplot直接取用<code>count</code>欄位當成高度即可，不用再數資料的個數了。</p>
+<p>在剛剛的例子中，<code>stat = &amp;quot;identity&amp;quot;</code>的意思，就是在告訴ggplot直接取用<code>count</code>欄位當成高度即可，不用再數資料的個數了。</p>
 </div>
 <div id="-33" class="section level2">
 <h2>關卡 33</h2>
-<p><code>geom_bar</code>的<code>stat</code>和<code>position</code>是和長條圖相關的參數。在<code>aes</code>中的參數，如同<code>x</code>、<code>y</code>和<code>fill</code>，即使是x-y散佈圖或boxplot，都會使用到的參數。而ggplot2的設計就是把能共通使用的繪圖參數放到<code>aes</code>中，個別圖種自己使用的參數，則放在<code>geom_</code>開頭的函數中。</p>
+<p><code>geom_bar</code>的<code>stat</code>和<code>position</code>是和長條圖相關的參數。 在<code>aes</code>中的參數，如同<code>x</code>、<code>y</code>和<code>fill</code>，即使是x-y散佈圖或boxplot，都會使用到的參數。 而ggplot2的設計就是把能共通使用的繪圖參數放到<code>aes</code>中，個別圖種自己使用的參數，則放在<code>geom_</code>開頭的函數中。</p>
 </div>
 <div id="-34" class="section level2">
 <h2>關卡 34</h2>
-<p>接著請同學輸入：<code>ggplot(hsb,aes(x=math))+geom_density()</code>。</p>
+<p>接著請同學輸入：<code>ggplot(hsb, aes(x = math)) + geom_density()</code>。</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(hsb, <span class="kw">aes</span>(<span class="dt">x =</span> math)) +<span class="st"> </span><span class="kw">geom_density</span>()</code></pre></div>
 </div>
 <div id="-35" class="section level2">
 <h2>關卡 35</h2>
-<p>上一張圖畫出了<code>math</code>欄位的分佈圖。接著我們可以依據性別，畫出不同性別的分佈圖。請同學輸入：<code>ggplot(hsb,aes(x=math,color=sex))+geom_density()</code>。</p>
+<p>上一張圖畫出了<code>math</code>欄位的分佈圖。 接著我們可以依據性別，畫出不同性別的分佈圖。 請同學輸入：<code>ggplot(hsb, aes(x = math, color = sex)) + geom_density()</code>。</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(hsb, <span class="kw">aes</span>(<span class="dt">x =</span> math, <span class="dt">color =</span> sex)) +<span class="st"> </span><span class="kw">geom_density</span>()</code></pre></div>
 </div>
 <div id="-36" class="section level2">
@@ -326,23 +326,23 @@ answer01 &lt;-<span class="st"> </span><span class="kw">local</span>({
 </div>
 <div id="-39" class="section level2">
 <h2>關卡 39</h2>
-<p>接下來我們來比較不同性別在公立、私立學校的數學表現。請同學先輸入以下程式碼：<code>dat2&lt;-summarise(group_by(hsb,sex,schtyp),math.avg=mean(math))</code>。</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dat2 &lt;-<span class="st"> </span><span class="kw">summarise</span>(<span class="kw">group_by</span>(hsb, sex, schtyp), <span class="dt">math.avg =</span> <span class="kw">mean</span>(math))</code></pre></div>
+<p>接下來我們來比較不同性別在公立、私立學校的數學表現。 請同學先輸入以下程式碼：<code>dat2 &amp;lt;- summarise(group_by(hsb, sex, schtyp), math.avg = mean(math))</code>。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dat2 &amp;lt;-<span class="st"> </span><span class="kw">summarise</span>(<span class="kw">group_by</span>(hsb, sex, schtyp), <span class="dt">math.avg =</span> <span class="kw">mean</span>(math))</code></pre></div>
 </div>
 <div id="-40" class="section level2">
 <h2>關卡 40</h2>
-<p>接著，我們輸入：<code>g&lt;-ggplot(dat2,aes(x=sex,y=math.avg,fill=schtyp))</code>建立一個基於dat2的ggplot物件。</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">g &lt;-<span class="st"> </span><span class="kw">ggplot</span>(dat2, <span class="kw">aes</span>(<span class="dt">x =</span> sex, <span class="dt">y =</span> math.avg, <span class="dt">fill =</span> schtyp))</code></pre></div>
+<p>接著，我們輸入：<code>g &amp;lt;- ggplot(dat2, aes(x = sex, y = math.avg, fill = schtyp))</code>建立一個基於dat2的ggplot物件。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">g &amp;lt;-<span class="st"> </span><span class="kw">ggplot</span>(dat2, <span class="kw">aes</span>(<span class="dt">x =</span> sex, <span class="dt">y =</span> math.avg, <span class="dt">fill =</span> schtyp))</code></pre></div>
 </div>
 <div id="-41" class="section level2">
 <h2>關卡 41</h2>
-<p>請同學先回憶我們對<code>geom_bar</code>的參數<code>stat</code>的解說。請問同學，如果我們輸入：<code>g+geom_bar(stat=&lt;??&gt;)</code>，<code>stat</code>的參數要給多少呢？</p>
+<p>請同學先回憶我們對<code>geom_bar</code>的參數<code>stat</code>的解說。 請問同學，如果我們輸入：<code>g + geom_bar(stat = &amp;lt;??&amp;gt;)</code>，<code>stat</code>的參數要給多少呢？</p>
 <p>identity</p>
 </div>
 <div id="-42" class="section level2">
 <h2>關卡 42</h2>
-<p>請輸入：<code>g2&lt;-g+geom_bar(stat=&quot;identity&quot;,position=&quot;dodge&quot;)</code>。</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">g2 &lt;-<span class="st"> </span>g +<span class="st"> </span><span class="kw">geom_bar</span>(<span class="dt">stat =</span> <span class="st">&quot;identity&quot;</span>, <span class="dt">position =</span> <span class="st">&quot;dodge&quot;</span>)</code></pre></div>
+<p>請輸入：<code>g2 &amp;lt;- g + geom_bar(stat = &amp;quot;identity&amp;quot;, position = &amp;quot;dodge&amp;quot;)</code>。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">g2 &amp;lt;-<span class="st"> </span>g +<span class="st"> </span><span class="kw">geom_bar</span>(<span class="dt">stat =</span> &amp;quot;identity&amp;quot;, <span class="dt">position =</span> &amp;quot;dodge&amp;quot;)</code></pre></div>
 </div>
 <div id="-43" class="section level2">
 <h2>關卡 43</h2>
@@ -351,17 +351,17 @@ answer01 &lt;-<span class="st"> </span><span class="kw">local</span>({
 </div>
 <div id="-44" class="section level2">
 <h2>關卡 44</h2>
-<p>ggplot依照性別與公立私立，分別呈現了數學平均。更貼心的是，圖例也已經自動產生了。如果我們想要調整y軸的範圍，放大視覺化的差異呢？請同學輸入：<code>g2+coord_cartesian(ylim=c(40,60))</code>。</p>
+<p>ggplot 依照性別與公立私立，分別呈現了數學平均。 更貼心的是，圖例也已經自動產生了。 如果我們想要調整y軸的範圍，放大視覺化的差異呢？ 請同學輸入：<code>g2 + coord_cartesian(ylim=c(40,60))</code>。</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">g2 +<span class="st"> </span><span class="kw">coord_cartesian</span>(<span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">40</span>,<span class="dv">60</span>))</code></pre></div>
 </div>
 <div id="-45" class="section level2">
 <h2>關卡 45</h2>
-<p>同學除了可以學習<code>coord_cartesian</code>這個語法之外，也請注意到我們可以把畫圖的指令當成變數給存到如<code>g2</code>的R物件之中。之後若我們要做調整（例如調整y軸的範圍）只要從<code>g2</code>開始用<code>+</code>下指令即可。這樣的設計讓我們在調整圖形上更方便。</p>
+<p>同學除了可以學習<code>coord_cartesian</code>這個語法之外，也請注意到我們可以把畫圖的指令當成變數給存到如<code>g2</code>的R物件之中。 之後若我們要做調整（例如調整y軸的範圍）只要從<code>g2</code>開始用<code>+</code>下指令即可。 這樣的設計讓我們在調整圖形上更方便。</p>
 </div>
 <div id="-46" class="section level2">
 <h2>關卡 46</h2>
-<p>在上一堂課程中，我們有介紹過dotchart。ggplot2中也有提供類似的圖層:geom_point。請同學輸入：<code>g3&lt;-g+geom_point(aes(color=schtyp),size=10)</code>。</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">g3 &lt;-<span class="st"> </span>g +<span class="st"> </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">color =</span> schtyp), <span class="dt">size =</span> <span class="dv">10</span>)</code></pre></div>
+<p>在上一堂課程中，我們有介紹過dotchart。 ggplot2中也有提供類似的圖層: geom_point。 請同學輸入：<code>g3 &amp;lt;- g + geom_point(aes(color = schtyp), size = 10)</code>。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">g3 &amp;lt;-<span class="st"> </span>g +<span class="st"> </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">color =</span> schtyp), <span class="dt">size =</span> <span class="dv">10</span>)</code></pre></div>
 </div>
 <div id="-47" class="section level2">
 <h2>關卡 47</h2>
@@ -370,46 +370,46 @@ answer01 &lt;-<span class="st"> </span><span class="kw">local</span>({
 </div>
 <div id="-48" class="section level2">
 <h2>關卡 48</h2>
-<p>如果要改成水平方向，可以使用：<code>g3+coord_flip()</code>。</p>
+<p>如果要改成水平方向，可以使用：<code>g3 + coord_flip()</code>。</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">g3 +<span class="st"> </span><span class="kw">coord_flip</span>()</code></pre></div>
 </div>
 <div id="-49" class="section level2">
 <h2>關卡 49</h2>
-<p>ggplot2把這些跟座標軸的縮放、翻轉的功能都放到<code>coord</code>開頭的函數了。繪圖常用的座標轉換，像是取log，也都有對應的函數，並且都是以<code>coord_</code>開頭。就如同繪圖、製作圖層的函數都是<code>geom_</code>開頭一樣。這些API的設計比起R的繪圖API是更有系統了。</p>
+<p>ggplot2把這些跟座標軸的縮放、翻轉的功能都放到<code>coord</code>開頭的函數了。 繪圖常用的座標轉換，像是取log，也都有對應的函數，並且都是以<code>coord_</code>開頭。 就如同繪圖、製作圖層的函數都是<code>geom_</code>開頭一樣。 這些API的設計比起R 的繪圖API是更有系統了。</p>
 </div>
 <div id="-50" class="section level2">
 <h2>關卡 50</h2>
-<p>除了觀察單一統計量之外，ggplot2也支援統計學常用的boxplot。請同學輸入：<code>g&lt;-ggplot(hsb,aes(x=sex,y=math,fill=schtyp))</code>，先告訴ggplot2要如何進行數據分組。</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">g &lt;-<span class="st"> </span><span class="kw">ggplot</span>(hsb, <span class="kw">aes</span>(<span class="dt">x =</span> sex, <span class="dt">y =</span> math, <span class="dt">fill =</span> schtyp))</code></pre></div>
+<p>除了觀察單一統計量之外，ggplot2也支援統計學常用的boxplot。 請同學輸入：<code>g &amp;lt;- ggplot(hsb, aes(x = sex, y = math, fill = schtyp))</code>，先告訴ggplot2要如何進行數據分組。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">g &amp;lt;-<span class="st"> </span><span class="kw">ggplot</span>(hsb, <span class="kw">aes</span>(<span class="dt">x =</span> sex, <span class="dt">y =</span> math, <span class="dt">fill =</span> schtyp))</code></pre></div>
 </div>
 <div id="-51" class="section level2">
 <h2>關卡 51</h2>
-<p>接著，我們可以使用geom_boxplot產生圖層：<code>g+geom_boxplot()</code>。</p>
+<p>接著，我們可以使用geom_boxplot產生圖層：<code>g + geom_boxplot()</code>。</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">g +<span class="st"> </span><span class="kw">geom_boxplot</span>()</code></pre></div>
 </div>
 <div id="-52" class="section level2">
 <h2>關卡 52</h2>
-<p>需要的話，我們可以增加更多欄位，讓boxplot有更多的變化。舉例來說，我們可以加上linetype:<code>g+geom_boxplot(aes(linetype=race))</code>。</p>
+<p>需要的話，我們可以增加更多欄位，讓boxplot有更多的變化。 舉例來說，我們可以加上linetype: <code>g + geom_boxplot(aes(linetype = race))</code>。</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">g +<span class="st"> </span><span class="kw">geom_boxplot</span>(<span class="kw">aes</span>(<span class="dt">linetype =</span> race))</code></pre></div>
 </div>
 <div id="-53" class="section level2">
 <h2>關卡 53</h2>
-<p>雖然這張圖有點複雜，但是因為ggplot2會自動生成圖例，所以仔細觀察後仍可以很清楚地看到各群分組的差異。舉例來說，圖中顯示某族裔美國人的女學生，在公立與私立學校的數學表現差異很大。請問同學，這是哪一個種族呢？A:AfricanAmerican,B:Asian,C:Hispanic,D:White</p>
+<p>雖然這張圖有點複雜，但是因為ggplot2會自動生成圖例，所以仔細觀察後仍可以很清楚地看到各群分組的差異。 舉例來說，圖中顯示某族裔美國人的女學生，在公立與私立學校的數學表現差異很大。 請問同學，這是哪一個種族呢？A: African American, B: Asian, C: Hispanic, D: White</p>
 <p>C</p>
 </div>
 <div id="-54" class="section level2">
 <h2>關卡 54</h2>
-<p>接下來我們試試看畫散佈圖。請同學輸入：<code>g&lt;-ggplot(hsb,aes(x=math,y=read))</code>。</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">g &lt;-<span class="st"> </span><span class="kw">ggplot</span>(hsb, <span class="kw">aes</span>(<span class="dt">x =</span> math, <span class="dt">y =</span> read))</code></pre></div>
+<p>接下來我們試試看畫散佈圖。請同學輸入：<code>g &amp;lt;- ggplot(hsb, aes(x = math, y = read))</code>。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">g &amp;lt;-<span class="st"> </span><span class="kw">ggplot</span>(hsb, <span class="kw">aes</span>(<span class="dt">x =</span> math, <span class="dt">y =</span> read))</code></pre></div>
 </div>
 <div id="-55" class="section level2">
 <h2>關卡 55</h2>
-<p>輸入<code>g+geom_point()</code>讓ggplot以散佈圖的方式繪製圖層。</p>
+<p>輸入<code>g + geom_point()</code>讓ggplot以散佈圖的方式繪製圖層。</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">g +<span class="st"> </span><span class="kw">geom_point</span>()</code></pre></div>
 </div>
 <div id="-56" class="section level2">
 <h2>關卡 56</h2>
-<p>還記得上一個課程最後所繪製的一張圖：一口氣運用點的大小、形狀、顏色來表示science的表現、公立私立與學生的性別。我們也可以在ggplot2中做到：<code>g+geom_point(aes(size=science,pch=schtyp,color=sex))</code>。</p>
+<p>還記得上一個課程最後所繪製的一張圖：一口氣運用點的大小、形狀、顏色來表示science的表現、公立私立與學生的性別。 我們也可以在ggplot2中做到：<code>g + geom_point(aes(size = science, pch = schtyp, color = sex))</code>。</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">g +<span class="st"> </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">size =</span> science, <span class="dt">pch =</span> schtyp, <span class="dt">color =</span> sex))</code></pre></div>
 </div>
 <div id="-57" class="section level2">
@@ -418,13 +418,13 @@ answer01 &lt;-<span class="st"> </span><span class="kw">local</span>({
 </div>
 <div id="-58" class="section level2">
 <h2>關卡 58</h2>
-<p>接著我們介紹如何調整ggplot2的配色。假設各位同學想要使用對色盲友善的配色系列，在參考Wong.B(2011)PointsofView:Colorblindness.NatureMethods8:411後，請同學輸入以下的指令：<code>cb7&lt;-c(&quot;#000000&quot;,&quot;#E69F00&quot;,&quot;#56B4E9&quot;,&quot;#009E73&quot;,&quot;#F0E442&quot;,&quot;#0072B2&quot;,&quot;#D55E00&quot;,&quot;#CC79A7&quot;)</code>。</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cb7 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;#000000&quot;</span>, <span class="st">&quot;#E69F00&quot;</span>, <span class="st">&quot;#56B4E9&quot;</span>, <span class="st">&quot;#009E73&quot;</span>, <span class="st">&quot;#F0E442&quot;</span>, <span class="st">&quot;#0072B2&quot;</span>, <span class="st">&quot;#D55E00&quot;</span>, <span class="st">&quot;#CC79A7&quot;</span>)</code></pre></div>
+<p>接著我們介紹如何調整ggplot2的配色。 假設各位同學想要使用對色盲友善的配色系列，在參考Wong. B (2011) Points of View: Color blindness. Nature Methods 8:411後， 請同學輸入以下的指令：<code>cb7 &amp;lt;- c(&amp;quot;#000000&amp;quot;, &amp;quot;#E69F00&amp;quot;, &amp;quot;#56B4E9&amp;quot;, &amp;quot;#009E73&amp;quot;, &amp;quot;#F0E442&amp;quot;, &amp;quot;#0072B2&amp;quot;, &amp;quot;#D55E00&amp;quot;, &amp;quot;#CC79A7&amp;quot;)</code>。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cb7 &amp;lt;-<span class="st"> </span><span class="kw">c</span>(&amp;quot;<span class="co">#000000&amp;quot;, &amp;quot;#E69F00&amp;quot;, &amp;quot;#56B4E9&amp;quot;, &amp;quot;#009E73&amp;quot;, &amp;quot;#F0E442&amp;quot;, &amp;quot;#0072B2&amp;quot;, &amp;quot;#D55E00&amp;quot;, &amp;quot;#CC79A7&amp;quot;)</span></code></pre></div>
 </div>
 <div id="-59" class="section level2">
 <h2>關卡 59</h2>
-<p>接著我們先繪製沒修正配色之前的版本。請同學輸入：<code>g&lt;-ggplot(hsb,aes(x=sex,fill=race))+geom_bar()</code>。</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">g &lt;-<span class="st"> </span><span class="kw">ggplot</span>(hsb, <span class="kw">aes</span>(<span class="dt">x =</span> sex, <span class="dt">fill =</span> race)) +<span class="st"> </span><span class="kw">geom_bar</span>()</code></pre></div>
+<p>接著我們先繪製沒修正配色之前的版本。 請同學輸入：<code>g &amp;lt;- ggplot(hsb, aes(x = sex, fill = race)) + geom_bar()</code>。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">g &amp;lt;-<span class="st"> </span><span class="kw">ggplot</span>(hsb, <span class="kw">aes</span>(<span class="dt">x =</span> sex, <span class="dt">fill =</span> race)) +<span class="st"> </span><span class="kw">geom_bar</span>()</code></pre></div>
 </div>
 <div id="-60" class="section level2">
 <h2>關卡 60</h2>
@@ -433,7 +433,7 @@ answer01 &lt;-<span class="st"> </span><span class="kw">local</span>({
 </div>
 <div id="-61" class="section level2">
 <h2>關卡 61</h2>
-<p>接著我們輸入：<code>g+scale_fill_manual(values=cb7)</code>來修改配色。</p>
+<p>接著我們輸入：<code>g + scale_fill_manual(values=cb7)</code>來修改配色。</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">g +<span class="st"> </span><span class="kw">scale_fill_manual</span>(<span class="dt">values=</span>cb7)</code></pre></div>
 </div>
 <div id="-62" class="section level2">
@@ -442,7 +442,7 @@ answer01 &lt;-<span class="st"> </span><span class="kw">local</span>({
 </div>
 <div id="-63" class="section level2">
 <h2>關卡 63</h2>
-<p>接下來我們介紹一個函數：<code>ggtheme</code>。它讓我們可以輕鬆的轉換ggplot的繪圖風格。請同學試試看：<code>g+theme_minimal()</code>。</p>
+<p>接下來我們介紹一個函數：<code>ggtheme</code>。 它讓我們可以輕鬆的轉換ggplot的繪圖風格。 請同學試試看：<code>g + theme_minimal()</code>。</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">g +<span class="st"> </span><span class="kw">theme_minimal</span>()</code></pre></div>
 </div>
 <div id="-64" class="section level2">
@@ -451,8 +451,8 @@ answer01 &lt;-<span class="st"> </span><span class="kw">local</span>({
 </div>
 <div id="-65" class="section level2">
 <h2>關卡 65</h2>
-<p>也可以使用<code>ggsave</code>來將圖片輸出到檔案中。請同學先輸入：<code>dst&lt;-tempfile(fileext=&quot;.png&quot;)</code>隨機生成一個暫存檔路徑。</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dst &lt;-<span class="st"> </span><span class="kw">tempfile</span>(<span class="dt">fileext =</span> <span class="st">&quot;.png&quot;</span>)</code></pre></div>
+<p>也可以使用<code>ggsave</code>來將圖片輸出到檔案中。 請同學先輸入：<code>dst &amp;lt;- tempfile(fileext = &amp;quot;.png&amp;quot;)</code>隨機生成一個暫存檔路徑。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dst &amp;lt;-<span class="st"> </span><span class="kw">tempfile</span>(<span class="dt">fileext =</span> &amp;quot;.png&amp;quot;)</code></pre></div>
 </div>
 <div id="-66" class="section level2">
 <h2>關卡 66</h2>
@@ -461,22 +461,22 @@ answer01 &lt;-<span class="st"> </span><span class="kw">local</span>({
 </div>
 <div id="-67" class="section level2">
 <h2>關卡 67</h2>
-<p>接著請同學輸入：<code>g&lt;-ggplot(hsb,aes(x=read,y=math))+geom_point()</code>。這裡<code>g</code>就代表readv.s.math的x-y散佈圖。</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">g &lt;-<span class="st"> </span><span class="kw">ggplot</span>(hsb, <span class="kw">aes</span>(<span class="dt">x =</span> read, <span class="dt">y =</span> math)) +<span class="st"> </span><span class="kw">geom_point</span>()</code></pre></div>
+<p>接著請同學輸入：<code>g &amp;lt;- ggplot(hsb, aes(x = read, y = math)) + geom_point()</code>。 這裡<code>g</code>就代表read v.s. math的x-y散佈圖。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">g &amp;lt;-<span class="st"> </span><span class="kw">ggplot</span>(hsb, <span class="kw">aes</span>(<span class="dt">x =</span> read, <span class="dt">y =</span> math)) +<span class="st"> </span><span class="kw">geom_point</span>()</code></pre></div>
 </div>
 <div id="-68" class="section level2">
 <h2>關卡 68</h2>
-<p>我們如果想要一個<code>race</code>的類別畫一張圖呢？請同學輸入：<code>g+facet_grid(.~race)</code>。</p>
+<p>我們如果想要一個<code>race</code>的類別畫一張圖呢？ 請同學輸入：<code>g + facet_grid(. ~ race)</code>。</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">g +<span class="st"> </span><span class="kw">facet_grid</span>(. ~<span class="st"> </span>race)</code></pre></div>
 </div>
 <div id="-69" class="section level2">
 <h2>關卡 69</h2>
-<p>剛剛的<code>face_grid</code>是一個比較進階的函數。同學只要記得，如果要對某一個欄位做展開，例如剛剛的動作就是對<code>race</code>做展開，每個<code>race</code>畫一張圖，第一個參數的formula中，<code>~</code>的左邊放<code>.</code>，右邊放要展開的欄位名稱即可（不需要加引號）。</p>
+<p>剛剛的<code>face_grid</code>是一個比較進階的函數。 同學只要記得，如果要對某一個欄位做展開，例如剛剛的動作就是對<code>race</code>做展開，每個<code>race</code>畫一張圖， 第一個參數的formula中，<code>~</code>的左邊放<code>.</code>，右邊放要展開的欄位名稱即可（不需要加引號）。</p>
 </div>
 <div id="-70" class="section level2">
 <h2>關卡 70</h2>
-<p>如果我們要一次畫出多筆數據兩兩間的散佈圖，就需要使用GGally這個套件。請同學安裝。</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">check_then_install</span>(<span class="st">&quot;GGally&quot;</span>, <span class="st">&quot;1.0.1&quot;</span>)</code></pre></div>
+<p>如果我們要一次畫出多筆數據兩兩間的散佈圖，就需要使用GGally這個套件。 請同學安裝。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">check_then_install</span>(&amp;quot;GGally&amp;quot;, &amp;quot;<span class="fl">1.0.1</span>&amp;quot;)</code></pre></div>
 </div>
 <div id="-71" class="section level2">
 <h2>關卡 71</h2>
@@ -485,7 +485,7 @@ answer01 &lt;-<span class="st"> </span><span class="kw">local</span>({
 </div>
 <div id="-72" class="section level2">
 <h2>關卡 72</h2>
-<p>如果我們想要看read,write,math,science兩兩組合的x-y散佈圖，我們只要輸入：<code>ggpairs(hsb,7:10)</code>。註:這些欄位分別位於hsb的第7至第10欄。</p>
+<p>如果我們想要看read, write, math, science 兩兩組合的x-y散佈圖，我們只要輸入：<code>ggpairs(hsb, 7:10)</code>。 註: 這些欄位分別位於hsb的第7至第10欄。</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggpairs</span>(hsb, <span class="dv">7</span>:<span class="dv">10</span>)</code></pre></div>
 </div>
 <div id="-73" class="section level2">
@@ -494,12 +494,12 @@ answer01 &lt;-<span class="st"> </span><span class="kw">local</span>({
 </div>
 <div id="-74" class="section level2">
 <h2>關卡 74</h2>
-<p>我們自內政部資料開放平台下載了個村（里）戶籍人口統計月報表。有興趣的同學可以輸入：<code>population_src()</code>來瀏覽資料來源。這裡請同學輸入：head(population)看一下這筆資料。</p>
+<p>我們自內政部資料開放平台下載了個村（里）戶籍人口統計月報表。 有興趣的同學可以輸入：<code>population_src()</code>來瀏覽資料來源。 這裡請同學輸入：head(population)看一下這筆資料。</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(population)</code></pre></div>
 </div>
 <div id="-75" class="section level2">
 <h2>關卡 75</h2>
-<p>接下來我們會在每個步驟先畫一張圖給同學參考。請同學依照指示從<code>population</code>中畫出類似的圖。受限於技術，目前我們只能請同學自行比對答案。完成之後請同學輸入<code>submit()</code>後就可以進行下一個挑戰。請同學輸入<code>skip()</code>開始第一個挑戰。</p>
+<p>接下來我們會在每個步驟先畫一張圖給同學參考。 請同學依照指示從<code>population</code>中畫出類似的圖。 受限於技術，目前我們只能請同學自行比對答案。 完成之後請同學輸入<code>submit()</code>後就可以進行下一個挑戰。 請同學輸入<code>skip()</code>開始第一個挑戰。</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">begin_rvisualization_03</span>()</code></pre></div>
 </div>
 <div id="-76" class="section level2">

@@ -138,24 +138,24 @@ Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">
 </noscript>
 <div id="-1" class="section level2">
 <h2>關卡 1</h2>
-<p>這門課程要介紹R語言的迴圈，以及常見的應用案例。</p>
+<p>這門課程要介紹R 語言的迴圈，以及常見的應用案例。</p>
 </div>
 <div id="-2" class="section level2">
 <h2>關卡 2</h2>
-<p>迴圈是一種寫程式時很泛用的技巧，可以幫助我們用簡短的程式碼來執行重複的動作。</p>
+<p>迴圈是一種寫程式時很泛用的技巧，可以幫助我們用 簡短的程式碼來執行重複的動作。</p>
 </div>
 <div id="-3" class="section level2">
 <h2>關卡 3</h2>
-<p>在做機器學習時，有些演算法是透過不停的重複做一樣的計算，而每次計算都能把學習的結果再改善一些。這類的動作就很適合用迴圈實做。</p>
+<p>在做機器學習時，有些演算法是透過不停的重複做一樣 的計算，而每次計算都能把學習的結果再改善一些。這類的動 作就很適合用迴圈實做。</p>
 </div>
 <div id="-4" class="section level2">
 <h2>關卡 4</h2>
-<p>讓我們用一個數學上的小應用來練習。假設我們要找出一個數x，使得f(x)=x^2的值最小。雖然我們知道這個問題的答案是x=0，但是這裡讓我們用數值方法來逼近答案。</p>
+<p>讓我們用一個數學上的小應用來練習。假設我們要找 出一個數x ，使得f(x) = x^2的值最小。雖然我們知道這個 問題的答案是x=0 ，但是這裡讓我們用數值方法來逼近答案。</p>
 </div>
 <div id="-5" class="section level2">
 <h2>關卡 5</h2>
-<p>請同學先把數字3存入變數<code>x0</code></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x0 &lt;-<span class="st"> </span><span class="dv">3</span></code></pre></div>
+<p>請同學先把數字3 存入變數<code>x0</code></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x0 &amp;lt;-<span class="st"> </span><span class="dv">3</span></code></pre></div>
 </div>
 <div id="-6" class="section level2">
 <h2>關卡 6</h2>
@@ -164,8 +164,8 @@ Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">
 </div>
 <div id="-7" class="section level2">
 <h2>關卡 7</h2>
-<p>接著，我們把<code>x0-0.2*x0</code>存到變數x1</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x1 &lt;-<span class="st"> </span>x0 -<span class="st"> </span><span class="fl">0.2</span> *<span class="st"> </span>x0</code></pre></div>
+<p>接著，我們把<code>x0 - 0.2 * x0</code> 存到變數x1</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x1 &amp;lt;-<span class="st"> </span>x0 -<span class="st"> </span><span class="fl">0.2</span> *<span class="st"> </span>x0</code></pre></div>
 </div>
 <div id="-8" class="section level2">
 <h2>關卡 8</h2>
@@ -179,49 +179,49 @@ Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">
 </div>
 <div id="-10" class="section level2">
 <h2>關卡 10</h2>
-<p>事實上，數學可以證明如果我們把<code>x1-0.2*x1</code>存到<code>x2</code>、<code>x2-0.2*x2</code>存到<code>x3</code>…以此類推，x1、x2、x3…就會越來越靠近最終的答案，也就是0。讓我們用迴圈來驗證這件事。</p>
+<p>事實上，數學可以證明如果我們把<code>x1 - 0.2 * x1</code>存到<code>x2</code>、 <code>x2 - 0.2 * x2</code>存到<code>x3</code>… 以此類推，x1、x2、x3… 就會越來越 靠近最終的答案，也就是0 。讓我們用迴圈來驗證這件事。</p>
 </div>
 <div id="-11" class="section level2">
 <h2>關卡 11</h2>
-<p>首先，假定我們要重複算99次。請同學先建立一個長度為100的數值向量，並且把它存到變數<code>x</code>之中。</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">numeric</span>(<span class="dv">100</span>)</code></pre></div>
+<p>首先，假定我們要重複算99次。請同學先建立一個長度 為100 的數值向量，並且把它存到變數<code>x</code> 之中。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &amp;lt;-<span class="st"> </span><span class="kw">numeric</span>(<span class="dv">100</span>)</code></pre></div>
 </div>
 <div id="-12" class="section level2">
 <h2>關卡 12</h2>
-<p>請把3存到<code>x</code>的第一個element</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x[<span class="dv">1</span>] &lt;-<span class="st"> </span><span class="dv">3</span></code></pre></div>
+<p>請把3 存到<code>x</code> 的第一個element</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x[<span class="dv">1</span>] &amp;lt;-<span class="st"> </span><span class="dv">3</span></code></pre></div>
 </div>
 <div id="-13" class="section level2">
 <h2>關卡 13</h2>
-<p>請把<code>x[1]-0.2*x[1]</code>存到x的第二個element</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x[<span class="dv">2</span>] &lt;-<span class="st"> </span>x[<span class="dv">1</span>] -<span class="st"> </span><span class="fl">0.2</span> *<span class="st"> </span>x[<span class="dv">1</span>]</code></pre></div>
+<p>請把<code>x[1] - 0.2 * x[1]</code> 存到x 的第二個element</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x[<span class="dv">2</span>] &amp;lt;-<span class="st"> </span>x[<span class="dv">1</span>] -<span class="st"> </span><span class="fl">0.2</span> *<span class="st"> </span>x[<span class="dv">1</span>]</code></pre></div>
 </div>
 <div id="-14" class="section level2">
 <h2>關卡 14</h2>
-<p>同學可能已經瞭解，類似<code>x[1]-0.2*x[1]</code>的運算會一直重複。差別只在於<code>x[1]-0.2*x[1]</code>中的<code>x[1]</code>需要做改變。</p>
+<p>同學可能已經瞭解，類似<code>x[1] - 0.2 * x[1]</code>的運算會 一直重複。差別只在於<code>x[1] - 0.2 * x[1]</code>中的<code>x[1]</code>需要做 改變。</p>
 </div>
 <div id="-15" class="section level2">
 <h2>關卡 15</h2>
-<p>其實<code>x[1]</code>在這裡，可以看成是<code>x[1]-0.2*x[1]</code>的運算的輸入位置，是x的第一個element。理解了這一點之後，為了讓R可以在改變<code>x[1]</code>的情形下重複<code>x[1]-0.2*x[1]</code>這樣的運算，我們可以利用一個變數<code>i</code>來代表現在要運算的位置。請同學把1存入變數<code>i</code>。</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">i &lt;-<span class="st"> </span><span class="dv">1</span></code></pre></div>
+<p>其實<code>x[1]</code>在這裡，可以看成是<code>x[1] - 0.2 * x[1]</code>的運算 的輸入位置，是x 的第一個element 。理解了這一點之後，為了讓R 可以在改變<code>x[1]</code> 的情形下重複<code>x[1] - 0.2 * x[1]</code> 這樣的運算， 我們可以利用一個變數<code>i</code> 來代表現在要運算的位置。請同學把1 存入變數<code>i</code>。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">i &amp;lt;-<span class="st"> </span><span class="dv">1</span></code></pre></div>
 </div>
 <div id="-16" class="section level2">
 <h2>關卡 16</h2>
-<p>接著，我們可以把<code>x[2]&lt;-x[1]-0.2*x[1]</code>這樣的運算用<code>i</code>改寫，請同學試試看。請注意，這裡<code>x[2]</code>的意義，是<code>x[1]</code>的「下一個位置」。</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x[i +<span class="st"> </span><span class="dv">1</span>] &lt;-<span class="st"> </span>x[i] -<span class="st"> </span><span class="fl">0.2</span> *<span class="st"> </span>x[i]</code></pre></div>
+<p>接著，我們可以把<code>x[2] &amp;lt;- x[1] - 0.2 * x[1]</code>這樣的運算 用<code>i</code> 改寫，請同學試試看。請注意，這裡<code>x[2]</code> 的意義，是<code>x[1]</code> 的「下一個位置」。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x[i +<span class="st"> </span><span class="dv">1</span>] &amp;lt;-<span class="st"> </span>x[i] -<span class="st"> </span><span class="fl">0.2</span> *<span class="st"> </span>x[i]</code></pre></div>
 </div>
 <div id="-17" class="section level2">
 <h2>關卡 17</h2>
-<p>在完成上一個問題之後，我們只要讓<code>i=1</code>的時候跑一次運算、<code>i=2</code>再跑一次運算、一直重複這個動作到<code>i=99</code>。在R裡面，我們可運用<code>for</code>這個語法來達成這個目的。下一個指令，我們先讓同學複製貼上一個R的迴圈指令，再跟同學解釋。</p>
+<p>在完成上一個問題之後，我們只要讓<code>i=1</code> 的時候跑一次運算、 <code>i=2</code> 再跑一次運算、一直重複這個動作到<code>i=99</code>。在R 裡面，我們可 運用<code>for</code> 這個語法來達成這個目的。下一個指令，我們先讓同學複製 貼上一個R 的迴圈指令，再跟同學解釋。</p>
 </div>
 <div id="-18" class="section level2">
 <h2>關卡 18</h2>
-<p>請同學輸入：<code>for(iin1:99)x[i+1]&lt;-x[i]-0.2*x[i]</code></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">for(i in <span class="dv">1</span>:<span class="dv">99</span>) x[i +<span class="st"> </span><span class="dv">1</span>] &lt;-<span class="st"> </span>x[i] -<span class="st"> </span><span class="fl">0.2</span> *<span class="st"> </span>x[i]</code></pre></div>
+<p>請同學輸入：<code>for(i in 1:99) x[i + 1] &amp;lt;- x[i] - 0.2 * x[i]</code></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">for(i in <span class="dv">1</span>:<span class="dv">99</span>) x[i +<span class="st"> </span><span class="dv">1</span>] &amp;lt;-<span class="st"> </span>x[i] -<span class="st"> </span><span class="fl">0.2</span> *<span class="st"> </span>x[i]</code></pre></div>
 </div>
 <div id="-19" class="section level2">
 <h2>關卡 19</h2>
-<p>請同學輸入<code>x</code>，就可以看看計算結果了。x越後面的element，就越靠近0。</p>
+<p>請同學輸入<code>x</code> ，就可以看看計算結果了。x 越後面的element， 就越靠近0 。</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x</code></pre></div>
 </div>
 <div id="-20" class="section level2">
@@ -231,58 +231,58 @@ Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">
 </div>
 <div id="-21" class="section level2">
 <h2>關卡 21</h2>
-<p>在R中，<code>for(iin1:99)expr</code>的語法代表的，就是讓<code>i</code>是為<code>1:99</code>的第一個element，也就是<code>i=1</code>的狀況下去運算<code>expr</code>。接著，讓<code>i</code>為<code>1:99</code>的第二個element，也就是<code>i=2</code>的狀況下去運算<code>expr</code>。重複這個動作，直到<code>i</code>到<code>1:99</code>的最後一個element，也就是<code>i=99</code>的狀況。提醒同學，這裡的expr就是<code>x[i+1]&lt;-x[i]-0.2*x[i]</code>。</p>
+<p>在R 中，<code>for(i in 1:99) expr</code>的語法代表的，就是讓<code>i</code>是 為<code>1:99</code>的第一個element，也就是<code>i=1</code> 的狀況下去運算<code>expr</code>。接著， 讓<code>i</code>為<code>1:99</code>的第二個element，也就是<code>i=2</code>的狀況下去運算<code>expr</code>。 重複這個動作，直到<code>i</code>到<code>1:99</code>的最後一個element，也就是<code>i=99</code>的狀況。 提醒同學，這裡的expr就是<code>x[i + 1] &amp;lt;- x[i] - 0.2 * x[i]</code>。</p>
 </div>
 <div id="-22" class="section level2">
 <h2>關卡 22</h2>
-<p>其實大部分機器學習算法的核心，是非常類似我們上述所做的動作：「不停的改善既有的答案」。一開始我們先猜3，然後我們得出一個可以改善答案的方法（<code>x[i+1]&lt;-x[i]-0.2*x[i]</code>），最後得到一個「夠用」的答案。</p>
+<p>其實大部分機器學習算法的核心，是非常類似我們上述所做的動作： 「不停的改善既有的答案」。一開始我們先猜 3，然後我們得出一個可以改 善答案的方法（<code>x[i + 1] &amp;lt;- x[i] - 0.2 * x[i]</code>），最後得到一個「夠用」 的答案。</p>
 </div>
 <div id="-23" class="section level2">
 <h2>關卡 23</h2>
-<p>除了上述的範例之外，<code>for</code>迴圈也常常用於處理各種資料處理的工作。舉例來說，如果我知道所有要讀資料的檔案名稱，依序是：“data/1.csv”、“data/2.csv”和、“data/3.csv”，那我們要如何用<code>for</code>迴圈讀取所有的資料呢？</p>
+<p>除了上述的範例之外，<code>for</code>迴圈也常常用於處理各種資料處理的工作。 舉例來說，如果我知道所有要讀資料的檔案名稱，依序是：“data/1.csv”、 “data/2.csv”和、“data/3.csv”，那我們要如何用<code>for</code>迴圈讀取所有的資料呢？</p>
 </div>
 <div id="-24" class="section level2">
 <h2>關卡 24</h2>
-<p>這類的應用，我們需要懂一點用R產生字串的函數，才能做出來。請同學先輸入：<code>paste0(&quot;data/&quot;,1,&quot;.csv&quot;)</code></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">paste0</span>(<span class="st">&quot;data/&quot;</span>, <span class="dv">1</span>, <span class="st">&quot;.csv&quot;</span>)</code></pre></div>
+<p>這類的應用，我們需要懂一點用R 產生字串的函數，才能做出來。 請同學先輸入：<code>paste0(&amp;quot;data/&amp;quot;, 1, &amp;quot;.csv&amp;quot;)</code></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">paste0</span>(&amp;quot;data/<span class="er">&amp;</span>quot;, <span class="dv">1</span>, &amp;quot;.csv&amp;quot;)</code></pre></div>
 </div>
 <div id="-25" class="section level2">
 <h2>關卡 25</h2>
-<p>這裡的<code>paste0</code>函數可以把輸入的R物件粘接成一個字串。另一個非常相似的函數是：<code>paste</code>。兩者最主要的差異，在於<code>paste0</code>是直接粘接，而<code>paste</code>在粘接時預設會插入空格。</p>
+<p>這裡的<code>paste0</code>函數可以把輸入的R 物件粘接成一個字串。另一個非常相似 的函數是：<code>paste</code>。兩者最主要的差異，在於<code>paste0</code> 是直接粘接，而<code>paste</code> 在粘接時預設會插入空格。</p>
 </div>
 <div id="-26" class="section level2">
 <h2>關卡 26</h2>
-<p>另一個問題，是跑迴圈時，要如何儲存每一次執行<code>expr</code>後得到的結果。當輸出結果是數字時，我們可以像上述的範例，先建立一個向量來儲存。更一般的狀況中，可以建立一個<code>list</code>來儲存結果。提醒同學，<code>list</code>可以儲存任何的R物件。</p>
+<p>另一個問題，是跑迴圈時，要如何儲存每一次執行<code>expr</code>後得到的結果。 當輸出結果是數字時，我們可以像上述的範例，先建立一個向量來儲存。更一般 的狀況中，可以建立一個<code>list</code>來儲存結果。提醒同學，<code>list</code>可以儲存任何的 R 物件。</p>
 </div>
 <div id="-27" class="section level2">
 <h2>關卡 27</h2>
-<p>假設我們先建立一個<code>list()</code>並取名為<code>retval</code>，接著我們想用<code>for(iin&lt;??&gt;)retval[[i]]&lt;-read.table(paste0(&quot;data/&quot;,i,&quot;.csv&quot;))</code>來一口氣讀取“data/1.csv”、“data/2.csv”、“data/3.csv”。請問同學，&lt;??&gt;應該要填入什麼呢？</p>
+<p>假設我們先建立一個<code>list()</code>並取名為<code>retval</code>，接著我們想 用<code>for(i in &amp;lt;??&amp;gt;) retval[[i]] &amp;lt;- read.table(paste0(&amp;quot;data/&amp;quot;, i, &amp;quot;.csv&amp;quot;))</code>來 一口氣讀取“data/1.csv”、“data/2.csv”、“data/3.csv”。請問同學， &lt;??&gt;應該要填入什麼呢？</p>
 <p>c(1,2,3)</p>
 </div>
 <div id="-28" class="section level2">
 <h2>關卡 28</h2>
-<p>上述的兩個例子，大致上呈現R的迴圈功能，以及在使用上所需要搭配的一些小撇步。</p>
+<p>上述的兩個例子，大致上呈現R 的迴圈功能，以及在使用上所需要 搭配的一些小撇步。</p>
 </div>
 <div id="-29" class="section level2">
 <h2>關卡 29</h2>
-<p>接著，再讓我們回到第一個範例。在實務上，我們不可能無窮無盡的讓改善答案的過程一直做下去。當答案「夠用」的時候，我們就想停止這個過程。除了用預先規劃跑99次的方式之外，另外一種常用的方式，是衡量每次改善的幅度，並且當改善幅度太小的時候，中斷執行的程序。</p>
+<p>接著，再讓我們回到第一個範例。在實務上，我們不可能無窮無盡的 讓改善答案的過程一直做下去。當答案「夠用」的時候，我們就想停止這個過程。 除了用預先規劃跑99 次的方式之外，另外一種常用的方式，是衡量每次改善的幅 度，並且當改善幅度太小的時候，中斷執行的程序。</p>
 </div>
 <div id="-30" class="section level2">
 <h2>關卡 30</h2>
-<p>通常，我們會拿這次的答案和上一次的答案做比較，如果差異過小，就代表能改善的幅度已經太小，答案可能已經夠用了。在這裡，我們利用<code>abs(x[2]-x[1])</code>可以計算第一次計算後答案的差異。這裡的<code>abs</code>是取絕對值的運算。<code>abs</code>可以保證回傳的都是正數，在比大小時很常用。同理，請同學計算第二次計算後答案的差異。</p>
+<p>通常，我們會拿這次的答案和上一次的答案做比較，如果差異過小，就 代表能改善的幅度已經太小，答案可能已經夠用了。 在這裡，我們利用<code>abs(x[2] - x[1])</code>可以計算第一次計算後答案的差異。這 裡的<code>abs</code>是取絕對值的運算。<code>abs</code>可以保證回傳的都是正數，在比大小時很常用。 同理，請同學計算第二次計算後答案的差異。</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">abs</span>(x[<span class="dv">3</span>] -<span class="st"> </span>x[<span class="dv">2</span>])</code></pre></div>
 </div>
 <div id="-31" class="section level2">
 <h2>關卡 31</h2>
-<p>一個實務上常常採用的策略是：我們希望在答案差異小於0.01的時候，終止迴圈運算，否則就會一直計算。同時，我們希望迴圈最多跑99次。</p>
+<p>一個實務上常常採用的策略是：我們希望在答案差異小於0.01的時候， 終止迴圈運算，否則就會一直計算。同時，我們希望迴圈最多跑99次。</p>
 </div>
 <div id="-32" class="section level2">
 <h2>關卡 32</h2>
-<p>要達到這樣的功能，我們需要先解決：「在改善幅度小於0.01的時候，終止迴圈運算，否則就會一直計算」的程式。在R之中，我們可以利用<code>if(expr1)expr2</code>來寫出這樣的程式。這樣，R只有在<code>expr1</code>為<code>TRUE</code>的時候，才會執行expr2。否則就會略過。</p>
+<p>要達到這樣的功能，我們需要先解決：「在改善幅度小於0.01的時候， 終止迴圈運算，否則就會一直計算」的程式。 在R 之中，我們可以利用<code>if (expr1) expr2</code>來寫出這樣的程式。這樣，R 只有 在<code>expr1</code>為<code>TRUE</code>的時候，才會執行expr2。否則就會略過。</p>
 </div>
 <div id="-33" class="section level2">
 <h2>關卡 33</h2>
-<p>在R的<code>break</code>函數則可以中斷迴圈。</p>
+<p>在R 的<code>break</code>函數則可以中斷迴圈。</p>
 </div>
 <div id="-34" class="section level2">
 <h2>關卡 34</h2>
@@ -298,7 +298,7 @@ for(i in <span class="dv">1</span>:<span class="dv">99</span>) {
 </div>
 <div id="-35" class="section level2">
 <h2>關卡 35</h2>
-<p>請同學先印出<code>x</code>得值</p>
+<p>請同學先印出<code>x</code> 得值</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x</code></pre></div>
 </div>
 <div id="-36" class="section level2">
@@ -308,7 +308,7 @@ for(i in <span class="dv">1</span>:<span class="dv">99</span>) {
 </div>
 <div id="-37" class="section level2">
 <h2>關卡 37</h2>
-<p>這份課程利用兩個常見的範例來跟同學介紹R中的<code>for</code>和<code>if</code>兩個功能。適當的使用這兩個功能，我們可以讓R來完成許多複雜的任務。</p>
+<p>這份課程利用兩個常見的範例來跟同學介紹R 中的<code>for</code> 和<code>if</code>兩個功能。適當的使用這兩個功能，我們可以讓R 來完 成許多複雜的任務。</p>
 </div>
 </div>
 

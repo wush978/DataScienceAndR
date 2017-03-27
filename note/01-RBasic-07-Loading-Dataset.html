@@ -142,22 +142,22 @@ Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">
 </div>
 <div id="-2" class="section level2">
 <h2>關卡 2</h2>
-<p>這個課程的目的是介紹R最常見的幾種資料載入方式</p>
+<p>這個課程的目的是介紹R 最常見的幾種資料載入方式</p>
 </div>
 <div id="-3" class="section level2">
 <h2>關卡 3</h2>
-<p>R內建有許多知名的資料集。這些內建的資料集，目前都在<code>datasets</code>這個套件之中。同學輸入：<code>library(help=datasets)</code>來檢視所有的資料集。請同學試試看。</p>
+<p>R 內建有許多知名的資料集。 這些內建的資料集，目前都在<code>datasets</code>這個套件之中。 同學輸入：<code>library(help=datasets)</code>來檢視所有的資料集。 請同學試試看。</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="dt">help=</span>datasets)</code></pre></div>
 </div>
 <div id="-4" class="section level2">
 <h2>關卡 4</h2>
-<p>在載入資料之前，為了更清楚地說明R的函數，請同學先輸入：<code>iris&lt;-1</code>。</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">iris &lt;-<span class="st"> </span><span class="dv">1</span></code></pre></div>
+<p>在載入資料之前，為了更清楚地說明R 的函數，請同學先輸入：<code>iris &amp;lt;- 1</code>。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">iris &amp;lt;-<span class="st"> </span><span class="dv">1</span></code></pre></div>
 </div>
 <div id="-5" class="section level2">
 <h2>關卡 5</h2>
-<p>我們可以運用<code>data</code>這個指令來載入列出的資料。請同學試試看：<code>data(iris,package=&quot;datasets&quot;)</code>，這個指令的意思為從套件datasets中載入資料集iris。</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(iris, <span class="dt">package =</span> <span class="st">&quot;datasets&quot;</span>)</code></pre></div>
+<p>我們可以運用<code>data</code>這個指令來載入列出的資料。 請同學試試看：<code>data(iris, package = &amp;quot;datasets&amp;quot;)</code>，這個指令的意思為從套件datasets中載入資料集iris。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(iris, <span class="dt">package =</span> &amp;quot;datasets&amp;quot;)</code></pre></div>
 </div>
 <div id="-6" class="section level2">
 <h2>關卡 6</h2>
@@ -166,11 +166,11 @@ Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">
 </div>
 <div id="-7" class="section level2">
 <h2>關卡 7</h2>
-<p>同學會在螢幕上看到R輸出一個data.frame，而不是當初輸入的1。</p>
+<p>同學會在螢幕上看到R 輸出一個data.frame，而不是當初輸入的1。</p>
 </div>
 <div id="-8" class="section level2">
 <h2>關卡 8</h2>
-<p>這就是<code>data</code>函數的功能。它可以讓同學從套件載入特定資料集（DataSets）。舉例來說，我們剛才已由library(help=datasets)觀察到datasets套件中有包含許多資料集，例如:AirPassengers、BJsales、…、iris…等。我們可以用<code>data(iris,package=&quot;datasets&quot;)</code>指令，並透過第一個參數指定特定資料集，R則會把iris的資料集輸入到iris這個變數之中。</p>
+<p>這就是<code>data</code>函數的功能。 它可以讓同學從套件載入特定資料集（Data Sets）。 舉例來說，我們剛才已由library(help=datasets)觀察到datasets套件中有包含許多資料集，例如:AirPassengers、BJsales、…、iris…等。 我們可以用<code>data(iris, package = &amp;quot;datasets&amp;quot;)</code>指令，並透過第一個參數指定特定資料集，R 則會把iris的資料集輸入到iris這個變數之中。</p>
 </div>
 <div id="-9" class="section level2">
 <h2>關卡 9</h2>
@@ -179,16 +179,16 @@ Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">
 </div>
 <div id="-10" class="section level2">
 <h2>關卡 10</h2>
-<p>雖然我們看到了欄位名稱，可是並不清楚這些欄位或是每列資料所代表的意義。這些事情，必須在實際進行資料分析之前就要預先理解的。</p>
+<p>雖然我們看到了欄位名稱，可是並不清楚這些欄位或是每列資料所代表的意義。 這些事情，必須在實際進行資料分析之前就要預先理解的。</p>
 </div>
 <div id="-11" class="section level2">
 <h2>關卡 11</h2>
-<p>如果是使用R提供的資料集，通常都會有相關的說明。甚至會包含該資料集出處的論文。請同學試試看輸入：<code>help(iris)</code>。</p>
+<p>如果是使用R 提供的資料集，通常都會有相關的說明。 甚至會包含該資料集出處的論文。請同學試試看輸入：<code>help(iris)</code>。</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">help</span>(iris)</code></pre></div>
 </div>
 <div id="-12" class="section level2">
 <h2>關卡 12</h2>
-<p>以上練習，已經讓同學了解如何使用R內建的資料集。</p>
+<p>以上練習，已經讓同學了解如何使用R 內建的資料集。</p>
 </div>
 <div id="-13" class="section level2">
 <h2>關卡 13</h2>
@@ -196,67 +196,67 @@ Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">
 </div>
 <div id="-14" class="section level2">
 <h2>關卡 14</h2>
-<p>外部資料集的格式有千百種，今天只跟大家介紹最常見的csv檔。</p>
+<p>外部資料集的格式有千百種，今天只跟大家介紹最常見的csv 檔。</p>
 </div>
 <div id="-15" class="section level2">
 <h2>關卡 15</h2>
-<p>csv檔的格式是以行(Line)為單位。每一行(Line)就是一筆紀錄(Record)。而每一筆紀錄中，以一個分隔符號來讓使用者或程式分辨欄位。常見的分隔符號有：tab()或逗號(,)。若以逗號做為分隔符號，則學生姓名加上4次小考分數的一筆紀錄，可用CSV表達如下：<code>柯小哲,77,82,87,92</code></p>
+<p>csv 檔的格式是以行(Line)為單位。每一行(Line)就是一筆紀錄(Record)。 而每一筆紀錄中，以一個分隔符號來讓使用者或程式分辨欄位。常見的分隔符號有： tab ()或逗號(,) 。 若以逗號做為分隔符號，則學生姓名加上4次小考分數的一筆紀錄，可用CSV表達如下：<code>柯小哲,77,82,87,92</code></p>
 </div>
 <div id="-16" class="section level2">
 <h2>關卡 16</h2>
-<p>我們拿一個自<a href="http://data.gov.tw/node/6213" class="uri">http://data.gov.tw/node/6213</a>下載的csv檔做範例。這個檔案的目錄已經存入了<code>lvr_land.path</code>變數之中。我們將利用這個檔案來示範如何將中文資料載入到R之中。</p>
+<p>我們拿一個自&lt;<a href="http://data.gov.tw/node/6213%3E下載的csv" class="uri">http://data.gov.tw/node/6213&gt;下載的csv</a> 檔做範例。 這個檔案的目錄已經存入了<code>lvr_land.path</code> 變數之中。 我們將利用這個檔案來示範如何將中文資料載入到R 之中。</p>
 </div>
 <div id="-17" class="section level2">
 <h2>關卡 17</h2>
-<p>載入中文資料時，最重要的就是要偵測檔案所採用的中文編碼。可惜目前我還不清楚如何直接在R中偵測編碼。另外，如果有同學不清楚編碼是什麼，可以參考這個youtube影片：<a href="https://www.youtube.com/watch?v=GG2UFrmdtH4" class="uri">https://www.youtube.com/watch?v=GG2UFrmdtH4</a>。</p>
+<p>載入中文資料時，最重要的就是要偵測檔案所採用的中文編碼。 可惜目前我還不清楚如何直接在R 中偵測編碼。 另外，如果有同學不清楚編碼是什麼，可以參考這個youtube 影片：&lt;<a href="https://www.youtube.com/watch?v=GG2UFrmdtH4%3E" class="uri">https://www.youtube.com/watch?v=GG2UFrmdtH4&gt;</a>。</p>
 </div>
 <div id="-18" class="section level2">
 <h2>關卡 18</h2>
-<p>簡單起見，我們將帶著同學分步驟測試這個檔案的編碼。第一步先檢查檔案中是否帶有BOM。BOM是一種利用檔案最前面的2個或3個位元組來標示檔案編碼的方式。在windows系統中建立的中文檔案經常會帶有BOM。請同學執行：<code>readBin(lvr_land.path,what=&quot;raw&quot;,n=3)</code></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">readBin</span>(lvr_land.path, <span class="dt">what =</span> <span class="st">&quot;raw&quot;</span>, <span class="dt">n =</span> <span class="dv">3</span>)</code></pre></div>
+<p>簡單起見，我們將帶著同學分步驟測試這個檔案的編碼。 第一步先檢查檔案中是否帶有BOM 。 BOM 是一種利用檔案最前面的2 個或3 個位元組來標示檔案編碼的方式。 在windows 系統中建立的中文檔案經常會帶有BOM 。 請同學執行：<code>readBin(lvr_land.path, what = &amp;quot;raw&amp;quot;, n = 3)</code></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">readBin</span>(lvr_land.path, <span class="dt">what =</span> &amp;quot;raw&amp;quot;, <span class="dt">n =</span> <span class="dv">3</span>)</code></pre></div>
 </div>
 <div id="-19" class="section level2">
 <h2>關卡 19</h2>
-<p>R中的<code>readBin</code>是一個可以直接讀取檔案中的位元組的指令，可以正確的處理BOM。第一個參數為檔案的路徑。第二個為稱作what的參數，目的是告訴R要如何處理讀入的資料。若<code>what=&quot;raw&quot;</code>代表讀入的資料用位元處理，而不是文字。第三個為稱作n的參數，代表要輸入的長度。因為BOM通常最多是3個位元組，所以這裡選擇<code>n=3</code>。</p>
+<p>R 中的<code>readBin</code> 是一個可以直接讀取檔案中的位元組的指令，可以正確的處理BOM 。 第一個參數為檔案的路徑。第二個為稱作what的參數，目的是告訴R 要如何處理讀入的資料。 若<code>what = &amp;quot;raw&amp;quot;</code>代表讀入的資料用位元處理，而不是文字。 第三個為稱作n 的參數，代表要輸入的長度。因為BOM 通常最多是3 個位元組，所以這裡選擇<code>n = 3</code>。</p>
 </div>
 <div id="-20" class="section level2">
 <h2>關卡 20</h2>
-<p>接著，我們可以到<a href="https://zh.wikipedia.org/wiki/位元組順序記號" class="uri">https://zh.wikipedia.org/wiki/位元組順序記號</a>查詢常用的BOM。這裡直接告訴同學，此份檔案中的三個位元不屬於任何已知編碼所使用的BOM，所以我們猜測這個檔案不帶BOM。</p>
+<p>接著，我們可以到&lt;<a href="https://zh.wikipedia.org/wiki/位元組順序記號%3E查詢常用的BOM" class="uri">https://zh.wikipedia.org/wiki/位元組順序記號&gt;查詢常用的BOM</a> 。 這裡直接告訴同學，此份檔案中的三個位元不屬於任何已知編碼所使用的BOM ，所以我們猜測這個檔案不帶BOM 。</p>
 </div>
 <div id="-21" class="section level2">
 <h2>關卡 21</h2>
-<p>如果沒有BOM，一種方法是使用<code>file</code>搭配<code>readLines</code>兩個函數來測試編碼。如果讀出來的中文可以正常顯示，就是猜中編碼了。如果讀出亂碼，或是讀取發生錯誤，那可能就猜錯了，需要換個編碼試試看。</p>
+<p>如果沒有BOM ，一種方法是使用<code>file</code>搭配<code>readLines</code> 兩個函數來測試編碼。 如果讀出來的中文可以正常顯示，就是猜中編碼了。 如果讀出亂碼，或是讀取發生錯誤，那可能就猜錯了，需要換個編碼試試看。</p>
 </div>
 <div id="-22" class="section level2">
 <h2>關卡 22</h2>
-<p>請同學試試看BIG5編碼：<code>readLines(file(lvr_land.path,encoding=&quot;BIG5&quot;),n=1)</code>這裡的file指令會打開一個檔案，第一個參數是檔案的路徑，第二個名稱為encoding的參數代表檔案的編碼。如果是BIG5編碼，就輸入名稱：<code>&quot;BIG5&quot;</code>，UTF-8的話，就輸入<code>&quot;UTF-8&quot;</code>。<code>readLines</code>函數會一行一行的讀取檔案的內容。第一個參數就是用<code>file</code>函數開啟的檔案。第二個為稱作n的參數，則代表讀取的行數。這裡<code>n=1</code>代表讀取一行，所以只會回傳一個元素的character向量。</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">readLines</span>(<span class="kw">file</span>(lvr_land.path, <span class="dt">encoding =</span> <span class="st">&quot;BIG5&quot;</span>), <span class="dt">n =</span> <span class="dv">1</span>)</code></pre></div>
+<p>請同學試試看BIG5編碼：<code>readLines(file(lvr_land.path, encoding = &amp;quot;BIG5&amp;quot;), n = 1)</code> 這裡的file指令會打開一個檔案，第一個參數是檔案的路徑，第二個名稱為encoding的參數代表檔案的編碼。 如果是BIG5編碼，就輸入名稱：<code>&amp;quot;BIG5&amp;quot;</code>，UTF-8 的話，就輸入<code>&amp;quot;UTF-8&amp;quot;</code>。 <code>readLines</code> 函數會一行一行的讀取檔案的內容。 第一個參數就是用<code>file</code>函數開啟的檔案。 第二個為稱作n 的參數，則代表讀取的行數。這裡<code>n=1</code> 代表讀取一行，所以只會回傳一個元素的character 向量。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">readLines</span>(<span class="kw">file</span>(lvr_land.path, <span class="dt">encoding =</span> &amp;quot;BIG5&amp;quot;), <span class="dt">n =</span> <span class="dv">1</span>)</code></pre></div>
 </div>
 <div id="-23" class="section level2">
 <h2>關卡 23</h2>
-<p>一試就中，所以同學的Rconsole上應該能夠顯示出正確的中文字串。</p>
+<p>一試就中，所以同學的R console 上應該能夠顯示出正確的中文字串。</p>
 </div>
 <div id="-24" class="section level2">
 <h2>關卡 24</h2>
-<p>這裡打個岔。<code>file</code>函數會建立一個物件代表檔案，在R之中叫做<code>connection</code>。之後同學會不定時的看到：<code>closingunusedconnection</code>，表示R會不定時關閉不使用的connection，並在console顯示警告訊息。</p>
+<p>這裡打個岔。 <code>file</code>函數會建立一個物件代表檔案，在R 之中叫做<code>connection</code>。 之後同學會不定時的看到：<code>closing unused connection</code>，表示R 會不定時關閉不使用的connection，並在console 顯示警告訊息。</p>
 </div>
 <div id="-25" class="section level2">
 <h2>關卡 25</h2>
-<p>一開始先用<code>readLines</code>看一下資料是個好習慣。除了第一行外，我們應該多看幾行，以方便預測檔案的格式。請同學再輸入一次<code>file</code>和<code>readLines</code>的組合指令，並且讀取5行。</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">readLines</span>(<span class="kw">file</span>(lvr_land.path, <span class="dt">encoding =</span> <span class="st">&quot;BIG5&quot;</span>), <span class="dt">n =</span> <span class="dv">5</span>)</code></pre></div>
+<p>一開始先用<code>readLines</code>看一下資料是個好習慣。 除了第一行外，我們應該多看幾行，以方便預測檔案的格式。 請同學再輸入一次<code>file</code> 和<code>readLines</code> 的組合指令，並且讀取5 行。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">readLines</span>(<span class="kw">file</span>(lvr_land.path, <span class="dt">encoding =</span> &amp;quot;BIG5&amp;quot;), <span class="dt">n =</span> <span class="dv">5</span>)</code></pre></div>
 </div>
 <div id="-26" class="section level2">
 <h2>關卡 26</h2>
-<p>有時候，由於不明原因，R會發生無法讀取特定編碼的狀況。這時候，我們可以先把資料以位元的方式讀取到R中，再進行轉碼。</p>
+<p>有時候，由於不明原因，R 會發生無法讀取特定編碼的狀況。 這時候，我們可以先把資料以位元的方式讀取到R 中，再進行轉碼。</p>
 </div>
 <div id="-27" class="section level2">
 <h2>關卡 27</h2>
-<p>在程式的世界中，資料在最終都是以0和1位元的方式儲存。處理資料時，程式需要先對資料有初步的認識才能進行處理，例如把資料當成字串、整數或浮點數。只有文字資料才會被編碼影響，所以如果我們只是用位元來處理檔案的內容，就可以避開編碼的問題。</p>
+<p>在程式的世界中，資料在最終都是以0 和1 位元的方式儲存。 處理資料時，程式需要先對資料有初步的認識才能進行處理，例如把資料當成字串、整數或浮點數。 只有文字資料才會被編碼影響，所以如果我們只是用位元來處理檔案的內容，就可以避開編碼的問題。</p>
 </div>
 <div id="-28" class="section level2">
 <h2>關卡 28</h2>
-<p>R利用型態為raw的向量來處理位元的物件。只要能知道檔案的大小，readBin就可以把所有的檔案資料以raw的形式輸入到R中。我們可以使用<code>file.info</code>來查詢檔案的大小。請同學利用<code>file.info(lvr_land.path)</code>來查詢檔案的資訊，並且把結果存到變數<code>lvr_land.info</code>。</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lvr_land.info &lt;-<span class="st"> </span><span class="kw">file.info</span>(lvr_land.path)</code></pre></div>
+<p>R 利用型態為raw 的向量來處理位元的物件。 只要能知道檔案的大小，readBin 就可以把所有的檔案資料以raw 的形式輸入到R 中。 我們可以使用<code>file.info</code>來查詢檔案的大小。 請同學利用<code>file.info(lvr_land.path)</code>來查詢檔案的資訊，並且把結果存到變數<code>lvr_land.info</code>。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lvr_land.info &amp;lt;-<span class="st"> </span><span class="kw">file.info</span>(lvr_land.path)</code></pre></div>
 </div>
 <div id="-29" class="section level2">
 <h2>關卡 29</h2>
@@ -275,106 +275,106 @@ Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">
 </div>
 <div id="-32" class="section level2">
 <h2>關卡 32</h2>
-<p>請問同學，<code>lvr_land.path</code>背後的檔案大小，應該是多少呢？請輸入一個指令，讓R輸出一個數值，代表這個檔案的大小。</p>
+<p>請問同學，<code>lvr_land.path</code>背後的檔案大小，應該是多少呢？ 請輸入一個指令，讓R 輸出一個數值，代表這個檔案的大小。</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lvr_land.info$size</code></pre></div>
 </div>
 <div id="-33" class="section level2">
 <h2>關卡 33</h2>
-<p>接著請同學利用<code>readBin</code>來把<code>lvr_land.path</code>的檔案以位元的方式讀到R中，並且存到名稱為<code>lvr_land.bin</code>的變數。</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lvr_land.bin &lt;-<span class="st"> </span><span class="kw">readBin</span>(lvr_land.path, <span class="dt">what =</span> <span class="st">&quot;raw&quot;</span>, <span class="dt">n =</span> lvr_land.info$size)</code></pre></div>
+<p>接著請同學利用<code>readBin</code>來把<code>lvr_land.path</code>的檔案以位元的方式讀到R 中，並且存到名稱為<code>lvr_land.bin</code>的變數。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lvr_land.bin &amp;lt;-<span class="st"> </span><span class="kw">readBin</span>(lvr_land.path, <span class="dt">what =</span> &amp;quot;raw&amp;quot;, <span class="dt">n =</span> lvr_land.info$size)</code></pre></div>
 </div>
 <div id="-34" class="section level2">
 <h2>關卡 34</h2>
-<p>接著，我們需要使用stringi套件。由於swirl本身已經相依於stringi，所以請同學直接載入stringi。</p>
+<p>接著，我們需要使用stringi套件。 由於swirl本身已經相依於stringi，所以請同學直接載入stringi。</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(stringi)</code></pre></div>
 </div>
 <div id="-35" class="section level2">
 <h2>關卡 35</h2>
-<p>透過stringi套件的<code>stri_encode</code>，我們可以把一個位元組的向量（在R中，這類向量的型態是raw）從一個編碼轉換為另一個編碼。</p>
+<p>透過stringi套件的<code>stri_encode</code>，我們可以把一個位元組的向量（在R 中，這類向量的型態是raw ）從一個編碼轉換為另一個編碼。</p>
 </div>
 <div id="-36" class="section level2">
 <h2>關卡 36</h2>
-<p>請同學把<code>stri_encode(lvr_land.bin,&quot;BIG-5&quot;,&quot;UTF-8&quot;)</code>的結果存到<code>lvr_land.txt</code>之中。</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lvr_land.txt &lt;-<span class="st"> </span><span class="kw">stri_encode</span>(lvr_land.bin, <span class="st">&quot;BIG-5&quot;</span>, <span class="st">&quot;UTF-8&quot;</span>)</code></pre></div>
+<p>請同學把<code>stri_encode(lvr_land.bin, &amp;quot;BIG-5&amp;quot;, &amp;quot;UTF-8&amp;quot;)</code>的結果存到<code>lvr_land.txt</code>之中。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lvr_land.txt &amp;lt;-<span class="st"> </span><span class="kw">stri_encode</span>(lvr_land.bin, &amp;quot;BIG<span class="dv">-5</span>&amp;quot;, &amp;quot;UTF<span class="dv">-8</span>&amp;quot;)</code></pre></div>
 </div>
 <div id="-37" class="section level2">
 <h2>關卡 37</h2>
-<p>透過以上的方法，我們可以取得轉換編碼後的character向量<code>lvr_land.txt</code>。</p>
+<p>透過以上的方法，我們可以取得轉換編碼後的character 向量<code>lvr_land.txt</code>。</p>
 </div>
 <div id="-38" class="section level2">
 <h2>關卡 38</h2>
-<p>接著，我們來講解讀取CSV格式檔案時最泛用的指令：<code>read.table</code>。</p>
+<p>接著，我們來講解讀取CSV 格式檔案時最泛用的指令：<code>read.table</code>。</p>
 </div>
 <div id="-39" class="section level2">
 <h2>關卡 39</h2>
-<p>在R中，<code>read.table</code>的第一個參數和readLines的第一個參數一樣，代表要開啟的檔案。如果我們不在乎檔案的編碼，可以直接輸入檔案的路徑。以下哪一個是正確的路徑呢？</p>
+<p>在R 中，<code>read.table</code>的第一個參數和readLines 的第一個參數一樣，代表要開啟的檔案。 如果我們不在乎檔案的編碼，可以直接輸入檔案的路徑。 以下哪一個是正確的路徑呢？</p>
 <p>lvr_land.path</p>
 </div>
 <div id="-40" class="section level2">
 <h2>關卡 40</h2>
-<p>請同學特別注意<code>read.table</code>的參數fileEncoding的用法，這個參數雖然可以解碼，但只能用在file參數為字串的案例中。請同學試試看<code>read.table(lvr_land.path,fileEncoding=&quot;BIG-5&quot;)</code>。</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">read.table</span>(lvr_land.path, <span class="dt">fileEncoding =</span> <span class="st">&quot;BIG-5&quot;</span>)</code></pre></div>
+<p>請同學特別注意<code>read.table</code>的參數fileEncoding的用法，這個參數雖然可以解碼，但只能用在file參數為字串的案例中。 請同學試試看<code>read.table(lvr_land.path, fileEncoding = &amp;quot;BIG-5&amp;quot;)</code>。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">read.table</span>(lvr_land.path, <span class="dt">fileEncoding =</span> &amp;quot;BIG<span class="dv">-5</span>&amp;quot;)</code></pre></div>
 </div>
 <div id="-41" class="section level2">
 <h2>關卡 41</h2>
-<p>可惜我們需要設定編碼。（註：在中文版windows上會預設使用BIG5編碼，所以可以直接和上面例題一樣輸入<code>lvr_land.path</code>。)第二個重要的參數是<code>header</code>。<code>header=TRUE</code>代表檔案的第一行是欄位名稱，而不是資料。<code>header=FALSE</code>代表檔案的第一行就是資料。剛剛我們看到檔案的前五行的內容是：<code>[1]&quot;鄉鎮市區,交易標的,...&quot;[2]&quot;文山區,房地(土地+建物)...&quot;</code>。請問同學，<code>header</code>的參數應該要給哪一個呢？</p>
+<p>可惜我們需要設定編碼。 （註：在中文版windows 上會預設使用BIG5編碼，所以可以直接和上面例題一樣輸入<code>lvr_land.path</code>。) 第二個重要的參數是<code>header</code>。 <code>header = TRUE</code>代表檔案的第一行是欄位名稱，而不是資料。 <code>header=FALSE</code>代表檔案的第一行就是資料。 剛剛我們看到檔案的前五行的內容是：<code>[1] &amp;quot;鄉鎮市區,交易標的,...&amp;quot; [2] &amp;quot;文山區,房地(土地+建物)...&amp;quot;</code>。 請問同學，<code>header</code>的參數應該要給哪一個呢？</p>
 <p>TRUE</p>
 </div>
 <div id="-42" class="section level2">
 <h2>關卡 42</h2>
-<p>第三個重要的參數是<code>sep</code>，這代表各行欄位間的分隔符號。根據之前我們看到的前五行的資料：<code>[1]&quot;鄉鎮市區,交易標的,土地區段位置...,土地移轉總面積...&quot;[2]&quot;文山區,房地(土地+建物),臺北市文山區...,43.44...&quot;[3]&quot;中正區,房地(土地+建物),臺北市中正區...,40.19...&quot;</code>。請問同學，這份檔案個欄位的分隔符號是什麼呢？</p>
+<p>第三個重要的參數是<code>sep</code> ，這代表各行欄位間的分隔符號。 根據之前我們看到的前五行的資料：<code>[1] &amp;quot;鄉鎮市區,交易標的,土地區段位置...,土地移轉總面積...&amp;quot;[2] &amp;quot;文山區,房地(土地+建物),臺北市文山區...,43.44...&amp;quot; [3] &amp;quot;中正區,房地(土地+建物),臺北市中 正區...,40.19...&amp;quot;</code>。 請問同學，這份檔案個欄位的分隔符號是什麼呢？</p>
 <p>,</p>
 </div>
 <div id="-43" class="section level2">
 <h2>關卡 43</h2>
-<p>依照以上問答題的答案，請同學利用<code>read.table</code>，用BIG5編碼進行讀取。<code>lvr_land.path</code>，並且把輸出存到變數<code>lvr_land</code></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lvr_land &lt;-<span class="st"> </span><span class="kw">read.table</span>(<span class="kw">file</span>(lvr_land.path, <span class="dt">encoding =</span> <span class="st">&quot;BIG5&quot;</span>), <span class="dt">header =</span> <span class="ot">TRUE</span>, <span class="dt">sep =</span> <span class="st">&quot;,&quot;</span>)</code></pre></div>
+<p>依照以上問答題的答案，請同學利用<code>read.table</code>，用BIG5編碼進行讀取。 <code>lvr_land.path</code> ，並且把輸出存到變數<code>lvr_land</code></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lvr_land &amp;lt;-<span class="st"> </span><span class="kw">read.table</span>(<span class="kw">file</span>(lvr_land.path, <span class="dt">encoding =</span> &amp;quot;BIG5&amp;quot;), <span class="dt">header =</span> <span class="ot">TRUE</span>, <span class="dt">sep =</span> &amp;quot;,&amp;quot;)</code></pre></div>
 </div>
 <div id="-44" class="section level2">
 <h2>關卡 44</h2>
-<p>如果要直接從<code>lvr_land.txt</code>的內容取出表格，一種方法是直接把<code>lvr_land.txt</code>寫成一個檔案，再用<code>read.table</code>讀取。另外一種方法則是把<code>lvr_land.txt</code>視為一個類似檔案的物件，也就是connection。</p>
+<p>如果要直接從<code>lvr_land.txt</code>的內容取出表格，一種方法是直接把<code>lvr_land.txt</code>寫成一個檔案，再用<code>read.table</code>讀取。 另外一種方法則是把<code>lvr_land.txt</code>視為一個類似檔案的物件，也就是connection。</p>
 </div>
 <div id="-45" class="section level2">
 <h2>關卡 45</h2>
-<p>在windows系統上，有一個很不方便的地方，接下來的作法和Windows的語系有關。如果同學的Windows的語系有支援多位元組字串（例如中文、日文等語系），則語法需要進行調整。</p>
+<p>在windows系統上，有一個很不方便的地方，接下來的作法和Windows的語系有關。 如果同學的Windows的語系有支援多位元組字串（例如中文、日文等語系），則語法需要進行調整。</p>
 </div>
 <div id="-46" class="section level2">
 <h2>關卡 46</h2>
-<p>我們可以用<code>l10n_info()</code>來查詢作業系統對於不同Encoding的支援狀況。<code>l10n_info()</code>會回報系統是否支援UTF-8（UTF-8欄位），或是多位元組字串（MBCS欄位）。請同學試試看輸入：<code>l10n_info()</code>。</p>
+<p>我們可以用<code>l10n_info()</code>來查詢作業系統對於不同Encoding的支援狀況。 <code>l10n_info()</code>會回報系統是否支援UTF-8 （UTF-8 欄位），或是多位元組字串（MBCS欄位）。 請同學試試看輸入：<code>l10n_info()</code>。</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">l10n_info</span>()</code></pre></div>
 </div>
 <div id="-47" class="section level2">
 <h2>關卡 47</h2>
-<p>根據經驗，如果<code>l10n_info()</code>的輸出中，MBCS為TRUE且UTF-8為FALSE，這時須使用<code>textConnection(lvr_land.txt)</code>來從<code>lvr_land.txt</code>建立一個connection。除此之外，則使用<code>textConnection(lvr_land.txt,encoding=&quot;UTF-8&quot;)</code>即可。請同學依據上一題的結果，在MBCS為TRUE且UTF-8為FALSE時執行：<code>read.table(textConnection(lvr_land.txt),header=TRUE,sep=&quot;,&quot;)</code>否則，請執行：<code>read.table(textConnection(lvr_land.txt,encoding=&quot;UTF-8&quot;),header=TRUE,sep=&quot;,&quot;)</code></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">read.table</span>(<span class="kw">get_text_connection_by_l10n_info</span>(lvr_land.txt), <span class="dt">header =</span> <span class="ot">TRUE</span>, <span class="dt">sep =</span> <span class="st">&quot;,&quot;</span>)</code></pre></div>
+<p>根據經驗，如果<code>l10n_info()</code>的輸出中，MBCS為TRUE且UTF-8 為FALSE， 這時須使用<code>textConnection(lvr_land.txt)</code>來從<code>lvr_land.txt</code>建立一個connection。 除此之外，則使用<code>textConnection(lvr_land.txt, encoding = &amp;quot;UTF-8&amp;quot;)</code>即可。 請同學依據上一題的結果，在MBCS為TRUE且UTF-8 為FALSE時執行： <code>read.table(textConnection(lvr_land.txt), header = TRUE, sep = &amp;quot;,&amp;quot;)</code> 否則，請執行：<code>read.table(textConnection(lvr_land.txt, encoding = &amp;quot;UTF-8&amp;quot;), header = TRUE, sep = &amp;quot;,&amp;quot;)</code></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">read.table</span>(<span class="kw">get_text_connection_by_l10n_info</span>(lvr_land.txt), <span class="dt">header =</span> <span class="ot">TRUE</span>, <span class="dt">sep =</span> &amp;quot;,&amp;quot;)</code></pre></div>
 </div>
 <div id="-48" class="section level2">
 <h2>關卡 48</h2>
-<p>以上提供數種在R中處理中文資料的方法給同學參考。</p>
+<p>以上提供數種在R 中處理中文資料的方法給同學參考。</p>
 </div>
 <div id="-49" class="section level2">
 <h2>關卡 49</h2>
-<p>事實上，如果同學自行下載原本的檔案來處理，會發現上述的流程還是會出錯。因為在資料中第21行，資料的最後一欄的內容包含：<code>,</code>這個符號，導致欄位判斷出錯。</p>
+<p>事實上，如果同學自行下載原本的檔案來處理，會發現上述的流程還是會出錯。 因為在資料中第21行，資料的最後一欄的內容包含：<code>,</code>這個符號，導致欄位判斷出錯。</p>
 </div>
 <div id="-50" class="section level2">
 <h2>關卡 50</h2>
-<p>遇到這種狀況，最好的方式是自己用其他的編輯器(如notepad++)，自行編輯原始的檔案資料（依照錯誤訊息，移除多餘的符號），再用R讀取。由於這樣的動作超過這個課程系統的內容，所以請同學自行練習操作了。</p>
+<p>遇到這種狀況，最好的方式是自己用其他的編輯器(如notepad++)，自行編輯原始的檔案資料（依照錯誤訊息，移除多餘的符號），再用R 讀取。 由於這樣的動作超過這個課程系統的內容，所以請同學自行練習操作了。</p>
 </div>
 <div id="-51" class="section level2">
 <h2>關卡 51</h2>
-<p>另外一種方式，是透過<code>readLines</code>來讀取資料，再用R的其他函數自行把讀入的字串轉換為data.frame。這部分很難歸納，會隨著資料的乾淨程度而有所不同。同學可以閱讀本課程中一些實際分析OpenData的範例，就可以學到一些處理技巧。或是繼續學習R的字串處理函數與套件。</p>
+<p>另外一種方式，是透過<code>readLines</code> 來讀取資料，再用R 的其他函數自行把讀入的字串轉換為data.frame。 這部分很難歸納，會隨著資料的乾淨程度而有所不同。 同學可以閱讀本課程中一些實際分析Open Data 的範例，就可以學到一些處理技巧。 或是繼續學習R 的字串處理函數與套件。</p>
 </div>
 <div id="-52" class="section level2">
 <h2>關卡 52</h2>
-<p>在這門課程中我們展示了如何從套件中載入資料，以及如何從檔案中讀取CSV的資料。</p>
+<p>在這門課程中我們展示了如何從套件中載入資料，以及如何從檔案中讀取CSV 的資料。</p>
 </div>
 <div id="-53" class="section level2">
 <h2>關卡 53</h2>
-<p>如果要使用R讀取XML的資料，可以使用套件XML。如果要讀取JSON，則可以使用rjsonlite。只要資料格式是公開格式，我們可以容易找到R的套件來讀取該資料格式。這就是R為OpenSource的威力！</p>
+<p>如果要使用R 讀取XML 的資料，可以使用套件XML 。 如果要讀取JSON，則可以使用rjsonlite 。 只要資料格式是公開格式，我們可以容易找到R 的套件來讀取該資料格式。 這就是R 為Open Source 的威力！</p>
 </div>
 <div id="-54" class="section level2">
 <h2>關卡 54</h2>
-<p>受限於課程內容，所以我們這裡只講讀取CSV的方式，這是最泛用的內容了。未來有時間，會再找社群的其他大大合作開寫其他和讀資料相關的課程。同學如果很期待看到處理某些形態資料的課程，歡迎到<a href="https://github.com/wush978/DataScienceAndR/issues" class="uri">https://github.com/wush978/DataScienceAndR/issues</a>許願。</p>
+<p>受限於課程內容，所以我們這裡只講讀取CSV 的方式，這是最泛用的內容了。 未來有時間，會再找社群的其他大大合作開寫其他和讀資料相關的課程。 同學如果很期待看到處理某些形態資料的課程，歡迎到&lt;<a href="https://github.com/wush978/DataScienceAndR/issues%3E" class="uri">https://github.com/wush978/DataScienceAndR/issues&gt;</a> 許願。</p>
 </div>
 <div id="-55" class="section level2">
 <h2>關卡 55</h2>

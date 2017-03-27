@@ -138,114 +138,114 @@ Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">
 </noscript>
 <div id="-1" class="section level2">
 <h2>關卡 1</h2>
-<p>這門課程想要跟同學介紹R中如何建立自己的函數。</p>
+<p>這門課程想要跟同學介紹R 中如何建立自己的函數。</p>
 </div>
 <div id="-2" class="section level2">
 <h2>關卡 2</h2>
-<p>R中已經有非常多很方便的工具，例如<code>mean</code>、<code>sd</code>等各種幫助使用者計算平均值、標準差的「函數」。而R也可以讓使用者建立自己的函數。</p>
+<p>R 中已經有非常多很方便的工具，例如<code>mean</code>、<code>sd</code>等各種 幫助使用者計算平均值、標準差的「函數」。而R 也可以讓使用者 建立自己的函數。</p>
 </div>
 <div id="-3" class="section level2">
 <h2>關卡 3</h2>
-<p>舉例來說，如果我們有一個矩陣<code>m</code>和一個向量<code>y</code>，我們想要找到一個向量<code>x</code>，讓<code>m%*%x</code>很靠近<code>y</code>。這裡的<code>m</code>可能是過去的一些資訊，而<code>y</code>可能是我們感興趣的數字，我們想預測的數字，或是我們想要了解它是如何變化的數字。舉例來說，<code>m</code>是車速，而<code>y</code>則是煞車的滑行距離。我們需要了解兩者的關係，才能建議合適的車速，以及與前車之間要保持的安全距離。</p>
+<p>舉例來說，如果我們有一個矩陣<code>m</code> 和一個向量<code>y</code> ，我們 想要找到一個向量<code>x</code>，讓<code>m %*% x</code>很靠近<code>y</code>。 這裡的<code>m</code> 可能是過去的一些資訊，而<code>y</code> 可能是我們感興趣的數 字，我們想預測的數字，或是我們想要了解它是如何變化的數字。 舉例來說，<code>m</code> 是車速，而<code>y</code> 則是煞車的滑行距離。 我們需要了解兩者的關係，才能建議合適的車速，以及與前車之間 要保持的安全距離。</p>
 </div>
 <div id="-4" class="section level2">
 <h2>關卡 4</h2>
-<p>首先我們先看看m的值。請同學輸入<code>m</code></p>
+<p>首先我們先看看m 的值。請同學輸入<code>m</code></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">m</code></pre></div>
 </div>
 <div id="-5" class="section level2">
 <h2>關卡 5</h2>
-<p>我們再看看y的值。請同學輸入<code>y</code></p>
+<p>我們再看看y 的值。請同學輸入<code>y</code></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">y</code></pre></div>
 </div>
 <div id="-6" class="section level2">
 <h2>關卡 6</h2>
-<p>因為<code>m</code>是一個50*2的矩陣，所以在R裡面找一個長度為2的向量，例如<code>c(-17,4)</code>，我們就可以用<code>m%*%c(-17,4)</code>來當作是對y的趨近。請同學算算看<code>m%*%</code>c(-17,4)`</p>
+<p>因為<code>m</code> 是一個50 * 2 的矩陣，所以在R 裡面找一個長度為2 的向量， 例如<code>c(-17, 4)</code> ，我們就可以用<code>m %*% c(-17, 4)</code>來當作是對y 的趨近。 請同學算算看<code>m %*%</code>c(-17, 4)`</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">m %*%<span class="st"> </span><span class="kw">c</span>(-<span class="dv">17</span>, <span class="dv">4</span>)</code></pre></div>
 </div>
 <div id="-7" class="section level2">
 <h2>關卡 7</h2>
-<p>接著我們來評估<code>c(-17,4)</code>是不是一個好的答案。請同學計算<code>m%*%c(-17,4)-y</code>的平方的和(SumofSquare)</p>
+<p>接著我們來評估<code>c(-17, 4)</code>是不是一個好的答案。請同學計算<code>m %*% c(-17, 4) - y</code> 的平方的和(Sum of Square)</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>((m %*%<span class="st"> </span><span class="kw">c</span>(-<span class="dv">17</span>, <span class="dv">4</span>) -<span class="st"> </span>y)^<span class="dv">2</span>)</code></pre></div>
 </div>
 <div id="-8" class="section level2">
 <h2>關卡 8</h2>
-<p>通常在比較這個指標的時候，我們可以拿<code>mean(y)-y</code>的平方的和作為一個參考值。這因為<code>y</code>的平均是一個趨近y最最普通的一種方式，所以我們對<code>y</code>的逼近應該要比<code>mean(y)</code>來的好。請同學計算以<code>mean(y)-y</code>的平方的和。</p>
+<p>通常在比較這個指標的時候，我們可以拿<code>mean(y) - y</code>的平方的和作為一個參考值。 這因為<code>y</code> 的平均是一個趨近y 最最普通的一種方式，所以我們對<code>y</code> 的逼近應該要比<code>mean(y)</code> 來的好。請同學計算以<code>mean(y) - y</code>的平方的和。</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>((<span class="kw">mean</span>(y) -<span class="st"> </span>y)^<span class="dv">2</span>)</code></pre></div>
 </div>
 <div id="-9" class="section level2">
 <h2>關卡 9</h2>
-<p>請問同學，<code>m%*%c(-17,4)</code>和<code>mean(y)</code>，哪一個趨近<code>y</code>的效果比較好？（以誤差的平方和來評估）</p>
+<p>請問同學，<code>m %*% c(-17, 4)</code>和<code>mean(y)</code>，哪一個趨近<code>y</code> 的效果比較好？（以誤差的平方和來評估）</p>
 <p>m %*% c(-17, 4)</p>
 </div>
 <div id="-10" class="section level2">
 <h2>關卡 10</h2>
-<p>在上面兩個操作的時候，同學重複的計算兩次和<code>y</code>相差的平方的和。這樣重複的計算，在R中是可以透過「撰寫函數」來簡化的。我們可以建立一個R的函數物件<code>f</code>，讓上述的兩個計算的程式碼從<code>sum((&lt;???&gt;-y)^2)</code>變成<code>f(&lt;???&gt;)</code>的。</p>
+<p>在上面兩個操作的時候，同學重複的計算兩次和<code>y</code> 相差的平方的和。這樣重複的計算， 在R 中是可以透過「撰寫函數」來簡化的。我們可以建立一個R 的函數物件<code>f</code> ，讓上述的兩個 計算的程式碼從<code>sum((&amp;lt;???&amp;gt; - y)^2)</code>變成<code>f(&amp;lt;???&amp;gt;)</code>的。</p>
 </div>
 <div id="-11" class="section level2">
 <h2>關卡 11</h2>
-<p>請同學輸入<code>f&lt;-function(x)sum((x-y)^2)</code></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">f &lt;-<span class="st"> </span>function(x) <span class="kw">sum</span>((x -<span class="st"> </span>y)^<span class="dv">2</span>)</code></pre></div>
+<p>請同學輸入<code>f &amp;lt;- function(x) sum((x - y)^2)</code></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">f &amp;lt;-<span class="st"> </span>function(x) <span class="kw">sum</span>((x -<span class="st"> </span>y)^<span class="dv">2</span>)</code></pre></div>
 </div>
 <div id="-12" class="section level2">
 <h2>關卡 12</h2>
-<p>我們先試試看<code>f</code>的效果。請同學輸入<code>f(m%*%c(-17,4))</code>，看看得到的答案是不是仍然是11491，也就是我們之前算<code>sum((m%*%c(-17,4)-y)^2)</code>的答案。</p>
+<p>我們先試試看<code>f</code> 的效果。請同學輸入<code>f(m %*% c(-17, 4))</code>，看看得到的答案是不是仍然是11491， 也就是我們之前算<code>sum((m %*% c(-17, 4) - y)^2)</code>的答案。</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">f</span>(m %*%<span class="st"> </span><span class="kw">c</span>(-<span class="dv">17</span>, <span class="dv">4</span>))</code></pre></div>
 </div>
 <div id="-13" class="section level2">
 <h2>關卡 13</h2>
-<p>接著請同學輸入：<code>f(mean(y))</code>，看看答案是不是32538.98，也就是<code>sum((mean(y)-y)^2)</code>的結果。</p>
+<p>接著請同學輸入：<code>f(mean(y))</code>，看看答案是不是32538.98，也就是<code>sum((mean(y) - y)^2)</code> 的結果。</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">f</span>(<span class="kw">mean</span>(y))</code></pre></div>
 </div>
 <div id="-14" class="section level2">
 <h2>關卡 14</h2>
-<p>我們來解釋一下：<code>f&lt;-function(x)sum((x-y)^2)</code>的效果。當我們輸入：<code>f(mean(y))</code>時，R就會進入到「函數的領域」（行話叫做「環境」，這部份在未來的RProgramming課程中會仔細解釋）<code>mean(y)</code>是<code>f</code>的第一個參數，也就是x，所以R在計算<code>sum((x-y)^2)</code>時，會用<code>mean(y)</code>的值替換掉<code>x</code>，所以我們才能拿到和<code>sum((mean(y)-y)^2)</code>一樣的計算結果。</p>
+<p>我們來解釋一下：<code>f &amp;lt;- function(x) sum((x - y)^2)</code>的效果。當我們輸入：<code>f(mean(y))</code>時， R 就會進入到「函數的領域」（行話叫做「環境」，這部份在未來的RProgramming 課程中會仔細解釋） <code>mean(y)</code>是<code>f</code>的第一個參數，也就是x ，所以R 在計算<code>sum((x - y)^2)</code> 時，會用<code>mean(y)</code> 的值 替換掉<code>x</code> ，所以我們才能拿到和<code>sum((mean(y) - y)^2)</code>一樣的計算結果。</p>
 </div>
 <div id="-15" class="section level2">
 <h2>關卡 15</h2>
-<p>同樣的道理，R在計算<code>f(m%*%c(-17,4))</code>時，他會拿某個運算結果代入<code>sum((x-y)^2)</code>的<code>x</code>。請問同學，下列哪一個運算結果是R代入<code>x</code>呢？</p>
+<p>同樣的道理，R 在計算<code>f(m %*% c(-17, 4))</code> 時，他會拿某個運算結果代入<code>sum((x - y)^2)</code>的 <code>x</code> 。請問同學，下列哪一個運算結果是R 代入<code>x</code> 呢？</p>
 <p>m %*% c(-17, 4)</p>
 </div>
 <div id="-16" class="section level2">
 <h2>關卡 16</h2>
-<p>透過<code>f</code>，我們就可以很方便的計算估計的誤差的平方和。</p>
+<p>透過<code>f</code> ，我們就可以很方便的計算估計的誤差的平方和。</p>
 </div>
 <div id="-17" class="section level2">
 <h2>關卡 17</h2>
-<p>但是回到原本的問題，我們是想要找一個長度為2的向量，讓m和這個向量相乘後，可以很靠近y。可是<code>f</code>的參數<code>x</code>，代表的意義已經是對<code>y</code>的估計了，這樣在使用上還是不夠方便。我們可以利用<code>f</code>來建立更方便的計算函數。請同學輸入：<code>f1&lt;-function(x)f(m%*%x)</code></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">f1 &lt;-<span class="st"> </span>function(x) <span class="kw">f</span>(m %*%<span class="st"> </span>x)</code></pre></div>
+<p>但是回到原本的問題，我們是想要找一個長度為2 的向量，讓m 和這個向量相乘後，可以很靠近y 。 可是<code>f</code> 的參數<code>x</code> ，代表的意義已經是對<code>y</code> 的估計了，這樣在使用上還是不夠方便。我們可以利用<code>f</code> 來建立更方便的計算函數。請同學輸入：<code>f1 &amp;lt;- function(x) f(m %*% x)</code></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">f1 &amp;lt;-<span class="st"> </span>function(x) <span class="kw">f</span>(m %*%<span class="st"> </span>x)</code></pre></div>
 </div>
 <div id="-18" class="section level2">
 <h2>關卡 18</h2>
-<p>請同學輸入：<code>f1(c(-17,4))</code>，是不是再次得到一樣的答案：11491呢？但是我們輸入的程式碼更短了。</p>
+<p>請同學輸入：<code>f1(c(-17, 4))</code>，是不是再次得到一樣的答案：11491呢？但是我們輸入的程式碼更短了。</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">f1</span>(<span class="kw">c</span>(-<span class="dv">17</span>, <span class="dv">4</span>))</code></pre></div>
 </div>
 <div id="-19" class="section level2">
 <h2>關卡 19</h2>
-<p>請同學輸入<code>f1(c(1,1))</code>，我們可以很快的得到如果拿<code>m%*%c(1,1)</code>逼近<code>y</code>後得到的結果好不好。</p>
+<p>請同學輸入<code>f1(c(1, 1))</code>，我們可以很快的得到如果拿<code>m %*% c(1, 1)</code> 逼近<code>y</code> 後得到的結果好不好。</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">f1</span>(<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>))</code></pre></div>
 </div>
 <div id="-20" class="section level2">
 <h2>關卡 20</h2>
-<p>把<code>f1(c(1,1))</code>的結果與<code>f(mean(y))</code>的答案32538.98相比，請問哪一個逼近的效果比較好？</p>
+<p>把<code>f1(c(1, 1))</code> 的結果與<code>f(mean(y))</code>的答案32538.98相比，請問哪一個逼近的效果比較好？</p>
 <p>mean(y)</p>
 </div>
 <div id="-21" class="section level2">
 <h2>關卡 21</h2>
-<p>一般來說，如果要靠瞎猜，猜到一組參數<code>x</code>讓<code>m%*%x</code>的估計比<code>mean(y)</code>好也不會太容易。</p>
+<p>一般來說，如果要靠瞎猜，猜到一組參數<code>x</code>讓<code>m %*% x</code>的估計比<code>mean(y)</code>好也不會太容易。</p>
 </div>
 <div id="-22" class="section level2">
 <h2>關卡 22</h2>
-<p>另外我們剛剛透過定義<code>f</code>和<code>f1</code>來簡化重複的動作。當我們在撰寫複雜的程式時，這類簡化的動作可以讓未來的工作效率。函數的設計，在近代軟體工程的領域中，也是有許多好的規範。這份教材只是介紹R的函數功能，如果未來同學有需要寫複雜的R程式，建議還是查查相關的資料後再動手，會讓自己的工作效率更高。</p>
+<p>另外我們剛剛透過定義<code>f</code> 和<code>f1</code>來簡化重複的動作。當我們在撰寫複雜的程式時，這類簡化的動作 可以讓未來的工作效率。函數的設計，在近代軟體工程的領域中，也是有許多好的規範。這份教材只是介紹 R 的函數功能，如果未來同學有需要寫複雜的R 程式，建議還是查查相關的資料後再動手，會讓自己的工作 效率更高。</p>
 </div>
 <div id="-23" class="section level2">
 <h2>關卡 23</h2>
-<p>在R之中我們可以利用<code>optim</code>來尋找一個函數的最小值。請同學輸入：<code>optim(c(0,0),f1)</code>並且把結果儲存到變數<code>r</code>之中。我們先讓同學玩一玩<code>r</code>之後，再解釋<code>optim</code>。這段玩的過程，也是當我們第一次使用R強大的計算功能後，得到的結果。</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">r &lt;-<span class="st"> </span><span class="kw">optim</span>(<span class="dt">par =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">0</span>), f1)</code></pre></div>
+<p>在R 之中我們可以利用<code>optim</code> 來尋找一個函數的最小值。 請同學輸入：<code>optim(c(0,0), f1)</code>並且把結果儲存到變數 <code>r</code> 之中。我們先讓同學玩一玩<code>r</code> 之後，再解釋<code>optim</code> 。這段 玩的過程，也是當我們第一次使用R 強大的計算功能後，得到的結 果。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">r &amp;lt;-<span class="st"> </span><span class="kw">optim</span>(<span class="dt">par =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">0</span>), f1)</code></pre></div>
 </div>
 <div id="-24" class="section level2">
 <h2>關卡 24</h2>
-<p>這裡的optim函數很厲害，可以找到一個向量讓<code>f1</code>的輸出最小。這些資訊現在都在變數<code>r</code>之中。請同學檢查一下<code>r</code>的型態。</p>
+<p>這裡的optim 函數很厲害，可以找到一個向量讓<code>f1</code> 的輸出最小。 這些資訊現在都在變數<code>r</code> 之中。請同學檢查一下<code>r</code> 的型態。</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">class</span>(r)</code></pre></div>
 </div>
 <div id="-25" class="section level2">
@@ -255,26 +255,26 @@ Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">
 </div>
 <div id="-26" class="section level2">
 <h2>關卡 26</h2>
-<p>請同學輸入<code>?optim</code>讀一讀<code>optim</code>的說明，尤其是下一個問題是要參考Value這個段落中的說明文字。</p>
+<p>請同學輸入<code>?optim</code>讀一讀<code>optim</code> 的說明，尤其是下一個問題 是要參考Value 這個段落中的說明文字。</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">?optim</code></pre></div>
 </div>
 <div id="-27" class="section level2">
 <h2>關卡 27</h2>
-<p>請問同學，哪一個<code>r</code>的元素代表著產生最小值的<code>beta</code>？</p>
+<p>請問同學，哪一個<code>r</code> 的元素代表著產生最小值的<code>beta</code>？</p>
 <p>par</p>
 </div>
 <div id="-28" class="section level2">
 <h2>關卡 28</h2>
-<p>我們回來看看原先計算<code>r</code>的程式碼：<code>optim(c(0,0),f1)</code>。請問同學，<code>c(0,0)</code>對應到<code>optim</code>這個函數的哪一個參數？請參考optim的說明文件作答。</p>
+<p>我們回來看看原先計算<code>r</code> 的程式碼：<code>optim(c(0,0), f1)</code>。 請問同學，<code>c(0, 0)</code>對應到<code>optim</code>這個函數的哪一個參數？請參考 optim 的說明文件作答。</p>
 <p>par</p>
 </div>
 <div id="-29" class="section level2">
 <h2>關卡 29</h2>
-<p>另外一個R很重要的特色是，函數本身也是一種物件。R其實是「函數式語言」，而這是所有函數式語言的一個重要特色。所以，「函數可以當成參數給另外一個函數的」。</p>
+<p>另外一個R 很重要的特色是，函數本身也是一種物件。R 其實是「函數式語言」，而這是所有函數式語言 的一個重要特色。所以，「函數可以當成參數給另外一個函數的」。</p>
 </div>
 <div id="-30" class="section level2">
 <h2>關卡 30</h2>
-<p>請問同學，在<code>optim(c(0,0),f1)</code>中，<code>f1</code>對應到<code>optim</code>這個函數的哪一個參數？請參考optim的說明文件作答。</p>
+<p>請問同學，在<code>optim(c(0,0), f1)</code>中，<code>f1</code>對應到<code>optim</code>這個函數的哪一個參數？ 請參考optim 的說明文件作答。</p>
 <p>fn</p>
 </div>
 <div id="-31" class="section level2">
@@ -284,16 +284,16 @@ Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">
 </div>
 <div id="-32" class="section level2">
 <h2>關卡 32</h2>
-<p>在<code>optim</code>的範例中，我們運用<code>f1</code>告訴R我們在乎的指標（也就是透過和<code>m</code>做相乘後與<code>y</code>的差別），這裡的<code>f1</code>是一個動態的動作：R每猜一個，例如<code>c(0,0)</code>的值，就會用<code>f1</code>來評估猜的好不好。透過一些最佳化的演算法，R就可以找到最好的猜測。</p>
+<p>在<code>optim</code>的範例中，我們運用<code>f1</code>告訴R 我們在乎的指標（也就是透過和<code>m</code> 做相乘後與<code>y</code> 的差別）， 這裡的<code>f1</code>是一個動態的動作：R 每猜一個，例如<code>c(0,0)</code>的值，就會用<code>f1</code> 來評估猜的好不好。 透過一些最佳化的演算法，R 就可以找到最好的猜測。</p>
 </div>
 <div id="-33" class="section level2">
 <h2>關卡 33</h2>
-<p>請同學輸入<code>r$par</code>看看<code>optim</code>找到的最佳解</p>
+<p>請同學輸入<code>r$par</code>看看<code>optim</code> 找到的最佳解</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">r$par</code></pre></div>
 </div>
 <div id="-34" class="section level2">
 <h2>關卡 34</h2>
-<p>讓我們用迴歸分析的方法找到最好的解。請同學輸入<code>solve(t(m)%*%m,t(m)%*%y)</code></p>
+<p>讓我們用迴歸分析的方法找到最好的解。請同學輸入<code>solve(t(m) %*% m, t(m) %*% y)</code></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">solve</span>(<span class="kw">t</span>(m) %*%<span class="st"> </span>m, <span class="kw">t</span>(m) %*%<span class="st"> </span>y)</code></pre></div>
 </div>
 <div id="-35" class="section level2">
@@ -302,7 +302,7 @@ Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">
 </div>
 <div id="-36" class="section level2">
 <h2>關卡 36</h2>
-<p>以上就是對於R的函數功能的簡單簡介。</p>
+<p>以上就是對於R 的函數功能的簡單簡介。</p>
 </div>
 </div>
 

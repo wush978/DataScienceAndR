@@ -138,20 +138,20 @@ Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">
 </noscript>
 <div id="-1" class="section level2">
 <h2>關卡 1</h2>
-<p>前半段的課程，大部分著重於從資料中萃取出資訊，並且整理成一個data.frame（結構化）。這門課程則是要開始討論，當資訊已經被結構化之後，我們要如何整理結構化的資料。</p>
+<p>前半段的課程，大部分著重於從資料中萃取出資訊，並且整理成一個data.frame（結構化）。 這門課程則是要開始討論，當資訊已經被結構化之後，我們要如何整理結構化的資料。</p>
 </div>
 <div id="-2" class="section level2">
 <h2>關卡 2</h2>
-<p>R有許多解決這類問題的函數，例如：<code>melt</code>、<code>subset</code>等等，族繁不及備載。這些函數的名稱不容易記憶，而且效能並不是很好。</p>
+<p>R 有許多解決這類問題的函數，例如：<code>melt</code>、<code>subset</code>等等，族繁不及備載。 這些函數的名稱不容易記憶，而且效能並不是很好。</p>
 </div>
 <div id="-3" class="section level2">
 <h2>關卡 3</h2>
-<p>dplyr套件是HadleyWickham和RomainFrancois在2014上架的一個套件，是目前我認為在R中做資料整理上最完善的套件之一。dplyr提供了直觀的函數，並且能夠和SQLexpression做對應，效能也被Romain透過C++進行優化過，上述的優勢讓我決定跳過傳統R整理資料的工具，直接教大家dplyr。</p>
+<p>dplyr套件是Hadley Wickham和Romain Francois在2014上架的一個套件，是目前我認為在R 中做資料整理上最完善的套件之一。 dplyr提供了直觀的函數，並且能夠和SQL expression做對應，效能也被Romain透過C++進行優化過，上述的優勢讓我決定跳過傳統R 整理資料的工具，直接教大家dplyr。</p>
 </div>
 <div id="-4" class="section level2">
 <h2>關卡 4</h2>
 <p>請大家先安裝<code>dplyr</code>套件。</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">check_then_install</span>(<span class="st">&quot;dplyr&quot;</span>, <span class="st">&quot;0.4.3&quot;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">check_then_install</span>(&amp;quot;dplyr&amp;quot;, &amp;quot;<span class="fl">0.4.3</span>&amp;quot;)</code></pre></div>
 </div>
 <div id="-5" class="section level2">
 <h2>關卡 5</h2>
@@ -160,22 +160,22 @@ Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">
 </div>
 <div id="-6" class="section level2">
 <h2>關卡 6</h2>
-<p>請同學輸入學套件的起手式：<code>vignette(package=&quot;dplyr&quot;)</code>。</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">vignette</span>(<span class="dt">package =</span> <span class="st">&quot;dplyr&quot;</span>)</code></pre></div>
+<p>請同學輸入學套件的起手式：<code>vignette(package = &amp;quot;dplyr&amp;quot;)</code>。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">vignette</span>(<span class="dt">package =</span> &amp;quot;dplyr&amp;quot;)</code></pre></div>
 </div>
 <div id="-7" class="section level2">
 <h2>關卡 7</h2>
-<p>Hadley等人都是開發R套件界的大大，他們對vignette是非常重視的，所以我們會看到許多vignette。說實話，我個人寫的dplyr套件的介紹絕對也不會比Hadley大大他們寫的精彩。不過透過swirl的好處，就是我們可以把整個dplyr的功能都經歷過一遍。</p>
+<p>Hadley等人都是開發R 套件界的大大，他們對vignette是非常重視的，所以我們會看到許多vignette。 說實話，我個人寫的dplyr套件的介紹絕對也不會比Hadley大大他們寫的精彩。 不過透過swirl的好處，就是我們可以把整個dplyr的功能都經歷過一遍。</p>
 </div>
 <div id="-8" class="section level2">
 <h2>關卡 8</h2>
-<p>請同學執行<code>vignette(&quot;introduction&quot;,package=&quot;dplyr&quot;)</code>，打開Introduction。</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">vignette</span>(<span class="st">&quot;introduction&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;dplyr&quot;</span>)</code></pre></div>
+<p>請同學執行<code>vignette(&amp;quot;introduction&amp;quot;, package = &amp;quot;dplyr&amp;quot;)</code>，打開Introduction。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">vignette</span>(&amp;quot;introduction&amp;quot;, <span class="dt">package =</span> &amp;quot;dplyr&amp;quot;)</code></pre></div>
 </div>
 <div id="-9" class="section level2">
 <h2>關卡 9</h2>
-<p>簡單起見，我們直接跟著vignette，拿<code>nycflights13</code>中的資料集<code>flights</code>做練習。請同學先安裝<code>nycflights13</code>套件。</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">check_then_install</span>(<span class="st">&quot;nycflights13&quot;</span>, <span class="st">&quot;0.1&quot;</span>)</code></pre></div>
+<p>簡單起見，我們直接跟著vignette，拿<code>nycflights13</code>中的資料集<code>flights</code>做練習。 請同學先安裝<code>nycflights13</code>套件。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">check_then_install</span>(&amp;quot;nycflights13&amp;quot;, &amp;quot;<span class="fl">0.1</span>&amp;quot;)</code></pre></div>
 </div>
 <div id="-10" class="section level2">
 <h2>關卡 10</h2>
@@ -188,25 +188,25 @@ Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">
 </div>
 <div id="-12" class="section level2">
 <h2>關卡 12</h2>
-<p>Vignette中宣稱flights共有336776筆資料。我們進行驗證一下，也順便讓同學複習data.frame的操作。請同學用指令查詢flights共有多少資料。</p>
+<p>Vignette中宣稱flights共有336776筆資料。 我們進行驗證一下，也順便讓同學複習data.frame的操作。 請同學用指令查詢flights共有多少資料。</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">nrow</span>(flights)</code></pre></div>
 </div>
 <div id="-13" class="section level2">
 <h2>關卡 13</h2>
-<p>在dplyr中，處理data.frame的函數共有：<code>filter</code>、<code>slice</code>、<code>arrange</code>、<code>select</code>、<code>distinct</code>、<code>mutate</code>、<code>summarise</code>和<code>sample_n</code>。接下來的課程中，我們一邊操作，一邊講解。</p>
+<p>在dplyr中，處理data.frame的函數共有：<code>filter</code>、<code>slice</code>、<code>arrange</code>、<code>select</code>、<code>distinct</code>、<code>mutate</code>、<code>summarise</code>和<code>sample_n</code>。 接下來的課程中，我們一邊操作，一邊講解。</p>
 </div>
 <div id="-14" class="section level2">
 <h2>關卡 14</h2>
-<p><code>filter</code>的目的是用來做列方向的過濾，所以經過<code>filter</code>處理後，資料的個數（<code>nrow</code>）會下降。<code>filter</code>函數的用法為，第一個參數放我們要處理的data.frame，後面接著不同的過濾條件。例如：<code>filter(flights,month==1,day==1)</code>，請同學試試看。</p>
+<p><code>filter</code>的目的是用來做列方向的過濾，所以經過<code>filter</code>處理後，資料的個數（<code>nrow</code>）會下降。 <code>filter</code>函數的用法為，第一個參數放我們要處理的data.frame，後面接著不同的過濾條件。 例如：<code>filter(flights, month == 1, day == 1)</code>，請同學試試看。</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">filter</span>(flights, month ==<span class="st"> </span><span class="dv">1</span>, day ==<span class="st"> </span><span class="dv">1</span>)</code></pre></div>
 </div>
 <div id="-15" class="section level2">
 <h2>關卡 15</h2>
-<p>同學應該會注意到，輸出結果中<code>month</code>和<code>day</code>都是1了。因為<code>filter</code>會將資料一筆一筆的對後面的語句（<code>month==1</code>和<code>day==1</code>）做檢查。R在解析這些語句時，會自動將這些變數對應到<code>flights</code>的欄位。所以在<code>filter</code>中的<code>month</code>就等同於<code>flights$month</code>，<code>day</code>就等同於<code>flights$day</code>。</p>
+<p>同學應該會注意到，輸出結果中<code>month</code>和<code>day</code>都是1 了。 因為<code>filter</code>會將資料一筆一筆的對後面的語句（<code>month == 1</code>和<code>day == 1</code>）做檢查。 R 在解析這些語句時，會自動將這些變數對應到<code>flights</code>的欄位。 所以在<code>filter</code>中的<code>month</code>就等同於<code>flights$month</code>，<code>day</code>就等同於<code>flights$day</code>。</p>
 </div>
 <div id="-16" class="section level2">
 <h2>關卡 16</h2>
-<p>熟悉SQLexpression的同學請注意，<code>filter</code>就是SQL中的<code>WHERE</code>。</p>
+<p>熟悉SQL expression的同學請注意，<code>filter</code>就是SQL中的<code>WHERE</code>。</p>
 </div>
 <div id="-17" class="section level2">
 <h2>關卡 17</h2>
@@ -225,28 +225,28 @@ answer01 &lt;-<span class="st"> </span><span class="kw">local</span>({
 </div>
 <div id="-18" class="section level2">
 <h2>關卡 18</h2>
-<p>為了降低難度，我們在scripts中讓大家是一步一步的做操作。實務上，熟悉R的使用者會直接寫一行：<code>flights[flights$month==1&amp;flights$day==1,]</code>，這是一種程式碼的壓縮。</p>
+<p>為了降低難度，我們在scripts中讓大家是一步一步的做操作。 實務上，熟悉R 的使用者會直接寫一行：<code>flights[flights$month == 1 &amp;amp; flights$day == 1,]</code>，這是一種程式碼的壓縮。</p>
 </div>
 <div id="-19" class="section level2">
 <h2>關卡 19</h2>
-<p>程式碼的壓縮，讓使用者可以減少打字及減少設定暫存變數，如剛剛寫的<code>month_is_1</code>、<code>day_is_1</code>和<code>is_target</code>等等。但是即使如此，dplyr提供的<code>filter</code>可以用更簡潔程式碼達到一樣的效果。背後的原因就在於<code>flights$month</code>和<code>flights$day</code>的<code>flights</code>被省略了。</p>
+<p>程式碼的壓縮，讓使用者可以減少打字及減少設定暫存變數，如剛剛寫的<code>month_is_1</code>、<code>day_is_1</code>和<code>is_target</code>等等。 但是即使如此，dplyr提供的<code>filter</code>可以用更簡潔程式碼達到一樣的效果。 背後的原因就在於<code>flights$month</code>和<code>flights$day</code>的<code>flights</code>被省略了。</p>
 </div>
 <div id="-20" class="section level2">
 <h2>關卡 20</h2>
-<p>一般來說，<code>filter</code>的第一個參數，代表著要做處理的data.frame，而後面的參數皆都為條件。每個條件就是一個expression，並且輸出布林向量。<code>filter</code>則只會回傳那些滿足所有條件的資料。</p>
+<p>一般來說，<code>filter</code>的第一個參數，代表著要做處理的data.frame，而後面的參數皆都為條件。 每個條件就是一個expression，並且輸出布林向量。 <code>filter</code>則只會回傳那些滿足所有條件的資料。</p>
 </div>
 <div id="-21" class="section level2">
 <h2>關卡 21</h2>
-<p>這堂課程介紹的dplyr的函數，都具有一樣的性質：第一個參數是要處理的data.frame，而其餘的參數是不同的expression，且這些expression中的變數名稱都會優先對應到data.frame中的欄位。</p>
+<p>這堂課程介紹的dplyr的函數，都具有一樣的性質：第一個參數是要處理的data.frame，而其餘的參數是不同的expression，且這些expression中的變數名稱都會優先對應到data.frame 中的欄位。</p>
 </div>
 <div id="-22" class="section level2">
 <h2>關卡 22</h2>
-<p>請同學試著從<code>flights</code>中找出<code>flights$month</code>為1，<code>flights$day</code>為2的資料。</p>
+<p>請同學試著從<code>flights</code>中找出<code>flights$month</code>為 1，<code>flights$day</code>為2的資料。</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">filter</span>(flights, month ==<span class="st"> </span><span class="dv">1</span>, day ==<span class="st"> </span><span class="dv">2</span>)</code></pre></div>
 </div>
 <div id="-23" class="section level2">
 <h2>關卡 23</h2>
-<p>filter也會自動過濾掉結果為NA的條件。在下一個題目，同學可以趁機摸索看看。</p>
+<p>filter也會自動過濾掉結果為 NA 的條件。 在下一個題目，同學可以趁機摸索看看。</p>
 </div>
 <div id="-24" class="section level2">
 <h2>關卡 24</h2>
@@ -259,54 +259,54 @@ answer01 &lt;-<span class="st"> </span><span class="kw">local</span>({
 </div>
 <div id="-25" class="section level2">
 <h2>關卡 25</h2>
-<p>上一題的答案也是可以做程式碼的壓縮的。同學可以先用<code>filter(flights,dep_delay&gt;0)</code>篩選出資料集之後，直接把結果的值傳到<code>nrow</code>的第一個參數，也就是：<code>nrow(filter(flights,dep_delay&gt;0))</code>。</p>
+<p>上一題的答案也是可以做程式碼的壓縮的。 同學可以先用<code>filter(flights, dep_delay &amp;gt; 0)</code>篩選出資料集之後，直接把結果的值傳到<code>nrow</code>的第一個參數，也就是：<code>nrow(filter(flights, dep_delay &amp;gt; 0))</code>。</p>
 </div>
 <div id="-26" class="section level2">
 <h2>關卡 26</h2>
-<p>有時候我們希望找出符合特定條件的文字。舉例來說，如果我們要找出<code>tailnum</code>中包含有<code>&quot;AA&quot;</code>的文字，要怎麼做呢？R內建有一個<code>grepl</code>的函數可以解決這個問題。請同學先輸入<code>?grepl</code>打開它的說明文件。</p>
+<p>有時候我們希望找出符合特定條件的文字。 舉例來說，如果我們要找出<code>tailnum</code>中包含有<code>&amp;quot;AA&amp;quot;</code>的文字，要怎麼做呢？ R 內建有一個<code>grepl</code>的函數可以解決這個問題。 請同學先輸入<code>?grepl</code>打開它的說明文件。</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">?grepl</code></pre></div>
 </div>
 <div id="-27" class="section level2">
 <h2>關卡 27</h2>
-<p><code>grepl</code>的參數很多，但是這裡我們只要學三個參數：<code>pattern</code>、<code>x</code>和、<code>fixed</code>。第一個參數<code>pattern</code>，代表的是我們要找的模式。舉例來說，如果我們要找<code>&quot;AA&quot;</code>，pattern就會是<code>&quot;AA&quot;</code>。但是如果是在<code>fixed=FALSE</code>狀態下，R會使用「正則表示式」（RegularExpression）來處理<code>pattern</code>，有時候會有預期外的結果。這部份在同學學會正則表示式之前，都請先設定<code>fixed=TRUE</code>比較單純。<code>x</code>就是我們要搜尋文字。在這範例中，就是<code>flights$tailnum</code>。</p>
+<p><code>grepl</code>的參數很多，但是這裡我們只要學三個參數：<code>pattern</code>、<code>x</code>和、<code>fixed</code>。 第一個參數<code>pattern</code>，代表的是我們要找的模式。 舉例來說，如果我們要找<code>&amp;quot;AA&amp;quot;</code>，pattern就會是<code>&amp;quot;AA&amp;quot;</code>。 但是如果是在<code>fixed = FALSE</code>狀態下，R 會使用「正則表示式」（Regular Expression）來處理<code>pattern</code>，有時候會有預期外的結果。 這部份在同學學會正則表示式之前，都請先設定<code>fixed = TRUE</code>比較單純。 <code>x</code>就是我們要搜尋文字。 在這範例中，就是<code>flights$tailnum</code>。</p>
 </div>
 <div id="-28" class="section level2">
 <h2>關卡 28</h2>
-<p>我們想輸出的程式碼是：<code>filter(flights,grepl(pattern=&lt;1&gt;,x=&lt;2&gt;,fixed=TRUE))</code>，這裡透過適當的設定<code>grepl</code>的參數，就可以獲得我們想要的比對結果，也就是「tailnum中是不是有包含<code>&quot;AA&quot;</code>這樣的文字」的結果。而<code>filter</code>再利用這樣的結果對資料做篩選。請問同學，&lt;1&gt;應該要填寫什麼呢？</p>
+<p>我們想輸出的程式碼是：<code>filter(flights, grepl(pattern = &amp;lt;1&amp;gt;, x = &amp;lt;2&amp;gt;, fixed = TRUE))</code>， 這裡透過適當的設定<code>grepl</code>的參數，就可以獲得我們想要的比對結果，也就是「tailnum中是不是有包含<code>&amp;quot;AA&amp;quot;</code>這樣的文字」的結果。 而<code>filter</code>再利用這樣的結果對資料做篩選。 請問同學，&lt;1&gt;應該要填寫什麼呢？</p>
 <p>“AA”</p>
 </div>
 <div id="-29" class="section level2">
 <h2>關卡 29</h2>
-<p>我們想輸出的程式碼是：<code>filter(flights,grepl(pattern=&lt;1&gt;,x=&lt;2&gt;,fixed=TRUE))</code>。請問同學，&lt;2&gt;應該要填寫什麼？</p>
+<p>我們想輸出的程式碼是：<code>filter(flights, grepl(pattern = &amp;lt;1&amp;gt;, x = &amp;lt;2&amp;gt;, fixed = TRUE))</code>。 請問同學，&lt;2&gt;應該要填寫什麼？</p>
 <p>flights$tailnum</p>
 </div>
 <div id="-30" class="section level2">
 <h2>關卡 30</h2>
-<p>再請問同學，<code>filter(flights,grepl(pattern=&quot;AA&quot;,x=tailnum,fixed=TRUE))</code>是不是也成立呢？</p>
+<p>再請問同學，<code>filter(flights, grepl(pattern = &amp;quot;AA&amp;quot;, x = tailnum, fixed = TRUE))</code>是不是也成立呢？</p>
 <p>Yes</p>
 </div>
 <div id="-31" class="section level2">
 <h2>關卡 31</h2>
-<p>最後，請同學試試看：<code>filter(flights,grepl(pattern=&quot;AA&quot;,x=tailnum,fixed=TRUE))</code>。</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">filter</span>(flights, <span class="kw">grepl</span>(<span class="dt">pattern =</span> <span class="st">&quot;AA&quot;</span>, <span class="dt">x =</span> tailnum, <span class="dt">fixed =</span> <span class="ot">TRUE</span>))</code></pre></div>
+<p>最後，請同學試試看：<code>filter(flights, grepl(pattern = &amp;quot;AA&amp;quot;, x = tailnum, fixed = TRUE))</code>。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">filter</span>(flights, <span class="kw">grepl</span>(<span class="dt">pattern =</span> &amp;quot;AA&amp;quot;, <span class="dt">x =</span> tailnum, <span class="dt">fixed =</span> <span class="ot">TRUE</span>))</code></pre></div>
 </div>
 <div id="-32" class="section level2">
 <h2>關卡 32</h2>
-<p>針對<code>filter</code>已經介紹得差不多了。接下來我們會介紹<code>slice</code>。<code>slice</code>很單純，<code>slice(flights,1:6)</code>就等價於<code>flights[1:6,]</code>。</p>
+<p>針對<code>filter</code>已經介紹得差不多了。接下來我們會介紹<code>slice</code>。 <code>slice</code>很單純，<code>slice(flights, 1:6)</code>就等價於<code>flights[1:6,]</code>。</p>
 </div>
 <div id="-33" class="section level2">
 <h2>關卡 33</h2>
-<p>讓我們直接進入練習吧!「用肌肉記憶」。請同學選出<code>flights</code>的第10000到第20000筆資料。</p>
+<p>讓我們直接進入練習吧!「用肌肉記憶」。 請同學選出<code>flights</code>的第10000 到 第20000筆資料。</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">slice</span>(flights, <span class="dv">10000</span>:<span class="dv">20000</span>)</code></pre></div>
 </div>
 <div id="-34" class="section level2">
 <h2>關卡 34</h2>
-<p>接下來，我們練習<code>arrange</code>。<code>arrange</code>會把data.frame的資料，根據後面的expression做排序。請同學試試看：<code>arrange(flights,month,day,dep_time)</code>。給熟悉SQL的同學，<code>arrange</code>的用法很類似SQL的<code>ORDERBY</code>。</p>
+<p>接下來，我們練習<code>arrange</code>。 <code>arrange</code>會把data.frame的資料，根據後面的expression做排序。 請同學試試看：<code>arrange(flights, month, day, dep_time)</code>。 給熟悉SQL的同學，<code>arrange</code>的用法很類似SQL的<code>ORDER BY</code>。</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">arrange</span>(flights, month, day, dep_time)</code></pre></div>
 </div>
 <div id="-35" class="section level2">
 <h2>關卡 35</h2>
-<p>我們仔細觀察上一題的輸出。<code>arrange</code>會先比較<code>month</code>的值，當<code>month</code>平手時就比較<code>day</code>的值，以此類推。所以我們看到的輸出中，最前面的結果就是<code>month</code>、<code>day</code>皆為最小的資料中，<code>dep_time</code>值最小的資料。</p>
+<p>我們仔細觀察上一題的輸出。 <code>arrange</code>會先比較<code>month</code>的值，當<code>month</code>平手時就比較<code>day</code>的值，以此類推。 所以我們看到的輸出中，最前面的結果就是<code>month</code>、<code>day</code>皆為最小的資料中，<code>dep_time</code>值最小的資料。</p>
 </div>
 <div id="-36" class="section level2">
 <h2>關卡 36</h2>
@@ -315,37 +315,37 @@ answer01 &lt;-<span class="st"> </span><span class="kw">local</span>({
 </div>
 <div id="-37" class="section level2">
 <h2>關卡 37</h2>
-<p>我們是不能確定這件事情的，因為有些資料可能有更小的<code>dep_time</code>，但是他們的<code>day</code>和<code>month</code>太大，所以被排到後面去了。我們來找找看<code>dep_time</code>的最小值吧。請同學輸入：<code>min(flights$dep_time)</code>。</p>
+<p>我們是不能確定這件事情的，因為有些資料可能有更小的<code>dep_time</code>，但是他們的<code>day</code>和<code>month</code>太大，所以被排到後面去了。 我們來找找看<code>dep_time</code>的最小值吧。 請同學輸入：<code>min(flights$dep_time)</code>。</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">min</span>(flights$dep_time)</code></pre></div>
 </div>
 <div id="-38" class="section level2">
 <h2>關卡 38</h2>
-<p>我們注意到dep_time的資料有missingdata。導致上一題的輸出為<code>NA</code>。我們要怎麼忽略<code>NA</code>呢？請同學試試看：<code>min(flights$dep_time,na.rm=TRUE)</code>。</p>
+<p>我們注意到dep_time的資料有missing data。 導致上一題的輸出為<code>NA</code>。 我們要怎麼忽略<code>NA</code>呢？ 請同學試試看：<code>min(flights$dep_time, na.rm = TRUE)</code>。</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">min</span>(flights$dep_time, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</code></pre></div>
 </div>
 <div id="-39" class="section level2">
 <h2>關卡 39</h2>
-<p>我們也可以把比較的順序從由小到大改成由大到小，只要加上<code>desc</code>就行了。舉例來說：<code>arrange(flights,desc(month),desc(day),desc(dep_time))</code>，請同學試試看。</p>
+<p>我們也可以把比較的順序從由小到大改成由大到小，只要加上<code>desc</code>就行了。 舉例來說：<code>arrange(flights, desc(month), desc(day), desc(dep_time))</code>，請同學試試看。</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">arrange</span>(flights, <span class="kw">desc</span>(month), <span class="kw">desc</span>(day), <span class="kw">desc</span>(dep_time))</code></pre></div>
 </div>
 <div id="-40" class="section level2">
 <h2>關卡 40</h2>
-<p>接下來我們來介紹<code>select</code>。通常一個很大的data.frame中，我們一次只會對少數幾欄資料有興趣，<code>select</code>可以讓我們挑出我們有興趣的欄位。請同學試試看：<code>select(flights,year,month,day)</code>。給熟SQL的同學，<code>select</code>就是SQL中的<code>SELECT</code>。</p>
+<p>接下來我們來介紹<code>select</code>。 通常一個很大的data.frame中，我們一次只會對少數幾欄資料有興趣，<code>select</code>可以讓我們挑出我們有興趣的欄位。 請同學試試看：<code>select(flights, year, month, day)</code>。 給熟SQL的同學，<code>select</code>就是SQL中的<code>SELECT</code>。</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">select</span>(flights, year, month, day)</code></pre></div>
 </div>
 <div id="-41" class="section level2">
 <h2>關卡 41</h2>
-<p>我們先檢查<code>flights</code>的欄位名稱。請同學複習一下之前所學的data.frame的操作。</p>
+<p>我們先檢查<code>flights</code>的欄位名稱。 請同學複習一下之前所學的data.frame的操作。</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">colnames</span>(flights)</code></pre></div>
 </div>
 <div id="-42" class="section level2">
 <h2>關卡 42</h2>
-<p>我們也可以用<code>select(flights,year:day)</code>來選取<code>year</code>和<code>day</code>之間的欄位。請同學試試看。</p>
+<p>我們也可以用<code>select(flights, year:day)</code>來選取<code>year</code>和<code>day</code>之間的欄位。 請同學試試看。</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">select</span>(flights, year:day)</code></pre></div>
 </div>
 <div id="-43" class="section level2">
 <h2>關卡 43</h2>
-<p>如果是要反面選取，剃除掉<code>year</code>到<code>day</code>之間的欄位，只要使用：<code>select(flights,-(year:day))</code>。請同學試試看。</p>
+<p>如果是要反面選取，剃除掉<code>year</code>到<code>day</code>之間的欄位，只要使用：<code>select(flights, -(year:day))</code>。 請同學試試看。</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">select</span>(flights, -(year:day))</code></pre></div>
 </div>
 <div id="-44" class="section level2">
@@ -362,48 +362,48 @@ answer01 &lt;-<span class="st"> </span><span class="kw">local</span>({
 </div>
 <div id="-45" class="section level2">
 <h2>關卡 45</h2>
-<p>上一題的目的是想看看dep_time為“NA”是不是有異常的模式。例如，都聚集在某一天。實務上在做資料分析時，常常需要對自己資料的正確性保持懷疑，因此常常要篩選出資料來做觀察確認。此時，是否熟練的運用dplyr的函數就會影響到我們的工作效率。</p>
+<p>上一題的目的是想看看dep_time為“NA”是不是有異常的模式。 例如，都聚集在某一天。 實務上在做資料分析時，常常需要對自己資料的正確性保持懷疑，因此常常要篩選出資料來做觀察確認。 此時，是否熟練的運用dplyr的函數就會影響到我們的工作效率。</p>
 </div>
 <div id="-46" class="section level2">
 <h2>關卡 46</h2>
-<p>接著我們介紹<code>distinct</code>。它可以挑出後續多個expression的組合中，不重複的部份。所以<code>distinct</code>能用來回答「資料有多少類」等問題。給熟SQL的同學，distinct就是SQL的<code>DISTINCT</code>。</p>
+<p>接著我們介紹<code>distinct</code>。 它可以挑出後續多個expression的組合中，不重複的部份。 所以<code>distinct</code>能用來回答「資料有多少類」等問題。 給熟SQL的同學，distinct就是SQL的<code>DISTINCT</code>。</p>
 </div>
 <div id="-47" class="section level2">
 <h2>關卡 47</h2>
-<p>請同學試試看：<code>distinct(select(flights,year:day))</code>。一年有365天，是不是每天都有資料呢？</p>
+<p>請同學試試看：<code>distinct(select(flights, year:day))</code>。 一年有365天，是不是每天都有資料呢？</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">distinct</span>(<span class="kw">select</span>(flights, year:day))</code></pre></div>
 </div>
 <div id="-48" class="section level2">
 <h2>關卡 48</h2>
-<p>當我們要更改，或是新增欄位時，就可以使用<code>mutate</code>這個欄位了。舉例來說，如果我們要新增一個欄位<code>gain</code>，它是拿arr_delay扣掉dep_delay，代表飛機停留在紐約機場待的時間比原本簡短多少。此時，我們可以用：<code>mutate(flights,gain=arr_delay-dep_delay)</code>。</p>
+<p>當我們要更改，或是新增欄位時，就可以使用<code>mutate</code>這個欄位了。 舉例來說，如果我們要新增一個欄位<code>gain</code>，它是拿arr_delay扣掉dep_delay，代表飛機停留在紐約機場待的時間比原本簡短多少。 此時，我們可以用：<code>mutate(flights, gain = arr_delay - dep_delay)</code>。</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mutate</span>(flights, <span class="dt">gain =</span> arr_delay -<span class="st"> </span>dep_delay)</code></pre></div>
 </div>
 <div id="-49" class="section level2">
 <h2>關卡 49</h2>
-<p><code>mutate</code>的功能就類似SQL的UPDATE，但因為可以新增欄位，所以更為廣泛。在<code>mutate</code>中，後面的expression可以使用前面expression所新增的欄。</p>
+<p><code>mutate</code>的功能就類似SQL的UPDATE，但因為可以新增欄位，所以更為廣泛。 在<code>mutate</code>中，後面的expression可以使用前面expression所新增的欄。</p>
 </div>
 <div id="-50" class="section level2">
 <h2>關卡 50</h2>
-<p>最後我們介紹<code>summarise</code>，它會根據給定的函數，計算出單一的值。舉例來說：<code>max</code>、<code>min</code>都可以是這樣的函數，但是<code>range</code>就會出問題。因為<code>max</code>和<code>min</code>的輸出長度為1，但是<code>range</code>的輸出長度為2。</p>
+<p>最後我們介紹<code>summarise</code>，它會根據給定的函數，計算出單一的值。 舉例來說：<code>max</code>、<code>min</code>都可以是這樣的函數，但是<code>range</code>就會出問題。 因為<code>max</code>和<code>min</code>的輸出長度為1 ，但是<code>range</code>的輸出長度為2。</p>
 </div>
 <div id="-51" class="section level2">
 <h2>關卡 51</h2>
-<p>請同學輸入<code>summarise(flights,mean(dep_delay,na.rm=TRUE))</code>來計算平均的誤點時間。</p>
+<p>請同學輸入<code>summarise(flights, mean(dep_delay, na.rm = TRUE))</code>來計算平均的誤點時間。</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summarise</span>(flights, <span class="kw">mean</span>(dep_delay, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>))</code></pre></div>
 </div>
 <div id="-52" class="section level2">
 <h2>關卡 52</h2>
-<p>我們也可以透過<code>sample_n</code>或<code>sample_frac</code>從<code>flights</code>中抽出資料。這個方法在資料很大，且電腦又不夠力的狀況下很有用。舉例來說，<code>sample_n(flights,10)</code>會從數據中抽10筆資料。請同學試試看。</p>
+<p>我們也可以透過<code>sample_n</code>或<code>sample_frac</code>從<code>flights</code>中抽出資料。 這個方法在資料很大，且電腦又不夠力的狀況下很有用。 舉例來說，<code>sample_n(flights, 10)</code>會從數據中抽10筆資料。 請同學試試看。</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sample_n</span>(flights, <span class="dv">10</span>)</code></pre></div>
 </div>
 <div id="-53" class="section level2">
 <h2>關卡 53</h2>
-<p>也請同學試試看：<code>sample_frac(flights,0.01)</code>。</p>
+<p>也請同學試試看：<code>sample_frac(flights, 0.01)</code>。</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sample_frac</span>(flights, <span class="fl">0.01</span>)</code></pre></div>
 </div>
 <div id="-54" class="section level2">
 <h2>關卡 54</h2>
-<p>當需要取後放回的隨機抽樣時，可以下參數：<code>replace=TRUE</code>。而當希望機率不相等時，可以把機率的比率送到<code>weight</code>這個參數。</p>
+<p>當需要取後放回的隨機抽樣時，可以下參數：<code>replace = TRUE</code>。 而當希望機率不相等時，可以把機率的比率送到<code>weight</code>這個參數。</p>
 </div>
 <div id="-55" class="section level2">
 <h2>關卡 55</h2>
@@ -463,31 +463,31 @@ answer04<span class="fl">.3</span> &lt;-<span class="st"> </span><span class="kw
 </div>
 <div id="-60" class="section level2">
 <h2>關卡 60</h2>
-<p>接下來我們跟同學介紹R在2014年開始發展的一種寫法，稱作「pipelineoperator」。</p>
+<p>接下來我們跟同學介紹R 在2014年開始發展的一種寫法，稱作「pipeline operator」。</p>
 </div>
 <div id="-61" class="section level2">
 <h2>關卡 61</h2>
-<p>在剛剛的練習中，同學可能會寫出如：<code>summarise(filter(flights,...))</code>的程式碼。或是使用大量的暫存變數，如：<code>a1&lt;-filter(flights,...)</code>以及<code>a2&lt;-summarise(a1,...)</code>。在整理資料的時候，我們常常要對數據做連續的操作（例如:先<code>filter</code>再進行<code>summarise</code>等）</p>
+<p>在剛剛的練習中，同學可能會寫出如：<code>summarise(filter(flights, ...))</code>的程式碼。 或是使用大量的暫存變數，如：<code>a1 &amp;lt;- filter(flights, ...)</code>以及<code>a2 &amp;lt;- summarise(a1, ...)</code>。 在整理資料的時候，我們常常要對數據做連續的操作（例如:先<code>filter</code>再進行<code>summarise</code>等）</p>
 </div>
 <div id="-62" class="section level2">
 <h2>關卡 62</h2>
-<p>這時後，我們可能只能建立大量的暫存變數，如<code>a1</code>，<code>a2</code>，或者是寫出不好讀的程式碼，如：<code>summarise(filter(flights,...))</code></p>
+<p>這時後，我們可能只能建立大量的暫存變數，如<code>a1</code>，<code>a2</code>，或者是寫出不好讀的程式碼， 如：<code>summarise(filter(flights, ...))</code></p>
 </div>
 <div id="-63" class="section level2">
 <h2>關卡 63</h2>
-<p>在dplyr中導入了magrittr在2014年的發明：pipelineoperator，<code>%&gt;%</code>。<code>%&gt;%</code>會將上一個函數的輸出，放到後面函數的第一個參數。也就是說，上述的程式碼可以改寫成：<code>filter(flights,...)%&gt;%summarise(...)</code>。</p>
+<p>在dplyr中導入了magrittr在2014年的發明：pipeline operator，<code>%&amp;gt;%</code>。 <code>%&amp;gt;%</code>會將上一個函數的輸出，放到後面函數的第一個參數。 也就是說，上述的程式碼可以改寫成：<code>filter(flights, ...) %&amp;gt;% summarise(...)</code>。</p>
 </div>
 <div id="-64" class="section level2">
 <h2>關卡 64</h2>
-<p>而<code>%&gt;%</code>是可以串接的，所以實務上，我們就可以寫出：<code>filter(flights,...)%&gt;%select(...)%&gt;%mutate(...)%&gt;%summarise</code>。每一個函數的輸出，都是下一個函數的第一個參數（也就是要進行處理的data.frame）。所以這段程式碼中，<code>filter</code>的輸出就交給<code>select</code>處理後，再交給<code>mutate</code>，最後給<code>summarise</code>。各位同學從這邊，就可以看出dplyr在設計函數時所下的苦心。</p>
+<p>而<code>%&amp;gt;%</code>是可以串接的，所以實務上，我們就可以寫出：<code>filter(flights, ...) %&amp;gt;% select(...) %&amp;gt;% mutate(...) %&amp;gt;% summarise</code>。 每一個函數的輸出，都是下一個函數的第一個參數（也就是要進行處理的data.frame）。 所以這段程式碼中，<code>filter</code>的輸出就交給<code>select</code>處理後，再交給<code>mutate</code>，最後給<code>summarise</code>。 各位同學從這邊，就可以看出dplyr在設計函數時所下的苦心。</p>
 </div>
 <div id="-65" class="section level2">
 <h2>關卡 65</h2>
-<p>使用<code>%&gt;%</code>寫程式，不只不需要命名大量的變數，如：<code>a1</code>、<code>a2</code>等，程式碼的看起來也比<code>summarise(mutate(select(filter(flights,...),...),...),...)</code>簡單的多了。</p>
+<p>使用<code>%&amp;gt;%</code>寫程式，不只不需要命名大量的變數，如：<code>a1</code>、<code>a2</code>等， 程式碼的看起來也比<code>summarise(mutate(select(filter(flights, ...), ...), ...), ...)</code>簡單的多了。</p>
 </div>
 <div id="-66" class="section level2">
 <h2>關卡 66</h2>
-<p>請同學將剛剛做的檔案：RDataEngineer-05-04.R再讀一次。我們需要再做一次這一個練習。</p>
+<p>請同學將剛剛做的檔案：RDataEngineer-05-04.R 再讀一次。 我們需要再做一次這一個練習。</p>
 </div>
 <div id="-67" class="section level2">
 <h2>關卡 67</h2>
@@ -531,7 +531,7 @@ answer04<span class="fl">.3</span> &lt;-<span class="st"> </span><span class="kw
 </div>
 <div id="-68" class="section level2">
 <h2>關卡 68</h2>
-<p>剛剛的第一個練習題（answer04.1），我們計算了一月份平均的gain（arr_delay-dep_delay）。但是如果我們要計算一月、二月到十二月份平均的gain，並且做比較，要怎麼做呢？</p>
+<p>剛剛的第一個練習題（answer04.1），我們計算了一月份平均的gain（arr_delay - dep_delay）。 但是如果我們要計算一月、二月到十二月份平均的gain，並且做比較，要怎麼做呢？</p>
 </div>
 <div id="-69" class="section level2">
 <h2>關卡 69</h2>
@@ -539,12 +539,12 @@ answer04<span class="fl">.3</span> &lt;-<span class="st"> </span><span class="kw
 </div>
 <div id="-70" class="section level2">
 <h2>關卡 70</h2>
-<p>dplyr提供了函數<code>group_by</code>來解決這樣的問題。它讓我們依照某個欄位，將整個資料切割成若干份。之後，我們對它（經過<code>group_by</code>處理後的data.frame）做的動作都會同步作用在每一份資料中(data.frame)。</p>
+<p>dplyr提供了函數<code>group_by</code>來解決這樣的問題。 它讓我們依照某個欄位，將整個資料切割成若干份。 之後，我們對它（經過<code>group_by</code>處理後的data.frame）做的動作都會同步作用在每一份資料中(data.frame)。</p>
 </div>
 <div id="-71" class="section level2">
 <h2>關卡 71</h2>
-<p>舉例來說，我們可以用<code>df&lt;-group_by(flights,month)</code>，先用<code>group_by</code>標記要根據<code>month</code>對flights的資料做分割。並且把這個動作的結果存到<code>df</code>變數中。請同學試試看。</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df &lt;-<span class="st"> </span><span class="kw">group_by</span>(flights, month)</code></pre></div>
+<p>舉例來說，我們可以用<code>df &amp;lt;- group_by(flights, month)</code>，先用<code>group_by</code>標記要根據<code>month</code>對flights的資料做分割。 並且把這個動作的結果存到<code>df</code>變數中。 請同學試試看。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df &amp;lt;-<span class="st"> </span><span class="kw">group_by</span>(flights, month)</code></pre></div>
 </div>
 <div id="-72" class="section level2">
 <h2>關卡 72</h2>
@@ -578,20 +578,20 @@ answer05 &lt;-
 </div>
 <div id="-75" class="section level2">
 <h2>關卡 75</h2>
-<p>這裡建議同學一個在實務上撰寫<code>gruop_by</code>的思路。首先，我們針對某個欄位（例如月份）做<code>filter</code>，挑出特定的類別。並對<code>filter</code>的結果做不同的操作，回答並解決相對應的問題。當我們想要把<code>filter</code>之後的動作，重複的操作在每一種類別（例如每一個月份）時，只要把<code>filter</code>換掉改成<code>group_by</code>，後面的步驟照舊即可得到答案。</p>
+<p>這裡建議同學一個在實務上撰寫<code>gruop_by</code>的思路。 首先，我們針對某個欄位（例如月份）做<code>filter</code>，挑出特定的類別。 並對<code>filter</code>的結果做不同的操作，回答並解決相對應的問題。 當我們想要把<code>filter</code>之後的動作，重複的操作在每一種類別（例如每一個月份）時，只要把<code>filter</code>換掉改成<code>group_by</code>，後面的步驟照舊即可得到答案。</p>
 </div>
 <div id="-76" class="section level2">
 <h2>關卡 76</h2>
-<p>以上的內容就是這門課程對dplyr的介紹。為了下一個課程，我們要做最後一個練習。</p>
+<p>以上的內容就是這門課程對dplyr的介紹。 為了下一個課程，我們要做最後一個練習。</p>
 </div>
 <div id="-77" class="section level2">
 <h2>關卡 77</h2>
-<p>變數<code>cl_info</code>記載著從金管會銀行局的一般銀行及信用合作社消費者貸款業務項目。同學可以使用<code>View(cl_info)</code>看一看資料。</p>
+<p>變數<code>cl_info</code>記載著從金管會銀行局的一般銀行及信用合作社消費者貸款業務項目。 同學可以使用<code>View(cl_info)</code>看一看資料。</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">View</span>(cl_info)</code></pre></div>
 </div>
 <div id="-78" class="section level2">
 <h2>關卡 78</h2>
-<p>這個練習是要對這個資料做一連串的整理之後，算出每個月份的銀行房貸放款數量。這個數字會和我國的房地產是否泡沫化有關。</p>
+<p>這個練習是要對這個資料做一連串的整理之後，算出每個月份的銀行房貸放款數量。 這個數字會和我國的房地產是否泡沫化有關。</p>
 </div>
 <div id="-79" class="section level2">
 <h2>關卡 79</h2>

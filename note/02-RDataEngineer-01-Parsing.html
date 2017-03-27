@@ -138,24 +138,24 @@ Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">
 </noscript>
 <div id="-1" class="section level2">
 <h2>關卡 1</h2>
-<p>這門課程將會帶大家走過一遍R所提供的字串處理功能。</p>
+<p>這門課程將會帶大家走過一遍R 所提供的字串處理功能。</p>
 </div>
 <div id="-2" class="section level2">
 <h2>關卡 2</h2>
-<p>在實務上，數據來源經常是隱含某些規則的文字檔案。例如：伺服器依據工程師擬定的規則所產生的資料。這個規則可能是工程師自己訂的，也可能是符合眾人智慧所訂定的規範。</p>
+<p>在實務上，數據來源經常是隱含某些規則的文字檔案。 例如：伺服器依據工程師擬定的規則所產生的資料。 這個規則可能是工程師自己訂的，也可能是符合眾人智慧所訂定的規範。</p>
 </div>
 <div id="-3" class="section level2">
 <h2>關卡 3</h2>
-<p>但是不管是工程師自己的想法，或是眾人的智慧，R都能從文字中萃取出資訊。這樣的技術就稱作Parsing。同學上一堂課程所學到的<code>read.table</code>，其實就是Parsing的其中一種功能。</p>
+<p>但是不管是工程師自己的想法，或是眾人的智慧，R 都能從文字中萃取出資訊。 這樣的技術就稱作Parsing。 同學上一堂課程所學到的<code>read.table</code>，其實就是Parsing的其中一種功能。</p>
 </div>
 <div id="-4" class="section level2">
 <h2>關卡 4</h2>
-<p>這個課程中，我們事先從政府的公開資料平台抓取了血清白蛋白(Albumin)檢查比率的資料。資料已經存放於<code>hospital_path</code>了。有興趣的同學，可以參考網址：<a href="http://data.gov.tw/node/25511" class="uri">http://data.gov.tw/node/25511</a>閱讀關於這個資料集的故事。</p>
+<p>這個課程中，我們事先從政府的公開資料平台抓取了血清白蛋白(Albumin)檢查比率的資料。 資料已經存放於<code>hospital_path</code>了。 有興趣的同學，可以參考網址：&lt;<a href="http://data.gov.tw/node/25511%3E閱讀關於這個資料集的故事" class="uri">http://data.gov.tw/node/25511&gt;閱讀關於這個資料集的故事</a>。</p>
 </div>
 <div id="-5" class="section level2">
 <h2>關卡 5</h2>
 <p>請同學用上一堂課所學的方法，先用<code>readBin</code>來檢查這個檔案的BOM。</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">readBin</span>(hospital_path, <span class="st">&quot;raw&quot;</span>, <span class="dt">n =</span> 3L)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">readBin</span>(hospital_path, &amp;quot;raw&amp;quot;, <span class="dt">n =</span> 3L)</code></pre></div>
 </div>
 <div id="-6" class="section level2">
 <h2>關卡 6</h2>
@@ -164,13 +164,13 @@ Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">
 </div>
 <div id="-7" class="section level2">
 <h2>關卡 7</h2>
-<p>當BOM無法被判斷的時候，我們只好用不同Encoding讀取資料最初幾行試試看。由於政府公開資料網宣稱這個檔案為UTF-8編碼的，我們先使用UTF-8讀讀看。請同學輸入：<code>readLines(file(hospital_path,encoding=&quot;UTF-8&quot;),n=6)</code></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">readLines</span>(<span class="kw">file</span>(hospital_path, <span class="dt">encoding =</span> <span class="st">&quot;UTF-8&quot;</span>), <span class="dt">n =</span> <span class="dv">6</span>)</code></pre></div>
+<p>當BOM無法被判斷的時候，我們只好用不同Encoding讀取資料最初幾行試試看。 由於政府公開資料網宣稱這個檔案為UTF-8編碼的，我們先使用UTF-8讀讀看。 請同學輸入：<code>readLines(file(hospital_path, encoding = &amp;quot;UTF-8&amp;quot;), n = 6)</code></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">readLines</span>(<span class="kw">file</span>(hospital_path, <span class="dt">encoding =</span> &amp;quot;UTF<span class="dv">-8</span>&amp;quot;), <span class="dt">n =</span> <span class="dv">6</span>)</code></pre></div>
 </div>
 <div id="-8" class="section level2">
 <h2>關卡 8</h2>
-<p>接著我們再使用<code>readLines(file(hospital_path,encoding=&quot;BIG5&quot;),n=6)</code>試試看。如果看到警告（warning）訊息，即代表這份檔案並非UTF-8編碼，因而導致的小錯誤。</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">readLines</span>(<span class="kw">file</span>(hospital_path, <span class="dt">encoding =</span> <span class="st">&quot;BIG5&quot;</span>), <span class="dt">n =</span> <span class="dv">6</span>)</code></pre></div>
+<p>接著我們再使用<code>readLines(file(hospital_path, encoding = &amp;quot;BIG5&amp;quot;), n = 6)</code>試試看。 如果看到警告（warning）訊息，即代表這份檔案並非UTF-8編碼，因而導致的小錯誤。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">readLines</span>(<span class="kw">file</span>(hospital_path, <span class="dt">encoding =</span> &amp;quot;BIG5&amp;quot;), <span class="dt">n =</span> <span class="dv">6</span>)</code></pre></div>
 </div>
 <div id="-9" class="section level2">
 <h2>關卡 9</h2>
@@ -184,16 +184,16 @@ Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">
 <div id="-11" class="section level2">
 <h2>關卡 11</h2>
 <p>接著請同學依照在RBasic-07中所學到的技巧，用<code>read.table</code>和<code>file</code>兩個函數的組合，並適當的設定<code>sep</code>、<code>header</code>和<code>encoding</code>等參數，將<code>hospital_path</code>的內容存到<code>hospital</code>之中。</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">hospital &lt;-<span class="st"> </span><span class="kw">.read.table.big5</span>(hospital_path, <span class="dt">header =</span> <span class="ot">TRUE</span>, <span class="dt">sep =</span> <span class="st">&quot;,&quot;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">hospital &amp;lt;-<span class="st"> </span><span class="kw">.read.table.big5</span>(hospital_path, <span class="dt">header =</span> <span class="ot">TRUE</span>, <span class="dt">sep =</span> &amp;quot;,&amp;quot;)</code></pre></div>
 </div>
 <div id="-12" class="section level2">
 <h2>關卡 12</h2>
-<p>如果希望從欄位YEARYY中擷取出資料的年份。我們先看看名稱為YEARYY這欄，請同學自hospital中選出YEARYY欄位。（同學可以使用<code>[[</code>、或<code>$</code>搭配名稱或是欄位順序）</p>
+<p>如果希望從欄位YEARYY中擷取出資料的年份。 我們先看看名稱為YEARYY這欄，請同學自hospital中選出YEARYY欄位。 （同學可以使用<code>[[</code>、或<code>$</code>搭配名稱或是欄位順序）</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">hospital$YEARYY</code></pre></div>
 </div>
 <div id="-13" class="section level2">
 <h2>關卡 13</h2>
-<p>有時候，觀察到太大量的資料可能會對R、電腦帶來大量的負荷，同時也對我們沒有意義。因為我們能同時處理的資料量是有限的。這部份建議同學可以用<code>head</code>這個函數篩選出資料的前6列做觀察。</p>
+<p>有時候，觀察到太大量的資料可能會對R 、電腦帶來大量的負荷，同時也對我們沒有意義。 因為我們能同時處理的資料量是有限的。 這部份建議同學可以用<code>head</code>這個函數篩選出資料的前6 列做觀察。</p>
 </div>
 <div id="-14" class="section level2">
 <h2>關卡 14</h2>
@@ -202,7 +202,7 @@ Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">
 </div>
 <div id="-15" class="section level2">
 <h2>關卡 15</h2>
-<p>Levels上的資訊顯示，年份的資訊，可能位於前兩個或前三個數字。如果都是兩個數字的話，我們可以透過<code>substring</code>函數直接擷取字串中的段落。請同學輸入：<code>?substring</code>先看看substring函數的說明文件。</p>
+<p>Levels上的資訊顯示，年份的資訊，可能位於前兩個或前三個數字。 如果都是兩個數字的話，我們可以透過<code>substring</code>函數直接擷取字串中的段落。 請同學輸入：<code>?substring</code>先看看substring函數的說明文件。</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">?substring</code></pre></div>
 </div>
 <div id="-16" class="section level2">
@@ -212,16 +212,16 @@ Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">
 </div>
 <div id="-17" class="section level2">
 <h2>關卡 17</h2>
-<p>R的<code>substring</code>函數可以將<code>text</code>參數代表的字串中，依照字符的位置，擷取出中間的段落。舉例來說，<code>substring(&quot;abc&quot;,1,2)</code>就會擷取出“abc”中第1個字母到第2個字母的段落，也就是“ab”。而<code>substring</code>也是向量式的函數。請同學輸入<code>substring(head(hospital$YEARYY),1,3)</code>看看前6筆數據經過R的<code>substring</code>函數處理之後的結果。</p>
+<p>R 的<code>substring</code>函數可以將<code>text</code>參數代表的字串中，依照字符的位置，擷取出中間的段落。 舉例來說，<code>substring(&amp;quot;abc&amp;quot;, 1, 2)</code>就會擷取出“abc”中第1 個字母到第2 個字母的段落，也就是“ab”。 而<code>substring</code>也是向量式的函數。 請同學輸入<code>substring(head(hospital$YEARYY), 1, 3)</code>看看前6 筆數據經過R 的<code>substring</code>函數處理之後的結果。</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">substring</span>(<span class="kw">head</span>(hospital$YEARYY), <span class="dv">1</span>, <span class="dv">3</span>)</code></pre></div>
 </div>
 <div id="-18" class="section level2">
 <h2>關卡 18</h2>
-<p>有時候這樣的作法就夠了，可惜在現在的狀況不適合。因為年度可能是2位數也可能是3位數。</p>
+<p>有時候這樣的作法就夠了，可惜在現在的狀況不適合。 因為年度可能是2 位數也可能是3 位數。</p>
 </div>
 <div id="-19" class="section level2">
 <h2>關卡 19</h2>
-<p>另外一種想法則是拿<code>&quot;Q&quot;</code>當做定位點。我們如果利用<code>&quot;Q&quot;</code>把字串分割成兩部份，第一部份就是我們需要的年份了。在R中，可以運用函數<code>strsplit</code>達到這個目的。請同學打開<code>strsplit</code>的說明文件。</p>
+<p>另外一種想法則是拿<code>&amp;quot;Q&amp;quot;</code>當做定位點。 我們如果利用<code>&amp;quot;Q&amp;quot;</code>把字串分割成兩部份，第一部份就是我們需要的年份了。 在R 中，可以運用函數<code>strsplit</code>達到這個目的。 請同學打開<code>strsplit</code>的說明文件。</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">?strsplit</code></pre></div>
 </div>
 <div id="-20" class="section level2">
@@ -231,13 +231,13 @@ Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">
 </div>
 <div id="-21" class="section level2">
 <h2>關卡 21</h2>
-<p>根據說明文件，<code>strsplit</code>會利用<code>split</code>參數來切割<code>x</code>字串，並回傳一個<code>list</code>。因為<code>x</code>的長度可能超過1，而<code>strsplit</code>會用<code>split</code>去切割每一個<code>x</code>的元素。而切割出來的結果，第一個元素可能切出兩段，但是第二個元素可能只切出一段。所以R使用<code>list</code>這個結構來處理。但是<code>strsplit</code>並不接受factor參數，只接受字串向量。因此請同學用：<code>yearyy&lt;-as.character(hospital$YEARYY)</code>將資料存到<code>yearyy</code>這個變數中。</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">yearyy &lt;-<span class="st"> </span><span class="kw">as.character</span>(hospital$YEARYY)</code></pre></div>
+<p>根據說明文件，<code>strsplit</code>會利用<code>split</code>參數來切割<code>x</code>字串，並回傳一個<code>list</code>。 因為<code>x</code>的長度可能超過1 ，而<code>strsplit</code>會用<code>split</code>去切割每一個<code>x</code>的元素。 而切割出來的結果，第一個元素可能切出兩段，但是第二個元素可能只切出一段。 所以R 使用<code>list</code>這個結構來處理。 但是<code>strsplit</code>並不接受factor參數，只接受字串向量。 因此請同學用：<code>yearyy &amp;lt;- as.character(hospital$YEARYY)</code>將資料存到<code>yearyy</code>這個變數中。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">yearyy &amp;lt;-<span class="st"> </span><span class="kw">as.character</span>(hospital$YEARYY)</code></pre></div>
 </div>
 <div id="-22" class="section level2">
 <h2>關卡 22</h2>
-<p>接著請同學輸入：<code>tmp&lt;-strsplit(yearyy,&quot;Q&quot;)</code>，把切割的結果儲存到<code>tmp</code>這個變數。</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">tmp &lt;-<span class="st"> </span><span class="kw">strsplit</span>(yearyy, <span class="st">&quot;Q&quot;</span>)</code></pre></div>
+<p>接著請同學輸入：<code>tmp &amp;lt;- strsplit(yearyy, &amp;quot;Q&amp;quot;)</code>，把切割的結果儲存到<code>tmp</code>這個變數。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">tmp &amp;lt;-<span class="st"> </span><span class="kw">strsplit</span>(yearyy, &amp;quot;Q&amp;quot;)</code></pre></div>
 </div>
 <div id="-23" class="section level2">
 <h2>關卡 23</h2>
@@ -246,11 +246,11 @@ Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">
 </div>
 <div id="-24" class="section level2">
 <h2>關卡 24</h2>
-<p>這時，同學會看到裝著許多字串向量的list。這樣的list，甚至是更複雜的結構，都是在處理文字資料時經常遇到的。</p>
+<p>這時，同學會看到裝著許多字串向量的list。 這樣的list，甚至是更複雜的結構，都是在處理文字資料時經常遇到的。</p>
 </div>
 <div id="-25" class="section level2">
 <h2>關卡 25</h2>
-<p>由於我們需要的是在<code>&quot;Q&quot;</code>之前的文字，而在經過<code>strsplit</code>處理後，這些文字會在每個list元素的第一個。請同學先用<code>[[</code>拿出tmp的第一個字串向量元素，然後用<code>[</code>拿出這個字串向量的第一個值。該值即為第一筆資料的年度。</p>
+<p>由於我們需要的是在<code>&amp;quot;Q&amp;quot;</code>之前的文字，而在經過<code>strsplit</code>處理後，這些文字會在每個list元素的第一個。 請同學先用<code>[[</code>拿出tmp的第一個字串向量元素，然後用<code>[</code>拿出這個字串向量的第一個值。 該值即為第一筆資料的年度。</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">tmp[[<span class="dv">1</span>]][<span class="dv">1</span>]</code></pre></div>
 </div>
 <div id="-26" class="section level2">
@@ -264,25 +264,25 @@ Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">
 </div>
 <div id="-28" class="section level2">
 <h2>關卡 28</h2>
-<p>顯然一個一個處理是不可行的。而R中當然有針對這種狀況的解法。首先請先觀察看看<code>tmp[[1]][1]</code>、<code>tmp[[2]][1]</code>、<code>tmp[[3]][1]</code>有什麼共通性？一種觀點是，我們需要對<code>tmp</code>的每一個元素進行<code>[1]</code>的操作。</p>
+<p>顯然一個一個處理是不可行的。而R 中當然有針對這種狀況的解法。 首先請先觀察看看<code>tmp[[1]][1]</code>、<code>tmp[[2]][1]</code>、<code>tmp[[3]][1]</code>有什麼共通性？ 一種觀點是，我們需要對<code>tmp</code>的每一個元素進行<code>[1]</code>的操作。</p>
 </div>
 <div id="-29" class="section level2">
 <h2>關卡 29</h2>
-<p>這樣的需求，在parsing時是十分常見的。所以R提供了<code>lapply</code>這個函數。請同學先打開<code>lapply</code>的說明文件。</p>
+<p>這樣的需求，在parsing時是十分常見的。 所以R 提供了<code>lapply</code>這個函數。 請同學先打開<code>lapply</code>的說明文件。</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">?lapply</code></pre></div>
 </div>
 <div id="-30" class="section level2">
 <h2>關卡 30</h2>
-<p>R的<code>lapply</code>是同第一個接觸到的進階函數。請問同學，下列哪一個不是<code>lapply</code>的參數？</p>
+<p>R 的<code>lapply</code>是同第一個接觸到的進階函數。 請問同學，下列哪一個不是<code>lapply</code>的參數？</p>
 <p>Y</p>
 </div>
 <div id="-31" class="section level2">
 <h2>關卡 31</h2>
-<p><code>lapply</code>的第一個參數<code>X</code>通常是一個vector。第二個參數<code>FUN</code>則是代表一種「動作」。<code>lapply</code>會對每一個<code>X</code>的元素進行<code>FUN</code>所定義的動作，並且把結果彙整回R之中。</p>
+<p><code>lapply</code>的第一個參數<code>X</code>通常是一個vector。 第二個參數<code>FUN</code>則是代表一種「動作」。 <code>lapply</code>會對每一個<code>X</code>的元素進行<code>FUN</code>所定義的動作，並且把結果彙整回R 之中。</p>
 </div>
 <div id="-32" class="section level2">
 <h2>關卡 32</h2>
-<p>如果想要對<code>tmp</code>的每一個元素進行<code>[1]</code>的操作。根據上述的解釋，<code>lapply</code>的<code>X</code>參數應該要填入什麼呢？</p>
+<p>如果想要對<code>tmp</code>的每一個元素進行<code>[1]</code>的操作。 根據上述的解釋，<code>lapply</code>的<code>X</code>參數應該要填入什麼呢？</p>
 <p>tmp</p>
 </div>
 <div id="-33" class="section level2">
@@ -292,65 +292,65 @@ Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">
 </div>
 <div id="-34" class="section level2">
 <h2>關卡 34</h2>
-<p>課程進行至此，再解釋一遍給還沒完全理解的同學。最一開始我們希望產生的結果，會等於：<code>c(tmp[[1]][1],tmp[[2]][1],tmp[[3]][1],...)</code>，在這樣的運算中，第一個<code>[[1]]</code>、<code>[[2]]</code>、<code>[[3]]</code>是變動的，代表著從<code>tmp</code>中拿出第一個元素、第二個元素和第三個元素等等。而<code>[1]</code>則是不變的動作。</p>
+<p>課程進行至此，再解釋一遍給還沒完全理解的同學。 最一開始我們希望產生的結果，會等於：<code>c(tmp[[1]][1], tmp[[2]][1], tmp[[3]][1], ...)</code>， 在這樣的運算中，第一個<code>[[1]]</code>、<code>[[2]]</code>、<code>[[3]]</code>是變動的，代表著從<code>tmp</code>中拿出第一個元素、第二個元素和第三個元素等等。 而<code>[1]</code>則是不變的動作。</p>
 </div>
 <div id="-35" class="section level2">
 <h2>關卡 35</h2>
-<p>因此<code>lapply</code>的第一個參數<code>X</code>放的是<code>tmp</code>，代表著：<code>c(FUN(tmp[[1]]),FUN(tmp[[2]]),FUN(tmp[[3]]),...)</code>，而此刻我們希望<code>FUN</code>作出<code>[1]</code>的動作。然而，<code>lapply(tmp,[1])</code>這種語法是不合邏輯的。</p>
+<p>因此<code>lapply</code>的第一個參數<code>X</code>放的是<code>tmp</code>，代表著：<code>c(FUN(tmp[[1]]), FUN(tmp[[2]]), FUN(tmp[[3]]), ...)</code>，而此刻我們希望<code>FUN</code>作出<code>[1]</code>的動作。 然而，<code>lapply(tmp, [1])</code>這種語法是不合邏輯的。</p>
 </div>
 <div id="-36" class="section level2">
 <h2>關卡 36</h2>
-<p>在R中，所有的動作都是函數。同理，<code>[1]</code>在R中其實也是一個名叫<code>[</code>的函數。</p>
+<p>在R 中，所有的動作都是函數。同理，<code>[1]</code>在R 中其實也是一個名叫<code>[</code>的函數。</p>
 </div>
 <div id="-37" class="section level2">
 <h2>關卡 37</h2>
-<p>因為這個函數比較特別，所以我們使用<code>lapply(tmp,&quot;[&quot;,1)</code>這個語法來取出<code>tmp</code>中每個元素（字串向量）的第一個欄位。請同學試試看。</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">lapply</span>(tmp, <span class="st">&quot;[&quot;</span>, <span class="dv">1</span>)</code></pre></div>
+<p>因為這個函數比較特別，所以我們使用<code>lapply(tmp, &amp;quot;[&amp;quot;, 1)</code>這個語法來取出<code>tmp</code>中每個元素（字串向量）的第一個欄位。 請同學試試看。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">lapply</span>(tmp, &amp;quot;[&amp;quot;, <span class="dv">1</span>)</code></pre></div>
 </div>
 <div id="-38" class="section level2">
 <h2>關卡 38</h2>
-<p>如果我們要取出<code>tmp</code>中每個元素（字串向量）的第二個欄位，可以用：<code>lapply(tmp,&quot;[&quot;,2)</code>取得，請同學試試看。</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">lapply</span>(tmp, <span class="st">&quot;[&quot;</span>, <span class="dv">2</span>)</code></pre></div>
+<p>如果我們要取出<code>tmp</code>中每個元素（字串向量）的第二個欄位，可以用：<code>lapply(tmp, &amp;quot;[&amp;quot;, 2)</code>取得，請同學試試看。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">lapply</span>(tmp, &amp;quot;[&amp;quot;, <span class="dv">2</span>)</code></pre></div>
 </div>
 <div id="-39" class="section level2">
 <h2>關卡 39</h2>
-<p>到目前為止，同學學到<code>X</code>和<code>FUN</code>這兩個參數在<code>lapply</code>中扮演的角色。但是最後一個<code>...</code>的參數是什麼意思呢？因為<code>lapply</code>並不清楚執行<code>FUN</code>需要什麼樣的參數，所以使用者可以在指定<code>X</code>和<code>FUN</code>之後，放入任意的參數，而這些參數並不是由<code>lapply</code>所使用，而是由<code>FUN</code>所使用。</p>
+<p>到目前為止，同學學到<code>X</code>和<code>FUN</code>這兩個參數在<code>lapply</code>中扮演的角色。 但是最後一個<code>...</code>的參數是什麼意思呢？ 因為<code>lapply</code>並不清楚執行<code>FUN</code>需要什麼樣的參數，所以使用者可以在指定<code>X</code>和<code>FUN</code>之後，放入任意的參數， 而這些參數並不是由<code>lapply</code>所使用，而是由<code>FUN</code>所使用。</p>
 </div>
 <div id="-40" class="section level2">
 <h2>關卡 40</h2>
-<p>所以<code>lapply(tmp,&quot;[&quot;,1)</code>中的第三個參數<code>1</code>就會透過<code>lapply</code>轉交給<code>[</code>。如此一來，R就可以知道要從<code>tmp</code>的每個元素中拿出第<strong>1</strong>個元素。</p>
+<p>所以<code>lapply(tmp, &amp;quot;[&amp;quot;, 1)</code>中的第三個參數<code>1</code>就會透過<code>lapply</code>轉交給<code>[</code>。 如此一來，R 就可以知道要從<code>tmp</code>的每個元素中拿出第<strong>1</strong>個元素。</p>
 </div>
 <div id="-41" class="section level2">
 <h2>關卡 41</h2>
-<p>同理，<code>lapply(tmp,&quot;[&quot;,2)</code>的第三個參數<code>2</code>透過<code>lapply</code>轉交給<code>[</code>後，R就會知道要從<code>tmp</code>的每個元素中拿出第<strong>2</strong>個元素。</p>
+<p>同理，<code>lapply(tmp, &amp;quot;[&amp;quot;, 2)</code>的第三個參數<code>2</code>透過<code>lapply</code>轉交給<code>[</code>後，R 就會知道要從<code>tmp</code>的每個元素中拿出第<strong>2</strong>個元素。</p>
 </div>
 <div id="-42" class="section level2">
 <h2>關卡 42</h2>
-<p>接著請教同學，<code>lapply(tmp,&quot;[&quot;,1)</code>的輸出結果是什麼型態呢？</p>
+<p>接著請教同學，<code>lapply(tmp, &amp;quot;[&amp;quot;, 1)</code>的輸出結果是什麼型態呢？</p>
 <p>list</p>
 </div>
 <div id="-43" class="section level2">
 <h2>關卡 43</h2>
-<p>list型態對於後續的處理還是比較麻煩的。因此在輸出時，通常會希望能夠將轉換為字串向量。其中一種做法是透過<code>unlist</code>把<code>lapply</code>所輸出的<code>list</code>拆開。請同學試試看先輸入：<code>tmp2&lt;-lapply(tmp,&quot;[&quot;,1)</code>，並將結果儲存到<code>tmp2</code>這個變數。</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">tmp2 &lt;-<span class="st"> </span><span class="kw">lapply</span>(tmp, <span class="st">&quot;[&quot;</span>, <span class="dv">1</span>)</code></pre></div>
+<p>list型態對於後續的處理還是比較麻煩的。 因此在輸出時，通常會希望能夠將轉換為字串向量。 其中一種做法是透過<code>unlist</code>把<code>lapply</code>所輸出的<code>list</code>拆開。 請同學試試看先輸入：<code>tmp2 &amp;lt;- lapply(tmp, &amp;quot;[&amp;quot;, 1)</code>，並將結果儲存到<code>tmp2</code>這個變數。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">tmp2 &amp;lt;-<span class="st"> </span><span class="kw">lapply</span>(tmp, &amp;quot;[&amp;quot;, <span class="dv">1</span>)</code></pre></div>
 </div>
 <div id="-44" class="section level2">
 <h2>關卡 44</h2>
-<p>接著，我們可以使用<code>unlist(tmp2)</code>取得字串向量了。請同學試試看。</p>
+<p>接著，我們可以使用<code>unlist(tmp2)</code>取得字串向量了。 請同學試試看。</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">unlist</span>(tmp2)</code></pre></div>
 </div>
 <div id="-45" class="section level2">
 <h2>關卡 45</h2>
-<p>另外一種方式是使用<code>sapply</code>這個函數。<code>sapply</code>和<code>lapply</code>幾乎一樣，差別在於<code>sapply</code>最後會嘗試重新整理輸出的格式，將list轉成array。請同學試試<code>sapply(tmp,&quot;[&quot;,1)</code>。</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sapply</span>(tmp, <span class="st">&quot;[&quot;</span>, <span class="dv">1</span>)</code></pre></div>
+<p>另外一種方式是使用<code>sapply</code>這個函數。 <code>sapply</code>和<code>lapply</code>幾乎一樣，差別在於<code>sapply</code>最後會嘗試重新整理輸出的格式，將list轉成array。 請同學試試<code>sapply(tmp, &amp;quot;[&amp;quot;, 1)</code>。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sapply</span>(tmp, &amp;quot;[&amp;quot;, <span class="dv">1</span>)</code></pre></div>
 </div>
 <div id="-46" class="section level2">
 <h2>關卡 46</h2>
-<p>以上示範的技巧在實務的應用中很常被使用到。當我們想要從文字中擷取出資訊時，都可以優先考慮運用<code>substring</code>或<code>strsplit</code>來擷取資訊。而當R將資訊轉成非結構化的list物件後，可以運用<code>lapply</code>或<code>sapply</code>做資料的整理。</p>
+<p>以上示範的技巧在實務的應用中很常被使用到。 當我們想要從文字中擷取出資訊時，都可以優先考慮運用<code>substring</code>或<code>strsplit</code>來擷取資訊。 而當R 將資訊轉成非結構化的list物件後，可以運用<code>lapply</code>或<code>sapply</code>做資料的整理。</p>
 </div>
 <div id="-47" class="section level2">
 <h2>關卡 47</h2>
-<p>事實上，如果同學能夠撰寫R的函數，就可以適當的將<code>lapply</code>與<code>sapply</code>作組合，更能有效率的整理資料。</p>
+<p>事實上，如果同學能夠撰寫R 的函數，就可以適當的將<code>lapply</code>與<code>sapply</code>作組合，更能有效率的整理資料。</p>
 </div>
 <div id="-48" class="section level2">
 <h2>關卡 48</h2>

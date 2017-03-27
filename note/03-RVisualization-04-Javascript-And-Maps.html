@@ -138,12 +138,12 @@ Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">
 </noscript>
 <div id="-1" class="section level2">
 <h2>關卡 1</h2>
-<p>大家好，本堂課主要跟大家解說，如何在R裡面處理新時代的互動式繪圖與新型態的數據。</p>
+<p>大家好，本堂課主要跟大家解說，如何在R 裡面處理新時代的互動式繪圖與新型態的數據。</p>
 </div>
 <div id="-2" class="section level2">
 <h2>關卡 2</h2>
-<p>我們會介紹的是googleVis套件。請同學安裝googleVis</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">check_then_install</span>(<span class="st">&quot;googleVis&quot;</span>, <span class="st">&quot;0.5.10&quot;</span>)</code></pre></div>
+<p>我們會介紹的是googleVis套件。 請同學安裝googleVis</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">check_then_install</span>(&amp;quot;googleVis&amp;quot;, &amp;quot;<span class="fl">0.5.10</span>&amp;quot;)</code></pre></div>
 </div>
 <div id="-3" class="section level2">
 <h2>關卡 3</h2>
@@ -152,17 +152,17 @@ Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">
 </div>
 <div id="-4" class="section level2">
 <h2>關卡 4</h2>
-<p>同學請打開<code>vignette(&quot;googleVis_examples&quot;,package=&quot;googleVis&quot;)</code>，我們簡單用這個文件做範例。</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">vignette</span>(<span class="st">&quot;googleVis_examples&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;googleVis&quot;</span>)</code></pre></div>
+<p>同學請打開<code>vignette(&amp;quot;googleVis_examples&amp;quot;, package = &amp;quot;googleVis&amp;quot;)</code>， 我們簡單用這個文件做範例。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">vignette</span>(&amp;quot;googleVis_examples&amp;quot;, <span class="dt">package =</span> &amp;quot;googleVis&amp;quot;)</code></pre></div>
 </div>
 <div id="-5" class="section level2">
 <h2>關卡 5</h2>
-<p>在第一章Linechart的部份，同學可以把滑鼠移動到線上。這就是用網頁技術做視覺化的好處：圖形可以「直接」跟使用者互動，而不需要透過程式碼。</p>
+<p>在第一章Line chart的部份，同學可以把滑鼠移動到線上。 這就是用網頁技術做視覺化的好處：圖形可以「直接」跟使用者互動，而不需要透過程式碼。</p>
 </div>
 <div id="-6" class="section level2">
 <h2>關卡 6</h2>
-<p>然而googleVis的API設計，需要我們完全自行整理資料。因此我們得先載入<code>dplyr</code>。請同學安裝<code>dplyr</code>或是輸入skip()跳過。</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">check_then_install</span>(<span class="st">&quot;dplyr&quot;</span>, <span class="st">&quot;0.4.3&quot;</span>)</code></pre></div>
+<p>然而googleVis的API設計，需要我們完全自行整理資料。 因此我們得先載入<code>dplyr</code>。 請同學安裝<code>dplyr</code>或是輸入skip()跳過。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">check_then_install</span>(&amp;quot;dplyr&amp;quot;, &amp;quot;<span class="fl">0.4.3</span>&amp;quot;)</code></pre></div>
 </div>
 <div id="-7" class="section level2">
 <h2>關卡 7</h2>
@@ -171,13 +171,13 @@ Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">
 </div>
 <div id="-8" class="section level2">
 <h2>關卡 8</h2>
-<p>請同學輸入：<code>dat1&lt;-group_by(hsb,race,sex)%&gt;%summarise(math.avg=mean(math))</code>。</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dat1 &lt;-<span class="st"> </span><span class="kw">group_by</span>(hsb, race, sex) %&gt;%<span class="st"> </span><span class="kw">summarise</span>(<span class="dt">math.avg =</span> <span class="kw">mean</span>(math))</code></pre></div>
+<p>請同學輸入： <code>dat1 &amp;lt;- group_by(hsb, race, sex) %&amp;gt;% summarise(math.avg = mean(math))</code>。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dat1 &amp;lt;-<span class="st"> </span><span class="kw">group_by</span>(hsb, race, sex) %&amp;gt;%<span class="st"> </span><span class="kw">summarise</span>(<span class="dt">math.avg =</span> <span class="kw">mean</span>(math))</code></pre></div>
 </div>
 <div id="-9" class="section level2">
 <h2>關卡 9</h2>
-<p>接著我們輸入：<code>g&lt;-gvisBarChart(dat1)</code>建立一個gvis物件。如果同學探索這個物件，會發現它是一個網頁的HTML。</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">g &lt;-<span class="st"> </span><span class="kw">gvisBarChart</span>(dat1)</code></pre></div>
+<p>接著我們輸入：<code>g &amp;lt;- gvisBarChart(dat1)</code>建立一個gvis物件。 如果同學探索這個物件，會發現它是一個網頁的HTML。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">g &amp;lt;-<span class="st"> </span><span class="kw">gvisBarChart</span>(dat1)</code></pre></div>
 </div>
 <div id="-10" class="section level2">
 <h2>關卡 10</h2>
@@ -186,12 +186,12 @@ Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">
 </div>
 <div id="-11" class="section level2">
 <h2>關卡 11</h2>
-<p>同學的電腦瀏覽器中會打開一個網頁，上面繪製著一份barchart。如果我們把滑鼠移上去，還會跳出確切的值。</p>
+<p>同學的電腦瀏覽器中會打開一個網頁，上面繪製著一份barchart。 如果我們把滑鼠移上去，還會跳出確切的值。</p>
 </div>
 <div id="-12" class="section level2">
 <h2>關卡 12</h2>
-<p>然而，gvisBarChart接收資料的邏輯和dplyr所整理出的資料不太一致。gvisBarChart將操作顏色的類別，放在data.frame的column方向。因此，我們需要用一個可以快速做轉換的套件。請同學輸入<code>skip()</code>檢查是否有安裝reshape2套件。若無，課程會自動安裝該套件。</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">check_then_install</span>(<span class="st">&quot;reshape2&quot;</span>, <span class="st">&quot;1.4.1&quot;</span>)</code></pre></div>
+<p>然而，gvisBarChart接收資料的邏輯和dplyr所整理出的資料不太一致。 gvisBarChart將操作顏色的類別，放在data.frame的column方向。 因此，我們需要用一個可以快速做轉換的套件。 請同學輸入<code>skip()</code>檢查是否有安裝reshape2套件。 若無，課程會自動安裝該套件。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">check_then_install</span>(&amp;quot;reshape2&amp;quot;, &amp;quot;<span class="fl">1.4.1</span>&amp;quot;)</code></pre></div>
 </div>
 <div id="-13" class="section level2">
 <h2>關卡 13</h2>
@@ -200,7 +200,7 @@ Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">
 </div>
 <div id="-14" class="section level2">
 <h2>關卡 14</h2>
-<p>接著我們執行：<code>dcast(dat1,race~sex)</code>。</p>
+<p>接著我們執行：<code>dcast(dat1, race ~ sex)</code>。</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dcast</span>(dat1, race ~<span class="st"> </span>sex)</code></pre></div>
 </div>
 <div id="-15" class="section level2">
@@ -209,8 +209,8 @@ Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">
 </div>
 <div id="-16" class="section level2">
 <h2>關卡 16</h2>
-<p>讓我們把這筆資料提供給gvisBarChart後呈現在網頁上。請同學輸入：<code>dcast(dat1,race~sex)%&gt;%gvisBarChart()%&gt;%plot()</code>。</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dcast</span>(dat1, race ~<span class="st"> </span>sex) %&gt;%<span class="st"> </span><span class="kw">gvisBarChart</span>() %&gt;%<span class="st"> </span><span class="kw">plot</span>()</code></pre></div>
+<p>讓我們把這筆資料提供給gvisBarChart後呈現在網頁上。 請同學輸入：<code>dcast(dat1, race ~ sex) %&amp;gt;% gvisBarChart() %&amp;gt;% plot()</code>。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dcast</span>(dat1, race ~<span class="st"> </span>sex) %&amp;gt;%<span class="st"> </span><span class="kw">gvisBarChart</span>() %&amp;gt;%<span class="st"> </span><span class="kw">plot</span>()</code></pre></div>
 </div>
 <div id="-17" class="section level2">
 <h2>關卡 17</h2>
@@ -218,52 +218,52 @@ Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">
 </div>
 <div id="-18" class="section level2">
 <h2>關卡 18</h2>
-<p>接著我們挑出read和math做scatterplot。請同學輸入：<code>select(hsb,read,math)%&gt;%gvisScatterChart()%&gt;%plot()</code>。</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">select</span>(hsb, read, math) %&gt;%<span class="st"> </span><span class="kw">gvisScatterChart</span>() %&gt;%<span class="st"> </span><span class="kw">plot</span>()</code></pre></div>
+<p>接著我們挑出read和math做scatter plot。 請同學輸入：<code>select(hsb, read, math) %&amp;gt;% gvisScatterChart() %&amp;gt;% plot()</code>。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">select</span>(hsb, read, math) %&amp;gt;%<span class="st"> </span><span class="kw">gvisScatterChart</span>() %&amp;gt;%<span class="st"> </span><span class="kw">plot</span>()</code></pre></div>
 </div>
 <div id="-19" class="section level2">
 <h2>關卡 19</h2>
-<p>目前googleVis整合了googleChartAPI，提供了許多功能。但是和ggplot2相比，它的功能仍是相對簡單。googleVis這類套件帶給R社群的影響，是讓大家了解javascriptbased的繪圖引擎所帶來的可能性。</p>
+<p>目前googleVis整合了google Chart API，提供了許多功能。 但是和ggplot2相比，它的功能仍是相對簡單。 googleVis這類套件帶給R社群的影響，是讓大家了解javascript based的繪圖引擎所帶來的可能性。</p>
 </div>
 <div id="-20" class="section level2">
 <h2>關卡 20</h2>
-<p>傳統的視覺化工具需要使用者與R互動，技術門檻很高。但是javascript等網頁技術則可以大幅度的降低這類技術門檻。</p>
+<p>傳統的視覺化工具需要使用者與R互動，技術門檻很高。 但是javascript等網頁技術則可以大幅度的降低這類技術門檻。</p>
 </div>
 <div id="-21" class="section level2">
 <h2>關卡 21</h2>
-<p>因此，現在R與javascript整合的套件可說是百花齊放，可惜目前為止我還沒有注意到有一套像ggplot2一樣有代表性的套件出現。</p>
+<p>因此，現在R 與javascript整合的套件可說是百花齊放，可惜目前為止我還沒有注意到有一套像ggplot2一樣有代表性的套件出現。</p>
 </div>
 <div id="-22" class="section level2">
 <h2>關卡 22</h2>
-<p>googleVis也帶來了傳統R所沒有提供的繪圖類型。例如：SankeyDiagram。</p>
+<p>googleVis也帶來了傳統R所沒有提供的繪圖類型。例如：Sankey Diagram。</p>
 </div>
 <div id="-23" class="section level2">
 <h2>關卡 23</h2>
-<p>請同學輸入：<code>gvisSankey(dat_sk)%&gt;%plot()</code>。</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">gvisSankey</span>(dat_sk) %&gt;%<span class="st"> </span><span class="kw">plot</span>()</code></pre></div>
+<p>請同學輸入：<code>gvisSankey(dat_sk) %&amp;gt;% plot()</code>。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">gvisSankey</span>(dat_sk) %&amp;gt;%<span class="st"> </span><span class="kw">plot</span>()</code></pre></div>
 </div>
 <div id="-24" class="section level2">
 <h2>關卡 24</h2>
-<p>這張圖描述了兩個state之間的流動。舉例來說，如果我們知道去年購買不同品牌筆電的消費者，今年各自是買哪一個品牌的筆電，那透過分析品牌間的數據變化，我們就可以利用SankeyDiagram來觀察變化的細節。</p>
+<p>這張圖描述了兩個state之間的流動。 舉例來說，如果我們知道去年購買不同品牌筆電的消費者，今年各自是買哪一個品牌的筆電，那透過分析品牌間的數據變化，我們就可以利用Sankey Diagram來觀察變化 的細節。</p>
 </div>
 <div id="-25" class="section level2">
 <h2>關卡 25</h2>
-<p>接著，請同學輸入：<code>gvisCalendar(TWII)%&gt;%plot</code>。</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">gvisCalendar</span>(TWII) %&gt;%<span class="st"> </span>plot</code></pre></div>
+<p>接著，請同學輸入： <code>gvisCalendar(TWII) %&amp;gt;% plot</code>。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">gvisCalendar</span>(TWII) %&amp;gt;%<span class="st"> </span>plot</code></pre></div>
 </div>
 <div id="-26" class="section level2">
 <h2>關卡 26</h2>
-<p>這是拿台股指數搭配googleVis提供的月曆API所繪製的圖。我們可以從中清楚的看到台股停止交易(或是yahoo沒有抓到資料)的日期，大部份為週末。這類和人的活動很相關的資料，使用googleVis進行呈現，會比直接用傳統的linechart還要容易發現數據和周末等日期之間的相關性。</p>
+<p>這是拿台股指數搭配googleVis提供的月曆API所繪製的圖。 我們可以從中清楚的看到台股停止交易(或是yahoo沒有抓到資料)的日期，大部份為週末。 這類和人的活動很相關的資料，使用googleVis進行呈現，會比直接用傳統的line chart還要容易發現數據和周末等日期之間的相關性。</p>
 </div>
 <div id="-27" class="section level2">
 <h2>關卡 27</h2>
-<p>還有其他範例，如：<code>gvisOrgChart(Regions)%&gt;%plot</code>則是拿來繪製組織圖的選擇。</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">gvisOrgChart</span>(Regions) %&gt;%<span class="st"> </span>plot</code></pre></div>
+<p>還有其他範例，如：<code>gvisOrgChart(Regions) %&amp;gt;% plot</code>則是拿來繪製組織圖的選擇。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">gvisOrgChart</span>(Regions) %&amp;gt;%<span class="st"> </span>plot</code></pre></div>
 </div>
 <div id="-28" class="section level2">
 <h2>關卡 28</h2>
-<p>接著我們介紹ggmap這個可以處理地理資料的套件。請同學輸入<code>skip()</code>檢查有無安裝ggmap。</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">check_then_install</span>(<span class="st">&quot;ggmap&quot;</span>, <span class="st">&quot;2.6.1&quot;</span>)</code></pre></div>
+<p>接著我們介紹ggmap這個可以處理地理資料的套件。 請同學輸入<code>skip()</code>檢查有無安裝ggmap。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">check_then_install</span>(&amp;quot;ggmap&amp;quot;, &amp;quot;<span class="fl">2.6.1</span>&amp;quot;)</code></pre></div>
 </div>
 <div id="-29" class="section level2">
 <h2>關卡 29</h2>
@@ -272,27 +272,27 @@ Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">
 </div>
 <div id="-30" class="section level2">
 <h2>關卡 30</h2>
-<p>eq是來自<a href="http://earthquake.usgs.gov" class="uri">http://earthquake.usgs.gov</a>所抓取的地震資料。請同學輸入<code>View(eq)</code>觀察一下這筆資料。</p>
+<p>eq是來自&lt;<a href="http://earthquake.usgs.gov%3E所抓取的地震資料" class="uri">http://earthquake.usgs.gov&gt;所抓取的地震資料</a>。 請同學輸入<code>View(eq)</code>觀察一下這筆資料。</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">View</span>(eq)</code></pre></div>
 </div>
 <div id="-31" class="section level2">
 <h2>關卡 31</h2>
-<p>同學可以看到，eq中有提供地震的位置(經緯度：longitude,latitude)和地震的規模(mag)。</p>
+<p>同學可以看到，eq中有提供地震的位置(經緯度：longitude, latitude)和地震的規模(mag)。</p>
 </div>
 <div id="-32" class="section level2">
 <h2>關卡 32</h2>
-<p>接著我們示範一次如何將地震畫在地圖中。首先我們要先從google拿到圖資。請同學輸入：<code>twmap&lt;-try(get_map(&quot;Taiwan&quot;,3),silent=TRUE)</code>。第一個參數是告訴google我們要抓取的圖資的位置。第二個參數則是地圖的範圍大小，值從3（世界規模）到21（建築物的規模）。</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">twmap &lt;-<span class="st"> </span><span class="kw">readRDS</span>(<span class="kw">.get_path</span>(<span class="st">&quot;twmap.Rds&quot;</span>))</code></pre></div>
+<p>接著我們示範一次如何將地震畫在地圖中。 首先我們要先從google拿到圖資。 請同學輸入：<code>twmap &amp;lt;- try(get_map(&amp;quot;Taiwan&amp;quot;, 3), silent = TRUE)</code>。 第一個參數是告訴google我們要抓取的圖資的位置。 第二個參數則是地圖的範圍大小，值從3（世界規模）到21（建築物的規模）。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">twmap &amp;lt;-<span class="st"> </span><span class="kw">readRDS</span>(<span class="kw">.get_path</span>(&amp;quot;twmap.Rds&amp;quot;))</code></pre></div>
 </div>
 <div id="-33" class="section level2">
 <h2>關卡 33</h2>
-<p>接著請同學輸入:<code>skip()</code>來確認圖資是否確實載入。</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">if (<span class="kw">class</span>(twmap)[<span class="dv">1</span>] ==<span class="st"> &quot;try-error&quot;</span>) twmap &lt;-<span class="st"> </span><span class="kw">readRDS</span>(<span class="kw">.get_path</span>(<span class="st">&quot;twmap.Rds&quot;</span>))</code></pre></div>
+<p>接著請同學輸入: <code>skip()</code>來確認圖資是否確實載入。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">if (<span class="kw">class</span>(twmap)[<span class="dv">1</span>] ==<span class="st"> </span><span class="er">&amp;</span>quot;try-error&amp;quot;) twmap &amp;lt;-<span class="st"> </span><span class="kw">readRDS</span>(<span class="kw">.get_path</span>(&amp;quot;twmap.Rds&amp;quot;))</code></pre></div>
 </div>
 <div id="-34" class="section level2">
 <h2>關卡 34</h2>
-<p>我們接著建立ggplot物件：<code>g&lt;-ggmap(twmap,extent=&quot;device&quot;)</code>。</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">g &lt;-<span class="st"> </span><span class="kw">ggmap</span>(twmap, <span class="dt">extent =</span> <span class="st">&quot;device&quot;</span>)</code></pre></div>
+<p>我們接著建立ggplot物件：<code>g &amp;lt;- ggmap(twmap, extent = &amp;quot;device&amp;quot;)</code>。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">g &amp;lt;-<span class="st"> </span><span class="kw">ggmap</span>(twmap, <span class="dt">extent =</span> &amp;quot;device&amp;quot;)</code></pre></div>
 </div>
 <div id="-35" class="section level2">
 <h2>關卡 35</h2>
@@ -301,12 +301,12 @@ Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">
 </div>
 <div id="-36" class="section level2">
 <h2>關卡 36</h2>
-<p>接著請同學輸入：<code>g+geom_point(aes(x=longitude,y=latitude),data=eq)</code>，來繪製新的圖層標示地震位置。</p>
+<p>接著請同學輸入：<code>g + geom_point(aes(x = longitude, y = latitude), data = eq)</code>， 來繪製新的圖層標示地震位置。</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">g +<span class="st"> </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">x =</span> longitude, <span class="dt">y =</span> latitude), <span class="dt">data =</span> eq)</code></pre></div>
 </div>
 <div id="-37" class="section level2">
 <h2>關卡 37</h2>
-<p>接著請同學輸入：<code>g+geom_point(aes(x=longitude,y=latitude,size=mag),data=eq)</code>，來用點的大小表示地震規模。</p>
+<p>接著請同學輸入：<code>g + geom_point(aes(x = longitude, y = latitude, size = mag), data = eq)</code>， 來用點的大小表示地震規模。</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">g +<span class="st"> </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">x =</span> longitude, <span class="dt">y =</span> latitude, <span class="dt">size =</span> mag), <span class="dt">data =</span> eq)</code></pre></div>
 </div>
 <div id="-38" class="section level2">
