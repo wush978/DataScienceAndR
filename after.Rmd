@@ -10,6 +10,14 @@ R 語言翻轉教室除了教R 之外，另外一個理念是想要教同學培�
 
 ## 閱讀專區
 
+### Taiwan R User Group 專區
+
+這裡紀錄許多社群分享的文章
+
+- [如何讓R與Java溝通 - rJava](http://programmermagazine.github.io/201308/htm/article5.html)
+- [R 講題分享 - 種類數的估計與預測](http://programmermagazine.github.io/201312/htm/article6.html)
+- [R 講題分享 – SpideR -- 用R自製網路爬蟲收集資料 (作者：Taiwan R User Group)](http://programmermagazine.github.io/201311/htm/article6.html)
+
 ### Wush 專區
 
 這裡紀錄了我個人有參與的R 相關著作
@@ -24,12 +32,4 @@ R 語言翻轉教室除了教R 之外，另外一個理念是想要教同學培�
 - [itertools簡介](http://wush.ghost.io/itertools-intro/)
 - [dplyr::group_by的進階應用](http://wush.ghost.io/dplyr_group_by/)
 - [R的除錯功能](http://wush.ghost.io/r-debug/)
-
-### Taiwan R User Group 專區
-
-這裡紀錄許多社群分享的文章
-
-- [如何讓R與Java溝通 - rJava](http://programmermagazine.github.io/201308/htm/article5.html)
-- [R 講題分享 - 種類數的估計與預測](http://programmermagazine.github.io/201312/htm/article6.html)
-- [R 講題分享 – SpideR -- 用R自製網路爬蟲收集資料 (作者：Taiwan R User Group)](http://programmermagazine.github.io/201311/htm/article6.html)
 
