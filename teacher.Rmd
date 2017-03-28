@@ -16,7 +16,7 @@
 
 ### 與我們合作
 
-R語言翻轉教室提供付費的教學解決方案。我們提供以下服務:
+R語言翻轉教室提供付費的教學解決方案。我們在線上提供以下服務:
 
 ```{r feature, echo = FALSE, results = "asis"}
 df <- xtable::xtable(data.frame(
@@ -74,5 +74,22 @@ df <- xtable::xtable(data.frame(
 ))
 xtable::print.xtable(df, type = "html", include.rownames = FALSE)
 ```
+
+為了協助學校在使用系統之後取得良好的教學效果，我們也希望在採購之餘，協助學校對老師與學生們進行九小時的教育訓練，介紹以下內容：
+
+- R 語言的功能介紹
+    - 持續進步的R 語言
+    - 社群分享的R 語言應用實例
+    - 個人在業界的經驗分享
+- R 語言的上手
+    - R / Rstudio 的安裝
+    - Rstudio 使用介紹
+    - 解讀R 的程式碼結構，了解什麼是Expression、變數、函數與套件
+    - 寫出第一個R 程式
+- R 語言物件操作的上手
+- 翻轉教室的上手
+    - 完成第一個與第二個關卡
+    - 如何使用聊天室解決問題
+- 如何操作R 語言翻轉系統瀏覽學生的操作資料與產生量化報告
 
 有興趣的老師歡迎來信：[wush@datascienceandr.org](mailto:wush@datascienceandr.org)
