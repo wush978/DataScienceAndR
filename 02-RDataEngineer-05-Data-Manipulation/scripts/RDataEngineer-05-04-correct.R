@@ -2,6 +2,15 @@
 
 # 請算出1 月份平均的gain
 answer04.1 <- local({
+
+#' 以下的答案有使用`[[`這個函數。道理是這樣:
+#' 在R之中，中括號等符號的背後也是函數。
+#' 例如 tmp[[1]] 等同 `[[`(tmp, 1)
+#'   ps. 這裡需要在console中輸入中括號兩邊的反引號(`)，告訴R 這裡的[[代表的是函數
+#' 我是期待同學寫出:
+#' tmp <- filter(...) %>% ...
+#' tmp[[1]]
+#' 的答案，但是這裡的參考答案用了上述知識與`%>%`做搭配搭配
   filter(flights, month == 1) %>%
     mutate(gain = arr_delay - dep_delay) %>%
     summarise(mean(gain, na.rm = TRUE)) %>%

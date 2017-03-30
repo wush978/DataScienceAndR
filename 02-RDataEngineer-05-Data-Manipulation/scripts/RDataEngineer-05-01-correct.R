@@ -5,7 +5,7 @@ answer01 <- local({
   month_is_1 <- flights$month == 1
   # 再拿flights$day 和 1 比較
   day_is_1 <- flights$day == 1
-  # 拿上面兩個比較結果做 & 後丟到 `[``
+  # 拿上面兩個比較結果做 & 後丟到中括號的第一個參數。
   is_target <- month_is_1 & day_is_1
   flights[is_target,]
 })
