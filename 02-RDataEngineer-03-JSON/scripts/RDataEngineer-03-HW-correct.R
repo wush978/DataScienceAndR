@@ -9,6 +9,10 @@ sbi1 <- youbike1$result$results$sbi
 rm(youbike1) # 刪除youbike
 youbike2 <- fromJSON(youbike_path, simplifyDataFrame = FALSE)
 results <- youbike2$result$results
+#' `sapply(results, "[[", "sna")`，在R中等價於以下的函數:
+#' sapply(results, function(element) {
+#'   element[["sna"]]
+#' })
 sna2 <- sapply(results, "[[", "sna")
 lat2 <- sapply(results, "[[", "lat")
 lng2 <- sapply(results, "[[", "lng")
