@@ -136,6 +136,33 @@ unlink("note", recursive = TRUE)
 course_list <- dir(repo@path, "lesson.yaml", full.names = TRUE, recursive = TRUE)
 get_lecture_note <- function(course, out_dir = tempdir()) {
   
+  escape_text <- function(x) {
+    matches <- stringi::stri_locate_all_regex(x, "`([^`]+)`")[[1]]
+    start <- 1
+    tokens <- list()
+    splits <- list()
+    if (nrow(matches) == 1 & is.na(matches[1,1])) return(whisker::whisker.escape(x))
+    for(i in seq_len(nrow(matches))) {
+      if (matches[i,1] > 1) {
+          tokens %<>% append(substring(x, start, matches[i,1] - 1))
+      } else {
+        tokens %<>% append("")
+      }
+      splits %<>% append(substring(x, matches[i,1], matches[i,2]))
+      start <- matches[i,2] + 1
+    }
+    if (start <= nchar(x)) {
+      tokens %<>% append(substring(x, start, nchar(x)))
+    }
+    if (length(tokens) > length(splits)) {
+      splits %<>% append("")
+    }
+    mat <- cbind(unlist(tokens), unlist(splits))
+    mat[,1] <- whisker::whisker.escape(mat[,1])
+    apply(mat, 1, paste, collapse = "") %>%
+      paste(collapse = "")
+  }
+  
   from_text <- function(level, i) {
 sprintf("
 
@@ -143,7 +170,7 @@ sprintf("
 
 %s
 
-", i, whisker::whisker.escape(trimws(level$Output)))
+", i, escape_text(trimws(level$Output)))
   }
 
   from_cmd_question <- function(level, i) {
@@ -157,7 +184,7 @@ sprintf("
 %s
 %s
 
-", i, whisker::whisker.escape(trimws(level$Output)), "```", whisker::whisker.escape(level$CorrectAnswer), "```")
+", i, escape_text(trimws(level$Output)), "```", (level$CorrectAnswer), "```")
   }
   
   from_mult_question <- function(level, i) {
@@ -168,7 +195,7 @@ sprintf("
 %s
 
 %s
-", i, whisker::whisker.escape(trimws(level$Output)), whisker::whisker.escape(level$CorrectAnswer))
+", i, escape_text(trimws(level$Output)), (level$CorrectAnswer))
   }
   
   from_script <- function(level, i) {
@@ -191,7 +218,7 @@ sprintf("
 %s
 %s
 
-", i, gsub("\\s", "", level$Output), "```", script, "```")
+", i, escape_text(trimws(level$Output)), "```", (script), "```")
   }
   content <- yaml.load_file(course)
   retval <- sprintf("---\ntitle: \"%s\"\ndate: \"`r Sys.Date()`\"\noutput:\n  rmdformats::html_clean\n---\n\n", content[[1]]$Lesson)
@@ -236,7 +263,11 @@ s.setAttribute(\'data-timestamp\', +new Date());
 if (!file.exists("note")) dir.create("note")
 htmls <- character(0)
 for(i in seq_along(course_list)) {
-  capture.output(htmls %<>% append(get_lecture_note(course_list[i], "./note")))
+  if (!interactive()) {
+    capture.output(htmls %<>% append(get_lecture_note(course_list[i], "./note")))
+  } else {
+    htmls %<>% append(get_lecture_note(course_list[i], "./note"))
+  }
 }
 sprintf("- [%s](%s)", basename(htmls) %>% tools::file_path_sans_ext(), file.path("note", basename(htmls))) %>%
   paste(collapse = "\n") %>%
