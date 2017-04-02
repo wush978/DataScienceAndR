@@ -1,3 +1,35 @@
-本區將提供，完成R語言翻轉教室後，其他更深入的R的教學素材
+## 簡介
 
-敬請期待
+R 語言翻轉教室除了教R 之外，另外一個理念是想要教同學培養工具的自學能力。
+
+為了協助老師上的教學使用，
+我們收集各種R 在各種領域的應用實例的文章，
+並且撰寫相關的小測驗，
+讓同學在閱讀之後可以做測驗，
+並且老師們可以掌握同學的自學狀況。
+
+## 閱讀專區
+
+### Taiwan R User Group 專區
+
+這裡紀錄許多社群分享的文章
+
+- [如何讓R與Java溝通 - rJava](http://programmermagazine.github.io/201308/htm/article5.html)
+- [R 講題分享 - 種類數的估計與預測](http://programmermagazine.github.io/201312/htm/article6.html)
+- [R 講題分享 – SpideR -- 用R自製網路爬蟲收集資料 (作者：Taiwan R User Group)](http://programmermagazine.github.io/201311/htm/article6.html)
+
+### Wush 專區
+
+這裡紀錄了我個人有參與的R 相關著作
+
+- [Self-Updating Process Clustering](https://cran.r-project.org/package=supc/vignettes/supc.html)
+- [RcppCNPy: Reading and writing NumPy binary files](https://cran.r-project.org/package=RcppCNPy/vignettes/RcppCNPy-intro.pdf)
+- [FeatureHashing](https://cran.r-project.org/package=FeatureHashing/vignettes/FeatureHashing.html)
+- [Sentiment Analysis via R, FeatureHashing and XGBoost](https://cran.r-project.org/package=FeatureHashing/vignettes/SentimentAnalysis.html)
+- [Serialize and Deserialize a C++ Object in Rcpp](http://gallery.rcpp.org/articles/rcpp-serialization/)
+- [Call Python from R through Rcpp](http://gallery.rcpp.org/articles/rcpp-python/)
+- [利用R處理大量的JSON資料 （Streaming Style）](http://wush.ghost.io/r-jsonlines/)
+- [itertools簡介](http://wush.ghost.io/itertools-intro/)
+- [dplyr::group_by的進階應用](http://wush.ghost.io/dplyr_group_by/)
+- [R的除錯功能](http://wush.ghost.io/r-debug/)
+
