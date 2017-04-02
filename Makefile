@@ -1,5 +1,5 @@
 WORKDIR=$()
-SRC=index.Rmd material.Rmd before.Rmd after.Rmd teacher.Rmd
+SRC=index.Rmd install.Rmd before.Rmd material.Rmd after.Rmd teacher.Rmd
 
 all : $(SRC:.Rmd=.html) thanks.html
 	$(MAKE) -C slide

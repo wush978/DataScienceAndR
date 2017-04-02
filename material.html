@@ -22,7 +22,7 @@
   <div class="container">
 
   <div class="row">
-<div class="container"><ul class="nav nav-tabs"><li><a href="index.html"><h1 style="color: #0088cc;">首頁</h1></a></li><li class="active"><a href="#"><h1>安裝教材</h1></a></li><li><a href="before.html"><h1 style="color: #0088cc;">上手教材</h1></a></li><li><a href="after.html"><h1 style="color: #0088cc;">課後教材</h1></a></li><li><a href="teacher.html"><h1 style="color: #0088cc;">教師專區</h1></a></li><li><a href="thanks.html"><h1 style="color: #0088cc;">感謝清單</h1></a></li></ul></div><div class="span3 bs-docs-sidebar"><ul class="nav nav-list bs-docs-sidenav" data-spy="affix"><li><a href="#1">1. 快速安裝教材</a></li><li><a href="#2">2. 示範區</a></li><li><a href="#3">2.1. 初次使用</a></li><li><a href="#4">2.2. 再次使用</a></li><li><a href="#5">2.3. 找不到課程DataScienceAndR</a></li><li><a href="#6">2.4. 找不到指定課程</a></li><li><a href="#7">3. 求助專區</a></li><li><a href="#8">4. 課程筆記</a></li><li><a href="#9">5. 課程投影片</a></li></ul></div><div class="span9"><p><!-- title: <img src="http://i.imgur.com/81C5LBk.png" style="height:7em" /> -->
+<div class="container"><ul class="nav nav-tabs"><li><a href="index.html"><h5 style="color: #0088cc;">首頁</h5></a></li><li><a href="install.html"><h5 style="color: #0088cc;">安裝導引</h5></a></li><li><a href="before.html"><h5 style="color: #0088cc;">上手教材</h5></a></li><li class="active"><a href="#"><h5>主要教材</h5></a></li><li><a href="after.html"><h5 style="color: #0088cc;">課後教材</h5></a></li><li><a href="teacher.html"><h5 style="color: #0088cc;">教師專區</h5></a></li><li><a href="thanks.html"><h5 style="color: #0088cc;">感謝清單</h5></a></li></ul></div><div class="span3 bs-docs-sidebar"><ul class="nav nav-list bs-docs-sidenav" data-spy="affix"><li><a href="#1">1. 求助專區</a></li><li><a href="#2">2. 課程筆記</a></li><li><a href="#3">3. 課程投影片</a></li></ul></div><div class="span9"><p><!-- title: <img src="http://i.imgur.com/81C5LBk.png" style="height:7em" /> -->
 <!-- subtitle: 全中文R語言互動式教材 -->
 <!-- header-title: R語言翻轉教室 -->
 <!-- icon: http://i.imgur.com/RkG7X4l.png --></p>
@@ -37,98 +37,7 @@
 
 <script src="http://momentjs.com/downloads/moment-with-locales.min.js" async defer></script>
 
-<h2 id="1">1. 快速安裝教材</h2>
-
-<p>同學請依照以下的動作安裝教材：</p>
-
-<ol>
-<li>安裝R</li>
-<li>安裝Rstudio(Windows 使用者請安裝Rstudio或自備能夠編輯UTF-8 編碼的編輯器，OS X 與Linux使用者可依據自己喜好決定是否使用Rstudio)</li>
-<li>打開R ，執行：<code>source("http://wush978.github.io/R/init-swirl.R")</code>（如果是網路環境受到限制，只能使用80 port 的同學，請參考 <a href="https://gist.github.com/wush978/957d8bee92f78f6c0aead949609f921d">https://gist.github.com/wush978/957d8bee92f78f6c0aead949609f921d</a>中的指令進行安裝）</li>
-<li>輸入<code>library(swirl);swirl()</code>後即進入教學環境。</li>
-<li>進入00-Hello-DataScienceAndR課程檢查你的電腦能不能執行本教材的所有功能，並瞭解本教材所提供的功能。</li>
-</ol>
-
-<p>安裝上有問題，或是在執行00-Hello-DataScienceAndR不順利的同學請到<a href="#求助專區">求助專區</a>取得協助</p>
-
-<h2 id="2">2. 示範區</h2>
-
-<h3 id="3">2.1. 初次使用</h3>
-
-<p>以下我們使用圖片示範安裝課程與進入課程:</p>
-
-<ol>
-<li>打開R, 在console輸入<code>source("http://wush978.github.io/R/init-swirl.R")</code> <img src="http://i.imgur.com/vc2FccR.png" alt="" title="" /></li>
-<li><img src="http://i.imgur.com/BnLqwZZ.png" alt="" title="" /> </li>
-<li>進入課程之前，會詢問同學是否要進入中文環境。請輸入<code>y</code> </li>
-<li><img src="http://i.imgur.com/R6V6Yj5.png" alt="" title="" /> </li>
-<li>為了避免R的中文顯示問題，我們會詢問是否要幫同學調整R的語系設定。請輸入<code>y</code></li>
-<li><img src="http://i.imgur.com/2kLVQcN.png" alt="" title="" /> </li>
-<li>接著會安裝課程</li>
-<li>安裝完成後，請同學輸入<code>swirl()</code>進入互動式教學。</li>
-<li><img src="http://i.imgur.com/ifkXyFS.png" alt="" title="" /></li>
-<li>這裡會詢問同學認證的方式。除非有另外通知，否則請同學使用Google或Facebook登入。未來只要用相同的方法登入，同學都可以查詢自己的進度。</li>
-<li><img src="http://i.imgur.com/rDZ6IAL.png" alt="" title="" /> </li>
-<li>當同學在瀏覽器授權給R語言翻轉教室之後，回到swirl就會看到互動式教學環境(swirl套件)的使用教學</li>
-<li><img src="http://i.imgur.com/BRxNZ3E.png" alt="" title="" /> </li>
-<li><img src="http://i.imgur.com/ylHLdFQ.png" alt="" title="" /></li>
-<li><img src="http://i.imgur.com/toMEI8q.png" alt="" title="" /></li>
-<li>最後會請同學進入選單。如果同學沒有看到DataScienceAndR，請參考<a href="#找不到課程DataScienceAndR">找不到課程DataScienceAndR</a>的說明。</li>
-<li><img src="http://i.imgur.com/S89YzLq.png" alt="" title="" /> 進入DataScienceAndR後，同學可以選擇對應的課程。</li>
-</ol>
-
-<p>目前主要課程分成以下三塊：</p>
-
-<ul>
-<li>01-RBasic區：講解R 語言的基礎知識與使用方法。所有以下的課程都需要知道RBasic的知識。</li>
-<li>02-RDataEngineer區：講解載入資料至R 語言，以及清理、整理資料的所需知識。</li>
-<li>03-RVisualization區：介紹R的視覺化功能</li>
-</ul>
-
-<p>其他的課程，同學可以視自己的興趣決定要不要完成</p>
-
-<ul>
-<li>Optional-RProgramming區：介紹R 語言的程式功能。</li>
-<li>Optional-RDataMining區：介紹R 語言在Data Mining中常用的套件。</li>
-<li>Optional-RStatistic區：搭配實體課程所使用的swirl課程，不建議同學自行使用</li>
-</ul>
-
-<h3 id="4">2.2. 再次使用</h3>
-
-<p>當同學重開R之後，請依照下列指示操作</p>
-
-<ol>
-<li>輸入<code>library(swirl)</code>載入互動式教學套件</li>
-<li><img src="http://i.imgur.com/3Yrb0qv.png" alt="" title="" /></li>
-<li>進入課程之前，會詢問同學是否要進入中文環境。請輸入<code>y</code> </li>
-<li><img src="http://i.imgur.com/gWLV8gv.png" alt="" title="" /></li>
-<li>為了避免R的中文顯示問題，我們會詢問是否要幫同學調整R的語系設定。請輸入<code>y</code></li>
-<li>請同學輸入<code>swirl()</code>進入互動式教學環境</li>
-<li><img src="http://i.imgur.com/tvYckay.png" alt="" title="" /></li>
-<li>這裡會詢問同學認證的方式。除非有另外通知，否則請同學使用Google或Facebook登入。未來只要用相同的方法登入，同學都可以查詢自己的進度。</li>
-<li><img src="http://i.imgur.com/OqBs3uY.png" alt="" title="" /></li>
-<li>如果同學上次進行的單元做到一半，會出現接關的選項。如果需要，請選擇接關，或是選擇「不，讓我開始一項新的課程」</li>
-</ol>
-
-<h3 id="5">2.3. 找不到課程DataScienceAndR</h3>
-
-<p>有時候，同學會找不到課程。第一種可能，是在選課時出現:</p>
-
-<p><img src="http://i.imgur.com/6oEiWRJ.png" alt="" title="" /></p>
-
-<p>這時候請同學選<code>1</code>之後，應該會出現:</p>
-
-<p><img src="http://i.imgur.com/Q33WXT5.png" alt="" title="" /></p>
-
-<p>之後同學即可依照上述只是進行選課</p>
-
-<h3 id="6">2.4. 找不到指定課程</h3>
-
-<p>有時候，同學會在選單中找不到特定的課程。此時請依照老師的指示，執行<code>install_course_</code>開頭的相關指令。</p>
-
-<p>例如: <code>install_course_url("https://wush978.github.io/R/course/DataScienceAndR.zip")</code>的指令即可安裝DataScienceAndR的課程</p>
-
-<h2 id="7">3. 求助專區</h2>
+<h2 id="1">1. 求助專區</h2>
 
 <p>有問題的朋友，麻煩先註冊一個Github帳號後，可以到以下地方討論：</p>
 
@@ -137,7 +46,7 @@
 <li>Gitter聊天室：<a href="https://gitter.im/wush978/DataScienceAndR?utm_source=badge&amp;utm_medium=badge&amp;utm_campaign=pr-badge"><img src="https://badges.gitter.im/wush978/DataScienceAndR.svg" alt="Gitter" title="" /></a></li>
 </ul>
 
-<h2 id="8">4. 課程筆記</h2>
+<h2 id="2">2. 課程筆記</h2>
 
 <p>以下連結記載swirl中DataScienceAndR(版本: 8a3eb8c1b5bbc63cd04accff4085a8c131e2b4ec)的課程內容</p>
 
@@ -165,7 +74,7 @@
 <li><a href="note/Project-ROpenData-Power-GDP.html">Project-ROpenData-Power-GDP</a></li>
 </ul>
 
-<h2 id="9">5. 課程投影片</h2>
+<h2 id="3">3. 課程投影片</h2>
 
 <p>以下連結是課程中使用的投影片</p>
 
