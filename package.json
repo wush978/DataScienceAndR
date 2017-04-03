@@ -5,7 +5,9 @@
   "dependencies": {
     "markdown2bootstrap": "git+https://github.com/wush978/markdown2bootstrap.git"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "local-web-server": "^1.2.7"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
