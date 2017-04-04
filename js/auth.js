@@ -32,8 +32,8 @@ function datascienceandrAuth(service, token) {
     success: function(data) {
     },
     complete: datascienceandrGetUserData,
-    error: function(err) {
-      throw err;
+    error: function(jqXHR, textStatus, errorThrown) {
+      throw errorThrown;
     },
     timeout: 5000,
     xhrFields: {
@@ -52,8 +52,8 @@ function datascienceandrGetUserData() {
       datascienceandrUserData = data;  
     },
     complete : datascienceandrRenderUserData,
-    error : function(err) {
-      throw err;
+    error: function(jqXHR, textStatus, errorThrown) {
+      throw errorThrown;
     },
     timeout : 5000,
     xhrFields: {
@@ -107,8 +107,8 @@ function datascienceandrLogout() {
     dataType : "json",
     success: function(data) { },
     complete: datascienceandrRenderUserData,
-    error: function(err) {
-      throw err;
+    error: function(jqXHR, textStatus, errorThrown) {
+      throw errorThrown;
     },
     timeout: 5000
   });
