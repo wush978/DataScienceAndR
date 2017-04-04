@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta name="google-signin-client_id" content="842324757776-nonjllne8m8as9djg51e6cg98h6ijam7.apps.googleusercontent.com">
+    <title>R語言翻轉教室</title>
+
+    <!-- Le styles -->
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="bootstrap/css/docs.css" rel="stylesheet">
+    <link href="bootstrap/js/google-code-prettify/prettify.css" rel="stylesheet">
+    <link rel="icon" href="http://i.imgur.com/RkG7X4l.png" />
+    <link href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css" rel="stylesheet">
+  </head>
+
+  <body data-spy="scroll" data-target=".bs-docs-sidebar">
+
+  <header class="jumbotron subhead" id="overview"><div class="container"><h1><img src="http://i.imgur.com/81C5LBk.png" style="height:7em" /></h1><p class="lead">全中文R語言互動式教材</p></div></header>
+
+  <div class="container">
+
+  <div class="row">
+<div class="container"><ul class="nav nav-tabs"><li><a href="index.html"><h5 style="color: #0088cc;">首頁</h5></a></li><li><a href="install.html"><h5 style="color: #0088cc;">安裝導引</h5></a></li><li><a href="before.html"><h5 style="color: #0088cc;">上手教材</h5></a></li><li><a href="material.html"><h5 style="color: #0088cc;">主要教材</h5></a></li><li><a href="after.html"><h5 style="color: #0088cc;">課後教材</h5></a></li><li class="active"><a href="#"><h5>個人紀錄</h5></a></li><li><a href="teacher.html"><h5 style="color: #0088cc;">教師專區</h5></a></li><li><a href="thanks.html"><h5 style="color: #0088cc;">感謝清單</h5></a></li></ul></div><div class="span3 bs-docs-sidebar"><ul class="nav nav-list bs-docs-sidenav" data-spy="affix"><li><a href="#1">1. 帳務專區</a></li><li><a href="#2">2. 報表專區</a></li></ul></div><div class="span9"><p><!-- title: <img src="http://i.imgur.com/81C5LBk.png" style="height:7em" /> -->
+<!-- subtitle: 全中文R語言互動式教材 -->
+<!-- header-title: R語言翻轉教室 -->
+<!-- icon: http://i.imgur.com/RkG7X4l.png --></p>
+
+<script>
+  ((window.gitter = {}).chat = {}).options = {
+    room: 'wush978/DataScienceAndR'
+  };
+</script>
+
+<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
+
+<script src="http://momentjs.com/downloads/moment-with-locales.min.js" async defer></script>
+
+<p><!-- scripts: [{"src" : "https://apis.google.com/js/platform.js?onload=renderGoogleButton", "async" : null, "defer" : null}, {"src" : "js/auth.js"}, {"src" : "js/underscore-min.js"}, {"src" : "https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"}, {"src" : "js/sha256.js"}] -->
+<!-- header-meta: [{"name" : "google-signin-client_id", "content" : "842324757776-nonjllne8m8as9djg51e6cg98h6ijam7.apps.googleusercontent.com"}] -->
+<!-- header-link: [{"href" : "https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css", "rel" : "stylesheet"}] --></p>
+
+<h2 id="1">1. 帳務專區</h2>
+
+<p>登入後，會將您的追蹤紀錄顯示於下方。</p>
+
+<p><button class="btn btn-primary" data-toggle="modal" data-target="#login-menu" onClick="return datascienceandrSetLogin();">請選擇登入的服務</button></p>
+
+<div id="login-menu" class="modal fade in" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+  <div class="modal-header">
+    <button id="login-close" type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+  </div>
+  <div class="modal-body">
+    <div class="row">
+      <div class="col-md-8" style="border-right: 1px dotted #C2C2C2;padding-right: 30px;">
+        <ul class="thumbnails" style="text-align: center; font-size: 200%">
+          <li class="span3">
+            <a class="thumbnail" href="#">
+              <div id="google-signin"></div>
+            </a>
+          </li>
+          <li class="span3">
+            <a class="thumbnail" onClick="return datascienceandrFacebookLogin();">
+              <img alt="Facebook" style="width: 240px; height: 50px; line-height: 50px;" src="" onClick="return datascienceandrFacebookLogin();"/>
+            </a>
+          </li>
+          <li class="span3">
+            <!-- <button class="btn btn-primary" data-toggle="modal" data-target="#login-menu">請選擇登入的服務</button> -->
+            <a class="thumbnail" data-toggle="modal" data-target="#classroom-login">
+              <img alt="Classroom登入" style="width: 240px; height: 50px; line-height: 50px;" src=""/>
+            </a>
+          </li>
+          <li class="span3">
+            <a class="thumbnail" href="#", onClick="return datascienceandrLogout();"><img alt="登出" style="width: 240px; height: 50px; text-align: center; line-height: 50px;" src=""/></a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="classroom-login" class="modal fade in" tabindex="-2" role="dialog" aria-hidden="true" style="display: none;">
+  <div class="modal-header">
+    <button id="classroom-login-close" type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+  </div>
+  <div class="modal-content">
+    <div style="width: 66.66666667%">
+            <form class="form-horizontal" action="javascript:void(0);">
+                    <div class="control-group">
+                        <label class="control-label" for="account">帳號名稱</label>
+                        <div class="controls">
+                            <input id="classroom-account" type="text" required"/>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="password">密碼</label>
+                        <div class="controls">
+                            <input id="classroom-password" type="password" required"/>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <div class="controls">
+                            <input value="Login" class="btn btn-primary" type="submit" onClick="return datascienceandrClassroomAuth();">
+                            <!-- <a id="forgotPasswordLink" href="#">Forgot Password</a> -->
+                        </div>
+                    </div>
+            </form>
+    </div>
+  </div>
+</div>
+
+<h2 id="2">2. 報表專區</h2>
+
+<div id="report_container">
+</div>
+
+<div id="fb-root"></div>
+      </div>
+    </div>
+
+  </div>
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="bootstrap/js/jquery.js"></script>
+    <script src="bootstrap/js/google-code-prettify/prettify.js"></script>
+    <script src="bootstrap/js/bootstrap.js"></script>
+    <script type="text/javascript">prettyPrint();</script>
+    <script src="https://apis.google.com/js/platform.js?onload=renderGoogleButton" async defer></script>
+<script src="js/auth.js"></script>
+<script src="js/underscore-min.js"></script>
+<script src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
+<script src="js/sha256.js"></script>
+  </body>
+</html>
