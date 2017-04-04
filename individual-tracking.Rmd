@@ -1,14 +1,16 @@
-<!-- scripts: [{"src" : "https://apis.google.com/js/platform.js?onload=renderGoogleButton", "async" : null, "defer" : null}, {"src" : "js/auth.js"}, {"src" : "js/underscore-min.js"}, {"src" : "https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"}] -->
+<!-- scripts: [{"src" : "https://apis.google.com/js/platform.js?onload=renderGoogleButton", "async" : null, "defer" : null}, {"src" : "js/auth.js"}, {"src" : "js/underscore-min.js"}, {"src" : "https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"}, {"src" : "js/sha256.js"}] -->
 <!-- header-meta: [{"name" : "google-signin-client_id", "content" : "842324757776-nonjllne8m8as9djg51e6cg98h6ijam7.apps.googleusercontent.com"}] -->
 <!-- header-link: [{"href" : "https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css", "rel" : "stylesheet"}] -->
-<div id="fb-root"></div>
-<button class="btn btn-primary" data-toggle="modal" data-target="#login-menu">請選擇登入的服務</button>
+
+## 帳務專區
 
 登入後，會將您的追蹤紀錄顯示於下方。
 
+<button class="btn btn-primary" data-toggle="modal" data-target="#login-menu" onClick="return datascienceandrSetLogin();">請選擇登入的服務</button>
+
 <div id="login-menu" class="modal fade in" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
   <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <button id="login-close" type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
   </div>
   <div class="modal-body">
     <div class="row">
@@ -20,8 +22,8 @@
             </a>
           </li>
           <li class="span3">
-            <a class="thumbnail" href="#">
-              <div class="fb-login-button" data-max-rows="2" data-size="xlarge" data-show-faces="false" data-auto-logout-link="false"></div>
+            <a class="thumbnail" onClick="return datascienceandrFacebookLogin();">
+              <img alt="Facebook" style="width: 240px; height: 50px; line-height: 50px;" src="" onClick="return datascienceandrFacebookLogin();"/>
             </a>
           </li>
           <li class="span3">
@@ -41,26 +43,26 @@
 
 <div id="classroom-login" class="modal fade in" tabindex="-2" role="dialog" aria-hidden="true" style="display: none;">
   <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <button id="classroom-login-close" type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
   </div>
   <div class="modal-content">
     <div style="width: 66.66666667%">
-			<form class="form-horizontal">
+			<form class="form-horizontal" action="javascript:void(0);">
 					<div class="control-group">
 						<label class="control-label" for="account">帳號名稱</label>
 						<div class="controls">
-							<input id="account" type="text" required/>
+							<input id="classroom-account" type="text" required"/>
 						</div>
 					</div>
 					<div class="control-group">
 						<label class="control-label" for="password">密碼</label>
 						<div class="controls">
-							<input id="password" type="password" required/>
+							<input id="classroom-password" type="password" required"/>
 						</div>
 					</div>
 					<div class="control-group">
 						<div class="controls">
-							<input value="Login" class="btn btn-primary" type="submit">
+							<input value="Login" class="btn btn-primary" type="submit" onClick="return datascienceandrClassroomAuth();">
 							<!-- <a id="forgotPasswordLink" href="#">Forgot Password</a> -->
 						</div>
 					</div>
@@ -69,6 +71,9 @@
   </div>
 </div>
 
-<table id="datascienceandr_user_records" class="display">
-</table>
+## 報表專區
 
+<div id="report_container">
+</div>
+
+<div id="fb-root"></div>
