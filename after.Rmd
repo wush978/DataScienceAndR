@@ -32,4 +32,5 @@ R 語言翻轉教室除了教R 之外，另外一個理念是想要教同學培�
 - [itertools簡介](http://wush.ghost.io/itertools-intro/)
 - [dplyr::group_by的進階應用](http://wush.ghost.io/dplyr_group_by/)
 - [R的除錯功能](http://wush.ghost.io/r-debug/)
+- [從R語言翻轉教室到機器學習](slide/DSRToML.html) <iframe width="560" height="315" src="https://www.youtube.com/embed/zax6l3ilg2A" frameborder="0" allowfullscreen></iframe>
 

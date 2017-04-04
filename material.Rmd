@@ -202,4 +202,3 @@ sprintf("- [%s](%s)", basename(htmls) %>% tools::file_path_sans_ext(), file.path
 - [RBasic-DataStructure](slide/RBasic-DataStructure.html)
 - [RDataEngineer-Introduction](slide/RDataEngineer-Introduction.html)
 - [RVisualization-Introduction](slide/RVisualization-Introduction.html)
-- [從R語言翻轉教室到機器學習](slide/DSRToML.html) <iframe width="560" height="315" src="https://www.youtube.com/embed/zax6l3ilg2A" frameborder="0" allowfullscreen></iframe>
