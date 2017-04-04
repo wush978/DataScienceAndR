@@ -6,7 +6,7 @@
 
 登入後，會將您的追蹤紀錄顯示於下方。
 
-<button class="btn btn-primary" data-toggle="modal" data-target="#login-menu" onClick="return datascienceandrSetLogin();">請選擇登入的服務</button>
+<button class="btn btn-primary" data-toggle="modal" data-target="#login-menu" onClick="return datascienceandrSetLogin();">請選擇登入的服務</button>或<button class="btn btn-primary" onClick="return datascienceandrLogout();">登出</button>
 
 <div id="login-menu" class="modal fade in" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
   <div class="modal-header">
@@ -14,26 +14,23 @@
   </div>
   <div class="modal-body">
     <div class="row">
-      <div class="col-md-8" style="border-right: 1px dotted #C2C2C2;padding-right: 30px;">
+      <div style="position: relative; padding-right: 20px; padding-left: 20px;">
         <ul class="thumbnails" style="text-align: center; font-size: 200%">
-          <li class="span3">
+          <li class="span3" style="display:inline-block; float:none;">
             <a class="thumbnail" href="#">
               <div id="google-signin"></div>
             </a>
           </li>
-          <li class="span3">
+          <li class="span3" style="display:inline-block; float:none;">
             <a class="thumbnail" onClick="return datascienceandrFacebookLogin();">
               <img alt="Facebook" style="width: 240px; height: 50px; line-height: 50px;" src="" onClick="return datascienceandrFacebookLogin();"/>
             </a>
           </li>
-          <li class="span3">
+          <li class="span3" style="display:inline-block; float:none;">
             <!-- <button class="btn btn-primary" data-toggle="modal" data-target="#login-menu">請選擇登入的服務</button> -->
             <a class="thumbnail" data-toggle="modal" data-target="#classroom-login">
               <img alt="Classroom登入" style="width: 240px; height: 50px; line-height: 50px;" src=""/>
             </a>
-          </li>
-          <li class="span3">
-            <a class="thumbnail" href="#", onClick="return datascienceandrLogout();"><img alt="登出" style="width: 240px; height: 50px; text-align: center; line-height: 50px;" src=""/></a>
           </li>
         </ul>
       </div>
