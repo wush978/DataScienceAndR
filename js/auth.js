@@ -134,7 +134,6 @@ var datascienceandr = {
 
 // google
 function onGoogleSuccess(user) {
-  $("#google-signin-wrapper > img").remove();
   datascienceandr.user.google = user;
   datascienceandrUser = user.getBasicProfile().getEmail().split("@")[0];
   var token = user.getAuthResponse().id_token;
@@ -185,6 +184,9 @@ function datascienceandrClassroomAuth() {
 
 // google button
 function renderGoogleButton() {
+  $("#google-signin").bind("DOMSubtreeModified", function() {
+    $("#google-signin-wrapper > img").hide();
+  });
   gapi.signin2.render("google-signin", {
     'scope': 'profile email',
     'width': 240,
