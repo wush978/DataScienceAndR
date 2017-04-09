@@ -1,3 +1,5 @@
+<!-- scripts: [{"src" : "https://apis.google.com/js/platform.js?onload=renderGoogleButton", "async" : null, "defer" : null}, {"src" : "js/auth.js"}, {"src" : "js/underscore-min.js"}, {"src" : "js/sha256.js"}] -->
+
 <button class="btn btn-primary" data-toggle="modal" data-target="#login-menu" onClick="return datascienceandrSetLogin();">請選擇登入的服務</button>或<button class="btn btn-primary" onClick="return datascienceandrLogout();">登出</button>
 
 <div id="login-menu" class="modal fade in" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
@@ -20,7 +22,6 @@
             </a>
           </li>
           <li class="span3" style="display:inline-block; float:none;">
-            <!-- <button class="btn btn-primary" data-toggle="modal" data-target="#login-menu">請選擇登入的服務</button> -->
             <a class="thumbnail" data-toggle="modal" data-target="#classroom-login">
               <img alt="Classroom帳號登入" style="width: 240px; height: 50px; line-height: 50px;" src=""/>
             </a>
@@ -53,7 +54,6 @@
 					<div class="control-group">
 						<div class="controls">
 							<input value="Login" class="btn btn-primary" type="submit" onClick="return datascienceandrClassroomAuth();">
-							<!-- <a id="forgotPasswordLink" href="#">Forgot Password</a> -->
 						</div>
 					</div>
 			</form>

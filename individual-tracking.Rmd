@@ -1,4 +1,4 @@
-<!-- scripts: [{"src" : "https://apis.google.com/js/platform.js?onload=renderGoogleButton", "async" : null, "defer" : null}, {"src" : "js/auth.js"}, {"src" : "js/underscore-min.js"}, {"src" : "https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"}, {"src" : "js/sha256.js"}] -->
+<!-- scripts: [{"src" : "https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"}] -->
 <!-- header-meta: [{"name" : "google-signin-client_id", "content" : "842324757776-nonjllne8m8as9djg51e6cg98h6ijam7.apps.googleusercontent.com"}] -->
 <!-- header-link: [{"href" : "https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css", "rel" : "stylesheet"}] -->
 
@@ -6,7 +6,7 @@
 
 登入後，會將您的追蹤紀錄顯示於下方。
 
-`r paste(readLines("chunks/login.md"), collapse = "\n")`
+`r paste(readLines("chunks/login.md"), collapse="\n")`
 
 ## 報表專區
 
