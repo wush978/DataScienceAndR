@@ -16,14 +16,17 @@ window.fbAsyncInit = function() {
  }(document, 'script', 'facebook-jssdk'));
 
 
-
+var datascienceandrUrlsValue;
 function datascienceandrUrls() {
-  return ["https://api2.datascienceandr.org"];
+  if (!datascienceandrUrlsValue) {
+    datascienceandrUrlsValue = _.sample(["https://api.datascienceandr.org", "https://api2.datascienceandr.org"]);
+  }
+  return datascienceandrUrlsValue;
 }
 var datascienceandrUser;
 function datascienceandrAuth(service, token) {
   if (!datascienceandrIsLogin) return;
-  var url = _.sample(datascienceandrUrls());
+  var url = datascienceandrUrls();
   $.ajax({
     url : url + "/api/authUser",
     type : "POST",
@@ -44,7 +47,7 @@ function datascienceandrAuth(service, token) {
 var datascienceandrUserData;
 function datascienceandrGetUserData() {
   $.ajax({
-    url : _.sample(datascienceandrUrls()) + "/api/auth/getCurrentUserRecords",
+    url : datascienceandrUrls() + "/api/auth/getCurrentUserRecords",
     type : "POST",
     data : {},
     dataType : "json",
@@ -99,7 +102,7 @@ function datascienceandrCloseLoginModal() {
 }
 
 function datascienceandrLogout() {
-  var url = _.sample(datascienceandrUrls());
+  var url = datascienceandrUrls();
   $.ajax({
     url : url + "/api/auth/logout",
     type : "POST",
@@ -131,6 +134,7 @@ var datascienceandr = {
 
 // google
 function onGoogleSuccess(user) {
+  $("#google-signin-wrapper > img").remove();
   datascienceandr.user.google = user;
   datascienceandrUser = user.getBasicProfile().getEmail().split("@")[0];
   var token = user.getAuthResponse().id_token;

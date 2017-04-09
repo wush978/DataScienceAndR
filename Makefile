@@ -13,6 +13,12 @@ thanks.md : wiki/感謝清單.md .check_wiki
 	cat $@ >> $@.tmp
 	mv $@.tmp $@
 
+individual-tracking.md : individual-tracking.Rmd chunks/login.md
+	Rscript -e "knitr::knit('$<', '$@')"
+	cat header.md > $@.tmp
+	cat $@ >> $@.tmp
+	mv $@.tmp $@
+
 %.md : %.Rmd
 	Rscript -e "knitr::knit('$<', '$@')"
 	cat header.md > $@.tmp
