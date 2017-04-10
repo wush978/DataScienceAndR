@@ -10,34 +10,17 @@
 
     <!-- Le styles -->
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="bootstrap/css/bootstrap-theme.min.css" rel="stylesheet">
     <link href="bootstrap/css/docs.css" rel="stylesheet">
-    <link href="bootstrap/js/google-code-prettify/prettify.css" rel="stylesheet">
     <link rel="icon" href="http://i.imgur.com/RkG7X4l.png" />
     
   </head>
 
   <body data-spy="scroll" data-target=".bs-docs-sidebar">
-
-  <header class="jumbotron subhead" id="overview"><div class="container"><h1><img src="http://i.imgur.com/81C5LBk.png" style="height:7em" /></h1><p class="lead">全中文R語言互動式教材</p></div></header>
-
-  <div class="container">
-
-  <div class="row">
-<div class="container"><ul class="nav nav-tabs"><li><a href="index.html"><h5 style="color: #0088cc;">首頁</h5></a></li><li><a href="install.html"><h5 style="color: #0088cc;">安裝導引</h5></a></li><li><a href="before.html"><h5 style="color: #0088cc;">上手教材</h5></a></li><li class="active"><a href="#"><h5>主要教材</h5></a></li><li><a href="after.html"><h5 style="color: #0088cc;">課後教材</h5></a></li><li><a href="individual-tracking.html"><h5 style="color: #0088cc;">個人紀錄</h5></a></li><li><a href="teacher.html"><h5 style="color: #0088cc;">教師專區</h5></a></li><li><a href="thanks.html"><h5 style="color: #0088cc;">感謝清單</h5></a></li></ul></div><div class="span3 bs-docs-sidebar"><ul class="nav nav-list bs-docs-sidenav" data-spy="affix"><li><a href="#1">1. 求助專區</a></li><li><a href="#2">2. 課程筆記</a></li><li><a href="#3">3. 課程投影片</a></li></ul></div><div class="span9"><p><!-- title: <img src="http://i.imgur.com/81C5LBk.png" style="height:7em" /> -->
+<div id="top-navbar" class="navbar-default"><ul class="nav nav-tabs"><li><a href="index.html"><h5 style="color: #0088cc;">首頁</h5></a></li><li><a href="install.html"><h5 style="color: #0088cc;">安裝導引</h5></a></li><li><a href="before.html"><h5 style="color: #0088cc;">上手教材</h5></a></li><li class="active"><a href="#"><h5>主要教材</h5></a></li><li><a href="after.html"><h5 style="color: #0088cc;">課後教材</h5></a></li><li><a href="individual-tracking.html"><h5 style="color: #0088cc;">個人紀錄</h5></a></li><li><a href="teacher.html"><h5 style="color: #0088cc;">教師專區</h5></a></li><li><a href="thanks.html"><h5 style="color: #0088cc;">感謝清單</h5></a></li></ul></div><div class="jumbotron subhead" style="text-align:center;"><div class="container"><h1><img src="http://i.imgur.com/81C5LBk.png" style="height:7em" /></h1><p class="lead">全中文R語言互動式教材</p></div></div><div class="col-md-2 bs-docs-sidebar"><ul id="affix-toc" class="nav nav-list bs-docs-sidenav"><li><a href="#1">1. 求助專區</a></li><li><a href="#2">2. 課程筆記</a></li><li><a href="#3">3. 課程投影片</a></li></ul></div><div id="main-content" class="container col-md-9"><p><!-- title: <img src="http://i.imgur.com/81C5LBk.png" style="height:7em" /> -->
 <!-- subtitle: 全中文R語言互動式教材 -->
 <!-- header-title: R語言翻轉教室 -->
 <!-- icon: http://i.imgur.com/RkG7X4l.png --></p>
-
-<script>
-  ((window.gitter = {}).chat = {}).options = {
-    room: 'wush978/DataScienceAndR'
-  };
-</script>
-
-<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
-
-<script src="http://momentjs.com/downloads/moment-with-locales.min.js" async defer></script>
 
 <h2 id="1">1. 求助專區</h2>
 
@@ -84,20 +67,29 @@
 <li><a href="slide/RBasic-Introduction.html">RBasic-Introduction</a></li>
 <li><a href="slide/RBasic-DataStructure.html">RBasic-DataStructure</a></li>
 <li><a href="slide/RDataEngineer-Introduction.html">RDataEngineer-Introduction</a></li>
-<li><a href="slide/RVisualization-Introduction.html">RVisualization-Introduction</a></li>
-</ul>
-      </div>
-    </div>
-
-  </div>
-
+<li><a href="slide/RVisualization-Introduction.html">RVisualization-Introduction</a>
+<!-- scripts: [{"src" : "https://sidecar.gitter.im/dist/sidecar.v1.js", "async" : null, "defer" : null}, {"src" : "http://momentjs.com/downloads/moment-with-locales.min.js", "async" : null, "defer" : null}, {"src" : "js/gitter.js"}] --></li>
+</ul></div>
     <!-- Le javascript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="bootstrap/js/jquery.js"></script>
-    <script src="bootstrap/js/google-code-prettify/prettify.js"></script>
-    <script src="bootstrap/js/bootstrap.js"></script>
-    <script type="text/javascript">prettyPrint();</script>
-    
+    <script src="jquery/jquery-3.2.0.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
+<script src="http://momentjs.com/downloads/moment-with-locales.min.js" async defer></script>
+<script src="js/gitter.js"></script>
+    <script type="text/javascript">
+      $(window).on('load', function() {
+        setTimeout(function() {
+          $('#affix-toc').each(function() {
+            var $spy = $(this);
+            var data = $spy.data();
+            if (!data.offset) data.offset = {};
+            data.offset.top = $spy.offset().top;
+            $spy.affix(data);
+          });
+        }, 100);
+      });
+    </script>
   </body>
 </html>
