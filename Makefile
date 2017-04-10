@@ -3,7 +3,7 @@ SRC=index.Rmd install.Rmd before.Rmd material.Rmd after.Rmd teacher.Rmd individu
 
 define md2html
 	cat chunks/header.md > $(1).tmp
-	cat $(1) >> $@.tmp
+	cat $(1) >> $(1).tmp
 	cat chunks/footer.md >> $(1).tmp
 	mv $(1).tmp $(1)
 endef
@@ -16,7 +16,10 @@ all : $(SRC:.Rmd=.html) thanks.html
 	cd wiki && git pull origin master
 
 thanks.md : wiki/感謝清單.md .check_wiki 
-	$(call md2html,$@)
+	cat chunks/header.md > $@.tmp
+	cat $< >> $@.tmp
+	cat chunks/footer.md >> $@.tmp
+	mv $@.tmp $@
 
 individual-tracking.md : individual-tracking.Rmd chunks/header.md chunks/footer.md chunks/login.md
 	Rscript -e "knitr::knit('$<', '$@')"
