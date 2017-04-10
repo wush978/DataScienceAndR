@@ -86,7 +86,7 @@ library(git2r)
 library(xml2)
 library(jsonlite)
 # check current version
-local({
+local(tryCatch({
   if (file.exists("index.html")) {
     doc <- xml2::read_html("index.html")
     .node <- xml_find_one(doc, "//html/body/div/div/div/ul/li/code") 
@@ -109,7 +109,10 @@ local({
     assign("current.swirl.version", NA, envir = globalenv())
     assign("current.dsr.version", NA, envir = globalenv())
   }
-})
+}, error = function(e) {
+  assign("current.swirl.version", NA, envir = globalenv())
+  assign("current.dsr.version", NA, envir = globalenv())
+}))
 # check remote version
 swirl.version <- read.dcf(url("https://raw.githubusercontent.com/wush978/swirl/master/DESCRIPTION"))[,"Version"]
 dsr.version <- fromJSON(url("https://api.github.com/repos/wush978/DataScienceAndR/git/refs/heads/course"))$object$sha
@@ -171,7 +174,7 @@ invisible(gc())
 
 ## 即時動態
 
-<div class="well" style="height: 14em;"><ul id="records"></ul></div>
+<div class="well" style="height: 18em;"><ul id="records"></ul></div>
 
 ## 緣起
 

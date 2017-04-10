@@ -1,3 +1,7 @@
+/**
+ * Please overwrite the function datascienceandrRenderUserData
+ */
+
 // facebook SDK
 window.fbAsyncInit = function() {
   FB.init({
@@ -25,6 +29,7 @@ function datascienceandrUrls() {
 }
 var datascienceandrUser;
 function datascienceandrAuth(service, token) {
+  datascienceandrOverlay();
   if (!datascienceandrIsLogin) return;
   var url = datascienceandrUrls();
   $.ajax({
@@ -45,14 +50,15 @@ function datascienceandrAuth(service, token) {
   });
 }
 var datascienceandrUserData;
-function datascienceandrGetUserData() {
+var datascienceandrGetUserData = function() {
   $.ajax({
     url : datascienceandrUrls() + "/api/auth/getCurrentUserRecords",
     type : "POST",
     data : {},
     dataType : "json",
     success : function(data) {
-      datascienceandrUserData = data;  
+      datascienceandrUserData = data;
+      datascienceandrOverlayDiv.hide();
     },
     complete : datascienceandrRenderUserData,
     error: function(jqXHR, textStatus, errorThrown) {
@@ -64,9 +70,9 @@ function datascienceandrGetUserData() {
     },
     crossDomain: true
   });
-}
+};
 var reportContainer = $("#report_container");
-function datascienceandrRenderUserData() {
+var datascienceandrRenderUserData = function() {
   setTimeout(datascienceandrCloseLoginModal, 100);
   var div = reportContainer;
   div.empty();
@@ -90,15 +96,10 @@ function datascienceandrRenderUserData() {
   src += "</tbody>";
   div.append(src);
   $("#used_record_table").DataTable({"columnDefs" : []});
-}
-var 
-  classroomLoginClose = $("#classroom-login-close"),
-  loginClose = $("#login-close");
+};
+var loginClose = $("#login-close");
 function datascienceandrCloseLoginModal() {
-  setTimeout(function() {
-    try{ loginClose.click(); } catch(e) { loginClose.click(); }
-  }, 100);
-  try { classroomLoginClose.click(); } catch(e) { classroomLoginClose.click(); }
+  loginClose.click();
 }
 
 function datascienceandrLogout() {
@@ -173,6 +174,7 @@ function datascienceandrClassroomAuth() {
   shaObj.setHMACKey(password, "TEXT");
   shaObj.update(object);
   var hmac = shaObj.getHMAC("HEX");
+
   datascienceandrAuth("classroom", {
     account : account,
     object : object,
@@ -204,5 +206,16 @@ function renderGoogleButton() {
 var datascienceandrIsLogin = false;
 function datascienceandrSetLogin() {
   datascienceandrIsLogin = true;
+  $("#classroom-login").hide();
+}
+
+// overlay
+var datascienceandrOverlayDiv = $(".overlay");
+function datascienceandrOverlay() {
+  if (!datascienceandrIsLogin) return;
+  datascienceandrOverlayDiv.show();
+  setTimeout(function() {
+    datascienceandrOverlayDiv.hide();
+  }, 10000);
 }
 

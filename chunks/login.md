@@ -1,62 +1,63 @@
 <!-- scripts: [{"src" : "https://apis.google.com/js/platform.js?onload=renderGoogleButton", "async" : null, "defer" : null}, {"src" : "js/auth.js"}, {"src" : "js/underscore-min.js"}, {"src" : "js/sha256.js"}] -->
 
-<button class="btn btn-primary" data-toggle="modal" data-target="#login-menu" onClick="return datascienceandrSetLogin();">請選擇登入的服務</button>或<button class="btn btn-primary" onClick="return datascienceandrLogout();">登出</button>
+<!-- Button trigger modal -->
+<div style="font-size:18px;">
+<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#login-menu" onclick="datascienceandrSetLogin();">登入</button>或<button class="btn btn-primary btn-lg" onClick="return datascienceandrLogout();">登出</button>
+</div>
 
-<div id="login-menu" class="modal fade in" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
-  <div class="modal-header">
-    <button id="login-close" type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-  </div>
-  <div class="modal-body">
-    <div class="row">
-      <div style="position: relative; padding-right: 20px; padding-left: 20px;">
-        <ul class="thumbnails" style="text-align: center; font-size: 150%">
-          <li class="span3" style="display:inline-block; float:none;">
-            <a id="google-signin-wrapper" class="thumbnail" href="#">
-              <img alt="Sign in with Google" style="width: 240px; height: 50px; line-height: 50px;" src=""/>
-              <div id="google-signin"></div>
-            </a>
-          </li>
-          <li class="span3" style="display:inline-block; float:none;">
-            <a class="thumbnail" onClick="return datascienceandrFacebookLogin();">
-              <img alt="Sign in with Facebook" style="width: 240px; height: 50px; line-height: 50px;" src="" onClick="return datascienceandrFacebookLogin();"/>
-            </a>
-          </li>
-          <li class="span3" style="display:inline-block; float:none;">
-            <a class="thumbnail" data-toggle="modal" data-target="#classroom-login">
-              <img alt="Classroom帳號登入" style="width: 240px; height: 50px; line-height: 50px;" src=""/>
-            </a>
-          </li>
-        </ul>
+<!-- Modal -->
+<div class="modal fade" id="login-menu" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content" style="text-align:center;">
+      <div class="overlay" style="background: rgb(0, 0, 0) none repeat scroll 0% 0%; position: absolute; top: 0px; right: 0px; bottom: 0px; left: 0px; opacity: 0.5; z-index:1060; display: none">
+        <div id="loading-img"></div>
+      </div>
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="login-close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">請選擇登入的服務</h4>
+      </div>
+      <div class="modal-body">
+        <div class="row" style="text-align: center;">
+          <div style="position: relative; padding-right: 20px; padding-left: 20px;">
+            <div class="thumbnail" style="width: 300px; display:inline-block; float: none; border: none !important;">
+              <div style="width: 260px; height: 60px; display:inline-block;"/>
+                <a id="google-signin-wrapper" class="thumbnail" href="#">
+                  <img alt="Sign in with Google" style="width: 240px; height: 50px; line-height: 50px;" src=""/>
+                  <div id="google-signin"></div>
+                </a>
+              </div>
+              <div style="width: 260px; height: 60px; display:inline-block;">
+                <a class="thumbnail" onClick="return datascienceandrFacebookLogin();">
+                  <img alt="Sign in with Facebook" style="width: 240px; height: 50px; line-height: 50px;" src="" onClick="return datascienceandrFacebookLogin();"/>
+                </a>
+              </div>
+              <div style="width: 260px; height: 60px; display:inline-block;">
+                <a class="thumbnail" onclick='$("#classroom-login").show();'>
+                  <img alt="Classroom帳號登入" style="width: 240px; height: 50px; line-height: 50px;" src=""/>
+                </a>
+              </div>
+              <div id="classroom-login" style="display:inline-block; display:none;">
+                <div class="input-group">
+                  <span class="input-group-addon">帳戶</span>
+                  <input id="classroom-account" type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1">
+                </div>
+                
+                <div class="input-group">
+                  <span class="input-group-addon">密碼</span>
+                  <input id="classroom-password" type="password" class="form-control" placeholder="Password" aria-describedby="basic-addon2">
+                </div>
+                <div class="input-group">
+                  <input value="Login" class="btn btn-primary" type="submit" onClick="return datascienceandrClassroomAuth();">
+                </div>
+              </div> 
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
     </div>
   </div>
 </div>
 
-<div id="classroom-login" class="modal fade in" tabindex="-2" role="dialog" aria-hidden="true" style="display: none;">
-  <div class="modal-header">
-    <button id="classroom-login-close" type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-  </div>
-  <div class="modal-content">
-    <div style="width: 66.66666667%">
-			<form class="form-horizontal" action="javascript:void(0);">
-					<div class="control-group">
-						<label class="control-label" for="account">帳號名稱</label>
-						<div class="controls">
-							<input id="classroom-account" type="text" required"/>
-						</div>
-					</div>
-					<div class="control-group">
-						<label class="control-label" for="password">密碼</label>
-						<div class="controls">
-							<input id="classroom-password" type="password" required"/>
-						</div>
-					</div>
-					<div class="control-group">
-						<div class="controls">
-							<input value="Login" class="btn btn-primary" type="submit" onClick="return datascienceandrClassroomAuth();">
-						</div>
-					</div>
-			</form>
-    </div>
-  </div>
-</div>
