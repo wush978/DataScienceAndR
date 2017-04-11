@@ -17,7 +17,7 @@
   </head>
 
   <body data-spy="scroll" data-target=".bs-docs-sidebar">
-<div id="top-navbar" class="navbar-default"><ul class="nav nav-tabs"><li><a href="index.html"><h5 style="color: #0088cc;">首頁</h5></a></li><li><a href="install.html"><h5 style="color: #0088cc;">安裝導引</h5></a></li><li><a href="before.html"><h5 style="color: #0088cc;">上手教材</h5></a></li><li><a href="material.html"><h5 style="color: #0088cc;">主要教材</h5></a></li><li><a href="after.html"><h5 style="color: #0088cc;">課後教材</h5></a></li><li class="active"><a href="#"><h5>個人紀錄</h5></a></li><li><a href="teacher.html"><h5 style="color: #0088cc;">教師專區</h5></a></li><li><a href="teacher-tracking.html"><h5 style="color: #0088cc;">教師報表</h5></a></li><li><a href="thanks.html"><h5 style="color: #0088cc;">感謝清單</h5></a></li></ul></div><div class="jumbotron subhead" style="text-align:center;"><div class="container"><h1><img src="http://i.imgur.com/81C5LBk.png" style="height:7em" /></h1><p class="lead">全中文R語言互動式教材</p></div></div><div class="col-md-2 bs-docs-sidebar"><ul id="affix-toc" class="nav nav-list bs-docs-sidenav"><li><a href="#1">1. 帳務專區</a></li><li><a href="#2">2. 報表專區</a></li><li><a href="#3">2.1. 以下是' + datascienceandrUser + '的操作紀錄</a></li></ul></div><div id="main-content" class="container col-md-9"><p><!-- title: <img src="http://i.imgur.com/81C5LBk.png" style="height:7em" /> -->
+<div id="top-navbar" class="navbar-default"><ul class="nav nav-tabs"><li><a href="index.html"><h5 style="color: #0088cc;">首頁</h5></a></li><li><a href="install.html"><h5 style="color: #0088cc;">安裝導引</h5></a></li><li><a href="before.html"><h5 style="color: #0088cc;">上手教材</h5></a></li><li><a href="material.html"><h5 style="color: #0088cc;">主要教材</h5></a></li><li><a href="after.html"><h5 style="color: #0088cc;">課後教材</h5></a></li><li><a href="individual-tracking.html"><h5 style="color: #0088cc;">個人紀錄</h5></a></li><li><a href="teacher.html"><h5 style="color: #0088cc;">教師專區</h5></a></li><li class="active"><a href="#"><h5>教師報表</h5></a></li><li><a href="thanks.html"><h5 style="color: #0088cc;">感謝清單</h5></a></li></ul></div><div class="jumbotron subhead" style="text-align:center;"><div class="container"><h1><img src="http://i.imgur.com/81C5LBk.png" style="height:7em" /></h1><p class="lead">全中文R語言互動式教材</p></div></div><div class="col-md-2 bs-docs-sidebar"><ul id="affix-toc" class="nav nav-list bs-docs-sidenav"></ul></div><div id="main-content" class="container col-md-9"><p><!-- title: <img src="http://i.imgur.com/81C5LBk.png" style="height:7em" /> -->
 <!-- subtitle: 全中文R語言互動式教材 -->
 <!-- header-title: R語言翻轉教室 -->
 <!-- icon: http://i.imgur.com/RkG7X4l.png --></p>
@@ -26,9 +26,7 @@
 <!-- header-meta: [{"name" : "google-signin-client_id", "content" : "842324757776-nonjllne8m8as9djg51e6cg98h6ijam7.apps.googleusercontent.com"}] -->
 <!-- header-link: [{"href" : "https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css", "rel" : "stylesheet"}] --></p>
 
-<h2 id="1">1. 帳務專區</h2>
-
-<p>登入後，會將您的追蹤紀錄顯示於下方。</p>
+<p>登入後，會將您的報告顯示於下方。</p>
 
 <!-- scripts: [{"src" : "https://apis.google.com/js/platform.js?onload=renderGoogleButton", "async" : null, "defer" : null}, {"src" : "js/auth.js"}, {"src" : "js/underscore-min.js"}, {"src" : "js/sha256.js"}] -->
 
@@ -95,10 +93,8 @@
   </div>
 </div>
 
-<h2 id="2">2. 報表專區</h2>
-
-<div id="report_container">
-</div>
+<iframe id="report_container" class="container col-md-9">
+</iframe>
 
 <div id="fb-root"></div>
 
@@ -106,10 +102,10 @@
 var datascienceandrUserData;
 var datascienceandrGetUserData = function() {
   $.ajax({
-    url : datascienceandrUrls() + "/api/auth/getCurrentUserRecords",
+    url : datascienceandrUrls() + "/api/auth/getTeacherReport",
     type : "POST",
     data : {},
-    dataType : "json",
+    dataType : "text",
     success : function(data) {
       datascienceandrUserData = data;
       datascienceandrOverlayDiv.hide();
@@ -126,28 +122,9 @@ var datascienceandrGetUserData = function() {
   });
 };
 var datascienceandrRenderUserData = function() {
-  var div = $("#report_container");
-  div.empty();
-  var src = '<div id="user_id" style="text-align : center;"><h3 id="3">2.1. 以下是' + datascienceandrUser + '的操作紀錄</h3></div>' +
-    '<table id="used_record_table" class="display">' +
-    '<thead><td>課程名稱</td><td>單元名稱</td><td>進入/完成</td><td>時間</td></tr></thead>' +
-    "<tfoot><tr><td>課程名稱</td><td>單元名稱</td><td>進入/完成</td><td>時間</td></tr></tfoot>" +
-    "<tbody>";
-  _.forEach(datascienceandrUserData, function(record) {
-    var result = "<tr><td>" +
-      record.course.split(":")[0] +
-      "</td><td>" +
-      record.course.split(":")[1] +
-      "</td><td>" +
-      (record.type == 1 ? "完成" : "進入") +
-      "</td><td>" +
-      record.created_at +
-      "</td></tr>";
-    src += result;
-  });
-  src += "</tbody>";
-  div.append(src);
-  $("#used_record_table").DataTable({"columnDefs" : []});
+  var iframe = $("#report_container");
+  iframe.attr("srcdoc", datascienceandrUserData);
+  iframe.css("height", $(window).height());
 };
 </script>
 
