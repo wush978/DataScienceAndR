@@ -1,0 +1,42 @@
+<!-- scripts: [{"src" : "https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"}] -->
+<!-- header-meta: [{"name" : "google-signin-client_id", "content" : "842324757776-nonjllne8m8as9djg51e6cg98h6ijam7.apps.googleusercontent.com"}] -->
+<!-- header-link: [{"href" : "https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css", "rel" : "stylesheet"}] -->
+
+登入後，會將您的報告顯示於下方。
+
+`r paste(readLines("chunks/login.md"), collapse="\n")`
+
+<iframe id="report_container" class="container col-md-9">
+</iframe>
+
+<div id="fb-root"></div>
+
+<script type="text/javascript">
+var datascienceandrUserData;
+var datascienceandrGetUserData = function() {
+  $.ajax({
+    url : datascienceandrUrls() + "/api/auth/getTeacherReport",
+    type : "POST",
+    data : {},
+    dataType : "text",
+    success : function(data) {
+      datascienceandrUserData = data;
+      datascienceandrOverlayDiv.hide();
+    },
+    complete : datascienceandrRenderUserData,
+    error: function(jqXHR, textStatus, errorThrown) {
+      throw errorThrown;
+    },
+    timeout : 5000,
+    xhrFields: {
+      withCredentials: true
+    },
+    crossDomain: true
+  });
+};
+var datascienceandrRenderUserData = function() {
+  var iframe = $("#report_container");
+  iframe.attr("srcdoc", datascienceandrUserData);
+  iframe.css("height", $(window).height());
+};
+</script>

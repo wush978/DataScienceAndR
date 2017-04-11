@@ -23,7 +23,7 @@ window.fbAsyncInit = function() {
 var datascienceandrUrlsValue;
 function datascienceandrUrls() {
   if (!datascienceandrUrlsValue) {
-    datascienceandrUrlsValue = _.sample(["https://api.datascienceandr.org", "https://api2.datascienceandr.org"]);
+    datascienceandrUrlsValue = _.sample(["https://api2.datascienceandr.org"]);
   }
   return datascienceandrUrlsValue;
 }
@@ -38,6 +38,7 @@ function datascienceandrAuth(service, token) {
     data : {service : service, token : JSON.stringify(token)},
     dataType : "json",
     success: function(data) {
+      setTimeout(datascienceandrCloseLoginModal, 100);
     },
     complete: datascienceandrGetUserData,
     error: function(jqXHR, textStatus, errorThrown) {
@@ -49,54 +50,7 @@ function datascienceandrAuth(service, token) {
     }
   });
 }
-var datascienceandrUserData;
-var datascienceandrGetUserData = function() {
-  $.ajax({
-    url : datascienceandrUrls() + "/api/auth/getCurrentUserRecords",
-    type : "POST",
-    data : {},
-    dataType : "json",
-    success : function(data) {
-      datascienceandrUserData = data;
-      datascienceandrOverlayDiv.hide();
-    },
-    complete : datascienceandrRenderUserData,
-    error: function(jqXHR, textStatus, errorThrown) {
-      throw errorThrown;
-    },
-    timeout : 5000,
-    xhrFields: {
-      withCredentials: true
-    },
-    crossDomain: true
-  });
-};
-var reportContainer = $("#report_container");
-var datascienceandrRenderUserData = function() {
-  setTimeout(datascienceandrCloseLoginModal, 100);
-  var div = reportContainer;
-  div.empty();
-  var src = '<div id="user_id" style="text-align : center;"><h3>以下是' + datascienceandrUser + '的操作紀錄</h3></div>' +
-    '<table id="used_record_table" class="display">' +
-    '<thead><td>課程名稱</td><td>單元名稱</td><td>進入/完成</td><td>時間</td></tr></thead>' +
-    "<tfoot><tr><td>課程名稱</td><td>單元名稱</td><td>進入/完成</td><td>時間</td></tr></tfoot>" +
-    "<tbody>";
-  _.forEach(datascienceandrUserData, function(record) {
-    var result = "<tr><td>" +
-      record.course.split(":")[0] +
-      "</td><td>" +
-      record.course.split(":")[1] +
-      "</td><td>" +
-      (record.type == 1 ? "完成" : "進入") +
-      "</td><td>" +
-      record.created_at +
-      "</td></tr>";
-    src += result;
-  });
-  src += "</tbody>";
-  div.append(src);
-  $("#used_record_table").DataTable({"columnDefs" : []});
-};
+
 var loginClose = $("#login-close");
 function datascienceandrCloseLoginModal() {
   loginClose.click();
