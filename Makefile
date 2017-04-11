@@ -1,5 +1,5 @@
 WORKDIR=$()
-SRC=index.Rmd install.Rmd before.Rmd material.Rmd after.Rmd teacher.Rmd individual-tracking.Rmd
+SRC=index.Rmd install.Rmd before.Rmd material.Rmd after.Rmd teacher.Rmd individual-tracking.Rmd teacher-tracking.Rmd
 
 define md2html
 	cat chunks/header.md > $(1).tmp
