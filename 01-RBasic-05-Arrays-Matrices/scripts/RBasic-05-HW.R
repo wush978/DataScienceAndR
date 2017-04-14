@@ -33,8 +33,8 @@ y <- y + epsilon
 #'     dim(beta.hat) 應該是 c(3, 1)
 #'     rownames(beta.hat) 應該是 c("x1", "x2", "x3")
 #'
-#' 對於沒有修過線性代數，或是未來沒有需要深入了解機器學習或統計相關演算法的同學，可以直接從網站上的參考答案取得答案，
-#' 跳過這個練習
+#' 對於沒有修過線性代數，或是未來沒有需要深入了解機器學習或統計相關演算法的同學，可以直接從網站上的參考答案取得答案，跳過這個練習
+#' 網址: <http://datascienceandr.org/note/01-RBasic-05-Arrays-Matrices.html#-64>
 
 beta.hat <- NULL # 請將NULL替換成你的程式碼
 
