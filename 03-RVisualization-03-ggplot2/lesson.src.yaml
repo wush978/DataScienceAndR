@@ -8,27 +8,27 @@
 
 - Class: text
   Output: |
-    各位同學好，本次課程的目標是介紹ggplot2套件。
+    各位同學好，本次課程的目標是介紹ggplot2套件。
 
 - Class: text
   Output: |
-    為什麼我們在學過看過R的繪圖功能後，還要學ggplot2呢？
+    為什麼我們在學過看過R的繪圖功能後，還要學ggplot2呢？
     因為以下幾個理由：ggplot2提供更美觀的預設圖片。所以我們不用作大量的微調，就可以獲得不錯的圖。
     我們也可以利用theme的功能，直接取用其他貢獻者繪製的樣本，畫出不同風格的圖。
 
 - Class: text
   Output: |
-    圖形本身會完整的物件化。而且使用者可以對物件化的圖形進行修正。
+    圖形本身會完整的物件化。而且使用者可以對物件化的圖形進行修正。
     也就是說，你可以把繪圖的指令結果，存到變數之中。
     而在存到變數中之後還可以操作這個變數，更改我們想要的繪圖效果。
 
 - Class: text
   Output: |
-    ggplot2和data.frame整合得更好，所以將資料整理成結構化資料後，ggplot2更能發揮威力。
+    ggplot2和data.frame整合得更好，所以將資料整理成結構化資料後，ggplot2更能發揮威力。
 
 - Class: text
   Output: |
-    更完整的文件如下。
+    更完整的文件如下。
     <http://docs.ggplot2.org>裡面收錄了所有的繪圖指令。
 
 - Class: text
@@ -37,14 +37,14 @@
 
 - Class: cmd_question
   Output: |
-    請同學先安裝ggplot2。
+    請同學先安裝ggplot2。
   CorrectAnswer: check_then_install("ggplot2", "2.0.0")
   AnswerTests: test_package_version("ggplot2", "2.0.0")
   Hint: install.packages("ggplot2")
 
 - Class: cmd_question
   Output: |
-    請同學載入ggplot2。
+    請同學載入ggplot2。
   CorrectAnswer: library(ggplot2)
   AnswerTests: test_search_path("ggplot2")
 
@@ -122,7 +122,7 @@
 
 - Class: cmd_question
   Output: |
-    這次請同學輸入：`g + geom_bar(aes(fill = "purple"))`。
+    這次請同學輸入：`g + geom_bar(aes(fill = "purple"))`。
   CorrectAnswer: g + geom_bar(aes(fill = "purple"))
   AnswerTests: omnitest('g + geom_bar(aes(fill = "purple"))')
 
@@ -217,7 +217,7 @@
 
 - Class: cmd_question
   Output: |
-    接著請同學輸入：`ggplot(hsb, aes(x = math)) + geom_density()`。
+    接著請同學輸入：`ggplot(hsb, aes(x = math)) + geom_density()`。
   CorrectAnswer: ggplot(hsb, aes(x = math)) + geom_density()
   AnswerTests: omnitest('ggplot(hsb, aes(x = math)) + geom_density()')
 
@@ -231,19 +231,19 @@
 
 - Class: cmd_question
   Output: |
-    請同學依據`race`，繪製出不同種族的`read`欄位成績分佈。(請修改上一題的答案)
+    請同學依據`race`，繪製出不同種族的`read`欄位成績分佈。(請修改上一題的答案)
   CorrectAnswer: ggplot(hsb, aes(x = read, color = race)) + geom_density()
   AnswerTests: omnitest('ggplot(hsb, aes(x = read, color = race)) + geom_density()')
 
 - Class: cmd_question
   Output: |
-    請同學先輸入`?geom_density`打開說明。
+    請同學先輸入`?geom_density`打開說明。
   CorrectAnswer: ?geom_density
   AnswerTests: omnitest('?geom_density')
 
 - Class: mult_question
   Output: |
-   請問以下哪一個是`geom_density`特有的參數?
+   請問以下哪一個是`geom_density`特有的參數?
   AnswerChoices: data;mapping;stat;x;y
   CorrectAnswer: "stat"
   AnswerTests: omnitest(correctVal='stat')
@@ -390,7 +390,7 @@
 
 - Class: text
   Output: |
-    同學可以輸入`?ggtheme`來查詢所有可用的theme。
+    同學可以輸入`?ggtheme`來查詢所有可用的theme。
     
 - Class: cmd_question
   Output: |
@@ -401,7 +401,7 @@
 
 - Class: cmd_question
   Output: |
-    請同學輸入：`ggsave(dst)`來將目前的ggplot2圖輸出到`dst`路徑。
+    請同學輸入：`ggsave(dst)`來將目前的ggplot2圖輸出到`dst`路徑。
   CorrectAnswer: ggsave(dst)
   AnswerTests: omnitest('ggsave(dst)')
 
@@ -434,7 +434,7 @@
 
 - Class: cmd_question
   Output: |
-    請載入GGally套件。
+    請載入GGally套件。
   CorrectAnswer: library(GGally)
   AnswerTests: test_search_path("GGally")
 

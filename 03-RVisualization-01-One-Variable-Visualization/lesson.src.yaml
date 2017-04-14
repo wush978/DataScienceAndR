@@ -8,11 +8,11 @@
 
 - Class: text
   Output: |
-    這個課程的目，是讓同學理解如何依據數據的型態，在一個維度上適當的呈現數據。
+    這個課程的目，是讓同學理解如何依據數據的型態，在一個維度上適當的呈現數據。
 
 - Class: cmd_question
   Output: |
-    請同學先打開`plot`的說明。
+    請同學先打開`plot`的說明。
   CorrectAnswer: ?plot
   AnswerTests: omnitest('?plot')
 
@@ -25,7 +25,7 @@
 
 - Class: cmd_question
   Output: |
-    首先，我們拿R 的內建的infert資料集為範例。
+    首先，我們拿R 的內建的infert資料集為範例。
     這是研究流產與不孕症之間關係的資料集。
     請同學輸入：`?infert`先看看資料對每個欄位的說明。
   CorrectAnswer: ?infert
@@ -38,7 +38,7 @@
 
 - Class: cmd_question
   Output: |
-    接著我們來具體看看資料本身。
+    接著我們來具體看看資料本身。
     請同學輸入`View(infert)`來看看實際的資料的值。
     這裡每筆資料都代表一名婦女。
   CorrectAnswer: View(infert)
@@ -46,7 +46,7 @@
 
 - Class: cmd_question
   Output: |
-    先拿`infert$spontaneous`進行說明。
+    先拿`infert$spontaneous`進行說明。
     請同學請先把`infert$spontaneous`存到`spon`變數中。
   CorrectAnswer: spon <- infert$spontaneous
   AnswerTests: check_val("spon", infert$spontaneous)
@@ -80,13 +80,13 @@
 
 - Class: cmd_question
   Output: |
-    接著，請同學先輸入： `spon <- factor(spon)`，轉換一下數據形態。
+    接著，請同學先輸入： `spon <- factor(spon)`，轉換一下數據形態。
   CorrectAnswer: spon <- factor(spon)
   AnswerTests: check_val("spon", factor(infert$spontaneous))
 
 - Class: cmd_question
   Output: |
-    我們再輸入一次：`plot(spon)`。
+    我們再輸入一次：`plot(spon)`。
   CorrectAnswer: plot(spon)
   AnswerTests: omnitest("plot(spon)")
 
@@ -98,25 +98,25 @@
 
 - Class: mult_question
   Output: |
-    請問同學，`spon`中大約有多少個`1`?
+    請問同學，`spon`中大約有多少個`1`?
   AnswerChoices: 100;70;40
   CorrectAnswer: "70"
   AnswerTests: omnitest(correctVal="70")
 
 - Class: cmd_question
   Output: |
-    請同學輸入：`table(spon)`。
+    請同學輸入：`table(spon)`。
     這個函數會計算一個向量中不同數值的個數。
   CorrectAnswer: table(spon)
   AnswerTests: omnitest("table(spon)")
 
 - Class: text
   Output: |
-    R 會告訴各位同學，`spon`中剛好有71個`1`。
+    R 會告訴各位同學，`spon`中剛好有71個`1`。
 
 - Class: mult_question
   Output: |
-    我們也拿`spon`來複習一下初等統計學的數值系統。
+    我們也拿`spon`來複習一下初等統計學的數值系統。
     根據`?infert`的說明，`spon`的值為0時，代表該名婦女沒有自然流產過；值為1時代表該名婦女自然流產過一次；值為2時則代表該名婦女自然流產過兩次以上。
     請問同學，`spon`比較適合名目尺度(選A)、順序尺度(選B)、區間尺度(選C)、還是比例尺度(選D)呢？
   AnswerChoices: A;B;C;D
@@ -145,26 +145,26 @@
 
 - Class: text
   Output: |
-    圓餅圖利用面積與角度，告訴我們數據分佈的比率。
+    圓餅圖利用面積與角度，告訴我們數據分佈的比率。
     由圖中可以明顯看出，"0"類別的個數佔了整體數據的一半。
     這點是長條圖比較難直接看出來的。
     R 的`pie`函數是需要名字與個數比率的，所以需要先利用`table`計算每個類別的個數，再將`table`的結果傳遞給`pie`做使用。
 
 - Class: cmd_question
   Output: |
-    請同學把`infert$age`存到變數`age`中。
+    請同學把`infert$age`存到變數`age`中。
   CorrectAnswer: age <- infert$age
   AnswerTests: check_val("age", infert$age)
 
 - Class: cmd_question
   Output: |
-    請問`age`的型態是？
+    請問`age`的型態是？
   CorrectAnswer: class(age)
   AnswerTests: omnitest(correctVal = class(age))
 
 - Class: cmd_question
   Output: |
-    請同學輸入`plot(age)`。
+    請同學輸入`plot(age)`。
   CorrectAnswer: plot(age)
   AnswerTests: omnitest("plot(age)")
 
@@ -176,7 +176,7 @@
 
 - Class: cmd_question
   Output: |
-    我們除了畫散佈圖，也可以畫折線圖。
+    我們除了畫散佈圖，也可以畫折線圖。
     請同學輸入：`plot(age, type = "l")`
   CorrectAnswer: plot(age, type = "l")
   AnswerTests: omnitest('plot(age, type = "l")')
@@ -276,7 +276,7 @@
 
 - Class: cmd_question
   Output: |
-    請同學輸入：`infert$education`，這筆數據本身就是把比例尺度切片後得到順序尺度的結果。
+    請同學輸入：`infert$education`，這筆數據本身就是把比例尺度切片後得到順序尺度的結果。
   CorrectAnswer: infert$education
   AnswerTests: omnitest("infert$education")
 
@@ -298,7 +298,7 @@
 
 - Class: mult_question
   Output: |
-    請問同學，圖中的曲線，共有幾個尖峰？
+    請問同學，圖中的曲線，共有幾個尖峰？
   AnswerChoices: 0;1;2;3
   CorrectAnswer: "2"
   AnswerTests: omnitest(correctVal = "2")
@@ -359,13 +359,13 @@
 
 - Class: cmd_question
   Output: |
-    接下來，我們請同學輸入`sunspot.year`。這是1700年至1988年，每年的太陽黑子數量。
+    接下來，我們請同學輸入`sunspot.year`。這是1700年至1988年，每年的太陽黑子數量。
   CorrectAnswer: sunspot.year
   AnswerTests: omnitest("sunspot.year")
 
 - Class: cmd_question
   Output: |
-    請問同學，`sunspot.year`的資料型態是？
+    請問同學，`sunspot.year`的資料型態是？
   CorrectAnswer: class(sunspot.year)
   AnswerTests: omnitest(correctVal = "ts")
 
@@ -386,20 +386,20 @@
 
 - Class: cmd_question
   Output: |
-    請同學先檢查`x`的型態。
+    請同學先檢查`x`的型態。
     經過`tail`函數處理後，`x`變成數值向量了。
   CorrectAnswer: class(x)
   AnswerTests: omnitest(correctVal = class(x))
 
 - Class: cmd_question
   Output: |
-    請同學先輸入：`plot(x)`。
+    請同學先輸入：`plot(x)`。
   CorrectAnswer: plot(x)
   AnswerTests: omnitest("plot(x)")
 
 - Class: cmd_question
   Output: |
-    接著再請同學輸入：`lines(x)`。
+    接著再請同學輸入：`lines(x)`。
   CorrectAnswer: lines(x)
   AnswerTests: omnitest("lines(x)")
 
@@ -433,7 +433,7 @@
 
 - Class: text
   Output: |
-    接下來我們介紹如何輸出R的圖片。
+    接下來我們介紹如何輸出R的圖片。
 
 - Class: cmd_question
   Output: |
@@ -501,35 +501,35 @@
 
 - Class: mult_question
   Output: |
-    請問同學，`write`欄位應該用哪一個R 型態處理呢？類別請選A, 數值請選B。
+    請問同學，`write`欄位應該用哪一個R 型態處理呢？類別請選A, 數值請選B。
   AnswerChoices: A;B
   CorrectAnswer: "B"
   AnswerTests: omnitest(correctVal = "B")
 
 - Class: cmd_question
   Output: |
-    請同學用`plot`和`density`的函數組合繪製`hsb$write`的數據。`bw`請用"SJ"。
+    請同學用`plot`和`density`的函數組合繪製`hsb$write`的數據。`bw`請用"SJ"。
   CorrectAnswer: plot(density(hsb$write, bw = "SJ"))
   AnswerTests: any_of_exprs('plot(density(hsb$write, "SJ"))',
     'plot(density(hsb$write, bw = "SJ"))', 'plot(density(x = hsb$write, bw = "SJ"))')
 
 - Class: mult_question
   Output: |
-    請問這張圖一共有幾個峰？
+    請問這張圖一共有幾個峰？
   AnswerChoices: 0;2;4
   CorrectAnswer: "2"
   AnswerTests: omnitest(correctVal = "2")
 
 - Class: mult_question
   Output: |
-    請問資料有沒有異常的極大值或極小值？
+    請問資料有沒有異常的極大值或極小值？
   AnswerChoices: Yes;No
   CorrectAnswer: "Yes"
   AnswerTests: omnitest(correctVal="Yes")
 
 - Class: mult_question
   Output: |
-    請問極小值大概是多少？
+    請問極小值大概是多少？
   AnswerChoices: -100;-50;0
   CorrectAnswer: -100
   AnswerTests: omnitest(correctVal = "-100")
@@ -542,38 +542,38 @@
 
 - Class: cmd_question
   Output: |
-    請同學對`hsb$sex`畫出圓餅圖。
+    請同學對`hsb$sex`畫出圓餅圖。
   CorrectAnswer: pie(table(hsb$sex))
   AnswerTests: omnitest("pie(table(hsb$sex))")
 
 - Class: text
   Output: |
-    最後我們直接用大量的範例繪圖程式碼，讓同學學習各種圖形繪製的細節調教。
+    最後我們直接用大量的範例繪圖程式碼，讓同學學習各種圖形繪製的細節調教。
 
 - Class: script
   Output: |
-    我們看看圓餅圖的範例。
+    我們看看圓餅圖的範例。
     結束請按`submit()`。
   Script: RVisualization-01-pie.R
   AnswerTests: pass()
 
 - Class: script
   Output: |
-    我們看看長條圖的範例。
+    我們看看長條圖的範例。
     結束請按`submit()`。
   Script: RVisualization-01-hist.R
   AnswerTests: pass()
 
 - Class: script
   Output: |
-    我們看看機率分佈圖的範例。
+    我們看看機率分佈圖的範例。
     結束請按`submit()`。
   Script: RVisualization-01-density.R
   AnswerTests: pass()
 
 - Class: script
   Output: |
-    我們看看折線圖的範例。
+    我們看看折線圖的範例。
     結束請按`submit()`。
   Script: RVisualization-01-plot.ts.R
   AnswerTests: pass()

@@ -105,14 +105,14 @@
 
 - Class: cmd_question
   Output: |
-    請大家先安裝`dplyr`套件。
+    請大家先安裝`dplyr`套件。
   CorrectAnswer: check_then_install("dplyr", "0.4.3")
   AnswerTests: test_package_version("dplyr", "0.4.3")
   Hint: install.packages("dplyr")
 
 - Class: cmd_question
   Output: |
-    接著請大家載入dplyr套件。
+    接著請大家載入dplyr套件。
   CorrectAnswer: library(dplyr)
   AnswerTests: test_search_path("dplyr")
   Hint: library(dplyr)

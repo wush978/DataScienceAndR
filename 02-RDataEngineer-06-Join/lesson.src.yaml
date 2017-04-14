@@ -8,20 +8,20 @@
 
 - Class: text
   Output: |
-    這門課程要介紹的是，資料科學團隊在剛成立時一定要經常使用的技術：資料比對。
+    這門課程要介紹的是，資料科學團隊在剛成立時一定要經常使用的技術：資料比對。
 
 - Class: text
   Output: |
-    現代資料科學有很豐富的內涵。
+    現代資料科學有很豐富的內涵。
     每天都有新的統計方法、新的演算法發明，讓人類在處理資料的能力上更進一步。
 
 - Class: text
   Output: |
-    但是在企業中，或是實際應用中，最重要的是「價值」，而不是「處理資料的手法」。
+    但是在企業中，或是實際應用中，最重要的是「價值」，而不是「處理資料的手法」。
 
 - Class: text
   Output: |
-    而這之中最重要的「價值」來自於我們能夠完成過去辦不到的事情。
+    而這之中最重要的「價值」來自於我們能夠完成過去辦不到的事情。
     資料科學也是如此。
     在企業內就是要能夠在「有限的資源中」做出「過去做不到的事情」。
     而一個資料科學團隊，所擁有的最特別的資產，就是檢視各種不同資料源的能力。
@@ -33,24 +33,24 @@
 
 - Class: text
   Output: |
-    就我個人的經驗，這是資料科學團隊為企業帶來價值的捷徑。
+    就我個人的經驗，這是資料科學團隊為企業帶來價值的捷徑。
 
 - Class: cmd_question
   Output: |
-    首先，請同學安裝套件dplyr。
+    首先，請同學安裝套件dplyr。
     已經裝過的同學請輸入`skip()`略過。
   CorrectAnswer: check_then_install("dplyr", "0.4.3")
   AnswerTests: test_package_version("dplyr", "0.4.3")
 
 - Class: cmd_question
   Output: |
-    接著，請同學載入dplyr。
+    接著，請同學載入dplyr。
   CorrectAnswer: library(dplyr)
   AnswerTests: test_search_path("dplyr")
 
 - Class: cmd_question
   Output: |
-    再來，請同學打開：`vignette("two-table", package = "dplyr")`。
+    再來，請同學打開：`vignette("two-table", package = "dplyr")`。
   CorrectAnswer: vignette("two-table", package = "dplyr")
   AnswerTests: omnitest('vignette("two-table", package = "dplyr")')
 
@@ -249,7 +249,7 @@
 
 - Class: cmd_question
   Output: |
-    請同學用`View(answer02.3)`，觀察我們在上一題得到的結果。
+    請同學用`View(answer02.3)`，觀察我們在上一題得到的結果。
   CorrectAnswer: View(answer02.3)
   AnswerTests: omnitest('View(answer02.3)')
 
@@ -259,18 +259,18 @@
 
 - Class: text
   Output: |
-    接著，我們來講解dplyr中的多種合併表格的方法。
+    接著，我們來講解dplyr中的多種合併表格的方法。
 
 - Class: text
   Output: |
-    除了`left_join`之外，dplyr還提供了6 種join函數。
+    除了`left_join`之外，dplyr還提供了6 種join函數。
     他們的參數都非常類似：`x`、`y`和`by`，而且在用法和比對的方法上也一模一樣。
     他們的差異，在於當比對結束之後，會產生不同資料範圍的data.frame。
   AnswerTests: browseURL("http://www.google.com")
 
 - Class : cmd_question
   Output: |
-    為了等下的說明，我們仿照vignette，建立了兩個變數：`df1`與`df2`。
+    為了等下的說明，我們仿照vignette，建立了兩個變數：`df1`與`df2`。
     請同學輸入`View(df1)`來查看`df1`的資料。
   CorrectAnswer: View(df1)
   AnswerTests: omnitest('View(df1)')
@@ -299,14 +299,14 @@
 
 - Class: mult_question
   Output: |
-    請問同學，如果輸入：`left_join(df1, df2)`的話，`left_join`會以哪一個欄位名稱為基準作比對呢？（提示：df1和df2共有的名稱）
+    請問同學，如果輸入：`left_join(df1, df2)`的話，`left_join`會以哪一個欄位名稱為基準作比對呢？（提示：df1和df2共有的名稱）
   AnswerChoices: x;y;a;b
   CorrectAnswer: "x"
   AnswerTests: omnitest(correctVal = "x")
 
 - Class: cmd_question
   Output: |
-    請同學輸入：`left_join(df1, df2)`
+    請同學輸入：`left_join(df1, df2)`
   CorrectAnswer: left_join(df1, df2)
   AnswerTests: omnitest('left_join(df1, df2)')
 
@@ -322,7 +322,7 @@
 
 - Class: cmd_question
   Output: |
-    請同學輸入：`right_join(df2, df1)`。請注意，我們這次是`x = df2`。
+    請同學輸入：`right_join(df2, df1)`。請注意，我們這次是`x = df2`。
   CorrectAnswer: right_join(df2, df1)
   AnswerTests: omnitest('right_join(df2, df1)')
 
@@ -336,13 +336,13 @@
 
 - Class: cmd_question
   Output: |
-    請同學輸入：`inner_join(df1, df2)`。
+    請同學輸入：`inner_join(df1, df2)`。
   CorrectAnswer: inner_join(df1, df2)
   AnswerTests: omnitest('inner_join(df1, df2)')
 
 - Class: text
   Output: |
-    結果出現`x`欄位只剩下`1`的狀況了，`df1` 和 `df2`中都有`x = 1`的資料。
+    結果出現`x`欄位只剩下`1`的狀況了，`df1` 和 `df2`中都有`x = 1`的資料。
 
 - Class: text
   Output: |
@@ -351,7 +351,7 @@
 
 - Class: cmd_question
   Output: |
-    請同學輸入：`full_join(df1, df2)`。
+    請同學輸入：`full_join(df1, df2)`。
   CorrectAnswer: full_join(df1, df2)
   AnswerTests: omnitest('full_join(df1, df2)')
 
@@ -361,13 +361,13 @@
 
 - Class: cmd_question
   Output: |
-    請同學輸入：`anti_join(df1, df2)`。
+    請同學輸入：`anti_join(df1, df2)`。
   CorrectAnswer: anti_join(df1, df2)
   AnswerTests: omnitest('anti_join(df1, df2)')
 
 - Class: text
   Output: |
-    結果只列出`df1`中和`df2`比對失敗的資料。
+    結果只列出`df1`中和`df2`比對失敗的資料。
     這是目前為止，唯一欄位只剩下`x`的欄位，所產生的JOIN結果。
 
 - Class: text
@@ -384,13 +384,13 @@
 
 - Class: cmd_question
   Output: |
-    請同學輸入`View(df4)`看看`df4`。
+    請同學輸入`View(df4)`看看`df4`。
   CorrectAnswer: View(df4)
   AnswerTests: omnitest('View(df4)')
 
 - Class: cmd_question
   Output: |
-    接著，我們輸入`inner_join(df3, df4)`看看結果有多少列。
+    接著，我們輸入`inner_join(df3, df4)`看看結果有多少列。
   CorrectAnswer: inner_join(df3, df4)
   AnswerTests : omnitest('inner_join(df3, df4)')
 
@@ -407,13 +407,13 @@
 
 - Class: cmd_question
   Output: |
-    請同學輸入：`semi_join(df3, df4)`看看結果。
+    請同學輸入：`semi_join(df3, df4)`看看結果。
   CorrectAnswer: semi_join(df3, df4)
   AnswerTests: omnitest('semi_join(df3, df4)')
 
 - Class: text
   Output: |
-    結果幾乎等價於`df3[1:2,]`，原因是只有前兩列資料有和`df4`比對成功。
+    結果幾乎等價於`df3[1:2,]`，原因是只有前兩列資料有和`df4`比對成功。
 
 - Class: text
   Output: |

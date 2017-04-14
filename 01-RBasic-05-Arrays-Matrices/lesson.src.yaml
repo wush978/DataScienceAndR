@@ -8,31 +8,31 @@
 
 - Class : text
   Output: |
-    這門課程是要介紹R 的線性代數運算系統。線性代數在許多現代的統計方法、Data Mining方法上都很重要。
+    這門課程是要介紹R 的線性代數運算系統。線性代數在許多現代的統計方法、Data Mining方法上都很重要。
     理解R 的線性代數系統，無論是對於撰寫自己的演算法，或是了解Open Source的演算法，都是非常重要的。
 
 - Class : cmd_question
   Output: |
-    我們先來複習R 中的向量。請同學建立一個型態為numeric，由1到18的向量。
+    我們先來複習R 中的向量。請同學建立一個型態為numeric，由1到18的向量。
   CorrectAnswer: 1:18
   AnswerTests: val_is(1:18)
 
 - Class : cmd_question
   Output: |
-    我們可以利用`matrix`這個函數來建立一個矩陣。舉例來說，`matrix(1:18, 6, 3)`就可以建立一個6 乘3 的矩陣。
+    我們可以利用`matrix`這個函數來建立一個矩陣。舉例來說，`matrix(1:18, 6, 3)`就可以建立一個6 乘3 的矩陣。
     請同學試試看，並把這個矩陣寫入變數x 。
   CorrectAnswer: x <- matrix(1:18, 6, 3)
   AnswerTests: any_of_exprs('x <- matrix(1:18, 6, 3)', 'x = matrix(1:18, 6, 3)')
 
 - Class : cmd_question
   Output: |
-    要了解`matrix`，請先打開matrix的說明頁面。
+    要了解`matrix`，請先打開matrix的說明頁面。
   CorrectAnswer: help(matrix)
   AnswerTests: any_of_exprs('help(matrix)', '?matrix', 'help("matrix")', "help('matrix')")
 
 - Class : mult_question
   Output: |
-    根據matrix的說明頁面，請問以下哪些不是matrix的參數呢？
+    根據matrix的說明頁面，請問以下哪些不是matrix的參數呢？
   AnswerChoices: data;nrow;ncol;byrow;dimnames;dim
   CorrectAnswer: dim
   AnswerTests: omnitest(correctVal = 'dim')
@@ -40,7 +40,7 @@
 
 - Class : cmd_question
   Output: |
-    數學上來說，一個矩陣除了值之外，需要的就是維度的定義。而`matrix`這個函數中，`data`的參數代表該矩陣的值，
+    數學上來說，一個矩陣除了值之外，需要的就是維度的定義。而`matrix`這個函數中，`data`的參數代表該矩陣的值，
     `nrow`的部份代表該矩陣的列數，而`ncol`的部份則代表該矩陣的行數。
     根據上述的邏輯，`matrix(1:18, 6, 3)`會產生一個6 列3 行（簡稱6 乘3 ）的矩陣。
     請同學輸入`x` 看一下R 是如何印出x 這個6 乘3 的矩陣。
@@ -49,17 +49,17 @@
 
 - Class : cmd_question
   Output: |
-    請同學看看x 的屬性。
+    請同學看看x 的屬性。
   CorrectAnswer: attributes(x)
   AnswerTests: omnitest('attributes(x)')
 
 - Class : text
   Output: |
-    有一個名字叫做"dim"的屬性，值是`c(6, 3)`，代表這是一個6 乘3 的矩陣。
+    有一個名字叫做"dim"的屬性，值是`c(6, 3)`，代表這是一個6 乘3 的矩陣。
 
 - Class : cmd_question
   Output: |
-    重要的屬性，R 都會提供內建函數來方便存取。`dim`就是可以存取矩陣維度的函數。
+    重要的屬性，R 都會提供內建函數來方便存取。`dim`就是可以存取矩陣維度的函數。
     請同學試試看：`dim(x)`
   CorrectAnswer: dim(x)
   AnswerTests: test_all(omnitest('dim(x)'), val_is(c(6L, 3L)))
@@ -78,7 +78,7 @@
 
 - Class : cmd_question
   Output: |
-    R 的除了矩陣(matrix)之外，還有高維度的陣列。
+    R 的除了矩陣(matrix)之外，還有高維度的陣列。
     我們可以直接更改x 的維度到更高維。請同學試試看：`dim(x) <- c(3, 3, 2)`。
   CorrectAnswer: dim(x) <- c(3, 3, 2)
   AnswerTests: any_of_exprs('dim(x) <- c(3, 3, 2)', 'dim(x) = c(3, 3, 2)')
@@ -98,20 +98,20 @@
 
 - Class : text
   Output: |
-    在RBasic-02-Data-Structure-Vectors的課程中，我們有提過兩種方式，可以從向量中挑選一部分的值。
+    在RBasic-02-Data-Structure-Vectors的課程中，我們有提過兩種方式，可以從向量中挑選一部分的值。
     一種是用座標，另外一種則是使用邏輯向量。
     在矩陣和陣列上，還是可以用這兩種方式從矩陣或陣列中挑選一部分的值。
 
 - Class : text
   Output: |
-    我們可以利用中括號`[`來取出矩陣或陣列中部分的值。舉例來說，如果x 是矩陣，`x[2,1]`會取出x 第二列第一行的值。
+    我們可以利用中括號`[`來取出矩陣或陣列中部分的值。舉例來說，如果x 是矩陣，`x[2,1]`會取出x 第二列第一行的值。
     陣列的狀況也是類似的。
     `x[1,2,3]`則會拿出第一個維度的第1 個方向，第二個維度的第2 個方向，第三個維度的第3 個方向。
     這就是以座標的方式做挑選。
 
 - Class : mult_question
   Output: |
-    我們來測測看同學是否理解剛剛的說明。
+    我們來測測看同學是否理解剛剛的說明。
     目前相當於`array(1:18, c(3, 3, 2))`的x , `x[1,2,2]`的值會是多少呢？
   AnswerChoices: 1;10;13;18
   CorrectAnswer: 13
@@ -120,7 +120,7 @@
 
 - Class : mult_question
   Output: |
-    在R 中，矩陣的資料順序是：`c(x[1,1], x[2,1], x[3,1], ...)`。也就是說，如果我們下指令：`matrix(1:18, 3, 6)`，
+    在R 中，矩陣的資料順序是：`c(x[1,1], x[2,1], x[3,1], ...)`。也就是說，如果我們下指令：`matrix(1:18, 3, 6)`，
     則x[1,1]會是1, x[2,1]會是2, x[3,1]是3, x[1,2]是4, 以此類推。高維度的矩陣也是類似。
     我們來試試看，目前的x 是一個高維陣列，請問：x[3,1,1]的值會是多少呢？
   AnswerChoices: 1;3;7;10;18
@@ -129,14 +129,14 @@
 
 - Class : cmd_question
   Output: |
-    如果給一個陣列，而只是要取單一個方向的向量，也可以適當的使用`[`完成取出。
+    如果給一個陣列，而只是要取單一個方向的向量，也可以適當的使用`[`完成取出。
     請同學再印出x 一次。
   CorrectAnswer: x
   AnswerTests: val_is(array(1:18, c(3, 3, 2)))
 
 - Class : cmd_question
   Output: |
-    我們可以看到，在螢幕上的`, , 2` 之後，顯示出一個3 乘3 的矩陣。
+    我們可以看到，在螢幕上的`, , 2` 之後，顯示出一個3 乘3 的矩陣。
     這個矩陣即是沿著第三個維度的第2個方向所切面出來的矩陣。
     也是螢幕上`, , 2`所代表的意思。
     而在R 中，我們可以利用`x[,,2]`取得這個矩陣。請取得這個矩陣，並把它存到變數x2中。
@@ -145,20 +145,20 @@
 
 - Class : cmd_question
   Output: |
-    我們先印出x2來看看。
+    我們先印出x2來看看。
   CorrectAnswer: x2
   AnswerTests: test_all(omnitest('x2'), val_is(matrix(10:18, 3, 3)))
 
 - Class : cmd_question
   Output: |
-    如果我們要選出第一列，只要輸入`x2[1,]`就可以了。請看一下x2的輸出，在第一列的左方有`[1,]`的圖示，即是提示可以用`x2[1,]`來選出第一列。
+    如果我們要選出第一列，只要輸入`x2[1,]`就可以了。請看一下x2的輸出，在第一列的左方有`[1,]`的圖示，即是提示可以用`x2[1,]`來選出第一列。
     我們請同學試試看選出`x2[1,]`
   CorrectAnswer: x2[1,]
   AnswerTests: test_all(omnitest('x2[1,]'), val_is(c(10, 13, 16)))
 
 - Class : cmd_question
   Output: |
-    如果要直接從x 中，呼叫` , , 2` 之下矩陣裡的第一列，我們可以使用：`x[1,,2]`。
+    如果要直接從x 中，呼叫` , , 2` 之下矩陣裡的第一列，我們可以使用：`x[1,,2]`。
     這裡的矩陣，在左方有`[1,]`、`[2,]`和`[3,]`，代表著若要取出對應的列，我們要分別使用：`x[1,]`、`x[2,]`和`x[3,]`這樣的符號。
     由於目前x 是一個三個維度的陣列，最後，還需要加上上述的：`, , 2`。
     所以若是要執行「呼叫` , , 2` 之下矩陣裡的第一列」，就會變成：`x[1, , 2]`。請同學試試看。
@@ -167,36 +167,36 @@
 
 - Class : cmd_question
   Output: |
-    回答下一個問題之前，我們先印出x。
+    回答下一個問題之前，我們先印出x。
   CorrectAnswer: x
   AnswerTests: test_all(omnitest("x"), val_is(array(1:18, c(3, 3, 2))))
 
 - Class : mult_question
   Output: |
-    請問`x[,3,1]`的值會是什麼呢？
+    請問`x[,3,1]`的值會是什麼呢？
   AnswerChoices: c(7,8,9);c(3,6,9);c(16,17,18);c(12,15,18)
   CorrectAnswer: c(7,8,9)
   AnswerTests: omnitest(correctVal = "c(7,8,9)")
 
 - Class : text
   Output: |
-    也可以利用中括號`[]`搭配邏輯向量，取出矩陣或陣列中的值。
+    也可以利用中括號`[]`搭配邏輯向量，取出矩陣或陣列中的值。
     R 會根據邏輯向量在`[]`中的位置，選擇該維度，只挑出該邏輯向量為TRUE的座標。
 
 - Class : mult_question
   Output: |
-    請問同學，依照上述的說明，`x[c(TRUE, TRUE, FALSE), , ]`的效果等同於以下哪一個程式碼呢？
+    請問同學，依照上述的說明，`x[c(TRUE, TRUE, FALSE), , ]`的效果等同於以下哪一個程式碼呢？
   AnswerChoices: x[1:2,,];x[,1:2,];x[,,1:2]
   CorrectAnswer: "x[1:2,,]"
   AnswerTests: omnitest(correctVal = "x[1:2,,]")
 
 - Class : text
   Output: |
-    接著我們介紹如何修改矩陣和陣列的元素。
+    接著我們介紹如何修改矩陣和陣列的元素。
 
 - Class : cmd_question
   Output: |
-    如果我們要修改矩陣的值，只需要搭配使用`[]`和`<-`就可以了。
+    如果我們要修改矩陣的值，只需要搭配使用`[]`和`<-`就可以了。
     首先，如果我們要將`x[1,1,1]`的值更改為2，
     我們可以使用`x[1,1,1] <- 2`。請同學試試看。
   CorrectAnswer: x[1,1,1] <- 2
@@ -204,13 +204,13 @@
 
 - Class : cmd_question
   Output: |
-    我們可以印出`x[1,1,1]`（不是印出全部的x）確認數值是否被修改成功。
+    我們可以印出`x[1,1,1]`（不是印出全部的x）確認數值是否被修改成功。
   CorrectAnswer: x[1,1,1]
   AnswerTests: omnitest('x[1,1,1]', 2)
 
 - Class : cmd_question
   Output: |
-    要更改一整排的資料也是類似的方法。
+    要更改一整排的資料也是類似的方法。
     舉例來說，`x[,1,1] <- 3`可以把`, , 1`底下矩陣的`[,1]`該行改成`c(3,3,3)`向量。
     這樣的運算也是向量式，R 會自動重複3 直到把x[,1,1]填滿。
   CorrectAnswer: x[,1,1] <- 3
@@ -218,22 +218,22 @@
 
 - Class : cmd_question
   Output: |
-    我們可以把`x[,,1]`印出來看看更改後的效果。
+    我們可以把`x[,,1]`印出來看看更改後的效果。
   CorrectAnswer: x[,,1]
   AnswerTests: val_is(matrix(c(3,3,3,4:9), 3, 3))
 
 - Class : text
   Output: |
-    希望這樣的說明可以讓同學了解R 如何存取矩陣和陣列的資料。
+    希望這樣的說明可以讓同學了解R 如何存取矩陣和陣列的資料。
 
 - Class : text
   Output: |
-    接下來說明的是陣列和矩陣的向量式運算。
+    接下來說明的是陣列和矩陣的向量式運算。
     先複習一下在向量的狀況下，R 的向量式運算。
 
 - Class : mult_question
   Output: |
-    請問`c(1,2,3) + c(2,4,6)`的結果會是？
+    請問`c(1,2,3) + c(2,4,6)`的結果會是？
   AnswerChoices: c(3,6,9);c(3);c(3,4,5)
   CorrectAnswer: c(3,6,9)
   AnswerTests: omnitest(correctVal = 'c(3,6,9)')
@@ -241,7 +241,7 @@
 
 - Class : mult_question
   Output: |
-    請問`c(1,2,3) + 2`的結果會是？
+    請問`c(1,2,3) + 2`的結果會是？
   AnswerChoices: c(3,4,5);c(3,2,3);c(3)
   CorrectAnswer: c(3,4,5)
   AnswerTests: omnitest(correctVal = 'c(3,4,5)')
@@ -249,28 +249,28 @@
 
 - Class : cmd_question
   Output: |
-    先針對矩陣的向量式運算進行說明。它和向量的運算非常類似，在運算時R 也會自動比對位置，並且在相同運算位置上做運算。
+    先針對矩陣的向量式運算進行說明。它和向量的運算非常類似，在運算時R 也會自動比對位置，並且在相同運算位置上做運算。
     請同學先印出`x[,,1]`。
     
 - Class : cmd_question
   Output: |
-   再請同學印出`x[,,2]`。
+   再請同學印出`x[,,2]`。
 - Class : cmd_question
   Output: 再請同學試試看：`x[,,1] + x[,,2]`
 
 - Class : text
   Output: |
-   這裡相加的結果，就是將`x[,,1]`和`x[,,2]`對應的位置做相加。同學可以比對前面的輸出結果。
+   這裡相加的結果，就是將`x[,,1]`和`x[,,2]`對應的位置做相加。同學可以比對前面的輸出結果。
 
 - Class : cmd_question
   Output: |
-    而當維度不相同的時候，R 會自動重複維度較低的那方。
+    而當維度不相同的時候，R 會自動重複維度較低的那方。
     舉例來說，當一邊是矩陣，一邊是單值的時候，運算相對簡單。
     請同學試試看：`x[,,1] + 1`
 
 - Class : mult_question
   Output: |
-    但是，當兩邊都是矩陣或陣列，並且長度不一樣時，就不容易了。
+    但是，當兩邊都是矩陣或陣列，並且長度不一樣時，就不容易了。
     先跟同學複習一下，陣列的值的排列方式。
     如果`y <- array(1:8, c(2, 2, 2))`，那`y[1,1,1]`是1 、`y[2,1,1]`是2 。
     R 會將`1:8`的值依照第一個維度（列）、第二個維度（行）到第三個維度，一個一個填入。
@@ -281,12 +281,12 @@
 
 - Class : cmd_question
   Output: |
-    當陣列和向量相加的時候，R 會一直重複向量，直到向量的長度和陣列需要的長度相符合。舉例來說，一個3 乘2 乘2 的陣列需要12個值。
+    當陣列和向量相加的時候，R 會一直重複向量，直到向量的長度和陣列需要的長度相符合。舉例來說，一個3 乘2 乘2 的陣列需要12個值。
     接著，R 會把這個向量轉換成和陣列一樣的維度，然後在對應的位置做相加。請同學試試看：`matrix(1:4, 2, 2) + 1:2`
 
 - Class : cmd_question
   Output: |
-    另外提及一件重要的事情，是關於上一個課程中有提到屬性的概念。
+    另外提及一件重要的事情，是關於上一個課程中有提到屬性的概念。
     現在的變數x 也是個R 物件，也有屬性。請同學查一下它的屬性。
   CorrectAnswer: attributes(x)
   AnswerTests: omnitest('attributes(x)')
@@ -294,7 +294,7 @@
 
 - Class : cmd_question
   Output: |
-    同學是否有看到名稱叫做dim 的一個整數向量呢？這個dim 屬性非常重要，所有的矩陣和陣列，都是一般的向量加上dim 這個屬性。
+    同學是否有看到名稱叫做dim 的一個整數向量呢？這個dim 屬性非常重要，所有的矩陣和陣列，都是一般的向量加上dim 這個屬性。
     R 也提供了`dim` 這個函數讓使用者可以存取dim 屬性。
     舉例來說，`dim(x)`會印出x 的維度。而我們可以透過`dim(x) <- NULL`來移除x 的dim 屬性。
     請同學試試看`dim(x) <- NULL`。
@@ -303,44 +303,44 @@
 
 - Class : cmd_question
   Output: |
-    請同學印出`x`來看看。
+    請同學印出`x`來看看。
 
 - Class : text
   Output: |
-    是不是就變成向量了呢？
+    是不是就變成向量了呢？
 
 - Class : text
   Output: |
-    R 中的陣列和向量的向量式運算，也可以回到兩個向量的運算。
+    R 中的陣列和向量的向量式運算，也可以回到兩個向量的運算。
     差別在於它們多了維度的屬性，所以當維度差異太大的時候，R 會認為向量式運算無效。
     所以一般來說只會拿單值或向量去和陣列做運算，或是維度相同的矩陣或陣列進行運算。
 
 - Class : text
   Output: |
-    基本上，`+`、`-`、`*`和`/`都會使用向量式運算。
+    基本上，`+`、`-`、`*`和`/`都會使用向量式運算。
 
 - Class : cmd_question
   Output: |
-    在R 中，使用`cbind`和`rbind`則可以合併兩個矩陣。
+    在R 中，使用`cbind`和`rbind`則可以合併兩個矩陣。
     舉例來說，`cbind(matrix(1:4, 2, 2), matrix(1:4, 2, 2))`會將兩個矩陣的行合併，運算之後會變成2 乘 4的矩陣。請同學試試看。
   CorrectAnswer: cbind(matrix(1:4, 2, 2), matrix(1:4, 2, 2))
   AnswerTests: omnitest('cbind(matrix(1:4, 2, 2), matrix(1:4, 2, 2))')
 
 - Class : cmd_question
   Output: |
-    使用`rbind(matrix(1:4, 2, 2), matrix(1:4, 2, 2))`則會把兩個矩陣的列合併，
+    使用`rbind(matrix(1:4, 2, 2), matrix(1:4, 2, 2))`則會把兩個矩陣的列合併，
     運算之後會變成4 乘 2的矩陣。請同學試試看。
   CorrectAnswer: rbind(matrix(1:4, 2, 2), matrix(1:4, 2, 2))
   AnswerTests: omnitest('rbind(matrix(1:4, 2, 2), matrix(1:4, 2, 2))')
 
 - Class : text
   Output: |
-    最後，我們介紹一些和線性代數相關的運算子和函數。
+    最後，我們介紹一些和線性代數相關的運算子和函數。
     如果對線性代數不熟悉的同學，可以在看過反矩陣之後跳過（使用`skip()`）後面的課程。
 
 - Class : cmd_question
   Output: |
-    在R 中兩個矩陣要作矩陣乘法，就是使用`%*%`這個運算符號。請同學試試看：`matrix(1:6, 2, 3) %*% matrix(3:8, 3, 2)`
+    在R 中兩個矩陣要作矩陣乘法，就是使用`%*%`這個運算符號。請同學試試看：`matrix(1:6, 2, 3) %*% matrix(3:8, 3, 2)`
   CorrectAnswer: matrix(1:6, 2, 3) %*% matrix(3:8, 3, 2)
   AnswerTests: omnitest('matrix(1:6, 2, 3) %*% matrix(3:8, 3, 2)', matrix(1:6, 2, 3) %*% matrix(3:8, 3, 2))
 
@@ -370,17 +370,17 @@
 
 - Class : cmd_question
   Output: |
-    再印出：`t(matrix(1:4, 2, 2))`
+    再印出：`t(matrix(1:4, 2, 2))`
 
 - Class : cmd_question
   Output: |
-    我們可以用`diag`快速建構對角化的矩陣。舉例來說：`diag(1, 3)`會建立出3 乘3 的單位矩陣。請試試看。
+    我們可以用`diag`快速建構對角化的矩陣。舉例來說：`diag(1, 3)`會建立出3 乘3 的單位矩陣。請試試看。
   CorrectAnswer: diag(1, 3)
   AnswerTests: omnitest("diag(1, 3)")
 
 - Class : cmd_question
   Output: |
-    如果已知` A %*% x = b `，給定`A` 和`b` ，我們就可以用`solve` 解出 x 。
+    如果已知` A %*% x = b `，給定`A` 和`b` ，我們就可以用`solve` 解出 x 。
     舉例來說，若`A`是`matrix(1:4, 2, 2)`、b 是`c(3, 8)`，`solve(A, b)`即可以給出`x`。
     變數`A`和`b`已經存在了，所以請同學直接解出`x`並且把它存到`x`之中。
   CorrectAnswer: x <- solve(A, b)
@@ -388,19 +388,19 @@
 
 - Class : cmd_question
   Output: |
-    我們來驗算一下，`A %*% x`的結果是否真的是`b`呢?
+    我們來驗算一下，`A %*% x`的結果是否真的是`b`呢?
   CorrectAnswer: A %*% x
   AnswerTests: omnitest('A %*% x')
 
 - Class : cmd_question
   Output: |
-    如果直接使用`solve(A)`，則R 會算出A 的反矩陣。請同學試試看。
+    如果直接使用`solve(A)`，則R 會算出A 的反矩陣。請同學試試看。
   CorrectAnswer: solve(A)
   AnswerTests: omnitest('solve(A)')
 
 - Class : cmd_question
   Output: |
-    使用`eigen(A)`則可以解出A 的特徵值(eigenvalues)和特徵向量(eigenvectors)。
+    使用`eigen(A)`則可以解出A 的特徵值(eigenvalues)和特徵向量(eigenvectors)。
     我們可以試試看： `A %*% eigen(A)$vectors[,1] / eigen(A)$vectors[,1]`
     是不是相除後，會拿到一模一樣的值呢？
     這裡的`$`用法，等到下一個課程，我們會有詳細的說明。
@@ -409,7 +409,7 @@
 
 - Class : script
   Output: |
-    最後，我們請同學用所學到的技巧，做一個簡短的練習。
+    最後，我們請同學用所學到的技巧，做一個簡短的練習。
     請同學在完成之後存檔，並輸入`submit()`來檢查結果是否符合預期。
     如果同學在檔案中看到亂碼，請使用Rstudio 左上角的File -> Reopen
     With Encoding... -> 選取：UTF-8

@@ -8,12 +8,12 @@
 
 - Class: text
   Output: |
-    這次個課程將著重於如何用R 讀寫關聯式資料庫。
+    這次個課程將著重於如何用R 讀寫關聯式資料庫。
     **因為本次課程會操作資料庫，所以在接關功能上會有些狀況。同學請儘量一口氣完成這門課程**
 
 - Class: text
   Output: |
-    資料庫（Database）泛指能夠儲存資料的檔案櫃。
+    資料庫（Database）泛指能夠儲存資料的檔案櫃。
     使用者可以對檔案中的資料進行新增、擷取、更新和刪除。
 
 - Class: text
@@ -23,23 +23,23 @@
 
 - Class: text
   Output: |
-    關聯式資料庫背後的設計牽涉到一種叫「Relational Model」的數學，並且由許多資訊科學的學者發展出的理論在背後支撐。
+    關聯式資料庫背後的設計牽涉到一種叫「Relational Model」的數學，並且由許多資訊科學的學者發展出的理論在背後支撐。
     而關聯式資料庫設計的成功，則可以從現代資訊科學在企業的應用層面所體現。
 
 - Class: text
   Output: |
-    在資訊時代，幾乎所有日常生活中碰觸到的重要資訊，都會過經過關聯式資料庫。
+    在資訊時代，幾乎所有日常生活中碰觸到的重要資訊，都會過經過關聯式資料庫。
     例如購票系統、會計系統、倉儲系統等等。
     關聯式資料庫的設計可以滿足廣泛的系統需求。
 
 - Class: text
   Output: |
-    而有數據的地方，就有潛在的分析需求。
-    R 語言身為大數據時代最火熱的工具之一，在與各種資料庫系統的串接上，自然有一席之地。
+    而有數據的地方，就有潛在的分析需求。
+    R 語言身為大數據時代最火熱的工具之一，在與各種資料庫系統的串接上，自然有一席之地。
 
 - Class: text
   Output: |
-    這次課程中，我們會描述R 語言如何透過DBI和其系列套件，操作關聯式資料庫。
+    這次課程中，我們會描述R 語言如何透過DBI和其系列套件，操作關聯式資料庫。
     而這裡我們以SQLite這套精巧的關聯式資料庫系統為例。
 
 - Class: text
@@ -51,7 +51,7 @@
 
 - Class: cmd_question
   Output: |
-    請同學先安裝RSQLite套件。
+    請同學先安裝RSQLite套件。
     它是R 與SQLite資料庫之間的橋樑。
     專業的術語叫：「客戶端」（Client）。
   CorrectAnswer: check_then_install("RSQLite", "1.0.0")
@@ -60,23 +60,23 @@
 
 - Class: cmd_question
   Output: |
-    請同學載入RSQLite。
+    請同學載入RSQLite。
   CorrectAnswer: library(RSQLite)
   AnswerTests: test_search_path("RSQLite")
 
 - Class: text
   Output: |
-    雖然目前市面上有許多不同的SQL 資料庫，但是這些資料庫在R 中操作起來都是非常類似的。
+    雖然目前市面上有許多不同的SQL 資料庫，但是這些資料庫在R 中操作起來都是非常類似的。
     R 都是透過DBI 套件所定義的函數，讓使用者操作資料庫。
 
 - Class: text
   Output: |
-    接下來的內容中，我們要帶同學操作一次SQLite 資料庫的連線、寫入資料、讀取資料、更改資料和刪除資料。
+    接下來的內容中，我們要帶同學操作一次SQLite 資料庫的連線、寫入資料、讀取資料、更改資料和刪除資料。
     這樣的操作是最基本的，未來在使用R 操作其他資料庫，甚至是NoSQL等外部儲存裝置時，流程也是一樣的：連線、寫入、讀取、更改和刪除。
 
 - Class: cmd_question
   Output: |
-    在跟同學繼續解釋之前，請先連接SQLite 資料庫。
+    在跟同學繼續解釋之前，請先連接SQLite 資料庫。
     我們已經事先準備了一個SQLite資料庫的檔案，並且將路徑存在：`db_path`變數之中。
     請同學輸入：`drv <- dbDriver("SQLite")`以取得連接SQLite 資料庫的方式。
   CorrectAnswer: drv <- dbDriver("SQLite")
@@ -84,7 +84,7 @@
 
 - Class: cmd_question
   Output: |
-    接著我們和SQLite 資料庫建立連線：`db <- dbConnect(drv, db_path)`。
+    接著我們和SQLite 資料庫建立連線：`db <- dbConnect(drv, db_path)`。
   CorrectAnswer: db <- dbConnect(drv, db_path)
   AnswerTests: omnitest('db <- dbConnect(drv, db_path)')
 
@@ -109,7 +109,7 @@
 
 - Class: mult_question
   Output: |
-    請問下列哪一個選項「不是」DBI套件`dbWriteTable`的參數？
+    請問下列哪一個選項「不是」DBI套件`dbWriteTable`的參數？
   AnswerChoices: conn;name;value;overwrite
   CorrectAnswer: "overwrite"
   AnswerTests: omnitest(correctVal = "overwrite")
@@ -132,7 +132,7 @@
 
 - Class: mult_question
   Output: |
-    此時的說明頁面左上角，會註明這份文件是來自RSQLite套件。
+    此時的說明頁面左上角，會註明這份文件是來自RSQLite套件。
     請同學參考文件內容後，回答以下問題：`overwrite`是不是dbWRiteTable的參數呢？
   AnswerChoices: yes;no
   CorrectAnswer: "yes"
@@ -140,19 +140,19 @@
 
 - Class: text
   Output: |
-    這是R 在處理SQL 資料庫的設計。
+    這是R 在處理SQL 資料庫的設計。
     如果使用者只有操作到DBI的dbWriteTable提供的功能，那未來相同的程式碼運作在其他的資料庫系統時，不需要太大的修改即可運作。
     但是如果是用了RSQLite提供的功能（如overwrite），那在切換資料庫時，就需確認新的資料庫的R 套件是否提供類似的功能。
 
 - Class: text
   Output: |
-    在解釋`dbWriteTable`之前，我們要先對資料庫系統有一點簡單的認知。
+    在解釋`dbWriteTable`之前，我們要先對資料庫系統有一點簡單的認知。
     資料庫在處理數據時，會將數據放在一個又一個的表格中。
     這和R 會把一個data.frame存放到對應的變數之中是相似的。
 
 - Class: text
   Output: |
-    回到`DBI::dbWriteTable(connection, name, value, ...)`的說明，R 會嘗試透過connection物件，將value的data.frame寫入到名稱為name的表格中。
+    回到`DBI::dbWriteTable(connection, name, value, ...)`的說明，R 會嘗試透過connection物件，將value的data.frame寫入到名稱為name的表格中。
 
 - Class: cmd_question
   Output: |
@@ -163,7 +163,7 @@
 
 - Class: text
   Output: |
-    欄位名稱很清楚的註明每個欄位的數據意義。
+    欄位名稱很清楚的註明每個欄位的數據意義。
 
 - Class: cmd_question
   Output: |
@@ -214,7 +214,7 @@
 
 - Class: text
   Output: |
-    這次應該會看到38或57筆資料（因為lvr_land總共有19筆資料，寫入兩次後會有38筆，三次則會有57筆），
+    這次應該會看到38或57筆資料（因為lvr_land總共有19筆資料，寫入兩次後會有38筆，三次則會有57筆），
     如果不幸需要接關的同學可能看到更多筆...
 
 - Class: cmd_question
@@ -285,7 +285,7 @@
 
 - Class: cmd_question
   Output: |
-    上一關所拿到的`rs`物件，就是整個資料集的「代理」。
+    上一關所拿到的`rs`物件，就是整個資料集的「代理」。
     我們可以利用`fetch`方法，一次拿一點資料出來。
     請同學試試看：`fetch(rs, 1)`。
   CorrectAnswer: fetch(rs, 1)
@@ -293,20 +293,20 @@
 
 - Class: cmd_question
   Output: |
-    請同學再試一次：`fetch(rs, 1)`（可以按一下 ↑ ，正常安裝的R 會顯示上一個輸入）
+    請同學再試一次：`fetch(rs, 1)`（可以按一下 ↑ ，正常安裝的R 會顯示上一個輸入）
   CorrectAnswer: fetch(rs, 1)
   AnswerTests: omnitest('fetch(rs, 1)')
 
 - Class: text
   Output: |
-    同學應該會注意到，兩次的結果是不同的。
+    同學應該會注意到，兩次的結果是不同的。
     這是因為在第一次`dbSendQuery`指令完成之後，R 和資料庫就把結果暫存到某個地方，並且將代理物件(也就是`rs`)回傳。
     之後每次執行`fetch`指令時，R 就會「依照順序」把結果一個又一個的回傳給使用者。
     如果使用者每次想多拿一些資料，則可以更改第二個參數，如：`fetch(rs, 100)`一次取出100筆資料。
 
 - Class: cmd_question
   Output: |
-    當我們不需要再使用`rs`物件時，就刪除它：`dbClearResult(rs)`。
+    當我們不需要再使用`rs`物件時，就刪除它：`dbClearResult(rs)`。
     請同學試試看。
   CorrectAnswer: dbClearResult(rs)
   AnswerTests: omnitest('dbClearResult(rs)')
@@ -326,7 +326,7 @@
     
 - Class: text
   Output: |
-    最後，我們示範資料庫的transaction功能。
+    最後，我們示範資料庫的transaction功能。
     這在處理資料時，也是非常重要的操作步驟。
 
 - Class: text
@@ -361,7 +361,7 @@
 
 - Class: cmd_question
   Output: |
-    請同學再次輸入：db <- dbConnect(drv, db_path)`。
+    請同學再次輸入：db <- dbConnect(drv, db_path)`。
   CorrectAnswer: db <- dbConnect(drv, db_path)
   AnswerTests: omnitest('db <- dbConnect(drv, db_path)')
 
@@ -432,7 +432,7 @@
 
 - Class: text
   Output: |
-    在這之後，就算我們斷線重連，"CO2"表格也不會回來了。
+    在這之後，就算我們斷線重連，"CO2"表格也不會回來了。
 
 - Class: text
   Output: |
