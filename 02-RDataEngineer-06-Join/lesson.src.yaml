@@ -266,7 +266,6 @@
     除了`left_join`之外，dplyr還提供了6 種join函數。
     他們的參數都非常類似：`x`、`y`和`by`，而且在用法和比對的方法上也一模一樣。
     他們的差異，在於當比對結束之後，會產生不同資料範圍的data.frame。
-  AnswerTests: browseURL("http://www.google.com")
 
 - Class : cmd_question
   Output: |
