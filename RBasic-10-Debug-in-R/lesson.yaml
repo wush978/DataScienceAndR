@@ -1,0 +1,81 @@
+- Class: meta
+  Course: DSC2015_RBasic_Part2
+  Lesson: lesson3 - debug and undebug
+  Author: Noah
+  Type: Standard
+  Organization: DSC 2015 R Tutorial
+  Version: 2.3.1
+
+- Class: text
+  Output: 範例1：debug/undebug 用法：
+
+- Class: text
+  Output: 提醒一下：如果已經有太多變數、函式時候，實在覺得很亂，想一次全部清除R或R Studio的變數以及名稱，可以使用這個指令： rm(list=ls())
+
+- Class: text
+  Output: debug() 是R所提供很方便的除錯指令，
+
+- Class: text
+  Output: 在function出現error，或是function的結果和自己計算的不一樣的時候，他可以讓程式寫作者一步一步的檢查自己的function，看看是什麼地方出錯。
+
+- Class: mult_question
+  Output: 執行的方法很簡單，比如之前我們寫過hello_world_r()這個function，那要輸入哪一個呢？
+  AnswerChoices: debug(hello_world_r);debug() = hello_world_r;hello_world_r=debug();debug(hello_world_r(my_name))
+  CorrectAnswer: debug(hello_world_r)
+  AnswerTests: omnitest(correctVal='debug(hello_world_r)')
+  Hint: 請選擇debug(hello_world_r)，不要選擇有加my_name的那個選項，因為這個時候還沒開始執行除錯
+
+
+- Class: text
+  Output: 但是，光輸入debug(hello_world_r)也沒有作用，沒錯，這只是告訴R，現在hello_world_r要進入除錯模式，而不是一般正常的執行的模式
+
+- Class: text
+  Output: 真正要進入除錯模式，debug()之後，只要按照平常的function執行方法就可以了。像是hello_world_r()，或是hello_world_r(my_name)。
+
+- Class: text
+  Output: 進入除錯模式，有人有注意到console命令列中原本[>]的符號變成[Browse[2]> ]了，真是有好的觀察力，柯南都要拜你為師了
+
+- Class: text
+  Output: 簡單介紹一下R 裏面Browse，簡單說Browse就是目前執行第幾個function，而括號內的數字就是function中第幾個function執行後所輸出的結果。
+
+- Class: text
+  Output: 在執行R function 或指令之後，例如print("I Love R")，通常輸出結果會看到[1] "I Love R"的結果，最前面[1]所代表的意思就是Browse[1]，也就是第一個function執行後所顯示的結果。
+
+- Class: text
+  Output: 再來，因為hello_world_r()這個function裏面沒有呼叫或執行其他的function，所以hello_world_r()執行後的結果，只有Browse[1]的機會，而R會把Browse[1]簡稱為[1]
+
+- Class: text
+  Output: 有點難懂，對嗎？沒關係，多玩多學就知道了，
+
+- Class: text
+  Output: 還記得前面有輸入debug(hello_world_r)嗎？這就代表debug會變成第一個function，而hello_world_r()就變成debug()中所呼叫的第二個function，也就是Browse[2]了。
+
+
+- Class: mult_question
+  Output: 那如果hello_world_r()裏面還有呼叫其他的function，例如：有另一個hello_world_r2()的話，而且現在不是debug() 的時候，hello_world_r2()所執行後的結果，前面會顯示什麼？
+  AnswerChoices: Browse[2];Browse[3];Browse[0];Browse[1]
+  CorrectAnswer: Browse[2]
+  AnswerTests: omnitest(correctVal='Browse[2]')
+  Hint: 請選擇Browse[2]，因為現在hello_world_r()不是在debug模式下。
+
+- Class: mult_question
+  Output: 很好，那如果在debug模式下的hello_world_r()，這時候執行hello_world_r2()所執行後的結果，前面會顯示什麼？
+  AnswerChoices: Browse[2];Browse[3];Browse[0];Browse[1];Browse[4]
+  CorrectAnswer: Browse[3]
+  AnswerTests: omnitest(correctVal='Browse[3]')
+  Hint: 請選擇Browse[3]，因為現在hello_world_r()已經在debug模式下了。
+
+- Class: text
+  Output: 這樣有比較知道了嗎？很好。
+
+- Class: text
+  Output: 這時候，我們都知道怎麼進入debug了，但好像每次執行hello_world_r()的時候，都會進入debug模式，這實在很煩，因為hello_world_r的問題都已經解決了阿，這要怎麼辦呢？
+
+- Class: text
+  Output: 還記得最前面有說過debug / undebug嗎？這時候，只要在hello_world_r()，在一次用undebug的方法，就可以解除hello_world_r每次都進入debug模式了。
+
+- Class: text
+  Output: 方法就是：undebug(hello_world_r)
+
+- Class: text
+  Output: 謝謝各位，debug/undebug的教學就到這邊。
