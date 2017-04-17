@@ -1,0 +1,9 @@
+- Class: meta
+  Course: DataScienceAndR
+  Lesson: RBasic-Probability-Distribution
+  Author: Summit Suen
+  Type: Standard
+  Organization: Taiwan R User Group
+  Version: 0.1
+- Class: text
+  Output: 拉皮測試測試
