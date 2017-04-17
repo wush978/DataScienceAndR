@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2016/wi">
+	<Product Name="DataScienceAndR" Manufacturer="Wush Wu"
+		Id = "CE4CB908-4195-45C6-96F6-42181198E393"
+		UpgradeCode="34983DD5-D38E-4D26-AD33-2417CBC19014"
+		Language="1033"
+		Codepage="1252"
+		Version="1.0.0">
+		<Package InstallerVersion="200" Compressed="yes" Comments="Windows Installer Package"/>
+    <Media Id="1" Cabinet="product.cab" EmbedCab="yes"/>
+
+		<Directory Id="TARGETDIR" Name="SourceDir">
+			<Directory Id="AppDataFolder">
+			  <Directory Id="INSTALLDIR" Name="DataScienceAndR">
+			  </Directory>
+			</Directory>
+      <Directory Id="ProgramMenuFolder">
+          <Directory Id="ApplicationProgramsFolder" Name="DataScienceAndR"/>
+      </Directory>		
+		</Directory>
+
+    <DirectoryRef Id="ApplicationProgramsFolder">
+      <Component Id="ApplicationShortcut" Guid="7103FFAC-487C-4A3A-B155-C41D2445E629">
+        <Shortcut Id="ApplicationStartMenuShortcut" 
+                  Name="RStudio-1.0.136"
+                  Description="Customized Rstudio and R for DataScienceAndR"
+                  Target="libs\RStudio-1.0.136\bin\rstudio.exe"
+                  WorkingDirectory="INSTALLDIR"/>
+      </Component>
+    </DirectoryRef>
+
+		<Feature Id="Deployment" Title="Deployment" Level="1">
+		  <ComponentGroupRef Id="libs"/>
+		  <ComponentRef Id="ApplicationShortcut"/>
+		</Feature>
+  </Product>
+</Wix>
