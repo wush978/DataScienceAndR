@@ -1,0 +1,18 @@
+<slide class="{{ slide.class }}" id="{{ slide.id }}" style="background-image: url('{{page.url.framework}}/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  {{# slide.header }}
+  <hgroup>
+    {{{ slide.header}}}
+  </hgroup>
+  {{/ slide.header }}
+  <article data-timings="{{ slide.dt }}">
+    {{{ slide.content }}}
+  </article>
+  <!-- Presenter Notes -->
+  {{# slide.pnotes }}
+  <aside class="note" id="{{ id }}">
+    <section>
+      {{{ html }}}
+    </section>
+  </aside>
+  {{/ slide.pnotes }}
+</slide>

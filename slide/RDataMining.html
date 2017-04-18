@@ -1,0 +1,2413 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>R 語言和Data Mining</title>
+  <meta charset="utf-8">
+  <meta name="description" content="R 語言和Data Mining">
+  <meta name="author" content="Wush Wu">
+  <meta name="generator" content="slidify" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <link rel="stylesheet" href="libraries/frameworks/io2012-wush/css/default.css" media="all" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012-wush/css/phone.css" 
+    media="only screen and (max-device-width: 480px)" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012-wush/css/slidify.css" >
+  <link rel="stylesheet" href="libraries/highlighters/highlight.js/css/zenburn.css" />
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->  <link rel=stylesheet href="./assets/css/custom.css"></link>
+<link rel=stylesheet href="./assets/css/ribbons.css"></link>
+
+  
+  <!-- Grab CDN jQuery, fall back to local if offline -->
+  <script src="libraries/frameworks/io2012-wush/js/jquery-1.7.min.js"></script>
+  <!-- <script>window.jQuery || document.write('<script src="libraries/widgets/quiz/js/jquery.js"><\/script>')</script> -->
+  <script data-main="libraries/frameworks/io2012-wush/js/slides" 
+    src="libraries/frameworks/io2012-wush/js/require-1.0.8.min.js">
+  </script>
+  
+  
+
+</head>
+<body style="opacity: 0">
+  <slides class="layout-widescreen">
+    
+    <!-- LOGO SLIDE -->
+        <slide class="title-slide segue nobackground">
+  <hgroup class="auto-fadein">
+    <h1>R 語言和Data Mining</h1>
+    <h2></h2>
+    <p>Wush Wu<br/></p>
+  </hgroup>
+  <article></article>  
+</slide>
+    
+
+    <!-- SLIDES -->
+    <slide class="largecontent" id="slide-1" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>目錄</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>R 語言的視覺化</li>
+<li>R 語言的Clustering 相關套件介紹</li>
+<li>R 語言的Classification 相關套件介紹</li>
+<li>R 語言的Frequency Pattern Mining 相關套件介紹</li>
+<li>R 語言的Text Mining 相關套件介紹</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="dark segue" id="slide-2" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2>R 語言的視覺化</h2>
+  </hgroup>
+  <article data-timings="">
+    
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-3" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>R 的繪圖引擎</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>X11: Unix 作業系統上的X11 桌面系統</li>
+<li>windows: 用於Windows系統</li>
+<li>quartz: Mac OS X 系統</li>
+<li>postscript: 用於印表機或是建立PostScript文件</li>
+<li>pdf, png, jpeg: 用於建立特定格式的檔案</li>
+<li>html 和 javascript: 用於建立網頁上的互動式圖表</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-4" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>R 的繪圖簡介</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>API 設計
+
+<ul>
+<li>基本繪圖API</li>
+<li>ggplot2</li>
+</ul></li>
+<li>大數據時代的視覺化</li>
+</ul>
+
+<p><img src="./assets/fig/rdatamining-ggplot2-1-1.png" alt="plot of chunk ggplot2-1"></p>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="dark segue" id="slide-5" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2>R 的各種基礎Visualization API</h2>
+  </hgroup>
+  <article data-timings="">
+    
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-6" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>Visualization 簡單分類</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>單變數
+
+<ul>
+<li>類別型變數</li>
+<li>連續型變數</li>
+</ul></li>
+<li>雙變數
+
+<ul>
+<li>連續 vs 連續</li>
+<li>連續 vs 離散</li>
+<li>連續 vs 連續</li>
+</ul></li>
+<li>多變量</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-7" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>類別型變數</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<pre><code class="r">pie(table(iris$Species))
+</code></pre>
+
+<p><img src="./assets/fig/rdatamining-categorical-plot-1.png" alt="plot of chunk categorical-plot"></p>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-8" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>連續型變數</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<pre><code class="r">par(mfrow = c(1, 2))
+plot(density(iris$Sepal.Length))
+hist(iris$Sepal.Length)
+</code></pre>
+
+<p><img src="./assets/fig/rdatamining-continuous-plot-1.png" alt="plot of chunk continuous-plot"></p>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-9" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>類別 v.s. 類別</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<pre><code class="r">data(Titanic)
+mosaicplot(~ Sex + Survived, data = Titanic, 
+           main = &quot;Survival on the Titanic&quot;, color = TRUE)
+</code></pre>
+
+<p><img src="./assets/fig/rdatamining-categorical-categorical-1.png" alt="plot of chunk categorical-categorical"></p>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-10" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>類別 v.s. 連續</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<pre><code class="r">plot(Sepal.Length ~ Species, iris)
+</code></pre>
+
+<p><img src="./assets/fig/rdatamining-categorical-continuous-1.png" alt="plot of chunk categorical-continuous"></p>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-11" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>連續 v.s. 連續</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<pre><code class="r">plot(dist ~ speed, cars)
+</code></pre>
+
+<p><img src="./assets/fig/rdatamining-continuous-continuous-1.png" alt="plot of chunk continuous-continuous"></p>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-12" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>多變量</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<pre><code class="r">plot(iris)
+</code></pre>
+
+<p><img src="./assets/fig/rdatamining-mv1-1.png" alt="plot of chunk mv1"></p>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-13" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>多變量</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<pre><code class="r">suppressPackageStartupMessages(library(PerformanceAnalytics))
+suppressWarnings(chart.Correlation(iris[-5], bg=iris$Species, pch=21))
+</code></pre>
+
+<p><img src="./assets/fig/rdatamining-mv2-1.png" alt="plot of chunk mv2"></p>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-14" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>多變量</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<pre><code class="r">library(corrplot)
+corrplot(cor(mtcars), method = &quot;circle&quot;)
+</code></pre>
+
+<p><img src="./assets/fig/rdatamining-mv3-1.png" alt="plot of chunk mv3"></p>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="segue dark" id="slide-15" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2>各種R 和分析結果結合的視覺化</h2>
+  </hgroup>
+  <article data-timings="">
+    
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-16" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2><code>plot</code>和Linear Regression</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<pre><code class="r">g &lt;- lm(dist ~ speed, cars)
+par(mfrow = c(2,2))
+plot(g)
+</code></pre>
+
+<p><img src="./assets/fig/rdatamining-lm.plot-1.png" alt="plot of chunk lm.plot"></p>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-17" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2><code>plot</code>和Regression</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<pre><code class="r">plot(cars, main = &quot;lowess(cars)&quot;)
+lines(lowess(cars), col = 2)
+</code></pre>
+
+<p><img src="./assets/fig/rdatamining-lowess-1.png" alt="plot of chunk lowess"></p>
+
+<p><small>W. S. Cleveland, E. Grosse and W. M. Shyu (1992) Local regression models. Chapter 8 of Statistical Models in S eds J.M. Chambers and T.J. Hastie, Wadsworth &amp; Brooks/Cole. </small></p>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-18" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2><code>plot</code>和Regression</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<pre><code class="r">suppressPackageStartupMessages(library(sm))
+with(cars, sm.regression(dist, speed, method = &quot;aicc&quot;, 
+                         col = &quot;red&quot;, model = &quot;linear&quot;))
+</code></pre>
+
+<p><img src="./assets/fig/rdatamining-sm-1.png" alt="plot of chunk sm"></p>
+
+<p><small>Bowman, A.W. and Azzalini, A. (1997). Applied Smoothing Techniques for Data Analysis: the Kernel Approach with S-Plus Illustrations. Oxford University Press, Oxford.</small></p>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-19" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2><code>plot</code>和Decision Tree</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<pre><code class="r">library(rpart)
+library(rpart.plot)
+rpart.plot(rpart(Species ~ ., iris))
+</code></pre>
+
+<p><img src="./assets/fig/rdatamining-rpart.plot-1.png" alt="plot of chunk rpart.plot"></p>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-20" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>多變量 PCA</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<pre><code class="r">library(ade4)
+g &lt;- dudi.pca(iris[,-5], scan = FALSE)
+scatter(g)
+</code></pre>
+
+<p><img src="./assets/fig/rdatamining-ggplot2-mv1-1.png" alt="plot of chunk ggplot2-mv1"></p>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-21" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>R 的基本繪圖API</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>高階繪圖指令：依據輸入的資料產生完整的圖片</li>
+<li>低階繪圖指令：修飾當前的圖片</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-22" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>基礎繪圖方式與R 的基本繪圖API</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>泛用型的物件導向API：
+
+<ul>
+<li><code>plot</code>本身能以直角座標系統繪製各種幾何圖形</li>
+<li><code>plot</code>能和模型結合，依據模型的型態繪製各種模型的結果
+
+<ul>
+<li><code>plot.lm</code>, <code>rpart::plot.rpart</code></li>
+</ul></li>
+</ul></li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-23" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>基礎繪圖API</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li><code>pie</code>, <code>hist</code>, <code>boxplot</code>, <code>barplot</code>, ...
+
+<ul>
+<li>清空之前的繪圖結果</li>
+</ul></li>
+<li><code>lines</code>, <code>points</code>, <code>legend</code>, <code>title</code>, <code>text</code>, <code>polygon</code>, ..
+
+<ul>
+<li>修飾之前的繪圖結果</li>
+</ul></li>
+<li><code>par</code>
+
+<ul>
+<li>控制繪圖引擎的參數</li>
+</ul></li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="segue dark" id="slide-24" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2>ggplot2</h2>
+  </hgroup>
+  <article data-timings="">
+    
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-25" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>Reference</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>Wilkinson, Leland (2005). The Grammar of Graphics. Springer. ISBN 978-0-387-98774-3.</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-26" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>ggplot2 的邏輯</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>基礎API 是一種用紙筆模型來繪圖的設計思想</li>
+<li>ggplot2 是一種以繪圖物件為主的設計思想</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-27" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>ggplot2 對R 的影響</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>大量以ggplot2的API 為骨幹的套件</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-28" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>ggplot2 離散</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<pre><code class="r">data(diamonds, package = &quot;ggplot2&quot;)
+ggplot(diamonds, aes(x = color)) +
+  geom_bar()
+</code></pre>
+
+<p><img src="./assets/fig/rdatamining-ggplot2-categorical-1.png" alt="plot of chunk ggplot2-categorical"></p>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-29" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>ggplot2 連續</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<pre><code class="r">ggplot(diamonds, aes(x = price)) + 
+  geom_density()
+</code></pre>
+
+<p><img src="./assets/fig/rdatamining-ggplot2-continuous-1.png" alt="plot of chunk ggplot2-continuous"></p>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-30" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>ggplot2 離散 v.s. 離散</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<p><img src="./assets/fig/rdatamining-ggplot2-categorical-categorical-1.png" alt="plot of chunk ggplot2-categorical-categorical"></p>
+
+<p><small><a href="http://stackoverflow.com/questions/19233365/how-to-create-a-marimekko-mosaic-plot-in-ggplot2">http://stackoverflow.com/questions/19233365/how-to-create-a-marimekko-mosaic-plot-in-ggplot2</a></small></p>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-31" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>ggplot2 類別 v.s. 連續</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<pre><code class="r">ggplot(iris, aes(x = Species, y = Sepal.Width)) +
+  geom_boxplot()
+</code></pre>
+
+<p><img src="./assets/fig/rdatamining-ggplot2-categorical-continuous-1.png" alt="plot of chunk ggplot2-categorical-continuous"></p>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-32" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>ggplot2 連續 v.s. 連續</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<pre><code class="r">ggplot(iris, aes(x = Sepal.Width, y = Sepal.Length, color = Species)) +
+  geom_point()
+</code></pre>
+
+<p><img src="./assets/fig/rdatamining-ggplot2-continuous-continuous-1.png" alt="plot of chunk ggplot2-continuous-continuous"></p>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="segue dark" id="slide-33" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2>大數據時代的視覺化</h2>
+  </hgroup>
+  <article data-timings="">
+    
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-34" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>大數據時代視覺化的挑戰</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>資料太大，直接化就當機，打開圖的人也會當機</li>
+<li>資料的維度太多，需要能對圖做操作，而不是程式碼</li>
+<li>資料的種類更廣泛，除了離散、數值之外，還包含如「圖資」等各種資料</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-35" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>tabplot</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>Google: &quot;R big data visualization&quot;</li>
+<li><a href="https://cran.r-project.org/web/packages/tabplot/vignettes/tabplot-vignette.html">https://cran.r-project.org/web/packages/tabplot/vignettes/tabplot-vignette.html</a></li>
+<li>初步解決了數據量的問題</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-36" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>Web Based 的互動式解決方案</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>Java Script
+
+<ul>
+<li><a href="http://www.htmlwidgets.org/">http://www.htmlwidgets.org/</a></li>
+<li>透過互動圖表解決資料維度更多的問題</li>
+<li><a href="http://yihui.name/recharts/">http://yihui.name/recharts/</a></li>
+</ul></li>
+<li>Shiny
+
+<ul>
+<li><a href="http://shiny.rstudio.com/gallery/">http://shiny.rstudio.com/gallery/</a></li>
+</ul></li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-37" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>Open Source 太棒了</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>新型態的資料，社群就會誕生新的套件
+
+<ul>
+<li><a href="https://cran.r-project.org/doc/contrib/intro-spatial-rl.pdf">圖資</a></li>
+<li><a href="http://kateto.net/network-visualization">社群網路</a></li>
+</ul></li>
+<li>甚至是新型態的Visualization</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-38" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>地圖</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<pre><code class="r">suppressPackageStartupMessages(library(Rtwmap))
+data(county1984)
+random.color &lt;- as.factor(sample(1:3, length(county1984), TRUE))
+color &lt;- rainbow(3)
+county1984$random.color &lt;- random.color
+spplot(county1984, &quot;random.color&quot;, col.regions = color, main = &quot;Taiwan Random Color&quot;)
+</code></pre>
+
+<p><img src="./assets/fig/rdatamining-twmap-1.png" alt="plot of chunk twmap"></p>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-39" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>Network Visualization</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<pre><code class="r">suppressPackageStartupMessages(library(networkD3))
+data(MisLinks)
+data(MisNodes)
+# Create graph
+forceNetwork(Links = MisLinks, Nodes = MisNodes, Source = &quot;source&quot;,
+             Target = &quot;target&quot;, Value = &quot;value&quot;, NodeID = &quot;name&quot;,
+             Group = &quot;group&quot;, opacity = 0.4, zoom = TRUE)
+</code></pre>
+
+<iframe src="networkD3-eval.html" style="width:100%;height:125%"></iframe>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-40" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>資料的流動 - Sankey Diagram</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<!-- Sankey generated in R 3.2.3 by googleVis 0.5.10 package -->
+
+<!-- Sun Jan 10 18:16:55 2016 -->
+
+<!-- jsHeader -->
+
+<script type="text/javascript">
+ 
+// jsData 
+function gvisDataSankeyID34b16f47bba7 () {
+var data = new google.visualization.DataTable();
+var datajson =
+[
+ [
+ "France",
+"UK",
+3.816 
+],
+[
+ "Germany",
+"UK",
+3.18 
+],
+[
+ "USA",
+"UK",
+2.862 
+],
+[
+ "Irish Republic",
+"UK",
+2.544 
+],
+[
+ "Netherlands",
+"UK",
+1.908 
+],
+[
+ "Spain",
+"UK",
+1.908 
+],
+[
+ "Italy",
+"UK",
+1.59 
+],
+[
+ "Poland",
+"UK",
+1.272 
+],
+[
+ "Belgium",
+"UK",
+1.272 
+],
+[
+ "Australia",
+"UK",
+0.954 
+],
+[
+ "Other countries",
+"UK",
+10.494 
+],
+[
+ "UK",
+"Scotland",
+2.2 
+],
+[
+ "UK",
+"Wales",
+0.9 
+],
+[
+ "UK",
+"Northern Ireland",
+0.4 
+],
+[
+ "UK",
+"England",
+12.8 
+],
+[
+ "UK",
+"London",
+15.5 
+] 
+];
+data.addColumn('string','origin');
+data.addColumn('string','visit');
+data.addColumn('number','weights');
+data.addRows(datajson);
+return(data);
+}
+ 
+// jsDrawChart
+function drawChartSankeyID34b16f47bba7() {
+var data = gvisDataSankeyID34b16f47bba7();
+var options = {};
+options["width"] =    400;
+options["height"] =    250;
+options["sankey"] = {link:{color:{fill:'lightblue'}}};
+
+    var chart = new google.visualization.Sankey(
+    document.getElementById('SankeyID34b16f47bba7')
+    );
+    chart.draw(data,options);
+    
+
+}
+  
+ 
+// jsDisplayChart
+(function() {
+var pkgs = window.__gvisPackages = window.__gvisPackages || [];
+var callbacks = window.__gvisCallbacks = window.__gvisCallbacks || [];
+var chartid = "sankey";
+  
+// Manually see if chartid is in pkgs (not all browsers support Array.indexOf)
+var i, newPackage = true;
+for (i = 0; newPackage && i < pkgs.length; i++) {
+if (pkgs[i] === chartid)
+newPackage = false;
+}
+if (newPackage)
+  pkgs.push(chartid);
+  
+// Add the drawChart function to the global list of callbacks
+callbacks.push(drawChartSankeyID34b16f47bba7);
+})();
+function displayChartSankeyID34b16f47bba7() {
+  var pkgs = window.__gvisPackages = window.__gvisPackages || [];
+  var callbacks = window.__gvisCallbacks = window.__gvisCallbacks || [];
+  window.clearTimeout(window.__gvisLoad);
+  // The timeout is set to 100 because otherwise the container div we are
+  // targeting might not be part of the document yet
+  window.__gvisLoad = setTimeout(function() {
+  var pkgCount = pkgs.length;
+  google.load("visualization", "1", { packages:pkgs, callback: function() {
+  if (pkgCount != pkgs.length) {
+  // Race condition where another setTimeout call snuck in after us; if
+  // that call added a package, we must not shift its callback
+  return;
+}
+while (callbacks.length > 0)
+callbacks.shift()();
+} });
+}, 100);
+}
+ 
+// jsFooter
+</script>
+ 
+
+<!-- jsChart -->  
+
+<script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartSankeyID34b16f47bba7"></script>
+ 
+
+<!-- divChart -->
+
+<div id="SankeyID34b16f47bba7" 
+  style="width: 400; height: 250;">
+</div>
+
+<p><small><a href="http://www.magesblog.com/2014/03/sankey-diagrams-with-googlevis.html">http://www.magesblog.com/2014/03/sankey-diagrams-with-googlevis.html</a></small></p>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="dark segue" id="slide-41" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2>R 與數據模型</h2>
+  </hgroup>
+  <article data-timings="">
+    
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-42" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>數據模型的API 設計模式</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>線性代數介面</li>
+<li>Formula 介面</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-43" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>線性代數介面</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<pre><code class="r">g &lt;- lm.fit(X, y, ...)
+</code></pre>
+
+<ul>
+<li>\(X\): 一個代表解釋變數的矩陣</li>
+<li>\(y\): 一個代表應變數的向量</li>
+<li>\(...\): 控制演算法的參數</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-44" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>Formula 介面</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<pre><code class="r">g &lt;- lm(y ~ x1 + x2 + x3, data, ...)
+predict(g, data2)
+</code></pre>
+
+<ul>
+<li>\(y \sim x_1 + x_2 + x_3\): 描述y 和X 的關係</li>
+<li>\(data\): 描述$y, x_1, x_2, x_3$的來源</li>
+<li>\(...\): 控制演算法的參數</li>
+<li>Formula 介面支援各種Operator: <code>+-:*|^I1</code>
+
+<ul>
+<li><a href="http://faculty.chicagobooth.edu/richard.hahn/teaching/FormulaNotation.pdf">Statistical Formula Notation in R</a></li>
+</ul></li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-45" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>兩種介面的比較</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>線性代數介面：
+
+<ul>
+<li>可以控制資料結構</li>
+<li>可以做更高的客製化</li>
+<li>必須要自己從資料建立矩陣ex: <code>model.matrix</code></li>
+</ul></li>
+<li>Formula 介面：
+
+<ul>
+<li>更清楚的程式碼</li>
+<li>更彈性、簡潔的語法ex: <code>log(dist) ~ I(speed^2)</code></li>
+<li>被公認的好設計</li>
+</ul></li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="dark segue" id="slide-46" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2>Dimension Reduction</h2>
+  </hgroup>
+  <article data-timings="">
+    
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-47" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>PCA 內建語法</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>學習：<code>g &lt;- prcomp(iris[,1:4])</code></li>
+<li>預測：<code>predict(g, iris[,1:4])</code></li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-48" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>PCA 內建語法</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<pre><code class="r">pc.cr &lt;- prcomp(iris[,1:4], cor = TRUE)
+plot(pc.cr)
+</code></pre>
+
+<p><img src="./assets/fig/rdatamining-prcomp-1.png" alt="plot of chunk prcomp"></p>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-49" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>PCA 內建語法</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<pre><code class="r">biplot(pc.cr)
+</code></pre>
+
+<p><img src="./assets/fig/rdatamining-prcomp2-1.png" alt="plot of chunk prcomp2"></p>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-50" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>套件：
+
+<ul>
+<li><code>multiDimBio::PPCA</code>: Performs a probabilistic principle component analysis using the function &#39;pca&#39; in the package&#39;pcaMethods&#39;</li>
+<li><code>CADStat::pca.fa.JGR</code>: This function receives inputs from the Java GUI for factor analysis/principle component analysis and sends these parameters to the FA/PCA function.</li>
+<li><code>imputeR::pcrR</code>: Principle component regression method for imputation</li>
+<li>族繁不及備載</li>
+</ul></li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-51" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>泛用套件</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<pre><code class="r">library(ade4)
+g &lt;- dudi.pca(iris[,-5], scan = FALSE)
+scatter(g)
+</code></pre>
+
+<p><img src="./assets/fig/rdatamining-pca1-1.png" alt="plot of chunk pca1"></p>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-52" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>如何比較套件的實作？</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>親身體驗</li>
+<li>道聽胡說</li>
+<li>熱門推薦：觀察下載數量
+
+<ul>
+<li><a href="https://cran.r-project.org/web/packages/multiDimBio">multiDimBio <img src="http://cranlogs.r-pkg.org/badges/multiDimBio" alt=""></a> </li>
+<li><a href="https://cran.r-project.org/web/packages/CADStat">CADStat <img src="http://cranlogs.r-pkg.org/badges/CADStat" alt=""></a></li>
+<li><a href="https://cran.r-project.org/web/packages/imputeR">imputeR <img src="http://cranlogs.r-pkg.org/badges/imputeR" alt=""></a></li>
+<li><a href="https://cran.r-project.org/web/packages/ade4">ade4 <img src="http://cranlogs.r-pkg.org/badges/ade4" alt=""></a></li>
+</ul></li>
+<li><a href="https://github.com/metacran/cranlogs.app">CRAN log</a></li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-53" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>Feature Selection</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li><code>step</code>: AIC based feature selection</li>
+<li><a href="https://cran.r-project.org/web/packages/FSelector">FSelector <img src="http://cranlogs.r-pkg.org/badges/FSelector" alt=""></a> <a href="https://en.wikibooks.org/wiki/Data_Mining_Algorithms_In_R/Dimensionality_Reduction/Feature_Selection#Feature_Selection_in_R_with_the_FSelector_Package">wiki</a> </li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="dark segue" id="slide-54" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2>Clustering</h2>
+  </hgroup>
+  <article data-timings="">
+    
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-55" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>CRAN Task View</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>CRAN針對各種學科，撰寫套件的survey報告</li>
+<li><a href="https://cran.r-project.org/web/views/Cluster.html">CRAN Task View: Cluster Analysis &amp; Finite Mixture Models</a></li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-56" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>Hierarchical Clustering</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<pre><code class="r">cl &lt;- hclust(dist(iris[,1:4]))
+suppressWarnings(plot(as.dendrogram(cl), leaflab = &quot;none&quot;))
+rect.hclust(cl, k=3)
+</code></pre>
+
+<p><img src="./assets/fig/rdatamining-hclust-1.png" alt="plot of chunk hclust"></p>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-57" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>Hierarchical Clustering</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<pre><code class="r">cl2 &lt;- cutree(cl, k = 3)
+plot(iris[,1:2], col = cl2, pch = as.integer(iris$Species))
+</code></pre>
+
+<p><img src="./assets/fig/rdatamining-hclust2-1.png" alt="plot of chunk hclust2"></p>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-58" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>Partitioning Clustering - K Means</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<pre><code class="r">cl &lt;- kmeans(iris[,1:2], centers = 3)
+</code></pre>
+
+<p><img src="kmeans.gif" alt=""></p>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-59" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>Density-Based Clustering: DBSCAN</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<pre><code class="r">data(ruspini, package=&quot;cluster&quot;)
+library(fpc)
+cl &lt;- dbscan(ruspini, eps = 20)
+plot(ruspini, col = cl$cluster + 1)
+</code></pre>
+
+<p><img src="./assets/fig/rdatamining-dbscan-1.png" alt="plot of chunk dbscan"></p>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="dark segue" id="slide-60" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2>Classification</h2>
+  </hgroup>
+  <article data-timings="">
+    
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-61" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>Decision Tree</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<pre><code class="r">library(rpart)
+g &lt;- rpart(Species ~ Sepal.Length + Sepal.Width, iris)
+library(rpart.plot)
+rpart.plot(g)
+</code></pre>
+
+<p><img src="./assets/fig/rdatamining-rpart-1.png" alt="plot of chunk rpart"></p>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-62" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>Decision Tree</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<pre><code class="r">suppressPackageStartupMessages(library(plotmo))
+plotmo(g, type = &quot;class&quot;, type2 = &quot;image&quot;, degree1 = FALSE,
+       pch.response = as.integer(iris$Species), ngrid2 = 100,
+       col.response = c(&quot;#990000&quot;, &quot;#009900&quot;, &quot;#000099&quot;)[as.integer(iris$Species)],
+       image.col = c(&quot;#ffcccc&quot;, &quot;#ccffcc&quot;, &quot;#ccccff&quot;))
+</code></pre>
+
+<p><img src="./assets/fig/rdatamining-rpart-plotmo-1.png" alt="plot of chunk rpart-plotmo"></p>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-63" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>Random Forest</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<pre><code class="r">suppressPackageStartupMessages(library(xgboost))
+iris.x &lt;- model.matrix(~ Sepal.Length + Sepal.Width - 1, iris)
+g &lt;- xgboost(data = iris.x, 
+             label = as.integer(iris$Species) - 1, max.depth = 3, 
+             num_parallel_tree = 100, subsample = 0.5, colsample_bytree =0.5, 
+             num_class = 3, nround = 1, params = list(objective = &quot;multi:softprob&quot;))
+</code></pre>
+
+<p><img src="./assets/fig/rdatamining-plotmo-xgboost-rf-1.png" alt="plot of chunk plotmo-xgboost-rf"></p>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-64" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>Gradient Boosting Decision Tree</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<pre><code class="r">suppressPackageStartupMessages(library(xgboost))
+iris.x &lt;- model.matrix(~ Sepal.Length + Sepal.Width - 1, iris)
+g &lt;- xgboost(data = iris.x, 
+             label = as.integer(iris$Species) - 1, max.depth = 3, 
+             num_parallel_tree = 100, num_class = 3, nround = 100, 
+             params = list(objective = &quot;multi:softprob&quot;))
+</code></pre>
+
+<p><img src="./assets/fig/rdatamining-plotmo-xgboost-gdbt-1.png" alt="plot of chunk plotmo-xgboost-gdbt"></p>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-65" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>Support Vector Machine</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<pre><code class="r">suppressPackageStartupMessages(library(e1071))
+g &lt;- svm(Species ~ Sepal.Length + Sepal.Width, iris)
+</code></pre>
+
+<p><img src="./assets/fig/rdatamining-plotmo-svm-1.png" alt="plot of chunk plotmo-svm"></p>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-66" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>Neuron Network</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<pre><code class="r">suppressPackageStartupMessages(library(neuralnet))
+g &lt;- neuralnet(setosa + versicolor + virginica ~ Sepal.Length + Sepal.Width, iris2,
+               hidden = c(2,2), rep = 1, stepmax = 1e7)
+</code></pre>
+
+<p><img src="./assets/fig/rdatamining-plot-nn-1.png" alt="plot of chunk plot-nn"></p>
+
+<p><img src="%22assets/fig/plot-nn.png%22" alt=""></p>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-67" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>Neuron Network</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<pre><code class="r">suppressPackageStartupMessages(library(plotmo))
+plotmo(g, type = &quot;class&quot;, type2 = &quot;image&quot;, degree1 = FALSE,
+       pch.response = as.integer(iris$Species), ngrid2 = 100, 
+       col.response = c(&quot;#990000&quot;, &quot;#009900&quot;, &quot;#000099&quot;)[as.integer(iris$Species)],
+       image.col = c(&quot;#ffcccc&quot;, &quot;#ccffcc&quot;, &quot;#ccccff&quot;))
+</code></pre>
+
+<p><img src="./assets/fig/rdatamining-nn-plotmo-1.png" alt="plot of chunk nn-plotmo"></p>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="dark segue" id="slide-68" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2>Association Rule</h2>
+  </hgroup>
+  <article data-timings="">
+    
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-69" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>Transaction</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<pre><code class="r">suppressPackageStartupMessages(library(arules))
+summary(Adult)
+</code></pre>
+
+<pre><code>transactions as itemMatrix in sparse format with
+ 48842 rows (elements/itemsets/transactions) and
+ 115 columns (items) and a density of 0.1089938631 
+
+most frequent items:
+           capital-loss=None            capital-gain=None 
+                       46560                        44807 
+native-country=United-States                   race=White 
+                       43832                        41762 
+           workclass=Private                      (Other) 
+                       33906                       401333 
+
+element (itemset/transaction) length distribution:
+sizes
+    9    10    11    12    13 
+   19   971  2067 15623 30162 
+
+    Min.  1st Qu.   Median     Mean  3rd Qu.     Max. 
+ 9.00000 12.00000 13.00000 12.53429 13.00000 13.00000 
+
+includes extended item information - examples:
+           labels variables      levels
+1       age=Young       age       Young
+2 age=Middle-aged       age Middle-aged
+3      age=Senior       age      Senior
+
+includes extended transaction information - examples:
+  transactionID
+1             1
+2             2
+3             3
+</code></pre>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-70" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>Item Frequency</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<pre><code class="r">itemFrequencyPlot(Adult, support = 0.2)
+</code></pre>
+
+<p><img src="./assets/fig/rdatamining-freq-item-1.png" alt="plot of chunk freq-item"></p>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-71" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>Association Rule Mining</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<pre><code class="r">rules &lt;- apriori(Adult, parameter = list(support = 0.01, confidence = 0.6))
+</code></pre>
+
+<pre><code>Apriori
+
+Parameter specification:
+ confidence minval smax arem  aval originalSupport support minlen maxlen
+        0.6    0.1    1 none FALSE            TRUE    0.01      1     10
+ target   ext
+  rules FALSE
+
+Algorithmic control:
+ filter tree heap memopt load sort verbose
+    0.1 TRUE TRUE  FALSE TRUE    2    TRUE
+
+Absolute minimum support count: 488 
+
+set item appearances ...[0 item(s)] done [0.00s].
+set transactions ...[115 item(s), 48842 transaction(s)] done [0.02s].
+sorting and recoding items ... [67 item(s)] done [0.01s].
+creating transaction tree ... done [0.03s].
+checking subsets of size 1 2 3 4 5 6 7 8 9 10 done [0.63s].
+writing ... [276443 rule(s)] done [0.03s].
+creating S4 object  ... done [0.07s].
+</code></pre>
+
+<pre><code class="r">summary(rules)
+</code></pre>
+
+<pre><code>set of 276443 rules
+
+rule length distribution (lhs + rhs):sizes
+    1     2     3     4     5     6     7     8     9    10 
+    6   432  4981 22127 52669 75104 67198 38094 13244  2588 
+
+     Min.   1st Qu.    Median      Mean   3rd Qu.      Max. 
+ 1.000000  5.000000  6.000000  6.288834  7.000000 10.000000 
+
+summary of quality measures:
+    support             confidence             lift           
+ Min.   :0.01001187   Min.   :0.6000000   Min.   : 0.7171385  
+ 1st Qu.:0.01253020   1st Qu.:0.7691154   1st Qu.: 1.0100024  
+ Median :0.01701405   Median :0.9051491   Median : 1.0553820  
+ Mean   :0.02679055   Mean   :0.8600124   Mean   : 1.3109483  
+ 3rd Qu.:0.02741493   3rd Qu.:0.9542484   3rd Qu.: 1.2980105  
+ Max.   :0.95327792   Max.   :1.0000000   Max.   :20.6826252  
+
+mining info:
+  data ntransactions support confidence
+ Adult         48842    0.01        0.6
+</code></pre>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-72" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>Analyzing Rules</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<pre><code class="r">rules.income.small &lt;- subset(rules, subset = rhs %in% &quot;income=small&quot; &amp; lift &gt; 1.2)
+inspect(head(sort(rules.income.small, by = &quot;confidence&quot;), n = 3))
+</code></pre>
+
+<pre><code>  lhs                               rhs                  support   confidence        lift
+1 {workclass=Private,                                                                    
+   marital-status=Never-married,                                                         
+   relationship=Own-child,                                                               
+   sex=Male,                                                                             
+   hours-per-week=Part-time,                                                             
+   native-country=United-States} =&gt; {income=small} 0.01074894558 0.7104194858 1.403653257
+2 {workclass=Private,                                                                    
+   marital-status=Never-married,                                                         
+   relationship=Own-child,                                                               
+   sex=Male,                                                                             
+   hours-per-week=Part-time}     =&gt; {income=small} 0.01144506777 0.7102922490 1.403401862
+3 {workclass=Private,                                                                    
+   marital-status=Never-married,                                                         
+   relationship=Own-child,                                                               
+   sex=Male,                                                                             
+   capital-gain=None,                                                                    
+   hours-per-week=Part-time,                                                             
+   native-country=United-States} =&gt; {income=small} 0.01046230703 0.7097222222 1.402275598
+</code></pre>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="dark segue" id="slide-73" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2>Text Mining</h2>
+  </hgroup>
+  <article data-timings="">
+    
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-74" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>ptt 笨版文章分析</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<pre><code class="r">library(httr)
+library(XML)
+</code></pre>
+
+<ul>
+<li>利用<a href="https://cran.r-project.org/web/packages/httr">httr <img src="http://cranlogs.r-pkg.org/badges/httr" alt=""></a>抓取笨版的文章</li>
+<li>利用<a href="https://cran.r-project.org/web/packages/XML">XML <img src="http://cranlogs.r-pkg.org/badges/XML" alt=""></a> 搭配<a href="https://en.wikipedia.org/wiki/XPath">XPath</a>從HTML中抓取需要的資訊</li>
+</ul>
+
+<p><small><a href="http://rstudio-pubs-static.s3.amazonaws.com/12422_b2b48bb2da7942acaca5ace45bd8c60c.html">http://rstudio-pubs-static.s3.amazonaws.com/12422_b2b48bb2da7942acaca5ace45bd8c60c.html</a></small></p>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-75" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>文字處理</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<pre><code class="r">library(tm)
+library(tmcn)
+library(jiebaR)
+cutter &lt;- worker()
+d.corpus &lt;- Corpus(DirSource(&quot;ptt-StupidClown/&quot;), list(language = NA))
+...
+</code></pre>
+
+<ul>
+<li>數據清理: <a href="https://cran.r-project.org/web/packages/tm">tm <img src="http://cranlogs.r-pkg.org/badges/tm" alt=""></a> 和 <code>tmcn</code></li>
+<li>中文斷詞: <a href="https://cran.r-project.org/web/packages/jiebaR">jiebaR <img src="http://cranlogs.r-pkg.org/badges/jiebaR" alt=""></a></li>
+<li>建立TermDocumentMatrix</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-76" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>關鍵字詞雲</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<pre><code class="r">suppressPackageStartupMessages(library(wordcloud))
+suppressWarnings(
+wordcloud(d$word, d$freq, min.freq = 10, random.order = F, ordered.colors = F, 
+          colors = rainbow(length(row.names(m1))))
+)
+</code></pre>
+
+<p><img src="./assets/fig/rdatamining-wordcloud-1.png" alt="plot of chunk wordcloud"></p>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-77" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>關鍵字的頻率</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<pre><code class="r">d.dtm &lt;- DocumentTermMatrix(d.corpus, control = list(wordLengths = c(2, Inf)))
+findFreqTerms(d.dtm, 30)
+</code></pre>
+
+<pre><code>   [1] &quot;一下&quot;     &quot;一件&quot;     &quot;一份&quot;     &quot;一位&quot;     &quot;一個&quot;     &quot;一個月&quot;  
+   [7] &quot;一包&quot;     &quot;一半&quot;     &quot;一口&quot;     &quot;一句&quot;     &quot;一台&quot;     &quot;一堆&quot;    
+  [13] &quot;一塊&quot;     &quot;一大&quot;     &quot;一天&quot;     &quot;一如&quot;     &quot;一定&quot;     &quot;一家&quot;    
+  [19] &quot;一年&quot;     &quot;一張&quot;     &quot;一把&quot;     &quot;一旁&quot;     &quot;一時&quot;     &quot;一杯&quot;    
+  [25] &quot;一條&quot;     &quot;一樓&quot;     &quot;一模一樣&quot; &quot;一樣&quot;     &quot;一次&quot;     &quot;一片&quot;    
+  [31] &quot;一看&quot;     &quot;一眼&quot;     &quot;一秒&quot;     &quot;一種&quot;     &quot;一篇&quot;     &quot;一群&quot;    
+  [37] &quot;一聲&quot;     &quot;一臉&quot;     &quot;一起&quot;     &quot;一路&quot;     &quot;一邊&quot;     &quot;一間&quot;    
+  [43] &quot;一陣&quot;     &quot;一陣子&quot;   &quot;一隻&quot;     &quot;一顆&quot;     &quot;一點&quot;     &quot;三個&quot;    
+  [49] &quot;三天&quot;     &quot;三樓&quot;     &quot;三次&quot;     &quot;三秒&quot;     &quot;上來&quot;     &quot;上去&quot;    
+  [55] &quot;上學&quot;     &quot;上次&quot;     &quot;上班&quot;     &quot;上網&quot;     &quot;上課&quot;     &quot;上車&quot;    
+  [61] &quot;上面&quot;     &quot;下來&quot;     &quot;下午&quot;     &quot;下去&quot;     &quot;下樓&quot;     &quot;下次&quot;    
+  [67] &quot;下班&quot;     &quot;下課&quot;     &quot;下車&quot;     &quot;下面&quot;     &quot;不了&quot;     &quot;不像&quot;    
+  [73] &quot;不到&quot;     &quot;不可&quot;     &quot;不吃&quot;     &quot;不同&quot;     &quot;不在&quot;     &quot;不夠&quot;    
+  [79] &quot;不太&quot;     &quot;不好&quot;     &quot;不好意思&quot; &quot;不少&quot;     &quot;不想&quot;     &quot;不敢&quot;    
+  [85] &quot;不斷&quot;     &quot;不是&quot;     &quot;不是故意&quot; &quot;不會&quot;     &quot;不用&quot;     &quot;不知&quot;    
+  [91] &quot;不能&quot;     &quot;不行&quot;     &quot;不要&quot;     &quot;不見&quot;     &quot;不過&quot;     &quot;不錯&quot;    
+  [97] &quot;世界&quot;     &quot;丟臉&quot;     &quot;並視&quot;     &quot;中午&quot;     &quot;中國&quot;     &quot;中文&quot;    
+ [103] &quot;中時&quot;     &quot;中毒&quot;     &quot;中秋&quot;     &quot;中秋節&quot;   &quot;中肯&quot;     &quot;中間&quot;    
+ [109] &quot;主人&quot;     &quot;主任&quot;     &quot;主管&quot;     &quot;之前&quot;     &quot;之後&quot;     &quot;之銘言&quot;  
+ [115] &quot;之類&quot;     &quot;乖乖&quot;     &quot;乾淨&quot;     &quot;乾脆&quot;     &quot;了解&quot;     &quot;事件&quot;    
+ [121] &quot;事情&quot;     &quot;二十&quot;     &quot;二樓&quot;     &quot;五樓&quot;     &quot;交給&quot;     &quot;人員&quot;    
+ [127] &quot;人帥&quot;     &quot;人生&quot;     &quot;什麼&quot;     &quot;今天&quot;     &quot;今年&quot;     &quot;介紹&quot;    
+ [133] &quot;仔細&quot;     &quot;他們&quot;     &quot;代表&quot;     &quot;以上&quot;     &quot;以下&quot;     &quot;以前&quot;    
+ [139] &quot;以圖&quot;     &quot;以後&quot;     &quot;以為&quot;     &quot;休息&quot;     &quot;伸手&quot;     &quot;似乎&quot;    
+ [145] &quot;位子&quot;     &quot;位置&quot;     &quot;作業&quot;     &quot;你們&quot;     &quot;你好&quot;     &quot;你媽&quot;    
+ [151] &quot;你家&quot;     &quot;使用&quot;     &quot;來不及&quot;   &quot;來到&quot;     &quot;來看&quot;     &quot;來自&quot;    
+ [157] &quot;來說&quot;     &quot;便利商店&quot; &quot;便宜&quot;     &quot;便當&quot;     &quot;保護&quot;     &quot;保險套&quot;  
+ [163] &quot;個人&quot;     &quot;做過&quot;     &quot;停車&quot;     &quot;健康&quot;     &quot;健忘&quot;     &quot;偶爾&quot;    
+ [169] &quot;偷偷&quot;     &quot;傳來&quot;     &quot;傳給&quot;     &quot;傳說&quot;     &quot;傷眼&quot;     &quot;傻眼&quot;    
+ [175] &quot;像是&quot;     &quot;兄弟&quot;     &quot;充滿&quot;     &quot;先生&quot;     &quot;免費&quot;     &quot;兒子&quot;    
+ [181] &quot;兔子&quot;     &quot;內容&quot;     &quot;內心&quot;     &quot;內衣&quot;     &quot;內褲&quot;     &quot;全家&quot;    
+ [187] &quot;全班&quot;     &quot;全部&quot;     &quot;兩位&quot;     &quot;兩個&quot;     &quot;兩天&quot;     &quot;兩次&quot;    
+ [193] &quot;兩隻&quot;     &quot;八卦&quot;     &quot;公分&quot;     &quot;公司&quot;     &quot;公告&quot;     &quot;公車&quot;    
+ [199] &quot;六樓&quot;     &quot;其他人&quot;   &quot;其實&quot;     &quot;再也&quot;     &quot;再來&quot;     &quot;再有&quot;    
+ [205] &quot;再次&quot;     &quot;再說&quot;     &quot;冒險&quot;     &quot;冰塊&quot;     &quot;冰箱&quot;     &quot;冷氣&quot;    
+ [211] &quot;凸凸&quot;     &quot;出來&quot;     &quot;出去&quot;     &quot;出口&quot;     &quot;出現&quot;     &quot;出賣&quot;    
+ [217] &quot;出門&quot;     &quot;刀片&quot;     &quot;分享&quot;     &quot;分手&quot;     &quot;分鐘&quot;     &quot;分類&quot;    
+ [223] &quot;別人&quot;     &quot;別的&quot;     &quot;刪除&quot;     &quot;到底&quot;     &quot;到處&quot;     &quot;刷牙&quot;    
+ [229] &quot;前天&quot;     &quot;前情&quot;     &quot;前面&quot;     &quot;剛剛&quot;     &quot;剛好&quot;     &quot;剛才&quot;    
+ [235] &quot;剩下&quot;     &quot;副總&quot;     &quot;創意&quot;     &quot;劇情&quot;     &quot;功能&quot;     &quot;加上&quot;    
+ [241] &quot;加入&quot;     &quot;加油&quot;     &quot;加油站&quot;   &quot;劣退&quot;     &quot;努力&quot;     &quot;努力下去&quot;
+ [247] &quot;動作&quot;     &quot;動物&quot;     &quot;包包&quot;     &quot;包裝&quot;     &quot;十分&quot;     &quot;十年&quot;    
+ [253] &quot;午餐&quot;     &quot;半夜&quot;     &quot;南無&quot;     &quot;卡位&quot;     &quot;印象&quot;     &quot;危險&quot;    
+ [259] &quot;原來&quot;     &quot;原味&quot;     &quot;原因&quot;     &quot;原圖&quot;     &quot;原好&quot;     &quot;原媽&quot;    
+ [265] &quot;原文&quot;     &quot;原是&quot;     &quot;原有&quot;     &quot;原本&quot;     &quot;原波&quot;     &quot;厲害&quot;    
+ [271] &quot;去年&quot;     &quot;參加&quot;     &quot;友人&quot;     &quot;反應&quot;     &quot;反正&quot;     &quot;反而&quot;    
+ [277] &quot;叔叔&quot;     &quot;口味&quot;     &quot;口水&quot;     &quot;口袋&quot;     &quot;只好&quot;     &quot;只會&quot;    
+ [283] &quot;只能&quot;     &quot;召喚&quot;     &quot;可怕&quot;     &quot;可惜&quot;     &quot;可惡&quot;     &quot;可愛&quot;    
+ [289] &quot;可憐&quot;     &quot;可樂&quot;     &quot;可能&quot;     &quot;台北&quot;     &quot;台南&quot;     &quot;台灣&quot;    
+ [295] &quot;台語&quot;     &quot;右手&quot;     &quot;右邊&quot;     &quot;司機&quot;     &quot;吃掉&quot;     &quot;吃過&quot;    
+ [301] &quot;吃飯&quot;     &quot;吃飽&quot;     &quot;各種&quot;     &quot;同事&quot;     &quot;同學&quot;     &quot;同意&quot;    
+ [307] &quot;同時&quot;     &quot;同樣&quot;     &quot;名字&quot;     &quot;名稱&quot;     &quot;吐司&quot;     &quot;吸管&quot;    
+ [313] &quot;告白&quot;     &quot;告訴&quot;     &quot;味道&quot;     &quot;呵呵&quot;     &quot;呼吸&quot;     &quot;咖哩&quot;    
+ [319] &quot;咖啡&quot;     &quot;哀傷&quot;     &quot;哈哈哈&quot;   &quot;哈哈哈哈&quot; &quot;員工&quot;     &quot;哥哥&quot;    
+ [325] &quot;哪來&quot;     &quot;哪個&quot;     &quot;哪招&quot;     &quot;哪裡&quot;     &quot;哭哭&quot;     &quot;唬爛&quot;    
+ [331] &quot;唯一&quot;     &quot;啊啊啊&quot;   &quot;問了&quot;     &quot;問他&quot;     &quot;問卷&quot;     &quot;問我&quot;    
+ [337] &quot;問題&quot;     &quot;喇叭&quot;     &quot;喜歡&quot;     &quot;喝湯&quot;     &quot;單純&quot;     &quot;單身&quot;    
+ [343] &quot;嗚嗚&quot;     &quot;嘉義人&quot;   &quot;嘖嘖&quot;     &quot;嘗試&quot;     &quot;嘴巴&quot;     &quot;嘴裡&quot;    
+ [349] &quot;嘴角&quot;     &quot;嘿嘿&quot;     &quot;噁心&quot;     &quot;噴笑&quot;     &quot;嚇到&quot;     &quot;嚇死&quot;    
+ [355] &quot;嚴重&quot;     &quot;四樓&quot;     &quot;回來&quot;     &quot;回到&quot;     &quot;回去&quot;     &quot;回家&quot;    
+ [361] &quot;回憶&quot;     &quot;回應&quot;     &quot;回文&quot;     &quot;回答&quot;     &quot;回覆&quot;     &quot;回頭&quot;    
+ [367] &quot;因為&quot;     &quot;國中&quot;     &quot;國小&quot;     &quot;國文&quot;     &quot;圖勒&quot;     &quot;圖好&quot;    
+ [373] &quot;圖片&quot;     &quot;在家&quot;     &quot;地上&quot;     &quot;地方&quot;     &quot;地理&quot;     &quot;地點&quot;    
+ [379] &quot;坐下&quot;     &quot;坐在&quot;     &quot;垃圾&quot;     &quot;垃圾桶&quot;   &quot;基於&quot;     &quot;報到&quot;    
+ [385] &quot;報名&quot;     &quot;報告&quot;     &quot;壓力&quot;     &quot;壞人&quot;     &quot;壞掉&quot;     &quot;外套&quot;    
+ [391] &quot;外面&quot;     &quot;多久&quot;     &quot;多多&quot;     &quot;多次&quot;     &quot;夜市&quot;     &quot;大人&quot;    
+ [397] &quot;大便&quot;     &quot;大叔&quot;     &quot;大哥&quot;     &quot;大哭&quot;     &quot;大大&quot;     &quot;大嫂&quot;    
+ [403] &quot;大學&quot;     &quot;大學生&quot;   &quot;大家&quot;     &quot;大概&quot;     &quot;大笑&quot;     &quot;大約&quot;    
+ [409] &quot;大聲&quot;     &quot;大腿&quot;     &quot;大隻&quot;     &quot;天兵&quot;     &quot;天才&quot;     &quot;天氣&quot;    
+ [415] &quot;天然&quot;     &quot;太多&quot;     &quot;太大&quot;     &quot;太好了&quot;   &quot;太強&quot;     &quot;太扯&quot;    
+ [421] &quot;太有&quot;     &quot;太猛&quot;     &quot;太神&quot;     &quot;太陽&quot;     &quot;失敗&quot;     &quot;奇怪&quot;    
+ [427] &quot;女兒&quot;     &quot;女友&quot;     &quot;女孩&quot;     &quot;女朋友&quot;   &quot;女生&quot;     &quot;奶奶&quot;    
+ [433] &quot;奶茶&quot;     &quot;她們&quot;     &quot;好不好&quot;   &quot;好不容易&quot; &quot;好久&quot;     &quot;好像&quot;    
+ [439] &quot;好友&quot;     &quot;好吃&quot;     &quot;好喝&quot;     &quot;好壞&quot;     &quot;好壯&quot;     &quot;好多&quot;    
+ [445] &quot;好奇&quot;     &quot;好好&quot;     &quot;好好笑&quot;   &quot;好強&quot;     &quot;好心&quot;     &quot;好慘&quot;    
+ [451] &quot;好玩&quot;     &quot;好痛&quot;     &quot;好看&quot;     &quot;好笑&quot;     &quot;好笨&quot;     &quot;好險&quot;    
+ [457] &quot;妳有&quot;     &quot;妹妹&quot;     &quot;姊姊&quot;     &quot;姐姐&quot;     &quot;姑姑&quot;     &quot;姿勢&quot;    
+ [463] &quot;娃娃&quot;     &quot;媽咪&quot;     &quot;媽媽&quot;     &quot;媽我&quot;     &quot;孤單&quot;     &quot;孩子&quot;    
+ [469] &quot;學妹&quot;     &quot;學弟&quot;     &quot;學校&quot;     &quot;學測&quot;     &quot;學生&quot;     &quot;學長&quot;    
+ [475] &quot;安全&quot;     &quot;安全帽&quot;   &quot;安安&quot;     &quot;安慰&quot;     &quot;安裝&quot;     &quot;完全&quot;    
+ [481] &quot;完成&quot;     &quot;完整&quot;     &quot;宜蘭&quot;     &quot;宜蘭人&quot;   &quot;客人&quot;     &quot;客廳&quot;    
+ [487] &quot;客服&quot;     &quot;室友&quot;     &quot;害怕&quot;     &quot;宵夜&quot;     &quot;家人&quot;     &quot;家裡&quot;    
+ [493] &quot;容易&quot;     &quot;宿舍&quot;     &quot;密碼&quot;     &quot;實在&quot;     &quot;實在太&quot;   &quot;實驗&quot;    
+ [499] &quot;寵物&quot;     &quot;寶貝&quot;     &quot;將板&quot;     &quot;專業&quot;     &quot;對不起&quot;   &quot;對方&quot;    
+ [505] &quot;對於&quot;     &quot;對話&quot;     &quot;對面&quot;     &quot;小女&quot;     &quot;小妹&quot;     &quot;小姐&quot;    
+ [511] &quot;小孩&quot;     &quot;小學&quot;     &quot;小寶&quot;     &quot;小小&quot;     &quot;小屁孩&quot;   &quot;小弟&quot;    
+ [517] &quot;小強&quot;     &quot;小心&quot;     &quot;小時&quot;     &quot;小時候&quot;   &quot;小朋友&quot;   &quot;小聲&quot;    
+ [523] &quot;小腿&quot;     &quot;小花&quot;     &quot;小魯&quot;     &quot;小黑&quot;     &quot;少於&quot;     &quot;尖叫&quot;    
+ [529] &quot;尤其&quot;     &quot;就劣&quot;     &quot;就問&quot;     &quot;就算&quot;     &quot;就要&quot;     &quot;尷尬&quot;    
+ [535] &quot;屁股&quot;     &quot;居然&quot;     &quot;崩潰&quot;     &quot;崩皿&quot;     &quot;工作&quot;     &quot;工具&quot;    
+ [541] &quot;工程師&quot;   &quot;左右&quot;     &quot;左手&quot;     &quot;左轉&quot;     &quot;巧克力&quot;   &quot;差不多&quot;  
+ [547] &quot;差點&quot;     &quot;已經&quot;     &quot;布丁&quot;     &quot;希望&quot;     &quot;帥哥&quot;     &quot;帥氣&quot;    
+ [553] &quot;師傅&quot;     &quot;帳號&quot;     &quot;帶著&quot;     &quot;常常&quot;     &quot;常識&quot;     &quot;幫忙&quot;    
+ [559] &quot;平安&quot;     &quot;平常&quot;     &quot;年代&quot;     &quot;年紀&quot;     &quot;年輕&quot;     &quot;幸好&quot;    
+ [565] &quot;幸福&quot;     &quot;幸運&quot;     &quot;幹嘛&quot;     &quot;幽默&quot;     &quot;幾乎&quot;     &quot;幾個&quot;    
+ [571] &quot;幾天&quot;     &quot;幾年&quot;     &quot;幾次&quot;     &quot;床上&quot;     &quot;底下&quot;     &quot;店員&quot;    
+ [577] &quot;店裡&quot;     &quot;店長&quot;     &quot;度過難關&quot; &quot;康復&quot;     &quot;廁所&quot;     &quot;廚房&quot;    
+ [583] &quot;廣告&quot;     &quot;建議&quot;     &quot;引述&quot;     &quot;弟弟&quot;     &quot;強者&quot;     &quot;彰化&quot;    
+ [589] &quot;彰化人&quot;   &quot;影片&quot;     &quot;影響&quot;     &quot;往常&quot;     &quot;很久&quot;     &quot;很多&quot;    
+ [595] &quot;很大&quot;     &quot;很少&quot;     &quot;很快&quot;     &quot;後來&quot;     &quot;後勁&quot;     &quot;後悔&quot;    
+ [601] &quot;後續&quot;     &quot;後面&quot;     &quot;得到&quot;     &quot;從小&quot;     &quot;微弱&quot;     &quot;微笑&quot;    
+ [607] &quot;心中&quot;     &quot;心情&quot;     &quot;心想&quot;     &quot;心裡&quot;     &quot;必須&quot;     &quot;忍不住&quot;  
+ [613] &quot;忘記&quot;     &quot;快樂&quot;     &quot;快點&quot;     &quot;忽然&quot;     &quot;怎樣&quot;     &quot;怎麼&quot;    
+ [619] &quot;怎麼辦&quot;   &quot;怒噓&quot;     &quot;思考&quot;     &quot;怪怪的&quot;   &quot;恍神&quot;     &quot;恐怖&quot;    
+ [625] &quot;恐龍&quot;     &quot;恩愛&quot;     &quot;恭喜&quot;     &quot;悠遊&quot;     &quot;您好&quot;     &quot;悲劇&quot;    
+ [631] &quot;情況&quot;     &quot;想像&quot;     &quot;想到&quot;     &quot;想想&quot;     &quot;想發&quot;     &quot;想要&quot;    
+ [637] &quot;想起&quot;     &quot;想過&quot;     &quot;意外&quot;     &quot;意思&quot;     &quot;愛心&quot;     &quot;感到&quot;    
+ [643] &quot;感動&quot;     &quot;感受&quot;     &quot;感情&quot;     &quot;感覺&quot;     &quot;感謝&quot;     &quot;慢慢&quot;    
+ [649] &quot;應徵&quot;     &quot;應該&quot;     &quot;懷疑&quot;     &quot;成功&quot;     &quot;我來&quot;     &quot;我們&quot;    
+ [655] &quot;我剛&quot;     &quot;我哥&quot;     &quot;我問&quot;     &quot;我妹&quot;     &quot;我媽&quot;     &quot;我家&quot;    
+ [661] &quot;我弟&quot;     &quot;我會&quot;     &quot;我爸&quot;     &quot;我用&quot;     &quot;我要&quot;     &quot;我還&quot;    
+ [667] &quot;或許&quot;     &quot;截圖&quot;     &quot;房間&quot;     &quot;所有&quot;     &quot;手上&quot;     &quot;手指&quot;    
+ [673] &quot;手機&quot;     &quot;才能&quot;     &quot;打不開&quot;   &quot;打來&quot;     &quot;打工&quot;     &quot;打掃&quot;    
+ [679] &quot;打算&quot;     &quot;打給&quot;     &quot;打錯&quot;     &quot;打開&quot;     &quot;打電話&quot;   &quot;找到&quot;    
+ [685] &quot;承認&quot;     &quot;技能&quot;     &quot;投票&quot;     &quot;抬頭&quot;     &quot;抱歉&quot;     &quot;拍拍&quot;    
+ [691] &quot;拍照&quot;     &quot;拔刺&quot;     &quot;拜拜&quot;     &quot;拜託&quot;     &quot;拿來&quot;     &quot;拿出&quot;    
+ [697] &quot;拿到&quot;     &quot;捷運&quot;     &quot;掃把&quot;     &quot;排版&quot;     &quot;排隊&quot;     &quot;接下來&quot;  
+ [703] &quot;接到&quot;     &quot;接受&quot;     &quot;接著&quot;     &quot;控制&quot;     &quot;推原&quot;     &quot;推圖&quot;    
+ [709] &quot;推推&quot;     &quot;推文&quot;     &quot;推樓&quot;     &quot;推薦&quot;     &quot;掩面&quot;     &quot;提到&quot;    
+ [715] &quot;提醒&quot;     &quot;握手&quot;     &quot;搜尋&quot;     &quot;搞不好&quot;   &quot;搞笑&quot;     &quot;搞錯&quot;    
+ [721] &quot;摸摸&quot;     &quot;擔心&quot;     &quot;支持&quot;     &quot;收到&quot;     &quot;放假&quot;     &quot;放到&quot;    
+ [727] &quot;放在&quot;     &quot;放學&quot;     &quot;放屁&quot;     &quot;放心&quot;     &quot;放棄&quot;     &quot;放生&quot;    
+ [733] &quot;故事&quot;     &quot;故意&quot;     &quot;效果&quot;     &quot;救援&quot;     &quot;教室&quot;     &quot;教授&quot;    
+ [739] &quot;教育&quot;     &quot;敲碗&quot;     &quot;整個&quot;     &quot;整理&quot;     &quot;數學&quot;     &quot;文字&quot;    
+ [745] &quot;文章&quot;     &quot;文筆&quot;     &quot;料理&quot;     &quot;新竹&quot;     &quot;新聞&quot;     &quot;方便&quot;    
+ [751] &quot;方向&quot;     &quot;方式&quot;     &quot;方法&quot;     &quot;於是&quot;     &quot;旁邊&quot;     &quot;日本&quot;    
+ [757] &quot;早上&quot;     &quot;早就&quot;     &quot;早日康復&quot; &quot;早餐&quot;     &quot;明天&quot;     &quot;明年&quot;    
+ [763] &quot;明明&quot;     &quot;明白&quot;     &quot;明顯&quot;     &quot;昨天&quot;     &quot;昨天晚上&quot; &quot;昨晚&quot;    
+ [769] &quot;是不是&quot;   &quot;是否&quot;     &quot;是從&quot;     &quot;時代&quot;     &quot;時候&quot;     &quot;晚上&quot;    
+ [775] &quot;晚餐&quot;     &quot;智障&quot;     &quot;暑假&quot;     &quot;暗示&quot;     &quot;暴力&quot;     &quot;書包&quot;    
+ [781] &quot;曾經&quot;     &quot;最好&quot;     &quot;最後&quot;     &quot;最近&quot;     &quot;月亮&quot;     &quot;有人&quot;    
+ [787] &quot;有個&quot;     &quot;有名&quot;     &quot;有圖&quot;     &quot;有夠&quot;     &quot;有天&quot;     &quot;有時&quot;    
+ [793] &quot;有時候&quot;   &quot;有次&quot;     &quot;有沒有&quot;   &quot;有用&quot;     &quot;有種&quot;     &quot;有趣&quot;    
+ [799] &quot;有點&quot;     &quot;有點像&quot;   &quot;朋友&quot;     &quot;服務&quot;     &quot;服務生&quot;   &quot;朝聖&quot;    
+ [805] &quot;期待&quot;     &quot;未來&quot;     &quot;本人&quot;     &quot;本來&quot;     &quot;本魯&quot;     &quot;杯子&quot;    
+ [811] &quot;東西&quot;     &quot;板工&quot;     &quot;某個&quot;     &quot;某天&quot;     &quot;查理&quot;     &quot;根本&quot;    
+ [817] &quot;桃園&quot;     &quot;桌上&quot;     &quot;棒棒&quot;     &quot;棒球&quot;     &quot;椅子&quot;     &quot;概念&quot;    
+ [823] &quot;樓上&quot;     &quot;樓下&quot;     &quot;樓主&quot;     &quot;樓梯&quot;     &quot;樓樓&quot;     &quot;標準&quot;    
+ [829] &quot;模式&quot;     &quot;樣子&quot;     &quot;機會&quot;     &quot;機車&quot;     &quot;橡皮擦&quot;   &quot;檢查&quot;    
+ [835] &quot;檸檬&quot;     &quot;櫃檯&quot;     &quot;歡樂&quot;     &quot;歡迎&quot;     &quot;正在&quot;     &quot;正妹&quot;    
+ [841] &quot;正常&quot;     &quot;正文&quot;     &quot;正當&quot;     &quot;正確&quot;     &quot;正解&quot;     &quot;此時&quot;    
+ [847] &quot;此風&quot;     &quot;母親&quot;     &quot;每個&quot;     &quot;每天&quot;     &quot;每次&quot;     &quot;比較&quot;    
+ [853] &quot;氣球&quot;     &quot;水桶&quot;     &quot;水龍頭&quot;   &quot;永遠&quot;     &quot;決定&quot;     &quot;沒事&quot;    
+ [859] &quot;沒人&quot;     &quot;沒什麼&quot;   &quot;沒圖&quot;     &quot;沒多久&quot;   &quot;沒帶&quot;     &quot;沒想到&quot;  
+ [865] &quot;沒有&quot;     &quot;沒用&quot;     &quot;沒笨點&quot;   &quot;沒聽過&quot;   &quot;沒錯&quot;     &quot;沒關係&quot;  
+ [871] &quot;沙發&quot;     &quot;治療&quot;     &quot;泡泡&quot;     &quot;注意&quot;     &quot;注音&quot;     &quot;洋蔥&quot;    
+ [877] &quot;洗完&quot;     &quot;洗手&quot;     &quot;洗澡&quot;     &quot;活動&quot;     &quot;流行&quot;     &quot;浪費&quot;    
+ [883] &quot;浴室&quot;     &quot;海豚&quot;     &quot;消失&quot;     &quot;清楚&quot;     &quot;測試&quot;     &quot;湯匙&quot;    
+ [889] &quot;準備&quot;     &quot;溫馨&quot;     &quot;滷味&quot;     &quot;滿壯&quot;     &quot;漂亮&quot;     &quot;漢堡&quot;    
+ [895] &quot;漫畫&quot;     &quot;火車&quot;     &quot;火車站&quot;   &quot;火鍋&quot;     &quot;炫耀&quot;     &quot;為何&quot;    
+ [901] &quot;烤肉&quot;     &quot;無奈&quot;     &quot;無法&quot;     &quot;無聊&quot;     &quot;無腦&quot;     &quot;無言&quot;    
+ [907] &quot;無誤&quot;     &quot;無論如何&quot; &quot;無辜&quot;     &quot;無限&quot;     &quot;然後&quot;     &quot;照片&quot;    
+ [913] &quot;熟悉&quot;     &quot;爆炸&quot;     &quot;爆笑&quot;     &quot;爆米花&quot;   &quot;爆頭&quot;     &quot;父親&quot;    
+ [919] &quot;爸媽&quot;     &quot;爸爸&quot;     &quot;爺爺&quot;     &quot;版主&quot;     &quot;牌子&quot;     &quot;牛奶&quot;    
+ [925] &quot;牛肉&quot;     &quot;特別&quot;     &quot;特地&quot;     &quot;狀態&quot;     &quot;狀況&quot;     &quot;狂笑&quot;    
+ [931] &quot;狗狗&quot;     &quot;猶豫&quot;     &quot;玉米&quot;     &quot;玩具&quot;     &quot;玻璃&quot;     &quot;珍珠&quot;    
+ [937] &quot;班上&quot;     &quot;現在&quot;     &quot;現場&quot;     &quot;理解&quot;     &quot;瓦斯&quot;     &quot;甚麼&quot;    
+ [943] &quot;生日&quot;     &quot;生日快樂&quot; &quot;生氣&quot;     &quot;生活&quot;     &quot;產品&quot;     &quot;用力&quot;    
+ [949] &quot;用心&quot;     &quot;由於&quot;     &quot;男人&quot;     &quot;男友&quot;     &quot;男朋友&quot;   &quot;男生&quot;    
+ [955] &quot;留下&quot;     &quot;留言&quot;     &quot;畢業&quot;     &quot;畢竟&quot;     &quot;番茄&quot;     &quot;畫的&quot;    
+ [961] &quot;畫面&quot;     &quot;畫風&quot;     &quot;當下&quot;     &quot;當兵&quot;     &quot;當初&quot;     &quot;當天&quot;    
+ [967] &quot;當年&quot;     &quot;當我&quot;     &quot;當時&quot;     &quot;當然&quot;     &quot;疑惑&quot;     &quot;痛苦&quot;    
+ [973] &quot;瘋狂&quot;     &quot;發信站&quot;   &quot;發文&quot;     &quot;發現&quot;     &quot;發生&quot;     &quot;發票&quot;    
+ [979] &quot;白痴&quot;     &quot;白癡&quot;     &quot;白色&quot;     &quot;的確&quot;     &quot;的話&quot;     &quot;盒子&quot;    
+ [985] &quot;目前&quot;     &quot;直到&quot;     &quot;直接&quot;     &quot;相信&quot;     &quot;看不到&quot;   &quot;看不懂&quot;  
+ [991] &quot;看來&quot;     &quot;看到&quot;     &quot;看圖&quot;     &quot;看成&quot;     &quot;看板&quot;     &quot;看清楚&quot;  
+ [997] &quot;看看&quot;     &quot;看著&quot;     &quot;看見&quot;     &quot;看起來&quot;   &quot;看過&quot;     &quot;看錯&quot;    
+[1003] &quot;真人&quot;     &quot;真好&quot;     &quot;真心&quot;     &quot;真是&quot;     &quot;真是太&quot;   &quot;真的&quot;    
+[1009] &quot;真相&quot;     &quot;眼殘&quot;     &quot;眼睛&quot;     &quot;眼神&quot;     &quot;眼鏡&quot;     &quot;睡覺&quot;    
+[1015] &quot;瞬間&quot;     &quot;知識&quot;     &quot;知道&quot;     &quot;砍文&quot;     &quot;研究&quot;     &quot;確定&quot;    
+[1021] &quot;確認&quot;     &quot;示意圖&quot;   &quot;社會&quot;     &quot;祝原&quot;     &quot;祝原媽&quot;   &quot;祝福&quot;    
+[1027] &quot;神奇&quot;     &quot;禮拜&quot;     &quot;禮物&quot;     &quot;禮貌&quot;     &quot;科科&quot;     &quot;程度&quot;    
+[1033] &quot;程式&quot;     &quot;空心菜&quot;   &quot;空白&quot;     &quot;穿著&quot;     &quot;突然&quot;     &quot;窗戶&quot;    
+[1039] &quot;立刻&quot;     &quot;立馬&quot;     &quot;竟然&quot;     &quot;童年&quot;     &quot;笑噴&quot;     &quot;笑話&quot;    
+[1045] &quot;笑點&quot;     &quot;笨事&quot;     &quot;笨板&quot;     &quot;笨版&quot;     &quot;笨版長&quot;   &quot;笨版首&quot;  
+[1051] &quot;笨蛋&quot;     &quot;笨點&quot;     &quot;第一&quot;     &quot;第一個&quot;   &quot;第一張&quot;   &quot;第一次&quot;  
+[1057] &quot;第一首&quot;   &quot;第二張&quot;   &quot;第二首&quot;   &quot;筆記&quot;     &quot;等到&quot;     &quot;等待&quot;    
+[1063] &quot;答案&quot;     &quot;筷子&quot;     &quot;算了&quot;     &quot;算是&quot;     &quot;管理員&quot;   &quot;簡單&quot;    
+[1069] &quot;簡稱&quot;     &quot;簽名&quot;     &quot;簽名檔&quot;   &quot;精神&quot;     &quot;糟糕&quot;     &quot;系列&quot;    
+[1075] &quot;系統&quot;     &quot;紀錄&quot;     &quot;紅燈&quot;     &quot;紅茶&quot;     &quot;紅酒&quot;     &quot;終於&quot;    
+[1081] &quot;結婚&quot;     &quot;結帳&quot;     &quot;結束&quot;     &quot;結果&quot;     &quot;結論&quot;     &quot;絕對&quot;    
+[1087] &quot;給他&quot;     &quot;給你&quot;     &quot;給我&quot;     &quot;給推&quot;     &quot;經過&quot;     &quot;經驗&quot;    
+[1093] &quot;網址&quot;     &quot;網路&quot;     &quot;緊張&quot;     &quot;總之&quot;     &quot;總是&quot;     &quot;繼續&quot;    
+[1099] &quot;罰站&quot;     &quot;美國&quot;     &quot;羞恥&quot;     &quot;群組&quot;     &quot;羨慕&quot;     &quot;義大利&quot;  
+[1105] &quot;習慣&quot;     &quot;翻譯&quot;     &quot;老公&quot;     &quot;老大&quot;     &quot;老婆&quot;     &quot;老媽&quot;    
+[1111] &quot;老師&quot;     &quot;老爸&quot;     &quot;老闆&quot;     &quot;老闆娘&quot;   &quot;老鼠&quot;     &quot;考慮&quot;    
+[1117] &quot;考試&quot;     &quot;耳朵&quot;     &quot;聊到&quot;     &quot;聊天&quot;     &quot;聯絡&quot;     &quot;聰明&quot;    
+[1123] &quot;聲音&quot;     &quot;聽到&quot;     &quot;聽說&quot;     &quot;聽過&quot;     &quot;聽錯&quot;     &quot;肌肉&quot;    
+[1129] &quot;肚子&quot;     &quot;肥宅&quot;     &quot;肯定&quot;     &quot;背後&quot;     &quot;背景&quot;     &quot;腦袋&quot;    
+[1135] &quot;腳踏車&quot;   &quot;膝蓋&quot;     &quot;臉上&quot;     &quot;臉書&quot;     &quot;自動&quot;     &quot;自然&quot;    
+[1141] &quot;自肥&quot;     &quot;至少&quot;     &quot;臺灣&quot;     &quot;興奮&quot;     &quot;興趣&quot;     &quot;舉手&quot;    
+[1147] &quot;舌頭&quot;     &quot;舒服&quot;     &quot;花生&quot;     &quot;花蓮&quot;     &quot;英文&quot;     &quot;草莓&quot;    
+[1153] &quot;莫名&quot;     &quot;萬聖節&quot;   &quot;葡萄&quot;     &quot;蓋子&quot;     &quot;蓋章&quot;     &quot;藍色&quot;    
+[1159] &quot;蘋果&quot;     &quot;蘿蔔&quot;     &quot;處理&quot;     &quot;蚊子&quot;     &quot;蛋白&quot;     &quot;蛋糕&quot;    
+[1165] &quot;蛋蛋&quot;     &quot;蛋黃&quot;     &quot;蛤蜊&quot;     &quot;蜘蛛&quot;     &quot;螞蟻&quot;     &quot;螢幕&quot;    
+[1171] &quot;螳螂&quot;     &quot;蟑螂&quot;     &quot;蠢事&quot;     &quot;行動&quot;     &quot;行會&quot;     &quot;衛生紙&quot;  
+[1177] &quot;衣服&quot;     &quot;表情&quot;     &quot;表示&quot;     &quot;表達&quot;     &quot;被騙&quot;     &quot;補充&quot;    
+[1183] &quot;補習班&quot;   &quot;補血&quot;     &quot;裡的&quot;     &quot;裡面&quot;     &quot;褲子&quot;     &quot;西斯&quot;    
+[1189] &quot;要來&quot;     &quot;要加&quot;     &quot;要說&quot;     &quot;見諒&quot;     &quot;規八&quot;     &quot;親子&quot;    
+[1195] &quot;覺得&quot;     &quot;解決&quot;     &quot;解釋&quot;     &quot;訊息&quot;     &quot;討厭&quot;     &quot;討論&quot;    
+[1201] &quot;記得&quot;     &quot;設定&quot;     &quot;設計&quot;     &quot;詐騙&quot;     &quot;試試&quot;     &quot;試試看&quot;  
+[1207] &quot;話題&quot;     &quot;誇張&quot;     &quot;認為&quot;     &quot;認真&quot;     &quot;認識&quot;     &quot;誤會&quot;    
+[1213] &quot;說不定&quot;   &quot;說好&quot;     &quot;說明&quot;     &quot;說真的&quot;   &quot;說話&quot;     &quot;課本&quot;    
+[1219] &quot;請問&quot;     &quot;請見&quot;     &quot;講話&quot;     &quot;謝謝&quot;     &quot;警察&quot;     &quot;警衛&quot;    
+[1225] &quot;護士&quot;     &quot;護士服&quot;   &quot;讀書&quot;     &quot;變態&quot;     &quot;變成&quot;     &quot;豆漿&quot;    
+[1231] &quot;豬肉&quot;     &quot;貓咪&quot;     &quot;負責&quot;     &quot;販賣機&quot;   &quot;貼圖&quot;     &quot;貼心&quot;    
+[1237] &quot;資料&quot;     &quot;走到&quot;     &quot;走路&quot;     &quot;走進&quot;     &quot;起來&quot;     &quot;起司&quot;    
+[1243] &quot;起床&quot;     &quot;超像&quot;     &quot;超商&quot;     &quot;超好&quot;     &quot;超強&quot;     &quot;超有&quot;    
+[1249] &quot;超級&quot;     &quot;超過&quot;     &quot;越來越&quot;   &quot;趕快&quot;     &quot;趕緊&quot;     &quot;距離&quot;    
+[1255] &quot;跪求&quot;     &quot;路上&quot;     &quot;路人&quot;     &quot;路過&quot;     &quot;路邊&quot;     &quot;踢踢&quot;    
+[1261] &quot;身上&quot;     &quot;身為&quot;     &quot;身邊&quot;     &quot;身體&quot;     &quot;車上&quot;     &quot;車子&quot;    
+[1267] &quot;車站&quot;     &quot;轉過&quot;     &quot;轉錄&quot;     &quot;轉頭&quot;     &quot;辛苦&quot;     &quot;辦公室&quot;  
+[1273] &quot;辦法&quot;     &quot;這也&quot;     &quot;這些&quot;     &quot;這件&quot;     &quot;這位&quot;     &quot;這個&quot;    
+[1279] &quot;這句&quot;     &quot;這張&quot;     &quot;這是&quot;     &quot;這時&quot;     &quot;這時候&quot;   &quot;這樣&quot;    
+[1285] &quot;這次&quot;     &quot;這種&quot;     &quot;這篇&quot;     &quot;這裡&quot;     &quot;這邊&quot;     &quot;這麼&quot;    
+[1291] &quot;通常&quot;     &quot;通知&quot;     &quot;速度&quot;     &quot;連結&quot;     &quot;進來&quot;     &quot;進入&quot;    
+[1297] &quot;進去&quot;     &quot;遇到&quot;     &quot;遇過&quot;     &quot;遊戲&quot;     &quot;運動&quot;     &quot;過了&quot;    
+[1303] &quot;過來&quot;     &quot;過去&quot;     &quot;過期&quot;     &quot;過程&quot;     &quot;道歉&quot;     &quot;達成&quot;    
+[1309] &quot;違反&quot;     &quot;適合&quot;     &quot;遲到&quot;     &quot;選字&quot;     &quot;選擇&quot;     &quot;還不&quot;    
+[1315] &quot;還以&quot;     &quot;還在&quot;     &quot;還好&quot;     &quot;還想&quot;     &quot;還是&quot;     &quot;還會&quot;    
+[1321] &quot;還有&quot;     &quot;還沒&quot;     &quot;還滿&quot;     &quot;還能&quot;     &quot;還蠻&quot;     &quot;還要&quot;    
+[1327] &quot;還說&quot;     &quot;邏輯&quot;     &quot;那位&quot;     &quot;那個&quot;     &quot;那天&quot;     &quot;那時&quot;    
+[1333] &quot;那樣&quot;     &quot;那種&quot;     &quot;那裡&quot;     &quot;那邊&quot;     &quot;那間&quot;     &quot;那麼&quot;    
+[1339] &quot;鄉民&quot;     &quot;鄰居&quot;     &quot;醒來&quot;     &quot;醒醒&quot;     &quot;醫生&quot;     &quot;醫院&quot;    
+[1345] &quot;重複&quot;     &quot;重要&quot;     &quot;重點&quot;     &quot;金針&quot;     &quot;錢包&quot;     &quot;錯版&quot;    
+[1351] &quot;錯誤&quot;     &quot;鏡子&quot;     &quot;鑰匙&quot;     &quot;長大&quot;     &quot;長輩&quot;     &quot;門口&quot;    
+[1357] &quot;閃光&quot;     &quot;開刀&quot;     &quot;開啟&quot;     &quot;開始&quot;     &quot;開心&quot;     &quot;開放&quot;    
+[1363] &quot;開玩笑&quot;   &quot;開車&quot;     &quot;開門&quot;     &quot;關係&quot;     &quot;關心&quot;     &quot;關於&quot;    
+[1369] &quot;關門&quot;     &quot;阿伯&quot;     &quot;阿公&quot;     &quot;阿姨&quot;     &quot;阿婆&quot;     &quot;阿嬤&quot;    
+[1375] &quot;阿母&quot;     &quot;阿阿阿&quot;   &quot;附上&quot;     &quot;附圖&quot;     &quot;附近&quot;     &quot;陣子&quot;    
+[1381] &quot;隔壁&quot;     &quot;隔天&quot;     &quot;隨便&quot;     &quot;隨身&quot;     &quot;集氣&quot;     &quot;雖然&quot;    
+[1387] &quot;雞肉&quot;     &quot;雞蛋&quot;     &quot;雞雞&quot;     &quot;離開&quot;     &quot;難得&quot;     &quot;難怪&quot;    
+[1393] &quot;難過&quot;     &quot;難道&quot;     &quot;零錢&quot;     &quot;電影&quot;     &quot;電梯&quot;     &quot;電源&quot;    
+[1399] &quot;電腦&quot;     &quot;電視&quot;     &quot;電話&quot;     &quot;需要&quot;     &quot;霸氣&quot;     &quot;青春&quot;    
+[1405] &quot;非常&quot;     &quot;靠北&quot;     &quot;面前&quot;     &quot;面對&quot;     &quot;韓國&quot;     &quot;音樂&quot;    
+[1411] &quot;順便&quot;     &quot;順利&quot;     &quot;順手&quot;     &quot;頓時&quot;     &quot;頭髮&quot;     &quot;題目&quot;    
+[1417] &quot;顏色&quot;     &quot;願意&quot;     &quot;類似&quot;     &quot;顯示&quot;     &quot;颱風&quot;     &quot;食物&quot;    
+[1423] &quot;飯糰&quot;     &quot;飲料&quot;     &quot;餅乾&quot;     &quot;餐廳&quot;     &quot;香蕉&quot;     &quot;馬上&quot;    
+[1429] &quot;馬桶&quot;     &quot;馬路&quot;     &quot;騎車&quot;     &quot;驚恐&quot;     &quot;驚訝&quot;     &quot;高三&quot;    
+[1435] &quot;高中&quot;     &quot;高興&quot;     &quot;高調&quot;     &quot;高雄&quot;     &quot;高麗菜&quot;   &quot;魔法&quot;    
+[1441] &quot;鮮肉&quot;     &quot;鯉魚&quot;     &quot;麥當勞&quot;   &quot;麻煩&quot;     &quot;黑暗&quot;     &quot;黑色&quot;    
+[1447] &quot;默默&quot;     &quot;點了&quot;     &quot;鼻子&quot;    
+</code></pre>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-78" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>關鍵字的相關性</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<pre><code class="r">findAssocs(d.dtm, &quot;五樓&quot;, 0.6)
+</code></pre>
+
+<pre><code>$五樓
+  推五樓     自肥     九天     事講     兌現     八天     勇猛     圓夢 
+    0.73     0.67     0.64     0.64     0.64     0.64     0.64     0.64 
+    壯遊 夢想成真     大理     日遊     有微     桌都   樓愛被     白族 
+    0.64     0.64     0.64     0.64     0.64     0.64     0.64     0.64 
+    白樂     神煩 美夢成真     肛冷     肛得     肛戲     肛臂     肛雜 
+    0.64     0.64     0.64     0.64     0.64     0.64     0.64     0.64 
+    調高     諾言     較優     重口     雲南 雲南白藥 
+    0.64     0.64     0.64     0.64     0.64     0.64 
+</code></pre>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-79" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>Topic Model</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<pre><code class="r">library(topicmodels)
+g &lt;- LDA(d.dtm, 10)
+terms(g, 10)
+</code></pre>
+
+<pre><code>      Topic 1 Topic 2  Topic 3    Topic 4  Topic 5  Topic 6    Topic 7 
+ [1,] &quot;少於&quot;  &quot;真的&quot;   &quot;哈哈哈&quot;   &quot;一樓&quot;   &quot;後續&quot;   &quot;加油&quot;     &quot;什麼&quot;  
+ [2,] &quot;一個&quot;  &quot;哈哈哈&quot; &quot;可愛&quot;     &quot;文章&quot;   &quot;手機&quot;   &quot;爸爸&quot;     &quot;文章&quot;  
+ [3,] &quot;問卷&quot;  &quot;文章&quot;   &quot;哈哈哈哈&quot; &quot;網址&quot;   &quot;哈哈哈&quot; &quot;一定&quot;     &quot;踢踢&quot;  
+ [4,] &quot;集氣&quot;  &quot;不是&quot;   &quot;好笑&quot;     &quot;踢踢&quot;   &quot;什麼&quot;   &quot;努力&quot;     &quot;發信站&quot;
+ [5,] &quot;水桶&quot;  &quot;踢踢&quot;   &quot;真的&quot;     &quot;發信站&quot; &quot;覺得&quot;   &quot;呼吸&quot;     &quot;來自&quot;  
+ [6,] &quot;再有&quot;  &quot;發信站&quot; &quot;什麼&quot;     &quot;來自&quot;   &quot;真的&quot;   &quot;度過難關&quot; &quot;網址&quot;  
+ [7,] &quot;板工&quot;  &quot;來自&quot;   &quot;知道&quot;     &quot;看板&quot;   &quot;還是&quot;   &quot;早日康復&quot; &quot;看板&quot;  
+ [8,] &quot;二十&quot;  &quot;網址&quot;   &quot;怎麼&quot;     &quot;發文&quot;   &quot;沒有&quot;   &quot;阿公&quot;     &quot;然後&quot;  
+ [9,] &quot;規八&quot;  &quot;看板&quot;   &quot;這樣&quot;     &quot;附圖&quot;   &quot;不是&quot;   &quot;順利&quot;     &quot;真的&quot;  
+[10,] &quot;想發&quot;  &quot;沒有&quot;   &quot;不要&quot;     &quot;不可&quot;   &quot;應該&quot;   &quot;開刀&quot;     &quot;時候&quot;  
+      Topic 8  Topic 9 Topic 10
+ [1,] &quot;什麼&quot;   &quot;高調&quot;  &quot;看板&quot;  
+ [2,] &quot;看板&quot;   &quot;網址&quot;  &quot;轉錄&quot;  
+ [3,] &quot;文章&quot;   &quot;玉米&quot;  &quot;老師&quot;  
+ [4,] &quot;網址&quot;   &quot;不是&quot;  &quot;爆頭&quot;  
+ [5,] &quot;踢踢&quot;   &quot;知道&quot;  &quot;哈哈哈&quot;
+ [6,] &quot;來自&quot;   &quot;什麼&quot;  &quot;什麼&quot;  
+ [7,] &quot;發信站&quot; &quot;弟弟&quot;  &quot;文章&quot;  
+ [8,] &quot;真的&quot;   &quot;我們&quot;  &quot;來自&quot;  
+ [9,] &quot;一個&quot;   &quot;文章&quot;  &quot;這樣&quot;  
+[10,] &quot;不是&quot;   &quot;真的&quot;  &quot;朋友&quot;  
+</code></pre>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="dark segue" id="slide-80" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;">
+  <hgroup>
+    <h2>心得分享與總結</h2>
+  </hgroup>
+  <article data-timings="">
+    
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-81" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>R 在Data Mining上的優勢</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>已有大量的演算法</li>
+<li>強大的資料收集能力與整理能力</li>
+<li>豐富的視覺化功能</li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-82" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>作業</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>請同學更新swirl 的課程內容</li>
+</ul>
+
+<pre><code class="r">library(swirl)
+uninstall_all_courses()
+install_course_github(&quot;wush978&quot;, &quot;DataScienceAndR&quot;, &quot;course&quot;)
+</code></pre>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-83" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>請同學完成以下課程：</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li><code>RDataMining-01-Clustering</code></li>
+<li><code>RDataMining-02-Classification</code></li>
+<li><code>RDataMining-03-Association-Rule</code></li>
+<li><code>RDataMining-04-Text-Mining</code></li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-84" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>作業</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>請在期限內完成作業之後，將&lt;學號&gt;.zip的檔案上傳到ceiba。該壓縮檔的內容應該為：</li>
+</ul>
+
+<pre><code>d01921016/
+d01921016/RDataMining-01-HW.R
+d01921016/RDataMining-02-HW.R
+d01921016/RDataMining-03-HW.R
+d01921016/RDataMining-04-HW.R
+</code></pre>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-85" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>作業</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<ul>
+<li>繳交前，可以用<code>submit()</code>檢查是否有錯，但是最後仍然要上傳ceiba
+
+<ul>
+<li>歡迎到<a href="https://github.com/wush978/DataScienceAndR/issues">issue區</a>找我討論</li>
+<li>這次更趕了，所以bug 可能更多了... Orz</li>
+<li>Windows 的同學如果裝不起來，請幫我拍下錯誤訊息後發到<a href="https://github.com/wush978/DataScienceAndR/issues">issue區</a></li>
+<li>如果無法解決，可以先借用我架設的server做作業：<a href="http://140.112.170.201:8787">http://140.112.170.201:8787</a></li>
+</ul></li>
+</ul>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="largecontent" id="slide-86" style="background-image: url('libraries/frameworks/io2012-wush/images/background.png'); background-repeat:no-repeat; background-position:center; background-size: 100% 100%;" >
+<hgroup>
+  <h2>Q&amp;A</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+    <slide class="backdrop"></slide>
+  </slides>
+  <div class="pagination pagination-small" id='io2012-ptoc' style="display:none;">
+    <ul>
+      <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=1 title='目錄'>
+         1
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=2 title='R 語言的視覺化'>
+         2
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=3 title='R 的繪圖引擎'>
+         3
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=4 title='R 的繪圖簡介'>
+         4
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=5 title='R 的各種基礎Visualization API'>
+         5
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=6 title='Visualization 簡單分類'>
+         6
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=7 title='類別型變數'>
+         7
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=8 title='連續型變數'>
+         8
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=9 title='類別 v.s. 類別'>
+         9
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=10 title='類別 v.s. 連續'>
+         10
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=11 title='連續 v.s. 連續'>
+         11
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=12 title='多變量'>
+         12
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=13 title='多變量'>
+         13
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=14 title='多變量'>
+         14
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=15 title='各種R 和分析結果結合的視覺化'>
+         15
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=16 title='<code>plot</code>和Linear Regression'>
+         16
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=17 title='<code>plot</code>和Regression'>
+         17
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=18 title='<code>plot</code>和Regression'>
+         18
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=19 title='<code>plot</code>和Decision Tree'>
+         19
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=20 title='多變量 PCA'>
+         20
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=21 title='R 的基本繪圖API'>
+         21
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=22 title='基礎繪圖方式與R 的基本繪圖API'>
+         22
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=23 title='基礎繪圖API'>
+         23
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=24 title='ggplot2'>
+         24
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=25 title='Reference'>
+         25
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=26 title='ggplot2 的邏輯'>
+         26
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=27 title='ggplot2 對R 的影響'>
+         27
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=28 title='ggplot2 離散'>
+         28
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=29 title='ggplot2 連續'>
+         29
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=30 title='ggplot2 離散 v.s. 離散'>
+         30
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=31 title='ggplot2 類別 v.s. 連續'>
+         31
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=32 title='ggplot2 連續 v.s. 連續'>
+         32
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=33 title='大數據時代的視覺化'>
+         33
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=34 title='大數據時代視覺化的挑戰'>
+         34
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=35 title='tabplot'>
+         35
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=36 title='Web Based 的互動式解決方案'>
+         36
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=37 title='Open Source 太棒了'>
+         37
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=38 title='地圖'>
+         38
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=39 title='Network Visualization'>
+         39
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=40 title='資料的流動 - Sankey Diagram'>
+         40
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=41 title='R 與數據模型'>
+         41
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=42 title='數據模型的API 設計模式'>
+         42
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=43 title='線性代數介面'>
+         43
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=44 title='Formula 介面'>
+         44
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=45 title='兩種介面的比較'>
+         45
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=46 title='Dimension Reduction'>
+         46
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=47 title='PCA 內建語法'>
+         47
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=48 title='PCA 內建語法'>
+         48
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=49 title='PCA 內建語法'>
+         49
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=50 title='NA'>
+         50
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=51 title='泛用套件'>
+         51
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=52 title='如何比較套件的實作？'>
+         52
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=53 title='Feature Selection'>
+         53
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=54 title='Clustering'>
+         54
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=55 title='CRAN Task View'>
+         55
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=56 title='Hierarchical Clustering'>
+         56
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=57 title='Hierarchical Clustering'>
+         57
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=58 title='Partitioning Clustering - K Means'>
+         58
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=59 title='Density-Based Clustering: DBSCAN'>
+         59
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=60 title='Classification'>
+         60
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=61 title='Decision Tree'>
+         61
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=62 title='Decision Tree'>
+         62
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=63 title='Random Forest'>
+         63
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=64 title='Gradient Boosting Decision Tree'>
+         64
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=65 title='Support Vector Machine'>
+         65
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=66 title='Neuron Network'>
+         66
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=67 title='Neuron Network'>
+         67
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=68 title='Association Rule'>
+         68
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=69 title='Transaction'>
+         69
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=70 title='Item Frequency'>
+         70
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=71 title='Association Rule Mining'>
+         71
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=72 title='Analyzing Rules'>
+         72
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=73 title='Text Mining'>
+         73
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=74 title='ptt 笨版文章分析'>
+         74
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=75 title='文字處理'>
+         75
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=76 title='關鍵字詞雲'>
+         76
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=77 title='關鍵字的頻率'>
+         77
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=78 title='關鍵字的相關性'>
+         78
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=79 title='Topic Model'>
+         79
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=80 title='心得分享與總結'>
+         80
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=81 title='R 在Data Mining上的優勢'>
+         81
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=82 title='作業'>
+         82
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=83 title='請同學完成以下課程：'>
+         83
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=84 title='作業'>
+         84
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=85 title='作業'>
+         85
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=86 title='Q&amp;A'>
+         86
+      </a>
+    </li>
+  </ul>
+  </div>  <!--[if IE]>
+    <script 
+      src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js">  
+    </script>
+    <script>CFInstall.check({mode: 'overlay'});</script>
+  <![endif]-->
+</body>
+  <!-- Load Javascripts for Widgets -->
+  
+  <!-- MathJax: Fall back to local if CDN offline but local image fonts are not supported (saves >100MB) -->
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        processEscapes: true
+      }
+    });
+  </script>
+  <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/2.0-latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  <!-- <script src="https://c328740.ssl.cf1.rackcdn.com/mathjax/2.0-latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script> -->
+  <script>window.MathJax || document.write('<script type="text/x-mathjax-config">MathJax.Hub.Config({"HTML-CSS":{imageFont:null}});<\/script><script src="libraries/widgets/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"><\/script>')
+</script>
+<!-- LOAD HIGHLIGHTER JS FILES -->
+  <script src="libraries/highlighters/highlight.js/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <!-- DONE LOADING HIGHLIGHTER JS FILES -->
+   
+  </html>
