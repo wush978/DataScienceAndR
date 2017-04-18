@@ -1,0 +1,86 @@
+- Class: meta
+  Course: .
+  Lesson: Demo
+  Author: Chung-Fu,Yang
+  Type: Standard
+  Organization: your organization's name goes here
+  Version: 2.4.0
+  
+- Class: text
+  Output: |
+    歡迎來到一堂體驗螺旋丸的課，當你看到這篇代表你已經開始課程且安裝好套件，
+    接下來我希望你體會lo sin wan三步驟，本課程是我想測試用今天學的東西展現螺旋丸，所以我預設你們已經會基本的忍術，像是dplyr
+
+- Class: cmd_question
+  Output: |
+    現在請各位同學查詢是否安裝`highcharter`的說明，請執行這條`devtools::install_github("jbkunst/highcharter")`code並讀入。
+  CorrectAnswer: devtools::install_github("jbkunst/highcharter")
+  AnswerTests: any_of_exprs('devtools::install_github("jbkunst/highcharter")')
+  Hint: 還記得`devtools::install_github("jbkunst/highcharter")`嗎？
+  
+- Class: cmd_question
+  Output: |
+    現在請各位同學將套件讀入，`library(dplyr)`code並讀入。
+  CorrectAnswer: library(dplyr)
+  AnswerTests: any_of_exprs("library(dplyr)")
+  Hint: 還記得`library()`嗎？
+
+- Class: cmd_question
+  Output: |
+    現在請各位同學將套件讀入，`library(highcharter)`code並讀入。
+  CorrectAnswer: library(highcharter)
+  AnswerTests: any_of_exprs("library(highcharter)")
+  Hint: 還記得`library()`嗎？
+
+- Class: cmd_question
+  Output: |
+    現在請各位同學查詢是否安裝`data = iris %>% select(1,5) %>%
+    group_by(Species) %>%
+    summarise(percent=100*round(length(Sepal.Length)/150,2))`的說明，請執行這條code並讀入。
+  CorrectAnswer: data = iris %>% select(1,5) %>%
+    group_by(Species) %>%
+    summarise(percent=100*round(length(Sepal.Length)/150,2)) 
+  AnswerTests: any_of_exprs("data = iris %>% select(1,5) %>%
+    group_by(Species) %>%
+    summarise(percent=100*round(length(Sepal.Length)/150,2))")
+  Hint: 還記得`data = iris %>% select(1,5) %>%
+    group_by(Species) %>%
+    summarise(percent=100*round(length(Sepal.Length)/150,2))`嗎？
+
+
+
+- Class: cmd_question
+  Output: |
+    現在請各位同學查詢是否安裝`highchart() %>% hc_title(text = "不用結印！螺旋丸～～～～～") %>%
+    hc_subtitle(text = "阿～～～～") %>% hc_add_series_labels_values(data$Species,data$percent,
+    colors = c("blue","blue","blue"), type = "pie",name = "FUNC_TYPE", colorByPoint = TRUE, center = c('50%', '50%'),
+    size = 150, dataLabels = list(enabled = TRUE)) %>% hc_tooltip(pointFormat = "{point.y}%")`的說明，請執行這條code並讀入。
+  CorrectAnswer: highchart() %>% 
+    hc_title(text = "不用結印！螺旋丸～～～～～") %>%
+    hc_subtitle(text = "阿～～～～") %>% hc_add_series_labels_values(data$Species,data$percent,
+    colors = c("blue","blue","blue"), type = "pie",
+    name = "FUNC_TYPE", colorByPoint = TRUE, center = c('50%', '50%'),
+                              size = 150, dataLabels = list(enabled = TRUE)) %>% hc_tooltip(pointFormat = "{point.y}%") 
+  AnswerTests: any_of_exprs("highchart() %>% 
+    hc_title(text = "不用結印！螺旋丸～～～～～") %>%
+    hc_subtitle(text = "阿～～～～") %>% hc_add_series_labels_values(data$Species,data$percent,
+    colors = c("blue","blue","blue"), type = "pie",
+    name = "FUNC_TYPE", colorByPoint = TRUE, center = c('50%', '50%'),
+    size = 150, dataLabels = list(enabled = TRUE)) %>% hc_tooltip(pointFormat = "{point.y}%") ")
+  Hint: 還記得`highchart() %>% 
+    hc_title(text = "不用結印！螺旋丸～～～～～") %>%
+    hc_subtitle(text = "阿～～～～") %>% hc_add_series_labels_values(data$Species,data$percent,
+    colors = c("blue","blue","blue"), type = "pie",
+    name = "FUNC_TYPE", colorByPoint = TRUE, center = c('50%', '50%'),
+    size = 150, dataLabels = list(enabled = TRUE)) %>% hc_tooltip(pointFormat = "{point.y}%") `嗎？
+  
+
+- Class: text
+  Output: |
+      恭喜恭喜～這就是iris查克拉版本的螺旋丸～歐噎
+      歐歐歐歐
+
+
+
+
+
