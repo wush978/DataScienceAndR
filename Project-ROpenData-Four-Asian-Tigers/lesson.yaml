@@ -1,0 +1,69 @@
+- Class: meta
+  Course: DataScienceAndR
+  Lesson: Project-ROpenData-Four-Asian-Tigers
+  Author: Cheng-Yu Lin (aha)
+  Type: Standard
+  Organization: Taiwan R User Group
+  Version: 0.0.1
+
+- Class: text
+  Output:
+    亞洲四小龍是指自1970年代起經濟迅速發展的四個亞洲經濟體：南韓、臺灣、香港、新加坡。這些位於東亞和東南亞的國家或地區在1970年代到1990年代經濟發展高速成長，但是，在這之前他們都只以農業和輕工業為主。它們利用西方發達國家向發展中國家轉移勞動密集型產業的機會，吸引外國大量的資金和技術，利用本地廉價而良好的勞動力優勢適時調整經濟發展策略，迅速走上發展道路，並且成為繼日本國以後亞洲新興的發達國家或地區，也成為東亞和東南亞地區的經濟火車頭之一，其成功的經濟發展過程和經驗是發展經濟學研究的典型例子。亞洲四小龍的稱呼在其經濟高速發展時期較為常見，1990年代後較為少用。
+  
+- Class: text
+  Output: 
+    整體的發展趨勢是: 農業, 輕工業 -> 吸引資金與技術 + 本地勞動力(出口導向) -> 東亞與東南亞主要經濟體 1970- 1990
+  
+- Class: text
+  Output:
+    今天我們的問題是: 過了2000年，時間來到2015，台灣的GDP成長依舊是四小龍之首?
+    
+- Class: text
+  Output: 
+    這次練習中，國家資料來源是取自：
+    Worldbank<http://data.worldbank.org/> 與台灣主計處 <http://statdb.dgbas.gov.tw/pxweb/Dialog/NI.asp>。
+    目前將2016-03-17時下載後的檔案解壓縮，並且把要用到的搬到課程目錄之下。
+    其中台灣主計處資料因為預設都是big5，下載後用其他軟體轉成utf8。
+    
+- Class: cmd_question
+  Output: 
+    由於網路在傳輸課程資料時，可能會出錯，所以我們可以先用R 的內建 功能檢查檔案的內容是不是在安裝過程中毀損。請同學輸入： `tools::md5sum(RawData_KR)`。完成後課程會在背景自動比對結果。
+  CorrectAnswer: tools::md5sum(RawData_KR)
+  AnswerTests: omnitest('tools::md5sum(RawData_KR)', 'd38cb9e3530432181ead18a421b2725e')
+  Hint: 如果輸出結果不是`"d38cb9e3530432181ead18a421b2725e"`，代表檔案 已經毀損，請移除課程（`uninstall_all_courses`）後重新安裝課程。
+  
+- Class: text
+  Output: 這裡的`::`代表說，`md5sum`這個函數是來自`tools`這個套件。 這是近代R 語言新增的一種類似namespace的功能，是個很大的進步。(by wush)
+  
+- Class: text
+  Output: 在處理GDP v.s. Power的資料中已經處理過繁瑣的編碼問題，現在我們直接跳過進行處理後面的資料整合．
+  
+- Class: text
+  Output: 由於本次我們的資料會使用到中國，美國，日本，新加坡，台灣，香港，南韓．一共七個國家，建議都進行測試
+  
+- Class: text
+  Output: 過了2000年，時間來到2015，台灣的GDP成長依舊是四小龍之首? 我們要透過資料來呈現，後續這份資料可提供大家繼續做預測使用
+  
+- Class: text
+  Output: 第一步，我們要先讀入所有的資料，先針對中國，美國，日本，新加坡，香港，南韓，除了台灣，因為台灣資料不是直接從WorldBank得到，另外處理
+
+- Class: cmd_question
+  Output: 在世界銀行中的資料都是UTF8, 透過網站上的說明，我們知道這些檔案都是csv檔案,所以可以直接將這些檔案透過read.csv()讀入，
+    裡面帶入的參數主要可以很簡單使用file由於檔案都已經下載好了，這些檔案路徑可以直接透過Data_KR,RawData_US讀到資料內，
+    請就先創造Data_KR是來自讀入`RawData_KR`(這個就是檔案路徑)的資料吧．我們會發現直接讀入會讓他無法直接使用read.csv,也因此建議把前三行給去除掉
+    可以透過skip=3的方法去除前三行，同時為了方便後面處理一致，可以先讓所有欄位都採用文字stringsAsFactors=F,
+    在參數的順序上可以依序從file,skip,stringsAsFactors, 順序不一定要一樣，只是練習的時候透過這樣的順序過關
+  CorrectAnswer: Data_KR = read.csv(file=RawData_KR,skip=3,stringsAsFactors=F)
+  AnswerTests: omnitest('Data_KR = read.csv(file=RawData_KR,skip=3,stringsAsFactors=F)')
+  Hint: Data_KR = read.csv(file=RawData_KR,skip=3,stringsAsFactors=F)
+
+- Class: text
+  Output: 恭喜你讀入這個檔案，但其實後面還有陸陸續續的其他國家的檔案要讀入，可以繼續將每個國家都讀入．讓我們依序把這些讀入吧
+  
+- Class: cmd_question
+  Output: 第二個是美國，檔案路徑在RawData_USA,請放到變數Data_USA
+  CorrectAnswer: Data_USA = read.csv(file=RawData_USA,skip=3,stringsAsFactors=F)
+  AnswerTests: omnitest('Data_USA = read.csv(file=RawData_USA,skip=3,stringsAsFactors=F)')
+  Hint: Data_USA = read.csv(file=RawData_USA,skip=3,stringsAsFactors=F)
+
+

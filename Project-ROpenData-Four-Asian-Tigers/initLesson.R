@@ -1,0 +1,16 @@
+# Code placed in this file fill be executed every time the
+# lesson is started. Any variables created here will show up in
+# the user's working directory and thus be accessible to them
+# throughout the lesson.
+
+#setwd("./")
+assign("RawData_KR",.get_path("./aha/Korea/data.csv"),envir = globalenv())
+assign("RawData_USA",.get_path("./aha/USA/data.csv"),envir = globalenv())
+assign("RawData_Taiwan",.get_path("./aha/Taiwan.csv"),envir = globalenv())
+assign("RawData_HK",.get_path("./aha/HK/data.csv"),envir = globalenv())
+assign("RawData_Sigapore",.get_path("./aha/Singapore/data.csv"),envir = globalenv())
+assign("RawData_Japan",.get_path("./aha/Japan/data.csv"),envir = globalenv())
+assign("RawData_China",.get_path("./aha/China/data.csv"),envir = globalenv())
+
+assign("install_dplyr",check_then_install("dplyr","0.4.3"),envir = globalenv())
+assign("install_ggplot2r",check_then_install("ggplot2","2.1.0"),envir = globalenv())
