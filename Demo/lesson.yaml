@@ -1,0 +1,32 @@
+- Class: meta
+  Course: DataScienceAndR
+  Lesson: Demo
+  Author: hsiaoling
+  Type: Standard
+  Organization: your organization's name goes here
+  Version: 2.3.1.5
+- Class: text
+  Output: |
+    這是個測試
+- Class: cmd_question
+  Output: 現在請各位同學查詢`chol2inv`的說明。
+  CorrectAnswer: help(chol2inv)
+  AnswerTests: any_of_exprs("?chol2inv", "help(chol2inv)")
+  Hint: 還記得`?`或`help`嗎？
+- Class: text
+  Output: |
+    這是個測試2
+- Class: text
+  Output: |
+    這是個測試3
+- Class: cmd_question
+  Output: 這是個測試`a <- iris`
+  CorrectAnswer: a <- iris
+  AnswerTests: omnitest('a <- iris')
+  Hint: a <- iris
+- Class: text
+  Output: |
+    這還是個測試
+- Class: text
+  Output: "這還是個測試 \n"
+
