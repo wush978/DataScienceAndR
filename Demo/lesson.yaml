@@ -1,0 +1,20 @@
+- Class: meta
+  Course: DataScienceAndR
+  Lesson: Demo
+  Author: Lucy0222
+  Type: Standard
+  Organization: your organization's name goes here
+  Version: 2.3.1.5
+- Class: text
+  Output: test!!!
+- Class: cmd_question
+  Output: 現在請各位同學查詢`chol2inv`的說明。
+  CorrectAnswer: help(chol2inv)
+  AnswerTests: any_of_exprs("?chol2inv", "help(chol2inv)")
+  Hint: 還記得`?`或`help`嗎？
+- Class: cmd_question
+  Output: try`a <- iris`
+  CorrectAnswer: a <- iris
+  AnswerTests: omnitest('a <- iris')
+  Hint: a <- iris
+
