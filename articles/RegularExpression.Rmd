@@ -1,0 +1,389 @@
+---
+title: "正則表示式：文字處理的大絕招"
+output:
+  rmdformats::html_docco:
+    fig_width: 6
+    fig_height: 6
+    highlight: kate
+    thumbnails: true
+    lightbox: true
+    gallery: true
+bibliography: articles.bib
+---
+
+```{r setup, include=FALSE}
+library(nycflights13)
+data(flights)
+knitr::opts_chunk$set(echo = TRUE, cache.path = "cache-RegularExpression", fig.path = "fig-RegularExpression")
+inline.print.string <- function(x) {
+  sprintf('%s"%s"%s', rawToChar(as.raw(0x60)), x, rawToChar(as.raw(0x60)))
+}
+```
+
+# 前言
+
+正則表示式（Regular Expression）是我們在處理純文字資料時，幾乎可以解決所有問題的技術。
+R 語言有內建許多與正則表示式相關的函數，不需要安裝套件即可使用。
+這篇文章想要跟各位同學介紹我自己很常使用的一些正則表示式的函數。
+
+
+## 什麼是正則表示式？
+
+正則表示式是一種描述文字模式的語言。
+它不是單純依照應用歸納出來的工具，背後具有相當的數學基礎。
+正則表示式的誕生，來自於美國數學家Stephen Cole Kleene在超過半個世紀之前的研究成果：@Kleene56。
+目前各種程式語言中，幾乎都內建正則表示式，但是他們的語法主要分成兩個派系：
+
+- 一種語法出自於電機電子工程師學會(IEEE)制定的標準
+- 一種語法，則來自於另一個程式語言：Perl
+
+正則表示是可以讓我們撰寫程式來自文字中比對、取代甚至是抽取各種資訊。以下我們將從簡單的應用開始介紹。
+
+# R 語言中的正則表示式
+
+這篇文章中，我不會介紹全部與正則表示式相關的函數與功能。
+以下我介紹的這些函數，目前已經足夠我解決了許多工作上的問題了。
+學習技術的目的應該還是聚焦在解決問題上，所以只要能學會一個汎用的功能，比學會每個功能都介紹。
+因此我沒介紹的功能，就再請同學們有興趣再去自行補足。
+
+## 比對
+
+我們回到翻轉教室中02-RDataEngineer-05-Data-Manipulation的一個問題：我們想要檢查飛機的尾翼號碼上有AA的資料，是不是剛好都是美國航空（carrier資料也會是AA）的問題。
+那時候我們請同學使用的函數：`grepl`就是R 之中使用正則表示式做比對的函數。
+
+```{r, echo = FALSE}
+args(grepl)
+```
+
+在大部分的狀況，我們把要搜尋的文字規則放到`grepl`的第一個參數，也就是`pattern`參數之中。
+在這裡的例子，就是`"AA"`。
+接著把被搜尋的文字放到`grepl`的第二個參數，也就是`x`參數。
+在這裡的例子，是`flights$tailnum`
+接著，`grepl`就會告訴我們，每一個`flights$tailnum`的字串是不是有包含`"AA"`。
+舉例來說，`flights$tailnum`的前六個元素的結果依序是：`r head(grepl("AA", flights$tailnum))`
+我們可以看一下資料中的`tailnum`：
+
+```{r}
+head(flights$tailnum)
+```
+
+確實，只有第三個元素`r inline.print.string(flights$tailnum[3])`有包含`"AA"`。
+更廣泛的來說，這裡的`pattern`參數，就是一個正則表示式的語言。
+R 會先把`"AA"`解析乘要比對的內容，並且一一比對參數`x`的元素。
+如果比對成功，對應的答案就會是`TRUE`。
+反之，則會是`FALSE`。
+
+剛好在這個例子，`"AA"`對正則表示式來說，就是簡單的比對這個字串中有沒有連續兩個`"A"`。
+這樣子的功能，同學在Word中也能透過CTRL+F等搜尋功能達成。
+但是正則表示式只有這麼簡單嘛？
+
+## 開頭或結尾
+
+在正則表示式中，我們可以指定模式出現的位置是不是在文字的開頭或結尾。
+這裡我們拿一個與`grepl`的行為非常接近的函數：`grep`來做範例。
+`grep`與`grepl`的參數有八成像，具體來說，多了`value`與`invert`這兩個參數。
+這篇文章中限於篇幅，我們不會仔細的講解所有的參數。
+所以有興趣的同學麻煩再自行研究。
+
+`grep`與`grepl`最大的差異，在於它回傳的是「符合`pattern`」的「位置」或「文字」，而不是一個布林向量。
+因此結果的向量長度，會短很多。
+
+在正則表示式中，我們可以在`pattern`的第一個字元放上`"^"`，代表接下來的模式一定要從字串的開頭開始。
+舉例來說：
+
+```{r}
+grep("^AA", flights$tailnum)
+```
+
+以上的程式碼告訴我們，有哪些位置的tailnum資料是由`"AA"`開頭的，結果是R沒有找到。
+同學可以用`substring`做驗證：
+
+```{r}
+sum(substring(flights$tailnum, 1, 2) == "AA", na.rm = TRUE)
+```
+
+結果會與剛剛的`grep`的結果符合。
+
+又如果我們在`pattern`的最後一個字元放上`$`，則代表接下來之前的模式一定要是字串的最後。
+舉例來說：
+
+```{r}
+head(grep("AA$", flights$tailnum))
+```
+
+我們可以加上參數`value = TRUE`來看比對成功的文字：
+
+```{r}
+head(grep("AA$", flights$tailnum, value = TRUE))
+```
+
+這裡，我們還是可以用`substring`來驗證我們的結果：
+
+```{r}
+ans.substring <- substring(flights$tailnum, nchar(flights$tailnum) - 1, nchar(flights$tailnum)) == "AA"
+ans.grepl <- grepl("AA$", flights$tailnum)
+all(ans.substring == ans.grepl, na.rm = TRUE)
+```
+
+以上的指令中，`nchar`代表這個字串中有多少個字元。
+組合`substring`與`nchar`，我們就可以切割出字串最後兩個字元。
+而`all`這個函數，必須要參數中的布林向量全部都是`TRUE`的時候，才會回傳`TRUE`。
+
+## 不定長度：同時比對`"AA"`、`"AAA"`或`"AAAA"`等等
+
+在正則表示式中，我們能寫出一種模式，告訴R 我們的目標的長度是不確定的。
+
+舉例來說：`"AA"`在正則表示式中等價於`"A{2}"`，也就是把字元`"A"`重複兩次的模式。
+大括號裡的數字，就代表重複的次數。
+而重複的字元，限定是大括號前面的一個字元。
+R 要剛好找到，才判斷字串符合我們提供的模式。
+
+```{r}
+all(grep("AA", flights$tailnum) == grep("A{2}", flights$tailnum), na.rm = TRUE)
+```
+
+同理可證，我們可以找連續三個A：
+
+```{r}
+head(grep("A{3}", flights$tailnum, value = TRUE))
+```
+
+因此我們可以告訴R，我們需要的A可以有連續2、3或4個。
+
+
+```{r}
+grep("A{2,4}", c("A", "AA", "AAA", "AAAA", "AAAAA"), value = TRUE)
+```
+
+同學有沒有注意到，連續五個A也被算是比對成功呢？因為五個A也算是符合連續2~4個A的模式。
+
+甚至是我們可以告訴R，只要有連續的A（但是至少要一個）就行了。
+這裡的`"A+"`的模式代表，至少要有一個A。
+
+```{r}
+grep("A+", c("", "A", "AA", "AAA", "AAAA", "AAAAA"), value = TRUE)
+```
+
+同學請注意到，空字串`""`比對失敗。
+
+與`+`類似的，還有`*`與`?`的符號。
+`?`代表0個或1個。
+`*`代表連續0個、1個、2個... 
+
+總而言之，透過大括號，以及`+`、`*`與`?`，我們可以透過正則表示式表達各種可能的長度的模式。
+最後提醒同學，大括號、`+`、`*`與`?`都是針對他們之前的一個字元而已。
+
+## 不定字元
+
+那除了長度可以有不確定之外，模式中的字元也可以是不確定的。
+
+舉例來說，如果我們要找的不再是如`"A"`、`"AA"`與`"AAA"`等連續的相同字元，而是兩個A中間夾雜任意字元的模式。
+我們可以利用：`"A.A"`來表示這樣的模式。
+這裡的`.`代表一個任意字元：
+
+```{r}
+head(grep("A.A", flights$tailnum, value = TRUE))
+```
+
+同學可以看到，R 找到符合`"A.A"`模式的字元的前六個之中，你們是不是能找到兩個A中間夾著任意字元的模式呢？
+
+## 否定字元
+
+上一個模式中，包含`"AAA"`這樣的模式。
+如果我們希望兩個A中間夾著的字元是數字呢？
+我們可以利用`"A[0-9]A"`來表示：
+這裡的中括號，代表一個字元。而這個字元必須要符合中括號之間的字元，才算有效。
+而`0-9`在這裡就代表0, 1, 2, ..., 9 等十個字元的集合。
+
+```{r}
+grep("A[0-9]A", flights$tailnum, value = TRUE)
+```
+
+結果在tailnum中，是找不到符合這種模式的航班。
+理由是因為，航班的tailnum資料需要註冊，並且符合一定的規則的。
+通常第一個字元一定是`N`，後接若干個數字，最後會是英文字母。
+因此，`A[0-9]A`的模式就不存在了。
+有興趣的同學可以參考[Aircraft registration](https://en.wikipedia.org/wiki/Aircraft_registration)上的資料。
+
+中括號除了代表「符合」的模式，之外，也可以代表「不符合」。
+兩者的差別在於「符合」的模式，是`[]`，而「不符合」的模式，是`[^]`。
+舉例來說：
+
+```{r}
+head(grep("N[13]", flights$tailnum, value = TRUE))
+```
+
+找出來的模式，N的後面必須是1或3。
+
+```{r}
+head(grep("N[^13]", flights$tailnum, value = TRUE))
+```
+
+找出來的模式，N的後面**不能**是1或3。
+
+這類不定字元的模式，也可以與前面介紹的不定長度的技巧一起使用。
+舉例來說：
+
+```{r}
+head(grep("N[13]{3}", flights$tailnum, value = TRUE))
+```
+
+這裡找出來的模式，N後面一定有連續三個1或3。
+大家有沒有開始慢慢感受到正則表示式的威力了呢？
+
+## 子模式
+
+以上的內容我很早就自己學會了。
+但是在實務上，還是常常遇到沒辦法解決的問題。
+直到我學會子模式之後，是我才開始覺得正則表示式能夠解決大部份我的問題。
+
+這裡先跟同學複習一下，剛剛我們介紹的正則表示式語法中，如大括號、`+`、`*`與`?`都是針對他們之前的一個字元而已。
+那如果我們不只是針對一個字元呢？
+
+舉例來說，如果我想要找的是像1212這樣，12重複兩次的模式呢？
+答案就是用小括號建立子模式。
+舉例來說，`"(12){2}"就是連續12這兩個數字的模式，連續出現兩次的模式：
+
+```{r}
+head(grep("(12){2}", flights$tailnum, value = TRUE))
+```
+
+這樣找出來的模式，都一定會有1212。
+
+這樣的手法，可以跟上面教過的語法整合。
+舉例來說，我們可能想要的是：
+
+```{r}
+head(grep("(1[23]){2}", flights$tailnum, value = TRUE))
+```
+
+這裡的小括號中的子模式，就是前面教的：`"1[23]"`，也就是1後面可以接2或3。
+而這樣的模式，再重複兩次。
+因此同學會看到上面的指令找出來的結果，都會有1312, 1212, 1213... 等模式出現。
+
+## 抽取資訊
+
+在R之中，我們不只可以尋找子模式，我們還可以請R 把子模式的資訊抽取出來。
+我們回到RDataEngineer-01-Parsing的最後一個測驗。
+這個問題中，我們需要從海盜的資料抽取資訊。我們先從github中下載這份課程中的資料：
+
+```{r pirate_info, cache = TRUE}
+pirate_path <- tempfile(fileext = ".txt")
+download.file("https://raw.githubusercontent.com/wush978/DataScienceAndR/course/02-RDataEngineer-01-Parsing/pirate-info-2015-09.txt", destfile = pirate_path)
+pirate_info <- readLines(file(pirate_path, encoding = "BIG5"))
+head(pirate_info)
+```
+
+透過翻轉教室中的教學，我們知道可以使用`strsplit`或`substring`來從文字中萃取資料。
+但是如果利用正則表示式的子模式來抽取時間的資訊，我們可以這樣寫：
+
+```{r, dependson="pirate_info"}
+head(
+  regmatches(
+    pirate_info, 
+    regexec("日期：([0-9]{4})年([0-9]{1,2})月([0-9]{1,2})日", pirate_info)
+  ))
+```
+
+這裡我們使用的是`regexec`的函數，並且與`regmatches`函數搭配。
+`regexec`也是R裡面的正則表示式的函數之一。
+`regmatches`可以從比對出來的結果，抽取資訊。
+這樣的組合在抽取子模式的內容時，是很方便的。
+舉例來說，同學可以看到上面的輸出，是一個list物件。
+那些pirate_info的字串元素，如果不符合我們寫的模式，為應的list物件中的元素，就會是`character(0)`。
+如果有比對成功，R不只會回傳字串的內容，還會幫我們把子模式的內容也抽出來放在後面。
+所以同學會看到第六筆資料：`"1. 日期：2015年9月6日"`在抽出子模式之後，我們知道：
+
+- 第一個子模式（年）的內容是`"2015"`
+- 第二個子模式（月）的內容是`"9"`
+- 第三個子模式（日）的內容是`"6"`
+
+這樣的功能，在實務上非常的好用。
+
+## 跳脫字元
+
+運用上述的技巧，我們就可以去抽取，例如文字中的成對括號之間的文字。
+舉例來說，如果我們有一個文字資料：
+
+```{r}
+x <- "123(45)657"
+```
+
+我們希望能夠抓取兩個小括號之間的數字。
+
+我第一次遇到類似問題時，就根據上面我學到的技巧，寫出這樣的正則表示式：
+
+```{r}
+pattern <- "((.*))"
+```
+
+那時我心裡這樣想：外圈的括號代表文字中的括號。內圈的括號代表子模式。
+R 應該可以懂我吧？
+當然不懂！
+**小括號就是代表子模式，這是絕對的！**
+
+```{r}
+regmatches(x, regexec(pattern, x))
+```
+
+所以R 並沒有找到兩個括號之間的數字：`"45"`。
+
+那我們怎麼半呢？答案是要透過「跳脫字元」。
+正則表示式的跳脫字元，是`"\"`，剛好與R 的字串的跳脫字元一樣。
+因此雖然我心裡想要輸入的是：
+`\((.*)\)`
+但是跑到R 的雙引號中間之後，每一個`"\"`都要重複兩遍：
+
+```{r}
+pattern <- "\\((.*)\\)"
+```
+
+我們可以透過`cat`函數來看R 看到的雙引號之間的文字，是什麼：
+
+```{r}
+cat(pattern)
+```
+
+雖然我們輸入的時候，`"\"`需要兩個，可是透過`cat`，我們可以確定R 並沒有搞混。
+
+```{r}
+regmatches(x, regexec(pattern, x))
+```
+
+結果R 也真的能找到45。
+
+因此這裡要提醒同學，所有之前講過得特殊符號，例如大括號、中括號、小括號、`+`... 在比對的時候，如果這些剛好是你要比對的文字，那就要加上跳脫字元`"\"`，程式才能正確的詮釋我們想表達的意思。
+
+又剛好跳脫字元`"\"`也是R 的字串的跳脫字元，所以我們在輸入時，一個`"\"`就要輸入兩次。
+因此，如果剛好要比對的符號是`\`，那在R裡面的輸入就要是`"\\\\"`了...
+
+# 總結
+
+以上介紹了我個人常用的正則表示式的功能，希望對同學有幫助。
+之後我會釋出一個小關卡，讓讀過這篇文章的同學可以練習正則表示式。
+看不懂的同學，也都很歡迎到聊天室，或是下面的留言板討論。
+如果對內容有建議的網友，也歡迎在或是到<https://github.com/wush978/DataScienceAndR/issues>發issue給我。
+
+<div id="disqus_thread"></div>
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+*/
+var disqus_config = function () {
+this.page.url = "http://datascienceandr.org/articles/RegularExpression.html";  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = "articles/RegularExpression"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://ryu-yan-fan-zhuan-jiao-shi.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<script id="dsq-count-scr" src="https://ryu-yan-fan-zhuan-jiao-shi.disqus.com/count.js" async></script>
+
+# 參考文獻
+
