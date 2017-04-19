@@ -10,6 +10,8 @@ R 語言翻轉教室除了教R 之外，另外一個理念是想要教同學培�
 
 ## 閱讀專區
 
+- [正則表示式：文字處理的大絕招](http://datascienceandr.org/articles/RegularExpression.html)
+
 ### Taiwan R User Group 專區
 
 這裡紀錄許多社群分享的文章
