@@ -20,6 +20,26 @@ R 語言翻轉教室除了教R 之外，另外一個理念是想要教同學培�
 - [R 講題分享 - 種類數的估計與預測](http://programmermagazine.github.io/201312/htm/article6.html)
 - [R 講題分享 – SpideR -- 用R自製網路爬蟲收集資料 (作者：Taiwan R User Group)](http://programmermagazine.github.io/201311/htm/article6.html)
 
+### [celestialgod](http://chingchuan-chen.github.io/) 專區
+
+- [在R用ROracle去操作Oracle資料庫](http://chingchuan-chen.github.io/posts/2016/07/25/use-ROracle-to-manipulate-oracle-database-in-R)
+- [Pipe Operators in R](http://chingchuan-chen.github.io/posts/2016/07/10/pipe-operators-in-R)
+- [introduction to magrittr](http://chingchuan-chen.github.io/posts/2015/07/01/magrittr)
+- [introduction to data.table](http://chingchuan-chen.github.io/posts/2015/07/02/data-table)
+- [introduction to dplyr](http://chingchuan-chen.github.io/posts/2015/07/03/dplyr)
+- [introduction to tidyr](http://chingchuan-chen.github.io/posts/2015/07/04/tidyr)
+- [R web service with opencpu](http://chingchuan-chen.github.io/posts/2016/10/21/R-web-service-with-opencpu
+)
+- [A comparison for R parallel packages](http://chingchuan-chen.github.io/posts/2016/11/26/R-parallel-pkgs)
+- [Differences between RcppEigen and RcppArmadillo](http://chingchuan-chen.github.io/posts/2016/12/31/Differences-between-RcppEigen-and-RcppArmadillo
+)
+- [Using caret to tune the model parameters](http://chingchuan-chen.github.io/posts/2017/03/14/using-caret-to-tune-model-parameters)
+- [Grid search in data.table](http://chingchuan-chen.github.io/posts/2017/04/10/grid-search-in-data.table
+)
+- [ptt問答: parsing的中文顯示](https://www.ptt.cc/bbs/R_Language/M.1466658481.A.FAB.html)
+- [ptt問答：爬蟲爬取聯合財經新聞](https://www.ptt.cc/bbs/R_Language/M.1480080483.A.5F6.html)
+- [ptt問答：零基礎的網頁Parse?](https://www.ptt.cc/bbs/R_Language/M.1465313901.A.EE1.html)
+
 ### Wush 專區
 
 這裡紀錄了我個人有參與的R 相關著作
