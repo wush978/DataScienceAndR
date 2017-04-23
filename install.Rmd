@@ -3,6 +3,7 @@
 同學請依照以下的動作安裝教材：
 
 1. 安裝R
+    - 由於R 3.4剛上線，目前與教材不相容。請同學到 <https://mran.revolutionanalytics.com/snapshot/2017-04-01/> 上下載R 3.3.3版本。
 2. 安裝Rstudio(Windows 使用者請安裝Rstudio或自備能夠編輯UTF-8 編碼的編輯器，OS X 與Linux使用者可依據自己喜好決定是否使用Rstudio)
 3. 打開R ，執行：`source("http://wush978.github.io/R/init-swirl.R")`（如果是網路環境受到限制，只能使用80 port 的同學，請參考 <https://gist.github.com/wush978/957d8bee92f78f6c0aead949609f921d>中的指令進行安裝）
 4. 輸入`library(swirl);swirl()`後即進入教學環境。
