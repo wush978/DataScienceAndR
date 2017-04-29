@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta name="google-signin-client_id" content="842324757776-nonjllne8m8as9djg51e6cg98h6ijam7.apps.googleusercontent.com">
+    <title>R語言翻轉教室</title>
+
+    <!-- Le styles -->
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="bootstrap/css/bootstrap-theme.min.css" rel="stylesheet">
+    <link href="bootstrap/css/docs.css" rel="stylesheet">
+    <link rel="icon" href="http://i.imgur.com/RkG7X4l.png" />
+    <link href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css" rel="stylesheet">
+  </head>
+
+  <body data-spy="scroll" data-target=".bs-docs-sidebar">
+<div id="top-navbar" class="navbar-default"><ul class="nav nav-tabs"><li><a href="index.html"><h5 style="color: #0088cc;">首頁</h5></a></li><li><a href="install.html"><h5 style="color: #0088cc;">安裝導引</h5></a></li><li><a href="before.html"><h5 style="color: #0088cc;">上手教材</h5></a></li><li><a href="material.html"><h5 style="color: #0088cc;">主要教材</h5></a></li><li><a href="after.html"><h5 style="color: #0088cc;">課後教材</h5></a></li><li><a href="individual-tracking.html"><h5 style="color: #0088cc;">個人紀錄</h5></a></li><li><a href="teacher.html"><h5 style="color: #0088cc;">教師專區</h5></a></li><li><a href="teacher-tracking.html"><h5 style="color: #0088cc;">教師報表</h5></a></li><li><a href="thanks.html"><h5 style="color: #0088cc;">感謝清單</h5></a></li></ul></div><div class="jumbotron subhead" style="text-align:center;"><div class="container"><h1><img src="http://i.imgur.com/81C5LBk.png" style="height:7em" /></h1><p class="lead">全中文R語言互動式教材</p></div></div><div class="col-md-2 bs-docs-sidebar"><ul id="affix-toc" class="nav nav-list bs-docs-sidenav"><li><a href="#1">1. 帳務專區</a></li><li><a href="#2">1.1. 已登入的服務：</a></li><li><a href="#3">2. 帳號整合申請</a></li></ul></div><div id="main-content" class="container col-md-9"><p><!-- title: <img src="http://i.imgur.com/81C5LBk.png" style="height:7em" /> -->
+<!-- subtitle: 全中文R語言互動式教材 -->
+<!-- header-title: R語言翻轉教室 -->
+<!-- icon: http://i.imgur.com/RkG7X4l.png --></p>
+
+<p><!-- scripts: [{"src" : "https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"}] -->
+<!-- header-meta: [{"name" : "google-signin-client_id", "content" : "842324757776-nonjllne8m8as9djg51e6cg98h6ijam7.apps.googleusercontent.com"}] -->
+<!-- header-link: [{"href" : "https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css", "rel" : "stylesheet"}] --></p>
+
+<h2 id="1">1. 帳務專區</h2>
+
+<!-- scripts: [{"src" : "https://apis.google.com/js/platform.js?onload=renderGoogleButton", "async" : null, "defer" : null}, {"src" : "js/auth.js"}, {"src" : "js/underscore-min.js"}, {"src" : "js/sha256.js"}] -->
+
+<!-- Button trigger modal -->
+
+<div style="font-size:18px;">
+<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#login-menu" onclick="datascienceandrSetLogin();">登入</button>或<button class="btn btn-primary btn-lg" onClick="return datascienceandrLogout();">登出</button>
+</div>
+
+<!-- Modal -->
+
+<div class="modal fade" id="login-menu" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content" style="text-align:center;">
+      <div class="overlay" style="background: rgb(0, 0, 0) none repeat scroll 0% 0%; position: absolute; top: 0px; right: 0px; bottom: 0px; left: 0px; opacity: 0.5; z-index:1060; display: none">
+        <div id="loading-img"></div>
+      </div>
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="login-close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">請選擇登入的服務</h4>
+      </div>
+      <div class="modal-body">
+        <div class="row" style="text-align: center;">
+          <div style="position: relative; padding-right: 20px; padding-left: 20px;">
+            <div class="thumbnail" style="width: 300px; display:inline-block; float: none; border: none !important;">
+              <div style="width: 260px; height: 60px; display:inline-block;"/>
+                <a id="google-signin-wrapper" class="thumbnail" href="#">
+                  <img alt="Sign in with Google" style="width: 240px; height: 50px; line-height: 50px;" src=""/>
+                  <div id="google-signin"></div>
+                </a>
+              </div>
+              <div style="width: 260px; height: 60px; display:inline-block;">
+                <a class="thumbnail" onClick="return datascienceandrFacebookLogin();">
+                  <img alt="Sign in with Facebook" style="width: 240px; height: 50px; line-height: 50px;" src="" onClick="return datascienceandrFacebookLogin();"/>
+                </a>
+              </div>
+              <div style="width: 260px; height: 60px; display:inline-block;">
+                <a class="thumbnail" onclick='$("#classroom-login").show();'>
+                  <img alt="Classroom帳號登入" style="width: 240px; height: 50px; line-height: 50px;" src=""/>
+                </a>
+              </div>
+              <div id="classroom-login" style="display:inline-block; display:none;">
+                <div class="input-group">
+                  <span class="input-group-addon">帳戶</span>
+                  <input id="classroom-account" type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1">
+                </div>
+
+                <div class="input-group">
+                  <span class="input-group-addon">密碼</span>
+                  <input id="classroom-password" type="password" class="form-control" placeholder="Password" aria-describedby="basic-addon2">
+                </div>
+                <div class="input-group">
+                  <input value="Login" class="btn btn-primary" type="submit" onClick="return datascienceandrClassroomAuth();">
+                </div>
+              </div> 
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<h3 id="2">1.1. 已登入的服務：</h3>
+
+<ul id="login-account" class="list-group">
+  <li id="Google-login" class="list-group-item">Google:<font>無</font></li>
+  <li id="Facebook-login" class="list-group-item">Facebook:<font>無</font></li>
+  <li id="classroom-login" class="list-group-item">classroom:<font>無</font></li>
+</ul>
+
+<h2 id="3">2. 帳號整合申請</h2>
+
+<ol>
+<li>請在「帳務專區」登入所有你的服務</li>
+<li>點選下方的「申請帳號整合」</li>
+</ol>
+
+<p><button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#sync-progress" onclick="datascienceandrSyncAccount();">申請帳號整合</button></p>
+
+<div class="modal fade" id="sync-progress" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content" style="text-align:center;">
+      <div class="overlay" style="background: rgb(0, 0, 0) none repeat scroll 0% 0%; position: absolute; top: 0px; right: 0px; bottom: 0px; left: 0px; opacity: 0.5; z-index:1060; display: none">
+        <div id="loading-img"></div>
+      </div>
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="sync-done"><span aria-hidden="true">&times;</span></button>
+      </div>
+      <div class="modal-body">
+        <div class="row" style="text-align: center;">
+          <p>處理中...</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="fb-root"></div>
+
+<script type="text/javascript">
+function datascienceandrGetUserData(service) {
+  datascienceandrOverlayDiv.hide();
+  $("#" + service + "-login > font").contents().last()[0].textContent = datascienceandrUser;
+}
+var datascienceandrAuthOrigin;
+changeDatascienceandrAuth = function() {
+  if (typeof datascienceandrAuth === "undefined" || datascienceandrAuth === null) {
+    setTimeout(changeDatascienceandrAuth, 100);
+  } else {
+    datascienceandrAuthOrigin = datascienceandrAuth;
+    datascienceandrAuth = function(service, token) {
+      if (service === "classroom") return datascienceandrAuthOrigin(service, token);
+      datascienceandrGetUserData(service);
+    };
+  }
+}
+changeDatascienceandrAuth();
+
+function syncAccountDone() {
+  $("#sync-done").click();
+}
+
+function datascienceandrSyncAccount() {
+  var googleToken, facebookToken;
+  try {
+    googleToken = datascienceandr.user.google.getAuthResponse().id_token;
+  } catch (e) { }
+  try {
+    facebookToken = datascienceandr.user.facebook.authResponse.accessToken;
+  } catch (e) { }
+  var account = datascienceandrClassroomAuthAccount[0].value;
+  var password = datascienceandrClassroomAuthPassword[0].value;
+  if (account === "") {
+    alert("請先登入classroom帳號")
+    setTimeout(syncAccountDone, 100);
+    return;
+  }
+  if (password === "") {
+    alert("請先登入classroom帳號")
+    setTimeout(syncAccountDone, 100);
+    return;
+  }
+  var url = datascienceandrUrls();
+  $.ajax({
+    url : url + "/api/auth/syncAccount",
+    type : "POST",
+    data : {
+      googleToken : JSON.stringify(googleToken),
+      facebookToken : JSON.stringify(facebookToken)
+    },
+    dataType : "json",
+    success: function(data) {
+    },
+    complete: function() {
+      alert("申請成功!");
+      syncAccountDone();
+    },
+    error: function(jqXHR, textStatus, errorThrown) {
+      alert("申請失敗，請網頁右下角點開聊天室後找管理員求助. 錯誤訊息: " + errorThrown);
+      throw errorThrown;
+    },
+    timeout: 5000,
+    xhrFields: {
+      withCredentials: true
+    }
+  });
+
+}
+</script>
+
+<!-- scripts: [{"src" : "https://sidecar.gitter.im/dist/sidecar.v1.js", "async" : null, "defer" : null}, {"src" : "http://momentjs.com/downloads/moment-with-locales.min.js", "async" : null, "defer" : null}, {"src" : "js/gitter.js"}] --></div>
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="jquery/jquery-3.2.0.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
+<script src="https://apis.google.com/js/platform.js?onload=renderGoogleButton" async defer></script>
+<script src="js/auth.js"></script>
+<script src="js/underscore-min.js"></script>
+<script src="js/sha256.js"></script>
+<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
+<script src="http://momentjs.com/downloads/moment-with-locales.min.js" async defer></script>
+<script src="js/gitter.js"></script>
+    <script type="text/javascript">
+      $(window).on('load', function() {
+        setTimeout(function() {
+          $('#affix-toc').each(function() {
+            var $spy = $(this);
+            var data = $spy.data();
+            if (!data.offset) data.offset = {};
+            data.offset.top = $spy.offset().top;
+            $spy.affix(data);
+          });
+        }, 100);
+      });
+    </script>
+  </body>
+</html>

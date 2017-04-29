@@ -40,7 +40,9 @@ function datascienceandrAuth(service, token) {
     success: function(data) {
       setTimeout(datascienceandrCloseLoginModal, 100);
     },
-    complete: datascienceandrGetUserData,
+    complete: function() {
+      datascienceandrGetUserData(service);
+    },
     error: function(jqXHR, textStatus, errorThrown) {
       throw errorThrown;
     },
@@ -49,7 +51,7 @@ function datascienceandrAuth(service, token) {
       withCredentials: true
     }
   });
-}
+};
 
 var loginClose = $("#login-close");
 function datascienceandrCloseLoginModal() {
@@ -106,6 +108,10 @@ function datascienceandrFacebookLogin() {
           datascienceandrUser = response.name;
         }
       });
+      datascienceandr.user.facebook = {
+        authResponse : FB.getAuthResponse(),
+        user : datascienceandrUser
+      };
       datascienceandrAuth("Facebook", FB.getAuthResponse().accessToken);
     }
   }, {scope: 'public_profile,email'});
@@ -116,19 +122,26 @@ var
   datascienceandrClassroomAuthAccount = $("#classroom-account"),
   datascienceandrClassroomAuthPassword = $("#classroom-password");
 
+
+function datascienceandrClassroomAuthTimebasedObject() {
+  var randomArray = new Uint8Array(2);
+  window.crypto.getRandomValues(randomArray);
+  return parseInt(Date.now() / 1000) + "-" + _.map(randomArray, function(x) {return x.toString(16);}).join("");
+}
+function datascienceandrClassroomAuthHmac(account, password, object) {
+  var shaObj = new jsSHA("SHA-256", "TEXT");
+  shaObj.setHMACKey(password, "TEXT");
+  shaObj.update(object);
+  return shaObj.getHMAC("HEX");
+}
 function datascienceandrClassroomAuth() {
   var time = Date.now();
   var account = datascienceandrClassroomAuthAccount[0].value;
   datascienceandrUser = account;
   var password = datascienceandrClassroomAuthPassword[0].value;
-  var randomArray = new Uint8Array(2);
-  window.crypto.getRandomValues(randomArray);
-  var object = parseInt(Date.now() / 1000) + "-" + _.map(randomArray, function(x) {return x.toString(16);}).join("");
-  var shaObj = new jsSHA("SHA-256", "TEXT");
-  shaObj.setHMACKey(password, "TEXT");
-  shaObj.update(object);
-  var hmac = shaObj.getHMAC("HEX");
-
+  var object = datascienceandrClassroomAuthTimebasedObject();
+  var hmac = datascienceandrClassroomAuthHmac(account, password, object);
+  datascienceandr.user.classroom = account;
   datascienceandrAuth("classroom", {
     account : account,
     object : object,
@@ -172,4 +185,3 @@ function datascienceandrOverlay() {
     datascienceandrOverlayDiv.hide();
   }, 10000);
 }
-

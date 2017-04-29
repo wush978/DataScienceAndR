@@ -1,0 +1,114 @@
+<!-- scripts: [{"src" : "https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"}] -->
+<!-- header-meta: [{"name" : "google-signin-client_id", "content" : "842324757776-nonjllne8m8as9djg51e6cg98h6ijam7.apps.googleusercontent.com"}] -->
+<!-- header-link: [{"href" : "https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css", "rel" : "stylesheet"}] -->
+
+## 帳務專區
+
+`r paste(readLines("chunks/login.md"), collapse="\n")`
+
+<h3>已登入的服務：</h3>
+
+<ul id="login-account" class="list-group">
+  <li id="Google-login" class="list-group-item">Google:<font>無</font></li>
+  <li id="Facebook-login" class="list-group-item">Facebook:<font>無</font></li>
+  <li id="classroom-login" class="list-group-item">classroom:<font>無</font></li>
+</ul>
+
+
+## 帳號整合申請
+
+1. 請在「帳務專區」登入所有你的服務
+2. 點選下方的「申請帳號整合」
+
+<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#sync-progress" onclick="datascienceandrSyncAccount();">申請帳號整合</button>
+
+<div class="modal fade" id="sync-progress" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content" style="text-align:center;">
+      <div class="overlay" style="background: rgb(0, 0, 0) none repeat scroll 0% 0%; position: absolute; top: 0px; right: 0px; bottom: 0px; left: 0px; opacity: 0.5; z-index:1060; display: none">
+        <div id="loading-img"></div>
+      </div>
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="sync-done"><span aria-hidden="true">&times;</span></button>
+      </div>
+      <div class="modal-body">
+        <div class="row" style="text-align: center;">
+          <p>處理中...</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="fb-root"></div>
+
+<script type="text/javascript">
+function datascienceandrGetUserData(service) {
+  datascienceandrOverlayDiv.hide();
+  $("#" + service + "-login > font").contents().last()[0].textContent = datascienceandrUser;
+}
+var datascienceandrAuthOrigin;
+changeDatascienceandrAuth = function() {
+  if (typeof datascienceandrAuth === "undefined" || datascienceandrAuth === null) {
+    setTimeout(changeDatascienceandrAuth, 100);
+  } else {
+    datascienceandrAuthOrigin = datascienceandrAuth;
+    datascienceandrAuth = function(service, token) {
+      if (service === "classroom") return datascienceandrAuthOrigin(service, token);
+      datascienceandrGetUserData(service);
+    };
+  }
+}
+changeDatascienceandrAuth();
+
+function syncAccountDone() {
+  $("#sync-done").click();
+}
+
+function datascienceandrSyncAccount() {
+  var googleToken, facebookToken;
+  try {
+    googleToken = datascienceandr.user.google.getAuthResponse().id_token;
+  } catch (e) { }
+  try {
+    facebookToken = datascienceandr.user.facebook.authResponse.accessToken;
+  } catch (e) { }
+  var account = datascienceandrClassroomAuthAccount[0].value;
+  var password = datascienceandrClassroomAuthPassword[0].value;
+  if (account === "") {
+    alert("請先登入classroom帳號")
+    setTimeout(syncAccountDone, 100);
+    return;
+  }
+  if (password === "") {
+    alert("請先登入classroom帳號")
+    setTimeout(syncAccountDone, 100);
+    return;
+  }
+  var url = datascienceandrUrls();
+  $.ajax({
+    url : url + "/api/auth/syncAccount",
+    type : "POST",
+    data : {
+      googleToken : JSON.stringify(googleToken),
+      facebookToken : JSON.stringify(facebookToken)
+    },
+    dataType : "json",
+    success: function(data) {
+    },
+    complete: function() {
+      alert("申請成功!");
+      syncAccountDone();
+    },
+    error: function(jqXHR, textStatus, errorThrown) {
+      alert("申請失敗，請網頁右下角點開聊天室後找管理員求助. 錯誤訊息: " + errorThrown);
+      throw errorThrown;
+    },
+    timeout: 5000,
+    xhrFields: {
+      withCredentials: true
+    }
+  });
+
+}
+</script>
