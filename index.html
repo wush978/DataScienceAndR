@@ -17,7 +17,7 @@
   </head>
 
   <body data-spy="scroll" data-target=".bs-docs-sidebar">
-<div id="top-navbar" class="navbar-default"><ul class="nav nav-tabs"><li class="active"><a href="#"><h5>首頁</h5></a></li><li><a href="install.html"><h5 style="color: #0088cc;">安裝導引</h5></a></li><li><a href="before.html"><h5 style="color: #0088cc;">上手教材</h5></a></li><li><a href="material.html"><h5 style="color: #0088cc;">主要教材</h5></a></li><li><a href="after.html"><h5 style="color: #0088cc;">課後教材</h5></a></li><li><a href="individual-tracking.html"><h5 style="color: #0088cc;">個人紀錄</h5></a></li><li><a href="teacher.html"><h5 style="color: #0088cc;">教師專區</h5></a></li><li><a href="teacher-tracking.html"><h5 style="color: #0088cc;">教師報表</h5></a></li><li><a href="thanks.html"><h5 style="color: #0088cc;">感謝清單</h5></a></li></ul></div><div class="jumbotron subhead" style="text-align:center;"><div class="container"><h1><img src="http://i.imgur.com/81C5LBk.png" style="height:7em" /></h1><p class="lead">全中文R語言互動式教材</p></div></div><div class="col-md-2 bs-docs-sidebar"><ul id="affix-toc" class="nav nav-list bs-docs-sidenav"><li><a href="#1">1. 簡介</a></li><li><a href="#2">2. 新聞專區</a></li><li><a href="#3">3. 即時動態</a></li><li><a href="#4">4. 緣起</a></li><li><a href="#5">5. License</a></li></ul></div><div id="main-content" class="container col-md-9"><p><!-- title: <img src="http://i.imgur.com/81C5LBk.png" style="height:7em" /> -->
+<div id="top-navbar" class="navbar-default"><ul class="nav nav-tabs"><li class="active"><a href="#"><h5>首頁</h5></a></li><li><a href="install.html"><h5 style="color: #0088cc;">安裝導引</h5></a></li><li><a href="before.html"><h5 style="color: #0088cc;">上手教材</h5></a></li><li><a href="material.html"><h5 style="color: #0088cc;">主要教材</h5></a></li><li><a href="after.html"><h5 style="color: #0088cc;">課後教材</h5></a></li><li><a href="individual-tracking.html"><h5 style="color: #0088cc;">個人紀錄</h5></a></li><li><a href="teacher.html"><h5 style="color: #0088cc;">教師專區</h5></a></li><li><a href="teacher-tracking.html"><h5 style="color: #0088cc;">教師報表</h5></a></li><li><a href="thanks.html"><h5 style="color: #0088cc;">感謝清單</h5></a></li></ul></div><div class="jumbotron subhead" style="text-align:center;"><div class="container"><h1><img src="http://i.imgur.com/81C5LBk.png" style="height:7em" /></h1><p class="lead">全中文R語言互動式教材</p></div></div><div class="col-md-2 bs-docs-sidebar"><ul id="affix-toc" class="nav nav-list bs-docs-sidenav"><li><a href="#1">1. 簡介</a></li><li><a href="#2">2. 如何使用教材</a></li><li><a href="#3">3. 新聞專區</a></li><li><a href="#4">4. 即時動態</a></li><li><a href="#5">5. 緣起</a></li><li><a href="#6">6. License</a></li></ul></div><div id="main-content" class="container col-md-9"><p><!-- title: <img src="http://i.imgur.com/81C5LBk.png" style="height:7em" /> -->
 <!-- subtitle: 全中文R語言互動式教材 -->
 <!-- header-title: R語言翻轉教室 -->
 <!-- icon: http://i.imgur.com/RkG7X4l.png --></p>
@@ -131,9 +131,17 @@ window.onload =function(){
 <li><strong>互動</strong>。我們基於R Community貢獻的R 語言套件swirl 所撰寫的互動式學習環境，可以讓同學以最貼近實際使用R 的狀況來學R</li>
 <li><strong>教材設計</strong>。每個單元的開始，我們設計大量的操作讓同學是透過用<strong>肌肉</strong>來記憶R 的指令。並且在單元的最後都擁有來自實務且具有挑戰性的關卡。</li>
 <li><strong>自由</strong>。老師們可以很方便與自由地將本教材整合至您的教案之中。有興趣的老師請參考：<a href="teacher.html">教師專區</a></li>
+<li><strong>貼近實務</strong>。所有操作都是在同學的電腦上完成，也就是未來同學實際分析的電腦，這是一般雲端教材所沒有的。同時教材內容中也包含大量的實做。因此本教材對同學來說，很接近實際的分析環境。</li>
 </ol>
 
-<h2 id="2">2. 新聞專區</h2>
+<h2 id="2">2. 如何使用教材</h2>
+
+<ol>
+<li>請進入<a href="install.html">安裝導引</a>，依照指示在同學的電腦上安裝R、Rstudio(Windows使用者必裝)、相關套件與課程。</li>
+<li>開啟Rstudio，輸入<code>library(swirl)</code>與<code>swirl()</code>後進入DataScienceAndR，開啟互動式學習環境。這個互動式學習環境本身，就是本教材。</li>
+</ol>
+
+<h2 id="3">3. 新聞專區</h2>
 
 <ul>
 <li>swirl版本:101.5.4.4</li>
@@ -146,16 +154,16 @@ window.onload =function(){
 
 <p>若網友有發現任何bug，麻煩到<a href="https://gitter.im/wush978/DataScienceAndR?utm_source=badge&amp;utm_medium=badge&amp;utm_campaign=pr-badge">聊天室</a>回報，謝謝</p>
 
-<h2 id="3">3. 即時動態</h2>
+<h2 id="4">4. 即時動態</h2>
 
 <div class="well" style="height: 18em;"><ul id="records"></ul></div>
 
-<h2 id="4">4. 緣起</h2>
+<h2 id="5">5. 緣起</h2>
 
 <p>這個Repository主要是為了準備我在臺大的資料科學課程，幫陳老師講的兩堂R 的課程。課程素材主要就是投影片和swirl。內容則是參考CRAN上介紹R 的官方文件：<a href="https://cran.r-project.org/doc/manuals/R-intro.pdf">An Introduction to R</a>。
 另外也要感謝社群中所有有參與籌備資料科學愛好者年會2015的同伴。</p>
 
-<h2 id="5">5. License</h2>
+<h2 id="6">6. License</h2>
 
 <p><a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/tw/"><img alt="創用 CC 授權條款" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/3.0/tw/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">Data Science and R</span>由<a xmlns:cc="http://creativecommons.org/ns#" href="https://github.com/wush978/DataScienceAndR" property="cc:attributionName" rel="cc:attributionURL">Wush Wu、Chih Cheng Liang和Johnson Hsieh</a>製作，以<a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/tw/">創用CC 姓名標示-相同方式分享 3.0 台灣 授權條款</a>釋出。
 <!-- scripts: [{"src" : "https://sidecar.gitter.im/dist/sidecar.v1.js", "async" : null, "defer" : null}, {"src" : "http://momentjs.com/downloads/moment-with-locales.min.js", "async" : null, "defer" : null}, {"src" : "js/gitter.js"}] --></p></div>
