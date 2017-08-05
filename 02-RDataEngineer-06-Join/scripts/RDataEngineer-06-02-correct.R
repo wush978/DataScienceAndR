@@ -43,6 +43,6 @@ answer02.3 <- local({
 })
 stopifnot(nrow(answer02.3) == 4)
 stopifnot(colnames(answer02.3) == c("wind_speed", "mean(arr_delay)"))
-if (packageVersion("nycflights13") != "0.2.0") stopifnot(answer02.3[[2]] > 4)
+if (packageVersion("nycflights13") < package_version("0.2.0")) stopifnot(answer02.3[[2]] > 4)
 stopifnot(answer02.3[[2]] < 16)
 # 請同學完成後回到console輸入`submit()`做檢查
