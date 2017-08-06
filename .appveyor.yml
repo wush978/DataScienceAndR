@@ -13,7 +13,7 @@ install:
 
 build_script:
   - Rscript -e "download.file('https://raw.githubusercontent.com/wush978/R/gh-pages/.test_course.R', destfile = '.test_course.R')"
-  - Rscript -e "source('https://wush978.github.io/R/init-swirl.R')"
+  - Rscript -e "options(repos = c(CRAN='https://cloud.r-project.org'));source('https://wush978.github.io/R/init-swirl.R')"
 
 test_script:
   - Rscript .test_course.R push
