@@ -190,7 +190,7 @@
   Hint: ?lapply
 - Class: mult_question
   Output: |
-    R 的`lapply`是同第一個接觸到的進階函數。
+    R 的`lapply`視同第一個接觸到的進階函數。
     請問同學，下列哪一個不是`lapply`的參數？
   AnswerChoices: X;FUN;...;Y
   CorrectAnswer: 'Y'
