@@ -185,7 +185,7 @@
   Output: |
     請同學檢查`ns`的型態。
   CorrectAnswer: class(ns)
-  AnswerTests: omnitest(correctVal=class(ns))
+  AnswerTests: val_is(class(ns))
   Hint: class(ns)
 - Class: text
   Output: |
