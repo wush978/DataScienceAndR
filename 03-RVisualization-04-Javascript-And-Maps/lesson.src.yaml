@@ -12,14 +12,14 @@
 
 - Class: cmd_question
   Output: |
-    我們會介紹的是googleVis套件。
+    我們會介紹的是googleVis套件。
     請同學安裝googleVis
   CorrectAnswer: check_then_install("googleVis", "0.5.10")
   AnswerTests: test_package_version("googleVis", "0.5.10")
 
 - Class: cmd_question
   Output: |
-    請同學載入googleVis套件。
+    請同學載入googleVis套件。
   CorrectAnswer: library(googleVis)
   AnswerTests: test_search_path("googleVis")
 
@@ -43,7 +43,7 @@
 
 - Class: cmd_question
   Output: |
-    請同學載入dplyr。
+    請同學載入dplyr。
   CorrectAnswer: library(dplyr)
   AnswerTests: test_search_path("dplyr")
 
@@ -133,7 +133,7 @@
 
 - Class: cmd_question
   Output: |
-    接著，請同學輸入： `gvisCalendar(TWII) %>% plot`。
+    接著，請同學輸入： `gvisCalendar(TWII) %>% plot`。
     
 - Class: text
   Output: |

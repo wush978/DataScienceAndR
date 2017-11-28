@@ -8,7 +8,7 @@
 
 - Class: text
   Output: |
-    前半段的課程，大部分著重於從資料中萃取出資訊，並且整理成一個data.frame（結構化）。
+    前半段的課程，大部分著重於從資料中萃取出資訊，並且整理成一個data.frame（結構化）。
     這門課程則是要開始討論，當資訊已經被結構化之後，我們要如何整理結構化的資料。
 
 - Class: text
@@ -23,37 +23,37 @@
 
 - Class: cmd_question
   Output: |
-    請大家先安裝`dplyr`套件。
+    請大家先安裝`dplyr`套件。
   CorrectAnswer: check_then_install("dplyr", "0.4.3")
   AnswerTests: test_package_version("dplyr", "0.4.3")
 
 - Class: cmd_question
   Output: |
-    接著請大家載入dplyr套件。
+    接著請大家載入dplyr套件。
   CorrectAnswer: library(dplyr)
   AnswerTests: test_search_path("dplyr")
 
 - Class: cmd_question
   Output: |
-    請同學輸入學套件的起手式：`vignette(package = "dplyr")`。
+    請同學輸入學套件的起手式：`vignette(package = "dplyr")`。
   CorrectAnswer: vignette(package = "dplyr")
   AnswerTests: omnitest('vignette(package = "dplyr")')
 
 - Class: text
   Output: |
-    Hadley等人都是開發R 套件界的大大，他們對vignette是非常重視的，所以我們會看到許多vignette。
+    Hadley等人都是開發R 套件界的大大，他們對vignette是非常重視的，所以我們會看到許多vignette。
     說實話，我個人寫的dplyr套件的介紹絕對也不會比Hadley大大他們寫的精彩。
     不過透過swirl的好處，就是我們可以把整個dplyr的功能都經歷過一遍。
 
 - Class: cmd_question
   Output: |
-    請同學執行`vignette("introduction", package = "dplyr")`，打開Introduction。
+    請同學執行`vignette("introduction", package = "dplyr")`，打開Introduction。
   CorrectAnswer: vignette("introduction", package = "dplyr")
   AnswerTests: omnitest('vignette("introduction", package = "dplyr")')
 
 - Class: cmd_question
   Output: |
-    簡單起見，我們直接跟著vignette，拿`nycflights13`中的資料集`flights`做練習。
+    簡單起見，我們直接跟著vignette，拿`nycflights13`中的資料集`flights`做練習。
     請同學先安裝`nycflights13`套件。
   CorrectAnswer: check_then_install("nycflights13", "0.1")
   AnswerTests: test_package_version("nycflights13", "0.1")
@@ -61,17 +61,17 @@
 
 - Class: cmd_question
   Output: |
-    接著載入`nycflights13`套件。
+    接著載入`nycflights13`套件。
   CorrectAnswer: library(nycflights13)
   AnswerTests: test_search_path("nycflights13")
 
 - Class: text
   Output: |
-    這個套件提供的flights資料集合，內容為所有於2013年在紐約起降的飛機資料。
+    這個套件提供的flights資料集合，內容為所有於2013年在紐約起降的飛機資料。
 
 - Class: cmd_question
   Output: |
-    Vignette中宣稱flights共有336776筆資料。
+    Vignette中宣稱flights共有336776筆資料。
     我們進行驗證一下，也順便讓同學複習data.frame的操作。
     請同學用指令查詢flights共有多少資料。
   CorrectAnswer: nrow(flights)
@@ -99,7 +99,7 @@
     
 - Class: text
   Output: |
-    熟悉SQL expression的同學請注意，`filter`就是SQL中的`WHERE`。
+    熟悉SQL expression的同學請注意，`filter`就是SQL中的`WHERE`。
 
 - Class: script
   Output: |
@@ -112,7 +112,7 @@
 
 - Class: text
   Output: |
-    為了降低難度，我們在scripts中讓大家是一步一步的做操作。
+    為了降低難度，我們在scripts中讓大家是一步一步的做操作。
     實務上，熟悉R 的使用者會直接寫一行：`flights[flights$month == 1 & flights$day == 1,]`，這是一種程式碼的壓縮。
 
 - Class: text
@@ -134,7 +134,7 @@
 
 - Class: cmd_question
   Output: |
-    請同學試著從`flights`中找出`flights$month`為 1，`flights$day`為2的資料。
+    請同學試著從`flights`中找出`flights$month`為 1，`flights$day`為2的資料。
   CorrectAnswer: filter(flights, month == 1, day == 2)
   AnswerTests: val_is(filter(flights, month == 1, day == 2))
 
@@ -203,7 +203,7 @@
 
 - Class: cmd_question
   Output: |
-    最後，請同學試試看：`filter(flights, grepl(pattern = "AA", x = tailnum, fixed = TRUE))`。
+    最後，請同學試試看：`filter(flights, grepl(pattern = "AA", x = tailnum, fixed = TRUE))`。
   CorrectAnswer: filter(flights, grepl(pattern = "AA", x = tailnum, fixed = TRUE))
   AnswerTests: omnitest('filter(flights, grepl(pattern = "AA", x = tailnum, fixed = TRUE))')
 
@@ -236,7 +236,7 @@
 
 - Class: mult_question
   Output: |
-    所以我們能不能根據上面的結果判斷：`dep_time`的最小值是517呢？（第一列的dep_time）
+    所以我們能不能根據上面的結果判斷：`dep_time`的最小值是517呢？（第一列的dep_time）
   AnswerChoices: Yes;No
   CorrectAnswer: "No"
   AnswerTests: omnitest(correctVal = "No")
@@ -276,7 +276,7 @@
 
 - Class: cmd_question
   Output: |
-    我們先檢查`flights`的欄位名稱。
+    我們先檢查`flights`的欄位名稱。
     請同學複習一下之前所學的data.frame的操作。
   CorrectAnswer: colnames(flights)
   AnswerTests: omnitest(correctVal = colnames(flights))
@@ -312,21 +312,21 @@
 
 - Class: text
   Output: |
-    接著我們介紹`distinct`。
+    接著我們介紹`distinct`。
     它可以挑出後續多個expression的組合中，不重複的部份。
     所以`distinct`能用來回答「資料有多少類」等問題。
     給熟SQL的同學，distinct就是SQL的`DISTINCT`。
 
 - Class: cmd_question
   Output: |
-    請同學試試看：`distinct(select(flights, year:day))`。
+    請同學試試看：`distinct(select(flights, year:day))`。
     一年有365天，是不是每天都有資料呢？
   CorrectAnswer: distinct(select(flights, year:day))
   AnswerTests: omnitest('distinct(select(flights, year:day))')
 
 - Class: cmd_question
   Output: |
-    當我們要更改，或是新增欄位時，就可以使用`mutate`這個欄位了。
+    當我們要更改，或是新增欄位時，就可以使用`mutate`這個欄位了。
     舉例來說，如果我們要新增一個欄位`gain`，它是拿arr_delay扣掉dep_delay，代表飛機停留在紐約機場待的時間比原本簡短多少。
     此時，我們可以用：`mutate(flights, gain = arr_delay - dep_delay)`。
   CorrectAnswer:  mutate(flights, gain = arr_delay - dep_delay)
@@ -339,13 +339,13 @@
 
 - Class: text
   Output: |
-    最後我們介紹`summarise`，它會根據給定的函數，計算出單一的值。
+    最後我們介紹`summarise`，它會根據給定的函數，計算出單一的值。
     舉例來說：`max`、`min`都可以是這樣的函數，但是`range`就會出問題。
     因為`max`和`min`的輸出長度為1 ，但是`range`的輸出長度為2。
 
 - Class: cmd_question
   Output: |
-    請同學輸入`summarise(flights, mean(dep_delay, na.rm = TRUE))`來計算平均的誤點時間。
+    請同學輸入`summarise(flights, mean(dep_delay, na.rm = TRUE))`來計算平均的誤點時間。
   CorrectAnswer: summarise(flights, mean(dep_delay, na.rm = TRUE))
   AnswerTests: omnitest('summarise(flights, mean(dep_delay, na.rm = TRUE))')
 
@@ -375,15 +375,15 @@
 
 - Class: text
   Output: |
-    本堂課第二個要點是，我們可以在後面的參數，後續的expression中省略data.frame的變數名稱。
+    本堂課第二個要點是，我們可以在後面的參數，後續的expression中省略data.frame的變數名稱。
 
 - Class: text
   Output: |
-    而第三個要點我們前面沒有強調，就是每次產生的data.frame都是新的，我們並沒有更動原本的`flights`。
+    而第三個要點我們前面沒有強調，就是每次產生的data.frame都是新的，我們並沒有更動原本的`flights`。
 
 - Class: text
   Output: |
-    有了這些工具之後，就可以組合出複雜的邏輯。
+    有了這些工具之後，就可以組合出複雜的邏輯。
 
 - Class: script
   Output: |
@@ -423,7 +423,7 @@
 
 - Class: text
   Output: |
-    使用`%>%`寫程式，不只不需要命名大量的變數，如：`a1`、`a2`等，
+    使用`%>%`寫程式，不只不需要命名大量的變數，如：`a1`、`a2`等，
     程式碼的看起來也比`summarise(mutate(select(filter(flights, ...), ...), ...), ...)`簡單的多了。
 
 - Class: text
@@ -464,14 +464,14 @@
 
 - Class: script
   Output: |
-    接著，我們將剛剛解答`answer04.1`的動作中，扣掉`filter`的部份，再做一次。
+    接著，我們將剛剛解答`answer04.1`的動作中，扣掉`filter`的部份，再做一次。
     請同學看看改過之後的結果，輸入`submit()`即可。這題不用對程式進行修改。
   Script: RDataEngineer-05-05.R
   AnswerTests: rdataengineer_05_05(answer05)
 
 - Class: cmd_question
   Output: |
-    讓我們看看結果吧。請同學輸入：`answer05`。
+    讓我們看看結果吧。請同學輸入：`answer05`。
   CorrectAnswer: answer05
   AnswerTests: omnitest('answer05')
 
