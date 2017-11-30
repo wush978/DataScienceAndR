@@ -246,7 +246,7 @@
   Output: |
     繪圖函數`plot`也可以使用`formula`進行繪圖。
     請同學在`plot`函數中的第一個參數使用`read ~ math`，第二個參數使用`data=hsb`，重新繪製學生數學與閱讀成績的散佈圖。
-    請注意波浪符號`~`左邊的參數代表反應變數 (response variable)；而右邊的參數代表解釋變數 (dependent variable)。
+    請注意波浪符號`~`左邊的參數代表反應變數 (response variable)；而右邊的參數代表解釋變數 (independent variable)。
   CorrectAnswer: plot(read ~ math, data=hsb)
   AnswerTests: omnitest('plot(read ~ math, data=hsb)')
   Hint: plot(read ~ math, data=hsb)
