@@ -34,7 +34,7 @@
   Output: |
     請檢查一下`x[[3]]`的型態。
   CorrectAnswer: mode(x[[3]])
-  AnswerTests: omnitest(correctVal = "numeric")
+  AnswerTests: val_is("numeric")
   Hint: 還記得`class`或`mode`這兩個函數嗎？
 - Class: text
   Output: |
