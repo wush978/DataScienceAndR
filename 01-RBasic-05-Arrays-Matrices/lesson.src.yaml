@@ -14,7 +14,7 @@
 - Class : cmd_question
   Output: |
     我們先來複習R 中的向量。請同學建立一個型態為numeric，由1到18的向量。
-  CorrectAnswer: 1:18
+  CorrectAnswer: "1:18"
   AnswerTests: val_is(1:18)
 
 - Class : cmd_question
