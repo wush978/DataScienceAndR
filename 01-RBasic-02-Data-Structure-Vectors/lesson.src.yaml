@@ -161,7 +161,7 @@
     這樣的功能，在整理資料時十分實用。
     舉例來說，如果需要取出第5筆到第100筆的資料，就會用到類似的語法。
     請同學利用`:`建立一個從20到40的序列。
-  CorrectAnswer: 20:40
+  CorrectAnswer: "20:40"
   AnswerTests: omnitest("20:40")
 
 - Class : cmd_question
