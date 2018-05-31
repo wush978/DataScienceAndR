@@ -2,7 +2,7 @@
 
 function showRegistrationRecords() {
   $("#records").empty();
-  var urls = ["http://api.datascienceandr.org/api/getManyRecords","http://api2.datascienceandr.org/api/getManyRecords"];
+  var urls = ["https://api.datascienceandr.org/api/getManyRecords","https://api2.datascienceandr.org/api/getManyRecords"];
   var url1, url2;
   if (Math.random() < 0.5) {
     url1 = urls[0];
@@ -148,7 +148,7 @@ invisible(gc())
 
 如果你已經有R 語言的基礎，我建議你可以先完成Hello-DataScienceAndR之後，從01-RBasic-07開始學習中文處理與資料處理相關的知識，這段內容我自以為勝過大部分的R 教材。
 
-如果你完全沒有程式的經驗，我建議你可以挑戰看看，但是請儘量善用聊天室（你可以點選右下角的Open Chat或造訪：<http://gitter.im/wush978/DataScienceAndR>）。如果仍然完全無法理解R 語言的邏輯，就麻煩你先參加其他的實體課程後再回來學習。
+如果你完全沒有程式的經驗，我建議你可以挑戰看看，但是請儘量善用聊天室（你可以點選右下角的Open Chat或造訪：<https://gitter.im/wush978/DataScienceAndR>）。如果仍然完全無法理解R 語言的邏輯，就麻煩你先參加其他的實體課程後再回來學習。
 
 這份教材具有以下的特色：
 
@@ -188,4 +188,4 @@ invisible(gc())
 
 ## License
 
-<a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/tw/"><img alt="創用 CC 授權條款" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/3.0/tw/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">Data Science and R</span>由<a xmlns:cc="http://creativecommons.org/ns#" href="https://github.com/wush978/DataScienceAndR" property="cc:attributionName" rel="cc:attributionURL">Wush Wu、Chih Cheng Liang和Johnson Hsieh</a>製作，以<a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/tw/">創用CC 姓名標示-相同方式分享 3.0 台灣 授權條款</a>釋出。
+<a rel="license" href="https://creativecommons.org/licenses/by-sa/3.0/tw/"><img alt="創用 CC 授權條款" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/3.0/tw/88x31.png" /></a><br /><span xmlns:dct="https://purl.org/dc/terms/" href="https://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">Data Science and R</span>由<a xmlns:cc="https://creativecommons.org/ns#" href="https://github.com/wush978/DataScienceAndR" property="cc:attributionName" rel="cc:attributionURL">Wush Wu、Chih Cheng Liang和Johnson Hsieh</a>製作，以<a rel="license" href="https://creativecommons.org/licenses/by-sa/3.0/tw/">創用CC 姓名標示-相同方式分享 3.0 台灣 授權條款</a>釋出。

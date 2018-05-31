@@ -9,7 +9,7 @@
 <meta name="generator" content="pandoc" />
 
 
-<meta name="date" content="2017-04-09" />
+<meta name="date" content="2018-05-31" />
 
 <title>03-RVisualization-02-Multiple-Variables-Visualization</title>
 
@@ -108,7 +108,7 @@ img {
 
 <div id="header">
 <h1 class="title">03-RVisualization-02-Multiple-Variables-Visualization</h1>
-<h4 class="date"><em>2017-04-09</em></h4>
+<h4 class="date"><em>2018-05-31</em></h4>
 </div>
 
 <div id="content">
@@ -122,7 +122,7 @@ img {
 *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
 /*
 var disqus_config = function () {
-this.page.url = http://datascienceandr.org/note/03-RVisualization-02-Multiple-Variables-Visualization.html;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.url = https://datascienceandr.org/note/03-RVisualization-02-Multiple-Variables-Visualization.html;  // Replace PAGE_URL with your page's canonical URL variable
 this.page.identifier = 03-RVisualization-02-Multiple-Variables-Visualization; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
 };
 */
@@ -328,7 +328,7 @@ Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">
 </div>
 <div id="-43" class="section level2">
 <h2>關卡 43</h2>
-<p>繪圖函數<code>plot</code>也可以使用<code>formula</code>進行繪圖。 請同學在<code>plot</code>函數中的第一個參數使用<code>read ~ math</code>，第二個參數使用<code>data=hsb</code>，重新繪製學生數學與閱讀成績的散佈圖。 請注意波浪符號<code>~</code>左邊的參數代表反應變數 (response variable)；而右邊的參數代表解釋變數 (dependent variable)。</p>
+<p>繪圖函數<code>plot</code>也可以使用<code>formula</code>進行繪圖。 請同學在<code>plot</code>函數中的第一個參數使用<code>read ~ math</code>，第二個參數使用<code>data=hsb</code>，重新繪製學生數學與閱讀成績的散佈圖。 請注意波浪符號<code>~</code>左邊的參數代表反應變數 (response variable)；而右邊的參數代表解釋變數 (independent variable)。</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(read ~<span class="st"> </span>math, <span class="dt">data=</span>hsb)</code></pre></div>
 </div>
 <div id="-44" class="section level2">

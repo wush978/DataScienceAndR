@@ -160,7 +160,7 @@ s.setAttribute(\'data-timestamp\', +new Date());
 (d.head || d.body).appendChild(s);
 })();
 </script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>', sprintf("http://datascienceandr.org/note/%s.html", content[[1]]$Lesson), content[[1]]$Lesson))
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>', sprintf("https://datascienceandr.org/note/%s.html", content[[1]]$Lesson), content[[1]]$Lesson))
   for(i in seq_along(content) %>% tail(-1)) {
     operator <- get(sprintf("from_%s", content[[i]]$Class))
     retval %<>% append(operator(content[[i]], i - 1))
