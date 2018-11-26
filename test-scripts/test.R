@@ -3,7 +3,6 @@
 dir.create(., recursive = TRUE, showWarnings = FALSE)
 .libPaths(new = .)
 Sys.setenv(R_LIBS=.)
-install.packages("remotes")
 if (package_version(R.version) < package_version("3.2.3")) local({
   msg <- sprintf("The version of R (%s) is not compatible with the course content. Please visit https://mran.revolutionanalytics.com/snapshot/2017-04-01/ to upgrade your R.", package_version(R.version))
   Encoding(msg) <- "UTF-8"
@@ -31,8 +30,8 @@ R.date <- local({
 })
 R.date <- as.Date(R.date)
 repos <- c(CRAN = sprintf("https://cran.microsoft.com/snapshot/%s", R.date + 7))
-install.packages("subprocess", repos = repos)
-install.packages("magrittr", repos = repos)
+if (!suppressWarnings(require(subprocess))) install.packages("subprocess", repos = repos)
+if (!suppressWarnings(require(magrittr))) install.packages("magrittr", repos = repos)
 
 library(magrittr)
 library(subprocess)
