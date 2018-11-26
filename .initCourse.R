@@ -51,16 +51,17 @@ assign("source_by_l10n_info", function(path) {
     try(source(path, local = new.env(), encoding = "UTF-8"), silent = TRUE)
   }
 }, envir = globalenv())
-
-options(
-  "SWIRL_TRACKING_SERVER_IP" = "api.datascienceandr.org,api2.datascienceandr.org",
-  "SWIRL_COURSE_VERSION" = "v1.0",
+local({
   R.date <- local({
     m <- regexec("\\((.*)\\)$", R.version.string)
     . <- regmatches(R.version.string, m)
     . <- Filter(., f = function(.) length(.) == 2)
     .[[1]][2]
   })
-  R.date <- as.Date(R.date)
-  "repos" = c("http://wush978.github.io/R", "CRAN"=sprintf("https://cran.microsoft.com/snapshot/%s", R.date + 7))
-)
+  R.date <- as.Date(R.date)       
+  options(
+    "SWIRL_TRACKING_SERVER_IP" = "api.datascienceandr.org,api2.datascienceandr.org",
+    "SWIRL_COURSE_VERSION" = "v1.0",
+    "repos" = c("http://wush978.github.io/R", "CRAN"=sprintf("https://cran.microsoft.com/snapshot/%s", R.date + 7))
+  )
+})
