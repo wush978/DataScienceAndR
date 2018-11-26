@@ -114,7 +114,7 @@ wait_until <- function(checker, is.stdout = TRUE, check.last = TRUE) {
 }
 
 search_selection <- function(txt, ans) {
-  . <- regexec(sprintf("(\\d+): %s", ans), txt) %>%
+  . <- regexec(sprintf("^(\\d+): %s$", ans), txt) %>%
     regmatches(x = txt) %>%
     Filter(f = function(.) length(.) == 2)
   stopifnot(length(.) == 1)
