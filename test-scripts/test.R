@@ -150,7 +150,7 @@ get_character <- function(expr.txt) {
 
 enter_swirl <- function() {
   enter_process(sprintf("options(repos=c(CRAN='%s'))\n", repos))
-  enter_process("options(editor = 'less', browser = 'less')\n")
+  enter_process("options(editor = function(file, title){}, browser = 'less')\n")
   enter_process("Sys.setlocale(locale = 'zh_TW.UTF-8')\n")
   enter_process("library(swirl)\n")
   enter_process("y\n")
