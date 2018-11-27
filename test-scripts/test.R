@@ -50,6 +50,8 @@ R.date <- local({
   as.Date()
 repos <- c(CRAN = sprintf("https://cran.microsoft.com/snapshot/%s", R.date + 7))
 
+# retry start
+
 if (file.exists(user_data.path <- file.path(system.file("", package = "swirl"), "user_data"))) {
   unlink(user_data.path, recursive = TRUE, force = TRUE)
 }
@@ -70,9 +72,18 @@ p.buf <- new.env()
 p.buf$output <- list()
 p.buf$show <- 0
 
-get_stderr <- function() {
+get_stdout <- function() {
   lapply(p.buf$output, "[[", "stdout") %>%
     unlist()
+}
+
+get_stderr <- function() {
+  lapply(p.buf$output, "[[", "stderr") %>%
+    unlist()
+}
+
+get_buf_size <- function() {
+  length(p.buf$output)
 }
 
 search_output <- function(checker, is.output = TRUE) {
@@ -101,23 +112,28 @@ read <- function() {
   show()
 }
 
-wait_until <- function(checker, is.stdout = TRUE, check.last = TRUE) {
-  if (check.last && length(p.buf$output) > 0) {
+wait_until <- function(checker, is.stdout = TRUE, check.last = TRUE, current.index = get_buf_size()) {
+  if (check.last && current.index > 0) {
     if (is.stdout) {
-      if (checker(p.buf$output[[length(p.buf$output)]]$stdout)) return(invisible(NULL))
+      if (checker(p.buf$output[[current.index]]$stdout)) return(invisible(NULL))
     } else {
-      if (checker(p.buf$output[[length(p.buf$output)]]$stderr)) return(invisible(NULL))
+      if (checker(p.buf$output[[current.index]]$stderr)) return(invisible(NULL))
     }
   }
   retry <- 0
+  start.index <- current.index + 1
   while(TRUE) {
     Sys.sleep(1)
     read()
-    if (is.stdout) {
-      if (checker(p.buf$output[[length(p.buf$output)]]$stdout)) return(invisible(NULL))
-    } else {
-      if (checker(p.buf$output[[length(p.buf$output)]]$stderr)) return(invisible(NULL))
+    end.index <- get_buf_size()
+    for(i in start.index:end.index) {
+      if (is.stdout) {
+        if (checker(p.buf$output[[i]]$stdout)) return(invisible(NULL))
+      } else {
+        if (checker(p.buf$output[[i]]$stderr)) return(invisible(NULL))
+      }
     }
+    start.index <- end.index + 1
     retry <- retry + 1
     if (retry %% 5 == 0) enter_process("\n")
     if (retry > 60) stop(sprintf("wait_until timeout"))
