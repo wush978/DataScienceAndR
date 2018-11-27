@@ -113,6 +113,9 @@ wait_until <- function(checker, is.stdout = TRUE, check.last = TRUE) {
 }
 
 search_selection <- function(txt, ans) {
+  for(char in c("(", ")", "^", "\\", "[", "]", "{", "}", ".")) {
+    ans <- gsub(sprintf("\\%s", char), char, ans, fixed = TRUE)
+  }
   . <- regexec(sprintf("^\\s*(\\d+): %s$", ans), txt) %>%
     regmatches(x = txt) %>%
     Filter(f = function(.) length(.) == 2)
@@ -126,7 +129,6 @@ enter_process <- function(cmd, breakline = FALSE) {
   cat(sprintf("(process_write)> %s\n", cmd))
   Sys.sleep(0.5)
   read()
-  Sys.sleep(0.5)
   show()
   invisible(NULL)
 }
