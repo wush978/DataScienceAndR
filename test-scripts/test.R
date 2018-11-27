@@ -22,6 +22,9 @@ local({
   try(uninstall_course("DataScienceAndR"), silent=TRUE)
   swirl::install_course_directory("~/DataScienceAndR")
 })
+
+
+
 R.date <- local({
   m <- regexec("\\((.*)\\)$", R.version.string)
   . <- regmatches(R.version.string, m)
@@ -51,10 +54,14 @@ if (file.exists(user_data.path <- file.path(system.file("", package = "swirl"), 
 }
 dir.create(file.path(user_data.path, "wush"), recursive = TRUE)
 
+.env <- Sys.getenv()
+.env[["R_LIBS"]] <- .libPaths()[1]
+.env[["LC_ALL"]] <- "zh_TW.UTF-8"
+.env[["LANGUAGE"]] <- "zh_TW"
 p <- spawn_process(
   R.home("bin/R"),
   c("--no-save", "--no-readline", "--quiet", "--interactive"),
-  c(R_LIBS = .libPaths()[1], LC_ALL = "zh_TW.UTF-8", LANGUAGE="zh_TW"),
+  .env,
   workdir = getwd()
 )
 
@@ -165,7 +172,7 @@ enter_swirl <- function() {
 }
 
 enter_course <- function(name) {
-  read()
+  wait_until(function(.) any(grepl("帶我去 swirl 課程庫！", ., fixed = TRUE)), check.last = TRUE)
   . <- search_output(function(.) any(grepl("帶我去 swirl 課程庫！", ., fixed = TRUE))) %>%
     max()
   search_selection(p.buf$output[[.]]$stdout, "DataScienceAndR") %>%
@@ -179,9 +186,11 @@ enter_course <- function(name) {
   Sys.sleep(10)
   for(i in 2:length(src)) {
     if (src[[i]]$Class == "text") {
+      wait_until(function(.) any(grepl("...", ., fixed = TRUE)), check.last = TRUE)
       enter_process("\n")
     } else if (src[[i]]$Class == "cmd_question") {
-      enter_process("skip()\n")
+      wait_until(function(.) any(grepl("> ", ., fixed = TRUE)), check.last = TRUE)
+      enter_process(src[[i]]$CorrectAnswer, TRUE)
     } else if (src[[i]]$Class == "script") {
       script_temp_path <- get_character("swirl:::.get_e()$script_temp_path")
       correct_script_temp_path <- get_character("swirl:::.get_e()$correct_script_temp_path")
@@ -189,6 +198,7 @@ enter_course <- function(name) {
 #      enter_process("cat(sprintf('output:%s:', swirl:::.get_e()$script_temp_path))\n")
       enter_process("submit()\n")
     } else if (src[[i]]$Class == "mult_question") {
+      wait_until(function(.) any(grepl("Selection:", ., fixed = TRUE)), check.last = TRUE)
       ans <- src[[i]]$CorrectAnswer %>% as.character()
       . <- search_output(function(.) any(grepl("Selection:", ., fixed = TRUE))) %>%
         max()
