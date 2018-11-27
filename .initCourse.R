@@ -1,7 +1,7 @@
 if (packageVersion("swirl") < package_version("100.5.2")) {
   stop("Please upgrade the version of swirl via: `install.packages('swirl', repos = 'http://wush978.github.io/R')`")
 }
-
+stopifnot(packageVersion("pvm") >= package_version(0.4.2))
 assign(".get_path",
        function(fname) {
          path <- file.path(lesPath, fname)
@@ -11,8 +11,8 @@ assign(".get_path",
 
 assign("check_then_install",
        function(pkg_name, pkg_version) {
-         if (!suppressWarnings(suppressMessages(require(pkg_name, character.only = TRUE)))) utils::install.packages(pkg_name, dependencies = FALSE) else {
-           if (packageVersion(pkg_name) < package_version(pkg_version)) utils::install.packages(pkg_name, dependencies = FALSE)
+         if (!suppressWarnings(suppressMessages(require(pkg_name, character.only = TRUE)))) pvm::install.packages.via.graph(pkg_name) else {
+           if (packageVersion(pkg_name) < package_version(pkg_version)) pvm::install.packages.via.graph(pkg_name)
          }
        },
        envir = globalenv())
