@@ -109,6 +109,7 @@ wait_until <- function(checker, is.stdout = TRUE, check.last = TRUE) {
       if (checker(p.buf$output[[length(p.buf$output)]]$stderr)) return(invisible(NULL))
     }
   }
+  retry <- 0
   while(TRUE) {
     Sys.sleep(1)
     read()
@@ -117,6 +118,9 @@ wait_until <- function(checker, is.stdout = TRUE, check.last = TRUE) {
     } else {
       if (checker(p.buf$output[[length(p.buf$output)]]$stderr)) return(invisible(NULL))
     }
+    retry <- retry + 1
+    if (retry %% 5 == 0) enter_process("\n")
+    if (retry > 60) stop(sprintf("wait_until timeout"))
   }
 }
 
@@ -143,8 +147,7 @@ enter_process <- function(cmd, breakline = FALSE) {
 
 get_character <- function(expr.txt) {
   cmd <- sprintf("cat(sprintf('output:%%s:\n', %s))", expr.txt)
-  enter_process(cmd)
-  enter_process("\n")
+  enter_process(cmd, breakline = TRUE)
   wait_until(function(.) any(grepl("output:", ., fixed = TRUE)))
   . <- lapply(p.buf$output, "[[", "stdout") %>%
     grep(pattern = "output:", fixed = TRUE) %>%
