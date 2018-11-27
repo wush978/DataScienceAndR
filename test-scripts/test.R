@@ -138,7 +138,7 @@ wait_until <- function(checker, is.stdout = TRUE, check.last = TRUE, current.ind
     start.index <- end.index + 1
     retry <- retry + 1
     if (retry %% 5 == 0) enter_process("\n")
-    if (retry > 60) stop(sprintf("wait_until timeout"))
+    if (retry > 600) stop(sprintf("wait_until timeout"))
     colddown <- min(colddown + 0.1, 1)
   }
 }
