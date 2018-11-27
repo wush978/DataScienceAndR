@@ -11,8 +11,8 @@ assign(".get_path",
 
 assign("check_then_install",
        function(pkg_name, pkg_version) {
-         if (!suppressWarnings(suppressMessages(require(pkg_name, character.only = TRUE)))) utils::install.packages(pkg_name) else {
-           if (packageVersion(pkg_name) < package_version(pkg_version)) utils::install.packages(pkg_name)
+         if (!suppressWarnings(suppressMessages(require(pkg_name, character.only = TRUE)))) utils::install.packages(pkg_name, dependencies = FALSE) else {
+           if (packageVersion(pkg_name) < package_version(pkg_version)) utils::install.packages(pkg_name, dependencies = FALSE)
          }
        },
        envir = globalenv())
@@ -20,7 +20,7 @@ assign("check_then_install",
 assign("check_then_install_github",
        function(pkg_name, pkg_version, ...) {
          if (!require(pkg_name, character.only = TRUE)) devtools::install_github(...) else {
-         if (packageVersion(pkg_name) < package_version(pkg_version)) devtools::install_github(...)
+         if (packageVersion(pkg_name) < package_version(pkg_version)) devtools::install_github(..., dependencies = FALSE)
          }
        })
 
