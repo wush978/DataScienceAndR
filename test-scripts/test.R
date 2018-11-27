@@ -113,8 +113,8 @@ wait_until <- function(checker, is.stdout = TRUE, check.last = TRUE) {
 }
 
 search_selection <- function(txt, ans) {
-  for(char in c("(", ")", "^", "\\", "[", "]", "{", "}", ".")) {
-    ans <- gsub(sprintf("\\%s", char), char, ans, fixed = TRUE)
+  for(char in c("\\", "(", ")", "^", "[", "]", "{", "}", ".")) {
+    ans <- gsub(char, sprintf("\\%s", char), ans, fixed = TRUE)
   }
   . <- regexec(sprintf("^\\s*(\\d+): %s$", ans), txt) %>%
     regmatches(x = txt) %>%
