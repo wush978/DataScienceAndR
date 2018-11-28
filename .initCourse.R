@@ -1,7 +1,7 @@
 if (packageVersion("swirl") < package_version("100.5.2")) {
   stop("Please upgrade the version of swirl via: `install.packages('swirl', repos = 'http://wush978.github.io/R')`")
 }
-stopifnot(packageVersion("pvm") >= package_version(0.4.2))
+stopifnot(packageVersion("pvm") >= package_version("0.4.2"))
 assign(".get_path",
        function(fname) {
          path <- file.path(lesPath, fname)
