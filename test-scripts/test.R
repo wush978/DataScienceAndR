@@ -13,7 +13,12 @@ if (package_version(R.version) < package_version("3.2.3")) local({
 local({
   repos <- "https://wush978.github.io/R"
   if (!suppressWarnings(require(remotes))) install.packages("remotes", repos = "http://cran.csie.ntu.edu.tw")
-  if (!suppressWarnings(require(pvm))) utils::install.packages("pvm", repos = "https://wush978.github.io/R", type = "source")
+  if ("pvm" %in% rownames(installed.packages())) {
+    . <- packageVersion("pvm")
+    if (. < package_version("0.4.2")) {
+      utils::install.packages("pvm", repos = "https://wush978.github.io/R", type = "source")
+    }
+  } else utils::install.packages("pvm", repos = "https://wush978.github.io/R", type = "source")
   pvm::import.packages(sprintf("https://raw.githubusercontent.com/wush978/pvm-list/master/dsr-%s.yml", package_version(R.version)))
   utils::install.packages("swirl", repos = repos)
   Sys.setenv("SWIRL_DEV"="TRUE")
