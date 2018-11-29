@@ -3,19 +3,13 @@
 dir.create(., recursive = TRUE, showWarnings = FALSE)
 .libPaths(new = .)
 Sys.setenv(R_LIBS=.)
-if (package_version(R.version) < package_version("3.2.3")) local({
-  msg <- sprintf("The version of R (%s) is not compatible with the course content. Please visit https://mran.revolutionanalytics.com/snapshot/2017-04-01/ to upgrade your R.", package_version(R.version))
-  Encoding(msg) <- "UTF-8"
-  stop(msg)
-})
-
 
 local({
   repos <- "https://wush978.github.io/R"
   if (!suppressWarnings(require(remotes))) install.packages("remotes", repos = "http://cran.csie.ntu.edu.tw")
   if ("pvm" %in% rownames(installed.packages())) {
     . <- packageVersion("pvm")
-    if (. < package_version("0.4.2.1")) {
+    if (. < package_version("0.4.2.2")) {
       utils::install.packages("pvm", repos = "https://wush978.github.io/R", type = "source")
     }
   } else utils::install.packages("pvm", repos = "https://wush978.github.io/R", type = "source")
@@ -31,30 +25,14 @@ local({
 })
 
 
-
-R.date <- local({
-  m <- regexec("\\((.*)\\)$", R.version.string)
-  . <- regmatches(R.version.string, m)
-  . <- Filter(., f = function(.) length(.) == 2)
-  .[[1]][2]
-})
-R.date <- as.Date(R.date)
-repos <- c(CRAN = sprintf("https://cran.microsoft.com/snapshot/%s", R.date + 7))
+. <- sprintf("%s.%s", R.version$major, R.version$minor)
+. <- pvm::R.release.dates[.]
+repos <- c(CRAN = sprintf("https://cran.microsoft.com/snapshot/%s", . + 7))
 if (!suppressWarnings(require(subprocess))) install.packages("subprocess", repos = repos)
 if (!suppressWarnings(require(magrittr))) install.packages("magrittr", repos = repos)
 
 library(magrittr)
 library(subprocess)
-
-R.date <- local({
-  m <- regexec("\\((.*)\\)$", R.version.string)
-  regmatches(R.version.string, m) %>%
-    Filter(f = function(.) length(.) == 2) %>%
-    extract2(1) %>%
-    extract(2)
-}) %>%
-  as.Date()
-repos <- c(CRAN = sprintf("https://cran.microsoft.com/snapshot/%s", R.date + 7))
 
 # retry start
 
