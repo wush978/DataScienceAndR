@@ -19,12 +19,21 @@ check_lvr_land <- function(db) {
   converter <- function(x, encoding) {
     if (is.character(x)) convert(x, encoding) else x
   }
-  .tmp1 <- dbReadTable(db, "lvr_land2")
-  .tmp2 <- readRDS(.get_path("lvr_land_read.Rds"))
-  .tmp1.1 <- lapply(.tmp1, converter, "BIG5")
-  .tmp2.1 <- lapply(.tmp2, converter, "UTF-8")
-  names(.tmp1.1) <- names(.tmp2.1) <- NULL
-  isTRUE(all.equal(.tmp1.1, .tmp2.1))
+  if (packageVersion("RSQLite") >= package_version("2.0")) {
+    .tmp1 <- dbReadTable(db, "lvr_land2", check.names = FALSE)
+    .tmp2 <- readRDS(.get_path("lvr_land_read.Rds"))
+    .tmp1.1 <- lapply(.tmp1, converter, "UTF-8")
+    .tmp2.1 <- lapply(.tmp2, converter, "UTF-8")
+    names(.tmp1.1) <- names(.tmp2.1) <- NULL
+    isTRUE(all.equal(.tmp1.1, .tmp2.1))
+  } else {
+    .tmp1 <- dbReadTable(db, "lvr_land2")
+    .tmp2 <- readRDS(.get_path("lvr_land_read.Rds"))
+    .tmp1.1 <- lapply(.tmp1, converter, "BIG5")
+    .tmp2.1 <- lapply(.tmp2, converter, "UTF-8")
+    names(.tmp1.1) <- names(.tmp2.1) <- NULL
+    isTRUE(all.equal(.tmp1.1, .tmp2.1))
+  }
 }
 
 rdataengineer_04_hw_test <- function() {
