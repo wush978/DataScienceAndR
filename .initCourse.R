@@ -52,13 +52,7 @@ assign("source_by_l10n_info", function(path) {
   }
 }, envir = globalenv())
 local({
-  R.date <- local({
-    m <- regexec("\\((.*)\\)$", R.version.string)
-    . <- regmatches(R.version.string, m)
-    . <- Filter(., f = function(.) length(.) == 2)
-    .[[1]][2]
-  })
-  R.date <- as.Date(R.date)       
+  R.date <- pvm::R.release.dates[sprintf("%s.%s", R.version$major, R.version$minor)]
   options(
     "SWIRL_TRACKING_SERVER_IP" = "api.datascienceandr.org,api2.datascienceandr.org",
     "SWIRL_COURSE_VERSION" = "v1.0",
