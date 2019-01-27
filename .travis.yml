@@ -3,10 +3,11 @@ sudo: false
 latex: false
 
 install:
+  - Rscript -e "download.file('https://raw.githubusercontent.com/wush978/.Rprofile/master/travis-ci.R', '.Rprofile')"
   - Rscript -e "install.packages('remotes')"
   - Rscript -e "utils::install.packages('pvm', repos = 'https://wush978.github.io/R', type = 'source')"
-  - Rscript -e "options(repos = c(CRAN = sprintf('https://cran.microsoft.com/snapshot/%s', pvm::R.release.dates[sprintf('%s', Sys.getenv('TRAVIS_R_VERSION_STRING'))] + 7)));utils::install.packages('git2r')"
-  - Rscript -e "options(repos = c(CRAN = sprintf('https://cran.microsoft.com/snapshot/%s', pvm::R.release.dates[sprintf('%s', Sys.getenv('TRAVIS_R_VERSION_STRING'))] + 7)));remotes::install_github('wush978/swirlify@master')"
+  - Rscript -e "utils::install.packages('git2r')"
+  - Rscript -e "remotes::install_github('wush978/swirlify@master')"
   - Rscript -e "source('https://wush978.github.io/R/init-swirl.R')"
   - wget https://raw.githubusercontent.com/wush978/R/gh-pages/.test_course.R
 
