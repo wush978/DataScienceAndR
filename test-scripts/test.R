@@ -244,12 +244,13 @@ enter_course <- function(name) {
 }
 
 # Execusion
+COURSE_PREFIX <- Sys.getenv("COURSE_PREFIX")
 wait_until(function(.) any(grepl("> ", ., fixed = TRUE)))
 enter_swirl()
-lapply(
-  system.file("Courses/DataScienceAndR", package = "swirl") %>% dir(),
-  enter_course
-)
+system.file("Courses/DataScienceAndR", package = "swirl") %>% 
+  dir() %>% 
+  grep(pattern = COURSE_PREFIX, value = TRUE) %>%
+  lapply(enter_course)
 process_terminate(p)
 rm(p.buf)
 gc()
