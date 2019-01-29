@@ -1,21 +1,23 @@
-. <- sprintf("%s.%s", R.version$major, R.version$minor)
-. <- file.path("R-lib", .)
-dir.create(., recursive = TRUE, showWarnings = FALSE)
-.libPaths(new = .)
-Sys.setenv(R_LIBS=.)
+R.version <- sprintf("%s.%s", R.version$major, R.version$minor)
+COURSE_PREFIX <- Sys.getenv("COURSE_PREFIX")
+R_LIBS <- c(tempfile(), file.path("R-lib", R.version))
+lapply(R_LIBS, dir.create, recursive = TRUE, showWarnings = FALSE)
+.libPaths(new = R_LIBS)
+Sys.setenv(R_LIBS=paste(R_LIBS, collapse = ":"))
 
 local({
   repos <- "https://wush978.github.io/R"
-  if (!suppressWarnings(require(remotes))) install.packages("remotes", repos = "http://cran.csie.ntu.edu.tw")
-  if ("pvm" %in% rownames(installed.packages())) {
-    . <- packageVersion("pvm")
+  if (!suppressWarnings(require(remotes))) install.packages("remotes", repos = "http://cran.csie.ntu.edu.tw", lib = R_LIBS[1])
+  if ("pvm" %in% rownames(installed.packages(lib.loc = R_LIBS[1]))) {
+    . <- packageVersion("pvm", lib.loc = R_LIBS[1])
     if (. < package_version("0.4.2.2")) {
-      utils::install.packages("pvm", repos = "https://wush978.github.io/R", type = "source")
+      utils::install.packages("pvm", repos = "https://wush978.github.io/R", type = "source", lib = R_LIBS[1])
     }
-  } else utils::install.packages("pvm", repos = "https://wush978.github.io/R", type = "source")
-  stopifnot(packageVersion("pvm") >= package_version("0.4.2.2"))
-  pvm::import.packages(sprintf("https://raw.githubusercontent.com/wush978/pvm-list/master/dsr-%s.yml", package_version(R.version)))
-  utils::install.packages("swirl", repos = repos)
+  } else utils::install.packages("pvm", repos = "https://wush978.github.io/R", type = "source", lib = R_LIBS[1])
+  stopifnot(packageVersion("pvm", lib.loc = R_LIBS[1]) >= package_version("0.4.2.2"))
+  loadNamespace("pvm", lib.loc = R_LIBS[1])
+  pvm::import.packages(sprintf("https://raw.githubusercontent.com/wush978/pvm-list/master/dsr-%s.yml", package_version(R.version)), lib = R_LIBS[2])
+  utils::install.packages("swirl", repos = repos, lib = R_LIBS[1])
   Sys.setenv("SWIRL_DEV"="TRUE")
   library(swirl)
   library(curl)
@@ -24,12 +26,12 @@ local({
   swirl::install_course_directory("~/DataScienceAndR")
 })
 
-
-. <- sprintf("%s.%s", R.version$major, R.version$minor)
-. <- pvm::R.release.dates[.]
-repos <- c(CRAN = sprintf("https://cran.microsoft.com/snapshot/%s", . + 7))
-if (!suppressWarnings(require(subprocess))) install.packages("subprocess", repos = repos)
-if (!suppressWarnings(require(magrittr))) install.packages("magrittr", repos = repos)
+R.date <- pvm::R.release.dates[R.version]
+R_USER_LIBS <- file.path("R-lib", sprintf("%s-%s", R.version, COURSE_PREFIX), R.date)
+dir.create(R_USER_LIBS, showWarnings = FALSE)
+repos <- c(CRAN = sprintf("https://cran.microsoft.com/snapshot/%s", R.date + 7))
+if (!suppressWarnings(require(subprocess))) install.packages("subprocess", repos = repos, lib = R_LIBS[2])
+if (!suppressWarnings(require(magrittr))) install.packages("magrittr", repos = repos, lib = R_LIBS[2])
 
 library(magrittr)
 library(subprocess)
@@ -42,7 +44,7 @@ if (file.exists(user_data.path <- file.path(system.file("", package = "swirl"), 
 dir.create(file.path(user_data.path, "wush"), recursive = TRUE)
 
 .env <- Sys.getenv()
-.env[["R_LIBS"]] <- .libPaths()[1]
+.env[["R_LIBS"]] <- paste(R_LIBS, collapse = ":")
 .env[["LC_ALL"]] <- "zh_TW.UTF-8"
 .env[["LANGUAGE"]] <- "zh_TW"
 log.path <- tempfile()
@@ -183,26 +185,15 @@ enter_swirl <- function() {
   enter_process("lockBinding('View', .)")
   enter_process("Sys.setlocale(locale = 'zh_TW.UTF-8')\n")
   enter_process(". <- tempfile()")
+  enter_process("cat(.)")
+  p.buf$R_USER_LIBS <- tail(p.buf$output, 1)[[1]]$stdout
+  p.buf$R_USER_LIBS <- strsplit(p.buf$R_USER_LIBS, split = ">", fixed = TRUE)[[1]][1]
+  p.buf$R_USER_LIBS <- base::trimws(p.buf$R_USER_LIBS)
   enter_process("dir.create(.)")
+  enter_process(sprintf("lapply(dir('%s', full.names=TRUE), file.copy, ., recursive = TRUE)", R_USER_LIBS))
   enter_process(".libPaths(new = c(., .libPaths()))")
   enter_process("library(swirl)\n")
   enter_process("delete_progress('wush')\n")
-  create.cb.script <- '
-.swirl.slave.cb <- addTaskCallback(function(expr, value, ok, visible) {
-  tryCatch({
-    .e <- swirl:::.get_e()
-    . <- rownames(.e$current.row)
-    i <- as.integer(.) + 1
-    course <- basename(.e$path)
-    txt <- sprintf("\n%s::%d\n", course, i)
-    write(txt, commandArgs(TRUE))
-  }, error = function(e) {
-    warning(conditionMessage(e))
-  })
-  TRUE
-})
-'
-  enter_process(create.cb.script)
   enter_process("swirl()\n")
   enter_process("3\n")
   enter_process("wush\n")
@@ -251,13 +242,24 @@ enter_course <- function(name) {
 }
 
 # Execusion
-COURSE_PREFIX <- Sys.getenv("COURSE_PREFIX")
-wait_until(function(.) any(grepl("> ", ., fixed = TRUE)))
-enter_swirl()
-system.file("Courses/DataScienceAndR", package = "swirl") %>% 
-  dir() %>% 
-  grep(pattern = COURSE_PREFIX, value = TRUE) %>%
-  lapply(enter_course)
-process_terminate(p)
-rm(p.buf)
-gc()
+tryCatch({
+  wait_until(function(.) any(grepl("> ", ., fixed = TRUE)))
+  enter_swirl()
+  system.file("Courses/DataScienceAndR", package = "swirl") %>% 
+    dir() %>% 
+    grep(pattern = COURSE_PREFIX, value = TRUE) %>%
+    lapply(enter_course)
+}, finally = {
+  targets <- dir(p.buf$R_USER_LIBS, full.names = TRUE)
+  # remove locked files
+  . <- regmatches(targets, regexec("00LOCK-(.*)$", targets))
+  . <- Filter(f = function(.) length(.) == 2, .)
+  if (length(.) > 0) {
+    locked.pkg <- .[[1]][2]
+    unlink(file.path(p.buf$R_USER_LIBS, locked.pkg), recursive = TRUE)
+    unlink(file.path(p.buf$R_USER_LIBS, sprintf("00LOCK-%s", locked.pkg)), recursive = TRUE)
+    targets <- dir(p.buf$R_USER_LIBS, full.names = TRUE)
+  }
+  lapply(targets, file.copy, R_USER_LIBS, overwrite = FALSE, recursive = TRUE)
+  process_terminate(p)
+})
