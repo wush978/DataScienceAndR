@@ -134,7 +134,14 @@ search_selection <- function(txt, ans) {
   . <- regexec(sprintf("^\\s*(\\d+): %s$", ans), txt) %>%
     regmatches(x = txt) %>%
     Filter(f = function(.) length(.) == 2)
-  stopifnot(length(.) == 1)
+  if(length(.) != 1) {
+    cat("search_selection error:\n", file = stderr())
+    cat("\n\n==txt==\n\n", file = stderr())
+    cat(txt, sep = "\n", file = stderr())
+    cat("\n\n==ans==\n\n", file = stderr())
+    cat(ans, sep = "\n", file = stderr())
+    stop("")
+  }
   .[[1]][2]
 }
 
