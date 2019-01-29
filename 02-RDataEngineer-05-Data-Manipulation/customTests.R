@@ -78,7 +78,7 @@ rdataengineer_05_06 <- function(cl_info2, cl_info3) {
     summarise(mortgage_total_bal = sum(mortgage_bal)) %>%
     arrange(year_month)
     if (!check_equal(cl_info3$year_month, cl_info3.ref$year_month)) {
-      message("cl_info3$month is wrong")
+      message("cl_info3$year_month is wrong")
       return(FALSE)
     }
     if (!check_equal(cl_info3$mortgage_total_bal, cl_info3.ref$mortgage_total_bal)) {
