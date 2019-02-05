@@ -29,7 +29,7 @@ check_lvr_land <- function(db) {
   } else {
     .tmp1 <- dbReadTable(db, "lvr_land2")
     .tmp2 <- readRDS(.get_path("lvr_land_read.Rds"))
-    .tmp1.1 <- lapply(.tmp1, converter, "BIG5")
+    .tmp1.1 <- lapply(.tmp1, converter, "unknown")
     .tmp2.1 <- lapply(.tmp2, converter, "UTF-8")
     names(.tmp1.1) <- names(.tmp2.1) <- NULL
     isTRUE(all.equal(.tmp1.1, .tmp2.1))
