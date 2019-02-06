@@ -12,28 +12,23 @@ AUTO_DETECT_NEWVAR <- FALSE
 # expression which the user entered, so care must be taken.
 
 check_lvr_land <- function(db) {
-  convert <- function(x, encoding) {
-    Encoding(x) <- encoding
-    enc2native(x)
-  }
-  converter <- function(x, encoding) {
-    if (is.character(x)) convert(x, encoding) else x
-  }
-  if (packageVersion("RSQLite") >= package_version("2.0")) {
-    .tmp1 <- dbReadTable(db, "lvr_land2", check.names = FALSE)
-    .tmp2 <- readRDS(.get_path("lvr_land_read.Rds"))
-    .tmp1.1 <- lapply(.tmp1, converter, "UTF-8")
-    .tmp2.1 <- lapply(.tmp2, converter, "UTF-8")
-    names(.tmp1.1) <- names(.tmp2.1) <- NULL
-    isTRUE(all.equal(.tmp1.1, .tmp2.1))
-  } else {
-    .tmp1 <- dbReadTable(db, "lvr_land2")
-    .tmp2 <- readRDS(.get_path("lvr_land_read.Rds"))
-    .tmp1.1 <- lapply(.tmp1, converter, "unknown")
-    .tmp2.1 <- lapply(.tmp2, converter, "UTF-8")
-    names(.tmp1.1) <- names(.tmp2.1) <- NULL
-    isTRUE(all.equal(.tmp1.1, .tmp2.1))
-  }
+  .db <- RSQLite::dbConnect(RSQLite::SQLite())
+  tryCatch({
+    your_answer <- RSQLite::dbReadTable(db, "lvr_land2")
+    RSQLite::dbWriteTable(.db, "lvr_land", readRDS(.get_path(.vr_land_read.Rds)))
+    referenced_answer <- RSQLite::dbReadTable(.db, "lvr_land")
+    if (isTRUE(all.equal(your_answer, .tmp2.1))) return(TRUE) else {
+      . <- capture.output(all.equal(your_answer, referenced_answer))
+      cat(., sep = "\n", file = stderr());cat("\n", file = stderr())
+      return(FALSE)
+    }
+  }, error = function(e) {
+    . <- conditionMessage(e)
+    cat(., sep = "\n", file = stderr());cat("\n", file = stderr())
+    return(FALSE)
+  }, finally = {
+    RSQLite::dbDisconnect(.db)    
+  })
 }
 
 rdataengineer_04_hw_test <- function() {
