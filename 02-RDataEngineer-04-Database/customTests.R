@@ -15,7 +15,7 @@ check_lvr_land <- function(db) {
   .db <- RSQLite::dbConnect(RSQLite::SQLite())
   tryCatch({
     your_answer <- RSQLite::dbReadTable(db, "lvr_land2")
-    RSQLite::dbWriteTable(.db, "lvr_land", readRDS(.get_path(.vr_land_read.Rds)))
+    RSQLite::dbWriteTable(.db, "lvr_land", readRDS(.get_path("lvr_land_read.Rds")))
     referenced_answer <- RSQLite::dbReadTable(.db, "lvr_land")
     if (isTRUE(all.equal(your_answer, .tmp2.1))) return(TRUE) else {
       . <- capture.output(all.equal(your_answer, referenced_answer))
