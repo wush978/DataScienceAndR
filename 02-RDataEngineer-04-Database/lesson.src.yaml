@@ -286,37 +286,37 @@
 - Class: cmd_question
   Output: |
     `dbSendQuery`函數則會先將結果儲存於Result物件中，再由使用者一段一段的取出。
-    請同學試著執行：`.rs <- dbSendQuery(db, "SELECT * FROM iris")`。
-  CorrectAnswer: .rs <- dbSendQuery(db, "SELECT * FROM iris")
-  AnswerTests: omnitest('.rs <- dbSendQuery(db, "SELECT * FROM iris")')
+    請同學試著執行：`rs <- dbSendQuery(db, "SELECT * FROM iris")`。
+  CorrectAnswer: rs <- dbSendQuery(db, "SELECT * FROM iris")
+  AnswerTests: omnitest('rs <- dbSendQuery(db, "SELECT * FROM iris")')
 
 - Class: cmd_question
   Output: |
-    上一關所拿到的`.rs`物件，就是整個資料集的「代理」。
+    上一關所拿到的`rs`物件，就是整個資料集的「代理」。
     我們可以利用`fetch`方法，一次拿一點資料出來。
-    請同學試試看：`fetch(.rs, 1)`。
-  CorrectAnswer: fetch(.rs, 1)
-  AnswerTests: omnitest('fetch(.rs, 1)')
+    請同學試試看：`fetch(rs, 1)`。
+  CorrectAnswer: fetch(rs, 1)
+  AnswerTests: omnitest('fetch(rs, 1)')
 
 - Class: cmd_question
   Output: |
-    請同學再試一次：`fetch(.rs, 1)`（可以按一下 ↑ ，正常安裝的R 會顯示上一個輸入）
-  CorrectAnswer: fetch(.rs, 1)
-  AnswerTests: omnitest('fetch(.rs, 1)')
+    請同學再試一次：`fetch(rs, 1)`（可以按一下 ↑ ，正常安裝的R 會顯示上一個輸入）
+  CorrectAnswer: fetch(rs, 1)
+  AnswerTests: omnitest('fetch(rs, 1)')
 
 - Class: text
   Output: |
     同學應該會注意到，兩次的結果是不同的。
-    這是因為在第一次`dbSendQuery`指令完成之後，R 和資料庫就把結果暫存到某個地方，並且將代理物件(也就是`.rs`)回傳。
+    這是因為在第一次`dbSendQuery`指令完成之後，R 和資料庫就把結果暫存到某個地方，並且將代理物件(也就是`rs`)回傳。
     之後每次執行`fetch`指令時，R 就會「依照順序」把結果一個又一個的回傳給使用者。
-    如果使用者每次想多拿一些資料，則可以更改第二個參數，如：`fetch(.rs, 100)`一次取出100筆資料。
+    如果使用者每次想多拿一些資料，則可以更改第二個參數，如：`fetch(rs, 100)`一次取出100筆資料。
 
 - Class: cmd_question
   Output: |
-    當我們不需要再使用`.rs`物件時，就刪除它：`dbClearResult(.rs)`。
+    當我們不需要再使用`rs`物件時，就刪除它：`dbClearResult(rs)`。
     請同學試試看。
-  CorrectAnswer: dbClearResult(.rs)
-  AnswerTests: omnitest('dbClearResult(.rs)')
+  CorrectAnswer: dbClearResult(rs)
+  AnswerTests: omnitest('dbClearResult(rs)')
 
 - Class: text
   Output: |

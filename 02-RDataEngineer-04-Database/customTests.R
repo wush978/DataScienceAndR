@@ -15,9 +15,22 @@ check_lvr_land <- function(db) {
   .db <- RSQLite::dbConnect(RSQLite::SQLite())
   tryCatch({
     your_answer <- RSQLite::dbReadTable(db, "lvr_land2")
-    RSQLite::dbWriteTable(.db, "lvr_land", readRDS(.get_path("lvr_land_read.Rds")))
+    RSQLite::dbWriteTable(.db, "lvr_land", local({
+        . <- readRDS(.get_path("lvr_land_read.Rds"))
+        colnames(.) <- c(
+          "township", "target", "location", "area.of.squared.meters", 
+          "urban.land.division", "non.urban.land.division", "non.urban.land.compilation", 
+          "trading.year", "trading.number", "transfer.level", "total.floor", 
+          "building.type", "main.purpose", "main.materials", "building.completion.year", 
+          "transfer.area.squared.meters", "building.pattern.room", "building.pattern.living.dining", 
+          "building.pattern.bathroom", "building.pattern.compartment", 
+          "is.managed", "total.price", "unit.price.squared.meters", "parking.type", 
+          "parking.area.squared.meters", "parking.price", "remarks", "no."
+        )
+        .
+      }))
     referenced_answer <- RSQLite::dbReadTable(.db, "lvr_land")
-    if (isTRUE(all.equal(your_answer, .tmp2.1))) return(TRUE) else {
+    if (isTRUE(all.equal(your_answer, referenced_answer))) return(TRUE) else {
       . <- capture.output(all.equal(your_answer, referenced_answer))
       cat(., sep = "\n", file = stderr());cat("\n", file = stderr())
       return(FALSE)
