@@ -56,6 +56,6 @@ local({
   options(
     "SWIRL_TRACKING_SERVER_IP" = "api.datascienceandr.org,api2.datascienceandr.org",
     "SWIRL_COURSE_VERSION" = "v1.0",
-    "repos" = c("http://wush978.github.io/R", "CRAN"=sprintf("https://cran.microsoft.com/snapshot/%s", R.date + 7))
+    "repos" = c("http://wush978.github.io/R", "CRAN"=sprintf("https://cran.microsoft.com/snapshot/%s", R.date + 14))
   )
 })
