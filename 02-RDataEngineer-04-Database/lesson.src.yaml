@@ -167,6 +167,13 @@
 
 - Class: cmd_question
   Output: |
+    由於在Windows上的RSQLite 1.0.0版本之後的套件有bug(已經於2019年1月時候修正)，
+    導致中文的欄位名稱會發生錯誤。因此我們將`lvr_land`的欄位名稱改為英文。
+    請同學輸入：`colnames(lvr_land) <- lvr_land.names`
+  CorrectAnswer: colnames(lvr_land) <- lvr_land.names
+
+- Class: cmd_question
+  Output: |
     接著，我們透過`dbWriteTable`將實價登錄資料寫入資料庫中。
     請同學輸入：`dbWriteTable(db, "lvr_land2", lvr_land)`。
   CorrectAnswer: dbWriteTable(db, "lvr_land2", lvr_land)

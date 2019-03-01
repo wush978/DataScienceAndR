@@ -156,19 +156,75 @@
   CorrectAnswer: gvisOrgChart(Regions) %>% plot
   AnswerTests: omnitest('gvisOrgChart(Regions) %>% plot')
   Hint: gvisOrgChart(Regions) %>% plot
+- Class: text
+  Output: |
+    接著我們介紹leaflet這個可以將地理資料視覺化的套件。
+    我們會搭配leaflet的官方網頁，介紹leaflet的功能，
+    同時也希望同學累積：自行利用網路資源學習更多
+    R語言功能的經驗。
 - Class: cmd_question
   Output: |
-    接著我們介紹ggmap這個可以處理地理資料的套件。
-    請同學輸入`skip()`檢查有無安裝ggmap。
-  CorrectAnswer: check_then_install("ggmap", "2.6.1")
-  AnswerTests: test_package_version("ggmap", "2.6.1")
-  Hint: check_then_install("ggmap", "2.6.1")
+    官方網站的網址可以透過Google "R leaflet"來找到。
+    在撰寫教材時，老師查到的網址是：
+    <https://rstudio.github.io/leaflet/>
+    請同學輸入`browseURL("https://rstudio.github.io/leaflet/")`
+  CorrectAnswer: browseURL("https://rstudio.github.io/leaflet/")
+  AnswerTests: omnitest('browseURL("https://rstudio.github.io/leaflet/")')
+  Hint: browseURL("https://rstudio.github.io/leaflet/")
 - Class: cmd_question
   Output: |
-    接著，請載入ggmap。
-  CorrectAnswer: library(ggmap)
-  AnswerTests: test_search_path("ggmap")
-  Hint: library(ggmap)
+    接著請同學安裝leaflet套件，或是輸入`skip()`
+    檢查有無安裝leaflet套件。
+  CorrectAnswer: check_then_install("leaflet", "1.1.0")
+  AnswerTests: test_package_version("leaflet", "1.1.0")
+  Hint: check_then_install("leaflet", "1.1.0")
+- Class: cmd_question
+  Output: |
+    接著，請載入leaflet。
+  CorrectAnswer: library(leaflet)
+  AnswerTests: test_search_path("leaflet")
+  Hint: library(leaflet)
+- Class: text
+  Output: |
+    接著請同學閱讀官方網站的Introduction的部分。
+- Class: cmd_question
+  Output: |
+    在老師撰寫教材時，leaflet官方網站有了第一個範例。
+    請同學照著輸入：`m <- leaflet() %>% addTiles() %>% addMarkers(lng=174.768, lat=-36.852, popup="The birthplace of R")`
+  CorrectAnswer: m <- leaflet() %>% addTiles() %>% addMarkers(lng=174.768, lat=-36.852,
+    popup="The birthplace of R")
+  AnswerTests: omnitest('m <- leaflet() %>% addTiles() %>% addMarkers(lng=174.768,
+    lat=-36.852, popup="The birthplace of R")')
+  Hint: m <- leaflet() %>% addTiles() %>% addMarkers(lng=174.768, lat=-36.852, popup="The
+    birthplace of R")
+- Class: cmd_question
+  Output: |
+    接著請同學輸入`m`來看看結果。
+    有沒有看到類似leaflet官方說明上的圖呢？
+  CorrectAnswer: m
+  AnswerTests: omnitest('m')
+  Hint: m
+- Class: text
+  Output: |
+    在閱讀一個套件的說明時，在仍然對套件很陌生的時候，
+    我們第一件要做的事情就是先將範例複製貼上。
+    這樣一來可以了解套件要做的事情，也可以測試套件是否
+    運作正常。
+- Class: text
+  Output: |
+    舉例來說，如果剛剛的指令沒有出現類似的圖，
+    那我們幾乎很肯定，這個套件有地方壞掉了。
+    在Open Source的世界，程式壞掉也常常是我們使用的套件壞掉，
+    而不是我們寫出錯誤的程式碼。
+- Class: text
+  Output: |
+    如果同學一開始就自己寫程式碼，萬一出錯時，
+    就分不出來是自己寫錯，還是套件出錯了。
+- Class: text
+  Output: |
+    接著同學可以在這個課程結束後，
+    依照官網推薦的閱讀順序，將leaflet的功能仔細閱讀過一遍。
+    在接下來的練習中，老師則是要拿地震的資料，做一個leaflet的展示。
 - Class: cmd_question
   Output: |
     eq是來自<http://earthquake.usgs.gov>所抓取的地震資料。
@@ -178,58 +234,97 @@
   Hint: View(eq)
 - Class: text
   Output: |
-    同學可以看到，eq中有提供地震的位置(經緯度：longitude, latitude)和地震的規模(mag)。
+    同學可以看到，eq中有提供地震的位置(經緯度：longitude, latitude)
+    和地震的規模(mag)。
 - Class: cmd_question
   Output: |
-    接著我們示範一次如何將地震畫在地圖中。
-    首先我們要先從google拿到圖資。
-    請同學輸入：`twmap <- try(get_map("Taiwan", 3), silent = TRUE)`。
-    第一個參數是告訴google我們要抓取的圖資的位置。
-    第二個參數則是地圖的範圍大小，值從3（世界規模）到21（建築物的規模）。
-  CorrectAnswer: twmap <- readRDS(.get_path("twmap.Rds"))
-  AnswerTests: any_of_exprs('twmap <- try(get_map("Taiwan", 3), silent = TRUE)', 'twmap
-    <- readRDS(.get_path("twmap.Rds"))')
-  Hint: twmap <- readRDS(.get_path("twmap.Rds"))
+    接著我們示範一次如何一邊將地震畫在地圖中。
+    首先我們要基於`eq`資料來建立地圖物件。
+    這種概念很接近`ggplot2`：讓我們接下來可以直接用
+    `eq`的欄位名稱來指定資料源，而不是透過直接告訴
+    leaflet地圖的相關資訊。
+    請同學輸入：`twmap <- leaflet(eq)`。
+  CorrectAnswer: twmap <- leaflet(eq)
+  AnswerTests: omnitest('twmap <- leaflet(eq)')
+  Hint: twmap <- leaflet(eq)
 - Class: cmd_question
   Output: |
-    接著請同學輸入: `skip()`來確認圖資是否確實載入。
-  CorrectAnswer: if (class(twmap)[1] == "try-error") twmap <- readRDS(.get_path("twmap.Rds"))
-  AnswerTests: omnitest('if (class(twmap)[1] == "try-error") twmap <- readRDS(.get_path("twmap.Rds"))')
-  Hint: if (class(twmap)[1] == "try-error") twmap <- readRDS(.get_path("twmap.Rds"))
+    接著請同學輸入: `twmap2 <- addMarkers(twmap, lng = ~longitude, lat = ~latitude)`
+    這段指令的效果我們等下再來解釋。
+  CorrectAnswer: twmap2 <- addMarkers(twmap, lng = ~longitude, lat = ~latitude)
+  AnswerTests: omnitest('twmap2 <- addMarkers(twmap, lng = ~longitude, lat = ~latitude)')
+  Hint: twmap2 <- addMarkers(twmap, lng = ~longitude, lat = ~latitude)
 - Class: cmd_question
   Output: |
-    我們接著建立ggplot物件：`g <- ggmap(twmap, extent = "device")`。
-  CorrectAnswer: g <- ggmap(twmap, extent = "device")
-  AnswerTests: omnitest('g <- ggmap(twmap, extent = "device")')
-  Hint: g <- ggmap(twmap, extent = "device")
-- Class: cmd_question
-  Output: |
-    我們輸入`g`看一下剛剛抓回來的圖資。
-  CorrectAnswer: g
-  AnswerTests: omnitest('g')
-  Hint: g
-- Class: cmd_question
-  Output: |
-    接著請同學輸入：`g + geom_point(aes(x = longitude, y = latitude), data = eq)`，
-    來繪製新的圖層標示地震位置。
-  CorrectAnswer: g + geom_point(aes(x = longitude, y = latitude), data = eq)
-  AnswerTests: omnitest('g + geom_point(aes(x = longitude, y = latitude), data = eq)')
-  Hint: g + geom_point(aes(x = longitude, y = latitude), data = eq)
-- Class: cmd_question
-  Output: |
-    接著請同學輸入：`g + geom_point(aes(x = longitude, y = latitude, size = mag), data = eq)`，
-    來用點的大小表示地震規模。
-  CorrectAnswer: g + geom_point(aes(x = longitude, y = latitude, size = mag), data
-    = eq)
-  AnswerTests: omnitest('g + geom_point(aes(x = longitude, y = latitude, size = mag),
-    data = eq)')
-  Hint: g + geom_point(aes(x = longitude, y = latitude, size = mag), data = eq)
+    接著請同學輸入`twmap2`把我們目前的結果畫出來。
+  CorrectAnswer: twmap2
+  AnswerTests: omnitest('twmap2')
+  Hint: twmap2
 - Class: text
   Output: |
-    如果同學熟悉ggplot2的話，ggmap應該就可以很快的上手了。
+    同學可以看到許多圖上的標記。
+    這就是`addMarkers`的效果。
+    leaflet也提供許多類型的標記效果，同學可以在
+    leaflet的官網上近一步學習相關函數，以及相關參數。
+    在這裡，我們畫出的標記座標，則是基於`eq$longitude`
+    與`eq$latitude`的數值所繪製的。
+    這則是`~longitude`與`~latitude`的效果。
+- Class: text
+  Output: |
+    在R中，這種帶有`~`符號的expression通稱為`formula`。
+    在大部分的狀況下，`formula`要搭配`data.frame`一起使用，
+    而`formula`中的名稱則代表`data.frame`中的欄位名稱。
+    有興趣的同學可以`?formula`了解更多
+- Class: text
+  Output: |
+    另一個同學會想問的問題是，目前這張圖中並沒有底圖。
+    這導致它看起來完全不像地圖。
+- Class: cmd_question
+  Output: |
+    為了加上底圖，請同學輸入：
+    `twmap3 <- addTiles(twmap2)`
+  CorrectAnswer: twmap3 <- addTiles(twmap2)
+  AnswerTests: omnitest('twmap3 <- addTiles(twmap2)')
+  Hint: twmap3 <- addTiles(twmap2)
+- Class: cmd_question
+  Output: |
+    接著輸入`twmap3`看看加上`addTiles`後的結果。
+  CorrectAnswer: twmap3
+  AnswerTests: omnitest('twmap3')
+  Hint: twmap3
+- Class: text
+  Output: |
+    leaflet 套件也有提供同學操控底圖大小、範圍的參數。
+    細節再麻煩同學閱讀`?addTiles`或是leaflet官網中的說明了。
+- Class: cmd_question
+  Output: |
+    接下來，我們介紹最後一個範例。請同學輸入：
+    `twmap4 <- addMarkers(twmap, lng = ~longitude, lat = ~latitude, label = ~paste("Magnitude:", mag))`
+  CorrectAnswer: twmap4 <- addMarkers(twmap, lng = ~longitude, lat = ~latitude, label
+    = ~paste("Magnitude:", mag))
+  AnswerTests: omnitest('twmap4 <- addMarkers(twmap, lng = ~longitude, lat = ~latitude,
+    label = ~paste("Magnitude:", mag))')
+  Hint: twmap4 <- addMarkers(twmap, lng = ~longitude, lat = ~latitude, label = ~paste("Magnitude:",
+    mag))
+- Class: cmd_question
+  Output: |
+    再請同學輸入`twmap4`看看結果
+  CorrectAnswer: twmap4
+  AnswerTests: omnitest('twmap4')
+  Hint: twmap4
+- Class: text
+  Output: |
+    透過參數`label`，我們可以在標記上加註文字。
+    當同學用滑鼠滑到標記上方時，就會自動出現一段文字。
+- Class: text
+  Output: |
+    這段文字是透過`label=~paste("Magnitude:", mag)`來產生的。
+    透過formula的方式，R會自動用`eq$mag`來帶入`mag`，然後
+    處理`paste("Magnitude:", eq$mag)`這個expression，再把
+    結果放到`label`中。
 - Class: script
   Output: |
-    最後我們請同學利用之前所學，從`pirate_path`中爬取經緯度，再利用ggmap將海盜的通報事件畫到地圖上。
+    我們請同學利用之前所學，從`pirate_path`中爬取經緯度，再利用leaflet將海盜的通報事件畫到地圖上。
   Script: RVisualization-04-HW.R
   AnswerTests: pass()
 
