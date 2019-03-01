@@ -16,7 +16,8 @@ check_lvr_land <- function(db) {
   tryCatch({
     your_answer <- RSQLite::dbReadTable(db, "lvr_land2")
     RSQLite::dbWriteTable(.db, "lvr_land", local({
-        . <- readRDS(.get_path("lvr_land_read.Rds"))
+        . <- read.table(file(.get_path("A_LVR_LAND_A.CSV"), encoding = "BIG5"),
+  sep = ",", header = TRUE, stringsAsFactors = FALSE)
         colnames(.) <- c(
           "township", "target", "location", "area.of.squared.meters", 
           "urban.land.division", "non.urban.land.division", "non.urban.land.compilation", 
