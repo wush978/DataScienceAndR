@@ -250,16 +250,27 @@
 
 - Class: cmd_question
   Output: |
-    因為這個函數比較特別，所以我們使用`lapply(tmp, "[", 1)`這個語法來取出`tmp`中每個元素（字串向量）的第一個欄位。
+    因為這個函數比較特別，所以我們使用`tmp1 <- lapply(tmp, "[", 1)`
+    這個語法來取出`tmp`中每個元素（字串向量）的第一個欄位。
+    再將它存到變數`tmp1`之中。
     請同學試試看。
-  CorrectAnswer: lapply(tmp, "[", 1)
-  AnswerTests: omnitest('lapply(tmp, "[", 1)')
+  CorrectAnswer: tmp1 <- lapply(tmp, "[", 1)
+  AnswerTests: check_val("tmp1", lapply(tmp, "[", 1))
 
 - Class: cmd_question
   Output: |
-    如果我們要取出`tmp`中每個元素（字串向量）的第二個欄位，可以用：`lapply(tmp, "[", 2)`取得，請同學試試看。
-  CorrectAnswer: lapply(tmp, "[", 2)
-  AnswerTests: omnitest('lapply(tmp, "[", 2)')
+    請同學輸入`head(tmp1)`看看結果
+
+- Class: cmd_question
+  Output: |
+    如果我們要取出`tmp`中每個元素（字串向量）的第二個欄位，
+    可以用：`tmp2 <- lapply(tmp, "[", 2)`取得，請同學試試看。
+  CorrectAnswer: tmp2 <- lapply(tmp, "[", 2)
+  AnswerTests: check_val("tmp2", lapply(tmp, "[", 2))
+
+- Class: cmd_question
+  Output: |
+    請同學輸入`head(tmp2)`看看結果
 
 - Class: text
   Output: |
@@ -284,29 +295,26 @@
   CorrectAnswer: "list"
   AnswerTests: omnitest(correctVal = "list")
 
-- Class: cmd_question
+- Class: text
   Output: |
     list型態對於後續的處理還是比較麻煩的。
     因此在輸出時，通常會希望能夠將轉換為字串向量。
     其中一種做法是透過`unlist`把`lapply`所輸出的`list`拆開。
-    請同學試試看先輸入：`tmp2 <- lapply(tmp, "[", 1)`，並將結果儲存到`tmp2`這個變數。
-  CorrectAnswer: tmp2 <- lapply(tmp, "[", 1)
-  AnswerTests: omnitest('tmp2 <- lapply(tmp, "[", 1)')
 
 - Class: cmd_question
   Output: |
-    接著，我們可以使用`unlist(tmp2)`取得字串向量了。
+    舉例來說，我們可以使用`unlist(tmp)`取得字串向量。
     請同學試試看。
-  CorrectAnswer: unlist(tmp2)
-  AnswerTests: omnitest("unlist(tmp2)")
+  CorrectAnswer: unlist(tmp)
+  AnswerTests: omnitest("unlist(tmp)")
 
 - Class: cmd_question
   Output: |
     另外一種方式是使用`sapply`這個函數。
     `sapply`和`lapply`幾乎一樣，差別在於`sapply`最後會嘗試重新整理輸出的格式，將list轉成array。
-    請同學試試`sapply(tmp, "[", 1)`。
-  CorrectAnswer: sapply(tmp, "[", 1)
-  AnswerTests: omnitest('sapply(tmp, "[", 1)')
+    請同學試試`tmp3 <- sapply(tmp, "[", 1)`。
+  CorrectAnswer: tmp3 <- sapply(tmp, "[", 1)
+  AnswerTests: check_val("tmp3", sapply(tmp, "[", 1))
 
 - Class: text
   Output: |

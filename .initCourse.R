@@ -1,7 +1,7 @@
 if (packageVersion("swirl") < package_version("100.5.2")) {
   stop("Please upgrade the version of swirl via: `install.packages('swirl', repos = 'http://wush978.github.io/R')`")
 }
-
+stopifnot(packageVersion("pvm") >= package_version("0.4.2"))
 assign(".get_path",
        function(fname) {
          path <- file.path(lesPath, fname)
@@ -11,8 +11,8 @@ assign(".get_path",
 
 assign("check_then_install",
        function(pkg_name, pkg_version) {
-         if (!suppressWarnings(suppressMessages(require(pkg_name, character.only = TRUE)))) utils::install.packages(pkg_name) else {
-           if (packageVersion(pkg_name) < package_version(pkg_version)) utils::install.packages(pkg_name)
+         if (!suppressWarnings(suppressMessages(require(pkg_name, character.only = TRUE)))) pvm::install.packages.via.graph(pkg_name) else {
+           if (packageVersion(pkg_name) < package_version(pkg_version)) pvm::install.packages.via.graph(pkg_name)
          }
        },
        envir = globalenv())
@@ -20,7 +20,7 @@ assign("check_then_install",
 assign("check_then_install_github",
        function(pkg_name, pkg_version, ...) {
          if (!require(pkg_name, character.only = TRUE)) devtools::install_github(...) else {
-         if (packageVersion(pkg_name) < package_version(pkg_version)) devtools::install_github(...)
+         if (packageVersion(pkg_name) < package_version(pkg_version)) devtools::install_github(..., dependencies = FALSE)
          }
        })
 
@@ -51,9 +51,11 @@ assign("source_by_l10n_info", function(path) {
     try(source(path, local = new.env(), encoding = "UTF-8"), silent = TRUE)
   }
 }, envir = globalenv())
-
-options(
-  "SWIRL_TRACKING_SERVER_IP" = "api.datascienceandr.org,api2.datascienceandr.org",
-  "SWIRL_COURSE_VERSION" = "v1.0",
-  "repos" = c("CRAN"="https://cloud.r-project.org/")
-)
+local({
+  R.date <- pvm::R.release.dates[sprintf("%s.%s", R.version$major, R.version$minor)]
+  options(
+    "SWIRL_TRACKING_SERVER_IP" = "api.datascienceandr.org,api2.datascienceandr.org",
+    "SWIRL_COURSE_VERSION" = "v1.0",
+    "repos" = c("CRAN"="https://cloud.r-project.org/")
+  )
+})

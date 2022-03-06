@@ -21,3 +21,17 @@ assign("db_path2",
 assign("lvr_land",
        .lvr_land,
        envir = globalenv())
+
+assign(
+  "lvr_land.names",
+  c("township", "target", "location", "area.of.squared.meters", 
+    "urban.land.division", "non.urban.land.division", "non.urban.land.compilation", 
+    "trading.year", "trading.number", "transfer.level", "total.floor", 
+    "building.type", "main.purpose", "main.materials", "building.completion.year", 
+    "transfer.area.squared.meters", "building.pattern.room", "building.pattern.living.dining", 
+    "building.pattern.bathroom", "building.pattern.compartment", 
+    "is.managed", "total.price", "unit.price.squared.meters", "parking.type", 
+    "parking.area.squared.meters", "parking.price", "remarks", "no."
+  ),
+  envir = globalenv()
+  )
