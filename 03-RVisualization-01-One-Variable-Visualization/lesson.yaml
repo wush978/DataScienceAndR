@@ -10,9 +10,9 @@
     這個課程的目，是讓同學理解如何依據數據的型態，在一個維度上適當的呈現數據。
 - Class: cmd_question
   Output: |
-    請同學先打開`plot`的說明。
-  CorrectAnswer: ?plot
-  AnswerTests: omnitest('?plot')
+    請同學先打開`base::plot`的說明。
+  CorrectAnswer: ?base::plot
+  AnswerTests: omnitest('?base::plot')
   Hint: ?plot
 - Class: text
   Output: |
