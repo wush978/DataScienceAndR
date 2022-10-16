@@ -11,16 +11,17 @@ assign(".get_path",
 
 assign("check_then_install",
        function(pkg_name, pkg_version) {
-         if (!suppressWarnings(suppressMessages(require(pkg_name, character.only = TRUE)))) pvm::install.packages.via.graph(pkg_name) else {
-           if (packageVersion(pkg_name) < package_version(pkg_version)) pvm::install.packages.via.graph(pkg_name)
+         if (suppressWarnings(suppressMessages(require(pkg_name, character.only = TRUE)))) {
+           if (packageVersion(pkg_name) >= package_version(pkg_version)) return(NULL)
          }
-       },
-       envir = globalenv())
+         remotes::install_version(pkg_name, pkg_version)
+        },
+        envir = globalenv())
 
 assign("check_then_install_github",
        function(pkg_name, pkg_version, ...) {
-         if (!require(pkg_name, character.only = TRUE)) devtools::install_github(...) else {
-         if (packageVersion(pkg_name) < package_version(pkg_version)) devtools::install_github(..., dependencies = FALSE)
+         if (!require(pkg_name, character.only = TRUE)) remotes::install_github(...) else {
+         if (packageVersion(pkg_name) < package_version(pkg_version)) remotes::install_github(..., dependencies = FALSE)
          }
        })
 
