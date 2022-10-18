@@ -14,7 +14,10 @@ assign("check_then_install",
          if (suppressWarnings(suppressMessages(require(pkg_name, character.only = TRUE)))) {
            if (packageVersion(pkg_name) >= package_version(pkg_version)) return(NULL)
          }
-         remotes::install_version(pkg_name, pkg_version)
+         pkgs <- available.pakcages()
+         if (package_version(pkgs[pkg_name,"Version"]) >= package_version(pkg_version)) {
+           utils::install.packages(pkg_name)
+         } else remotes::install_version(pkg_name, pkg_version)
         },
         envir = globalenv())
 
