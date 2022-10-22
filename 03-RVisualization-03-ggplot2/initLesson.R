@@ -68,13 +68,15 @@ assign("hw_03", function() {
 }, envir = globalenv())
 
 assign("hw_04", function() {
-  g <-
-    mutate(population, city = substring(site_id, 1, 3)) %>%
-    filter(city %in% c(.hw_description[6], .hw_description[7])) %>%
+  df <- mutate(population, city = substring(site_id, 1, 3))
+  idx <- df$city %in% c(.hw_description[6], .hw_description[7])
+  df <- df %>%
+    filter(idx) %>%
     group_by(city, age) %>%
     summarise(count = sum(count)) %>%
     group_by(city) %>%
-    mutate(ratio = count / sum(count)) %>%
+    mutate(ratio = count / sum(count))
+  g <- df %>%
     ggplot(aes(x = age, y = ratio, color = city)) +
     geom_point() + geom_line()
   if (Sys.info()["sysname"] == "Darwin" & interactive()) {
