@@ -68,10 +68,8 @@ assign("hw_03", function() {
 }, envir = globalenv())
 
 assign("hw_04", function() {
-  df <- mutate(population, city = substring(site_id, 1, 3))
-  idx <- df$city %in% c(.hw_description[6], .hw_description[7])
-  df <- df %>%
-    filter(idx) %>%
+  df <- mutate(population, city = substring(site_id, 1, 3)) %>%
+    inner_join(data.frame(city = c(.hw_description[6], .hw_description[7]), stringsAsFactors = FALSE)) %>%
     group_by(city, age) %>%
     summarise(count = sum(count)) %>%
     group_by(city) %>%
