@@ -139,7 +139,7 @@
   Output: |
     關於類別欄位對單一數值的視覺化，一般而言有兩種做法：長條圖 (bar plot)和點標圖 (dor plot)。
     先來計算各種族學生 (race) 的閱讀成績中位數 (`read.med=median(read)`)。
-    請同學輸入以下指令：`dat3 <- summarise(group_by(hsb, race), read.med=median(read)`建立`dat3`。
+    請同學輸入以下指令：`dat3 <- summarise(group_by(hsb, race), read.med=median(read))`建立`dat3`。
   CorrectAnswer: dat3 <- summarise(group_by(hsb, race), read.med=median(read))
   AnswerTests: omnitest('dat3 <- summarise(group_by(hsb, race), read.med=median(read))')
   Hint: dat3 <- summarise(group_by(hsb, race), read.med=median(read))
@@ -172,10 +172,10 @@
 - Class: cmd_question
   Output: |
     與點標圖不同，當每一種類別對應的數值只有一個時，應使用箱形圖 (box plot) 進行視覺化。
-    譬如各種族學生的閱讀成績之分布，請同學輸入以下指令：`plot(math ~ race, data=hsb)`。
-  CorrectAnswer: plot(math ~ race, data=hsb)
-  AnswerTests: omnitest('plot(math ~ race, data=hsb)')
-  Hint: plot(math ~ race, data=hsb)
+    譬如各種族學生的閱讀成績之分布，請同學輸入以下指令：`plot(math ~ factor(race), data=hsb)`。
+  CorrectAnswer: plot(math ~ factor(race), data=hsb)
+  AnswerTests: omnitest('plot(math ~ factor(race), data=hsb)')
+  Hint: plot(math ~ factor(race), data=hsb)
 - Class: mult_question
   Output: "請問同學，圖中顯示哪一種種族的學生有最好的數學成績? \nA. African American；B. Asian；C. Hispanic；D.
     White ?\n"

@@ -3,4 +3,7 @@
 # the user's working directory and thus be accessible to them
 # throughout the lesson.
 
-assign("hsb", read.csv(.get_path("hsb.csv"), header = TRUE), envir = globalenv())
+local({
+  hsb <- read.csv(.get_path("hsb.csv"), header = TRUE, stringsAsFactors = TRUE)
+  assign("hsb", hsb, envir = globalenv())
+})

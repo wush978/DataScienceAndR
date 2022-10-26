@@ -12,9 +12,9 @@
 
 - Class: cmd_question
   Output: |
-    請同學先打開`plot`的說明。
-  CorrectAnswer: ?plot
-  AnswerTests: omnitest('?plot')
+    請同學先打開`base::plot`的說明。
+  CorrectAnswer: ?base::plot
+  AnswerTests: omnitest('?base::plot')
 
 - Class: text
   Output: |
