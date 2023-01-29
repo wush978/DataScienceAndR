@@ -1,7 +1,7 @@
 if (packageVersion("swirl") < package_version("100.5.2")) {
   stop("Please upgrade the version of swirl via: `install.packages('swirl', repos = 'http://wush978.github.io/R')`")
 }
-stopifnot(packageVersion("pvm") >= package_version("0.4.2"))
+# stopifnot(packageVersion("pvm") >= package_version("0.4.2"))
 assign(".get_path",
        function(fname) {
          path <- file.path(lesPath, fname)
@@ -56,10 +56,10 @@ assign("source_by_l10n_info", function(path) {
   }
 }, envir = globalenv())
 local({
-  R.date <- pvm::R.release.dates[sprintf("%s.%s", R.version$major, R.version$minor)]
+  # R.date <- pvm::R.release.dates[sprintf("%s.%s", R.version$major, R.version$minor)]
   options(
-    "SWIRL_TRACKING_SERVER_IP" = "api.datascienceandr.org,api2.datascienceandr.org",
-    "SWIRL_COURSE_VERSION" = "v1.0",
-    "repos" = c("CRAN"=sprintf("https://cran.microsoft.com/snapshot/%s", R.date + 14))
+    # "SWIRL_TRACKING_SERVER_IP" = "api.datascienceandr.org,api2.datascienceandr.org",
+    "SWIRL_COURSE_VERSION" = "v1.0"
+    # "repos" = c("CRAN"=sprintf("https://cran.microsoft.com/snapshot/%s", R.date + 14))
   )
 })
