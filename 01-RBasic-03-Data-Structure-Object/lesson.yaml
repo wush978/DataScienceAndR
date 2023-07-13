@@ -71,7 +71,7 @@
     而這樣的輸出結果和`g`會有同樣的`mode`。
     請同學試看看`g[1:2]`的結果。
   CorrectAnswer: g[1:2]
-  AnswerTests: omnitest('g[1:2]', g[1:2])
+  AnswerTests: expr_identical_to('g[1:2]')
   Hint: g[1:2]
 - Class: text
   Output: |
