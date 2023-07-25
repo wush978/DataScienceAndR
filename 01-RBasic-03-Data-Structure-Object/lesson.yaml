@@ -93,7 +93,7 @@
   Output: |
     請同學輸入`list(1, a = 2)`來看看R 如何顯示list，並比較當值有附帶名字及沒有附帶名字時，輸出結果的不同。
   CorrectAnswer: list(1, a = 2)
-  AnswerTests: omnitest('list(1, a = 2)')
+  AnswerTests: expr_identical_to('list(1, a = 2)')
   Hint: list(1, a = 2)
 - Class: text
   Output: |
@@ -109,7 +109,7 @@
     若想找出`g`的第一個值的物件本身，而非被包在一個list中，我們需要用到：`g[[1]]`。
     請同學試試看。
   CorrectAnswer: g[[1]]
-  AnswerTests: omnitest('g[[1]]', g[[1]])
+  AnswerTests: expr_identical_to('g[[1]]', g[[1]])
   Hint: g[[1]]
 - Class: cmd_question
   Output: |
