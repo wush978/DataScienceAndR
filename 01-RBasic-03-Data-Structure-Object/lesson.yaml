@@ -109,13 +109,13 @@
     若想找出`g`的第一個值的物件本身，而非被包在一個list中，我們需要用到：`g[[1]]`。
     請同學試試看。
   CorrectAnswer: g[[1]]
-  AnswerTests: expr_identical_to('g[[1]]', g[[1]])
+  AnswerTests: expr_identical_to('g[[1]]')
   Hint: g[[1]]
 - Class: cmd_question
   Output: |
     請同學查詢`g[[1]]`的型態。
   CorrectAnswer: mode(g[[1]])
-  AnswerTests: omnitest('mode(g[[1]])', mode(g[[1]]))
+  AnswerTests: val_is(mode(g[[1]]))
   Hint: mode(g[[1]])
 - Class: cmd_question
   Output: |
