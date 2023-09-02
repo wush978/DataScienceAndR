@@ -14,7 +14,7 @@
 - Class: cmd_question
   Output: 由於網路在傳輸課程資料時，可能會出錯，所以我們可以先用R 的內建 功能檢查power.txt的內容是不是在安裝過程中毀損。請同學輸入： `tools::md5sum(power_path)`。完成後課程會在背景自動比對結果。
   CorrectAnswer: tools::md5sum(power_path)
-  AnswerTests: omnitest('tools::md5sum(power_path)', '80c02601192e706d453a289a5e32c176')
+  AnswerTests: test_md5sum_result(power_path, '80c02601192e706d453a289a5e32c176')
   Hint: 如果輸出結果不是`"80c02601192e706d453a289a5e32c176"`，代表檔案 已經毀損，請移除課程（`uninstall_all_courses`）後重新安裝課程。
 - Class: text
   Output: 這裡的`::`代表說，`md5sum`這個函數是來自`tools`這個套件。 這是近代R 語言新增的一種類似namespace的功能，是個很大的進步。
@@ -22,7 +22,7 @@
   Output: 各行業的GDP 資料則下載自<http://statdb.dgbas.gov.tw/pxweb/dialog/statfile9L.asp>。
     檔案路徑已經放入`gdp_path`之中。請同學再次利用`tools::md5sum(gdp_path)` 來檢查檔案內容。
   CorrectAnswer: tools::md5sum(gdp_path)
-  AnswerTests: omnitest('tools::md5sum(gdp_path)', '9eee2ac49d017dbb79c8a802b55eb3bc')
+  AnswerTests: test_md5sum_result(gdp_path, '9eee2ac49d017dbb79c8a802b55eb3bc')
   Hint: tools::md5sum(gdp_path)
 - Class: cmd_question
   Output: 首先，就讓我們把資料載入到R 之中吧！ 首先我們來一起處理電力資料。 一般來說，在讀中文資料之前，我們要先了解資料的編碼。 由於官方文件上並沒有編碼的資訊，所以在實務上只能一個個嘗試。
@@ -31,7 +31,7 @@
     `readLines`則是輸出一個字串向量，而這個向量是從檔案中一行一行的把內容讀出來的。 也就是說，檔案裡面的每一行會變成一個向量中的字串。 參數`n =
     10`則代表我們只讀最前面的10行。 這是實務上的一個好習慣：先看一看檔案的一開始。
   CorrectAnswer: readLines(file(power_path, encoding = "BIG-5"), n = 10)
-  AnswerTests: omnitest('readLines(file(power_path, encoding = "BIG-5"), n = 10)')
+  AnswerTests: any_of_exprs('readLines(file(power_path, encoding = "BIG-5"), n = 10)')
   Hint: readLines(file(power_path, encoding = "BIG-5"), n = 10)
 - Class: text
   Output: 如果成功看到中文字，就是猜對Encoding了。
@@ -55,7 +55,7 @@
     do.call(rbind, power.split)`。 `power.split`是一個R 物件向量，而rbind是吃一個任意參數的函數， 並且把每個參數當成一個row，組裝出一個matrix。
     `do.call`會把在這裡的功能，就等價於：`rbind(power.split[[1]], power.split[[2]], ...)` 把`power.split`拆解後，全部當成參數丟到rbind去做組裝。
   CorrectAnswer: power.mat <- do.call(rbind, power.split)
-  AnswerTests: omnitest('power.mat <- do.call(rbind, power.split)')
+  AnswerTests: any_of_exprs('power.mat <- do.call(rbind, power.split)')
   Hint: power.mat <- do.call(rbind, power.split)
 - Class: cmd_question
   Output: 我們差不多把電力資料整理的差不多了，只剩下最後一步：把`power.mat` 轉換成一個data.frame，並且讓各個column擁有正確的形態。
@@ -107,7 +107,7 @@
   CorrectAnswer: head(power.df)
   AnswerTests: |
     test_all(
-      omnitest("head(power.df)"),
+      any_of_exprs("head(power.df)"),
       check_val("power.df", local({
         retval <- data.frame(get("power.mat", envir = globalenv()), stringsAsFactors = FALSE)
         colnames(retval) <- c("id", "name", "year", "power")
@@ -123,7 +123,7 @@
   CorrectAnswer: all(!is.na(power.df))
   AnswerTests: |
     test_all(
-      omnitest("all(!is.na(power.df))"),
+      any_of_exprs("all(!is.na(power.df))"),
       val_is(TRUE))
   Hint: all(!is.na(power.df))
 - Class: cmd_question
@@ -165,14 +165,14 @@
     軸。x 軸的通常放的是分類，而y 放的是我們想要觀測的數據的值。 請同學修改以下的指令，將ggplot2的底圖物件寫入變數`g`。 指令是：`g <- ggplot(power.target,
     aes(x = <欄位名稱1>, y = <欄位名稱2>))`
   CorrectAnswer: g <- ggplot(power.target, aes(x = name, y = power))
-  AnswerTests: omnitest('g <- ggplot(power.target, aes(x = name, y = power))')
+  AnswerTests: any_of_exprs('g <- ggplot(power.target, aes(x = name, y = power))')
   Hint: 我們可以用`colnames(power.target)`來看一下欄位的名稱，以及用 `head(power.target)`來簡單看一下`power.target`的內容。這裡其實id和
     name都可以，那為了讓圖表更清楚，我們先採用name當x軸的說明。
 - Class: cmd_question
   Output: 建立底圖之後，我們就要選用適當的圖形工具來適當的呈現我們要看的工具。 這裡我們來用`geom_bar`來呈現我們要資料。 大家可以試試看：`g
     + geom_bar(stat = "identity")`
   CorrectAnswer: g + geom_bar(stat = "identity")
-  AnswerTests: omnitest('g + geom_bar(stat = "identity")')
+  AnswerTests: any_of_exprs('g + geom_bar(stat = "identity")')
   Hint: g + geom_bar(stat = "identity")
 - Class: text
   Output: 有些使用者可能會無法在圖上顯示中文。這可能是字形的問題。 如果是蘋果牌的使用者，可以更改預設的字形來顯示中文： `theme_set(theme_gray(base_family
@@ -184,7 +184,7 @@
     90))`
   CorrectAnswer: g + geom_bar(stat = "identity") + theme(axis.text.x = element_text(angle
     = 90))
-  AnswerTests: omnitest('g + geom_bar(stat = "identity") + theme(axis.text.x = element_text(angle
+  AnswerTests: any_of_exprs('g + geom_bar(stat = "identity") + theme(axis.text.x = element_text(angle
     = 90))')
   Hint: g + geom_bar(stat = "identity") + theme(axis.text.x = element_text(angle =
     90))
@@ -196,7 +196,7 @@
     = "y")` 如果同學覺得這個指令很冗長的話，可以輸入`skip()`來跳過。
   CorrectAnswer: ggplot(power.target, aes(x = "", y = power, fill = name)) + geom_bar(stat
     = "identity") + coord_polar(theta = "y")
-  AnswerTests: omnitest('ggplot(power.target, aes(x = "", y = power, fill = name))
+  AnswerTests: any_of_exprs('ggplot(power.target, aes(x = "", y = power, fill = name))
     + geom_bar(stat = "identity") + coord_polar(theta = "y")')
   Hint: ggplot(power.target, aes(x = "", y = power, fill = name)) + geom_bar(stat
     = "identity") + coord_polar(theta = "y")
@@ -212,7 +212,7 @@
 - Class: cmd_question
   Output: 透過一樣的要領，我們應該先用`readLines`先看看`gdp_path` 的資料內容。請同學檢視`gdp_path`這個檔案的前20行。
   CorrectAnswer: readLines(file(gdp_path, encoding = "BIG-5"), n = 20)
-  AnswerTests: omnitest('readLines(file(gdp_path, encoding = "BIG-5"), n = 20)')
+  AnswerTests: any_of_exprs('readLines(file(gdp_path, encoding = "BIG-5"), n = 20)')
   Hint: readLines(file(gdp_path, encoding = "BIG-5"), n = 20)
 - Class: text
   Output: 一些不熟悉R 的同學可能會被`\"`這個符號給搞混了。 由於`"`在R 中是代表字串的開始和結束，所以R 會在顯示字串時， 在`"`之前加註`\`，所以一個`\"`實際上就是一個`"`
@@ -221,7 +221,7 @@
     = "BIG-5"), n = 20), sep = "\n")`
   CorrectAnswer: cat(readLines(file(gdp_path, encoding = "BIG-5"), n = 20), sep =
     "\n")
-  AnswerTests: omnitest('cat(readLines(file(gdp_path, encoding = "BIG-5"), n = 20),
+  AnswerTests: any_of_exprs('cat(readLines(file(gdp_path, encoding = "BIG-5"), n = 20),
     sep = "\n")')
   Hint: cat(readLines(file(gdp_path, encoding = "BIG-5"), n = 20), sep = "\n")
 - Class: text
@@ -247,7 +247,7 @@
     = "\n")` 請同學試試看
   CorrectAnswer: file(gdp_path, encoding = "BIG-5") %>% readLines(n = 20) %>% cat(sep
     = "\n")
-  AnswerTests: omnitest('file(gdp_path, encoding = "BIG-5") %>% readLines(n = 20)
+  AnswerTests: any_of_exprs('file(gdp_path, encoding = "BIG-5") %>% readLines(n = 20)
     %>% cat(sep = "\n")')
   Hint: file(gdp_path, encoding = "BIG-5") %>% readLines(n = 20) %>% cat(sep = "\n")
 - Class: text
@@ -277,20 +277,20 @@
     利用`sapply`這個函數來查詢。請同學試試看： `(sapply(gdp.split, length) == 1) %>% which` 這裡的`sapply(gdp.split,
     lenght)`相當於建立一個向量，並且讓第一個值 為`length(gdp.split[[1]])`，第二個值為`length(gdp.split[[2]])`，以此類推。
   CorrectAnswer: (sapply(gdp.split, length) == 1) %>% which
-  AnswerTests: omnitest('(sapply(gdp.split, length) == 1) %>% which')
+  AnswerTests: any_of_exprs('(sapply(gdp.split, length) == 1) %>% which')
   Hint: (sapply(gdp.split, length) == 1) %>% which
 - Class: cmd_question
   Output: 我們可以看一下，這些長度為一的行的內容： 請同學輸入：`gdp.split[(sapply(gdp.split, length) == 1) %>%
     which]`
   CorrectAnswer: gdp.split[(sapply(gdp.split, length) == 1) %>% which]
-  AnswerTests: omnitest('gdp.split[(sapply(gdp.split, length) == 1) %>% which]')
+  AnswerTests: any_of_exprs('gdp.split[(sapply(gdp.split, length) == 1) %>% which]')
   Hint: gdp.split[(sapply(gdp.split, length) == 1) %>% which]
 - Class: cmd_question
   Output: 我們可以看到，只有前7 個index 是真的代表年份。 最後幾個index 其實只有指到這個檔案的一些說明。 所以我們利用`head`這個函數，拿出前7
     個index，並存到：`year.index`之中。 請同學輸入：`year.index <- (sapply(gdp.split, length) ==
     1) %>% which %>% head(7)`
   CorrectAnswer: year.index <- (sapply(gdp.split, length) == 1) %>% which %>% head(7)
-  AnswerTests: omnitest('year.index <- (sapply(gdp.split, length) == 1) %>% which
+  AnswerTests: any_of_exprs('year.index <- (sapply(gdp.split, length) == 1) %>% which
     %>% head(7)')
   Hint: year.index <- (sapply(gdp.split, length) == 1) %>% which %>% head(7)
 - Class: script
@@ -322,13 +322,13 @@
   Output: |
     我們先看看gdp.df資料中的行業別。請同學輸入：`unique(gdp.df$name)`
   CorrectAnswer: unique(gdp.df$name)
-  AnswerTests: omnitest('unique(gdp.df$name)')
+  AnswerTests: any_of_exprs('unique(gdp.df$name)')
   Hint: unique(gdp.df$name)
 - Class: cmd_question
   Output: |
     再來看看power.df資料中的行業別。請同學輸入：`unique(power.df$id)`
   CorrectAnswer: unique(power.df$id)
-  AnswerTests: omnitest('unique(power.df$id)')
+  AnswerTests: any_of_exprs('unique(power.df$id)')
   Hint: unique(power.df$id)
 - Class: text
   Output: |
@@ -342,7 +342,7 @@
     放到欄位id
   CorrectAnswer: gdp.df %<>% mutate(id = strsplit(name, ".", fixed = TRUE) %>% sapply("[",
     1))
-  AnswerTests: omnitest('gdp.df %<>% mutate(id = strsplit(name, ".", fixed = TRUE)
+  AnswerTests: any_of_exprs('gdp.df %<>% mutate(id = strsplit(name, ".", fixed = TRUE)
     %>% sapply("[", 1))')
   Hint: gdp.df %<>% mutate(id = strsplit(name, ".", fixed = TRUE) %>% sapply("[",
     1))
@@ -350,7 +350,7 @@
   Output: |
     我們輸入：`unique(gdp.df$id)`看看整理後的結果。
   CorrectAnswer: unique(gdp.df$id)
-  AnswerTests: omnitest('unique(gdp.df$id)')
+  AnswerTests: any_of_exprs('unique(gdp.df$id)')
   Hint: unique(gdp.df$id)
 - Class: text
   Output: |
@@ -360,13 +360,13 @@
     請輸入：`gdp.df2 <- filter(gdp.df, nchar(id) == 1)` 來只挑出那些
     id 為單一文字的資料
   CorrectAnswer: gdp.df2 <- filter(gdp.df, nchar(id) == 1)
-  AnswerTests: omnitest('gdp.df2 <- filter(gdp.df, nchar(id) == 1)')
+  AnswerTests: any_of_exprs('gdp.df2 <- filter(gdp.df, nchar(id) == 1)')
   Hint: gdp.df2 <- filter(gdp.df, nchar(id) == 1)
 - Class: cmd_question
   Output: |
     我們輸入：`unique(gdp.df2$id)`看看整理後的結果，是不是全英文
   CorrectAnswer: unique(gdp.df2$id)
-  AnswerTests: omnitest('unique(gdp.df2$id)')
+  AnswerTests: any_of_exprs('unique(gdp.df2$id)')
   Hint: unique(gdp.df2$id)
 - Class: script
   Output: |
@@ -388,14 +388,14 @@
     請同學輸入：`distinct(power.df2, id, name)`再檢查一下
     用電量資料裡的id所代表的意義
   CorrectAnswer: distinct(power.df2, id, name)
-  AnswerTests: omnitest('distinct(power.df2, id, name)')
+  AnswerTests: any_of_exprs('distinct(power.df2, id, name)')
   Hint: distinct(power.df2, id, name)
 - Class: cmd_question
   Output: |
     再請同學輸入：`distinct(gdp.df2, id, name)`再檢查一下
     國民生產毛額的資料裡的id所代表的意義
   CorrectAnswer: distinct(gdp.df2, id, name)
-  AnswerTests: omnitest('distinct(gdp.df2, id, name)')
+  AnswerTests: any_of_exprs('distinct(gdp.df2, id, name)')
   Hint: distinct(gdp.df2, id, name)
 - Class: text
   Output: 同學有沒有注意到，兩者的K，代表的意義不一致？
@@ -405,7 +405,7 @@
     請同學看一看。這是一個多對多的對應關係。有些行業別我們不知道
     如何對應，等等就先略過。
   CorrectAnswer: translation
-  AnswerTests: omnitest('translation')
+  AnswerTests: any_of_exprs('translation')
   Hint: translation
 - Class: cmd_question
   Output: |

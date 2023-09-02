@@ -12,7 +12,7 @@
   Output: |
     請同學先打開`base::plot`的說明。
   CorrectAnswer: ?base::plot
-  AnswerTests: omnitest('?base::plot')
+  AnswerTests: any_of_exprs('?base::plot')
   Hint: ?plot
 - Class: text
   Output: |
@@ -26,7 +26,7 @@
     這是研究流產與不孕症之間關係的資料集。
     請同學輸入：`?infert`先看看資料對每個欄位的說明。
   CorrectAnswer: ?infert
-  AnswerTests: omnitest("?infert")
+  AnswerTests: any_of_exprs("?infert")
   Hint: ?infert
 - Class: text
   Output: |
@@ -38,7 +38,7 @@
     請同學輸入`View(infert)`來看看實際的資料的值。
     這裡每筆資料都代表一名婦女。
   CorrectAnswer: View(infert)
-  AnswerTests: omnitest('View(infert)')
+  AnswerTests: any_of_exprs('View(infert)')
   Hint: View(infert)
 - Class: cmd_question
   Output: |
@@ -51,14 +51,14 @@
   Output: |
     請問同學，`spon`是什麼型態呢？
   CorrectAnswer: class(spon)
-  AnswerTests: omnitest(correctVal = class(spon))
+  AnswerTests: val_is(class(spon))
   Hint: class(spon)
 - Class: cmd_question
   Output: |
     在R 中，`plot`是最泛用的繪圖指令。
     我們先請同學輸入：`plot(spon)`。
   CorrectAnswer: plot(spon)
-  AnswerTests: omnitest('plot(spon)')
+  AnswerTests: any_of_exprs('plot(spon)')
   Hint: plot(spon)
 - Class: text
   Output: |
@@ -82,7 +82,7 @@
   Output: |
     我們再輸入一次：`plot(spon)`。
   CorrectAnswer: plot(spon)
-  AnswerTests: omnitest("plot(spon)")
+  AnswerTests: any_of_exprs("plot(spon)")
   Hint: plot(spon)
 - Class: text
   Output: |
@@ -94,13 +94,13 @@
     請問同學，`spon`中大約有多少個`1`?
   AnswerChoices: 100;70;40
   CorrectAnswer: '70'
-  AnswerTests: omnitest(correctVal="70")
+  AnswerTests: val_is("70")
 - Class: cmd_question
   Output: |
     請同學輸入：`table(spon)`。
     這個函數會計算一個向量中不同數值的個數。
   CorrectAnswer: table(spon)
-  AnswerTests: omnitest("table(spon)")
+  AnswerTests: any_of_exprs("table(spon)")
   Hint: table(spon)
 - Class: text
   Output: |
@@ -112,7 +112,7 @@
     請問同學，`spon`比較適合名目尺度(選A)、順序尺度(選B)、區間尺度(選C)、還是比例尺度(選D)呢？
   AnswerChoices: A;B;C;D
   CorrectAnswer: B
-  AnswerTests: omnitest(correctVal="B")
+  AnswerTests: val_is("B")
   Hint: |
     `spon`有順序性是無庸置疑。
     但是`spon`中的2是「兩次或以上」，而不只是單純的「兩次」，所以會應該要使用「順序尺度」。
@@ -129,7 +129,7 @@
     另外一種常用的圖形是圓餅圖。
     請同學輸入：`pie(table(spon))`
   CorrectAnswer: pie(table(spon))
-  AnswerTests: omnitest("pie(table(spon))")
+  AnswerTests: any_of_exprs("pie(table(spon))")
   Hint: pie(table(spon))
 - Class: text
   Output: |
@@ -147,13 +147,13 @@
   Output: |
     請問`age`的型態是？
   CorrectAnswer: class(age)
-  AnswerTests: omnitest(correctVal = class(age))
+  AnswerTests: val_is(class(age))
   Hint: class(age)
 - Class: cmd_question
   Output: |
     請同學輸入`plot(age)`。
   CorrectAnswer: plot(age)
-  AnswerTests: omnitest("plot(age)")
+  AnswerTests: any_of_exprs("plot(age)")
   Hint: plot(age)
 - Class: text
   Output: |
@@ -165,7 +165,7 @@
     我們除了畫散佈圖，也可以畫折線圖。
     請同學輸入：`plot(age, type = "l")`
   CorrectAnswer: plot(age, type = "l")
-  AnswerTests: omnitest('plot(age, type = "l")')
+  AnswerTests: any_of_exprs('plot(age, type = "l")')
   Hint: plot(age, type = "l")
 - Class: text
   Output: |
@@ -176,7 +176,7 @@
     分析時，我們常常用直方圖來觀看區間尺度或比例尺度的數據分佈。
     請同學輸入：`x <- hist(age)`來繪製`age`的直方圖，觀察`age`的分佈。
   CorrectAnswer: x <- hist(age)
-  AnswerTests: omnitest("x <- hist(age)")
+  AnswerTests: any_of_exprs("x <- hist(age)")
   Hint: x <- hist(age)
 - Class: cmd_question
   Output: |
@@ -185,7 +185,7 @@
     剛剛的assignment會把R 如何繪製直方圖的細節存至變數`x`中。
     請同學輸入：`x`來顯示繪圖的細節。
   CorrectAnswer: x
-  AnswerTests: omnitest("x")
+  AnswerTests: any_of_exprs("x")
   Hint: x
 - Class: mult_question
   Output: |
@@ -193,7 +193,7 @@
     請由`$breaks`(也就是`x$breaks`)的值，回答問題如下：樣本數最高的年齡層為何?
   AnswerChoices: (25,27];(26,28];(27,29]
   CorrectAnswer: (26,28]
-  AnswerTests: omnitest(correctVal="(26,28]")
+  AnswerTests: val_is("(26,28]")
 - Class: cmd_question
   Output: |
     這裡幫同學複習一下：(26,28]代表的意思為age > 26 且 age <= 28。
@@ -201,7 +201,7 @@
     根據`x$counts`，(26,28]的資料共有45筆。
     請同學輸入：`sum(age > 26 & age <= 28)`來驗證。
   CorrectAnswer: sum(age > 26 & age <= 28)
-  AnswerTests: omnitest("sum(age > 26 & age <= 28)")
+  AnswerTests: any_of_exprs("sum(age > 26 & age <= 28)")
   Hint: sum(age > 26 & age <= 28)
 - Class: text
   Output: |
@@ -211,7 +211,7 @@
     為了接下來的關卡，我們先解釋`cut`的功能。
     請同學輸入：`?cut`。
   CorrectAnswer: ?cut
-  AnswerTests: omnitest('?cut')
+  AnswerTests: any_of_exprs('?cut')
   Hint: ?cut
 - Class: text
   Output: |
@@ -222,7 +222,7 @@
   Output: |
     請同學輸入`cut(1:10, 2:4)`試試看。
   CorrectAnswer: cut(1:10, 2:4)
-  AnswerTests: omnitest('cut(1:10, 2:4)')
+  AnswerTests: any_of_exprs('cut(1:10, 2:4)')
   Hint: cut(1:10, 2:4)
 - Class: text
   Output: |
@@ -232,7 +232,7 @@
   Output: |
     請同學輸入：`plot(cut(age, breaks = x$breaks))`。
   CorrectAnswer: plot(cut(age, breaks = x$breaks))
-  AnswerTests: omnitest("plot(cut(age, breaks = x$breaks))")
+  AnswerTests: any_of_exprs("plot(cut(age, breaks = x$breaks))")
   Hint: plot(cut(age, breaks = x$breaks))
 - Class: text
   Output: |
@@ -256,14 +256,14 @@
   Output: |
     請同學輸入：`infert$education`，這筆數據本身就是把比例尺度切片後得到順序尺度的結果。
   CorrectAnswer: infert$education
-  AnswerTests: omnitest("infert$education")
+  AnswerTests: any_of_exprs("infert$education")
   Hint: infert$education
 - Class: cmd_question
   Output: |
     在R 之中，處理區間尺度與比例尺度的資料，還有其他的方法。
     請同學輸入：plot(density(age))。
   CorrectAnswer: plot(density(age))
-  AnswerTests: omnitest("plot(density(age))")
+  AnswerTests: any_of_exprs("plot(density(age))")
   Hint: plot(density(age))
 - Class: text
   Output: |
@@ -277,19 +277,19 @@
     請問同學，圖中的曲線，共有幾個尖峰？
   AnswerChoices: 0;1;2;3
   CorrectAnswer: '2'
-  AnswerTests: omnitest(correctVal = "2")
+  AnswerTests: val_is("2")
 - Class: mult_question
   Output: |
     請問同學，圖中的曲線，是A:左偏（少數特別小的`age`）、B:右偏（少數特別大的`age`）或C:不偏（沒有上述兩種狀況）？
   AnswerChoices: A;B;C
   CorrectAnswer: C
-  AnswerTests: omnitest(correctVal = "C")
+  AnswerTests: val_is("C")
 - Class: cmd_question
   Output: |
     這個統計方法中，很重要的參數是：`bw`。我們先請同學來畫出不同`bw`的結果。
     請同學先輸入：`plot(density(age, bw = 0.1))`
   CorrectAnswer: plot(density(age, bw = 0.1))
-  AnswerTests: omnitest("plot(density(age, bw = 0.1))")
+  AnswerTests: any_of_exprs("plot(density(age, bw = 0.1))")
   Hint: plot(density(age, bw = 0.1))
 - Class: text
   Output: |
@@ -301,7 +301,7 @@
   Output: |
     請同學輸入：`plot(density(age, bw = 1))`。
   CorrectAnswer: plot(density(age, bw = 1))
-  AnswerTests: omnitest("plot(density(age, bw = 1))")
+  AnswerTests: any_of_exprs("plot(density(age, bw = 1))")
   Hint: plot(density(age, bw = 1))
 - Class: text
   Output: |
@@ -315,7 +315,7 @@
     而統計文獻中，比較推薦的方法是`bw.SJ`函數的計算結果。
     請同學輸入：`plot(density(age, bw = "SJ"))`，使用主流的推薦選擇`bw`的方法來繪圖。
   CorrectAnswer: plot(density(age, bw = "SJ"))
-  AnswerTests: omnitest('plot(density(age, bw = "SJ"))')
+  AnswerTests: any_of_exprs('plot(density(age, bw = "SJ"))')
   Hint: plot(density(age, bw = "SJ"))
 - Class: text
   Output: |
@@ -331,19 +331,19 @@
   Output: |
     接下來，我們請同學輸入`sunspot.year`。這是1700年至1988年，每年的太陽黑子數量。
   CorrectAnswer: sunspot.year
-  AnswerTests: omnitest("sunspot.year")
+  AnswerTests: any_of_exprs("sunspot.year")
   Hint: sunspot.year
 - Class: cmd_question
   Output: |
     請問同學，`sunspot.year`的資料型態是？
   CorrectAnswer: class(sunspot.year)
-  AnswerTests: omnitest(correctVal = "ts")
+  AnswerTests: val_is("ts")
   Hint: class(sunspot.year)
 - Class: cmd_question
   Output: |
     "ts"型態是R專門用來處理時間序列的型態。請同學輸入：`plot(sunspot.year)`。
   CorrectAnswer: plot(sunspot.year)
-  AnswerTests: omnitest("plot(sunspot.year)")
+  AnswerTests: any_of_exprs("plot(sunspot.year)")
   Hint: plot(sunspot.year)
 - Class: cmd_question
   Output: |
@@ -352,26 +352,26 @@
     然而，這張圖太密了，資料太多，反而讓我們不容易看出太陽黑子的週期性。
     請同學輸入：`x <- tail(sunspot.year, 100)`，直接取出最後的100筆數據。
   CorrectAnswer: x <- tail(sunspot.year, 100)
-  AnswerTests: omnitest("x <- tail(sunspot.year, 100)")
+  AnswerTests: any_of_exprs("x <- tail(sunspot.year, 100)")
   Hint: x <- tail(sunspot.year, 100)
 - Class: cmd_question
   Output: |
     請同學先檢查`x`的型態。
     經過`tail`函數處理後，`x`變成數值向量了。
   CorrectAnswer: class(x)
-  AnswerTests: omnitest(correctVal = class(x))
+  AnswerTests: val_is(class(x))
   Hint: class(x)
 - Class: cmd_question
   Output: |
     請同學先輸入：`plot(x)`。
   CorrectAnswer: plot(x)
-  AnswerTests: omnitest("plot(x)")
+  AnswerTests: any_of_exprs("plot(x)")
   Hint: plot(x)
 - Class: cmd_question
   Output: |
     接著再請同學輸入：`lines(x)`。
   CorrectAnswer: lines(x)
-  AnswerTests: omnitest("lines(x)")
+  AnswerTests: any_of_exprs("lines(x)")
   Hint: lines(x)
 - Class: text
   Output: |
@@ -386,7 +386,7 @@
   Output: |
     請同學輸入：`lines(x, lty = 3, lwd = 3, col = 2)`。
   CorrectAnswer: lines(x, lty = 3, lwd = 3, col = 2)
-  AnswerTests: omnitest("lines(x, lty = 3, lwd = 3, col = 2)")
+  AnswerTests: any_of_exprs("lines(x, lty = 3, lwd = 3, col = 2)")
   Hint: lines(x, lty = 3, lwd = 3, col = 2)
 - Class: text
   Output: |
@@ -405,7 +405,7 @@
     輸出圖片最簡單的方式，就是先用互動式的console畫圖，然後用`savePlot`將圖用給定的格式儲存到給定的檔名。
     我們先輸入`dst <- tempfile(fileext = ".png")`來產生一個隨機的暫存檔案名稱。
   CorrectAnswer: dst <- tempfile(fileext = ".png")
-  AnswerTests: omnitest('dst <- tempfile(fileext = ".png")')
+  AnswerTests: any_of_exprs('dst <- tempfile(fileext = ".png")')
   Hint: dst <- tempfile(fileext = ".png")
 - Class: text
   Output: |
@@ -419,13 +419,13 @@
     舉例來說，`png`函數就會讓R 建立一個繪圖引擎。
     請同學輸入：`png(dst)`開啟`png`的繪圖引擎。
   CorrectAnswer: png(dst)
-  AnswerTests: omnitest("png(dst)")
+  AnswerTests: any_of_exprs("png(dst)")
   Hint: png(dst)
 - Class: cmd_question
   Output: |
     請同學輸入：plot(x)。同學應該會注意到右邊的圖像沒有反應。
   CorrectAnswer: plot(x)
-  AnswerTests: omnitest("plot(x)")
+  AnswerTests: any_of_exprs("plot(x)")
   Hint: plot(x)
 - Class: cmd_question
   Output: |
@@ -443,7 +443,7 @@
     接下來讓我們進入大魔王時間。
     保險起見，請同學先輸入`skip()`讓我們重新初始化繪圖環境。
   CorrectAnswer: try(dev.off(), silent = TRUE)
-  AnswerTests: omnitest("try(dev.off(), silent = TRUE)")
+  AnswerTests: any_of_exprs("try(dev.off(), silent = TRUE)")
   Hint: try(dev.off(), silent = TRUE)
 - Class: cmd_question
   Output: |
@@ -458,14 +458,14 @@
     第七欄至第十一欄則是各科考試成績。
     請同學輸入View(hsb)先看看數據。
   CorrectAnswer: View(hsb)
-  AnswerTests: omnitest("View(hsb)")
+  AnswerTests: any_of_exprs("View(hsb)")
   Hint: View(hsb)
 - Class: mult_question
   Output: |
     請問同學，`write`欄位應該用哪一個R 型態處理呢？類別請選A, 數值請選B。
   AnswerChoices: A;B
   CorrectAnswer: B
-  AnswerTests: omnitest(correctVal = "B")
+  AnswerTests: val_is("B")
 - Class: cmd_question
   Output: |
     請同學用`plot`和`density`的函數組合繪製`hsb$write`的數據。`bw`請用"SJ"。
@@ -478,19 +478,19 @@
     請問這張圖一共有幾個峰？
   AnswerChoices: 0;2;4
   CorrectAnswer: '2'
-  AnswerTests: omnitest(correctVal = "2")
+  AnswerTests: val_is("2")
 - Class: mult_question
   Output: |
     請問資料有沒有異常的極大值或極小值？
   AnswerChoices: Yes;No
   CorrectAnswer: 'Yes'
-  AnswerTests: omnitest(correctVal="Yes")
+  AnswerTests: val_is("Yes")
 - Class: mult_question
   Output: |
     請問極小值大概是多少？
   AnswerChoices: -100;-50;0
   CorrectAnswer: -100
-  AnswerTests: omnitest(correctVal = "-100")
+  AnswerTests: val_is("-100")
 - Class: text
   Output: |
     其實`hsb$write`的數據中，是以-99來記載遺失的資料。
@@ -500,7 +500,7 @@
   Output: |
     請同學對`hsb$sex`畫出圓餅圖。
   CorrectAnswer: pie(table(hsb$sex))
-  AnswerTests: omnitest("pie(table(hsb$sex))")
+  AnswerTests: any_of_exprs("pie(table(hsb$sex))")
   Hint: pie(table(hsb$sex))
 - Class: text
   Output: |

@@ -33,7 +33,7 @@
     請問同學，上述輸入的語法是assignment還是expression呢?
   AnswerChoices: assignment;expression
   CorrectAnswer: assignment
-  AnswerTests: omnitest(correctVal= 'assignment')
+  AnswerTests: val_is('assignment')
 - Class: cmd_question
   Output: |
     在R 中，`c()`可以接受任意數量的向量參數，並依照順序將它們串接成一個單一向量。
@@ -42,7 +42,7 @@
     請同學依照上述規則，撰寫一個expression，內容是建立一個在x 後面接上x 的向量。
   CorrectAnswer: c(x, x)
   AnswerTests: |
-    test_all(omnitest(correctExpr='c(x, x)'),
+    test_all(any_of_exprs('c(x, x)'),
       val_is(c(10.4, 5.6, 3.1, 6.4, 10.4, 5.6, 3.1, 6.4)))
   Hint: c(x, x)
 - Class: cmd_question
@@ -51,7 +51,7 @@
     請同學輸入：`c(1, 2, 3) + c(2, 4, 6)` 並觀察結果。
   CorrectAnswer: c(1, 2, 3) + c(2, 4, 6)
   AnswerTests: |
-    test_all(omnitest('c(1, 2, 3) + c(2, 4, 6)'),
+    test_all(any_of_exprs('c(1, 2, 3) + c(2, 4, 6)'),
       val_is(c(3, 6, 9)))
   Hint: c(1, 2, 3) + c(2, 4, 6)
 - Class: text
@@ -63,7 +63,7 @@
     當相加的兩個向量長度不同時，R 會自動重複比較短的向量，補到和較長的向量相同的長度，然後用
     一樣的方式去做計算。請同學輸入`2 + c(1,2,3)`試試看。
   CorrectAnswer: 2 + c(1,2,3)
-  AnswerTests: omnitest(correctExpr='2 + c(1,2,3)')
+  AnswerTests: any_of_exprs('2 + c(1,2,3)')
   Hint: 2 + c(1,2,3)
 - Class: text
   Output: |
@@ -84,7 +84,7 @@
     在R 中有，函數`range`能直接傳回輸入向量的範圍（最小到最大）。
     請同學使用`range`，再算一次x 的範圍。
   CorrectAnswer: range(x)
-  AnswerTests: omnitest('range(x)')
+  AnswerTests: any_of_exprs('range(x)')
   Hint: range(x)
 - Class: cmd_question
   Output: |
@@ -92,7 +92,7 @@
     函數`length(x)`則能直接傳回x 的長度。
     現在，請同學利用`sum`和`length`計算x 的平均值。
   CorrectAnswer: sum(x) / length(x)
-  AnswerTests: omnitest(correctExpr = 'sum(x)/length(x)')
+  AnswerTests: any_of_exprs('sum(x)/length(x)')
   Hint: 除法可以用 `/`
 - Class: text
   Output: |
@@ -104,20 +104,20 @@
   Output: |
     現在，請利用`var`計算x 的樣本變異數。
   CorrectAnswer: var(x)
-  AnswerTests: omnitest(correctExpr = 'var(x)')
+  AnswerTests: any_of_exprs('var(x)')
   Hint: var(x)
 - Class: cmd_question
   Output: |
     請利用`sd`計算x 的樣本標準差。
   CorrectAnswer: sd(x)
-  AnswerTests: omnitest(correctExpr = 'sd(x)')
+  AnswerTests: any_of_exprs('sd(x)')
   Hint: sd(x)
 - Class: cmd_question
   Output: |
     而`sort(x)`則會產生一個和x 長度一樣的向量，但向量中的值是由小到大排列。
     請同學試試看：`sort(x)`
   CorrectAnswer: sort(x)
-  AnswerTests: omnitest(correctExpr = 'sort(x)')
+  AnswerTests: any_of_exprs('sort(x)')
   Hint: sort(x)
 - Class: text
   Output: |
@@ -128,7 +128,7 @@
     舉例來說，如果輸入`sqrt(-17)`，我們會得到NaN（Not A Number）的結果。
     請同學試試看輸入`sqrt(-17)`。這裡的`sqrt`代表的是數學上開根號的運算。
   CorrectAnswer: sqrt(-17)
-  AnswerTests: omnitest(correctExpr = 'sqrt(-17)', correctVal = NaN)
+  AnswerTests: any_of_exprs('sqrt(-17)')
   Hint: sqrt(-17)
 - Class: text
   Output: |
@@ -138,7 +138,7 @@
     但是，若我們改為輸入`sqrt(-17 + 0i)`，這時候因為輸入的是一個複數，
     R 會自動調整運算行為，不會再回傳一個NaN。請同學試試看。
   CorrectAnswer: sqrt(-17 + 0i)
-  AnswerTests: omnitest(correctExpr = 'sqrt(-17 + 0i)')
+  AnswerTests: any_of_exprs('sqrt(-17 + 0i)')
   Hint: sqrt(-17 + 0i)
 - Class: cmd_question
   Output: |
@@ -148,7 +148,7 @@
     舉例來說，如果需要取出第5筆到第100筆的資料，就會用到類似的語法。
     請同學利用`:`建立一個從20到40的序列。
   CorrectAnswer: '20:40'
-  AnswerTests: omnitest("20:40")
+  AnswerTests: any_of_exprs("20:40")
   Hint: '20:40'
 - Class: cmd_question
   Output: |
@@ -156,7 +156,7 @@
     也就是說，如果看到：`2 * 1:10`這段expression，會優先處理`1:10`的部分，然後再將結果乘以2。
     我們來讓同學試試看，請輸入：`2 * 1:10`。
   CorrectAnswer: 2 * 1:10
-  AnswerTests: omnitest(correctExpr = '2 * 1:10')
+  AnswerTests: any_of_exprs('2 * 1:10')
   Hint: 2 * 1:10
 - Class: cmd_question
   Output: |
@@ -164,7 +164,7 @@
     `seq(1, 10)` 在R 中所代表的，其實就是`1:10`。
     請試試看輸入`seq(1, 10)`。
   CorrectAnswer: seq(1,10)
-  AnswerTests: omnitest(correctExpr = 'seq(1,10)')
+  AnswerTests: any_of_exprs('seq(1,10)')
   Hint: seq(1,10)
 - Class: cmd_question
   Output: |
@@ -193,7 +193,7 @@
   Output: |
     如果要運行這些範例，可以簡單輸入：`example(seq)`，請同學跟著輸入。
   CorrectAnswer: example(seq)
-  AnswerTests: omnitest(correctExpr = 'example(seq)')
+  AnswerTests: any_of_exprs('example(seq)')
   Hint: example(seq)
 - Class: text
   Output: |
@@ -206,14 +206,14 @@
     舉例來說，`seq(to = 10, from = 1)`會告訴R 參數`from`的值是1 ，而`to`則是10。
     因此，計算結果將會和`seq(1,10)`相同。請同學試試看。
   CorrectAnswer: seq(to = 10, from = 1)
-  AnswerTests: omnitest(correctExpr = 'seq(to = 10, from = 1)')
+  AnswerTests: any_of_exprs('seq(to = 10, from = 1)')
   Hint: seq(to = 10, from = 1)
 - Class: cmd_question
   Output: |
     而利用`seq`所產生的序列間隔也不一定要是1 。`seq`函數可以透過`by`這個參數控制間隔，
     如果希望間隔是0.5，所以只要輸入`seq(1, 10, by = 0.5)`即可產生。請同學試試看。
   CorrectAnswer: seq(1, 10, by = 0.5)
-  AnswerTests: omnitest(correctExpr = 'seq(1, 10, by = 0.5)')
+  AnswerTests: any_of_exprs('seq(1, 10, by = 0.5)')
   Hint: seq(1, 10, by = 0.5)
 - Class: cmd_question
   Output: |
@@ -234,14 +234,14 @@
     若是不使用序列，而是想要重複某一個數字，則可以用`rep`。
     請同學試試看：`rep(2, times = 10)`
   CorrectAnswer: rep(2, times = 10)
-  AnswerTests: omnitest(correctExpr = 'rep(2, times = 10)')
+  AnswerTests: any_of_exprs('rep(2, times = 10)')
   Hint: rep(2, times = 10)
 - Class: cmd_question
   Output: |
     `rep`也可以作用在一個序列上。如果給了argument `times`定值，那R 會將整個序列重複`times`次，並接起來。
     請同學試試看：`rep(x, times = 2)`。
   CorrectAnswer: rep(x, times = 2)
-  AnswerTests: omnitest(correctExpr = 'rep(x, times = 2)')
+  AnswerTests: any_of_exprs('rep(x, times = 2)')
   Hint: rep(x, times = 2)
 - Class: cmd_question
   Output: |
@@ -249,7 +249,7 @@
     那R 會將向量的每一個值，個別重複`each`遍之後，再接起來。
     請同學試試看：`rep(x, each = 2)`。
   CorrectAnswer: rep(x, each = 2)
-  AnswerTests: omnitest(correctExpr = 'rep(x, each = 2)')
+  AnswerTests: any_of_exprs('rep(x, each = 2)')
   Hint: rep(x, each = 2)
 - Class: text
   Output: |
@@ -274,7 +274,7 @@
     我們可以利用各種不同「條件類型的expression」來建立邏輯向量。
     舉例來說，有一個序列x ，我們就可以利用`x > 5`來建立一個長度和x 相同的邏輯向量。請同學試試看。
   CorrectAnswer: x > 5
-  AnswerTests: omnitest(correctExpr = 'x > 5')
+  AnswerTests: any_of_exprs('x > 5')
   Hint: x > 5
 - Class: text
   Output: |
@@ -289,7 +289,7 @@
     另外，「且」`&`以及「或」`|`這兩個邏輯運算子也是很常用的。它們可以
     在兩個邏輯向量中做運算。請同學試試看：`x > 5 & x < 10`。
   CorrectAnswer: x > 5 & x < 10
-  AnswerTests: omnitest(correctExpr = 'x > 5 & x < 10')
+  AnswerTests: any_of_exprs('x > 5 & x < 10')
   Hint: x > 5 & x < 10
 - Class: text
   Output: |
@@ -305,7 +305,7 @@
     我們可以利用`is.na`來判斷一個向量裡面是否有NA存在。
     請同學試試看`is.na(x)`。
   CorrectAnswer: is.na(x)
-  AnswerTests: omnitest('is.na(x)')
+  AnswerTests: any_of_exprs('is.na(x)')
   Hint: is.na(x)
 - Class: cmd_question
   Output: |
@@ -313,7 +313,7 @@
     因此，我們來玩一個有NA的向量吧！
     請試試看：`is.na(c(1,2,NA,3))`
   CorrectAnswer: is.na(c(1,2,NA,3))
-  AnswerTests: omnitest('is.na(c(1,2,NA,3))')
+  AnswerTests: any_of_exprs('is.na(c(1,2,NA,3))')
   Hint: is.na(c(1,2,NA,3))
 - Class: cmd_question
   Output: |
@@ -323,14 +323,14 @@
     R 對此類的數學處理是很聰明的。
     同學們可以試試看使用R 計算`Inf + 1` 的結果。
   CorrectAnswer: Inf + 1
-  AnswerTests: omnitest('Inf + 1')
+  AnswerTests: any_of_exprs('Inf + 1')
   Hint: Inf + 1
 - Class: cmd_question
   Output: |
     雖然可以理解NA和NaN的不同，但是`is.na`會將兩者都定義成TRUE。
     請同學試試看：`is.na(c(NA, NaN, 1))`
   CorrectAnswer: is.na(c(NA, NaN, 1))
-  AnswerTests: omnitest('is.na(c(NA, NaN, 1))')
+  AnswerTests: any_of_exprs('is.na(c(NA, NaN, 1))')
   Hint: is.na(c(NA, NaN, 1))
 - Class: text
   Output: |
@@ -341,7 +341,7 @@
     舉例來說，如果直接輸入`x`而不用雙引號包覆它，R會自動將`x`當成變數名稱，進而回傳x 的內容。
     請同學試試看輸入：`x`
   CorrectAnswer: x
-  AnswerTests: omnitest('x')
+  AnswerTests: any_of_exprs('x')
   Hint: x
 - Class: cmd_question
   Output: |
@@ -360,7 +360,7 @@
     單引號`'`來包覆雙引號，另外一種就是在雙引號之前插入`\`。請同學試試看
     用跳脫符號的方式，輸入一個字串，內容只有一個雙引號。
   CorrectAnswer: '"\""'
-  AnswerTests: omnitest(correctVal = '"')
+  AnswerTests: val_is('"')
   Hint: '"\""'
 - Class: cmd_question
   Output: |
@@ -368,13 +368,13 @@
     我們可以丟任意個Argument 給`paste`，結果R 會把這些argument以字串的形式接成一個字串。
     請同學試試看：`paste("a", "b")`
   CorrectAnswer: paste("a", "b")
-  AnswerTests: omnitest('paste("a", "b")')
+  AnswerTests: any_of_exprs('paste("a", "b")')
   Hint: paste("a", "b")
 - Class: cmd_question
   Output: |
     請同學試試看：`paste(c("X", "Y"), 1:10)`
   CorrectAnswer: paste(c("X", "Y"), 1:10)
-  AnswerTests: omnitest('paste(c("X", "Y"), 1:10)')
+  AnswerTests: any_of_exprs('paste(c("X", "Y"), 1:10)')
   Hint: paste(c("X", "Y"), 1:10)
 - Class: text
   Output: |
@@ -388,7 +388,7 @@
     `paste0`和`paste`為幾乎一樣的函數。差別在於`paste0`預設在串接字串時，中間是不會有空格的。
     同學請試試看：`paste0(c("X", "Y"), 1:10)`
   CorrectAnswer: paste0(c("X", "Y"), 1:10)
-  AnswerTests: omnitest('paste0(c("X", "Y"), 1:10)')
+  AnswerTests: any_of_exprs('paste0(c("X", "Y"), 1:10)')
   Hint: paste0(c("X", "Y"), 1:10)
 - Class: text
   Output: |
@@ -399,21 +399,21 @@
     在R 之中，如果我們要挑選序列x 中的第一個和第三個位置的值，只要使用即可：`x[c(1,3)]`。
     請同學試試看。
   CorrectAnswer: x[c(1,3)]
-  AnswerTests: omnitest('x[c(1,3)]')
+  AnswerTests: any_of_exprs('x[c(1,3)]')
   Hint: x[c(1,3)]
 - Class: cmd_question
   Output: |
     第二種方法則是利用邏輯向量。
     舉例來說，如果要挑選x 之中超過5 的值，即可透過`x[x > 5]`取得。請同學試試看。
   CorrectAnswer: x[x > 5]
-  AnswerTests: omnitest('x[x>5]')
+  AnswerTests: any_of_exprs('x[x>5]')
   Hint: x[x > 5]
 - Class: cmd_question
   Output: |
     第三種方法為削去法。
     如果我們要挑序列x 中除了第二個數值之外全部的值，則可以使用`x[-2]`。
   CorrectAnswer: x[-2]
-  AnswerTests: omnitest('x[-2]')
+  AnswerTests: any_of_exprs('x[-2]')
   Hint: x[-2]
 - Class: cmd_question
   Output: |
@@ -422,7 +422,7 @@
     舉例來說，我們可以透過：`names(x) <- c("a", "b", "c", "d")`來幫x 的每個值命名。
     請同學試試看。
   CorrectAnswer: names(x) <- c("a", "b", "c", "d")
-  AnswerTests: omnitest('names(x) <- c("a", "b", "c", "d")')
+  AnswerTests: any_of_exprs('names(x) <- c("a", "b", "c", "d")')
   Hint: names(x) <- c("a", "b", "c", "d")
 - Class: cmd_question
   Output: |
@@ -438,7 +438,7 @@
     所以如果想要選取名稱為`c("b", "d")`的值，就只要輸入：`x[c("b", "d")]`。
     請同學試試看。
   CorrectAnswer: x[c("b", "d")]
-  AnswerTests: omnitest('x[c("b", "d")]')
+  AnswerTests: any_of_exprs('x[c("b", "d")]')
   Hint: x[c("b", "d")]
 - Class: text
   Output: |

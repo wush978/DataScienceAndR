@@ -34,7 +34,7 @@ rvisualization_03_hw_01 <- function() {
   e <- get("e", parent.frame())
   hw_01()
   tryCatch({
-    omnitest("begin_rvisualization_03()")
+    any_of_exprs("begin_rvisualization_03()")
   }, error = function(e) {
     FALSE
   })

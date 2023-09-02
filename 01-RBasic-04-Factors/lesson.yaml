@@ -17,7 +17,7 @@
     觀察一個實際的例子。
     課程儲存了一個文字向量 blood_type，記載著30個人的血型資料。請輸入 blood_type 。
   CorrectAnswer: blood_type
-  AnswerTests: omnitest(correctExpr='blood_type')
+  AnswerTests: any_of_exprs('blood_type')
   Hint: 請輸入 blood_type
 - Class: cmd_question
   Output: |
@@ -31,7 +31,7 @@
   Output: |
     仔細觀察這個Factor向量。請輸入`blood_type_factor` 。
   CorrectAnswer: blood_type_factor
-  AnswerTests: omnitest(correctExpr='blood_type_factor')
+  AnswerTests: any_of_exprs('blood_type_factor')
   Hint: 請輸入 blood_type_factor
 - Class: text
   Output: |
@@ -42,7 +42,7 @@
     要取出這些類別，可使用levels函數。
     請輸入`levels(blood_type_factor)`來取出所有允許的血型。
   CorrectAnswer: levels(blood_type_factor)
-  AnswerTests: omnitest(correctExpr='levels(blood_type_factor)')
+  AnswerTests: any_of_exprs('levels(blood_type_factor)')
   Hint: levels(blood_type_factor)
 - Class: cmd_question
   Output: |
@@ -56,7 +56,7 @@
   Output: |
     輸入`blood_type_factor`確認第五個元素變成NA。
   CorrectAnswer: blood_type_factor
-  AnswerTests: omnitest(correctExpr='blood_type_factor')
+  AnswerTests: any_of_exprs('blood_type_factor')
   Hint: blood_type_factor
 - Class: text
   Output: |
@@ -65,7 +65,7 @@
   Output: |
     進一步觀察factor向量的結構。請輸入`str(blood_type_factor)`。
   CorrectAnswer: str(blood_type_factor)
-  AnswerTests: omnitest(correctExpr='str(blood_type_factor)')
+  AnswerTests: any_of_exprs('str(blood_type_factor)')
   Hint: str(blood_type_factor)
 - Class: text
   Output: |
@@ -85,14 +85,14 @@
     以血型例子，第一個血型是「A」，第二個血型是「AB」。
     請試著輸入`blood_type_factor[1]> blood_type_factor[2]`來比較大小。
   CorrectAnswer: blood_type_factor[1]> blood_type_factor[2]
-  AnswerTests: omnitest(correctExpr='blood_type_factor[1]> blood_type_factor[2]')
+  AnswerTests: any_of_exprs('blood_type_factor[1]> blood_type_factor[2]')
   Hint: blood_type_factor[1]> blood_type_factor[2]
 - Class: cmd_question
   Output: |
     對於有順序的資料，請見另一個等第制資料集作為範例。
     請輸入`grades`載入五個同學的等第資料。
   CorrectAnswer: grades
-  AnswerTests: omnitest(correctExpr='grades')
+  AnswerTests: any_of_exprs('grades')
   Hint: grades
 - Class: text
   Output: |
@@ -112,7 +112,7 @@
   Output: |
     輸入`grades_factor`並觀察。
   CorrectAnswer: grades_factor
-  AnswerTests: omnitest(correctExpr='grades_factor')
+  AnswerTests: any_of_exprs('grades_factor')
   Hint: grades_factor
 - Class: text
   Output: |
@@ -122,7 +122,7 @@
     這時比較等第大小有意義。
     請輸入`grades_factor[1]> grades_factor[2]`，比較前兩個同學的等第。
   CorrectAnswer: grades_factor[1]> grades_factor[2]
-  AnswerTests: omnitest(correctExpr='grades_factor[1]> grades_factor[2]')
+  AnswerTests: any_of_exprs('grades_factor[1]> grades_factor[2]')
   Hint: grades_factor[1]> grades_factor[2]
 - Class: text
   Output: |

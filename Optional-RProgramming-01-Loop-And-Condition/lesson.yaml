@@ -21,7 +21,7 @@
 - Class: cmd_question
   Output: 先讓我們輸入`x0^2`，計算f(x0)的結果。
   CorrectAnswer: x0^2
-  AnswerTests: omnitest("x0^2")
+  AnswerTests: any_of_exprs("x0^2")
   Hint: x0^2
 - Class: cmd_question
   Output: 接著，我們把`x0 - 0.2 * x0` 存到變數x1
@@ -31,13 +31,13 @@
 - Class: cmd_question
   Output: 請同學計算f(x1)的值。
   CorrectAnswer: x1^2
-  AnswerTests: omnitest("x1^2")
+  AnswerTests: any_of_exprs("x1^2")
   Hint: x1^2
 - Class: mult_question
   Output: 請問同學，f(x0)和f(x1)，何者較小？
   AnswerChoices: f(x0);f(x1)
   CorrectAnswer: f(x1)
-  AnswerTests: omnitest(correctVal = "f(x1)")
+  AnswerTests: val_is("f(x1)")
 - Class: text
   Output: 事實上，數學可以證明如果我們把`x1 - 0.2 * x1`存到`x2`、 `x2 - 0.2 * x2`存到`x3`... 以此類推，x1、x2、x3...
     就會越來越 靠近最終的答案，也就是0 。讓我們用迴圈來驗證這件事。
@@ -78,18 +78,18 @@
 - Class: cmd_question
   Output: 請同學輸入：`for(i in 1:99) x[i + 1] <- x[i] - 0.2 * x[i]`
   CorrectAnswer: for(i in 1:99) x[i + 1] <- x[i] - 0.2 * x[i]
-  AnswerTests: omnitest("for(i in 1:99) x[i + 1] <- x[i] - 0.2 * x[i]")
+  AnswerTests: any_of_exprs("for(i in 1:99) x[i + 1] <- x[i] - 0.2 * x[i]")
   Hint: for(i in 1:99) x[i + 1] <- x[i] - 0.2 * x[i]
 - Class: cmd_question
   Output: 請同學輸入`x` ，就可以看看計算結果了。x 越後面的element， 就越靠近0 。
   CorrectAnswer: x
-  AnswerTests: omnitest("x")
+  AnswerTests: any_of_exprs("x")
   Hint: x
 - Class: mult_question
   Output: 請問同學，這裡`1:99`的長度是多少？
   AnswerChoices: 2;99
   CorrectAnswer: '99'
-  AnswerTests: omnitest(correctVal = "99")
+  AnswerTests: val_is("99")
 - Class: text
   Output: 在R 中，`for(i in 1:99) expr`的語法代表的，就是讓`i`是 為`1:99`的第一個element，也就是`i=1` 的狀況下去運算`expr`。接著，
     讓`i`為`1:99`的第二個element，也就是`i=2`的狀況下去運算`expr`。 重複這個動作，直到`i`到`1:99`的最後一個element，也就是`i=99`的狀況。
@@ -103,7 +103,7 @@
 - Class: cmd_question
   Output: 這類的應用，我們需要懂一點用R 產生字串的函數，才能做出來。 請同學先輸入：`paste0("data/", 1, ".csv")`
   CorrectAnswer: paste0("data/", 1, ".csv")
-  AnswerTests: omnitest('paste0("data/", 1, ".csv")')
+  AnswerTests: any_of_exprs('paste0("data/", 1, ".csv")')
   Hint: paste0("data/", 1, ".csv")
 - Class: text
   Output: 這裡的`paste0`函數可以把輸入的R 物件粘接成一個字串。另一個非常相似 的函數是：`paste`。兩者最主要的差異，在於`paste0`
@@ -116,7 +116,7 @@
     i, ".csv"))`來 一口氣讀取"data/1.csv"、"data/2.csv"、"data/3.csv"。請問同學， <??>應該要填入什麼呢？
   AnswerChoices: c(1,2,3);c(2,3,4);c(3,4,5)
   CorrectAnswer: c(1,2,3)
-  AnswerTests: omnitest(correctVal = c("c(1,2,3)"))
+  AnswerTests: val_is(c("c(1,2,3)"))
 - Class: text
   Output: 上述的兩個例子，大致上呈現R 的迴圈功能，以及在使用上所需要 搭配的一些小撇步。
 - Class: text
@@ -126,7 +126,7 @@
   Output: 通常，我們會拿這次的答案和上一次的答案做比較，如果差異過小，就 代表能改善的幅度已經太小，答案可能已經夠用了。 在這裡，我們利用`abs(x[2]
     - x[1])`可以計算第一次計算後答案的差異。這 裡的`abs`是取絕對值的運算。`abs`可以保證回傳的都是正數，在比大小時很常用。 同理，請同學計算第二次計算後答案的差異。
   CorrectAnswer: abs(x[3] - x[2])
-  AnswerTests: omnitest(correctVal = abs(x[3] - x[2]))
+  AnswerTests: val_is(abs(x[3] - x[2]))
   Hint: abs(x[3] - x[2])
 - Class: text
   Output: 一個實務上常常採用的策略是：我們希望在答案差異小於0.01的時候， 終止迴圈運算，否則就會一直計算。同時，我們希望迴圈最多跑99次。
@@ -142,13 +142,13 @@
 - Class: cmd_question
   Output: 請同學先印出`x` 得值
   CorrectAnswer: x
-  AnswerTests: omnitest("x")
+  AnswerTests: any_of_exprs("x")
   Hint: x
 - Class: mult_question
   Output: 請問同學，這個計算在執行多少次就停止了？
   AnswerChoices: 20;40;60;80;99
   CorrectAnswer: 20
-  AnswerTests: omnitest(correctVal = "20")
+  AnswerTests: val_is("20")
 - Class: text
   Output: 這份課程利用兩個常見的範例來跟同學介紹R 中的`for` 和`if`兩個功能。適當的使用這兩個功能，我們可以讓R 來完 成許多複雜的任務。
 

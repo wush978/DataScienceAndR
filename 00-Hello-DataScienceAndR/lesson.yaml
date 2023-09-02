@@ -38,7 +38,7 @@
     請在console中輸入：`chat()`。此部分必需要輸入與上述一樣的指令才會過關。
     這個指令能打開聊天室的網頁。註冊github帳戶（<https://github.com/join>）之後，即可在這個聊天室之中求助。
   CorrectAnswer: chat()
-  AnswerTests: omnitest('chat()')
+  AnswerTests: any_of_exprs('chat()')
   Hint: chat()
 - Class: script
   Output: |

@@ -26,7 +26,7 @@
     同學請打開`vignette("googleVis_examples", package = "googleVis")`，
     我們簡單用這個文件做範例。
   CorrectAnswer: vignette("googleVis_examples", package = "googleVis")
-  AnswerTests: omnitest('vignette("googleVis_examples", package = "googleVis")')
+  AnswerTests: any_of_exprs('vignette("googleVis_examples", package = "googleVis")')
   Hint: vignette("googleVis_examples", package = "googleVis")
 - Class: text
   Output: |
@@ -51,7 +51,7 @@
     請同學輸入：
     `dat1 <- group_by(hsb, race, sex) %>% summarise(math.avg = mean(math))`。
   CorrectAnswer: dat1 <- group_by(hsb, race, sex) %>% summarise(math.avg = mean(math))
-  AnswerTests: omnitest('dat1 <- group_by(hsb, race, sex) %>% summarise(math.avg =
+  AnswerTests: any_of_exprs('dat1 <- group_by(hsb, race, sex) %>% summarise(math.avg =
     mean(math))')
   Hint: dat1 <- group_by(hsb, race, sex) %>% summarise(math.avg = mean(math))
 - Class: cmd_question
@@ -59,13 +59,13 @@
     接著我們輸入：`g <- gvisBarChart(dat1)`建立一個gvis物件。
     如果同學探索這個物件，會發現它是一個網頁的HTML。
   CorrectAnswer: g <- gvisBarChart(dat1)
-  AnswerTests: omnitest('g <- gvisBarChart(dat1)')
+  AnswerTests: any_of_exprs('g <- gvisBarChart(dat1)')
   Hint: g <- gvisBarChart(dat1)
 - Class: cmd_question
   Output: |
     接著，我們輸入：`plot(g)`。
   CorrectAnswer: plot(g)
-  AnswerTests: omnitest('plot(g)')
+  AnswerTests: any_of_exprs('plot(g)')
   Hint: plot(g)
 - Class: text
   Output: |
@@ -91,7 +91,7 @@
   Output: |
     接著我們執行：`dcast(dat1, race ~ sex)`。
   CorrectAnswer: dcast(dat1, race ~ sex)
-  AnswerTests: omnitest('dcast(dat1, race ~ sex)')
+  AnswerTests: any_of_exprs('dcast(dat1, race ~ sex)')
   Hint: dcast(dat1, race ~ sex)
 - Class: text
   Output: |
@@ -101,7 +101,7 @@
     讓我們把這筆資料提供給gvisBarChart後呈現在網頁上。
     請同學輸入：`dcast(dat1, race ~ sex) %>% gvisBarChart() %>% plot()`。
   CorrectAnswer: dcast(dat1, race ~ sex) %>% gvisBarChart() %>% plot()
-  AnswerTests: omnitest('dcast(dat1, race ~ sex) %>% gvisBarChart() %>% plot()')
+  AnswerTests: any_of_exprs('dcast(dat1, race ~ sex) %>% gvisBarChart() %>% plot()')
   Hint: dcast(dat1, race ~ sex) %>% gvisBarChart() %>% plot()
 - Class: text
   Output: |
@@ -111,7 +111,7 @@
     接著我們挑出read和math做scatter plot。
     請同學輸入：`select(hsb, read, math) %>% gvisScatterChart() %>% plot()`。
   CorrectAnswer: select(hsb, read, math) %>% gvisScatterChart() %>% plot()
-  AnswerTests: omnitest('select(hsb, read, math) %>% gvisScatterChart() %>% plot()')
+  AnswerTests: any_of_exprs('select(hsb, read, math) %>% gvisScatterChart() %>% plot()')
   Hint: select(hsb, read, math) %>% gvisScatterChart() %>% plot()
 - Class: text
   Output: |
@@ -132,7 +132,7 @@
   Output: |
     請同學輸入：`gvisSankey(dat_sk) %>% plot()`。
   CorrectAnswer: gvisSankey(dat_sk) %>% plot()
-  AnswerTests: omnitest('gvisSankey(dat_sk) %>% plot()')
+  AnswerTests: any_of_exprs('gvisSankey(dat_sk) %>% plot()')
   Hint: gvisSankey(dat_sk) %>% plot()
 - Class: text
   Output: |
@@ -143,7 +143,7 @@
   Output: |
     接著，請同學輸入： `gvisCalendar(TWII) %>% plot`。
   CorrectAnswer: gvisCalendar(TWII) %>% plot
-  AnswerTests: omnitest('gvisCalendar(TWII) %>% plot')
+  AnswerTests: any_of_exprs('gvisCalendar(TWII) %>% plot')
   Hint: gvisCalendar(TWII) %>% plot
 - Class: text
   Output: |
@@ -154,7 +154,7 @@
   Output: |
     還有其他範例，如：`gvisOrgChart(Regions) %>% plot`則是拿來繪製組織圖的選擇。
   CorrectAnswer: gvisOrgChart(Regions) %>% plot
-  AnswerTests: omnitest('gvisOrgChart(Regions) %>% plot')
+  AnswerTests: any_of_exprs('gvisOrgChart(Regions) %>% plot')
   Hint: gvisOrgChart(Regions) %>% plot
 - Class: text
   Output: |
@@ -169,7 +169,7 @@
     <https://rstudio.github.io/leaflet/>
     請同學輸入`browseURL("https://rstudio.github.io/leaflet/")`
   CorrectAnswer: browseURL("https://rstudio.github.io/leaflet/")
-  AnswerTests: omnitest('browseURL("https://rstudio.github.io/leaflet/")')
+  AnswerTests: any_of_exprs('browseURL("https://rstudio.github.io/leaflet/")')
   Hint: browseURL("https://rstudio.github.io/leaflet/")
 - Class: cmd_question
   Output: |
@@ -193,7 +193,7 @@
     請同學照著輸入：`m <- leaflet() %>% addTiles() %>% addMarkers(lng=174.768, lat=-36.852, popup="The birthplace of R")`
   CorrectAnswer: m <- leaflet() %>% addTiles() %>% addMarkers(lng=174.768, lat=-36.852,
     popup="The birthplace of R")
-  AnswerTests: omnitest('m <- leaflet() %>% addTiles() %>% addMarkers(lng=174.768,
+  AnswerTests: any_of_exprs('m <- leaflet() %>% addTiles() %>% addMarkers(lng=174.768,
     lat=-36.852, popup="The birthplace of R")')
   Hint: m <- leaflet() %>% addTiles() %>% addMarkers(lng=174.768, lat=-36.852, popup="The
     birthplace of R")
@@ -202,7 +202,7 @@
     接著請同學輸入`m`來看看結果。
     有沒有看到類似leaflet官方說明上的圖呢？
   CorrectAnswer: m
-  AnswerTests: omnitest('m')
+  AnswerTests: any_of_exprs('m')
   Hint: m
 - Class: text
   Output: |
@@ -230,7 +230,7 @@
     eq是來自<http://earthquake.usgs.gov>所抓取的地震資料。
     請同學輸入`View(eq)`觀察一下這筆資料。
   CorrectAnswer: View(eq)
-  AnswerTests: omnitest('View(eq)')
+  AnswerTests: any_of_exprs('View(eq)')
   Hint: View(eq)
 - Class: text
   Output: |
@@ -245,20 +245,20 @@
     leaflet地圖的相關資訊。
     請同學輸入：`twmap <- leaflet(eq)`。
   CorrectAnswer: twmap <- leaflet(eq)
-  AnswerTests: omnitest('twmap <- leaflet(eq)')
+  AnswerTests: any_of_exprs('twmap <- leaflet(eq)')
   Hint: twmap <- leaflet(eq)
 - Class: cmd_question
   Output: |
     接著請同學輸入: `twmap2 <- addMarkers(twmap, lng = ~longitude, lat = ~latitude)`
     這段指令的效果我們等下再來解釋。
   CorrectAnswer: twmap2 <- addMarkers(twmap, lng = ~longitude, lat = ~latitude)
-  AnswerTests: omnitest('twmap2 <- addMarkers(twmap, lng = ~longitude, lat = ~latitude)')
+  AnswerTests: any_of_exprs('twmap2 <- addMarkers(twmap, lng = ~longitude, lat = ~latitude)')
   Hint: twmap2 <- addMarkers(twmap, lng = ~longitude, lat = ~latitude)
 - Class: cmd_question
   Output: |
     接著請同學輸入`twmap2`把我們目前的結果畫出來。
   CorrectAnswer: twmap2
-  AnswerTests: omnitest('twmap2')
+  AnswerTests: any_of_exprs('twmap2')
   Hint: twmap2
 - Class: text
   Output: |
@@ -284,13 +284,13 @@
     為了加上底圖，請同學輸入：
     `twmap3 <- addTiles(twmap2)`
   CorrectAnswer: twmap3 <- addTiles(twmap2)
-  AnswerTests: omnitest('twmap3 <- addTiles(twmap2)')
+  AnswerTests: any_of_exprs('twmap3 <- addTiles(twmap2)')
   Hint: twmap3 <- addTiles(twmap2)
 - Class: cmd_question
   Output: |
     接著輸入`twmap3`看看加上`addTiles`後的結果。
   CorrectAnswer: twmap3
-  AnswerTests: omnitest('twmap3')
+  AnswerTests: any_of_exprs('twmap3')
   Hint: twmap3
 - Class: text
   Output: |
@@ -302,7 +302,7 @@
     `twmap4 <- addMarkers(twmap, lng = ~longitude, lat = ~latitude, label = ~paste("Magnitude:", mag))`
   CorrectAnswer: twmap4 <- addMarkers(twmap, lng = ~longitude, lat = ~latitude, label
     = ~paste("Magnitude:", mag))
-  AnswerTests: omnitest('twmap4 <- addMarkers(twmap, lng = ~longitude, lat = ~latitude,
+  AnswerTests: any_of_exprs('twmap4 <- addMarkers(twmap, lng = ~longitude, lat = ~latitude,
     label = ~paste("Magnitude:", mag))')
   Hint: twmap4 <- addMarkers(twmap, lng = ~longitude, lat = ~latitude, label = ~paste("Magnitude:",
     mag))
@@ -310,7 +310,7 @@
   Output: |
     再請同學輸入`twmap4`看看結果
   CorrectAnswer: twmap4
-  AnswerTests: omnitest('twmap4')
+  AnswerTests: any_of_exprs('twmap4')
   Hint: twmap4
 - Class: text
   Output: |
