@@ -34,7 +34,7 @@
     請問同學，根據這三個byte，他們的BOM可能是什麼呢？
   AnswerChoices: UTF-8(EF BB BF);UTF-16BE(FE FF);UTF-16LE(FF FE);Unknown
   CorrectAnswer: Unknown
-  AnswerTests: omnitest(correctVal = "Unknown")
+  AnswerTests: val_is("Unknown")
   Hint: 請比對R 讀取`hospital_path`前三Byte的值與常見的BOM值
 - Class: cmd_question
   Output: |
@@ -42,21 +42,21 @@
     由於政府公開資料網宣稱這個檔案為UTF-8編碼的，我們先使用UTF-8讀讀看。
     請同學輸入：`readLines(file(hospital_path, encoding = "UTF-8"), n = 6)`
   CorrectAnswer: readLines(file(hospital_path, encoding = "UTF-8"), n = 6)
-  AnswerTests: omnitest('readLines(file(hospital_path, encoding = "UTF-8"), n = 6)')
+  AnswerTests: any_of_exprs('readLines(file(hospital_path, encoding = "UTF-8"), n = 6)')
   Hint: readLines(file(hospital_path, encoding = "UTF-8"), n = 6)
 - Class: cmd_question
   Output: |
     接著我們再使用`readLines(file(hospital_path, encoding = "BIG5"), n = 6)`試試看。
     如果看到警告（warning）訊息，即代表這份檔案並非UTF-8編碼，因而導致的小錯誤。
   CorrectAnswer: readLines(file(hospital_path, encoding = "BIG5"), n = 6)
-  AnswerTests: omnitest('readLines(file(hospital_path, encoding = "BIG5"), n = 6)')
+  AnswerTests: any_of_exprs('readLines(file(hospital_path, encoding = "BIG5"), n = 6)')
   Hint: readLines(file(hospital_path, encoding = "BIG5"), n = 6)
 - Class: mult_question
   Output: |
     透過上面的測試，請問同學，這個檔案的編碼是什麼呢?
   AnswerChoices: UTF-8;BIG5
   CorrectAnswer: BIG5
-  AnswerTests: omnitest(correctVal = "BIG5")
+  AnswerTests: val_is("BIG5")
 - Class: text
   Output: |
     像是這類編碼與文件不符的狀況，在實務的例子中是很常見的。
@@ -87,7 +87,7 @@
     請問同學，`hospital`中YEARYY欄位的型態為何？
   AnswerChoices: character;factor;integer;numeric;list
   CorrectAnswer: factor
-  AnswerTests: omnitest(correctVal = "factor")
+  AnswerTests: val_is("factor")
   Hint: 請注意，R 回報說這個欄位有36個Levels。
 - Class: cmd_question
   Output: |
@@ -102,7 +102,7 @@
     請問下列哪一個「不是」`substring`的參數？
   AnswerChoices: x;text;first;last
   CorrectAnswer: x
-  AnswerTests: omnitest(correctVal = "x")
+  AnswerTests: val_is("x")
 - Class: cmd_question
   Output: |
     R 的`substring`函數可以將`text`參數代表的字串中，依照字符的位置，擷取出中間的段落。
@@ -110,7 +110,7 @@
     而`substring`也是向量式的函數。
     請同學輸入`substring(head(hospital$YEARYY), 1, 3)`看看前6 筆數據經過R 的`substring`函數處理之後的結果。
   CorrectAnswer: substring(head(hospital$YEARYY), 1, 3)
-  AnswerTests: omnitest("substring(head(hospital$YEARYY), 1, 3)")
+  AnswerTests: any_of_exprs("substring(head(hospital$YEARYY), 1, 3)")
   Hint: substring(head(hospital$YEARYY), 1, 3)
 - Class: text
   Output: |
@@ -130,7 +130,7 @@
     請問同學，下列哪一個「不是」`strsplit`的參數？
   AnswerChoices: x;split;fixed;str
   CorrectAnswer: str
-  AnswerTests: omnitest(correctVal="str")
+  AnswerTests: val_is("str")
 - Class: cmd_question
   Output: |
     根據說明文件，`strsplit`會利用`split`參數來切割`x`字串，並回傳一個`list`。
@@ -140,19 +140,19 @@
     但是`strsplit`並不接受factor參數，只接受字串向量。
     因此請同學用：`yearyy <- as.character(hospital$YEARYY)`將資料存到`yearyy`這個變數中。
   CorrectAnswer: yearyy <- as.character(hospital$YEARYY)
-  AnswerTests: omnitest("yearyy <- as.character(hospital$YEARYY)")
+  AnswerTests: any_of_exprs("yearyy <- as.character(hospital$YEARYY)")
   Hint: yearyy <- as.character(hospital$YEARYY)
 - Class: cmd_question
   Output: |
     接著請同學輸入：`tmp <- strsplit(yearyy, "Q")`，把切割的結果儲存到`tmp`這個變數。
   CorrectAnswer: tmp <- strsplit(yearyy, "Q")
-  AnswerTests: omnitest('tmp <- strsplit(yearyy, "Q")')
+  AnswerTests: any_of_exprs('tmp <- strsplit(yearyy, "Q")')
   Hint: tmp <- strsplit(yearyy, "Q")
 - Class: cmd_question
   Output: |
     請同學輸入：`head(tmp)`看看結果。
   CorrectAnswer: head(tmp)
-  AnswerTests: omnitest("head(tmp)")
+  AnswerTests: any_of_exprs("head(tmp)")
   Hint: head(tmp)
 - Class: text
   Output: |
@@ -164,7 +164,7 @@
     請同學先用`[[`拿出tmp的第一個字串向量元素，然後用`[`拿出這個字串向量的第一個值。
     該值即為第一筆資料的年度。
   CorrectAnswer: tmp[[1]][1]
-  AnswerTests: omnitest("tmp[[1]][1]")
+  AnswerTests: any_of_exprs("tmp[[1]][1]")
   Hint: tmp[[1]][1]
 - Class: text
   Output: |
@@ -194,7 +194,7 @@
     請問同學，下列哪一個不是`lapply`的參數？
   AnswerChoices: X;FUN;...;Y
   CorrectAnswer: 'Y'
-  AnswerTests: omnitest(correctVal="Y")
+  AnswerTests: val_is("Y")
 - Class: text
   Output: |
     `lapply`的第一個參數`X`通常是一個vector。
@@ -206,13 +206,13 @@
     根據上述的解釋，`lapply`的`X`參數應該要填入什麼呢？
   AnswerChoices: tmp;[[1]];[1]
   CorrectAnswer: tmp
-  AnswerTests: omnitest(correctVal = "tmp")
+  AnswerTests: val_is("tmp")
 - Class: mult_question
   Output: |
     而`lapply`的`FUN`參數，也就是對每個`X`的元素所進行的動作，應該是以下哪一個呢？
   AnswerChoices: '[1];[[1]]'
   CorrectAnswer: '[1]'
-  AnswerTests: omnitest(correctVal="[1]")
+  AnswerTests: val_is("[1]")
 - Class: text
   Output: |
     課程進行至此，再解釋一遍給還沒完全理解的同學。
@@ -239,7 +239,7 @@
   Output: |
     請同學輸入`head(tmp1)`看看結果
   CorrectAnswer: head(tmp1)
-  AnswerTests: omnitest('head(tmp1)')
+  AnswerTests: any_of_exprs('head(tmp1)')
   Hint: head(tmp1)
 - Class: cmd_question
   Output: |
@@ -252,7 +252,7 @@
   Output: |
     請同學輸入`head(tmp2)`看看結果
   CorrectAnswer: head(tmp2)
-  AnswerTests: omnitest('head(tmp2)')
+  AnswerTests: any_of_exprs('head(tmp2)')
   Hint: head(tmp2)
 - Class: text
   Output: |
@@ -272,7 +272,7 @@
     接著請教同學，`lapply(tmp, "[", 1)`的輸出結果是什麼型態呢？
   AnswerChoices: list;字串向量(character);整數向量(integer)
   CorrectAnswer: list
-  AnswerTests: omnitest(correctVal = "list")
+  AnswerTests: val_is("list")
 - Class: text
   Output: |
     list型態對於後續的處理還是比較麻煩的。
@@ -283,7 +283,7 @@
     舉例來說，我們可以使用`unlist(tmp)`取得字串向量。
     請同學試試看。
   CorrectAnswer: unlist(tmp)
-  AnswerTests: omnitest("unlist(tmp)")
+  AnswerTests: any_of_exprs("unlist(tmp)")
   Hint: unlist(tmp)
 - Class: cmd_question
   Output: |

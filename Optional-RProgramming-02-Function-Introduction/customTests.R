@@ -16,3 +16,13 @@ test_x <- function() {
   x <- get("x", globalenv())
   (length(x) == 100) & is.numeric(x)
 }
+
+test_f <- function() {
+  f <- get("f", globalenv())
+  isTRUE(all.equal(deparse(f), deparse(function(x) sum((x - y)^2))))
+}
+
+test_f1 <- function() {
+  f1 <- get("f1", globalenv())
+  isTRUE(all.equal(deparse(f1), deparse(function(x) f(m %*% x))))
+}

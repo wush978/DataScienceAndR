@@ -10,3 +10,11 @@
 # variables when appropriate. The answer test, creates_new_var()
 # can be used for for the purpose, but it also re-evaluates the
 # expression which the user entered, so care must be taken.
+
+test_md5sum_result <- function(file_path, expected_md5) {
+    e <- get("e", parent.frame())
+    val_is(structure(
+        expected_md5,
+        names = file_path
+    ))
+}

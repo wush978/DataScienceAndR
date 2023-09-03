@@ -51,7 +51,7 @@
     舉例來說，`a <- 1`即是一個assignment的動作。
     請各位同學在console輸入`a <- 1`
   CorrectAnswer: a <- 1
-  AnswerTests: omnitest("a <- 1", 1)
+  AnswerTests: any_of_exprs("a <- 1")
   Hint: a <- 1
 - Class: text
   Output: |
@@ -61,7 +61,7 @@
     R 會evaluate這個expression，然後把結果顯示到螢幕上。
     舉例來說，請同學輸入：`a + 1`
   CorrectAnswer: a + 1
-  AnswerTests: omnitest("a + 1", 2)
+  AnswerTests: any_of_exprs("a + 1")
   Hint: a + 1
 - Class: text
   Output: |
@@ -82,7 +82,7 @@
     請問現在如果在R 的console中輸入`a - 1`，會螢幕上會顯示什麼結果呢？
   AnswerChoices: 1;2;"不會顯示";"4"
   CorrectAnswer: 1
-  AnswerTests: omnitest(correctVal= '1')
+  AnswerTests: val_is('1')
   Hint: 先想想`a - 1`是一個expression還是一個assignment，再想想`a`的值
 - Class: text
   Output: |
@@ -134,7 +134,7 @@
     我們可以刪除已經存在的物件。舉例來說，如果我們要刪除`a`，
     就只要輸入：`rm(a)`。請同學根據上述做法試試看。
   CorrectAnswer: rm(a)
-  AnswerTests: omnitest("rm(a)")
+  AnswerTests: any_of_exprs("rm(a)")
   Hint: rm(a)
 - Class: text
   Output: 第一章的內容就到此結束了。

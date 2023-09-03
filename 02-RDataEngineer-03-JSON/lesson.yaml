@@ -17,7 +17,7 @@
     JSON格式也非常簡單，一般人可以輕鬆理解。
     舉例來說，請同學輸入：`cat(facebook_error, sep = "\n")`來看看Facebook的錯誤訊息。
   CorrectAnswer: cat(facebook_error, sep = "\n")
-  AnswerTests: omnitest('cat(facebook_error, sep = "\n")')
+  AnswerTests: any_of_exprs('cat(facebook_error, sep = "\n")')
   Hint: cat(facebook_error, sep = "\n")
 - Class: text
   Output: |
@@ -29,7 +29,7 @@
     請問同學，在"error"的值中，包含的一對一對名稱與值的組合，而對應到值為"OAuthException"的為下列哪一個名稱呢？
   AnswerChoices: message;type;code;fbtrace_id
   CorrectAnswer: type
-  AnswerTests: omnitest(correctVal = "type")
+  AnswerTests: val_is("type")
 - Class: cmd_question
   Output: |
     在R 中，我們可以利用jsonlite套件，將一個JSON文件轉換成R 的list。
@@ -48,14 +48,14 @@
     接著，請同學檢查看看jsonlite套件的作者是否提供vignette，供R 的使用者閱讀。
     請同學輸入：`vignette(package = "jsonlite")`。
   CorrectAnswer: vignette(package = "jsonlite")
-  AnswerTests: omnitest('vignette(package = "jsonlite")')
+  AnswerTests: any_of_exprs('vignette(package = "jsonlite")')
   Hint: vignette(package = "jsonlite")
 - Class: cmd_question
   Output: |
     jsonlite的作者很熱情，一口氣寫了四、五篇vignettes。
     由於這堂課的目的是要上手jsonlite物件，所以就請同學輸入：`vignette("json-aaquickstart", "jsonlite")`。
   CorrectAnswer: vignette("json-aaquickstart", "jsonlite")
-  AnswerTests: omnitest('vignette("json-aaquickstart", "jsonlite")')
+  AnswerTests: any_of_exprs('vignette("json-aaquickstart", "jsonlite")')
   Hint: vignette("json-aaquickstart", "jsonlite")
 - Class: text
   Output: |
@@ -80,7 +80,7 @@
     我們已經把`["Amsterdam", "Rotterdam", "Utrecht", "Den Haag"]`這段文字儲存於變數`x1`。
     請同學試試看：`fromJSON(x1, simplifyVector = FALSE)`。
   CorrectAnswer: fromJSON(x1, simplifyVector = FALSE)
-  AnswerTests: omnitest('fromJSON(x1, simplifyVector = FALSE)')
+  AnswerTests: any_of_exprs('fromJSON(x1, simplifyVector = FALSE)')
   Hint: fromJSON(x1, simplifyVector = FALSE)
 - Class: text
   Output: |
@@ -92,7 +92,7 @@
     如果想知道函數的預設值，說明文件中都有清楚的記載。
     請同學輸入：`fromJSON(x1)`。
   CorrectAnswer: fromJSON(x1)
-  AnswerTests: omnitest('fromJSON(x1)')
+  AnswerTests: any_of_exprs('fromJSON(x1)')
   Hint: fromJSON(x1)
 - Class: text
   Output: |

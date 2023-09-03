@@ -33,7 +33,7 @@
   Output: |
     請同學輸入學套件的起手式：`vignette(package = "dplyr")`。
   CorrectAnswer: vignette(package = "dplyr")
-  AnswerTests: omnitest('vignette(package = "dplyr")')
+  AnswerTests: any_of_exprs('vignette(package = "dplyr")')
   Hint: vignette(package = "dplyr")
 - Class: text
   Output: |
@@ -44,7 +44,7 @@
   Output: |
     請同學執行`vignette("introduction", package = "dplyr")`，打開Introduction。
   CorrectAnswer: vignette("introduction", package = "dplyr")
-  AnswerTests: omnitest('vignette("introduction", package = "dplyr")')
+  AnswerTests: any_of_exprs('vignette("introduction", package = "dplyr")')
   Hint: vignette("introduction", package = "dplyr")
 - Class: cmd_question
   Output: |
@@ -68,7 +68,7 @@
     我們進行驗證一下，也順便讓同學複習data.frame的操作。
     請同學用指令查詢flights共有多少資料。
   CorrectAnswer: nrow(flights)
-  AnswerTests: omnitest(correctVal = nrow(flights))
+  AnswerTests: val_is(nrow(flights))
   Hint: nrow(flights)
 - Class: text
   Output: |
@@ -80,7 +80,7 @@
     `filter`函數的用法為，第一個參數放我們要處理的data.frame，後面接著不同的過濾條件。
     例如：`filter(flights, month == 1, day == 1)`，請同學試試看。
   CorrectAnswer: filter(flights, month == 1, day == 1)
-  AnswerTests: omnitest('filter(flights, month == 1, day == 1)')
+  AnswerTests: any_of_exprs('filter(flights, month == 1, day == 1)')
   Hint: filter(flights, month == 1, day == 1)
 - Class: text
   Output: |
@@ -164,7 +164,7 @@
   AnswerChoices: |
     "AA";AA;flights;flights$tailnum
   CorrectAnswer: '"AA"'
-  AnswerTests: omnitest(correctVal = '"AA"')
+  AnswerTests: val_is('"AA"')
 - Class: mult_question
   Output: |
     我們想輸出的程式碼是：`filter(flights, grepl(pattern = <1>, x = <2>, fixed = TRUE))`。
@@ -172,18 +172,18 @@
   AnswerChoices: |
     "AA";AA;flights;flights$tailnum
   CorrectAnswer: flights$tailnum
-  AnswerTests: omnitest(correctVal = 'flights$tailnum')
+  AnswerTests: val_is('flights$tailnum')
 - Class: mult_question
   Output: |
     再請問同學，`filter(flights, grepl(pattern = "AA", x = tailnum, fixed = TRUE))`是不是也成立呢？
   AnswerChoices: Yes;No
   CorrectAnswer: 'Yes'
-  AnswerTests: omnitest(correctVal = "Yes")
+  AnswerTests: val_is("Yes")
 - Class: cmd_question
   Output: |
     最後，請同學試試看：`filter(flights, grepl(pattern = "AA", x = tailnum, fixed = TRUE))`。
   CorrectAnswer: filter(flights, grepl(pattern = "AA", x = tailnum, fixed = TRUE))
-  AnswerTests: omnitest('filter(flights, grepl(pattern = "AA", x = tailnum, fixed
+  AnswerTests: any_of_exprs('filter(flights, grepl(pattern = "AA", x = tailnum, fixed
     = TRUE))')
   Hint: filter(flights, grepl(pattern = "AA", x = tailnum, fixed = TRUE))
 - Class: text
@@ -204,7 +204,7 @@
     請同學試試看：`arrange(flights, month, day, dep_time)`。
     給熟悉SQL的同學，`arrange`的用法很類似SQL的`ORDER BY`。
   CorrectAnswer: arrange(flights, month, day, dep_time)
-  AnswerTests: omnitest('arrange(flights, month, day, dep_time)')
+  AnswerTests: any_of_exprs('arrange(flights, month, day, dep_time)')
   Hint: arrange(flights, month, day, dep_time)
 - Class: text
   Output: |
@@ -216,14 +216,14 @@
     所以我們能不能根據上面的結果判斷：`dep_time`的最小值是517呢？（第一列的dep_time）
   AnswerChoices: Yes;No
   CorrectAnswer: 'No'
-  AnswerTests: omnitest(correctVal = "No")
+  AnswerTests: val_is("No")
 - Class: cmd_question
   Output: |
     我們是不能確定這件事情的，因為有些資料可能有更小的`dep_time`，但是他們的`day`和`month`太大，所以被排到後面去了。
     我們來找找看`dep_time`的最小值吧。
     請同學輸入：`min(flights$dep_time)`。
   CorrectAnswer: min(flights$dep_time)
-  AnswerTests: omnitest('min(flights$dep_time)')
+  AnswerTests: any_of_exprs('min(flights$dep_time)')
   Hint: min(flights$dep_time)
 - Class: cmd_question
   Output: |
@@ -232,14 +232,14 @@
     我們要怎麼忽略`NA`呢？
     請同學試試看：`min(flights$dep_time, na.rm = TRUE)`。
   CorrectAnswer: min(flights$dep_time, na.rm = TRUE)
-  AnswerTests: omnitest('min(flights$dep_time, na.rm = TRUE)')
+  AnswerTests: any_of_exprs('min(flights$dep_time, na.rm = TRUE)')
   Hint: min(flights$dep_time, na.rm = TRUE)
 - Class: cmd_question
   Output: |
     我們也可以把比較的順序從由小到大改成由大到小，只要加上`desc`就行了。
     舉例來說：`arrange(flights, desc(month), desc(day), desc(dep_time))`，請同學試試看。
   CorrectAnswer: arrange(flights, desc(month), desc(day), desc(dep_time))
-  AnswerTests: omnitest('arrange(flights, desc(month), desc(day), desc(dep_time))')
+  AnswerTests: any_of_exprs('arrange(flights, desc(month), desc(day), desc(dep_time))')
   Hint: arrange(flights, desc(month), desc(day), desc(dep_time))
 - Class: cmd_question
   Output: |
@@ -248,28 +248,28 @@
     請同學試試看：`select(flights, year, month, day)`。
     給熟SQL的同學，`select`就是SQL中的`SELECT`。
   CorrectAnswer: select(flights, year, month, day)
-  AnswerTests: omnitest('select(flights, year, month, day)')
+  AnswerTests: any_of_exprs('select(flights, year, month, day)')
   Hint: select(flights, year, month, day)
 - Class: cmd_question
   Output: |
     我們先檢查`flights`的欄位名稱。
     請同學複習一下之前所學的data.frame的操作。
   CorrectAnswer: colnames(flights)
-  AnswerTests: omnitest(correctVal = colnames(flights))
+  AnswerTests: val_is(colnames(flights))
   Hint: colnames(flights)
 - Class: cmd_question
   Output: |
     我們也可以用`select(flights, year:day)`來選取`year`和`day`之間的欄位。
     請同學試試看。
   CorrectAnswer: select(flights, year:day)
-  AnswerTests: omnitest('select(flights, year:day)')
+  AnswerTests: any_of_exprs('select(flights, year:day)')
   Hint: select(flights, year:day)
 - Class: cmd_question
   Output: |
     如果是要反面選取，剃除掉`year`到`day`之間的欄位，只要使用：`select(flights, -(year:day))`。
     請同學試試看。
   CorrectAnswer: select(flights, -(year:day))
-  AnswerTests: omnitest('select(flights, -(year:day))')
+  AnswerTests: any_of_exprs('select(flights, -(year:day))')
   Hint: select(flights, -(year:day))
 - Class: script
   Output: |
@@ -295,7 +295,7 @@
     請同學試試看：`distinct(select(flights, year:day))`。
     一年有365天，是不是每天都有資料呢？
   CorrectAnswer: distinct(select(flights, year:day))
-  AnswerTests: omnitest('distinct(select(flights, year:day))')
+  AnswerTests: any_of_exprs('distinct(select(flights, year:day))')
   Hint: distinct(select(flights, year:day))
 - Class: cmd_question
   Output: |
@@ -303,7 +303,7 @@
     舉例來說，如果我們要新增一個欄位`gain`，它是拿arr_delay扣掉dep_delay，代表飛機停留在紐約機場待的時間比原本簡短多少。
     此時，我們可以用：`mutate(flights, gain = arr_delay - dep_delay)`。
   CorrectAnswer: mutate(flights, gain = arr_delay - dep_delay)
-  AnswerTests: omnitest('mutate(flights, gain = arr_delay - dep_delay)')
+  AnswerTests: any_of_exprs('mutate(flights, gain = arr_delay - dep_delay)')
   Hint: mutate(flights, gain = arr_delay - dep_delay)
 - Class: text
   Output: |
@@ -318,7 +318,7 @@
   Output: |
     請同學輸入`summarise(flights, mean(dep_delay, na.rm = TRUE))`來計算平均的誤點時間。
   CorrectAnswer: summarise(flights, mean(dep_delay, na.rm = TRUE))
-  AnswerTests: omnitest('summarise(flights, mean(dep_delay, na.rm = TRUE))')
+  AnswerTests: any_of_exprs('summarise(flights, mean(dep_delay, na.rm = TRUE))')
   Hint: summarise(flights, mean(dep_delay, na.rm = TRUE))
 - Class: cmd_question
   Output: |
@@ -327,13 +327,13 @@
     舉例來說，`sample_n(flights, 10)`會從數據中抽10筆資料。
     請同學試試看。
   CorrectAnswer: sample_n(flights, 10)
-  AnswerTests: omnitest('sample_n(flights, 10)')
+  AnswerTests: any_of_exprs('sample_n(flights, 10)')
   Hint: sample_n(flights, 10)
 - Class: cmd_question
   Output: |
     也請同學試試看：`sample_frac(flights, 0.01)`。
   CorrectAnswer: sample_frac(flights, 0.01)
-  AnswerTests: omnitest('sample_frac(flights, 0.01)')
+  AnswerTests: any_of_exprs('sample_frac(flights, 0.01)')
   Hint: sample_frac(flights, 0.01)
 - Class: text
   Output: |
@@ -414,7 +414,7 @@
     並且把這個動作的結果存到`df`變數中。
     請同學試試看。
   CorrectAnswer: df <- group_by(flights, month)
-  AnswerTests: omnitest('df <- group_by(flights, month)')
+  AnswerTests: any_of_exprs('df <- group_by(flights, month)')
   Hint: df <- group_by(flights, month)
 - Class: script
   Output: |
@@ -426,7 +426,7 @@
   Output: |
     讓我們看看結果吧。請同學輸入：`answer05`。
   CorrectAnswer: answer05
-  AnswerTests: omnitest('answer05')
+  AnswerTests: any_of_exprs('answer05')
   Hint: answer05
 - Class: text
   Output: |
@@ -446,7 +446,7 @@
     變數`cl_info`記載著從金管會銀行局的一般銀行及信用合作社消費者貸款業務項目。
     同學可以使用`View(cl_info)`看一看資料。
   CorrectAnswer: View(cl_info)
-  AnswerTests: omnitest('View(cl_info)')
+  AnswerTests: any_of_exprs('View(cl_info)')
   Hint: View(cl_info)
 - Class: text
   Output: |

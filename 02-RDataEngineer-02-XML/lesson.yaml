@@ -26,7 +26,7 @@
     請問同學，「廠商名稱」這段文字是什麼標籤呢？
   AnswerChoices: th;td
   CorrectAnswer: th
-  AnswerTests: omnitest(correctVal = "th")
+  AnswerTests: val_is("th")
 - Class: text
   Output: |
     現代的網頁都是以類似的格式傳遞資訊，讓電腦進行處理。
@@ -41,7 +41,7 @@
     請問同學，th標籤的class屬性的值為何呢？'
   AnswerChoices: T11b;newstop
   CorrectAnswer: T11b
-  AnswerTests: omnitest(correctVal = "T11b")
+  AnswerTests: val_is("T11b")
 - Class: text
   Output: "XML的文件中，標籤可以有結構關係。\n我們拿一小段稍後要處理的文件作範例：\n'<tr>\n  <th class=\"T11b\" bgcolor=\"#ffdd83\"
     align=\"left\" valign=\"middle\" width=\"200\">廠商名稱</th>\n  <td class=\"newstop\"
@@ -76,14 +76,14 @@
   Output: |
     我們已經準備了一段簡單的XML文件，並且儲存於變數`x1`。請同學輸入`x1`看看這個文件。
   CorrectAnswer: x1
-  AnswerTests: omnitest("x1")
+  AnswerTests: expr_identical_to("x1")
   Hint: x1
 - Class: mult_question
   Output: |
     請問下列哪一個標籤不存在於x1文件中？
   AnswerChoices: a;b;c;course
   CorrectAnswer: course
-  AnswerTests: omnitest(correctVal = "course")
+  AnswerTests: val_is("course")
 - Class: cmd_question
   Output: |
     在利用xml2套件處理XML或HTML文件之前，必須要先作解析，將文件建立成一種特殊的R 物件後，才能讓進行挖掘資訊。
@@ -99,18 +99,18 @@
     請問同學，`x1`是不是符合`read_xml`的參數`x`的條件呢？
   AnswerChoices: Yes;No
   CorrectAnswer: 'Yes'
-  AnswerTests: omnitest(correctVal="Yes")
+  AnswerTests: val_is("Yes")
 - Class: cmd_question
   Output: |
     請同學利用`doc1 <- read_xml(x1)`，將x1解析後的結果儲存到變數`doc1`。
   CorrectAnswer: doc1 <- read_xml(x1)
-  AnswerTests: omnitest('doc1 <- read_xml(x1)')
+  AnswerTests: expr_identical_to('doc1 <- read_xml(x1)')
   Hint: doc1 <- read_xml(x1)
 - Class: cmd_question
   Output: |
     接著我們可以輸入`doc1`來看看xml2解析後的結果。
   CorrectAnswer: doc1
-  AnswerTests: omnitest("doc1")
+  AnswerTests: expr_identical_to("doc1")
   Hint: doc1
 - Class: cmd_question
   Output: |
@@ -151,7 +151,7 @@
     我們先操作練習一下`xml_find_all`後，再講解`xpath`。
     請同學輸入：`xml_find_all(doc1, "/a/b")`。
   CorrectAnswer: xml_find_all(doc1, "/a/b")
-  AnswerTests: omnitest('xml_find_all(doc1, "/a/b")')
+  AnswerTests: expr_identical_to('xml_find_all(doc1, "/a/b")')
   Hint: xml_find_all(doc1, "/a/b")
 - Class: cmd_question
   Output: |
@@ -159,7 +159,7 @@
     同學應該可以猜到，xpath最後類似路徑的格式，其實就是在描述標籤的相對位置。
     但是如果我們輸入的是：`xml_find_all(doc1, "/b")`呢？請同學試試看。
   CorrectAnswer: xml_find_all(doc1, "/b")
-  AnswerTests: omnitest('xml_find_all(doc1, "/b")')
+  AnswerTests: expr_identical_to('xml_find_all(doc1, "/b")')
   Hint: xml_find_all(doc1, "/b")
 - Class: text
   Output: |
@@ -174,12 +174,12 @@
     `x1`的內容為："<a><b>B</b><c>C1</c><c class='x'>C2</c></a>"。
   AnswerChoices: /a/b/c;/a/c;/c;/b/c;/a
   CorrectAnswer: /a/c
-  AnswerTests: omnitest(correctVal= "/a/c")
+  AnswerTests: val_is("/a/c")
 - Class: cmd_question
   Output: |
     接著，我們請同學輸入：`ns <- xml_find_all(doc1, "/a/c")`。
   CorrectAnswer: ns <- xml_find_all(doc1, "/a/c")
-  AnswerTests: omnitest('ns <- xml_find_all(doc1, "/a/c")')
+  AnswerTests: expr_identical_to('ns <- xml_find_all(doc1, "/a/c")')
   Hint: ns <- xml_find_all(doc1, "/a/c")
 - Class: cmd_question
   Output: |
@@ -196,18 +196,18 @@
     依照list的經驗，請問`ns[1]`的型態會是？
   AnswerChoices: xml_node;xml_nodeset
   CorrectAnswer: xml_nodeset
-  AnswerTests: omnitest(correctVal = "xml_nodeset")
+  AnswerTests: val_is("xml_nodeset")
 - Class: mult_question
   Output: |
     依照list的經驗，請問`ns[[1]]`的型態會是？
   AnswerChoices: xml_node;xml_nodeset
   CorrectAnswer: xml_node
-  AnswerTests: omnitest(correctVal = "xml_node")
+  AnswerTests: val_is("xml_node")
 - Class: cmd_question
   Output: |
     我們可以把第一個c標籤，存到變數`n1`。請同學輸入：`n1 <- ns[[1]]`。
   CorrectAnswer: n1 <- ns[[1]]
-  AnswerTests: omnitest("n1 <- ns[[1]]")
+  AnswerTests: expr_identical_to("n1 <- ns[[1]]")
   Hint: n1 <- ns[[1]]
 - Class: mult_question
   Output: |
@@ -215,32 +215,32 @@
     請問`n1`，也就是<a>...</a>底下的第一個<c>..</c>標籤，他的內容是什麼呢？
   AnswerChoices: B;C1;C2
   CorrectAnswer: C1
-  AnswerTests: omnitest(correctVal="C1")
+  AnswerTests: val_is("C1")
 - Class: cmd_question
   Output: |
     我們可以透過`xml_text(n1)`取出xml_node的內容。
     在這裡，我們應該要看到"C1"，請同學試試看。
   CorrectAnswer: xml_text(n1)
-  AnswerTests: omnitest('xml_text(n1)')
+  AnswerTests: expr_identical_to('xml_text(n1)')
   Hint: xml_text(n1)
 - Class: cmd_question
   Output: |
     我們也可以用`xml_parent`來看一個標籤的父標籤。
     請同學試試看輸入：`xml_parent(n1)`。
   CorrectAnswer: xml_parent(n1)
-  AnswerTests: omnitest("xml_parent(n1)")
+  AnswerTests: expr_identical_to("xml_parent(n1)")
   Hint: xml_parent(n1)
 - Class: cmd_question
   Output: |
     接著請執行：`n2 <- ns[[2]]`。
   CorrectAnswer: n2 <- ns[[2]]
-  AnswerTests: omnitest('n2 <- ns[[2]]')
+  AnswerTests: any_of_exprs('n2 <- ns[[2]]')
   Hint: n2 <- ns[[2]]
 - Class: cmd_question
   Output: |
     我們可以檢查一下`xml_text(n2)`的輸出，確認這是第二個c標籤。
   CorrectAnswer: xml_text(n2)
-  AnswerTests: omnitest(correctVal = "C2")
+  AnswerTests: val_is("C2")
   Hint: xml_text(n2)
 - Class: text
   Output: |
@@ -251,26 +251,26 @@
     請同學輸入：`a <- xml_find_one(doc1, "/a")`。
     這裡我們使用`xml_find_one`作選取，所以輸出的就只有一個node，型態就會是xml_node。
   CorrectAnswer: a <- xml_find_one(doc1, "/a")
-  AnswerTests: omnitest('a <- xml_find_one(doc1, "/a")')
+  AnswerTests: any_of_exprs('a <- xml_find_one(doc1, "/a")')
   Hint: a <- xml_find_one(doc1, "/a")
 - Class: cmd_question
   Output: |
     接著我們試試看輸入：`xml_text(a)`，同學會看到在<a>...</a>之間的所有文字。
   CorrectAnswer: xml_text(a)
-  AnswerTests: omnitest("xml_text(a)")
+  AnswerTests: any_of_exprs("xml_text(a)")
   Hint: xml_text(a)
 - Class: cmd_question
   Output: |
     但是我們若輸入：`xml_contents(a)`，R 就會回傳一個xml_nodeset給我們。請同學試試看。
   CorrectAnswer: xml_contents(a)
-  AnswerTests: omnitest("xml_contents(a)")
+  AnswerTests: any_of_exprs("xml_contents(a)")
   Hint: xml_contents(a)
 - Class: cmd_question
   Output: |
     我們也能透過`xml_children(a)`來取得所有以a 為父標籤的標籤們（在此案例中為是一個b標籤和兩個c標籤）。
     請同學試試看。
   CorrectAnswer: xml_children(a)
-  AnswerTests: omnitest("xml_children(a)")
+  AnswerTests: any_of_exprs("xml_children(a)")
   Hint: xml_children(a)
 - Class: cmd_question
   Output: |
@@ -278,7 +278,7 @@
     這兩個節點在結構上不同的，`n2`附帶了屬性，而`n1`沒有。
     請同學先看看`xml_attrs(n1)`的結果。
   CorrectAnswer: xml_attrs(n1)
-  AnswerTests: omnitest("xml_attrs(n1)")
+  AnswerTests: any_of_exprs("xml_attrs(n1)")
   Hint: xml_attrs(n1)
 - Class: text
   Output: |
@@ -287,7 +287,7 @@
   Output: |
     再請同學看看`xml_attrs(n2)`的結果。
   CorrectAnswer: xml_attrs(n2)
-  AnswerTests: omnitest("xml_attrs(n2)")
+  AnswerTests: any_of_exprs("xml_attrs(n2)")
   Hint: xml_attrs(n2)
 - Class: text
   Output: |
@@ -301,7 +301,7 @@
     class屬性。
     請同學試試看。
   CorrectAnswer: xml_find_all(doc1, "/a/c[@class]")
-  AnswerTests: omnitest('xml_find_all(doc1, "/a/c[@class]")')
+  AnswerTests: any_of_exprs('xml_find_all(doc1, "/a/c[@class]")')
   Hint: xml_find_all(doc1, "/a/c[@class]")
 - Class: cmd_question
   Output: |
@@ -310,7 +310,7 @@
     由於這裡的"g"必須要加上引號，但是整個文字的外面已經套上雙引號，如果重複使用雙引號的話會造成R 在判斷字串的困難。
     因此這裡要使用單引號。請同學試試看。
   CorrectAnswer: xml_find_all(doc1, "/a/c[@class='g']")
-  AnswerTests: omnitest("xml_find_all(doc1, \"/a/c[@class='g']\")")
+  AnswerTests: any_of_exprs("xml_find_all(doc1, \"/a/c[@class='g']\")")
   Hint: xml_find_all(doc1, "/a/c[@class='g']")
 - Class: text
   Output: |

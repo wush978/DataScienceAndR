@@ -33,7 +33,7 @@
     根據matrix的說明頁面，請問以下哪些不是matrix的參數呢？
   AnswerChoices: data;nrow;ncol;byrow;dimnames;dim
   CorrectAnswer: dim
-  AnswerTests: omnitest(correctVal = 'dim')
+  AnswerTests: val_is('dim')
   Hint: 請參考matrix的說明頁面的Usage。
 - Class: cmd_question
   Output: |
@@ -42,13 +42,13 @@
     根據上述的邏輯，`matrix(1:18, 6, 3)`會產生一個6 列3 行（簡稱6 乘3 ）的矩陣。
     請同學輸入`x` 看一下R 是如何印出x 這個6 乘3 的矩陣。
   CorrectAnswer: x
-  AnswerTests: omnitest('x')
+  AnswerTests: any_of_exprs('x')
   Hint: x
 - Class: cmd_question
   Output: |
     請同學看看x 的屬性。
   CorrectAnswer: attributes(x)
-  AnswerTests: omnitest('attributes(x)')
+  AnswerTests: any_of_exprs('attributes(x)')
   Hint: attributes(x)
 - Class: text
   Output: |
@@ -58,7 +58,7 @@
     重要的屬性，R 都會提供內建函數來方便存取。`dim`就是可以存取矩陣維度的函數。
     請同學試試看：`dim(x)`
   CorrectAnswer: dim(x)
-  AnswerTests: test_all(omnitest('dim(x)'), val_is(c(6L, 3L)))
+  AnswerTests: test_all(any_of_exprs('dim(x)'), val_is(c(6L, 3L)))
   Hint: dim(x)
 - Class: cmd_question
   Output: |
@@ -109,7 +109,7 @@
     目前相當於`array(1:18, c(3, 3, 2))`的x , `x[1,2,2]`的值會是多少呢？
   AnswerChoices: 1;10;13;18
   CorrectAnswer: 13
-  AnswerTests: omnitest(correctVal = as.character(x[1,2,2]))
+  AnswerTests: val_is(as.character(x[1,2,2]))
   Hint: 可以往上卷，看一看x 的輸出，在`, , 2` 底下的 `[1,]` 和 `[,2]` 的交會點。
 - Class: mult_question
   Output: |
@@ -118,7 +118,7 @@
     我們來試試看，目前的x 是一個高維陣列，請問：x[3,1,1]的值會是多少呢？
   AnswerChoices: 1;3;7;10;18
   CorrectAnswer: 3
-  AnswerTests: omnitest(correctVal = as.character(x[3,1,1]))
+  AnswerTests: val_is(as.character(x[3,1,1]))
 - Class: cmd_question
   Output: |
     如果給一個陣列，而只是要取單一個方向的向量，也可以適當的使用`[`完成取出。
@@ -139,14 +139,14 @@
   Output: |
     我們先印出x2來看看。
   CorrectAnswer: x2
-  AnswerTests: test_all(omnitest('x2'), val_is(matrix(10:18, 3, 3)))
+  AnswerTests: test_all(any_of_exprs('x2'), val_is(matrix(10:18, 3, 3)))
   Hint: x2
 - Class: cmd_question
   Output: |
     如果我們要選出第一列，只要輸入`x2[1,]`就可以了。請看一下x2的輸出，在第一列的左方有`[1,]`的圖示，即是提示可以用`x2[1,]`來選出第一列。
     我們請同學試試看選出`x2[1,]`
   CorrectAnswer: x2[1,]
-  AnswerTests: test_all(omnitest('x2[1,]'), val_is(c(10, 13, 16)))
+  AnswerTests: test_all(any_of_exprs('x2[1,]'), val_is(c(10, 13, 16)))
   Hint: x2[1,]
 - Class: cmd_question
   Output: |
@@ -161,14 +161,14 @@
   Output: |
     回答下一個問題之前，我們先印出x。
   CorrectAnswer: x
-  AnswerTests: test_all(omnitest("x"), val_is(array(1:18, c(3, 3, 2))))
+  AnswerTests: test_all(any_of_exprs("x"), val_is(array(1:18, c(3, 3, 2))))
   Hint: x
 - Class: mult_question
   Output: |
     請問`x[,3,1]`的值會是什麼呢？
   AnswerChoices: c(7,8,9);c(3,6,9);c(16,17,18);c(12,15,18)
   CorrectAnswer: c(7,8,9)
-  AnswerTests: omnitest(correctVal = "c(7,8,9)")
+  AnswerTests: val_is("c(7,8,9)")
 - Class: text
   Output: |
     也可以利用中括號`[]`搭配邏輯向量，取出矩陣或陣列中的值。
@@ -178,7 +178,7 @@
     請問同學，依照上述的說明，`x[c(TRUE, TRUE, FALSE), , ]`的效果等同於以下哪一個程式碼呢？
   AnswerChoices: x[1:2,,];x[,1:2,];x[,,1:2]
   CorrectAnswer: x[1:2,,]
-  AnswerTests: omnitest(correctVal = "x[1:2,,]")
+  AnswerTests: val_is("x[1:2,,]")
 - Class: text
   Output: |
     接著我們介紹如何修改矩陣和陣列的元素。
@@ -194,7 +194,7 @@
   Output: |
     我們可以印出`x[1,1,1]`（不是印出全部的x）確認數值是否被修改成功。
   CorrectAnswer: x[1,1,1]
-  AnswerTests: omnitest('x[1,1,1]', 2)
+  AnswerTests: any_of_exprs('x[1,1,1]')
   Hint: x[1,1,1]
 - Class: cmd_question
   Output: |
@@ -222,32 +222,32 @@
     請問`c(1,2,3) + c(2,4,6)`的結果會是？
   AnswerChoices: c(3,6,9);c(3);c(3,4,5)
   CorrectAnswer: c(3,6,9)
-  AnswerTests: omnitest(correctVal = 'c(3,6,9)')
+  AnswerTests: val_is('c(3,6,9)')
   Hint: 向量式運算，就是R 會對兩的向量的位置做運算。
 - Class: mult_question
   Output: |
     請問`c(1,2,3) + 2`的結果會是？
   AnswerChoices: c(3,4,5);c(3,2,3);c(3)
   CorrectAnswer: c(3,4,5)
-  AnswerTests: omnitest(correctVal = 'c(3,4,5)')
+  AnswerTests: val_is('c(3,4,5)')
   Hint: 當長度不相等的向量做運算時，長度比較短的向量會重複
 - Class: cmd_question
   Output: |
     先針對矩陣的向量式運算進行說明。它和向量的運算非常類似，在運算時R 也會自動比對位置，並且在相同運算位置上做運算。
     請同學先印出`x[,,1]`。
   CorrectAnswer: x[,,1]
-  AnswerTests: omnitest('x[,,1]')
+  AnswerTests: any_of_exprs('x[,,1]')
   Hint: x[,,1]
 - Class: cmd_question
   Output: |
     再請同學印出`x[,,2]`。
   CorrectAnswer: x[,,2]
-  AnswerTests: omnitest('x[,,2]')
+  AnswerTests: any_of_exprs('x[,,2]')
   Hint: x[,,2]
 - Class: cmd_question
   Output: 再請同學試試看：`x[,,1] + x[,,2]`
   CorrectAnswer: x[,,1] + x[,,2]
-  AnswerTests: omnitest('x[,,1] + x[,,2]')
+  AnswerTests: any_of_exprs('x[,,1] + x[,,2]')
   Hint: x[,,1] + x[,,2]
 - Class: text
   Output: |
@@ -258,7 +258,7 @@
     舉例來說，當一邊是矩陣，一邊是單值的時候，運算相對簡單。
     請同學試試看：`x[,,1] + 1`
   CorrectAnswer: x[,,1] + 1
-  AnswerTests: omnitest('x[,,1] + 1')
+  AnswerTests: any_of_exprs('x[,,1] + 1')
   Hint: x[,,1] + 1
 - Class: mult_question
   Output: |
@@ -269,20 +269,20 @@
     以此類推，所以`y[1,2,1]`的值會是？
   AnswerChoices: 3;4;5;6;7
   CorrectAnswer: 3
-  AnswerTests: omnitest(correctVal = '3')
+  AnswerTests: val_is('3')
 - Class: cmd_question
   Output: |
     當陣列和向量相加的時候，R 會一直重複向量，直到向量的長度和陣列需要的長度相符合。舉例來說，一個3 乘2 乘2 的陣列需要12個值。
     接著，R 會把這個向量轉換成和陣列一樣的維度，然後在對應的位置做相加。請同學試試看：`matrix(1:4, 2, 2) + 1:2`
   CorrectAnswer: matrix(1:4, 2, 2) + 1:2
-  AnswerTests: omnitest('matrix(1:4, 2, 2) + 1:2')
+  AnswerTests: any_of_exprs('matrix(1:4, 2, 2) + 1:2')
   Hint: matrix(1:4, 2, 2) + 1:2
 - Class: cmd_question
   Output: |
     另外提及一件重要的事情，是關於上一個課程中有提到屬性的概念。
     現在的變數x 也是個R 物件，也有屬性。請同學查一下它的屬性。
   CorrectAnswer: attributes(x)
-  AnswerTests: omnitest('attributes(x)')
+  AnswerTests: any_of_exprs('attributes(x)')
   Hint: 請用`attributes`這個函數。
 - Class: cmd_question
   Output: |
@@ -291,13 +291,13 @@
     舉例來說，`dim(x)`會印出x 的維度。而我們可以透過`dim(x) <- NULL`來移除x 的dim 屬性。
     請同學試試看`dim(x) <- NULL`。
   CorrectAnswer: dim(x) <- NULL
-  AnswerTests: omnitest('dim(x) <- NULL')
+  AnswerTests: any_of_exprs('dim(x) <- NULL')
   Hint: dim(x) <- NULL
 - Class: cmd_question
   Output: |
     請同學印出`x`來看看。
   CorrectAnswer: x
-  AnswerTests: omnitest('x')
+  AnswerTests: any_of_exprs('x')
   Hint: x
 - Class: text
   Output: |
@@ -315,14 +315,14 @@
     在R 中，使用`cbind`和`rbind`則可以合併兩個矩陣。
     舉例來說，`cbind(matrix(1:4, 2, 2), matrix(1:4, 2, 2))`會將兩個矩陣的行合併，運算之後會變成2 乘 4的矩陣。請同學試試看。
   CorrectAnswer: cbind(matrix(1:4, 2, 2), matrix(1:4, 2, 2))
-  AnswerTests: omnitest('cbind(matrix(1:4, 2, 2), matrix(1:4, 2, 2))')
+  AnswerTests: any_of_exprs('cbind(matrix(1:4, 2, 2), matrix(1:4, 2, 2))')
   Hint: cbind(matrix(1:4, 2, 2), matrix(1:4, 2, 2))
 - Class: cmd_question
   Output: |
     使用`rbind(matrix(1:4, 2, 2), matrix(1:4, 2, 2))`則會把兩個矩陣的列合併，
     運算之後會變成4 乘 2的矩陣。請同學試試看。
   CorrectAnswer: rbind(matrix(1:4, 2, 2), matrix(1:4, 2, 2))
-  AnswerTests: omnitest('rbind(matrix(1:4, 2, 2), matrix(1:4, 2, 2))')
+  AnswerTests: any_of_exprs('rbind(matrix(1:4, 2, 2), matrix(1:4, 2, 2))')
   Hint: rbind(matrix(1:4, 2, 2), matrix(1:4, 2, 2))
 - Class: text
   Output: |
@@ -332,22 +332,21 @@
   Output: |
     在R 中兩個矩陣要作矩陣乘法，就是使用`%*%`這個運算符號。請同學試試看：`matrix(1:6, 2, 3) %*% matrix(3:8, 3, 2)`
   CorrectAnswer: matrix(1:6, 2, 3) %*% matrix(3:8, 3, 2)
-  AnswerTests: omnitest('matrix(1:6, 2, 3) %*% matrix(3:8, 3, 2)', matrix(1:6, 2,
-    3) %*% matrix(3:8, 3, 2))
+  AnswerTests: any_of_exprs('matrix(1:6, 2, 3) %*% matrix(3:8, 3, 2)')
   Hint: matrix(1:6, 2, 3) %*% matrix(3:8, 3, 2)
 - Class: cmd_question
   Output: |
     當兩個向量使用`%*%`做運算，會得到他們的內積。
     舉例來說：`1:3 %*% 1:3`會得到什麼呢？請同學試試看。
   CorrectAnswer: 1:3 %*% 1:3
-  AnswerTests: omnitest('1:3 %*% 1:3')
+  AnswerTests: any_of_exprs('1:3 %*% 1:3')
   Hint: 1:3 %*% 1:3
 - Class: cmd_question
   Output: |
     當矩陣乘向量的時候，單一向量會被視為行向量，最後會得到矩陣每個列和單一向量的內積，形成一個新的行向量。
     舉例來說：`matrix(1:9,3,3) %*% 1:3` 會得到什麼呢？請同學試試看。
   CorrectAnswer: matrix(1:9,3,3) %*% 1:3
-  AnswerTests: omnitest('matrix(1:9,3,3) %*% 1:3')
+  AnswerTests: any_of_exprs('matrix(1:9,3,3) %*% 1:3')
   Hint: matrix(1:9,3,3) %*% 1:3
 - Class: text
   Output: |
@@ -358,19 +357,19 @@
   Output: |
     在R 中，要對一個矩陣做轉置，可以用`t`這個函數。請同學先印出`matrix(1:4, 2, 2)`
   CorrectAnswer: matrix(1:4, 2, 2)
-  AnswerTests: omnitest("matrix(1:4, 2, 2)")
+  AnswerTests: any_of_exprs("matrix(1:4, 2, 2)")
   Hint: matrix(1:4, 2, 2)
 - Class: cmd_question
   Output: |
     再印出：`t(matrix(1:4, 2, 2))`
   CorrectAnswer: t(matrix(1:4, 2, 2))
-  AnswerTests: omnitest('t(matrix(1:4, 2, 2))')
+  AnswerTests: any_of_exprs('t(matrix(1:4, 2, 2))')
   Hint: t(matrix(1:4, 2, 2))
 - Class: cmd_question
   Output: |
     我們可以用`diag`快速建構對角化的矩陣。舉例來說：`diag(1, 3)`會建立出3 乘3 的單位矩陣。請試試看。
   CorrectAnswer: diag(1, 3)
-  AnswerTests: omnitest("diag(1, 3)")
+  AnswerTests: any_of_exprs("diag(1, 3)")
   Hint: diag(1, 3)
 - Class: cmd_question
   Output: |
@@ -384,13 +383,13 @@
   Output: |
     我們來驗算一下，`A %*% x`的結果是否真的是`b`呢?
   CorrectAnswer: A %*% x
-  AnswerTests: omnitest('A %*% x')
+  AnswerTests: any_of_exprs('A %*% x')
   Hint: A %*% x
 - Class: cmd_question
   Output: |
     如果直接使用`solve(A)`，則R 會算出A 的反矩陣。請同學試試看。
   CorrectAnswer: solve(A)
-  AnswerTests: omnitest('solve(A)')
+  AnswerTests: any_of_exprs('solve(A)')
   Hint: solve(A)
 - Class: cmd_question
   Output: |
@@ -399,7 +398,7 @@
     是不是相除後，會拿到一模一樣的值呢？
     這裡的`$`用法，等到下一個課程，我們會有詳細的說明。
   CorrectAnswer: A %*% eigen(A)$vectors[,1] / eigen(A)$vectors[,1]
-  AnswerTests: omnitest('A %*% eigen(A)$vectors[,1] / eigen(A)$vectors[,1]')
+  AnswerTests: any_of_exprs('A %*% eigen(A)$vectors[,1] / eigen(A)$vectors[,1]')
   Hint: A %*% eigen(A)$vectors[,1] / eigen(A)$vectors[,1]
 - Class: script
   Output: |

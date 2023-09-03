@@ -16,53 +16,53 @@
 - Class: cmd_question
   Output: 首先我們先看看m 的值。請同學輸入`m`
   CorrectAnswer: m
-  AnswerTests: omnitest('m')
+  AnswerTests: any_of_exprs('m')
   Hint: m
 - Class: cmd_question
   Output: 我們再看看y 的值。請同學輸入`y`
   CorrectAnswer: 'y'
-  AnswerTests: omnitest('y')
+  AnswerTests: any_of_exprs('y')
   Hint: 'y'
 - Class: cmd_question
   Output: 因為`m` 是一個50 * 2 的矩陣，所以在R 裡面找一個長度為2 的向量， 例如`c(-17, 4)` ，我們就可以用`m %*% c(-17,
     4)`來當作是對y 的趨近。 請同學算算看`m %*% `c(-17, 4)`
   CorrectAnswer: m %*% c(-17, 4)
-  AnswerTests: omnitest("m %*% c(-17, 4)")
+  AnswerTests: any_of_exprs("m %*% c(-17, 4)")
   Hint: m %*% c(-17, 4)
 - Class: cmd_question
   Output: 接著我們來評估`c(-17, 4)`是不是一個好的答案。請同學計算`m %*% c(-17, 4) - y` 的平方的和(Sum of Square)
   CorrectAnswer: sum((m %*% c(-17, 4) - y)^2)
-  AnswerTests: omnitest(correctVal = sum((m %*% c(-17, 4) - y)^2))
+  AnswerTests: val_is(sum((m %*% c(-17, 4) - y)^2))
   Hint: sum((m %*% c(-17, 4) - y)^2)
 - Class: cmd_question
   Output: 通常在比較這個指標的時候，我們可以拿`mean(y) - y`的平方的和作為一個參考值。 這因為`y` 的平均是一個趨近y 最最普通的一種方式，所以我們對`y`
     的逼近應該要比`mean(y)` 來的好。請同學計算以`mean(y) - y`的平方的和。
   CorrectAnswer: sum((mean(y) - y)^2)
-  AnswerTests: omnitest(correctVal = sum((mean(y) - y)^2))
+  AnswerTests: val_is(sum((mean(y) - y)^2))
   Hint: sum((mean(y) - y)^2)
 - Class: mult_question
   Output: 請問同學，`m %*% c(-17, 4)`和`mean(y)`，哪一個趨近`y` 的效果比較好？（以誤差的平方和來評估）
   AnswerChoices: m %*% c(-17, 4);mean(y)
   CorrectAnswer: m %*% c(-17, 4)
-  AnswerTests: omnitest(correctVal = "m %*% c(-17, 4)")
+  AnswerTests: val_is("m %*% c(-17, 4)")
 - Class: text
   Output: 在上面兩個操作的時候，同學重複的計算兩次和`y` 相差的平方的和。這樣重複的計算， 在R 中是可以透過「撰寫函數」來簡化的。我們可以建立一個R
     的函數物件`f` ，讓上述的兩個 計算的程式碼從`sum((<???> - y)^2)`變成`f(<???>)`的。
 - Class: cmd_question
   Output: 請同學輸入`f <- function(x) sum((x - y)^2)`
   CorrectAnswer: f <- function(x) sum((x - y)^2)
-  AnswerTests: omnitest("f <- function(x) sum((x - y)^2)")
+  AnswerTests: test_f()
   Hint: f <- function(x) sum((x - y)^2)
 - Class: cmd_question
   Output: 我們先試試看`f` 的效果。請同學輸入`f(m %*% c(-17, 4))`，看看得到的答案是不是仍然是11491， 也就是我們之前算`sum((m
     %*% c(-17, 4) - y)^2)`的答案。
   CorrectAnswer: f(m %*% c(-17, 4))
-  AnswerTests: omnitest("f(m %*% c(-17, 4))")
+  AnswerTests: any_of_exprs("f(m %*% c(-17, 4))")
   Hint: f(m %*% c(-17, 4))
 - Class: cmd_question
   Output: 接著請同學輸入：`f(mean(y))`，看看答案是不是32538.98，也就是`sum((mean(y) - y)^2)` 的結果。
   CorrectAnswer: f(mean(y))
-  AnswerTests: omnitest("f(mean(y))")
+  AnswerTests: any_of_exprs("f(mean(y))")
   Hint: f(mean(y))
 - Class: text
   Output: 我們來解釋一下：`f <- function(x) sum((x - y)^2)`的效果。當我們輸入：`f(mean(y))`時， R 就會進入到「函數的領域」（行話叫做「環境」，這部份在未來的RProgramming
@@ -73,30 +73,30 @@
     代入`x` 呢？
   AnswerChoices: m;c(-17, 4);m %*% c(-17, 4)
   CorrectAnswer: m %*% c(-17, 4)
-  AnswerTests: omnitest(correctVal = "m %*% c(-17, 4)")
+  AnswerTests: val_is("m %*% c(-17, 4)")
 - Class: text
   Output: 透過`f` ，我們就可以很方便的計算估計的誤差的平方和。
 - Class: cmd_question
   Output: 但是回到原本的問題，我們是想要找一個長度為2 的向量，讓m 和這個向量相乘後，可以很靠近y 。 可是`f` 的參數`x` ，代表的意義已經是對`y`
     的估計了，這樣在使用上還是不夠方便。我們可以利用`f` 來建立更方便的計算函數。請同學輸入：`f1 <- function(x) f(m %*% x)`
   CorrectAnswer: f1 <- function(x) f(m %*% x)
-  AnswerTests: omnitest("f1 <- function(x) f(m %*% x)")
+  AnswerTests: test_f1()
   Hint: f1 <- function(x) f(m %*% x)
 - Class: cmd_question
   Output: 請同學輸入：`f1(c(-17, 4))`，是不是再次得到一樣的答案：11491呢？但是我們輸入的程式碼更短了。
   CorrectAnswer: f1(c(-17, 4))
-  AnswerTests: omnitest("f1(c(-17, 4))")
+  AnswerTests: any_of_exprs("f1(c(-17, 4))")
   Hint: f1(c(-17, 4))
 - Class: cmd_question
   Output: 請同學輸入`f1(c(1, 1))`，我們可以很快的得到如果拿`m %*% c(1, 1)` 逼近`y` 後得到的結果好不好。
   CorrectAnswer: f1(c(1, 1))
-  AnswerTests: omnitest("f1(c(1, 1))")
+  AnswerTests: any_of_exprs("f1(c(1, 1))")
   Hint: f1(c(1, 1))
 - Class: mult_question
   Output: 把`f1(c(1, 1))` 的結果與`f(mean(y))`的答案32538.98相比，請問哪一個逼近的效果比較好？
   AnswerChoices: m %*% c(1,1);mean(y)
   CorrectAnswer: mean(y)
-  AnswerTests: omnitest(correctVal = "mean(y)")
+  AnswerTests: val_is("mean(y)")
 - Class: text
   Output: 一般來說，如果要靠瞎猜，猜到一組參數`x`讓`m %*% x`的估計比`mean(y)`好也不會太容易。
 - Class: text
@@ -106,17 +106,17 @@
   Output: 在R 之中我們可以利用`optim` 來尋找一個函數的最小值。 請同學輸入：`optim(c(0,0), f1)`並且把結果儲存到變數 `r`
     之中。我們先讓同學玩一玩`r` 之後，再解釋`optim` 。這段 玩的過程，也是當我們第一次使用R 強大的計算功能後，得到的結 果。
   CorrectAnswer: r <- optim(par = c(0,0), f1)
-  AnswerTests: any_of_exprs("r <- optim(c(0,0), f1)", "r = optim(c(0,0), f1)")
+  AnswerTests: any_of_exprs("r <- optim(par = c(0,0), f1)", "r = optim(par = c(0,0), f1)")
   Hint: r <- optim(par = c(0,0), f1)
 - Class: cmd_question
   Output: 這裡的optim 函數很厲害，可以找到一個向量讓`f1` 的輸出最小。 這些資訊現在都在變數`r` 之中。請同學檢查一下`r` 的型態。
   CorrectAnswer: class(r)
-  AnswerTests: omnitest("class(r)")
+  AnswerTests: any_of_exprs("class(r)")
   Hint: class(r)
 - Class: cmd_question
   Output: 接著，請同學列出所有`r`元素的名稱。
   CorrectAnswer: names(r)
-  AnswerTests: omnitest(correctVal = names(r))
+  AnswerTests: val_is(names(r))
   Hint: names(r)
 - Class: cmd_question
   Output: 請同學輸入`?optim`讀一讀`optim` 的說明，尤其是下一個問題 是要參考Value 這個段落中的說明文字。
@@ -127,13 +127,13 @@
   Output: 請問同學，哪一個`r` 的元素代表著產生最小值的`beta`？
   AnswerChoices: par;value;counts;convergence;message
   CorrectAnswer: par
-  AnswerTests: omnitest(correctVal = "par")
+  AnswerTests: val_is("par")
 - Class: mult_question
   Output: 我們回來看看原先計算`r` 的程式碼：`optim(c(0,0), f1)`。 請問同學，`c(0, 0)`對應到`optim`這個函數的哪一個參數？請參考
     optim 的說明文件作答。
   AnswerChoices: par;fn;gr;method;lower;upper;control
   CorrectAnswer: par
-  AnswerTests: omnitest(correctVal = "par")
+  AnswerTests: val_is("par")
   Hint: R 在判斷函數的時候：「有名字的用名字、沒名字的用順序」
 - Class: text
   Output: 另外一個R 很重要的特色是，函數本身也是一種物件。R 其實是「函數式語言」，而這是所有函數式語言 的一個重要特色。所以，「函數可以當成參數給另外一個函數的」。
@@ -141,12 +141,12 @@
   Output: 請問同學，在`optim(c(0,0), f1)`中，`f1`對應到`optim`這個函數的哪一個參數？ 請參考optim 的說明文件作答。
   AnswerChoices: par;fn;gr;method;lower;upper;control
   CorrectAnswer: fn
-  AnswerTests: omnitest(correctVal = "fn")
+  AnswerTests: val_is("fn")
   Hint: R 在判斷函數的時候：「有名字的用名字、沒名字的用順序」
 - Class: cmd_question
   Output: 請問`f1`的型態（class）是什麼？
   CorrectAnswer: class(f1)
-  AnswerTests: omnitest(correctVal = class(f1))
+  AnswerTests: val_is(class(f1))
   Hint: class(f1)
 - Class: text
   Output: 在`optim`的範例中，我們運用`f1`告訴R 我們在乎的指標（也就是透過和`m` 做相乘後與`y` 的差別）， 這裡的`f1`是一個動態的動作：R
@@ -154,12 +154,12 @@
 - Class: cmd_question
   Output: 請同學輸入`r$par`看看`optim` 找到的最佳解
   CorrectAnswer: r$par
-  AnswerTests: omnitest("r$par")
+  AnswerTests: any_of_exprs("r$par")
   Hint: r$par
 - Class: cmd_question
   Output: 讓我們用迴歸分析的方法找到最好的解。請同學輸入`solve(t(m) %*% m, t(m) %*% y)`
   CorrectAnswer: solve(t(m) %*% m, t(m) %*% y)
-  AnswerTests: omnitest("solve(t(m) %*% m, t(m) %*% y)")
+  AnswerTests: any_of_exprs("solve(t(m) %*% m, t(m) %*% y)")
   Hint: solve(t(m) %*% m, t(m) %*% y)
 - Class: text
   Output: 找到的解是不是非常接近呢？

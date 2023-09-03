@@ -68,13 +68,13 @@
     我們已經事先準備了一個SQLite資料庫的檔案，並且將路徑存在：`db_path`變數之中。
     請同學輸入：`drv <- dbDriver("SQLite")`以取得連接SQLite 資料庫的方式。
   CorrectAnswer: drv <- dbDriver("SQLite")
-  AnswerTests: omnitest('drv <- dbDriver("SQLite")')
+  AnswerTests: any_of_exprs('drv <- dbDriver("SQLite")')
   Hint: drv <- dbDriver("SQLite")
 - Class: cmd_question
   Output: |
     接著我們和SQLite 資料庫建立連線：`db <- dbConnect(drv, db_path)`。
   CorrectAnswer: db <- dbConnect(drv, db_path)
-  AnswerTests: omnitest('db <- dbConnect(drv, db_path)')
+  AnswerTests: any_of_exprs('db <- dbConnect(drv, db_path)')
   Hint: db <- dbConnect(drv, db_path)
 - Class: text
   Output: |
@@ -98,13 +98,13 @@
     請問下列哪一個選項「不是」DBI套件`dbWriteTable`的參數？
   AnswerChoices: conn;name;value;overwrite
   CorrectAnswer: overwrite
-  AnswerTests: omnitest(correctVal = "overwrite")
+  AnswerTests: val_is("overwrite")
 - Class: cmd_question
   Output: |
     因為`db`是由RSQLite所提供的資料庫代理人（當初的`drv`代表的是`dbDriver("SQLite")`)，除了DBI的`dbWriteTable`之外，我們還有額外的參數可以使用。
     請同學輸入：`help.search("dbWriteTable")`
   CorrectAnswer: help.search("dbWriteTable")
-  AnswerTests: omnitest('help.search("dbWriteTable")')
+  AnswerTests: any_of_exprs('help.search("dbWriteTable")')
   Hint: help.search("dbWriteTable")
 - Class: cmd_question
   Output: |
@@ -113,7 +113,7 @@
     但是限於swirl環境，這裡需要同學輸入以下指令（或是`skip()`）：`help("dbWriteTable,SQLiteConnection,character,data.frame-method")`。
     使用R 原生環境的同學也是利用上述指令查詢RSQLite提供的dbWriteTable。
   CorrectAnswer: help("dbWriteTable,SQLiteConnection,character,data.frame-method")
-  AnswerTests: omnitest('help("dbWriteTable,SQLiteConnection,character,data.frame-method")')
+  AnswerTests: any_of_exprs('help("dbWriteTable,SQLiteConnection,character,data.frame-method")')
   Hint: help("dbWriteTable,SQLiteConnection,character,data.frame-method")
 - Class: mult_question
   Output: |
@@ -121,7 +121,7 @@
     請同學參考文件內容後，回答以下問題：`overwrite`是不是dbWRiteTable的參數呢？
   AnswerChoices: yes;no
   CorrectAnswer: 'yes'
-  AnswerTests: omnitest(correctVal="yes")
+  AnswerTests: val_is("yes")
 - Class: text
   Output: |
     這是R 在處理SQL 資料庫的設計。
@@ -140,7 +140,7 @@
     舉例來說，若我們想要將`lvr_land`這個記載實價登錄資訊的表格，寫到SQLite資料庫中。
     請同學利用指令：`head(lvr_land)`看一下這個資料集。
   CorrectAnswer: head(lvr_land)
-  AnswerTests: omnitest("head(lvr_land)")
+  AnswerTests: any_of_exprs("head(lvr_land)")
   Hint: head(lvr_land)
 - Class: text
   Output: |
@@ -151,7 +151,7 @@
     導致中文的欄位名稱會發生錯誤。因此我們將`lvr_land`的欄位名稱改為英文。
     請同學輸入：`colnames(lvr_land) <- lvr_land.names`
   CorrectAnswer: colnames(lvr_land) <- lvr_land.names
-  AnswerTests: omnitest('colnames(lvr_land) <- lvr_land.names')
+  AnswerTests: any_of_exprs('colnames(lvr_land) <- lvr_land.names')
   Hint: colnames(lvr_land) <- lvr_land.names
 - Class: cmd_question
   Output: |
@@ -181,20 +181,20 @@
     這個指令只需要兩個參數：`connection`和`name`。
     請同學輸入：`dbReadTable(db, "lvr_land2")`，就可以看到剛剛的數據。
   CorrectAnswer: dbReadTable(db, "lvr_land2")
-  AnswerTests: omnitest('dbReadTable(db, "lvr_land2")')
+  AnswerTests: any_of_exprs('dbReadTable(db, "lvr_land2")')
   Hint: dbReadTable(db, "lvr_land2")
 - Class: cmd_question
   Output: |
     我們可以再寫入一次`lvr_land`，並且設定`append = TRUE`。
     請同學試試看輸入：`dbWriteTable(db, "lvr_land2", lvr_land, append = TRUE)`
   CorrectAnswer: dbWriteTable(db, "lvr_land2", lvr_land, append = TRUE)
-  AnswerTests: omnitest('dbWriteTable(db, "lvr_land2", lvr_land, append = TRUE)')
+  AnswerTests: any_of_exprs('dbWriteTable(db, "lvr_land2", lvr_land, append = TRUE)')
   Hint: dbWriteTable(db, "lvr_land2", lvr_land, append = TRUE)
 - Class: cmd_question
   Output: |
     請再次執行`dbReadTable(db, "lvr_land2")`，讀取"lvr_land2"表格看看。
   CorrectAnswer: dbReadTable(db, "lvr_land2")
-  AnswerTests: omnitest('dbReadTable(db, "lvr_land2")')
+  AnswerTests: any_of_exprs('dbReadTable(db, "lvr_land2")')
   Hint: dbReadTable(db, "lvr_land2")
 - Class: text
   Output: |
@@ -205,20 +205,20 @@
     `dbListTables(db)`可以列出目前已經存在於資料庫的表格。
     請同學試試看。
   CorrectAnswer: dbListTables(db)
-  AnswerTests: omnitest('dbListTables(db)')
+  AnswerTests: any_of_exprs('dbListTables(db)')
   Hint: dbListTables(db)
 - Class: cmd_question
   Output: |
     請試著用`iris2 <- dbReadTable(db, "iris")`來讀出剛剛看到的`iris`表格，並存入變數`iris2`。
     這是我是前先將R 內建的iris資料集寫入資料庫後所產生的表格。
   CorrectAnswer: iris2 <- dbReadTable(db, "iris")
-  AnswerTests: omnitest('iris2 <- dbReadTable(db, "iris")')
+  AnswerTests: any_of_exprs('iris2 <- dbReadTable(db, "iris")')
   Hint: iris2 <- dbReadTable(db, "iris")
 - Class: cmd_question
   Output: |
     如同在RDataMining-03中看到jsonlite的vignette，我們可以用`all.equal(iris, iris2)`來比較看看兩者是不是一模一樣。
   CorrectAnswer: all.equal(iris, iris2)
-  AnswerTests: omnitest('all.equal(iris, iris2)')
+  AnswerTests: any_of_exprs('all.equal(iris, iris2)')
   Hint: all.equal(iris, iris2)
 - Class: text
   Output: |
@@ -247,7 +247,7 @@
     SQL是操作關聯式資料庫的必學工具，也是資料科學家必備的工具之一。
     請同學執行：`dbGetQuery(db, "SELECT * FROM iris WHERE species = \"virginica\"")`
   CorrectAnswer: dbGetQuery(db, "SELECT * FROM iris WHERE species = \"virginica\"")
-  AnswerTests: omnitest('dbGetQuery(db, "SELECT * FROM iris WHERE species = \\"virginica\\"")')
+  AnswerTests: any_of_exprs('dbGetQuery(db, "SELECT * FROM iris WHERE species = \\"virginica\\"")')
   Hint: dbGetQuery(db, "SELECT * FROM iris WHERE species = \"virginica\"")
 - Class: text
   Output: |
@@ -258,7 +258,7 @@
     `dbSendQuery`函數則會先將結果儲存於Result物件中，再由使用者一段一段的取出。
     請同學試著執行：`rs <- dbSendQuery(db, "SELECT * FROM iris")`。
   CorrectAnswer: rs <- dbSendQuery(db, "SELECT * FROM iris")
-  AnswerTests: omnitest('rs <- dbSendQuery(db, "SELECT * FROM iris")')
+  AnswerTests: any_of_exprs('rs <- dbSendQuery(db, "SELECT * FROM iris")')
   Hint: rs <- dbSendQuery(db, "SELECT * FROM iris")
 - Class: cmd_question
   Output: |
@@ -266,13 +266,13 @@
     我們可以利用`fetch`方法，一次拿一點資料出來。
     請同學試試看：`fetch(rs, 1)`。
   CorrectAnswer: fetch(rs, 1)
-  AnswerTests: omnitest('fetch(rs, 1)')
+  AnswerTests: any_of_exprs('fetch(rs, 1)')
   Hint: fetch(rs, 1)
 - Class: cmd_question
   Output: |
     請同學再試一次：`fetch(rs, 1)`（可以按一下 ↑ ，正常安裝的R 會顯示上一個輸入）
   CorrectAnswer: fetch(rs, 1)
-  AnswerTests: omnitest('fetch(rs, 1)')
+  AnswerTests: any_of_exprs('fetch(rs, 1)')
   Hint: fetch(rs, 1)
 - Class: text
   Output: |
@@ -285,7 +285,7 @@
     當我們不需要再使用`rs`物件時，就刪除它：`dbClearResult(rs)`。
     請同學試試看。
   CorrectAnswer: dbClearResult(rs)
-  AnswerTests: omnitest('dbClearResult(rs)')
+  AnswerTests: any_of_exprs('dbClearResult(rs)')
   Hint: dbClearResult(rs)
 - Class: text
   Output: |
@@ -326,50 +326,50 @@
     在進行接下來關於Transaction的練習之前，我們先重新連線。
     請同學先中斷連線，輸入：`dbDisconnect(db)`。
   CorrectAnswer: dbDisconnect(db)
-  AnswerTests: omnitest('dbDisconnect(db)')
+  AnswerTests: any_of_exprs('dbDisconnect(db)')
   Hint: dbDisconnect(db)
 - Class: cmd_question
   Output: |
     請同學再次輸入：db <- dbConnect(drv, db_path)`。
   CorrectAnswer: db <- dbConnect(drv, db_path)
-  AnswerTests: omnitest('db <- dbConnect(drv, db_path)')
+  AnswerTests: any_of_exprs('db <- dbConnect(drv, db_path)')
   Hint: db <- dbConnect(drv, db_path)
 - Class: cmd_question
   Output: |
     在R 中，我們可以利用`dbBegin(db)`來開啟一個Transaction。
     請同學試試看。
   CorrectAnswer: dbBegin(db)
-  AnswerTests: omnitest('dbBegin(db)')
+  AnswerTests: any_of_exprs('dbBegin(db)')
   Hint: dbBegin(db)
 - Class: cmd_question
   Output: |
     接著，讓我們利用`dbRemoveTable(db, "CO2")`來刪除"CO2"表格。
   CorrectAnswer: dbRemoveTable(db, "CO2")
-  AnswerTests: omnitest('dbRemoveTable(db, "CO2")')
+  AnswerTests: any_of_exprs('dbRemoveTable(db, "CO2")')
   Hint: dbRemoveTable(db, "CO2")
 - Class: cmd_question
   Output: |
     請同學用`dbListTables(db)`來檢查"CO2"表格是不是已經消失在表格清單之中。
   CorrectAnswer: dbListTables(db)
-  AnswerTests: omnitest('dbListTables(db)')
+  AnswerTests: any_of_exprs('dbListTables(db)')
   Hint: dbListTables(db)
 - Class: cmd_question
   Output: |
     請同學輸入`dbDisconnect(db)`，模擬當意外發生時與資料庫的連線中斷的狀況。
   CorrectAnswer: dbDisconnect(db)
-  AnswerTests: omnitest('dbDisconnect(db)')
+  AnswerTests: any_of_exprs('dbDisconnect(db)')
   Hint: dbDisconnect(db)
 - Class: cmd_question
   Output: |
     請同學輸入`db <- dbConnect(drv, db_path)`重新連接資料庫。
   CorrectAnswer: db <- dbConnect(drv, db_path)
-  AnswerTests: omnitest('db <- dbConnect(drv, db_path)')
+  AnswerTests: any_of_exprs('db <- dbConnect(drv, db_path)')
   Hint: db <- dbConnect(drv, db_path)
 - Class: cmd_question
   Output: |
     請同學用`dbListTables(db)`來檢查，"CO2"表格是不是又重出江湖了呢？
   CorrectAnswer: dbListTables(db)
-  AnswerTests: omnitest('dbListTables(db)')
+  AnswerTests: any_of_exprs('dbListTables(db)')
   Hint: dbListTables(db)
 - Class: text
   Output: |
@@ -378,25 +378,25 @@
   Output: |
     再請同學輸入：`dbBegin(db)`。
   CorrectAnswer: dbBegin(db)
-  AnswerTests: omnitest('dbBegin(db)')
+  AnswerTests: any_of_exprs('dbBegin(db)')
   Hint: dbBegin(db)
 - Class: cmd_question
   Output: |
     接著，讓我們利用`dbRemoveTable(db, "CO2")`再刪除"CO2"表格一次。
   CorrectAnswer: dbRemoveTable(db, "CO2")
-  AnswerTests: omnitest('dbRemoveTable(db, "CO2")')
+  AnswerTests: any_of_exprs('dbRemoveTable(db, "CO2")')
   Hint: dbRemoveTable(db, "CO2")
 - Class: cmd_question
   Output: |
     這次請輸入`dbCommit(db)`。
   CorrectAnswer: dbCommit(db)
-  AnswerTests: omnitest('dbCommit(db)')
+  AnswerTests: any_of_exprs('dbCommit(db)')
   Hint: dbCommit(db)
 - Class: cmd_question
   Output: |
     請同學用`dbListTables(db)`來檢查"CO2"表格是不是確實消失了？
   CorrectAnswer: dbListTables(db)
-  AnswerTests: omnitest('dbListTables(db)')
+  AnswerTests: any_of_exprs('dbListTables(db)')
   Hint: dbListTables(db)
 - Class: text
   Output: |

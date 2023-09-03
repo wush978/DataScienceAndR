@@ -45,7 +45,7 @@
   Output: |
     再來，請同學打開：`vignette("two-table", package = "dplyr")`。
   CorrectAnswer: vignette("two-table", package = "dplyr")
-  AnswerTests: omnitest('vignette("two-table", package = "dplyr")')
+  AnswerTests: any_of_exprs('vignette("two-table", package = "dplyr")')
   Hint: vignette("two-table", package = "dplyr")
 - Class: text
   Output: |
@@ -70,7 +70,7 @@
     上一堂課中，我們已經看過`flights`的資料了。
     現在請同學輸入：`View(airlines)`看一下航空公司的資料。
   CorrectAnswer: View(airlines)
-  AnswerTests: omnitest('View(airlines)')
+  AnswerTests: any_of_exprs('View(airlines)')
   Hint: View(airlines)
 - Class: cmd_question
   Output: |
@@ -85,7 +85,7 @@
     參考airlines的資料後，我們要貼哪一筆航空公司的全名到`flights`的第一筆資料中呢？
   AnswerChoices: United Air Lines Inc.(UA);American Airlines Inc.(AA);US Airways Inc.(US)
   CorrectAnswer: United Air Lines Inc.(UA)
-  AnswerTests: omnitest(correctVal="United Air Lines Inc.(UA)")
+  AnswerTests: val_is("United Air Lines Inc.(UA)")
 - Class: text
   Output: |
     在同學剛剛的思考過程應該是這樣的。
@@ -102,7 +102,7 @@
     請問以下哪一個「不是」`left_join`的參數呢？
   AnswerChoices: x;y;by;copy;key
   CorrectAnswer: key
-  AnswerTests: omnitest(correctVal = 'key')
+  AnswerTests: val_is('key')
 - Class: text
   Output: |
     我們來講解`left_join`的參數意義。
@@ -125,19 +125,19 @@
     所以我們可以依據時間和地點，把天氣的資料貼到`answer01`中。
     請同學輸入：`View(weather)`先看一下天氣資料。
   CorrectAnswer: View(weather)
-  AnswerTests: omnitest('View(weather)')
+  AnswerTests: any_of_exprs('View(weather)')
   Hint: View(weather)
 - Class: cmd_question
   Output: |
     接著請同學輸入：`answer02 <- left_join(answer01, weather)`，請注意到我們沒有給任何`by`的資訊。
   CorrectAnswer: answer02 <- left_join(answer01, weather)
-  AnswerTests: omnitest('answer02 <- left_join(answer01, weather)')
+  AnswerTests: any_of_exprs('answer02 <- left_join(answer01, weather)')
   Hint: answer02 <- left_join(answer01, weather)
 - Class: cmd_question
   Output: |
     請輸入`View(answer02)`，我們看一下`answer02`的資料黏貼後的結果。
   CorrectAnswer: View(answer02)
-  AnswerTests: omnitest('View(answer02)')
+  AnswerTests: any_of_exprs('View(answer02)')
   Hint: View(answer02)
 - Class: text
   Output: |
@@ -147,7 +147,7 @@
     根據文件，在沒有給定`by`的狀況下，`left_join`會比對兩個data.frame的欄位名稱（`colnames`），並且用重複的欄位名稱做比對的依據。
     請同學輸入：`intersect(colnames(answer01), colnames(weather))`
   CorrectAnswer: intersect(colnames(answer01), colnames(weather))
-  AnswerTests: omnitest('intersect(colnames(answer01), colnames(weather))')
+  AnswerTests: any_of_exprs('intersect(colnames(answer01), colnames(weather))')
   Hint: intersect(colnames(answer01), colnames(weather))
 - Class: text
   Output: |
@@ -169,7 +169,7 @@
     接著，我們看一下`airports`這個資料集。
     請同學輸入：`View(airports)`，可以看到裡面有不少關於機場的資訊（如：經緯度、簡稱等等）。
   CorrectAnswer: View(airports)
-  AnswerTests: omnitest('View(airports)')
+  AnswerTests: any_of_exprs('View(airports)')
   Hint: View(airports)
 - Class: text
   Output: |
@@ -183,7 +183,7 @@
     舉例來說：`c("origin" = "faa")`就是一個有名字的字串向量。
     請同學輸入：`c("origin" = "faa")`看看。
   CorrectAnswer: c("origin" = "faa")
-  AnswerTests: omnitest('c("origin" = "faa")')
+  AnswerTests: any_of_exprs('c("origin" = "faa")')
   Hint: c("origin" = "faa")
 - Class: cmd_question
   Output: |
@@ -191,14 +191,14 @@
     比對的依據分別是`answer02$origin`與`airports$faa`。
     請同學試試看執行`answer03 <- left_join(answer02, airports, by = c("origin" = "faa"))`。
   CorrectAnswer: answer03 <- left_join(answer02, airports, by = c("origin" = "faa"))
-  AnswerTests: omnitest('answer03 <- left_join(answer02, airports, by = c("origin"
+  AnswerTests: any_of_exprs('answer03 <- left_join(answer02, airports, by = c("origin"
     = "faa"))')
   Hint: answer03 <- left_join(answer02, airports, by = c("origin" = "faa"))
 - Class: cmd_question
   Output: |
     現在我們輸入`View(answer03)`，看看這份包含航班資訊、天氣資訊以及出發機場地理位置資訊的資料。
   CorrectAnswer: View(answer03)
-  AnswerTests: omnitest('View(answer03)')
+  AnswerTests: any_of_exprs('View(answer03)')
   Hint: View(answer03)
 - Class: cmd_question
   Output: |
@@ -211,7 +211,7 @@
   Output: |
     請同學輸入`colnames(answer04)`，看一下比對後的名稱。
   CorrectAnswer: colnames(answer04)
-  AnswerTests: omnitest('colnames(answer04)')
+  AnswerTests: any_of_exprs('colnames(answer04)')
   Hint: colnames(answer04)
 - Class: text
   Output: |
@@ -230,7 +230,7 @@
   Output: |
     請同學用`View(answer02.3)`，觀察我們在上一題得到的結果。
   CorrectAnswer: View(answer02.3)
-  AnswerTests: omnitest('View(answer02.3)')
+  AnswerTests: any_of_exprs('View(answer02.3)')
   Hint: View(answer02.3)
 - Class: text
   Output: |
@@ -248,13 +248,13 @@
     為了等下的說明，我們仿照vignette，建立了兩個變數：`df1`與`df2`。
     請同學輸入`View(df1)`來查看`df1`的資料。
   CorrectAnswer: View(df1)
-  AnswerTests: omnitest('View(df1)')
+  AnswerTests: any_of_exprs('View(df1)')
   Hint: View(df1)
 - Class: cmd_question
   Output: |
     請同學輸入`View(df2)`來查看`df2`的資料。
   CorrectAnswer: View(df2)
-  AnswerTests: omnitest('View(df2)')
+  AnswerTests: any_of_exprs('View(df2)')
   Hint: View(df2)
 - Class: text
   Output: |
@@ -265,7 +265,7 @@
   Output: |
     請同學輸入：`wiki_join()`來打開這六種JOIN的圖示。
   CorrectAnswer: wiki_join()
-  AnswerTests: omnitest('wiki_join()')
+  AnswerTests: any_of_exprs('wiki_join()')
   Hint: wiki_join()
 - Class: text
   Output: |
@@ -275,12 +275,12 @@
     請問同學，如果輸入：`left_join(df1, df2)`的話，`left_join`會以哪一個欄位名稱為基準作比對呢？（提示：df1和df2共有的名稱）
   AnswerChoices: x;y;a;b
   CorrectAnswer: x
-  AnswerTests: omnitest(correctVal = "x")
+  AnswerTests: val_is("x")
 - Class: cmd_question
   Output: |
     請同學輸入：`left_join(df1, df2)`
   CorrectAnswer: left_join(df1, df2)
-  AnswerTests: omnitest('left_join(df1, df2)')
+  AnswerTests: any_of_exprs('left_join(df1, df2)')
   Hint: left_join(df1, df2)
 - Class: text
   Output: |
@@ -294,7 +294,7 @@
   Output: |
     請同學輸入：`right_join(df2, df1)`。請注意，我們這次是`x = df2`。
   CorrectAnswer: right_join(df2, df1)
-  AnswerTests: omnitest('right_join(df2, df1)')
+  AnswerTests: any_of_exprs('right_join(df2, df1)')
   Hint: right_join(df2, df1)
 - Class: text
   Output: |
@@ -306,7 +306,7 @@
   Output: |
     請同學輸入：`inner_join(df1, df2)`。
   CorrectAnswer: inner_join(df1, df2)
-  AnswerTests: omnitest('inner_join(df1, df2)')
+  AnswerTests: any_of_exprs('inner_join(df1, df2)')
   Hint: inner_join(df1, df2)
 - Class: text
   Output: |
@@ -319,7 +319,7 @@
   Output: |
     請同學輸入：`full_join(df1, df2)`。
   CorrectAnswer: full_join(df1, df2)
-  AnswerTests: omnitest('full_join(df1, df2)')
+  AnswerTests: any_of_exprs('full_join(df1, df2)')
   Hint: full_join(df1, df2)
 - Class: text
   Output: |
@@ -328,7 +328,7 @@
   Output: |
     請同學輸入：`anti_join(df1, df2)`。
   CorrectAnswer: anti_join(df1, df2)
-  AnswerTests: omnitest('anti_join(df1, df2)')
+  AnswerTests: any_of_exprs('anti_join(df1, df2)')
   Hint: anti_join(df1, df2)
 - Class: text
   Output: |
@@ -343,19 +343,19 @@
     他們的`x`欄位都有兩個1。
     請同學輸入`View(df3)`看看`df3`。
   CorrectAnswer: View(df3)
-  AnswerTests: omnitest('View(df3)')
+  AnswerTests: any_of_exprs('View(df3)')
   Hint: View(df3)
 - Class: cmd_question
   Output: |
     請同學輸入`View(df4)`看看`df4`。
   CorrectAnswer: View(df4)
-  AnswerTests: omnitest('View(df4)')
+  AnswerTests: any_of_exprs('View(df4)')
   Hint: View(df4)
 - Class: cmd_question
   Output: |
     接著，我們輸入`inner_join(df3, df4)`看看結果有多少列。
   CorrectAnswer: inner_join(df3, df4)
-  AnswerTests: omnitest('inner_join(df3, df4)')
+  AnswerTests: any_of_exprs('inner_join(df3, df4)')
   Hint: inner_join(df3, df4)
 - Class: text
   Output: |
@@ -370,7 +370,7 @@
   Output: |
     請同學輸入：`semi_join(df3, df4)`看看結果。
   CorrectAnswer: semi_join(df3, df4)
-  AnswerTests: omnitest('semi_join(df3, df4)')
+  AnswerTests: any_of_exprs('semi_join(df3, df4)')
   Hint: semi_join(df3, df4)
 - Class: text
   Output: |
